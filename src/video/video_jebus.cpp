@@ -123,10 +123,10 @@ pnnl.addEventListener('keydown',doKeyUp);
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-let $H=Module.HEAPU8.buffer;
-let la=h$*h$*32;
+let $H=Module.HEAPF32.buffer;
+let la=h$*h$*4;
 var pointa=77*la;
-let agav=new Uint8Array($H,pointa,300);
+let agav=new Float32Array($H,pointa,300);
 let sz=(h$*h$)/8;
 var avag=0.750;
 var min=1.0;
@@ -282,7 +282,6 @@ contx.getExtension('ARB_depth_texture');
 //  contx.getExtension('ARB_multisample'); // OLD 2001!!
 contx.getExtension('ARB_framebuffer_multisample');
 //  contx.getExtension('ARB_shader_objects'); // OLD 2004!!
-  
 contx.getExtension('OES_vertex_array_object');
 contx.getExtension('WEBGL_compressed_texture_s3tc');
 contx.getExtension('WEBGL_compressed_texture_etc');
@@ -397,18 +396,18 @@ vv=document.getElementById("mv");
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 let l=w$*h$*16;
-la=h$*h$*32;
+la=h$*h$*4;
 let al=w$*h$*8;
 sz=(h$*h$)/8;
 pointa=77*la;
-agav=new Uint8Array($H,pointa,300);
+agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Uint8Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 var pointb=77*la;
-var $B=new Uint8Array($H,pointb,sz);
+var $B=new Float32Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -424,18 +423,18 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 var blank$=Math.max((((w$-h$)*0)/2),0);
 var nblank$=Math.max((((h$-w$)*0)/2),0);
 l=w$*h$*16;
-la=h$*h$*32;
+la=h$*h$*4;
 al=w$*h$*8;
 sz=(h$*h$)/8;
 pointa=77*la;
-var agav=new Uint8Array($H,pointa,300);
+var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Uint8Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 pointb=66*la;
-var $B=new Uint8Array($H,pointb,sz);
+var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
