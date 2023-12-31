@@ -99,9 +99,9 @@ video_resurection_webgpu:
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU',"runWebGPU",'wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -std=c++20 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_startWebGPU","_runWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --extern-pre-js js/fluid.js --extern-pre-js js/flui.js --extern-pre-js setUp.js --extern-pre-js startUp.js -lmath.js -lhtml5.js -lint53.js \
+	 --extern-pre-js js/fluid.js --extern-pre-js js/flui.js --extern-pre-js js/setUp.js --extern-pre-js startUp.js -lmath.js -lhtml5.js -lint53.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --extern-post-js js/pagec_webgpu.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js --extern-pre-js gpujsx.js --memory-init-file 0 --closure 0
+	 --extern-post-js js/pagec_webgpu.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js --extern-pre-js js/gpujsx.js --memory-init-file 0 --closure 0
 
 b3_video_google_llvm:
 	 em++ src/video/main_google_street.cpp -c -std=c++20 -fno-math-errno -O0 \
