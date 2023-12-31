@@ -1,4 +1,4 @@
-BIN_NAME += v0-001.js
+BIN_NAME += v0-001
 
 TIMESTAMP := $(shell date +%m%y)
 
@@ -60,7 +60,7 @@ vanilla_test_gpujs:
 video_test:
 	 em++ $(STDS) -c src/video/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -c src/video/video_test.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS) -o $(BIN_NAME) $(COMMON_FLAGS) -O2 $(LINK_SIMD_FLAGS) \
+	 em++ $(STDS) -o $(BIN_NAME).js $(COMMON_FLAGS) -O2 $(LINK_SIMD_FLAGS) \
 	 $(GL_FLAGS) $(LINK_FLAGS) $(BOOST_FLAGS) -sUSE_SDL=0 \
 	 -sFORCE_FILESYSTEM=1 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_str","_nano","_r4nd"]' \
@@ -70,7 +70,7 @@ video_test:
 video_test2:
 	 em++ -std=c++20 -c src/video/main.cpp -O2 $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ -std=c++20 -c src/video/video_test.cpp -O2 $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ -std=c++20 -o $(BIN_NAME) -O2 $(SIMD_FLAGS) \
+	 em++ -std=c++20 -o $(BIN_NAME).js -O2 $(SIMD_FLAGS) \
 	 $(GL_FLAGS) $(WEBGPU_FLAGS) -sALLOW_MEMORY_GROWTH=0 $(BOOST_FLAGS) -sUSE_SDL=0 \
 	 -sFORCE_FILESYSTEM=1 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_str","_nano","_r4nd"]' \
@@ -80,7 +80,7 @@ video_test2:
 video_test3:
 	 em++ $(STDS) -c src/video/main.cpp -O0 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -c src/video/video_test.cpp -O0 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	 em++ $(STDS) -o $(BIN_NAME) $(COMMON_FLAGS) $(LINK_FLAGS) -O0 $(SIMD_FLAGS) \
+	 em++ $(STDS) -o $(BIN_NAME).js $(COMMON_FLAGS) $(LINK_FLAGS) -O0 $(SIMD_FLAGS) \
 	 $(GL_FLAGS) $(WEBGPU_FLAGS) -sALLOW_MEMORY_GROWTH=0 $(BOOST_FLAGS) -sUSE_SDL=0 \
 	 -sFORCE_FILESYSTEM=1 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 -sEXPORTED_FUNCTIONS='["_main","_b3","_str","_nano","_r4nd"]' \
@@ -94,9 +94,9 @@ video_resurection_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
 	 emcc resurection_jebus_webgpu.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc resurection_jebus_webgpu.o -fPIC -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o b3667.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) -I/content/RAMDRIVE2/b3/include/vanilla/ -o b3667.js -sFORCE_FILESYSTEM=1 \
-	 -sINITIAL_MEMORY=512mb -sALLOW_MEMORY_GROWTH=0 \
-	 -sUSE_SDL=2 -sPRECISE_F32=1 \
+	 emcc resurection_jebus_webgpu.o -fPIC -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o $(BIN_NAME)-res.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) -I/content/RAMDRIVE2/b3/include/vanilla/ -sFORCE_FILESYSTEM=1 \
+	 -sINITIAL_MEMORY=1024mb -sALLOW_MEMORY_GROWTH=0 \
+	 -sUSE_SDL=2 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU',"runWebGPU",'wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -std=c++17 \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_startWebGPU","_runWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
