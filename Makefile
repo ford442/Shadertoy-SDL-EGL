@@ -93,8 +93,8 @@ video_new:
 video_resurection_webgpu:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 emcc resurection_jebus_webgpu.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc resurection_jebus_webgpu.o -fPIC -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o $(BIN_NAME)-res.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) -I/content/RAMDRIVE2/b3/include/vanilla/ -sFORCE_FILESYSTEM=1 \
+	 emcc video_jebus.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++17 $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 emcc video_jebus.o -fPIC -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o $(BIN_NAME)-res.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) -I/content/RAMDRIVE2/b3/include/vanilla/ -sFORCE_FILESYSTEM=1 \
 	 -sINITIAL_MEMORY=1024mb -sALLOW_MEMORY_GROWTH=0 \
 	 -sUSE_SDL=2 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['startWebGPU',"runWebGPU",'wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
