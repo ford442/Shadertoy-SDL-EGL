@@ -1,4 +1,4 @@
-document.querrySelector('#drumBtn').addEventListener('click',function(){
+document.querySelector('#drumBtn').addEventListener('click',function(){
 window.open('./drum');
 });
 
