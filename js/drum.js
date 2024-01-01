@@ -8,3 +8,9 @@ drumTempo.addEventListener('message',ea=>{
 var tmp0=ea.data.data;
 Module.ccall('tempoSet',null,["Number"],[tmp0]);
 });
+
+let drumKick=new BroadcastChannel('kick');
+
+drumKick.addEventListener('message',ea=>{
+Module.ccall('kickDrum');
+});
