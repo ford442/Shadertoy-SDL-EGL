@@ -424,7 +424,7 @@ clk_l=true;
 }
 */
 if(tempo.at(1,1)>0){
-tempo.at(1,1)=tempo.at(1,1)-5;
+tempo.at(1,1)=tempo.at(1,1)-10;
 u64_uni.at(1,1)=tempo.at(1,1);
 }
 u_time.t3=u_time.t2;
