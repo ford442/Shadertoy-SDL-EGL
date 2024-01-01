@@ -83,6 +83,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 WGpuUniform wTime;
 uint64_t tme;
 
+static i_tensor tempo=i_tensor{2,2};
 static i_tensor on=i_tensor{2,2};
 static i_tensor sze=i_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
@@ -423,7 +424,7 @@ clk_l=true;
 }
 */
 
-u64_uni.at(1,1)++;
+u64_uni.at(1,1)=tempo.at(0,0);
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
@@ -930,7 +931,7 @@ wbg.at(0,0)=bindgroup;
 colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
 // colorTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(1,1));
 u64_uni.at(0,0)=0;
-u64_uni.at(1,1)=0;
+u64_uni.at(1,1)=100;
 u64_uni.at(2,2)=u64_siz.at(0,0);
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -1160,7 +1161,17 @@ u64_uni.at(2,2)=int(u64_uni.at(2,2)*0.99);
 return;
 }
 
+void setTempo(int tmpo){
+tempo.at(0,0)=tmpo;
+return;
+}
+
 extern"C"{
+
+void tempoSet(int tt){
+setTempo(tt);
+return;
+}
 
 void resUp(){
 uniUp();
