@@ -994,6 +994,24 @@ return;
 EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
 window.scroll(0,0);
+
+document.querySelector('#drumBtn').addEventListener('click',function(){
+window.open('./drum/o8o.htm');
+});
+
+let drumTempo=new BroadcastChannel('tempo');
+
+drumTempo.addEventListener('message',ea=>{
+var tmp0=ea.data.data;
+Module.ccall('tempoSet',null,["Number"],[tmp0]);
+});
+
+let drumKick=new BroadcastChannel('kick');
+
+drumKick.addEventListener('message'{
+Module.ccall('kickDrum');
+});
+
 function highResStart(){
 document.querySelector('#shut').innerHTML=2;
 document.querySelector('#scanvas').width=window.innerWidth*4;
