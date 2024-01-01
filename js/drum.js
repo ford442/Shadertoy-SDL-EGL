@@ -1,5 +1,5 @@
 document.querySelector('#drumBtn').addEventListener('click',function(){
-window.open('./drum');
+window.open('./drum/o8o.htm');
 });
 
 let drumTempo=new BroadcastChannel('tempo');
