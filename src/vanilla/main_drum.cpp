@@ -83,7 +83,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 WGpuUniform wTime;
 uint64_t tme;
 
-static i_tensor tempo=i_tensor{2,2};
+static u64_tensor tempo=u64_tensor{2,2};
 static i_tensor on=i_tensor{2,2};
 static i_tensor sze=i_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
@@ -423,7 +423,7 @@ else{
 clk_l=true;
 }
 */
-u64_uni.at(1,1)=u64_uni.at(1,1)-10;
+tempo.at(1,1)=tempo.at(1,1)-10;
 u64_uni.at(1,1)=tempo.at(1,1);
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -971,7 +971,7 @@ return;
 }
 
 void drumKick(){
-tempo.at(1,1)=tempo.at(1,1)+100;
+tempo.at(1,1)=100;
 return;
 }
 
