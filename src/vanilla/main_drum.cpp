@@ -424,7 +424,7 @@ clk_l=true;
 }
 */
 
-u64_uni.at(1,1)=tempo.at(0,0);
+u64_uni.at(1,1)=tempo.at(1,1);
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
@@ -970,10 +970,22 @@ tempo.at(0,0)=tmpo;
 return;
 }
 
+void drumKick(){
+tempo.at(1,1)=100;
+usleep(250000); // 1/4 second delay
+tempo.at(1,1)=0;
+return;
+}
+
 extern "C"{
 
 void tempoSet(int tt){
 setTempo(tt);
+return;
+}
+
+void kickDrum(){
+drumKick();
 return;
 }
 
