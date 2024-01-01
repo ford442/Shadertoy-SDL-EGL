@@ -423,7 +423,7 @@ else{
 clk_l=true;
 }
 */
-u64_uni.at(1,1)=u64_uni.at(1,1)-1;
+u64_uni.at(1,1)=u64_uni.at(1,1)-10;
 u64_uni.at(1,1)=tempo.at(1,1);
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
