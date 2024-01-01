@@ -11,6 +11,6 @@ Module.ccall('tempoSet',null,["Number"],[tmp0]);
 
 let drumKick=new BroadcastChannel('kick');
 
-drumKick.addEventListener('message',ea=>{
+drumKick.addEventListener('message'{
 Module.ccall('kickDrum');
 });
