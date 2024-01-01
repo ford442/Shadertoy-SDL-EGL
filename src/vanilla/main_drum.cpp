@@ -973,6 +973,9 @@ return;
 }
 
 void drumKick(){
+  EM_ASM({
+console.log('testkick');
+});
 tempo.at(1,1)=100;
 return;
 }
