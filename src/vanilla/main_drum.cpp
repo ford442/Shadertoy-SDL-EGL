@@ -1013,6 +1013,8 @@ let drumKick=new BroadcastChannel('kick');
 
 drumKick.addEventListener('message',function(){
 Module.ccall('kickDrum');
+  console.log('testkickJS');
+
 });
 
 function highResStart(){
