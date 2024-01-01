@@ -464,7 +464,7 @@ wrpd.at(0,0)=passDesc;
 passDesc2.numColorAttachments=0;
 passDesc2.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(1,1)=passDesc2;
-      // Compute Pass
+/*      // Compute Pass
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
@@ -498,7 +498,7 @@ if(WGPU_BufferStatus.at(0,0,0)!=3){
     // wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
 wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,OutputBufferBytes);
 }
-  // Render pass A (color)
+*/  // Render pass A (color)
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
@@ -965,6 +965,20 @@ wao.at(0,0)=options;
 navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 }
 
+void setTempo(int tmpo){
+tempo.at(0,0)=tmpo;
+return;
+}
+
+extern "C"{
+
+void tempoSet(int tt){
+setTempo(tt);
+return;
+}
+
+}
+
 EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
 window.scroll(0,0);
@@ -986,6 +1000,7 @@ document.querySelector('#scanvas').height=window.innerHeight;
 document.querySelector('#di').click();
 },150);
 }
+
 function normalResStart(){
 setTimeout(function(){
 document.querySelector('#shut').innerHTML=2;
@@ -996,6 +1011,7 @@ Module.ccall("startWebGPU",{async:true});
 },100);
 document.querySelector('#status').style.backgroundColor="green";
 }
+
 var $shds=[];
 
 function shds(xml){
@@ -1161,17 +1177,7 @@ u64_uni.at(2,2)=int(u64_uni.at(2,2)*0.99);
 return;
 }
 
-void setTempo(int tmpo){
-tempo.at(0,0)=tmpo;
-return;
-}
-
 extern"C"{
-
-void tempoSet(int tt){
-setTempo(tt);
-return;
-}
 
 void resUp(){
 uniUp();
