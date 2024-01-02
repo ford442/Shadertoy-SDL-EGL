@@ -668,7 +668,7 @@ GPUTextureUsage.TEXTURE_BINDING,
  
 device.queue.writeTexture({
 texture,
-bytesPerRow: 4 * cnv.width,
+bytesPerRow: 8 * cnv.width,
 rowsPerImage: cnv.height,
 }, pixelData.buffer, pixelData.byteOffset, [texture.size[0], texture.size[1], 1]);
 
