@@ -341,7 +341,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(0,0)*4*sizeof(float),sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),36,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
@@ -364,7 +364,7 @@ WGPU_TEXTURE_FORMAT canvasViewFormat[1]={wtf.at(0,0)};
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
 config.format=wtf.at(0,0);
-config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BINDING;
+config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 // config.numViewFormats=1;
 config.viewFormats=&canvasViewFormat[0];
 // config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
@@ -442,7 +442,7 @@ videoSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(0,0));
 ws.at(0,0)=videoSampler;
 videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 videoTextureDescriptor.format=wtf.at(0,0);
-videoTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
+videoTextureDescriptor.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
 videoTextureDescriptor.width=sze.at(0,0);
 videoTextureDescriptor.height=sze.at(0,0); // default = 1;
 videoTextureDescriptor.depthOrArrayLayers=1;
@@ -639,17 +639,14 @@ async function videoFrames(){
 let SiZ=parseInt(window.innerHeight);
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
-const adapter = await navigator.gpu.requestAdapter();
-  if (!adapter) {
-    throw Error('Couldn\'t request WebGPU adapter.');
-  }
-let device = await adapter.requestDevice();
-console.log('WGPU?');
-setTimeout(function(){
-  //  const device =  adapter.requestDevice();
-console.log(device);
-},250);
+const context = cnv.getContext("webgpu");
+const gpu = navigator.gpu;
+const format = gpu.getPreferredCanvasFormat();
+const adapter = await gpu.requestAdapter();
+const device = await adapter.requestDevice();
+context.configure({ device, format, alphaMode: "opaque" });
 
+ 
 /*
       var texture = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -661,6 +658,30 @@ console.log(device);
     // Upload the image into the texture.
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, vv);
 
+const load_texture = (device, path) =>
+  fetch(path)
+    .then((res) => res.blob())
+    .then(createImageBitmap)
+    .then((bmp) => {
+      const texture = device.createTexture({
+        format: "rgba8unorm",
+        size: [bmp.width, bmp.height, 1],
+        usage:
+          GPUTextureUsage.COPY_DST |
+          GPUTextureUsage.RENDER_ATTACHMENT |
+          GPUTextureUsage.TEXTURE_BINDING,
+      });
+
+      device.queue.copyExternalImageToTexture({ source: bmp, flipY: true }, { texture }, [
+        bmp.width,
+        bmp.height,
+        1,
+      ]);
+      return [texture, bmp];
+    })
+    .then(([texture, bmp]) => (bmp.close(), texture));
+
+
 */
         
 let H=Module.HEAPU8.buffer;
@@ -668,28 +689,40 @@ let dataSize=cnv.width*cnv.height*8;
 let gl2=cnv.getContext('2d',{willReadFrequently:true});
 gl2.drawImage(vv,0,0);
 let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
-   
-const bytesPerRow = cnv.width * 4;
-const rowsPerImage = imageData.data.length / bytesPerRow;
-console.log('rowsPerImage:');
-console.log(rowsPerImage);
-console.log('bytesPerRow:');
-console.log(bytesPerRow);
-console.log('size:');
-console.log(cnv.width);
-let dataSize2=imageData.data.length;
-console.log('dataSize:',dataSize);
-console.log('dataSize2:',dataSize2);
     
 setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
-dataSize2=imageData.data.length;
-//  console.log('dataSize:',dataSize);
-//  console.log('dataSize2:',dataSize2);
-let pixelData=new Uint8Array(imageData);
-let heapArray=new Uint8Array(H,0,dataSize2);
-heapArray.set(pixelData,dataSize2);
+let pixelData=new Uint8Array(imageData.data);
+
+const texture = device.createTexture({
+format: "rgba8unorm",
+size: [cnv.width, cnv.height, 1],
+usage:
+GPUTextureUsage.COPY_DST |
+GPUTextureUsage.RENDER_ATTACHMENT |
+GPUTextureUsage.TEXTURE_BINDING,
+});
+ 
+device.queue.writeTexture({
+texture,
+bytesPerRow: 4 * cnv.width,
+rowsPerImage: cnv.height,
+}, pixelData.buffer, pixelData.byteOffset, [texture.size[0], texture.size[1], 1]);
+
+const textureData = new Uint8Array(texture.size[0] * texture.size[1] * 4); // Assuming RGBA format
+
+device.queue.readTexture({
+texture,
+bytesPerRow: 4 * cnv.width,
+rowsPerImage: cnv.height,
+}, textureData.buffer, textureData.byteOffset, [texture.size[0], texture.size[1], 1]);
+
+ let heapArray=new Uint8Array(H,0,textureData.length);
+heapArray.set(textureData);
+
+
+ 
 // Module.ccall("frm",null,["Number"],[0]);
 },50);
 }
