@@ -645,48 +645,10 @@ const format = gpu.getPreferredCanvasFormat();
 const adapter = await gpu.requestAdapter();
 const device = await adapter.requestDevice();
 context.configure({ device, format, alphaMode: "opaque" });
-
- 
-/*
-      var texture = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, texture);
-    // Set the parameters so we can render any size image.
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-    // Upload the image into the texture.
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, vv);
-
-const load_texture = (device, path) =>
-  fetch(path)
-    .then((res) => res.blob())
-    .then(createImageBitmap)
-    .then((bmp) => {
-      const texture = device.createTexture({
-        format: "rgba8unorm",
-        size: [bmp.width, bmp.height, 1],
-        usage:
-          GPUTextureUsage.COPY_DST |
-          GPUTextureUsage.RENDER_ATTACHMENT |
-          GPUTextureUsage.TEXTURE_BINDING,
-      });
-
-      device.queue.copyExternalImageToTexture({ source: bmp, flipY: true }, { texture }, [
-        bmp.width,
-        bmp.height,
-        1,
-      ]);
-      return [texture, bmp];
-    })
-    .then(([texture, bmp]) => (bmp.close(), texture));
-
-
-*/
         
-let H=Module.HEAPU8.buffer;
-let dataSize=cnv.width*cnv.height*8;
-let gl2=cnv.getContext('2d',{willReadFrequently:true});
+const H=Module.HEAPU8.buffer;
+const gl2=cnv.getContext('2d',{willReadFrequently:true});
+
 gl2.drawImage(vv,0,0);
 let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
     
