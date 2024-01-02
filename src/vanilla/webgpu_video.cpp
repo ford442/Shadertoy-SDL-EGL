@@ -659,7 +659,7 @@ let pixelData=new Uint8Array(imageData.data);
 
 const texture = device.createTexture({
 format: "rgba8unorm",
-size: [cnv.width, cnv.height, 1],
+size: [cnv.height, cnv.height, 1],
 usage:
 GPUTextureUsage.COPY_DST |
 GPUTextureUsage.RENDER_ATTACHMENT |
@@ -668,7 +668,7 @@ GPUTextureUsage.TEXTURE_BINDING,
  
 device.queue.writeTexture({
 texture,
-bytesPerRow: 8 * cnv.width,
+bytesPerRow: 4 * cnv.height,
 rowsPerImage: cnv.height,
 }, pixelData.buffer, pixelData.byteOffset, [texture.size[0], texture.size[1], 1]);
 
