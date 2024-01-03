@@ -413,6 +413,7 @@ uint_t n_frames = 0, sread = 0;
 
 fvec_t * out=new_fvec(1);
 aubio_tempo_t * o=new_aubio_tempo("default",win_size,hop_size,samplerate);
+aubio_pitch_t *pitch = new_aubio_pitch("yin", win_size, hop_size, samplerate);
 
  //          aubio_tempo_get_confidence(o);
 
@@ -1134,7 +1135,8 @@ return;
 EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
 FS.mkdir('/snd');
-  
+window.scroll(0,0);
+
 const fll=new BroadcastChannel('file');
 const shutDown=new BroadcastChannel('shutdown');
   
@@ -1152,6 +1154,7 @@ shutDown.postMessage({data:222});
 pll();
 },100);
 });
+
 function sngs(xml){
 const nparser=new DOMParser();
 const htmlDocs=nparser.parseFromString(xml.responseText,'text/html');
@@ -1173,6 +1176,7 @@ sngs(this);
 nxhttp.open('GET','songs/',true);
 nxhttp.send();
 }
+
 function snd(){
 var sngsNum=$sngs[0];
 const randSong=Module.ccall('r4nd','Number',['Number'],[sngsNum]);
@@ -1181,7 +1185,9 @@ document.getElementById('track').src=songSrc;
 const sng=new BroadcastChannel('sng');
 sng.postMessage({data:songSrc});
 }
+
 document.getElementById('musicBtn').addEventListener('click',function(){
+scanSongs();
 window.open('./flac');
 setTimeout(function(){
 snd();
@@ -1189,12 +1195,8 @@ setInterval(function(){
 Module.ccall('get_bpm');
 },2000);
 },1300);
-
 });
-scanSongs();
-
   
-window.scroll(0,0);
 
 document.querySelector('#drumBtn').addEventListener('click',function(){
 window.open('./drum/o8o.htm');
@@ -1268,14 +1270,12 @@ let codeMessage=new BroadcastChannel('codeMessage');
 codeMessage.addEventListener('message',event=>{
 document.querySelector('#status').style.backgroundColor="blue";
 let flDat=event.data.data;
-var buffer = new ArrayBuffer(flDat.length*2);
-var bufferView = new Uint16Array(buffer);
-for (var i = 0; i < flDat.length; i++) {
-    bufferView[i] = flDat.charCodeAt(i);
+var buffer=new ArrayBuffer(flDat.length*2);
+var bufferView=new Uint16Array(buffer);
+for(var i=0;i<flDat.length;i++) {
+bufferView[i]=flDat.charCodeAt(i);
 }
-// console.log(bufferView);
 FS.writeFile('/shader/shader.wgsl',bufferView);
-// document.querySelector('#startBtn').click();
 setTimeout(function(){
 document.querySelector('#circle').width=window.innerWidth;
 document.querySelector('#circle').height=window.innerHeight;
@@ -1287,7 +1287,6 @@ Module.ccall("startWebGPUb");
 
 function scanShaders(){
 const dxhttp=new XMLHttpRequest();
-// dxhttp.withCredentials=false;
 dxhttp.addEventListener("load",function(){
 shds(this);
 });
