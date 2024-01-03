@@ -329,7 +329,7 @@ double_int53_t WGPU_Range_PointerC;
   uint_t samplerate = 44100;
   uint_t win_size = 1024; // window size
   uint_t hop_size = win_size / 4;
-  uint_t n_frames = 0, read = 0;
+  uint_t n_frames = 0, sread = 0;
 /*
   char_t *source_path = argv[1];
   aubio_source_t * source = new_aubio_source(source_path, samplerate,
@@ -349,7 +349,7 @@ if (samplerate == 0 ) samplerate = aubio_source_get_samplerate(source);
  aubio_tempo_t * o = new_aubio_tempo("default", win_size, hop_size,
       samplerate);
 
- //   aubio_source_do(source, in, &read);
+ //   aubio_source_do(source, in, &sread);
 //    aubio_tempo_do(o,in,out);
 
 // int ms  aubio_tempo_get_last_ms(o);
