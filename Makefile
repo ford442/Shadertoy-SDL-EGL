@@ -69,7 +69,7 @@ b3_compute:
 	 --memory-init-file 0 main_compute.o
 
 b3_drum:
-	 em++ -D__EMSCRIPTEN__ src/vanilla/main_drum.cpp -std=c++14 -ffp-contract=off \
+	 em++ -D__EMSCRIPTEN__ src/vanilla/main_drum.cpp -fchar8_t -std=c++14 -ffp-contract=off \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -D__EMSCRIPTEN__ $(LDFLAGS) -fchar8_t -O0 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-drum.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 -ffast-math -ffp-contract=off \
