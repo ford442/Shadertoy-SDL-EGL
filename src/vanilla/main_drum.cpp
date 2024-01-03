@@ -1125,7 +1125,7 @@ FS.mkdir('/shader');
 FS.mkdir('/snd');
   
 const fll=new BroadcastChannel('file');
-const shutdown=new BroadcastChannel('shutdown');
+const shutDown=new BroadcastChannel('shutdown');
   
 function pll(){
 Module.ccall('pl');
