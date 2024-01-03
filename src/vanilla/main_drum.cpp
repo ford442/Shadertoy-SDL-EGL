@@ -436,8 +436,8 @@ uint_t peak_bin = 0;  // Index of the peak bin
 smpl_t peak_value = 0;  // Value of the peak
 
 for (uint_t i = 0; i < win_size / 2; i++) {  // Iterate over half the spectrum (real FFT)
-    if (fabs(input->data[i]) > peak_value) {
-        peak_value = fabs(input->data[i]);
+    if (fabs(in->data[i]) > peak_value) {
+        peak_value = fabs(in->data[i]);
         peak_bin = i;
     }
 }
