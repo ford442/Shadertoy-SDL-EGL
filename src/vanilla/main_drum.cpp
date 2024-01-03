@@ -1204,9 +1204,7 @@ var sngsNum=$sngs[0];
 const randSong=Module.ccall('r4nd','Number',['Number'],[sngsNum]);
 const songSrc=$sngs[randSong+5];
 document.getElementById('track').src=songSrc;
-setTimeout(function(){
 sng.postMessage({data:songSrc});
-},500);
 }
 
 document.getElementById('musicBtn').addEventListener('click',function(){
