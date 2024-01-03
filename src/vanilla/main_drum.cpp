@@ -1186,7 +1186,7 @@ window.open('./flac');
 setTimeout(function(){
 snd();
 setInterval(function(){
-Module.ccall('bpm');
+Module.ccall('get_bpm');
 },2000);
 },1300);
 
