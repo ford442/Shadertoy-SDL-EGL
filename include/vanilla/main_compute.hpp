@@ -10,6 +10,7 @@
 #include "/content/RAMDRIVE2/aubio/src/fvec.c"
 #include "/content/RAMDRIVE2/aubio/src/cvec.c"
 #include "/content/RAMDRIVE2/aubio/src/tempo/tempo.c"
+#include "/content/RAMDRIVE2/aubio/src/utils/log.c"
 
 #define __EMCSCRIPTEN__ 1
 
