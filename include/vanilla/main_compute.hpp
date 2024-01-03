@@ -6,6 +6,8 @@
 #include "../../lib/lib_webgpu_cpp20.cpp"
 #include <GL/gl.h>
 
+using namespace std;
+
 #include "/content/RAMDRIVE2/aubio/src/aubio.h"
 #include "/content/RAMDRIVE2/aubio/src/fvec.c"
 #include "/content/RAMDRIVE2/aubio/src/cvec.c"
@@ -90,7 +92,6 @@ void runWebGPU();
 
 }
 
-using namespace std;
 
 using dv_tensor=boost::numeric::ublas::tensor<SDL_AudioDeviceID>;
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
