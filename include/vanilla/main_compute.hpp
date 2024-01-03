@@ -9,16 +9,13 @@
 using namespace std;
 #include <cstdio> // C++ style
 #include <cstdarg> // C++ style
-#include "/content/RAMDRIVE2/aubio/src/pitch/pitchyinfft.h"
 
-#include "/content/RAMDRIVE2/aubio/src/pitch/pitch.c"
 
 #include "/content/RAMDRIVE2/aubio/src/aubio.h"
 #include "/content/RAMDRIVE2/aubio/src/fvec.c"
 #include "/content/RAMDRIVE2/aubio/src/lvec.c"
 #include "/content/RAMDRIVE2/aubio/src/cvec.c"
 #include "/content/RAMDRIVE2/aubio/src/mathutils.c"
-#include "/content/RAMDRIVE2/aubio/src/pitch/pitchyinfft.c"
 #include "/content/RAMDRIVE2/aubio/src/tempo/tempo.c"
 #include "/content/RAMDRIVE2/aubio/src/tempo/beattracking.c"
 #include "/content/RAMDRIVE2/aubio/src/spectral/specdesc.c"
@@ -32,6 +29,11 @@ using namespace std;
 #include "/content/RAMDRIVE2/aubio/src/spectral/ooura_fft8g.c"
 #include "/content/RAMDRIVE2/aubio/src/temporal/biquad.c"
 #include "/content/RAMDRIVE2/aubio/src/temporal/filter.c"
+
+#include "/content/RAMDRIVE2/aubio/src/pitch/pitchyinfft.h"
+#include "/content/RAMDRIVE2/aubio/src/pitch/pitchyinfft.c"
+#include "/content/RAMDRIVE2/aubio/src/pitch/pitch.c"
+
 #define __EMCSCRIPTEN__ 1
 
 #include <cstdint>
