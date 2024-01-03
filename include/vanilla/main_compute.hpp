@@ -116,11 +116,10 @@ using ub_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
 using lu_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned long>>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 
-
 using namespace boost::chrono;
+
 using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
 using wced_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoderDescriptor>;
-
 using wbmc_tensor=boost::numeric::ublas::tensor<WGpuBufferMapCallback>;
 using wcpe_tensor=boost::numeric::ublas::tensor<WGpuComputePassEncoder>;
 using wcp_tensor=boost::numeric::ublas::tensor<WGpuComputePipeline>;
@@ -130,7 +129,6 @@ using wbms_tensor=boost::numeric::ublas::tensor<WGPU_BUFFER_MAP_STATE>;
 using di_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
 // using void_tensor=boost::numeric::ublas::tensor<void *>;
 using wdc_tensor=boost::numeric::ublas::tensor<WGpuOnSubmittedWorkDoneCallback>;
-
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using c_tensor=boost::numeric::ublas::tensor<const char *>;
 using f_tensor=boost::numeric::ublas::tensor<float>;
