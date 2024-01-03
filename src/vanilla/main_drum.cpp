@@ -401,7 +401,7 @@ return;
 }
 
 uint_t samplerate = 44100;
-uint_t win_size = 512; // window size
+uint_t win_size = 2048; // window size
 uint_t hop_size = win_size / 4;
 uint_t n_frames = 0, sread = 0;
 
@@ -582,7 +582,7 @@ clk_l=true;
 }
 */
 _tempo_.at(1,1)=_tempo_.at(1,1)-10;
-u64_uni.at(1,1)=(_tempo_.at(1,1)*100000)+(_pitch_.at(0,0)*1000);
+u64_uni.at(1,1)=(_tempo_.at(1,1)*100000)+int(_pitch_.at(0,0)*1000);
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
@@ -1212,7 +1212,7 @@ setInterval(function(){
 Module.ccall('get_bpm');
 var tmmp=tmpo.innerText;
 tmpSync.postMessage({data:tmmp});
-},200);
+},2000);
 },1500);
 });
   
