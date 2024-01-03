@@ -55,6 +55,8 @@
 #include <thrust/functional.h>
 #include <cstdlib>
 
+#include <SDL2/SDL.h>
+
 #include <functional>
 
 template<class ArgumentType,class ResultType>
@@ -85,6 +87,15 @@ void runWebGPU();
 }
 
 using namespace std;
+
+using dv_tensor=boost::numeric::ublas::tensor<SDL_AudioDeviceID>;
+using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
+using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
+using ub_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
+using lu_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned long>>;
+using v_tensor=boost::numeric::ublas::tensor<v128_t>;
+
+
 using namespace boost::chrono;
 using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
 using wced_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoderDescriptor>;
