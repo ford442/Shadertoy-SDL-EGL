@@ -83,7 +83,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 WGpuUniform wTime;
 uint64_t tme;
 
-static u64_tensor tempos=u64_tensor{2,2};
+static u64_tensor _tempo_=u64_tensor{2,2};
 static i_tensor on=i_tensor{2,2};
 static i_tensor sze=i_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
@@ -417,7 +417,7 @@ fvec_t * out=new_fvec(1);
 aubio_tempo_t * atempo=new_aubio_tempo("default",win_size,hop_size,samplerate);
 aubio_pitch_t *apitch = new_aubio_pitch("yin", win_size, hop_size, samplerate);
 
- //          aubio_tempo_get_confidence(tempo);
+ //          aubio_tempo_get_confidence(atempo);
 
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 fvec_t* in = new_fvec(len / sizeof(float));
@@ -568,9 +568,9 @@ else{
 clk_l=true;
 }
 */
-if(tempo.at(1,1)>0){
-tempo.at(1,1)=tempo.at(1,1)-10;
-u64_uni.at(1,1)=tempo.at(1,1);
+if(_tempo_.at(1,1)>0){
+_tempo_.at(1,1)=_tempo_.at(1,1)-10;
+u64_uni.at(1,1)=_tempo_.at(1,1);
 }
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -1113,12 +1113,12 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 }
 
 void setTempo(int tmpo){
-tempo.at(0,0)=tmpo;
+_tempo_.at(0,0)=tmpo;
 return;
 }
 
 void drumKick(){
-tempo.at(1,1)=100;
+_tempo_.at(1,1)=100;
 return;
 }
 
