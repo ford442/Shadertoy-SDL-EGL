@@ -31,7 +31,8 @@ using namespace std;
 #include "/content/RAMDRIVE2/aubio/src/temporal/biquad.c"
 #include "/content/RAMDRIVE2/aubio/src/temporal/filter.c"
 
-// #include "/content/RAMDRIVE2/aubio/src/pitch/pitchyinfast.c"
+#include "/content/RAMDRIVE2/aubio/src/pitch/pitchyin.c"
+#include "/content/RAMDRIVE2/aubio/src/pitch/pitchyinfast.c"
 #include "/content/RAMDRIVE2/aubio/src/pitch/pitchyinfft.c"
 #include "/content/RAMDRIVE2/aubio/src/pitch/pitch.c"
 
