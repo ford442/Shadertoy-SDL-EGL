@@ -10,6 +10,8 @@ using namespace std;
 #include <cstdio> // C++ style
 #include <cstdarg> // C++ style
 
+#define HAVE_AUBIO_DOUBLE 1
+
 #include "/content/RAMDRIVE2/aubio/src/aubio.h"
 #include "/content/RAMDRIVE2/aubio/src/fvec.c"
 #include "/content/RAMDRIVE2/aubio/src/lvec.c"
