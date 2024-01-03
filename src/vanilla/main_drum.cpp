@@ -1158,7 +1158,7 @@ FS.mkdir('/snd');
 window.scroll(0,0);
 
 const fll=new BroadcastChannel('file');
-const shutDown=new BroadcastChannel('shutdown');
+const shutDown=new BroadcastChannel('shutDown');
   
 function pll(){
 Module.ccall('pl');
@@ -1197,13 +1197,16 @@ nxhttp.open('GET','songs/',true);
 nxhttp.send();
 }
 
+const sng=new BroadcastChannel('sng');
+
 function snd(){
 var sngsNum=$sngs[0];
 const randSong=Module.ccall('r4nd','Number',['Number'],[sngsNum]);
 const songSrc=$sngs[randSong+5];
 document.getElementById('track').src=songSrc;
-const sng=new BroadcastChannel('sng');
+setTimeout(function(){
 sng.postMessage({data:songSrc});
+},500);
 }
 
 document.getElementById('musicBtn').addEventListener('click',function(){
@@ -1218,7 +1221,7 @@ Module.ccall('get_bpm');
 var tmmp=tmpo.innerText;
 tmpSync.postMessage({data:tmmp});
 },2000);
-},1300);
+},1500);
 });
   
 
