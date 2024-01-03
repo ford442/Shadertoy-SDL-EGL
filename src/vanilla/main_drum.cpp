@@ -325,7 +325,6 @@ uint32_t outP;
 double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
 
-
   uint_t samplerate = 44100;
   uint_t win_size = 1024; // window size
   uint_t hop_size = win_size / 4;
@@ -357,6 +356,7 @@ if (samplerate == 0 ) samplerate = aubio_source_get_samplerate(source);
  //         aubio_tempo_get_last(o);
 // aubio_tempo_get_bpm(o);
  //          aubio_tempo_get_confidence(o);
+
 ub_tensor sound=ub_tensor{1,1,1};
 gi_tensor sound_pos=gi_tensor{1,1};
 gi_tensor sound_lft=gi_tensor{1,1};
