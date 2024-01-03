@@ -69,6 +69,7 @@ b3_compute:
 	 --memory-init-file 0 main_compute.o
 
 b3_drum:
+
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_drum.cpp -std=c++20 -ffp-contract=off \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -D__EMSCRIPTEN__ $(LDFLAGS) -O0 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-drum.js \
