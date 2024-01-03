@@ -440,8 +440,8 @@ peak_value = fabs(in->data[i]);
 peak_bin = i;
 }
 }
- smpl_t dominant_freq = peak_bin * samplerate / win_size;
-_pitch_.at(0,0)=float(dominant_freq)/44100.0f;
+smpl_t dominant_freq = peak_bin * samplerate / win_size;
+_pitch_.at(0,0)=float(dominant_freq/44100.0f);
  //         aubio_tempo_get_last(atempo);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
@@ -582,7 +582,7 @@ clk_l=true;
 }
 */
 _tempo_.at(1,1)=_tempo_.at(1,1)-10;
-u64_uni.at(1,1)=(_tempo_.at(1,1)*10000)+(_pitch_.at(0,0)*1000);
+u64_uni.at(1,1)=(_tempo_.at(1,1)*100000)+(_pitch_.at(0,0)*1000);
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
