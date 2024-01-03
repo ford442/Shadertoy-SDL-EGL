@@ -343,12 +343,12 @@ if (samplerate == 0 ) samplerate = aubio_source_get_samplerate(source);
   aubio_cleanup();
   
 */
-  fvec_t * in = new_fvec (hop_size); // input audio buffer
-  fvec_t * out = new_fvec (1); // output position
- aubio_tempo_t * o = new_aubio_tempo("default", win_size, hop_size,
-      samplerate);
+fvec_t * in=new_fvec(hop_size); // input audio buffer
+fvec_t * out=new_fvec(1); // output position
+aubio_tempo_t * o=new_aubio_tempo("default",win_size,hop_size,samplerate);
 
  //   aubio_source_do(source, in, &sread);
+
 //    aubio_tempo_do(o,in,out);
 
 // int ms  aubio_tempo_get_last_ms(o);
@@ -1125,6 +1125,7 @@ FS.mkdir('/shader');
 FS.mkdir('/snd');
   
 const fll=new BroadcastChannel('file');
+const shutdown=new BroadcastChannel('shutdown');
   
 function pll(){
 Module.ccall('pl');
