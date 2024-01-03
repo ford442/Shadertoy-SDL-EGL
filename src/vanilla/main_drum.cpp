@@ -428,7 +428,7 @@ snd_pos(sound_pos.at(0,0)+len);
 return;
 }
 
-const boost::function<EM_BOOL()>plt=[this](){
+const boost::function<EM_BOOL()>plt=[](){
 ::boost::tuples::tie(sound,sound_pos,sound_pos_u);
 ::boost::tuples::tie(wave,sse,sse2);
 ::boost::tuples::tie(bfr,request);
