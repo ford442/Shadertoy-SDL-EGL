@@ -422,6 +422,7 @@ aubio_fft_t* fft = new_aubio_fft(win_size);  // Create FFT object with desired w
 
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 fvec_t* in = new_fvec(len / sizeof(float));
+fvec_t* spectr = new_cvec(len / sizeof(float));
 // status=SDL_GetAudioDeviceStatus(dv.at(0,0));
 for (int i = 0; i < len / sizeof(float); i++) {
 in->data[i] = ((float*)stm)[i];
@@ -430,7 +431,7 @@ aubio_tempo_do(atempo,in,out);
 bpm.at(0,0)=aubio_tempo_get_bpm(atempo);
 // aubio_pitch_do(apitch,in,out);
 // _pitch_.at(0,0)=out->data[0];
- aubio_fft_do(fft,in,in);  // Perform FFT on input data
+ aubio_fft_do(fft,in,spectr);  // Perform FFT on input data
 
  //         aubio_tempo_get_last(atempo);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
