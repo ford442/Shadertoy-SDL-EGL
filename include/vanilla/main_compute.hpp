@@ -10,14 +10,13 @@ using namespace std;
 #include <cstdio> // C++ style
 #include <cstdarg> // C++ style
 
-#define HAVE_AUBIO_DOUBLE 1
-
 #include "/content/RAMDRIVE2/aubio/src/aubio.h"
 #include "/content/RAMDRIVE2/aubio/src/fvec.c"
 #include "/content/RAMDRIVE2/aubio/src/lvec.c"
 #include "/content/RAMDRIVE2/aubio/src/cvec.c"
 #include "/content/RAMDRIVE2/aubio/src/mathutils.c"
 #include "/content/RAMDRIVE2/aubio/src/pitch/pitch.c"
+#include "/content/RAMDRIVE2/aubio/src/pitch/pitchyinfft.c"
 #include "/content/RAMDRIVE2/aubio/src/tempo/tempo.c"
 #include "/content/RAMDRIVE2/aubio/src/tempo/beattracking.c"
 #include "/content/RAMDRIVE2/aubio/src/spectral/specdesc.c"
