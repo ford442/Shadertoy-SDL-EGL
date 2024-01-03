@@ -133,6 +133,7 @@ static ws_tensor wgpu_sampler=ws_tensor{2,2};
 static wsbl_tensor wsbl=wsbl_tensor{2,2};
 
 static i_tensor bpm=i_tensor{2,2};
+static f_tensor pitch=f_tensor{2,2};
 
 /*
 static mouse_tensor mms=mouse_tensor{2,2};
@@ -384,7 +385,8 @@ return EM_TRUE;
 EM_BOOL getBPM(){
 EM_ASM({
 console.log('BPM: ',$0);
-},bpm.at(0,0));
+console.log('pitch: ',$1);
+},bpm.at(0,0),pitch.at(0,0));
 return EM_TRUE;
 }
 
@@ -425,6 +427,8 @@ in->data[i] = ((float*)stm)[i];
 }
 aubio_tempo_do(o,in,out);
 bpm.at(0,0)=aubio_tempo_get_bpm(o);
+aubio_pitch_do(pitch,in,out);
+pitch.at(0,0)=out->data[0];
  //         aubio_tempo_get_last(o);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
