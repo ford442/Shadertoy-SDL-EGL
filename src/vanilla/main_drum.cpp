@@ -584,10 +584,10 @@ else{
 clk_l=true;
 }
 */
-if(_tempo_.at(1,1)>0){
+
 _tempo_.at(1,1)=_tempo_.at(1,1)-10;
-u64_uni.at(1,1)=_tempo_.at(1,1);
-}
+u64_uni.at(1,1)=_tempo_.at(1,1)+(_pitch_.at(0,0)*1000);
+
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
