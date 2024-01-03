@@ -132,6 +132,8 @@ static wsd_tensor wsd=wsd_tensor{2,2};
 static ws_tensor wgpu_sampler=ws_tensor{2,2};
 static wsbl_tensor wsbl=wsbl_tensor{2,2};
 
+static i_tensor bpm=i_tensor{2,2};
+
 /*
 static mouse_tensor mms=mouse_tensor{2,2};
 static mouse_tensor mms2=mouse_tensor{2,2};
@@ -379,10 +381,27 @@ sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
 return EM_TRUE;
 }
 
-  uint_t samplerate = 44100;
-  uint_t win_size = 1024; // window size
-  uint_t hop_size = win_size / 4;
-  uint_t n_frames = 0, sread = 0;
+EM_BOOL getBPM(){
+EM_ASM({
+console.log('BPM: ',$0);
+},bpm.at(0,0));
+return EM_TRUE;
+}
+
+extern"C"{
+
+void bpm()
+getBPM();
+return;
+}
+
+}
+
+uint_t samplerate = 44100;
+uint_t win_size = 1024; // window size
+uint_t hop_size = win_size / 4;
+uint_t n_frames = 0, sread = 0;
+
 /*
  // clean up memory
   del_aubio_tempo(o);
@@ -391,15 +410,11 @@ return EM_TRUE;
   del_aubio_source(source);
   aubio_cleanup();
 */
-fvec_t * out=new_fvec(1); // output position
+
+fvec_t * out=new_fvec(1);
 aubio_tempo_t * o=new_aubio_tempo("default",win_size,hop_size,samplerate);
 
-
-
-// int ms  aubio_tempo_get_last_ms(o);
-//    aubio_tempo_get_last_s(o);
  //          aubio_tempo_get_confidence(o);
-
 
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 fvec_t* in = new_fvec(len / sizeof(float));
@@ -408,7 +423,7 @@ for (int i = 0; i < len / sizeof(float); i++) {
 in->data[i] = ((float*)stm)[i];
 }
 aubio_tempo_do(o,in,out);
-int ii=aubio_tempo_get_bpm(o);
+bpm.at(0,0)=aubio_tempo_get_bpm(o);
  //         aubio_tempo_get_last(o);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
@@ -1170,7 +1185,11 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
+setInterval(function(){
+Module.ccall('bpm');
+},2000);
 },1300);
+
 });
 scanSongs();
 
