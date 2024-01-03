@@ -325,38 +325,6 @@ uint32_t outP;
 double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
 
-  uint_t samplerate = 44100;
-  uint_t win_size = 1024; // window size
-  uint_t hop_size = win_size / 4;
-  uint_t n_frames = 0, sread = 0;
-/*
-  char_t *source_path = argv[1];
-  aubio_source_t * source = new_aubio_source(source_path, samplerate,
-      hop_size);
-if (samplerate == 0 ) samplerate = aubio_source_get_samplerate(source);
-
- // clean up memory
-  del_aubio_tempo(o);
-  del_fvec(in);
-  del_fvec(out);
-  del_aubio_source(source);
-  aubio_cleanup();
-  
-*/
-fvec_t * in=new_fvec(hop_size); // input audio buffer
-fvec_t * out=new_fvec(1); // output position
-aubio_tempo_t * o=new_aubio_tempo("default",win_size,hop_size,samplerate);
-
- //   aubio_source_do(source, in, &sread);
-
-//    aubio_tempo_do(o,in,out);
-
-// int ms  aubio_tempo_get_last_ms(o);
-//    aubio_tempo_get_last_s(o);
- //         aubio_tempo_get_last(o);
-// aubio_tempo_get_bpm(o);
- //          aubio_tempo_get_confidence(o);
-
 ub_tensor sound=ub_tensor{1,1,1};
 gi_tensor sound_pos=gi_tensor{1,1};
 gi_tensor sound_lft=gi_tensor{1,1};
@@ -411,9 +379,37 @@ sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
 return EM_TRUE;
 }
 
+  uint_t samplerate = 44100;
+  uint_t win_size = 1024; // window size
+  uint_t hop_size = win_size / 4;
+  uint_t n_frames = 0, sread = 0;
+/*
+ // clean up memory
+  del_aubio_tempo(o);
+  del_fvec(in);
+  del_fvec(out);
+  del_aubio_source(source);
+  aubio_cleanup();
+*/
+fvec_t * out=new_fvec(1); // output position
+aubio_tempo_t * o=new_aubio_tempo("default",win_size,hop_size,samplerate);
+
+
+
+// int ms  aubio_tempo_get_last_ms(o);
+//    aubio_tempo_get_last_s(o);
+ //          aubio_tempo_get_confidence(o);
+
+
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
-// ::boost::tuples::tie(stm,len);
+fvec_t* in = new_fvec(len / sizeof(float));
 // status=SDL_GetAudioDeviceStatus(dv.at(0,0));
+for (int i = 0; i < len / sizeof(float); i++) {
+in->data[i] = ((float*)stm)[i];
+}
+aubio_tempo_do(o,in,out);
+int ii=aubio_tempo_get_bpm(o);
+ //         aubio_tempo_get_last(o);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 while(sound_lft.at(0,0)<=len){
