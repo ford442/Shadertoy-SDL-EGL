@@ -6,7 +6,9 @@
 #include "../../lib/lib_webgpu_cpp20.cpp"
 #include <GL/gl.h>
 
-#include "/usr/include/aubio/aubio.h"
+#include "/content/RAMDRIVE2/aubio/aubio.h"
+#include "/content/RAMDRIVE2/aubio/fvec.c"
+#include "/content/RAMDRIVE2/aubio/tempo.c"
 
 #define __EMCSCRIPTEN__ 1
 
