@@ -418,7 +418,6 @@ fvec_t * out=new_fvec(1);
 aubio_tempo_t * atempo=new_aubio_tempo("default",win_size,hop_size,samplerate);
 // aubio_pitch_t *apitch = new_aubio_pitch("yin", win_size, hop_size, samplerate);
 aubio_fft_t* fft = new_aubio_fft(win_size);  // Create FFT object with desired window size
-
  //          aubio_tempo_get_confidence(atempo);
 
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
@@ -435,16 +434,14 @@ bpm.at(0,0)=aubio_tempo_get_bpm(atempo);
  aubio_fft_do(fft,in,spectr);  // Perform FFT on input data
 uint_t peak_bin = 0;  // Index of the peak bin
 smpl_t peak_value = 0;  // Value of the peak
-
 for (uint_t i = 0; i < win_size / 2; i++) {  // Iterate over half the spectrum (real FFT)
-    if (fabs(in->data[i]) > peak_value) {
-        peak_value = fabs(in->data[i]);
-        peak_bin = i;
-    }
+if (fabs(in->data[i]) > peak_value) {
+peak_value = fabs(in->data[i]);
+peak_bin = i;
+}
 }
  smpl_t dominant_freq = peak_bin * samplerate / win_size;
 _pitch_.at(0,0)=float(dominant_freq)/44100.0f;
-
  //         aubio_tempo_get_last(atempo);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
@@ -584,10 +581,8 @@ else{
 clk_l=true;
 }
 */
-
 _tempo_.at(1,1)=_tempo_.at(1,1)-10;
-u64_uni.at(1,1)=_tempo_.at(1,1)+(_pitch_.at(0,0)*1000000);
-
+u64_uni.at(1,1)=(_tempo_.at(1,1)*1000000)+(_pitch_.at(0,0)*100000);
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
