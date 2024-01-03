@@ -27,9 +27,9 @@ using namespace std;
 #include "/content/RAMDRIVE2/aubio/src/spectral/phasevoc.c"
 #include "/content/RAMDRIVE2/aubio/src/spectral/fft.c"
 #include "/content/RAMDRIVE2/aubio/src/spectral/statistics.c"
+#include "/content/RAMDRIVE2/aubio/src/spectral/ooura_fft8g.c"
 #include "/content/RAMDRIVE2/aubio/src/temporal/biquad.c"
 #include "/content/RAMDRIVE2/aubio/src/temporal/filter.c"
-
 #define __EMCSCRIPTEN__ 1
 
 #include <cstdint>
