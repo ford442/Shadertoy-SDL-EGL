@@ -401,7 +401,7 @@ return;
 }
 
 uint_t samplerate = 44100;
-uint_t win_size = 4096; // window size
+uint_t win_size = 512; // window size
 uint_t hop_size = win_size / 4;
 uint_t n_frames = 0, sread = 0;
 
@@ -443,7 +443,7 @@ for (uint_t i = 0; i < win_size / 2; i++) {  // Iterate over half the spectrum (
     }
 }
  smpl_t dominant_freq = peak_bin * samplerate / win_size;
-_pitch_.at(0,0)=float(dominant_freq);
+_pitch_.at(0,0)=float(dominant_freq)/44100.0f;
 
  //         aubio_tempo_get_last(atempo);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
@@ -586,7 +586,7 @@ clk_l=true;
 */
 
 _tempo_.at(1,1)=_tempo_.at(1,1)-10;
-u64_uni.at(1,1)=_tempo_.at(1,1)+(_pitch_.at(0,0)*1000);
+u64_uni.at(1,1)=_tempo_.at(1,1)+(_pitch_.at(0,0)*1000000);
 
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
