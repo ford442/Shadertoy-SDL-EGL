@@ -83,7 +83,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 WGpuUniform wTime;
 uint64_t tme;
 
-static u64_tensor tempo=u64_tensor{2,2};
+static u64_tensor tempos=u64_tensor{2,2};
 static i_tensor on=i_tensor{2,2};
 static i_tensor sze=i_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
@@ -133,7 +133,7 @@ static ws_tensor wgpu_sampler=ws_tensor{2,2};
 static wsbl_tensor wsbl=wsbl_tensor{2,2};
 
 static i_tensor bpm=i_tensor{2,2};
-static f_tensor pitch=f_tensor{2,2};
+static f_tensor _pitch_=f_tensor{2,2};
 
 /*
 static mouse_tensor mms=mouse_tensor{2,2};
@@ -386,7 +386,7 @@ EM_BOOL getBPM(){
 EM_ASM({
 console.log('BPM: ',$0);
 console.log('pitch: ',$1);
-},bpm.at(0,0),pitch.at(0,0));
+},bpm.at(0,0),_pitch_.at(0,0));
 return EM_TRUE;
 }
 
@@ -414,8 +414,8 @@ uint_t n_frames = 0, sread = 0;
 */
 
 fvec_t * out=new_fvec(1);
-aubio_tempo_t * tempo=new_aubio_tempo("default",win_size,hop_size,samplerate);
-aubio_pitch_t *pitch = new_aubio_pitch("yin", win_size, hop_size, samplerate);
+aubio_tempo_t * atempo=new_aubio_tempo("default",win_size,hop_size,samplerate);
+aubio_pitch_t *apitch = new_aubio_pitch("yin", win_size, hop_size, samplerate);
 
  //          aubio_tempo_get_confidence(tempo);
 
@@ -425,11 +425,11 @@ fvec_t* in = new_fvec(len / sizeof(float));
 for (int i = 0; i < len / sizeof(float); i++) {
 in->data[i] = ((float*)stm)[i];
 }
-aubio_tempo_do(tempo,in,out);
-bpm.at(0,0)=aubio_tempo_get_bpm(tempo);
-aubio_pitch_do(pitch,in,out);
-pitch.at(0,0)=out->data[0];
- //         aubio_tempo_get_last(tempo);
+aubio_tempo_do(atempo,in,out);
+bpm.at(0,0)=aubio_tempo_get_bpm(atempo);
+aubio_pitch_do(apitch,in,out);
+_pitch_.at(0,0)=out->data[0];
+ //         aubio_tempo_get_last(atempo);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 while(sound_lft.at(0,0)<=len){
