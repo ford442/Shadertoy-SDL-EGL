@@ -367,11 +367,11 @@ v_tensor sse3=v_tensor{1,1};
 dv_tensor dv=dv_tensor{1,1};
 
 struct{
-register GLubyte * snd;
-register long pos;
+GLubyte * snd;
+long pos;
 SDL_AudioDeviceID dev;
-register GLuint slen;
-register GLubyte * wptr;
+GLuint slen;
+GLubyte * wptr;
 }wave;
 
 inline int rNd4(int randomMax){
