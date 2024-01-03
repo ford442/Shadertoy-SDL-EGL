@@ -20,9 +20,8 @@ using namespace std;
 #include "/content/RAMDRIVE2/aubio/src/onset/peakpicker.c"
 #include "/content/RAMDRIVE2/aubio/src/utils/log.c"
 #include "/content/RAMDRIVE2/aubio/src/utils/hist.c"
-extern "C"{
 #include "/content/RAMDRIVE2/aubio/src/spectral/phasevoc.c"
-}
+
 #define __EMCSCRIPTEN__ 1
 
 #include <cstdint>
