@@ -415,7 +415,8 @@ uint_t n_frames = 0, sread = 0;
 
 fvec_t * out=new_fvec(1);
 aubio_tempo_t * atempo=new_aubio_tempo("default",win_size,hop_size,samplerate);
-aubio_pitch_t *apitch = new_aubio_pitch("yin", win_size, hop_size, samplerate);
+// aubio_pitch_t *apitch = new_aubio_pitch("yin", win_size, hop_size, samplerate);
+aubio_fft_t* fft = new_aubio_fft(win_size);  // Create FFT object with desired window size
 
  //          aubio_tempo_get_confidence(atempo);
 
@@ -427,8 +428,10 @@ in->data[i] = ((float*)stm)[i];
 }
 aubio_tempo_do(atempo,in,out);
 bpm.at(0,0)=aubio_tempo_get_bpm(atempo);
-aubio_pitch_do(apitch,in,out);
-_pitch_.at(0,0)=out->data[0];
+// aubio_pitch_do(apitch,in,out);
+// _pitch_.at(0,0)=out->data[0];
+ aubio_fft_do(fft,in,in);  // Perform FFT on input data
+
  //         aubio_tempo_get_last(atempo);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
