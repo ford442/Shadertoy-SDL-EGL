@@ -34,7 +34,7 @@ using namespace std;
 
 
 #include "/content/RAMDRIVE2/aubio/src/pitch/pitch.h"
-// #include "/content/RAMDRIVE2/aubio/src/pitch/pitch.c"
+#include "/content/RAMDRIVE2/aubio/src/pitch/pitch.c"
 #include "/content/RAMDRIVE2/aubio/src/pitch/pitchyin.h"
 #include "/content/RAMDRIVE2/aubio/src/pitch/pitchyin.c"
 #include "/content/RAMDRIVE2/aubio/src/pitch/pitchyinfast.h"
