@@ -8,6 +8,7 @@
 
 #include "/content/RAMDRIVE2/aubio/src/aubio.h"
 #include "/content/RAMDRIVE2/aubio/src/fvec.c"
+#include "/content/RAMDRIVE2/aubio/src/cvec.c"
 #include "/content/RAMDRIVE2/aubio/src/tempo/tempo.c"
 
 #define __EMCSCRIPTEN__ 1
