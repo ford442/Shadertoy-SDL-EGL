@@ -5,7 +5,7 @@
 #include "../../include/vanilla/boost_defs.hpp"
 #include "../../lib/lib_webgpu_cpp20.cpp"
 
-#include <aubio.h>
+#include <aubio/aubio.h>
 
 #define __EMCSCRIPTEN__ 1
 
