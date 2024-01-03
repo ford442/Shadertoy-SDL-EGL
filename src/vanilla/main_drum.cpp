@@ -384,8 +384,9 @@ return EM_TRUE;
 
 EM_BOOL getBPM(){
 EM_ASM({
-console.log('BPM: ',$0);
-console.log('pitch: ',$1);
+// console.log('BPM: ',$0);
+// console.log('pitch: ',$1);
+document.querySelector('#tempo').innerText=$0;
 },bpm.at(0,0),_pitch_.at(0,0));
 return EM_TRUE;
 }
@@ -1207,11 +1208,15 @@ sng.postMessage({data:songSrc});
 
 document.getElementById('musicBtn').addEventListener('click',function(){
 scanSongs();
+let tmpSync=new BroadcastChannel('tempoSync');
+let tmpo=document.querySelector('#tempo');
 window.open('./flac');
 setTimeout(function(){
 snd();
 setInterval(function(){
 Module.ccall('get_bpm');
+var tmmp=tmpo.innerText;
+tmpSync.postMessage({data:tmmp});
 },2000);
 },1300);
 });
