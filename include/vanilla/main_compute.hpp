@@ -4,6 +4,7 @@
 // #include "../../include/vanilla/gl.hpp"
 #include "../../include/vanilla/boost_defs.hpp"
 #include "../../lib/lib_webgpu_cpp20.cpp"
+#include <GL/gl.h>
 
 #include "/usr/include/aubio/aubio.h"
 #include "/usr/include/aubio/tempo/tempo.h"
