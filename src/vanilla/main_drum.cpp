@@ -381,6 +381,15 @@ randomNumber=std::rand()%randomMax;
 return randomNumber;
 }
 
+extern"C"{
+
+int r4nd(int h){
+int k=rNd4(h);
+return k;
+}
+
+}
+
 GLchar flnm[24];
 SDL_AudioSpec request;
 
