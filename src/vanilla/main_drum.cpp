@@ -432,6 +432,17 @@ bpm.at(0,0)=aubio_tempo_get_bpm(atempo);
 // aubio_pitch_do(apitch,in,out);
 // _pitch_.at(0,0)=out->data[0];
  aubio_fft_do(fft,in,spectr);  // Perform FFT on input data
+uint_t peak_bin = 0;  // Index of the peak bin
+smpl_t peak_value = 0;  // Value of the peak
+
+for (uint_t i = 0; i < win_size / 2; i++) {  // Iterate over half the spectrum (real FFT)
+    if (fabs(input->data[i]) > peak_value) {
+        peak_value = fabs(input->data[i]);
+        peak_bin = i;
+    }
+}
+ smpl_t dominant_freq = peak_bin * samplerate / win_size;
+_pitch_.at(0,0)=float(dominant_freq);
 
  //         aubio_tempo_get_last(atempo);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
