@@ -16,8 +16,7 @@ using namespace std;
 #include "/content/RAMDRIVE2/aubio/src/cvec.c"
 #include "/content/RAMDRIVE2/aubio/src/mathutils.c"
 #include "/content/RAMDRIVE2/aubio/src/pitch/pitchyinfft.c"
-
-// #include "/content/RAMDRIVE2/aubio/src/pitch/pitch.c"
+#include "/content/RAMDRIVE2/aubio/src/pitch/pitch.c"
 #include "/content/RAMDRIVE2/aubio/src/tempo/tempo.c"
 #include "/content/RAMDRIVE2/aubio/src/tempo/beattracking.c"
 #include "/content/RAMDRIVE2/aubio/src/spectral/specdesc.c"
