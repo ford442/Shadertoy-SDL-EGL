@@ -1130,7 +1130,7 @@ function pll(){
 Module.ccall('pl');
 }
 
-let $songs=[];
+let $sngs=[];
 
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
