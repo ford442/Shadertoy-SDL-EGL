@@ -12,6 +12,7 @@ using namespace std;
 
 
 #include "/content/RAMDRIVE2/aubio/src/aubio.h"
+#include "/content/RAMDRIVE2/aubio/src/types.h"
 #include "/content/RAMDRIVE2/aubio/src/fvec.c"
 #include "/content/RAMDRIVE2/aubio/src/lvec.c"
 #include "/content/RAMDRIVE2/aubio/src/cvec.c"
