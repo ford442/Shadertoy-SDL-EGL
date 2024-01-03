@@ -108,7 +108,7 @@ using i53_tensor=boost::numeric::ublas::tensor<double_int53_t>;
 using wstbl_tensor=boost::numeric::ublas::tensor<WGpuStorageTextureBindingLayout>;
 using wbms_tensor=boost::numeric::ublas::tensor<WGPU_BUFFER_MAP_STATE>;
 using di_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
-using void_tensor=boost::numeric::ublas::tensor<void *>;
+// using void_tensor=boost::numeric::ublas::tensor<void *>;
 using wdc_tensor=boost::numeric::ublas::tensor<WGpuOnSubmittedWorkDoneCallback>;
 
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
