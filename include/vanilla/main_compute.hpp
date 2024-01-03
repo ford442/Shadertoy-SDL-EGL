@@ -8,6 +8,7 @@
 
 #include "/usr/include/aubio/aubio.h"
 #include "/usr/include/aubio/tempo/tempo.h"
+#include "/usr/include/aubio/fvec.h"
 
 #define __EMCSCRIPTEN__ 1
 
