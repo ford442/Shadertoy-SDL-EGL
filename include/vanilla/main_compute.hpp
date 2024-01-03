@@ -32,15 +32,23 @@ using namespace std;
 #include "/content/RAMDRIVE2/aubio/src/temporal/biquad.c"
 #include "/content/RAMDRIVE2/aubio/src/temporal/filter.c"
 
+#include "pitch/pitchmcomb.h"
+#include "pitch/pitchyin.h"
+#include "pitch/pitchfcomb.h"
+#include "pitch/pitchschmitt.h"
+#include "pitch/pitchyinfft.h"
+#include "pitch/pitchyinfast.h"
+#include "pitch/pitchspecacf.h"
 
-#include "/content/RAMDRIVE2/aubio/src/pitch/pitch.h"
-#include "/content/RAMDRIVE2/aubio/src/pitch/pitch.c"
-#include "/content/RAMDRIVE2/aubio/src/pitch/pitchyin.h"
+#include "/content/RAMDRIVE2/aubio/src/pitch/pitchmcomb.c"
 #include "/content/RAMDRIVE2/aubio/src/pitch/pitchyin.c"
-#include "/content/RAMDRIVE2/aubio/src/pitch/pitchyinfast.h"
-#include "/content/RAMDRIVE2/aubio/src/pitch/pitchyinfast.c"
-#include "/content/RAMDRIVE2/aubio/src/pitch/pitchyinfft.h"
+#include "/content/RAMDRIVE2/aubio/src/pitch/pitchfcomb.c"
+#include "/content/RAMDRIVE2/aubio/src/pitch/pitchschmitt.c"
 #include "/content/RAMDRIVE2/aubio/src/pitch/pitchyinfft.c"
+#include "/content/RAMDRIVE2/aubio/src/pitch/pitchyinfast.c"
+#include "/content/RAMDRIVE2/aubio/src/pitch/pitchspecacf.c"
+#include "/content/RAMDRIVE2/aubio/src/pitch/pitch.c"
+
 #define __EMCSCRIPTEN__ 1
 
 #include <cstdint>
