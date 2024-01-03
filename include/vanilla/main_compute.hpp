@@ -9,6 +9,7 @@
 using namespace std;
 #include <cstdio> // C++ style
 #include <cstdarg> // C++ style
+#include "/content/RAMDRIVE2/aubio/src/pitch/pitchyinfft.h"
 
 #include "/content/RAMDRIVE2/aubio/src/pitch/pitch.c"
 
