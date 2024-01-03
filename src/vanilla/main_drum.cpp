@@ -414,10 +414,10 @@ uint_t n_frames = 0, sread = 0;
 */
 
 fvec_t * out=new_fvec(1);
-aubio_tempo_t * o=new_aubio_tempo("default",win_size,hop_size,samplerate);
+aubio_tempo_t * tempo=new_aubio_tempo("default",win_size,hop_size,samplerate);
 aubio_pitch_t *pitch = new_aubio_pitch("yin", win_size, hop_size, samplerate);
 
- //          aubio_tempo_get_confidence(o);
+ //          aubio_tempo_get_confidence(tempo);
 
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 fvec_t* in = new_fvec(len / sizeof(float));
@@ -425,11 +425,11 @@ fvec_t* in = new_fvec(len / sizeof(float));
 for (int i = 0; i < len / sizeof(float); i++) {
 in->data[i] = ((float*)stm)[i];
 }
-aubio_tempo_do(o,in,out);
-bpm.at(0,0)=aubio_tempo_get_bpm(o);
+aubio_tempo_do(tempo,in,out);
+bpm.at(0,0)=aubio_tempo_get_bpm(tempo);
 aubio_pitch_do(pitch,in,out);
 pitch.at(0,0)=out->data[0];
- //         aubio_tempo_get_last(o);
+ //         aubio_tempo_get_last(tempo);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 while(sound_lft.at(0,0)<=len){
