@@ -390,7 +390,7 @@ return EM_TRUE;
 
 extern"C"{
 
-void bpm()
+void bpm(){
 getBPM();
 return;
 }
