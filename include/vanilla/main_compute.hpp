@@ -20,10 +20,12 @@ using namespace std;
 #include "/content/RAMDRIVE2/aubio/src/onset/peakpicker.c"
 #include "/content/RAMDRIVE2/aubio/src/utils/log.c"
 #include "/content/RAMDRIVE2/aubio/src/utils/hist.c"
+#include "/content/RAMDRIVE2/aubio/src/utils/scale.c"
 #include "/content/RAMDRIVE2/aubio/src/spectral/phasevoc.c"
 #include "/content/RAMDRIVE2/aubio/src/spectral/fft.c"
 #include "/content/RAMDRIVE2/aubio/src/spectral/statistics.c"
 #include "/content/RAMDRIVE2/aubio/src/temporal/biquad.c"
+#include "/content/RAMDRIVE2/aubio/src/temporal/filter.c"
 
 #define __EMCSCRIPTEN__ 1
 
