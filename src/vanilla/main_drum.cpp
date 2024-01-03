@@ -401,7 +401,7 @@ return;
 }
 
 uint_t samplerate = 44100;
-uint_t win_size = 1024; // window size
+uint_t win_size = 2048; // window size
 uint_t hop_size = win_size / 4;
 uint_t n_frames = 0, sread = 0;
 
