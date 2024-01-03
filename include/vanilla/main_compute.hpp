@@ -8,6 +8,7 @@
 
 using namespace std;
 #include <cstdio> // C++ style
+#include <cstdarg> // C++ style
 
 #include "/content/RAMDRIVE2/aubio/src/aubio.h"
 #include "/content/RAMDRIVE2/aubio/src/fvec.c"
