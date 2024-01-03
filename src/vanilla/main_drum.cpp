@@ -1208,7 +1208,6 @@ sng.postMessage({data:songSrc});
 }
 
 document.getElementById('musicBtn').addEventListener('click',function(){
-scanSongs();
 let tmpSync=new BroadcastChannel('tempoSync');
 let tmpo=document.querySelector('#tempo');
 window.open('./flac');
@@ -1318,7 +1317,9 @@ shds(this);
 dxhttp.open('GET','https://glsl.1ink.us/wgsl/',true);
 dxhttp.send();
 }
+
 scanShaders();
+scanSongs();
 
 document.querySelector('#pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.querySelector('#ihig').innerHTML=parseInt(window.innerHeight,10);
