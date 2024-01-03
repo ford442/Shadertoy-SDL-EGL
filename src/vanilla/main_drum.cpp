@@ -1129,7 +1129,9 @@ const fll=new BroadcastChannel('file');
 function pll(){
 Module.ccall('pl');
 }
-  
+
+let $songs=[];
+
 fll.addEventListener('message',ea=>{
 const fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
