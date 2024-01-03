@@ -345,7 +345,7 @@ GLuint slen;
 GLubyte * wptr;
 }wave;
 
-inline int rNd4(int randomMax){
+int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;
@@ -401,7 +401,7 @@ return;
 }
 
 uint_t samplerate = 44100;
-uint_t win_size = 2048; // window size
+uint_t win_size = 4096; // window size
 uint_t hop_size = win_size / 4;
 uint_t n_frames = 0, sread = 0;
 
