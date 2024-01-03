@@ -326,12 +326,132 @@ double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
 
 
+  uint_t samplerate = 44100;
+  uint_t win_size = 1024; // window size
+  uint_t hop_size = win_size / 4;
+  uint_t n_frames = 0, read = 0;
+/*
+  char_t *source_path = argv[1];
+  aubio_source_t * source = new_aubio_source(source_path, samplerate,
+      hop_size);
+if (samplerate == 0 ) samplerate = aubio_source_get_samplerate(source);
+
+ // clean up memory
+  del_aubio_tempo(o);
+  del_fvec(in);
+  del_fvec(out);
+  del_aubio_source(source);
+  aubio_cleanup();
+  
+*/
+  fvec_t * in = new_fvec (hop_size); // input audio buffer
+  fvec_t * out = new_fvec (1); // output position
+ aubio_tempo_t * o = new_aubio_tempo("default", win_size, hop_size,
+      samplerate);
+
+ //   aubio_source_do(source, in, &read);
+//    aubio_tempo_do(o,in,out);
+
+// int ms  aubio_tempo_get_last_ms(o);
+//    aubio_tempo_get_last_s(o);
+ //         aubio_tempo_get_last(o);
+// aubio_tempo_get_bpm(o);
+ //          aubio_tempo_get_confidence(o);
+ub_tensor sound=ub_tensor{1,1,1};
+gi_tensor sound_pos=gi_tensor{1,1};
+gi_tensor sound_lft=gi_tensor{1,1};
+lu_tensor sound_pos_u=lu_tensor{1,1};
+v_tensor sse=v_tensor{1,2};
+v_tensor sse2=v_tensor{1,1};
+v_tensor sse3=v_tensor{1,1};
+dv_tensor dv=dv_tensor{1,1};
+
+struct{
+register GLubyte * snd;
+register long pos;
+SDL_AudioDeviceID dev;
+register GLuint slen;
+register GLubyte * wptr;
+}wave;
+
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;
 return randomNumber;
 }
+
+GLchar flnm[24];
+SDL_AudioSpec request;
+
+const static EM_BOOL snd_pos(GLint set){
+sse3.at(0,0)=wasm_i64x2_splat(set);
+sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
+return EM_TRUE;
+}
+
+const static EM_BOOL snd_lft(long long set){
+sse.at(0,1)=wasm_i64x2_splat(set);
+sound_lft.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,1),0);
+return EM_TRUE;
+}
+
+const static EM_BOOL snd_pos_u(unsigned long long set){
+sse2.at(0,0)=wasm_u64x2_splat(set);
+sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
+return EM_TRUE;
+}
+
+static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
+// ::boost::tuples::tie(stm,len);
+// status=SDL_GetAudioDeviceStatus(dv.at(0,0));
+wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
+snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
+while(sound_lft.at(0,0)<=len){
+SDL_UnlockAudioDevice(wave.dev);
+SDL_memcpy(stm,wave.wptr,sound_lft.at(0,0));
+stm+=sound_lft.at(0,0);
+len-=sound_lft.at(0,0);
+wave.wptr=sound.at(0,1,0);
+snd_lft(sound_pos_u.at(0,0));
+snd_pos(0);
+SDL_LockAudioDevice(dv.at(0,0));
+}
+SDL_memcpy(stm,wave.wptr,len);
+snd_pos(sound_pos.at(0,0)+len);
+//  if(status==SDL_AUDIO_STOPPED){
+// SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
+// EM_ASM({
+// document.getElementById('musicBtn').click();
+// });
+// }
+return;
+}
+
+const boost::function<EM_BOOL()>plt=[this](){
+::boost::tuples::tie(sound,sound_pos,sound_pos_u);
+::boost::tuples::tie(wave,sse,sse2);
+::boost::tuples::tie(bfr,request);
+request.freq=44100;
+request.format=AUDIO_S32;
+request.channels=2;
+request.samples=128;
+SDL_memset(&request,0,sizeof(request));
+snd_pos(0);
+SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
+SDL_RWops *rw=SDL_RWFromFile(flnm,"rb");
+SDL_Init(SDL_INIT_AUDIO);
+SDL_LoadWAV_RW(rw,1,&request,&wave.snd,&wave.slen);
+sound.at(0,1,0)=wave.snd;
+snd_pos_u(wave.slen);
+request.callback=bfr;
+const char * devName=SDL_GetAudioDeviceName(0,SDL_FALSE);
+wave.dev=SDL_OpenAudioDevice(devName,SDL_FALSE,&request,NULL,0);
+dv.at(0,0)=wave.dev;
+SDL_PauseAudioDevice(dv.at(0,0),SDL_FALSE);
+return EM_TRUE;
+};
+
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 return;
@@ -993,6 +1113,60 @@ return;
 
 EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
+FS.mkdir('/snd');
+  
+const fll=new BroadcastChannel('file');
+  
+function pll(){
+Module.ccall('pl');
+}
+  
+fll.addEventListener('message',ea=>{
+const fill=new Uint8Array(ea.data.data);
+FS.writeFile('/snd/sample.wav',fill);
+setTimeout(function(){
+shutDown.postMessage({data:222});
+pll();
+},100);
+});
+function sngs(xml){
+const nparser=new DOMParser();
+const htmlDocs=nparser.parseFromString(xml.responseText,'text/html');
+const preList=htmlDocs.getElementsByTagName('pre')[0].getElementsByTagName('a');
+$sngs[0]=preList.length;
+for(var i=1;i<preList.length;i++){
+var txxt=preList[i].href;
+var Self=location.href;
+Self=Self.replace(/1ink.1ink/,"");
+txxt=txxt.replace(Self,"");
+$sngs[i]=Self+'songs/'+txxt;
+}}
+
+function scanSongs(){
+const nxhttp=new XMLHttpRequest();
+nxhttp.addEventListener("load",function(){
+sngs(this);
+});
+nxhttp.open('GET','songs/',true);
+nxhttp.send();
+}
+function snd(){
+var sngsNum=$sngs[0];
+const randSong=Module.ccall('r4nd','Number',['Number'],[sngsNum]);
+const songSrc=$sngs[randSong+5];
+document.getElementById('track').src=songSrc;
+const sng=new BroadcastChannel('sng');
+sng.postMessage({data:songSrc});
+}
+document.getElementById('musicBtn').addEventListener('click',function(){
+window.open('./flac');
+setTimeout(function(){
+snd();
+},1300);
+});
+scanSongs();
+
+  
 window.scroll(0,0);
 
 document.querySelector('#drumBtn').addEventListener('click',function(){
@@ -1212,6 +1386,11 @@ extern"C"{
 void resUp(){
 uniUp();
 return;
+}
+
+EM_BOOL pl(){
+plt();
+return EM_TRUE;
 }
 
 void resDown(){
