@@ -1,18 +1,4 @@
 #include "../../include/vanilla/main_compute.hpp"
-#include "../../onnxruntime/include/onnxruntime/core/session/onnxruntime_cxx_api.h"
-using namespace std;
-
-template<>
-class std::string::_Rep {
-public:
-  // ...
-};
-template<>
-class std::__2::basic_string<char, std::__2::char_traits<char>, std::__2::allocator<char>>::_Rep {
-public:
-  // ...
-};
-extern "C" void std::__2::basic_string<char, std::__2::char_traits<char>, std::__2::allocator<char>>::__grow_by(unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long);
 
 template <typename T>
 T vectorProduct(const std::vector<T>& v)
@@ -20,6 +6,7 @@ T vectorProduct(const std::vector<T>& v)
     return accumulate(v.begin(), v.end(), 1, std::multiplies<T>());
 }
 
+using namespace std;
 
 vector<int32_t> to_int32(vector<string> tokens) {
   vector<int32_t> ints;
@@ -199,6 +186,30 @@ std::cout << "The Run function takes the text prompt and the desired output size
 // std::cout << "Running inferrence." << std::endl;
 
 // auto outputDataPtr = outputTensors.GetTensorRawData();
+		
+	// Get the shape of the tensor.
+//  std::vector<int64_t> shape = outputTensorInfo.GetShape();
+  // Create a new image with the same shape as the tensor.
+//  unsigned char* image_data = new unsigned char[shape.size()];
+  // Copy the data from the tensor to the image.
+//  outputTensors.CopyTo(image_data);
+  // Save the image to a file.
+std::cout << "Got data. " << std::endl;
+
+
+//  emscripten_image_data_type* data = emscripten_new_typed_array(image_data, shape.size(), EMSCRIPTEN_TYPED_ARRAY_U8);
+//  emscripten_save_image(output_filename, data, shape[1], shape[0]);
+
+  // Delete the image data.
+//  delete[] image_data;
+	
+// int width = 400; // emscripten_get_image_width("output.png");
+// int height = 400; // emscripten_get_image_height("output.png");
+// emscripten_image_data_type* data = emscripten_get_image_data("output.png", width, height);
+
+// Display the image.
+// emscripten_set_canvas_image_data(data, width, height);
+//	std::cout << "Output tensors updated." << std::endl;
 }
 
 WGpuShaderModuleCompilationHint fragHint={};
