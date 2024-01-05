@@ -13,6 +13,194 @@ public:
 };
 extern "C" void std::__2::basic_string<char, std::__2::char_traits<char>, std::__2::allocator<char>>::__grow_by(unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long);
 
+template <typename T>
+T vectorProduct(const std::vector<T>& v)
+{
+    return accumulate(v.begin(), v.end(), 1, std::multiplies<T>());
+}
+
+using namespace std;
+
+vector<int32_t> to_int32(vector<string> tokens) {
+  vector<int32_t> ints;
+  for (string token : tokens) {
+std::cout << token << std::endl;
+  }
+  return ints;
+}
+
+vector<string> tokenize(string text) {
+  vector<string> tokens;
+  // Split the text into words.
+  stringstream ss(text);
+  string word;
+  while (getline(ss, word, ' ')) {
+    tokens.push_back(word);
+  }
+  // Remove punctuation and stop words.
+///  vector<string> stop_words = {"the", "of", "and", "to", "is", "was", "were", "be", "am", "are", "has", "have", "had", "that", "this", "it", "its", "with", "for", "by", "on", "at", "in", "to"};
+///  for (int i = 0; i < tokens.size(); i++) {
+///    if (ispunct(tokens[i][0]) || find(stop_words.begin(), stop_words.end(), tokens[i]) != stop_words.end()) {
+///      tokens.erase(tokens.begin() + i);
+///    }
+///  }
+  // Lowercase all words. 
+	// remember to use all lowercase for now
+//  for (int i = 0; i < tokens.size(); i++) {
+//    tokens[i] = tolower(tokens[i]);
+//  }
+  return tokens;
+}
+int max_wordlength=12;
+string text = "birds";
+vector<string> tokens = tokenize(text);
+vector<int32_t> ints = to_int32(tokens);
+
+void cltest(){
+std::vector<std::string> infos=Ort::GetAvailableProviders();
+char* char_array=new char[infos.size()*infos[0].size()];
+for (int i=0;i<infos.size();i++){
+std::copy(infos[i].begin(),infos[i].end(),char_array+i*infos[0].size());
+}
+std::cout << char_array << std::endl;
+Ort::Env ort_env;
+const char model_path[12]="/model.onnx";
+const int64_t batchSize=2;
+Ort::SessionOptions sessionOptions;
+sessionOptions.SetIntraOpNumThreads(1);
+	
+		 // Sets graph optimization level
+    // Available levels are
+    // ORT_DISABLE_ALL -> To disable all optimizations
+    // ORT_ENABLE_BASIC -> To enable basic optimizations (Such as redundant node
+    // removals) ORT_ENABLE_EXTENDED -> To enable extended optimizations
+    // (Includes level 1 + more complex optimizations like node fusions)
+    // ORT_ENABLE_ALL -> To Enable All possible optimizations
+	
+sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL);
+Ort::Session session(ort_env,model_path,Ort::SessionOptions{nullptr});
+Ort::AllocatorWithDefaultOptions allocator;
+
+size_t numInputNodes=session.GetInputCount();
+size_t numOutputNodes=session.GetOutputCount();
+
+auto inputName=session.GetInputNameAllocated(0,allocator);
+// const char* inputName = session.Ort::detail::GetInputName(0, allocator);
+
+Ort::TypeInfo inputTypeInfo=session.GetInputTypeInfo(0);
+auto inputTensorInfo=inputTypeInfo.GetTensorTypeAndShapeInfo();
+
+ONNXTensorElementDataType inputType=inputTensorInfo.GetElementType();
+
+std::vector<int64_t> inputDims=inputTensorInfo.GetShape();
+if (inputDims.at(0) == -1){
+std::cout << "Got dynamic batch size. Setting input batch size to " << batchSize << "." << std::endl;
+inputDims.at(0)=ints.size();
+inputDims.at(1)=max_wordlength;
+}
+
+auto outputName=session.GetOutputNameAllocated(0,allocator);
+	
+//   //   const char* outputName = session.Ort::detail::GetOutputName(0, allocator);
+
+Ort::TypeInfo outputTypeInfo=session.GetOutputTypeInfo(0);
+auto outputTensorInfo=outputTypeInfo.GetTensorTypeAndShapeInfo();
+
+ONNXTensorElementDataType outputType=outputTensorInfo.GetElementType();
+
+std::vector<int64_t> outputDims=outputTensorInfo.GetShape();
+if (outputDims.at(0) == -1){
+std::cout << "Got dynamic batch size. Setting output batch size to "
+<< batchSize << "." << std::endl;
+outputDims.at(0)=batchSize;
+}
+
+/*
+std::cout << "Input Name: " << inputName << std::endl;
+std::cout << "Input Type: " << inputType << std::endl;
+std::cout << "Input Dimensions 1: " <<  std::to_string(inputDims.at(0)) << std::endl;
+std::cout << "Input Dimensions 2: " <<  std::to_string(inputDims.at(1)) << std::endl;
+// std::cout << "Input Dimensions 3: " <<  std::to_string(inputDims.at(2)) << std::endl;
+std::cout << "Output Name: " << outputName << std::endl;
+std::cout << "Output Type: " << outputType << std::endl;
+std::cout << "Output Dimensions 1: " <<  std::to_string(outputDims.at(0)) << std::endl;
+std::cout << "Output Dimensions 2: " <<  std::to_string(outputDims.at(1)) << std::endl;
+std::cout << "Output Dimensions 3: " <<  std::to_string(outputDims.at(2)) << std::endl;
+std::cout << "Number of Input Nodes: " << numInputNodes << std::endl;
+std::cout << "Number of Output Nodes: " << numOutputNodes << std::endl;
+*/
+size_t inputTensorSize=vectorProduct(inputDims);
+
+std::cout << "setting inputTensorSize:" << inputTensorSize << std::endl;
+
+std::vector<int32_t> inputTensorValues(inputTensorSize);
+std::cout << "setting inputTensorValues " <<  std::endl;
+   for (int64_t i = 0; i < batchSize; ++i)
+    {
+        std::copy(ints.begin(),ints.end(),inputTensorValues.begin()+i*inputTensorSize);
+    }
+	
+size_t outputTensorSize=vectorProduct(outputDims);
+std::cout << "setting outputTensorSize " <<  std::endl;
+  //  589824 ?
+
+std::vector<float> outputTensorValues(outputTensorSize);
+std::cout << "setting outputTensorValues " <<  std::endl;
+
+std::string text_prompt="two birds";
+
+std::vector<float> text_prompt_vector;
+for(char c : text_prompt){
+text_prompt_vector.push_back(c);
+}
+	
+std::cout << "Establishing text input" << std::endl;
+
+std::vector<const char*>inputNames={"input_ids"};
+// std::vector<const char*>inputNames={inputName};
+std::vector<const char*>outputNames={"last_hidden_state","pooler_output"};
+// std::vector<const char*>outputNames={outputName};
+	
+std::cout << "Establishing tensor names" << std::endl;
+
+Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArenaAllocator,OrtMemTypeCPU);
+std::cout << "Establishing memoryInfo" << std::endl;
+
+std::vector<Ort::Value> inputTensors;
+Ort::Value outputTensors{nullptr};
+
+inputTensors.push_back(Ort::Value::CreateTensor<int32_t>(
+memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),6));
+
+std::cout << "Establishing Tensors" << std::endl;
+
+// std::cout << "Creating CPU link " << std::endl;
+
+// Ort::RunOptions runOpts;
+  // google colab
+std::cout << "The Run function takes the text prompt and the desired output size as input.\n"
+<< "The output size is the size of the desired image, in pixels.\n"
+<< "The Run function returns an Ort::Value object. \n"
+<< "The Ort::Value object contains the generated image. \n"
+<< "You can use the GetTensor function to get the tensor data from the Ort::Value object. \n"
+<< "The tensor data is a vector of floats that represents the image. \n"
+<< "You can use the cv::Mat class to convert the tensor data to an image.\n"
+<< std::endl;
+
+// Run inference
+// session.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),&outputTensors,1);
+	
+//   void Run(const RunOptions& run_options, const char* const* input_names, const Value* input_values, size_t input_count,
+//                     const char* const* output_names, Value* output_values, size_t output_count);
+	
+//   void Run(run_options,input_names,input_values,input_count,
+//                     output_names,output_values,output_count);
+
+// std::cout << "Running inferrence." << std::endl;
+
+// auto outputDataPtr = outputTensors.GetTensorRawData();
+}
+
 WGpuShaderModuleCompilationHint fragHint={};
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
@@ -1204,5 +1392,6 @@ return;
 int main(void){
 on.at(0,0)=0;
 js_main();
+cltest();
 return 0;
 }
