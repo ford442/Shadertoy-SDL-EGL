@@ -61,7 +61,7 @@ b3_onnx:
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 -ffast-math -ffp-contract=off \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 -rtlib=compiler-rt \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js -mllvm -mtune=wasm32 \
-	 -sUSE_SDL=2 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
+	 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS='["startWebGPU","_startWebGPUb"]' -sTEXTDECODER=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb","_resUp","_resDown"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
