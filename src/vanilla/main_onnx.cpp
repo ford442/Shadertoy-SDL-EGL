@@ -1,5 +1,4 @@
-#include "../../include/vanilla/main_compute.hpp"
-#include "../../onnxruntime/include/onnxruntime/core/session/onnxruntime_cxx_api.h"
+#include "../../include/vanilla/main_onnx.hpp"
 
 template <typename T>
 T vectorProduct(const std::vector<T>& v)
