@@ -210,6 +210,7 @@ std::cout << "Got data. " << std::endl;
 // Display the image.
 // emscripten_set_canvas_image_data(data, width, height);
 //	std::cout << "Output tensors updated." << std::endl;
+	return;
 }
 
 WGpuShaderModuleCompilationHint fragHint={};
