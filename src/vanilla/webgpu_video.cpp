@@ -639,12 +639,13 @@ async function videoFrames(){
 let SiZ=parseInt(window.innerHeight);
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
+let cnvb=document.getElementById('canvas');
 
 const H=Module.HEAPU8.buffer;
 const gl2=cnv.getContext('2d',{willReadFrequently:true});
 gl2.drawImage(vv,0,0);
 let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
-const context = cnv.getContext("webgpu");
+const context = cnvb.getContext("webgpu");
 const gpu = navigator.gpu;
 const format = gpu.getPreferredCanvasFormat();
 const adapter = await gpu.requestAdapter();
