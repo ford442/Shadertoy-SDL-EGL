@@ -652,7 +652,7 @@ const adapter = await gpu.requestAdapter();
 const device = await adapter.requestDevice();
 context.configure({ device, format, alphaMode: "opaque" });
 
-const texture = device.createTexture({
+let texture = device.createTexture({
 format: "rgba8unorm",
 size: [cnv.height, cnv.height, 1],
 usage:
@@ -664,9 +664,9 @@ setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
 let pixelData=new Uint8Array(imageData.data);
-device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset, [texture.size[0], texture.size[1], 1]);
-const textureData = new Uint8Array(texture.size[0] * texture.size[1] * 4); // Assuming RGBA format
-device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, textureData.buffer, textureData.byteOffset, [texture.size[0], texture.size[1], 1]);
+device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset, [cnv.height, cnv.height, 1]);
+const textureData = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
+device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, textureData.buffer, textureData.byteOffset, cnv.height, cnv.height, 1]);
 let heapArray=new Uint8Array(H,0,textureData.length);
 heapArray.set(textureData);
 // Module.ccall("frm",null,["Number"],[0]);
