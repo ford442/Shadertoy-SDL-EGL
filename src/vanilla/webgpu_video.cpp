@@ -639,16 +639,18 @@ async function videoFrames(){
 let SiZ=parseInt(window.innerHeight);
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
+
+const H=Module.HEAPU8.buffer;
+const gl2=cnv.getContext('2d',{willReadFrequently:true});
+gl2.drawImage(vv,0,0);
+let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
 const context = cnv.getContext("webgpu");
 const gpu = navigator.gpu;
 const format = gpu.getPreferredCanvasFormat();
 const adapter = await gpu.requestAdapter();
 const device = await adapter.requestDevice();
 context.configure({ device, format, alphaMode: "opaque" });
-const H=Module.HEAPU8.buffer;
-const gl2=cnv.getContext('2d',{willReadFrequently:true});
-gl2.drawImage(vv,0,0);
-let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
+
 const texture = device.createTexture({
 format: "rgba8unorm",
 size: [cnv.height, cnv.height, 1],
