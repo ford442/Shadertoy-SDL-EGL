@@ -341,7 +341,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(0,0)*2,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),36,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
@@ -645,18 +645,10 @@ const format = gpu.getPreferredCanvasFormat();
 const adapter = await gpu.requestAdapter();
 const device = await adapter.requestDevice();
 context.configure({ device, format, alphaMode: "opaque" });
-        
 const H=Module.HEAPU8.buffer;
 const gl2=cnv.getContext('2d',{willReadFrequently:true});
-
 gl2.drawImage(vv,0,0);
 let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
-    
-setInterval(function(){
-gl2.drawImage(vv,0,0);
-imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
-let pixelData=new Uint8Array(imageData.data);
-
 const texture = device.createTexture({
 format: "rgba8unorm",
 size: [cnv.height, cnv.height, 1],
@@ -664,27 +656,16 @@ usage:
 GPUTextureUsage.COPY_DST |
 GPUTextureUsage.RENDER_ATTACHMENT |
 GPUTextureUsage.TEXTURE_BINDING,
-});
- 
-device.queue.writeTexture({
-texture,
-bytesPerRow: 4 * cnv.height,
-rowsPerImage: cnv.height,
-}, pixelData.buffer, pixelData.byteOffset, [texture.size[0], texture.size[1], 1]);
-
+}); 
+setInterval(function(){
+gl2.drawImage(vv,0,0);
+imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
+let pixelData=new Uint8Array(imageData.data);
+device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset, [texture.size[0], texture.size[1], 1]);
 const textureData = new Uint8Array(texture.size[0] * texture.size[1] * 4); // Assuming RGBA format
-
-device.queue.readTexture({
-texture,
-bytesPerRow: 4 * cnv.width,
-rowsPerImage: cnv.height,
-}, textureData.buffer, textureData.byteOffset, [texture.size[0], texture.size[1], 1]);
-
- let heapArray=new Uint8Array(H,0,textureData.length);
+device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, textureData.buffer, textureData.byteOffset, [texture.size[0], texture.size[1], 1]);
+let heapArray=new Uint8Array(H,0,textureData.length);
 heapArray.set(textureData);
-
-
- 
 // Module.ccall("frm",null,["Number"],[0]);
 },50);
 }
