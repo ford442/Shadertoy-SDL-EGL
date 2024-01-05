@@ -1,5 +1,4 @@
 #include "../../include/vanilla/main_compute.hpp"
-#include <SDL2/SDL.h>
 #include <GL/gl.h>
 
 WGpuShaderModuleCompilationHint fragHint={};
