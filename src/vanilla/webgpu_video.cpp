@@ -660,6 +660,8 @@ GPUTextureUsage.COPY_DST |
 GPUTextureUsage.RENDER_ATTACHMENT |
 GPUTextureUsage.TEXTURE_BINDING,
 }); 
+setTimeout(function(){
+
 setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
@@ -671,6 +673,8 @@ let heapArray=new Uint8Array(H,0,textureData.length);
 heapArray.set(textureData);
 // Module.ccall("frm",null,["Number"],[0]);
 },50);
+},150);
+
 }
   
 function normalResStart(){
