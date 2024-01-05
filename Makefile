@@ -1,6 +1,7 @@
 WGL_BIN_NAME = w0-002
 
 LDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lpthread,-lc++abi,-lm,-lrt,-ldl,-S
+oLDFLAGS = -Wl,-O3,--lto-O3,-lc,-lc++,-lc++abi,-lm,-lpthread,-lrt,-ldl,-S
 
 SIMD_FLAGS = -DSIMD=2 -msimd128 -mavx
 
@@ -57,7 +58,7 @@ vanilla_test_gpujs:
 b3_onnx:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_onnx.cpp -fchar8_t -std=c++14 -ffp-contract=off \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -D__EMSCRIPTEN__ $(LDFLAGS) -O0 -std=c++14 -fchar8_t --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-onnx.js \
+	 em++ -D__EMSCRIPTEN__ $(oLDFLAGS) -O0 -std=c++14 -fchar8_t --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-onnx.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 -ffast-math -ffp-contract=off \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 -rtlib=compiler-rt \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js -mllvm -mtune=wasm32 \
