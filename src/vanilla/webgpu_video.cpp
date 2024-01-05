@@ -660,15 +660,17 @@ GPUTextureUsage.COPY_DST |
 GPUTextureUsage.RENDER_ATTACHMENT |
 GPUTextureUsage.TEXTURE_BINDING,
 }); 
+
 setTimeout(function(){
 
 setInterval(function(){
 gl2.drawImage(vv,0,0);
-imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
+imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
+
 let pixelData=new Uint8Array(imageData.data);
-device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset, [texture.size[0], texture.size[1], 2]);
+device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,SiZ, SiZ, 2]);
 const textureData = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
-device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, textureData.buffer, textureData.byteOffset, [texture.size[0], texture.size[1], 2]);
+device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, textureData.buffer, textureData.byteOffset, SiZ,SiZ, 2]);
 let heapArray=new Uint8Array(H,0,textureData.length);
 heapArray.set(textureData);
 // Module.ccall("frm",null,["Number"],[0]);
