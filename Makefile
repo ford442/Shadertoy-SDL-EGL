@@ -58,7 +58,7 @@ vanilla_test_gpujs:
 b3_onnx:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_onnx.cpp -fchar8_t -std=c++14 -ffp-contract=off \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -D__EMSCRIPTEN__ $(oLDFLAGS) -O0 -std=c++20 -fchar8_t --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-onnx.js \
+	 em++ -D__EMSCRIPTEN__ $(oLDFLAGS)  main_onnx.o libonnxruntime_webassembly.a -O0 -std=c++17 -fchar8_t --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-onnx.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 -ffast-math -ffp-contract=off \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 -rtlib=compiler-rt \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js -mllvm -mtune=wasm32 \
@@ -67,7 +67,7 @@ b3_onnx:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb","_resUp","_resDown"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 main_onnx.o libonnxruntime_webassembly.a
+	 --memory-init-file 0
 
 b3_compute:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_compute.cpp -std=c++20 -ffp-contract=off \
