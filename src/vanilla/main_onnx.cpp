@@ -1403,6 +1403,5 @@ return;
 int main(void){
 on.at(0,0)=0;
 js_main();
-cltest();
 return 0;
 }
