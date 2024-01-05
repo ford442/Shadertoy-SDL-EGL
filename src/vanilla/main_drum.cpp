@@ -1219,7 +1219,6 @@ tmpSync.postMessage({data:tmmp});
 },1500);
 });
   
-
 document.querySelector('#drumBtn').addEventListener('click',function(){
 window.open('./drum/o8o.htm');
 });
