@@ -1,5 +1,6 @@
 #include "../../include/vanilla/main_compute.hpp"
 #include "../../onnxruntime/include/onnxruntime/core/session/onnxruntime_cxx_api.h"
+using namespace std;
 
 template<>
 class std::string::_Rep {
@@ -19,7 +20,6 @@ T vectorProduct(const std::vector<T>& v)
     return accumulate(v.begin(), v.end(), 1, std::multiplies<T>());
 }
 
-using namespace std;
 
 vector<int32_t> to_int32(vector<string> tokens) {
   vector<int32_t> ints;
