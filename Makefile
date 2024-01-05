@@ -79,7 +79,7 @@ b3_audio_sdl:
 
 b3_audio_lab:
 	em++ -c src/audio/main.cpp -O0 $(SIMD_FLAGS) $(BOOST_FLAGS)
-	em++ -c src/audio/audio_sdl.cpp -O0 \
+	em++ -c src/audio/audio_sdl.cpp -O0 -D__EMSCRIPTEN__ \
 	-Wno-incompatible-function-pointer-types $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0
 	em++ -o $(BIN_NAME) -O0 $(LINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
