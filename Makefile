@@ -99,7 +99,7 @@ b3_drum:
 b3_webgpu_default:
 	 em++ -D__EMSCRIPTEN__ -fopenmp-simd src/vanilla/webgpu_default.cpp -std=c++20 -ffp-contract=off \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O2 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -D__EMSCRIPTEN__ $(LDFLAGS) -O2 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-df.js \
+	 em++ -D__EMSCRIPTEN__ $(LDFLAGS) -O2 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-df16.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 -ffast-math -ffp-contract=off \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 -rtlib=compiler-rt \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js -mllvm -mtune=wasm32 \
