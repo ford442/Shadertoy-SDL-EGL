@@ -173,7 +173,7 @@ return EM_TRUE;
 inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<f32,64>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<f32,64>;"
-"@group(0)@binding(2)var textureA:texture_storage_2d<rgba32uint,write>;"
+"@group(0)@binding(2)var textureA:texture_storage_2d<r32float,write>;"
 // "@group(0)@binding(3)var<storage,read_write>vertexBuffer:array<u32,64>;"
 "@compute@workgroup_size(4,1,64)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
@@ -312,7 +312,7 @@ WGpuBufferDescriptor bufferDescriptorO={OutputBufferBytes,WGPU_BUFFER_USAGE_STOR
 WGpuBufferDescriptor bufferDescriptorM={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorC={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 // 14 = R32FLOAT   34 = RGBA32UINT
-WGpuTextureDescriptor textureDescriptorA={64,1,1,1,1,2,34,WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST};
+WGpuTextureDescriptor textureDescriptorA={64,1,1,1,1,WGPU_TEXTURE_DIMENSION_2D,WGPU_TEXTURE_FORMAT_R32FLOAT,WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST};
 WGpuTextureViewDescriptor textureViewDescriptorA={34,WGPU_TEXTURE_VIEW_DIMENSION_2D};
 char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
