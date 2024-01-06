@@ -585,10 +585,10 @@ WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescript
 // }
 WGPU_Output_Buffer.buffer=WGPU_Buffers.at(0,0,0);
 WGPU_Output_Buffer.bytesPerRow=1024;
-WGPU_Output_Buffer.rowsPerImage=1;
+WGPU_Output_Buffer.rowsPerImage=64;
 WGPU_Mapped_Buffer.buffer=WGPU_Buffers.at(2,0,2);
 WGPU_Mapped_Buffer.bytesPerRow=1024;
-WGPU_Mapped_Buffer.rowsPerImage=1;
+WGPU_Mapped_Buffer.rowsPerImage=64;
 raN=rNd4(256);
 input[0]=raN;
 WGPU_InputBuffer.at(0,0,0)[0]=raN;
