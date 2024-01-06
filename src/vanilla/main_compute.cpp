@@ -181,11 +181,11 @@ inline char wgl_cmp_src[2000]=
 "if(index<arrayLength){"
 "let i=index;"
 "let swappedIndex=arrayLength-i-1;"
-"workgroupBarrier();"
+// "workgroupBarrier();"
 "let temp=outputBuffer[i];"
 "outputBuffer[i]=outputBuffer[swappedIndex];"
 "outputBuffer[swappedIndex]=temp;"
-"workgroupBarrier();"
+// "workgroupBarrier();"
 "}"
 "}";
 
