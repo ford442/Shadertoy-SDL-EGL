@@ -816,6 +816,13 @@ bindgroup_layout_entries[2].binding=2;
 bindgroup_layout_entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entries[2].layout.buffer=wbbl.at(0,0);
+
+bindgroup_layout_entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_layout_entries[3].binding=3;
+bindgroup_layout_entries[3].visibility=WGPU_SHADER_STAGE_COMPUTE;
+bindgroup_layout_entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
+bindgroup_layout_entries[3].layout.buffer=wbbl.at(3,3);
+  /*
 bindgroup_layout_entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[3].binding=3;
 bindgroup_layout_entries[3].visibility=WGPU_SHADER_STAGE_FRAGMENT;
@@ -836,8 +843,9 @@ bindgroup_layout_entries[6].binding=6;
 bindgroup_layout_entries[6].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[6].type=WGPU_BIND_GROUP_LAYOUT_TYPE_SAMPLER;
 bindgroup_layout_entries[6].layout.sampler=wsbl.at(0,0);
+  */
 wbgle.at(0,0)=bindgroup_layout_entries;
-bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3);
+bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),4);
 wbgl.at(0,0)=bindgroup_layout;
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
 wrpl.at(0,0)=pipeline_layout;
@@ -939,6 +947,10 @@ bindgroup_entries[2].bufferBindOffset=0;
 bindgroup_entries[2].bufferBindSize=sizeof(uint64_t);
 bindgroup_entries[3]={};
 bindgroup_entries[3].binding=3;
+bindgroup_entries[3].resource=wb.at(3,3);
+  /*
+bindgroup_entries[3]={};
+bindgroup_entries[3].binding=3;
 bindgroup_entries[3].resource=wt.at(1,1);
 bindgroup_entries[4]={};
 bindgroup_entries[4].binding=4;
@@ -949,6 +961,7 @@ bindgroup_entries[5].resource=wt.at(0,0);
 bindgroup_entries[6]={};
 bindgroup_entries[6].binding=6;
 bindgroup_entries[6].resource=wt.at(2,2);
+  */
 wbge.at(0,0)=bindgroup_entries;
 // renderBundleEncoderDescriptor.sampleCount=1;
 // renderBundleEncoderDescriptor.depthStencilFormat=wtf.at(2,2);
@@ -956,11 +969,10 @@ wbge.at(0,0)=bindgroup_entries;
 // renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
 // wrbe.at(0,0)=renderBundleEncoder;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
-    wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,vertices,sizeof(vertices));
-
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,vertices,sizeof(vertices));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
-bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),3);
+bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),4);
 wbg.at(0,0)=bindgroup;
 colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
 // colorTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(1,1));
