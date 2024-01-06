@@ -492,7 +492,7 @@ wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
  // wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 //  WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,3));
 // wgpu_object_destroy(WGPU_Buffers.at(2,0,2));
-  wgpu_command_encoder_copy_buffer_to_buffer(WGPU_ComputePassCommandEncoder.at(0,0,0),wb.at(3,3),0,WGPU_Buffers.at(1,1,1),0,sizeof(vertices));
+//  wgpu_command_encoder_copy_buffer_to_buffer(WGPU_ComputePassCommandEncoder.at(0,0,0),wb.at(3,3),0,WGPU_Buffers.at(1,1,1),0,sizeof(vertices));
 
  // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
       wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Output_Image,256,256,1);
@@ -976,6 +976,8 @@ wbge.at(0,0)=bindgroup_entries;
 // wrbe.at(0,0)=renderBundleEncoder;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,vertices,sizeof(vertices));
+wgpu_queue_write_buffer(wq.at(0,0),WGPU_Buffers.at(1,1,1),0,vertices,sizeof(vertices));
+
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),3);
