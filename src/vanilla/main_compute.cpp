@@ -713,11 +713,16 @@ wbd.at(3,3)=bufferDescriptor_vertex;
 vertAtt.offset=0;
 vertAtt.shaderLocation=0;
 vertAtt.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
+  
 vertBufLayout.numAttributes=1;
 vertBufLayout.attributes=&vertAtt;  //  * ?
 vertBufLayout.arrayStride=sizeof(Vertex);
 vertBufLayout.stepMode=WGPU_VERTEX_STEP_MODE_VERTEX;
 wvbl.at(0,0)=vertBufLayout;
+  bufferBindingLayoutV.type=WGPU_BUFFER_BINDING_TYPE_READ_ONLY_STORAGE;
+bufferBindingLayoutV.hasDynamicOffset=0,
+bufferBindingLayoutV.minBindingSize=sizeof(uint64_t);
+wbbl.at(1,1)=bufferBindingLayoutV;
 vertex_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 wb.at(3,3)=vertex_Buffer;
 depthState={};
@@ -816,12 +821,11 @@ bindgroup_layout_entries[2].binding=2;
 bindgroup_layout_entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entries[2].layout.buffer=wbbl.at(0,0);
-
 bindgroup_layout_entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[3].binding=3;
 bindgroup_layout_entries[3].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindgroup_layout_entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
-bindgroup_layout_entries[3].layout.buffer=wbbl.at(3,3);
+bindgroup_layout_entries[3].layout.buffer=wbbl.at(1,1);
   /*
 bindgroup_layout_entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[3].binding=3;
