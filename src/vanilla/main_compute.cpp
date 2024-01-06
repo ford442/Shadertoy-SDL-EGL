@@ -173,6 +173,12 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(2)var textureA:texture_storage_2d<rgba32uint,write>;"
 "@compute@workgroup_size(4,1,64)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
+
+"buffer<vec4<f32>> bufferData;"
+"@group_shared var vertexData: array<vec4<f32>, 64>;"
+"let vertexIndex = global_id.x;"
+"vertexData[local_invocation_id.x] = bufferData.load(vertexIndex);"
+
 "let f:u32=global_id.z;"
 "let g:u32=global_id.x;"
 // "let coord:vec2<u32>=vec2<u32>(0,0);"
