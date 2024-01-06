@@ -295,6 +295,39 @@ return result;
 return nullptr;
 }
 
+const char * Fnm2=reinterpret_cast<const char *>("/video/frame.gl");
+
+static char * result2=NULL;
+static char * results2=NULL;
+static long int length2=0;
+
+const inline uint8_t * rd_frm(const char * Fnm2){
+FILE * file=fopen(Fnm,"r");
+::boost::tuples::tie(result2,results2,file);
+if(file){
+int32_t stat=fseek(file,(int32_t)0,SEEK_END);
+if(stat!=0){
+fclose(file);
+return nullptr;
+}
+length=ftell(file);
+stat=fseek(file,(int32_t)0,SEEK_SET);
+if(stat!=0){
+fclose(file);
+return nullptr;
+}
+result2=static_cast<uint8_t *>(malloc((length+1)*sizeof(uint8_t)));
+if(result2){
+size_t actual_length=fread(result2,sizeof(uint8_t),length,file);
+result[actual_length++]={'\0'};
+}
+fclose(file);
+return result2;
+}
+return nullptr;
+}
+
+
 void raf(){
 u64_uni.at(3,3)++;
 u_time.t3=u_time.t2;
@@ -654,6 +687,7 @@ device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.h
 
 EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
+FS.mkdir('/video');
 
 async function videoFrames(){
 let SiZ=parseInt(window.innerHeight);
@@ -670,7 +704,9 @@ gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
 let pixelData=new Uint8Array(imageData.data.buffer);
 let heapArray=new Uint8Array(H);
-heapArray.set(pixelData);
+FS.writeFile('/video/frame.gl',pixelData);
+
+// heapArray.set(pixelData);
 // Module.ccall("frm",null,["Number"],[0]);
 },50);
 }
