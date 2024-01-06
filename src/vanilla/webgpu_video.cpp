@@ -341,7 +341,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(0,0)*8,sze.at(0,0),sze.at(0,0),sze.at(0,0),2);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(0,0)*8,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),36,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
@@ -668,7 +668,7 @@ setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
 let pixelData=new Uint8Array(imageData.data.buffer);
-let heapArray=new Uint8Array(H,0,pixelData.length);
+let heapArray=new Uint8Array(H,0,pixelData.data.length);
 heapArray.set(pixelData);
 // Module.ccall("frm",null,["Number"],[0]);
 },50);
