@@ -171,8 +171,8 @@ return EM_TRUE;
 */
 
 inline char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var<storage,read>inputBuffer:array<f32,262144>;"
-"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<f32,262144>;"
+"@group(0)@binding(0)var<storage,read>inputBuffer:array<f32,64>;"
+"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<f32,64>;"
 "@group(0)@binding(2)var textureA:texture_storage_2d<rgba32uint,write>;"
 // "@group(0)@binding(3)var<storage,read_write>vertexBuffer:array<u32,64>;"
 "@compute@workgroup_size(4,1,64)"
@@ -257,10 +257,10 @@ static wced_tensor WGPU_CommandEncoderDescriptor=wced_tensor{1,1,1};
 static wbms_tensor WGPU_BufferStatus=wbms_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
-uint32_t OutputBufferUnits=262144;
-uint32_t OutputBufferBytes=262144*4;
-uint32_t InputBufferUnits=262144;
-uint32_t InputBufferBytes=262144*4;
+uint32_t OutputBufferUnits=64;
+uint32_t OutputBufferBytes=64*4;
+uint32_t InputBufferUnits=64;
+uint32_t InputBufferBytes=64*4;
 uint64_t WGPU_InputRangeSize=OutputBufferBytes;
 
 const char * Entry="computeStuff";
