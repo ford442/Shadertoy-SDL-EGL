@@ -1,5 +1,7 @@
 #include "../../include/vanilla/main_compute.hpp"
 
+WGpuVertexAttribute vertAtt={};
+WGpuVertexBufferLayout vertBufLayout={};
 WGpuShaderModuleCompilationHint fragHint={};
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
@@ -30,6 +32,7 @@ WGpuBufferDescriptor bufferDescriptor_iTime={};
 WGpuBufferDescriptor bufferDescriptor_iResolution={};
 WGpuBufferDescriptor bufferDescriptor_iFrame={};
 WGpuBufferDescriptor bufferDescriptor_iTimeDelta={};
+WGpuBufferDescriptor bufferDescriptor_vertex={};
 // WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
 // WGpuPipelineLayout pipeline_layout=0;
 WGpuBindGroupLayout bindgroup_layout=0;
@@ -50,6 +53,7 @@ WGpuBuffer uni_iTime_Buffer;
 WGpuBuffer uni_iTimeDelta_Buffer;
 WGpuBuffer uni_iResolution_Buffer;
 WGpuBuffer uni_iFrame_Buffer;
+WGpuBuffer vertex_Buffer;
 WGpuBufferBindingLayout bufferBindingLayoutR={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 WGpuTextureBindingLayout textureBindingLayout1={};
 WGpuTextureBindingLayout textureBindingLayout2={};
@@ -82,7 +86,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 
 WGpuUniform wTime;
 uint64_t tme;
-
+static wvbl_tensor wvbl=wvbl_tensor{2,2};
 static i_tensor on=i_tensor{2,2};
 static i_tensor sze=i_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
@@ -194,14 +198,14 @@ const char * vertexShader =
 // "out.iChannel0Texture = iChannel0;\n"
 // "out.iChannel0Sampler = iChannel0Sampler;\n"
 "var pos = array<vec2<f32>, 6>(\n"
-"vec2<f32>(1.0f, 1.0f),\n"
-"vec2<f32>(-1.0f, 1.0f),\n"
-"vec2<f32>(-1.0f, -1.0f),\n"
-"vec2<f32>(1.0f, 1.0f),\n"
-"vec2<f32>(1.0f, -1.0f),\n"
-"vec2<f32>(-1.0f, -1.0f)\n"
+"vec4<f32>(1.0f, 1.0f,0.0f,1.0f),\n"
+"vec4<f32>(-1.0f, 1.0f,0.0f,1.0f),\n"
+"vec4<f32>(-1.0f, -1.0f,0.0f,1.0f),\n"
+"vec4<f32>(1.0f, 1.0f,0.0f,1.0f),\n"
+"vec4<f32>(1.0f, -1.0f,0.0f,1.0f),\n"
+"vec4<f32>(-1.0f, -1.0f,0.0f,1.0f)\n"
 ");\n"
-"return vec4<f32>(pos[vertexIndex], 0.0f, 1.0f);"
+"return vec4<f32>(pos[vertexIndex]);"
 "}\n";
 
 const char * fragHeader="";
@@ -324,6 +328,18 @@ uint32_t outP;
 double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
 
+struct Vertex{
+float position[4];
+};
+
+Vertex vertices[]={
+[1.0f,1.0f,0.0f,1.0f],
+[-1.0f,1.0f,0.0f,1.0f],
+[-1.0f,-1.0f,0.0f,1.0f],
+[1.0f,1.0f,0.0f,1.0f],
+[1.0f,-1.0f,0.0f,1.0f],
+[-1.0f,-1.0f,0.0f,1.0f]
+};
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
@@ -501,6 +517,8 @@ wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),mapCallbackStart,&WGPU_UserData.at(
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
+wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(3,3),0,sizeof(Vertex));
+wgpu_render_pass_encoder_set_vertex_buffer_layout(wrpe.at(0,0),wvbl.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
@@ -516,6 +534,8 @@ wceA={};
 wceB=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(1,1)=wceB;
 wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
+wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(1,1),0,wb.at(3,3),0,sizeof(Vertex));
+wgpu_render_pass_encoder_set_vertex_buffer_layout(wrpe.at(1,1),wvbl.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
 wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
@@ -750,6 +770,18 @@ uni_iFrame_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iFrame)
 wb.at(1,1)=uni_iFrame_Buffer;
 bufferDescriptor_iResolution={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(2,2)=bufferDescriptor_iResolution;
+bufferDescriptor_vertex={  sizeof(vertices), WGPU_BUFFER_USAGE_VERTEX,EM_FALSE};
+wbd.at(3,3)=bufferDescriptor_vertex;
+vertAtt.offset=0;
+vertAtt.shaderLocation=0;
+vertAtt.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
+vertBufLayout.numAttributes=1
+vertBufLayout.attributes=vertAtt;  //  * ?
+vertBufLayout.arrayStride=sizeof(Vertex);
+vertBufLayout.stepMode=WGPU_VERTEX_STEP_MODE_VERTEX;
+wvbl.at(0,0)=vertBufLayout;
+vertex_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_vertex);
+wb.at(3,3)=vertex_Buffer;
 uni_iResolution_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iResolution);
 wb.at(2,2)=uni_iResolution_Buffer;
 bufferBindingLayoutR.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
