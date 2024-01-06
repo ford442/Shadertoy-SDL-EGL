@@ -177,7 +177,7 @@ inline char wgl_cmp_src[2000]=
 "@compute@workgroup_size(4,1,64)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let index=global_id.x;"
-"let arrayLength=64;"
+"let arrayLength=<u32>64;"
 "if(index<arrayLength){"
 "let i=index;"
 "let swappedIndex=arrayLength-i-1;"
