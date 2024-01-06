@@ -181,7 +181,7 @@ const char * vertexShader =
 "fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
 // "out.iChannel0Texture = iChannel0;\n"
 // "out.iChannel0Sampler = iChannel0Sampler;\n"
-"var pos = array<vec2<f32>, 6>(\n"
+"var pos = array<vec4<f32>, 6>(\n"
 "vec4<f32>(1.0f, 1.0f,0.0f,1.0f),\n"
 "vec4<f32>(-1.0f, 1.0f,0.0f,1.0f),\n"
 "vec4<f32>(-1.0f, -1.0f,0.0f,1.0f),\n"
