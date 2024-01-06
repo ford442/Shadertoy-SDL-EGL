@@ -123,8 +123,8 @@ const char *vertexShader =
 "}\n";
 */
 
-/*
-const char * vertexShader=
+
+const char * vertexShadera=
 "struct VertexOutput {\n"
 "@builtin(position) Position : vec4<f32>,\n"
 "@location(0) fragUV : vec2<f32>\n"
@@ -152,9 +152,9 @@ const char * vertexShader=
 "output.fragUV = uv[VertexIndex];\n"
 "return output;\n"
 "}\n";
-*/
 
-const char * vertexShader=
+
+const char * vertexShaderb=
 "struct VertexOutput {\n"
 "@builtin(position) Position : vec4<f32>,\n"
 "@location(0) fragUV : vec2<f32>\n"
@@ -413,7 +413,7 @@ multiSamp.count=0;
 multiSamp.mask=-1;
 shaderModuleDescV={};
 shaderModuleDescF={};
-shaderModuleDescV.code=vertexShader;
+shaderModuleDescV.code=vertexShadera;
 vs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescV);
 shaderModuleDescF.code=frag_body;
 // shaderModuleDescF.code=fragmentShader;
