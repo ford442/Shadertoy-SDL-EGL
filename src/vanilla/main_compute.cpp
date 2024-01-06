@@ -527,7 +527,7 @@ wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
-wgpu_command_encoder_copy_texture_to_buffer(wrpe.at(0,0),&wict.at(0,0),&wb.at(3,3),1,64,1);
+wgpu_command_encoder_copy_texture_to_buffer(wrpe.at(0,0),wict.at(0,0),wb.at(3,3),1,64,1);
 // wgpu_command_encoder_copy_buffer_to_buffer(wrpe.at(0,0),WGPU_Buffers.at(2,0,2),0,wb.at(3,3),0,64);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(1,1),sizeof(uint64_t));
