@@ -176,7 +176,7 @@ char wgl_cmp_src[2000]=
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "}";
 
-const char * vertexShaderOld =
+const char * vertexShader =
 "@vertex\n"
 "fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
 // "out.iChannel0Texture = iChannel0;\n"
@@ -192,7 +192,7 @@ const char * vertexShaderOld =
 "return vec4<f32>(pos[vertexIndex]);"
 "}\n";
 
-const char * vertexShader =
+const char * vertexShaderNew =
 "struct Position {"
 "@location(7) position: vec4<f32>;"
 "};"
