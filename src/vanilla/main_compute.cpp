@@ -211,15 +211,10 @@ const char * vertexShaderOld =
 "}\n";
 
 const char * vertexShader =
-"struct VertexInput {"
-"[[location(0)]] position: vec4<f32>;"
-"};"
 "@vertex\n"
-"fn main([[location(0)]] VertexInput) -> @builtin(position) vec4<f32> {\n"
+"fn main(@location(0) position: vec4<f32>) -> @builtin(position) vec4<f32> {\n"
 "return vec4<f32>(position);"
 "}\n";
-
-
 
 const char * fragHeader="";
 
@@ -523,13 +518,11 @@ WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 // }
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
-WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-
+// WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 //  if(WGPU_BufferStatus.at(0,0,0)!=3){
     // wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
 //wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,OutputBufferBytes);
 // }
-  
   // Render pass A (color)
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
@@ -722,7 +715,6 @@ vs=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(0,0));
 wsm.at(0,0)=vs;
 fs=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(1,1));
 wsm.at(1,1)=fs;
-  
 bufferDescriptor_vertex={sizeof(vertices),WGPU_BUFFER_USAGE_VERTEX|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(3,3)=bufferDescriptor_vertex;
 vertAtt.offset=0;
@@ -735,7 +727,6 @@ vertBufLayout.stepMode=WGPU_VERTEX_STEP_MODE_VERTEX;
 wvbl.at(0,0)=vertBufLayout;
 vertex_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 wb.at(3,3)=vertex_Buffer;
-
 depthState={};
 depthState.format=WGPU_TEXTURE_FORMAT_INVALID;
 depthState.depthWriteEnabled=0;
