@@ -211,10 +211,15 @@ const char * vertexShaderOld =
 "}\n";
 
 const char * vertexShader =
+"struct VertexInput {"
+"[[location(0)]] position: vec4<f32>;"
+"};"
 "@vertex\n"
-"fn main(@location(0) in position: vec4<f32>) -> @builtin(position) vec4<f32> {\n"
+"fn main([[location(0)]] VertexInput) -> @builtin(position) vec4<f32> {\n"
 "return vec4<f32>(position);"
 "}\n";
+
+
 
 const char * fragHeader="";
 
@@ -721,7 +726,7 @@ wsm.at(1,1)=fs;
 bufferDescriptor_vertex={sizeof(vertices),WGPU_BUFFER_USAGE_VERTEX|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(3,3)=bufferDescriptor_vertex;
 vertAtt.offset=0;
-vertAtt.shaderLocation=7;
+vertAtt.shaderLocation=0;
 vertAtt.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
 vertBufLayout.numAttributes=1;
 vertBufLayout.attributes=&vertAtt;  //  * ?
