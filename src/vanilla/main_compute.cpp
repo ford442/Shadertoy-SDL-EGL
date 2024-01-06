@@ -344,14 +344,14 @@ struct Vertex{
 float position[4];
 };
 
-Vertex vertices[]=[
+Vertex vertices[]=
 [1.0f,1.0f,0.0f,1.0f],
 [-1.0f,1.0f,0.0f,1.0f],
 [-1.0f,-1.0f,0.0f,1.0f],
 [1.0f,1.0f,0.0f,1.0f],
 [1.0f,-1.0f,0.0f,1.0f],
 [-1.0f,-1.0f,0.0f,1.0f]
-];
+;
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
@@ -738,8 +738,8 @@ wbd.at(3,3)=bufferDescriptor_vertex;
 vertAtt.offset=0;
 vertAtt.shaderLocation=0;
 vertAtt.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
-vertBufLayout.numAttributes=1
-vertBufLayout.attributes=vertAtt;  //  * ?
+vertBufLayout.numAttributes=1;
+vertBufLayout.attributes=&vertAtt;  //  * ?
 vertBufLayout.arrayStride=sizeof(Vertex);
 vertBufLayout.stepMode=WGPU_VERTEX_STEP_MODE_VERTEX;
 wvbl.at(0,0)=vertBufLayout;
@@ -750,7 +750,7 @@ vertState={};
 vertState.module=wsm.at(0,0);
 vertState.entryPoint="main";
 vertState.numBuffers=1;
-vertState.buffers=wb.at(3,3);
+vertState.buffers=wvbl.at(0,0);
 vertState.numConstants=0;
 vertState.constants=nullptr;
 wvs.at(0,0)=vertState;
