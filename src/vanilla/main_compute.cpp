@@ -173,6 +173,7 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
 "@group(0)@binding(2)var textureA:texture_storage_2d<rgba32uint,write>;"
+"@group(0)@binding(3)var<storage,read_write>vertexBuffer:array<u32,64>;"
 "@compute@workgroup_size(4,1,64)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "outputBuffer[global_id.x]=inputBuffer[global_id.x];"
@@ -602,7 +603,7 @@ bindGroupLayoutEntries[3].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[3].type=4;
 bindGroupLayoutEntries[3].layout.storageTexture=WGPU_StorageTextureBindingLayout.at(0,0,0);
 WGPU_BindGroupLayoutEntries.at(0,0,0)=bindGroupLayoutEntries;
-WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(wd.at(0,0),WGPU_BindGroupLayoutEntries.at(0,0,0),2);
+WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(wd.at(0,0),WGPU_BindGroupLayoutEntries.at(0,0,0),3);
 WGPU_ComputePipelineLayout.at(0,0,0)=wgpu_device_create_pipeline_layout(wd.at(0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
 WGPU_ComputePipeline.at(0,0,0)=wgpu_device_create_compute_pipeline(wd.at(0,0),WGPU_ComputeModule.at(0,0,0),Entry,WGPU_ComputePipelineLayout.at(0,0,0),NULL,0);
 bindGroupEntry[0].binding=0;
@@ -620,7 +621,7 @@ bindGroupEntry[2].bufferBindSize=sizeof(vertices);
 bindGroupEntry[3].binding=2;
 bindGroupEntry[3].resource=WGPU_Texture.at(0,0,0);
 WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
-WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),2);
+WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),3);
 WGPU_ComputePassDescriptor.at(0,0,0)=computePassDescriptor;
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(wd.at(0,0));
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
@@ -709,12 +710,11 @@ vs=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(0,0));
 wsm.at(0,0)=vs;
 fs=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(1,1));
 wsm.at(1,1)=fs;
-bufferDescriptor_vertex={sizeof(vertices),WGPU_BUFFER_USAGE_VERTEX|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+bufferDescriptor_vertex={sizeof(vertices),WGPU_BUFFER_USAGE_VERTEX|WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(3,3)=bufferDescriptor_vertex;
 vertAtt.offset=0;
 vertAtt.shaderLocation=0;
 vertAtt.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
-  
 vertBufLayout.numAttributes=1;
 vertBufLayout.attributes=&vertAtt;  //  * ?
 vertBufLayout.arrayStride=sizeof(Vertex);
@@ -822,6 +822,7 @@ bindgroup_layout_entries[2].binding=2;
 bindgroup_layout_entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entries[2].layout.buffer=wbbl.at(0,0);
+  
    /* 
 bindgroup_layout_entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[3].binding=3;
