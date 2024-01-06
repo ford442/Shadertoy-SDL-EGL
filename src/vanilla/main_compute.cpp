@@ -169,31 +169,13 @@ return EM_TRUE;
 
 char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
-"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<u32,262144>;"
+"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<f32,262144>;"
 "@group(0)@binding(2)var textureA:texture_storage_2d<rgba32uint,write>;"
 "@compute@workgroup_size(4,1,64)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"buffer<vec4<f32>> bufferData;"
 "@group_shared var vertexData: array<vec4<f32>, 64>;"
 "let vertexIndex = global_id.x;"
-"vertexData[local_invocation_id.x] = bufferData.load(vertexIndex);"
-"let f:u32=global_id.z;"
-"let g:u32=global_id.x;"
-// "let coord:vec2<u32>=vec2<u32>(0,0);"
-// "let flo:vec4<u32>=vec4<u32>(24,24,24,255);"
-// "let u0:u32=0;"
-// "let clr:f32=textureLoad(textureA:texture_storage_2d<u32>,coord,u0);"
-// "textureStore(textureA,coord,vec4<u32>(24,24,24,255));"
-// "let h:u32=f*g;"
-// "var i:u32;"
-// "loop{"
-"outputBuffer[global_id.x]=inputBuffer[global_id.x];"
-// "outputBuffer[(f*g)+1]=inputBuffer[0];"
-// "outputBuffer[(f*g)+2]=inputBuffer[0];"
-// "outputBuffer[(f*g)+3]=inputBuffer[0];"
-// "i+=4;"
-// "if i==256{break;}"
-// "}"
+"vertexData[local_invocation_id.x] = outputBuffer.load(vertexIndex);"
 "}";
 
 const char * vertexShaderOld =
