@@ -176,7 +176,7 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(3)var<storage,read_write>vertexBuffer:array<u32,64>;"
 "@compute@workgroup_size(4,1,64)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"outputBuffer[global_id.x]=inputBuffer[global_id.x];"
+// "outputBuffer[global_id.x]=inputBuffer[global_id.x];"
 "}";
 
 const char * vertexShaderOld =
