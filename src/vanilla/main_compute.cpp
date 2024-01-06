@@ -55,7 +55,7 @@ WGpuBuffer uni_iResolution_Buffer;
 WGpuBuffer uni_iFrame_Buffer;
 WGpuBuffer vertex_Buffer;
 WGpuBufferBindingLayout bufferBindingLayoutR={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
-WGpuBufferBindingLayout bufferBindingLayoutV={GPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
+WGpuBufferBindingLayout bufferBindingLayoutV={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 WGpuTextureBindingLayout textureBindingLayout1={};
 WGpuTextureBindingLayout textureBindingLayout2={};
 WGpuTextureBindingLayout textureBindingLayout3={};
