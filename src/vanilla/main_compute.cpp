@@ -192,7 +192,7 @@ inline char wgl_cmp_src[2000]=
 // "}"
 "}";
 
-const char * vertexShader =
+const char * vertexShaderOld =
 "@vertex\n"
 "fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
 // "out.iChannel0Texture = iChannel0;\n"
@@ -206,6 +206,20 @@ const char * vertexShader =
 "vec4<f32>(-1.0f, -1.0f,0.0f,1.0f)\n"
 ");\n"
 "return vec4<f32>(pos[vertexIndex]);"
+"}\n";
+
+
+@location(0) in vec4<f32> position;  // Assuming position is the first attribute
+
+@vertex
+fn main(@builtin(vertex_index) vertexIndex : u32,@location(0) in vec4<f32> position) -> @builtin(position) vec4<f32> {
+return position;
+}
+  
+const char * vertexShader =
+"@vertex";
+"fn main(@builtin(vertex_index) vertexIndex : u32,@location(0) in vec4<f32> position) -> @builtin(position) vec4<f32> {";
+"return position;";
 "}\n";
 
 const char * fragHeader="";
@@ -718,16 +732,30 @@ depthState2.depthWriteEnabled=1;
 depthState2.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
 // depthState2.depthCompare=WGPU_COMPARE_FUNCTION_ALWAYS;
 wdss.at(1,1)=depthState2;
+
+bufferDescriptor_vertex={sizeof(vertices),WGPU_BUFFER_USAGE_VERTEX,EM_FALSE};
+wbd.at(3,3)=bufferDescriptor_vertex;
+vertAtt.offset=0;
+vertAtt.shaderLocation=0;
+vertAtt.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
+vertBufLayout.numAttributes=1
+vertBufLayout.attributes=vertAtt;  //  * ?
+vertBufLayout.arrayStride=sizeof(Vertex);
+vertBufLayout.stepMode=WGPU_VERTEX_STEP_MODE_VERTEX;
+wvbl.at(0,0)=vertBufLayout;
+vertex_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_vertex);
+wb.at(3,3)=vertex_Buffer;
+
 vertState={};
 vertState.module=wsm.at(0,0);
 vertState.entryPoint="main";
-vertState.numBuffers=0;
-vertState.buffers=nullptr;
+vertState.numBuffers=1;
+vertState.buffers=wb.at(3,3);
 vertState.numConstants=0;
 vertState.constants=nullptr;
 wvs.at(0,0)=vertState;
 priState={};
-priState.topology=WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST; // Defaults to WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST ('triangle-list')
+priState.topology=WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP; // Defaults to WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST ('triangle-list')
 // priState.stripIndexFormat=WGPU_INDEX_FORMAT_UINT32; // Defaults to undefined, must be explicitly specified if WGPU_PRIMITIVE_TOPOLOGY_LINE_STRIP ('line-strip') or WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP ('triangle-strip') is used.
 priState.frontFace=WGPU_FRONT_FACE_CCW; // Defaults to WGPU_FRONT_FACE_CCW ('ccw')
 priState.cullMode=WGPU_CULL_MODE_NONE; // Defaults to WGPU_CULL_MODE_NONE ('none')
@@ -770,18 +798,7 @@ uni_iFrame_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iFrame)
 wb.at(1,1)=uni_iFrame_Buffer;
 bufferDescriptor_iResolution={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(2,2)=bufferDescriptor_iResolution;
-bufferDescriptor_vertex={  sizeof(vertices), WGPU_BUFFER_USAGE_VERTEX,EM_FALSE};
-wbd.at(3,3)=bufferDescriptor_vertex;
-vertAtt.offset=0;
-vertAtt.shaderLocation=0;
-vertAtt.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
-vertBufLayout.numAttributes=1
-vertBufLayout.attributes=vertAtt;  //  * ?
-vertBufLayout.arrayStride=sizeof(Vertex);
-vertBufLayout.stepMode=WGPU_VERTEX_STEP_MODE_VERTEX;
-wvbl.at(0,0)=vertBufLayout;
-vertex_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_vertex);
-wb.at(3,3)=vertex_Buffer;
+
 uni_iResolution_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iResolution);
 wb.at(2,2)=uni_iResolution_Buffer;
 bufferBindingLayoutR.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
@@ -955,6 +972,8 @@ wbge.at(0,0)=bindgroup_entries;
 // renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
 // wrbe.at(0,0)=renderBundleEncoder;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
+  wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,vertices,sizeof(vertices));
+
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),3);
