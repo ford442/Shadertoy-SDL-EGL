@@ -173,8 +173,6 @@ char wgl_cmp_src[2000]=
 "@group(0)@binding(2)var textureA:texture_storage_2d<rgba32uint,write>;"
 "@compute@workgroup_size(4,1,64)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"let vertexIndex = global_id.x;"
-"vertexData[local_invocation_id.x] = outputBuffer.load(vertexIndex);"
 "}";
 
 const char * vertexShaderOld =
