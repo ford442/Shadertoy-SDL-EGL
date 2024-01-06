@@ -195,7 +195,7 @@ const char * vertexShaderOld =
 const char * vertexShader =
 "struct Position {"
 "@location(7) position: vec4<f32>;"
-};
+"};"
 "@vertex\n"
 "fn main(in @builtin(vertex_index) vertexIndex: u32, in vertexData: Position) -> @builtin(position) vec4<f32> {"
 "return position;}\n";
