@@ -168,12 +168,11 @@ return EM_TRUE;
 */
 
 char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var<storage,read>inputBuffer:array<u32,262144>;"
-"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<f32,262144>;"
+"@group(0)@binding(0)var<storage,read>inputBuffer:array<f32,64>;"
+"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<f32,64>;"
 "@group(0)@binding(2)var textureA:texture_storage_2d<rgba32uint,write>;"
 "@compute@workgroup_size(4,1,64)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
-"@group_shared var vertexData: array<vec4<f32>, 64>;"
 "let vertexIndex = global_id.x;"
 "vertexData[local_invocation_id.x] = outputBuffer.load(vertexIndex);"
 "}";
@@ -245,10 +244,10 @@ static wced_tensor WGPU_CommandEncoderDescriptor=wced_tensor{1,1,1};
 static wbms_tensor WGPU_BufferStatus=wbms_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
-uint32_t OutputBufferUnits=262144;
-uint32_t OutputBufferBytes=262144*4;
-uint32_t InputBufferUnits=262144;
-uint32_t InputBufferBytes=262144*4;
+uint32_t OutputBufferUnits=64;
+uint32_t OutputBufferBytes=64*4;
+uint32_t InputBufferUnits=64;
+uint32_t InputBufferBytes=64*4;
 uint64_t WGPU_InputRangeSize=OutputBufferBytes;
 
 const char * Entry="computeStuff";
@@ -484,7 +483,7 @@ wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
 raN=rNd4(256);
 WGPU_InputBuffer.at(0,0,0)[0]=raN;
-wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
+wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,vertices,InputBufferBytes);
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Input_Image,&WGPU_ColorBuffer.at(0,0,0),1024,0,1,1,1);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),4,1,64);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
