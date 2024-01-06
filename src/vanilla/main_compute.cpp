@@ -597,7 +597,7 @@ bindGroupLayoutEntries[1].layout.buffer=WGPU_BufferBindingLayout.at(0,0,2);
 bindGroupLayoutEntries[2].binding=3;
 bindGroupLayoutEntries[2].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[2].type=1;
-bindGroupLayoutEntries[2].layout.buffer=wvbl.at(0,0);
+bindGroupLayoutEntries[2].layout.buffer=wbbl.at(1,1);
   /*
   
 bindGroupLayoutEntries[3].binding=2;
@@ -725,7 +725,7 @@ vertBufLayout.attributes=&vertAtt;  //  * ?
 vertBufLayout.arrayStride=sizeof(Vertex);
 vertBufLayout.stepMode=WGPU_VERTEX_STEP_MODE_VERTEX;
 wvbl.at(0,0)=vertBufLayout;
-bufferBindingLayoutV.type=WGPU_BUFFER_BINDING_TYPE_READ_ONLY_STORAGE;
+bufferBindingLayoutV.type=WGPU_BUFFER_BINDING_TYPE_STORAGE|WGPU_BUFFER_BINDING_TYPE_VERTEX;
 bufferBindingLayoutV.hasDynamicOffset=0,
 bufferBindingLayoutV.minBindingSize=sizeof(vertices);
 wbbl.at(1,1)=bufferBindingLayoutV;
@@ -956,6 +956,7 @@ bindgroup_entries[2].binding=2;
 bindgroup_entries[2].resource=wb.at(2,2);
 bindgroup_entries[2].bufferBindOffset=0;
 bindgroup_entries[2].bufferBindSize=sizeof(uint64_t);
+  
     /*
 bindgroup_entries[3]={};
 bindgroup_entries[3].binding=3;
