@@ -193,8 +193,11 @@ const char * vertexShaderOld =
 "}\n";
 
 const char * vertexShader =
+"struct Position {"
+"@location(7) position: vec4<f32>;"
+};
 "@vertex\n"
-"fn main(@location(7) in vec4<f32> position : vec4<f32>) -> @builtin(position) vec4<f32> {"
+"fn main(in @builtin(vertex_index) vertexIndex: u32, in vertexData: Position) -> @builtin(position) vec4<f32> {"
 "return position;}\n";
 
 const char * fragHeader="";
