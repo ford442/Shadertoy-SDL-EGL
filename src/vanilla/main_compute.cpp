@@ -215,9 +215,9 @@ const char * vertexShaderOld =
 "}\n";
 
 const char * vertexShader =
-"@vertex";
-"fn main(@builtin(vertex_index) vertexIndex : u32,@location(0) in vec4<f32> position) -> @builtin(position) vec4<f32> {";
-"return position;";
+"@vertex"
+"fn main(@builtin(vertex_index) vertexIndex : u32,@location(0) in vec4<f32> position) -> @builtin(position) vec4<f32> {"
+"return position;"
 "}\n";
 
 const char * fragHeader="";
