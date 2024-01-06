@@ -243,8 +243,8 @@ static wbd_tensor WGPU_BufferDescriptor=wbd_tensor{1,1,4};
 static wsmd_tensor WGPU_ShaderModuleDescriptor=wsmd_tensor{1,1,3};
 static di_tensor WGPU_BufferMappedRange=di_tensor{1,1,1};
 static void_tensor WGPU_UserData=void_tensor{1,1,2};
-static uiptr_tensor WGPU_ResultBuffer=uiptr_tensor{1,1,1};
-static uiptr_tensor WGPU_InputBuffer=uiptr_tensor{1,1,1};
+static fptr_tensor WGPU_ResultBuffer=fptr_tensor{1,1,1};
+static fptr_tensor WGPU_InputBuffer=fptr_tensor{1,1,1};
 static i53_tensor WGPU_BufferRange=i53_tensor{1,1,2};
 static i53_tensor WGPU_BufferSize=i53_tensor{1,1,1};
 static wt_tensor WGPU_Texture=wt_tensor{1,1,1};
@@ -383,7 +383,6 @@ WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 // }
 // wgpu_buffer_map_async(WGPU_Buffers.at(1,0,1),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,WGPU_InputRangeSize);
-*/
 return;
 };
 
