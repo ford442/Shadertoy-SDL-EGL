@@ -715,6 +715,20 @@ vs=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(0,0));
 wsm.at(0,0)=vs;
 fs=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(1,1));
 wsm.at(1,1)=fs;
+  
+bufferDescriptor_vertex={sizeof(vertices),WGPU_BUFFER_USAGE_VERTEX|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+wbd.at(3,3)=bufferDescriptor_vertex;
+vertAtt.offset=0;
+vertAtt.shaderLocation=7;
+vertAtt.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
+vertBufLayout.numAttributes=1;
+vertBufLayout.attributes=&vertAtt;  //  * ?
+vertBufLayout.arrayStride=sizeof(Vertex);
+vertBufLayout.stepMode=WGPU_VERTEX_STEP_MODE_VERTEX;
+wvbl.at(0,0)=vertBufLayout;
+vertex_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
+wb.at(3,3)=vertex_Buffer;
+
 depthState={};
 depthState.format=WGPU_TEXTURE_FORMAT_INVALID;
 depthState.depthWriteEnabled=0;
