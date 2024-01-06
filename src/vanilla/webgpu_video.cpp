@@ -632,26 +632,13 @@ return;
 
 }
 
-EM_JS(void,js_main,(),{
-FS.mkdir('/shader');
-    
-async function videoFrames(){
-let SiZ=parseInt(window.innerHeight);
-let vv=document.getElementById('mv');
-let cnv=document.getElementById('bcanvas');
-let cnvb=document.getElementById('canvas');
-
-const H=Module.HEAPU8.buffer;
-const gl2=cnv.getContext('2d',{willReadFrequently:true});
-gl2.drawImage(vv,0,0);
-let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
+/*
 const context = cnvb.getContext("webgpu");
 const gpu = navigator.gpu;
 const format = gpu.getPreferredCanvasFormat();
 const adapter = await gpu.requestAdapter();
 const device = await adapter.requestDevice();
 context.configure({ device, format, alphaMode: "opaque" });
-
 let texture = device.createTexture({
 format: "rgba8unorm",
 size: [SiZ, SiZ, 2],
@@ -660,23 +647,31 @@ GPUTextureUsage.COPY_DST |
 GPUTextureUsage.RENDER_ATTACHMENT |
 GPUTextureUsage.TEXTURE_BINDING,
 }); 
-
-setTimeout(function(){
-
-setInterval(function(){
-gl2.drawImage(vv,0,0);
-imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
-
-let pixelData=new Uint8Array(imageData.data);
 device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[texture.size[0], texture.size[1], 2]);
 const textureData = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
 device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, textureData.buffer, textureData.byteOffset, [texture.size[0],texture.size[1], 2]);
-let heapArray=new Uint8Array(H,0,textureData.length);
-heapArray.set(textureData);
+*/
+
+EM_JS(void,js_main,(),{
+FS.mkdir('/shader');
+
+async function videoFrames(){
+let SiZ=parseInt(window.innerHeight);
+let vv=document.getElementById('mv');
+let cnv=document.getElementById('bcanvas');
+let cnvb=document.getElementById('canvas');
+const H=Module.HEAPU8.buffer;
+const gl2=cnv.getContext('2d',{willReadFrequently:true});
+gl2.drawImage(vv,0,0);
+let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
+setInterval(function(){
+gl2.drawImage(vv,0,0);
+imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
+let pixelData=new Uint8Array(imageData.data.buffer);
+let heapArray=new Uint8Array(H,0,pixelData.length);
+heapArray.set(pixelData);
 // Module.ccall("frm",null,["Number"],[0]);
 },50);
-},150);
-
 }
   
 function normalResStart(){
