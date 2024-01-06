@@ -483,9 +483,10 @@ WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
-raN=rNd4(256);
-WGPU_InputBuffer.at(0,0,0)[0]=raN;
-wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
+// raN=rNd4(256);
+// WGPU_InputBuffer.at(0,0,0)[0]=raN;
+wgpu_command_encoder_copy_buffer_to_buffer(WGPU_ComputePassCommandEncoder.at(0,0,0),wb.at(3,3),0,WGPU_Buffers.at(1,1,1),0,sizeof(vertices);
+// wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Input_Image,&WGPU_ColorBuffer.at(0,0,0),1024,0,1,1,1);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),4,1,64);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
@@ -719,9 +720,9 @@ vertBufLayout.attributes=&vertAtt;  //  * ?
 vertBufLayout.arrayStride=sizeof(Vertex);
 vertBufLayout.stepMode=WGPU_VERTEX_STEP_MODE_VERTEX;
 wvbl.at(0,0)=vertBufLayout;
-  bufferBindingLayoutV.type=WGPU_BUFFER_BINDING_TYPE_READ_ONLY_STORAGE;
+bufferBindingLayoutV.type=WGPU_BUFFER_BINDING_TYPE_READ_ONLY_STORAGE;
 bufferBindingLayoutV.hasDynamicOffset=0,
-bufferBindingLayoutV.minBindingSize=sizeof(uint64_t);
+bufferBindingLayoutV.minBindingSize=sizeof(vertices);
 wbbl.at(1,1)=bufferBindingLayoutV;
 vertex_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 wb.at(3,3)=vertex_Buffer;
@@ -821,12 +822,12 @@ bindgroup_layout_entries[2].binding=2;
 bindgroup_layout_entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entries[2].layout.buffer=wbbl.at(0,0);
+   /* 
 bindgroup_layout_entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[3].binding=3;
 bindgroup_layout_entries[3].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindgroup_layout_entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entries[3].layout.buffer=wbbl.at(1,1);
-  /*
 bindgroup_layout_entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[3].binding=3;
 bindgroup_layout_entries[3].visibility=WGPU_SHADER_STAGE_FRAGMENT;
@@ -849,7 +850,7 @@ bindgroup_layout_entries[6].type=WGPU_BIND_GROUP_LAYOUT_TYPE_SAMPLER;
 bindgroup_layout_entries[6].layout.sampler=wsbl.at(0,0);
   */
 wbgle.at(0,0)=bindgroup_layout_entries;
-bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),4);
+bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3);
 wbgl.at(0,0)=bindgroup_layout;
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
 wrpl.at(0,0)=pipeline_layout;
@@ -949,10 +950,10 @@ bindgroup_entries[2].binding=2;
 bindgroup_entries[2].resource=wb.at(2,2);
 bindgroup_entries[2].bufferBindOffset=0;
 bindgroup_entries[2].bufferBindSize=sizeof(uint64_t);
+    /*
 bindgroup_entries[3]={};
 bindgroup_entries[3].binding=3;
 bindgroup_entries[3].resource=wb.at(3,3);
-  /*
 bindgroup_entries[3]={};
 bindgroup_entries[3].binding=3;
 bindgroup_entries[3].resource=wt.at(1,1);
@@ -976,7 +977,7 @@ wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,vertices,sizeof(vertices));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
-bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),4);
+bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),3);
 wbg.at(0,0)=bindgroup;
 colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
 // colorTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(1,1));
