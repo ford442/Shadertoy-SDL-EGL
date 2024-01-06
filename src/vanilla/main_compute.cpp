@@ -1,5 +1,12 @@
 #include "../../include/vanilla/main_compute.hpp"
 
+WGpuVertexAttribute vertAtt={};
+WGpuVertexBufferLayout vertBufLayout={};
+WGpuBufferDescriptor bufferDescriptor_vertex={};
+WGpuBuffer vertex_Buffer;
+WGpuBufferBindingLayout bufferBindingLayoutV={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
+
+
 WGpuShaderModuleCompilationHint fragHint={};
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
@@ -130,6 +137,7 @@ static c_tensor wgsl=c_tensor{2,2};
 static wsd_tensor wsd=wsd_tensor{2,2};
 static ws_tensor wgpu_sampler=ws_tensor{2,2};
 static wsbl_tensor wsbl=wsbl_tensor{2,2};
+static wvbl_tensor wvbl=wvbl_tensor{2,2};
 
 /*
 static mouse_tensor mms=mouse_tensor{2,2};
@@ -193,16 +201,24 @@ const char * vertexShader =
 "fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
 // "out.iChannel0Texture = iChannel0;\n"
 // "out.iChannel0Sampler = iChannel0Sampler;\n"
-"var pos = array<vec2<f32>, 6>(\n"
-"vec2<f32>(1.0f, 1.0f),\n"
-"vec2<f32>(-1.0f, 1.0f),\n"
-"vec2<f32>(-1.0f, -1.0f),\n"
-"vec2<f32>(1.0f, 1.0f),\n"
-"vec2<f32>(1.0f, -1.0f),\n"
-"vec2<f32>(-1.0f, -1.0f)\n"
+"var pos = array<vec4<f32>, 6>(\n"
+"vec4<f32>(1.0f, 1.0f,0.0f,1.0f),\n"
+"vec4<f32>(-1.0f, 1.0f,0.0f,1.0f),\n"
+"vec4<f32>(-1.0f, -1.0f,0.0f,1.0f),\n"
+"vec4<f32>(1.0f, 1.0f,0.0f,1.0f),\n"
+"vec4<f32>(1.0f, -1.0f,0.0f,1.0f),\n"
+"vec4<f32>(-1.0f, -1.0f,0.0f,1.0f)\n"
 ");\n"
-"return vec4<f32>(pos[vertexIndex], 0.0f, 1.0f);"
+"return vec4<f32>(pos[vertexIndex]);"
 "}\n";
+
+const char * vertexShaderNew =
+"struct Position {"
+"@location(7) position: vec4<f32>;"
+"};"
+"@vertex\n"
+"fn main(in @builtin(vertex_index) vertexIndex: u32, in vertexData: Position) -> @builtin(position) vec4<f32> {"
+"return position;}\n";
 
 const char * fragHeader="";
 
@@ -285,9 +301,9 @@ WGpuComputePassDescriptor computePassDescriptor={};
 WGpuCommandBufferDescriptor commandBufferDescriptor={};
 WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDescriptor={};
-WGpuBindGroupLayoutEntry bindGroupLayoutEntries[3]={};
+WGpuBindGroupLayoutEntry bindGroupLayoutEntries[8]={};
 WGpuBindGroupLayoutEntry bindGroupLayoutEntriesB[2]={};
-WGpuBindGroupEntry bindGroupEntry[3]={};
+WGpuBindGroupEntry bindGroupEntry[8]={};
 WGpuBindGroupEntry bindGroupEntryB[2]={};
 WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
@@ -324,6 +340,17 @@ uint32_t outP;
 double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
 
+struct Vertex{
+float position[4];
+};
+
+Vertex vertices[]={
+{1.0f,1.0f,0.0f,1.0f},
+{-1.0f,1.0f,0.0f,1.0f},
+{-1.0f,-1.0f,0.0f,1.0f},
+{1.0f,1.0f,0.0f,1.0f},
+{1.0f,-1.0f,0.0f,1.0f},
+{-1.0f,-1.0f,0.0f,1.0f}
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
