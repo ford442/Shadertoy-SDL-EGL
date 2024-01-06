@@ -194,9 +194,9 @@ inline char wgl_cmp_src[2000]=
 // "}"
 "}";
 
-const char * vertexShader =
+const char * vertexShaderOld =
 "@vertex\n"
-"fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
+"fn main(@location(0) position: vec4<f32>) -> @builtin(position) vec4<f32> {\n"
 // "out.iChannel0Texture = iChannel0;\n"
 // "out.iChannel0Sampler = iChannel0Sampler;\n"
 "var pos = array<vec4<f32>, 6>(\n"
@@ -210,13 +210,11 @@ const char * vertexShader =
 "return vec4<f32>(pos[vertexIndex]);"
 "}\n";
 
-const char * vertexShaderNew =
-"struct Position {"
-"@location(7) position: vec4<f32>;"
-"};"
+const char * vertexShader =
 "@vertex\n"
-"fn main(in @builtin(vertex_index) vertexIndex: u32, in vertexData: Position) -> @builtin(position) vec4<f32> {"
-"return position;}\n";
+"fn main(@location(0) in position: vec4<f32>) -> @builtin(position) vec4<f32> {\n"
+"return vec4<f32>(position);"
+"}\n";
 
 const char * fragHeader="";
 
