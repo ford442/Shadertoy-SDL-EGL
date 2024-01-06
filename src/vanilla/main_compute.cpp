@@ -598,10 +598,12 @@ bindGroupLayoutEntries[2].binding=3;
 bindGroupLayoutEntries[2].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[2].type=1;
 bindGroupLayoutEntries[2].layout.buffer=wbbl.at(3,3);
+  /*
 bindGroupLayoutEntries[3].binding=2;
 bindGroupLayoutEntries[3].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[3].type=4;
 bindGroupLayoutEntries[3].layout.storageTexture=WGPU_StorageTextureBindingLayout.at(0,0,0);
+*/
 WGPU_BindGroupLayoutEntries.at(0,0,0)=bindGroupLayoutEntries;
 WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(wd.at(0,0),WGPU_BindGroupLayoutEntries.at(0,0,0),3);
 WGPU_ComputePipelineLayout.at(0,0,0)=wgpu_device_create_pipeline_layout(wd.at(0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
@@ -618,8 +620,10 @@ bindGroupEntry[2].binding=3;
 bindGroupEntry[2].resource=wb.at(3,3);
 bindGroupEntry[2].bufferBindOffset=0;
 bindGroupEntry[2].bufferBindSize=sizeof(vertices);
+  /*
 bindGroupEntry[3].binding=2;
 bindGroupEntry[3].resource=WGPU_Texture.at(0,0,0);
+*/
 WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
 WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),3);
 WGPU_ComputePassDescriptor.at(0,0,0)=computePassDescriptor;
