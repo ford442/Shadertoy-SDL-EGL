@@ -657,6 +657,7 @@ FS.mkdir('/shader');
 
 async function videoFrames(){
 let SiZ=parseInt(window.innerHeight);
+let dSiz=SiZ*SiZ*4;
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
 let cnvb=document.getElementById('canvas');
@@ -668,8 +669,8 @@ setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
 let pixelData=new Uint8Array(imageData.data.buffer);
-let heapArray=new Uint8Array(H,0,cnv.height*cnv.height*4);
-// heapArray.set(pixelData);
+let heapArray=new Uint8Array(H);
+heapArray.set(pixelData);
 // Module.ccall("frm",null,["Number"],[0]);
 },50);
 }
