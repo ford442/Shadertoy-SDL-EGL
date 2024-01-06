@@ -344,14 +344,14 @@ struct Vertex{
 float position[4];
 };
 
-Vertex vertices[]=
-[1.0f,1.0f,0.0f,1.0f],
-[-1.0f,1.0f,0.0f,1.0f],
-[-1.0f,-1.0f,0.0f,1.0f],
-[1.0f,1.0f,0.0f,1.0f],
-[1.0f,-1.0f,0.0f,1.0f],
-[-1.0f,-1.0f,0.0f,1.0f]
-;
+Vertex vertices[]={
+{1.0f,1.0f,0.0f,1.0f},
+{-1.0f,1.0f,0.0f,1.0f},
+{-1.0f,-1.0f,0.0f,1.0f},
+{1.0f,1.0f,0.0f,1.0f},
+{1.0f,-1.0f,0.0f,1.0f},
+{-1.0f,-1.0f,0.0f,1.0f}
+};
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
@@ -750,7 +750,7 @@ vertState={};
 vertState.module=wsm.at(0,0);
 vertState.entryPoint="main";
 vertState.numBuffers=1;
-vertState.buffers=wvbl.at(0,0);
+vertState.buffers=&wvbl.at(0,0);
 vertState.numConstants=0;
 vertState.constants=nullptr;
 wvs.at(0,0)=vertState;
