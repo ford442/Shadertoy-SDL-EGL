@@ -297,8 +297,8 @@ return nullptr;
 
 const char * Fnm2=reinterpret_cast<const char *>("/video/frame.gl");
 
-static char * result2=NULL;
-static char * results2=NULL;
+static uint8_t * result2=NULL;
+static uint8_t * results2=NULL;
 static long int length2=0;
 
 const inline uint8_t * rd_frm(const char * Fnm2){
