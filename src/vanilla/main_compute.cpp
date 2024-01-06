@@ -723,7 +723,7 @@ vertBufLayout.attributes=&vertAtt;  //  * ?
 vertBufLayout.arrayStride=sizeof(Vertex);
 vertBufLayout.stepMode=WGPU_VERTEX_STEP_MODE_VERTEX;
 wvbl.at(0,0)=vertBufLayout;
-vertex_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_vertex);
+vertex_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 wb.at(3,3)=vertex_Buffer;
 
 vertState={};
@@ -836,7 +836,7 @@ bindgroup_layout_entries[6].binding=6;
 bindgroup_layout_entries[6].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[6].type=WGPU_BIND_GROUP_LAYOUT_TYPE_SAMPLER;
 bindgroup_layout_entries[6].layout.sampler=wsbl.at(0,0);
-  bindgroup_layout_entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_layout_entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[3].binding=7;
 bindgroup_layout_entries[3].visibility=WGPU_SHADER_STAGE_VERTEX;
 bindgroup_layout_entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
