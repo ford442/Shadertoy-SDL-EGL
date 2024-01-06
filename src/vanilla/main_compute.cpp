@@ -344,14 +344,14 @@ struct Vertex{
 float position[4];
 };
 
-Vertex vertices[]={
+Vertex vertices[]={[
 [1.0f,1.0f,0.0f,1.0f],
 [-1.0f,1.0f,0.0f,1.0f],
 [-1.0f,-1.0f,0.0f,1.0f],
 [1.0f,1.0f,0.0f,1.0f],
 [1.0f,-1.0f,0.0f,1.0f],
 [-1.0f,-1.0f,0.0f,1.0f]
-};
+]};
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
