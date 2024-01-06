@@ -195,7 +195,7 @@ const char * vertexShaderOld =
 
 const char * vertexShader =
 "@vertex\n"
-"fn main(@builtin(vertex_index) vertexIndex : u32,@location(0) in vec4<f32> position) -> @builtin(position) vec4<f32> {"
+"fn main(@builtin(vertex_index) vertexIndex : u32,@location(0) in vec4<f32> position : vec4<f32>) -> @builtin(position) vec4<f32> {"
 "return position;"
 "}\n";
 
