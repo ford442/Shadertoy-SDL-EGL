@@ -301,7 +301,7 @@ static uint8_t * result2=NULL;
 static uint8_t * results2=NULL;
 static long int length2=0;
 
-const inline uint8_t * rd_frm(const char * Fnm2){
+inline uint8_t * rd_frm(const char * Fnm2){
 FILE * file2=fopen(Fnm,"r");
 ::boost::tuples::tie(result2,results2,file2);
 if(file2){
@@ -698,15 +698,15 @@ let dSiz=SiZ*SiZ*4;
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
 let cnvb=document.getElementById('canvas');
-const H=Module.HEAPU8.buffer;
+// const H=Module.HEAPU8.buffer;
 const gl2=cnv.getContext('2d',{willReadFrequently:true});
 gl2.drawImage(vv,0,0);
 let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
 setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
-let pixelData=new Uint8Array(imageData.data.buffer);
-let heapArray=new Uint8Array(H);
+var pixelData=new Uint8Array(imageData.data.buffer);
+var heapArray=new Uint8Array(H);
 FS.writeFile('/video/frame.gl',pixelData);
 
 // heapArray.set(pixelData);
