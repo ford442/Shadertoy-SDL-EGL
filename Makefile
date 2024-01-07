@@ -71,9 +71,9 @@ b3_onnx:
 b3_compute:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_compute.cpp -fchar8_t -std=c++14 -ffast-math -ffp-contract=off -mbulk-memory -matomics \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -O2 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -D__EMSCRIPTEN__ $(LDFLAGS) -O2 -std=c++14 -fchar8_t --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-cp.js \
+	 em++ -openmp-simd -pthread -D__EMSCRIPTEN__ $(LDFLAGS) -O2 -std=c++14 -fchar8_t --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-cp.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 -ffast-math -ffp-contract=off -mbulk-memory -matomics \
-	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 -rtlib=compiler-rt -openmp-simd -pthread \
+	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 -rtlib=compiler-rt \
 	 -sDEMANGLE_SUPPORT=0 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
 	 -sINITIAL_MEMORY=1536mb -lmath.js -lhtml5.js -lint53.js -mllvm -mtune=wasm32 \
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=1 -sUSE_GLFW=3 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
