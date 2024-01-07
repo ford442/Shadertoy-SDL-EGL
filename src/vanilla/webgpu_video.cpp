@@ -706,7 +706,7 @@ setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
 var pixelData=new Uint8Array(imageData.data.buffer);
-var heapArray=new Uint8Array(H);
+// var heapArray=new Uint8Array(H);
 FS.writeFile('/video/frame.gl',pixelData);
 
 // heapArray.set(pixelData);
