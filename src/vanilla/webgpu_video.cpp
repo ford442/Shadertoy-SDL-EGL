@@ -125,7 +125,7 @@ const char *vertexShader =
 
 
 const char * vertexShadera=
-"struct VertexOutput {\n"
+"struct VertexOutput{\n"
 "@builtin(position) Position : vec4<f32>,\n"
 "@location(0) fragUV : vec2<f32>\n"
 "};\n"
@@ -140,16 +140,16 @@ const char * vertexShadera=
 "vec2<f32>(-1.0f,-1.0f)\n"
 ");\n"
 "const uv=array<vec2<f32>,6>(\n"
-"vec2<f32>(1.0f, 0.0f),"
-"vec2<f32>(0.0f, 0.0f),"
-"vec2<f32>(0.0f, 1.0f),"
-"vec2<f32>(1.0f, 0.0f),"
-"vec2<f32>(1.0f, 1.0f),"
-"vec2<f32>(0.0f, 1.0f)"
+"vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(0.0f,1.0f),\n"
+"vec2<f32>(0.0f,0.0f),\n"
+"vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(1.0f,0.0f),\n"
+"vec2<f32>(0.0f,0.0f)\n"
 ");\n"
 "var output : VertexOutput;\n"
-"output.Position = vec4(pos[VertexIndex], 0.0f, 1.0f);\n"
-"output.fragUV = uv[VertexIndex];\n"
+"output.Position=vec4(pos[VertexIndex],0.0f,1.0f);\n"
+"output.fragUV=uv[VertexIndex];\n"
 "return output;\n"
 "}\n";
 
