@@ -327,7 +327,6 @@ return result2;
 return nullptr;
 }
 
-
 void raf(){
 u64_uni.at(3,3)++;
 u_time.t3=u_time.t2;
@@ -710,7 +709,7 @@ const rgbaData=new Uint8Array(imageData.data.buffer,0,imageData.width*imageData.
 const rgbaView=new Uint8Array(rgbaData.buffer,0,imageData.width*4,imageData.width*4);
 console.log(pixelData.length);
 // var heapArray=new Uint8Array(H);
-FS.writeFile('/video/frame.gl',rgbaView);
+FS.writeFile('/video/frame.gl',pixelData);
 
 // heapArray.set(pixelData);
 // Module.ccall("frm",null,["Number"],[0]);
