@@ -708,7 +708,7 @@ imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
 var pixelData=new Uint8Array(imageData.data.buffer);
 const rgbaData=new Uint8Array(imageData.data.buffer,0,imageData.width*imageData.height*4);
 const rgbaView=new Uint8Array(rgbaData.buffer,0,imageData.width*4,imageData.width*4);
-
+console.log(rgbaView.length);
 // var heapArray=new Uint8Array(H);
 FS.writeFile('/video/frame.gl',rgbaView);
 
