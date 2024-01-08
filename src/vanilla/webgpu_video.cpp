@@ -369,13 +369,13 @@ passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
- uint8_t * fram=(uint8_t*)rd_frm(Fnm2);
+uint8_t * fram=(uint8_t*)rd_frm(Fnm2);
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),fram,sze.at(0,0)*8,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),fram,sze.at(0,0)*32,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),36,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
@@ -706,8 +706,11 @@ setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
 var pixelData=new Uint8Array(imageData.data.buffer);
+const rgbaData=new Uint8Array(imageData.data.buffer,0,imageData.width*imageData.height*4);
+const rgbaView=new Uint8Array(rgbaData.buffer,0,imageData.width*4,imageData.width*4);
+
 // var heapArray=new Uint8Array(H);
-FS.writeFile('/video/frame.gl',pixelData);
+FS.writeFile('/video/frame.gl',rgbaView);
 
 // heapArray.set(pixelData);
 // Module.ccall("frm",null,["Number"],[0]);
