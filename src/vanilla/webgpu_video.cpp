@@ -131,21 +131,21 @@ const char * vertexShadera=
 "};\n"
 "@vertex\n"
 "fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
-"const pos = array<vec2<f32>, 6>(\n"
-"vec2<f32>(1.0f, 1.0f),\n"
-"vec2<f32>(-1.0f, 1.0f),\n"
-"vec2<f32>(-1.0f, -1.0f),\n"
-"vec2<f32>(1.0f, 1.0f),\n"
-"vec2<f32>(1.0f, -1.0f),\n"
-"vec2<f32>(-1.0f, -1.0f)\n"
+"const pos=array<vec2<f32>,6>(\n"
+"vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(-1.0f,1.0f),\n"
+"vec2<f32>(-1.0f,-1.0f),\n"
+"vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(1.0f,-1.0f),\n"
+"vec2<f32>(-1.0f,-1.0f)\n"
 ");\n"
-"const uv = array<vec2<f32>, 6>(\n"
-    vec2<f32>(1.0f, 0.0f), // Top right
-    vec2<f32>(0.0f, 0.0f), // Top left
-    vec2<f32>(0.0f, 1.0f), // Bottom left
-    vec2<f32>(1.0f, 0.0f), // Top right
-    vec2<f32>(1.0f, 1.0f), // Bottom right
-    vec2<f32>(0.0f, 1.0f)  // Bottom left
+"const uv=array<vec2<f32>,6>(\n"
+"vec2<f32>(1.0f, 0.0f),"
+"vec2<f32>(0.0f, 0.0f),"
+"vec2<f32>(0.0f, 1.0f),"
+"vec2<f32>(1.0f, 0.0f),"
+"vec2<f32>(1.0f, 1.0f),"
+"vec2<f32>(0.0f, 1.0f)"
 ");\n"
 "var output : VertexOutput;\n"
 "output.Position = vec4(pos[VertexIndex], 0.0f, 1.0f);\n"
