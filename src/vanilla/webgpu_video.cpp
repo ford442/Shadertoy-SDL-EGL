@@ -106,6 +106,7 @@ static u64_tensor u64_bfrSze=u64_tensor{4,4};
 static wict_tensor wict=wict_tensor{4,4};
 static wsd_tensor wsd=wsd_tensor{2,2};
 static ws_tensor ws=ws_tensor{2,2};
+static v_tensor imgData=v_tensor{2,2};
 
 /*
 const char *vertexShader =
@@ -301,17 +302,17 @@ static uint8_t * result2=NULL;
 static uint8_t * results2=NULL;
 static long int length2=0;
 
-inline uint8_t * rd_frm(const char * Fnm2){
+void * rd_frm(const char * Fnm2){
 FILE * file2=fopen(Fnm,"r");
 ::boost::tuples::tie(result2,results2,file2);
 if(file2){
-int32_t stat=fseek(file2,(int32_t)0,SEEK_END);
+int32_t stat=fseek(file2,0,SEEK_END);
 if(stat!=0){
 fclose(file2);
 return nullptr;
 }
 length=ftell(file2);
-stat=fseek(file2,(int32_t)0,SEEK_SET);
+stat=fseek(file2,0,SEEK_SET);
 if(stat!=0){
 fclose(file2);
 return nullptr;
@@ -368,7 +369,9 @@ passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
-uint8_t * fram=(uint8_t*)rd_frm(Fnm2);
+// uint8_t * fram=(uint8_t*)rd_frm(Fnm2);
+void * fram=(void*)rd_frm(Fnm2);
+ 
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
