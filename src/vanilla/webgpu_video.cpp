@@ -628,7 +628,7 @@ imageData=image.data;
  */
 setInterval(function(){
 
-pixelData=new Uint8ClampedArray(imageData);
+let pixelData=new Uint8ClampedArray(imageData);
   
 FS.writeFile('/video/frame.gl',pixelData);
   
