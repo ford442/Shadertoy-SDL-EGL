@@ -534,10 +534,10 @@ wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(1,1),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_uni.at(2,2),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(3,3),0,sizeof(vertices));
-  // wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT16,0,sizeof(indices));
+wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT16,0,sizeof(indices));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
-  //   wgpu_render_pass_encoder_draw_indexed(wrpe.at(1,1),35,1,0,0,0);
+  //   wgpu_render_pass_encoder_draw_indexed(wrpe.at(0,0),36,1,0,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
@@ -549,7 +549,7 @@ wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(1,1),0,wb.at(3,3),0,sizeof(vertices));
-  // wgpu_render_pass_encoder_set_index_buffer(wrpe.at(1,1),wb.at(4,4),WGPU_INDEX_FORMAT_UINT16,0,sizeof(indices));
+wgpu_render_pass_encoder_set_index_buffer(wrpe.at(1,1),wb.at(4,4),WGPU_INDEX_FORMAT_UINT16,0,sizeof(indices));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
   //   wgpu_render_pass_encoder_draw_indexed(wrpe.at(0,0),35,1,0,0,0);
@@ -618,7 +618,6 @@ bindGroupLayoutEntries[2].binding=3;
 bindGroupLayoutEntries[2].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[2].type=1;
 bindGroupLayoutEntries[2].layout.buffer=wbbl.at(1,1);
-  
 bindGroupLayoutEntries[3].binding=2;
 bindGroupLayoutEntries[3].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[3].type=4;
@@ -662,7 +661,6 @@ mms.at(0,1)=0.5*float_size.at(0,0);
 mms.at(1,0)=0.5*float_size.at(0,0);
 mms.at(1,1)=0.5*float_size.at(0,0);
 // mms.at(1,1)=0.5*(mms2.at(0,1)-float_size.at(0,0));
-
 mms.at(2,0)=float_size.at(0,0)*0.5;
 mms.at(2,1)=(mms2.at(0,1)-float_size.at(0,0))*0.5;
   //  glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,1),mms.at(1,0));
@@ -1006,9 +1004,7 @@ wbge.at(0,0)=bindgroup_entries;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,vertices,sizeof(vertices));
 wgpu_queue_write_buffer(wq.at(0,0),WGPU_Buffers.at(1,1,1),0,vertices,sizeof(vertices));
-  
-//  wgpu_queue_write_buffer(wq.at(0,0),wb.at(4,4),0,indices,sizeof(indices));
-
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(4,4),0,indices,sizeof(indices));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),3);
@@ -1128,8 +1124,6 @@ surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 // eglBindAPI(EGL_OPENGL_ES_API);
 eglBindAPI(EGL_OPENGL_API);
 eglMakeCurrent(display,surface,surface,contextegl);
-
-  
 emscripten_set_main_loop_timing(2,1);
 emscripten_set_main_loop((void(*)())raf,0,0);
 // emscripten_request_animation_frame_loop(raf,0);
