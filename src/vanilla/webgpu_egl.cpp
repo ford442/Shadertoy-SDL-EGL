@@ -338,7 +338,7 @@ struct Vertex{
 float position[4];
 };
 
-Vertex vertices[]={
+Vertex nvertices[]={
 {1.0f,1.0f,0.0f,1.0f},
 {-1.0f,1.0f,0.0f,1.0f},
 {-1.0f,-1.0f,0.0f,1.0f},
@@ -347,7 +347,7 @@ Vertex vertices[]={
 {-1.0f,-1.0f,0.0f,1.0f}
 };
 
-Vertex indexVertices[]={
+Vertex vertices[]={
 {-1.0f,-1.0f,1.0f,1.0f},
 {1.0f,-1.0f,1.0f,1.0f},
 {1.0f,1.0f,1.0f,1.0f},
