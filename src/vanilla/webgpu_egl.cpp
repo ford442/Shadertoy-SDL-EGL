@@ -550,7 +550,7 @@ wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(1,1),sizeof(uint64_t
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_uni.at(2,2),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(3,3),0,sizeof(vertices));
-wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT16,0,sizeof(indices));
+// wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT16,0,sizeof(indices));
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 //   wgpu_render_pass_encoder_draw_indexed(wrpe.at(0,0),35,1,0,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
@@ -565,7 +565,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
 wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(1,1),0,wb.at(3,3),0,sizeof(vertices));
-wgpu_render_pass_encoder_set_index_buffer(wrpe.at(1,1),wb.at(4,4),WGPU_INDEX_FORMAT_UINT16,0,sizeof(indices));
+// wgpu_render_pass_encoder_set_index_buffer(wrpe.at(1,1),wb.at(4,4),WGPU_INDEX_FORMAT_UINT16,0,sizeof(indices));
 wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
   //  wgpu_render_pass_encoder_draw_indexed(wrpe.at(1,1),35,1,0,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(1,1));
@@ -750,6 +750,7 @@ bufferDescriptor_vertex={sizeof(vertices),WGPU_BUFFER_USAGE_VERTEX|WGPU_BUFFER_U
 wbd.at(3,3)=bufferDescriptor_vertex;
 bufferDescriptor_indice={sizeof(indices),WGPU_BUFFER_USAGE_INDEX|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(4,4)=bufferDescriptor_indice;
+/*
 vertAtt.offset=0;
 vertAtt.shaderLocation=0;
 vertAtt.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
@@ -762,6 +763,7 @@ bufferBindingLayoutV.type=WGPU_BUFFER_BINDING_TYPE_STORAGE;
 bufferBindingLayoutV.hasDynamicOffset=0,
 bufferBindingLayoutV.minBindingSize=sizeof(vertices);
 wbbl.at(1,1)=bufferBindingLayoutV;
+*/
 vertex_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
 wb.at(4,4)=indice_Buffer;
 vertex_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
