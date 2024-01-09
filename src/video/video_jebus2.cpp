@@ -79,7 +79,7 @@ intervalBackward=setInterval(function(){
 if(vv.currentTime==0){
 clearInterval(intervalBackward);
 }else{
-vv.currentTime+=-(0.016);
+vv.currentTime+=-(0.032);
 }
 },16);
 };
@@ -88,7 +88,7 @@ let intervalForward;
 
 function forward(){
 intervalForward=setInterval(function(){
-vv.currentTime+=-(0.016);
+vv.currentTime+=-(0.032);
 },16);
 };
 
