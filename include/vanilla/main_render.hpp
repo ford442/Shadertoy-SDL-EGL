@@ -81,6 +81,7 @@ void startWebGPU();
 using namespace boost::chrono;
 
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
+using v_tensor=boost::numeric::ublas::tensor<void *>;
 using c_tensor=boost::numeric::ublas::tensor<const char *>;
 using f_tensor=boost::numeric::ublas::tensor<float>;
 using wce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
