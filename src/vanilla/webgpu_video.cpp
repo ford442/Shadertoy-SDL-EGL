@@ -585,25 +585,7 @@ return;
 
 }
 
-/*
-const context = cnvb.getContext("webgpu");
-const gpu = navigator.gpu;
-const format = gpu.getPreferredCanvasFormat();
-const adapter = await gpu.requestAdapter();
-const device = await adapter.requestDevice();
-context.configure({ device, format, alphaMode: "opaque" });
-let texture = device.createTexture({
-format: "rgba8unorm",
-size: [SiZ, SiZ, 2],
-usage:
-GPUTextureUsage.COPY_DST |
-GPUTextureUsage.RENDER_ATTACHMENT |
-GPUTextureUsage.TEXTURE_BINDING,
-}); 
-device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[texture.size[0], texture.size[1], 2]);
-const textureData = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
-device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, textureData.buffer, textureData.byteOffset, [texture.size[0],texture.size[1], 2]);
-*/
+
 
 EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
@@ -611,10 +593,30 @@ FS.mkdir('/video');
 
 async function videoFrames(){
 let SiZ=parseInt(window.innerHeight);
-  
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
 let cnvb=document.getElementById('canvas');
+
+// /*
+const context = cnvb.getContext("webgpu");
+const gpu = navigator.gpu;
+const format = gpu.getPreferredCanvasFormat();
+const adapter = await gpu.requestAdapter();
+const device = await adapter.requestDevice();
+context.configure({ device, format, alphaMode: "opaque" });
+
+let texture = device.createTexture({
+format: "rgba8unorm",
+size: [SiZ, SiZ, 2],
+usage:GPUTextureUsage.COPY_DST|GPUTextureUsage.RENDER_ATTACHMENT|GPUTextureUsage.TEXTURE_BINDING,
+}); 
+
+device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[texture.size[0], texture.size[1], 2]);
+const imageData = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
+device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageData.buffer, imageData.byteOffset, [texture.size[0],texture.size[1], 2]);
+// */
+  
+ /*
 // const H=Module.HEAPU8.buffer;
 const gl2=cnv.getContext('2d',{willReadFrequently:true,alpha:true});
 gl2.drawImage(vv,0,0);
@@ -625,7 +627,7 @@ setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
 imageData=image.data;
-
+ */
   
 pixelData=new Uint8ClampedArray(imageData);
   
