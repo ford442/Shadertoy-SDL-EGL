@@ -1020,7 +1020,9 @@ on.at(0,0)=1;
 }
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
-
+int sizzA;
+int sizzB;
+emscripten_get_element_css_size("canvas",&sizzB,&sizzA);
 EGLint numSamples;
 EGLint numSamplesNV;
 EGLint numBuffersNV;
@@ -1039,7 +1041,7 @@ EGLSurface surface;
 EGLContext contextegl;
 EGLConfig eglconfig=NULL;
 EGLint config_size,major,minor,atb_pos;
-int Size=(int)hi;
+int Size=(int)sizzA;
 float S=(float)Size;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 PFNEGLGETCONFIGATTRIBPROC eglGetConfigAttribHI = reinterpret_cast<PFNEGLGETCONFIGATTRIBPROC>(eglGetProcAddress("eglGetConfigAttribHI"));
@@ -1118,11 +1120,11 @@ EGL_SAMPLES,numSamples,
 EGL_NONE
 };
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
-ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
+contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglBindAPI(EGL_OPENGL_ES_API);
 // eglBindAPI(EGL_OPENGL_API);
-eglMakeCurrent(display,surface,surface,cntx.at(0,0));
+eglMakeCurrent(display,surface,surface,contextegl);
 
 
   
