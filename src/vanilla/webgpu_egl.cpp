@@ -1013,14 +1013,8 @@ u_time.t3=boost::chrono::high_resolution_clock::now();
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 if(on.at(0,0)==1){emscripten_cancel_main_loop();}
-emscripten_set_main_loop_timing(2,1);
-emscripten_set_main_loop((void(*)())raf,0,0);
-// emscripten_request_animation_frame_loop(raf,0);
-on.at(0,0)=1;
-}
 
-void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
-double sizzA,sizzB;
+  double sizzA,sizzB;
 emscripten_get_element_css_size("canvas",&sizzB,&sizzA);
 EGLint numSamples;
 EGLint numSamplesNV;
@@ -1059,7 +1053,7 @@ eglGetConfigAttrib(display,eglconfig,EGL_COVERAGE_BUFFERS_NV,&numBuffersNV);
 eglGetConfigAttrib(display,eglconfig,EGL_GL_COLORSPACE,&colorSpace);
 eglGetConfigAttrib(display,eglconfig,EGL_COLOR_FORMAT_HI,&colorFormat);
 static EGLint ctx_att[]={
-EGL_CONTEXT_CLIENT_TYPE,EGL_OPENGL_ES_API,
+EGL_CONTEXT_CLIENT_TYPE,EGL_OPENGL_API,
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_CONTEXT_MAJOR_VERSION_KHR,3,
 EGL_CONTEXT_MINOR_VERSION_KHR,0,
@@ -1085,14 +1079,14 @@ EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
 EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
-EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
+EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,  // EGL 1.5 needed  (WASM cannot Window surface)
 // EGL_RENDERABLE_TYPE,EGL_NONE,
 // EGL_CONFORMANT,EGL_OPENGL_BIT,
 // EGL_CONFORMANT,EGL_NONE,
 //  EGL_CONFIG_CAVEAT,EGL_NONE,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
-EGL_CONTEXT_OPENGL_NO_ERROR_KHR,EGL_TRUE,
+// EGL_CONTEXT_OPENGL_NO_ERROR_KHR,EGL_TRUE,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 // EGL_RENDER_BUFFER,EGL_TRIPLE_BUFFER_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV, //   available in OpenGL
@@ -1121,12 +1115,19 @@ EGL_NONE
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
-eglBindAPI(EGL_OPENGL_ES_API);
-// eglBindAPI(EGL_OPENGL_API);
+// eglBindAPI(EGL_OPENGL_ES_API);
+eglBindAPI(EGL_OPENGL_API);
 eglMakeCurrent(display,surface,surface,contextegl);
 
-
   
+emscripten_set_main_loop_timing(2,1);
+emscripten_set_main_loop((void(*)())raf,0,0);
+// emscripten_request_animation_frame_loop(raf,0);
+on.at(0,0)=1;
+}
+
+void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
+
 wa.at(0,0)=result;
 deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
 // deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8|WGPU_FEATURE_FLOAT32_FILTERABLE|WGPU_FEATURE_RG11B10UFLOAT_RENDERABLE;
