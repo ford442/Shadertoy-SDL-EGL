@@ -393,8 +393,6 @@ videoTextureCopy.texture=wt.at(2,2);
 videoTextureCopy.mipLevel=0;
 videoTextureCopy.origin=xyz;
 videoTextureCopy.aspect=WGPU_TEXTURE_ASPECT_ALL;
-// videoTextureCopy.colorSpace
-videoTextureCopy.premultipliedAlpha=true;
 wict.at(0,0)=videoTextureCopy;
 bufferDescriptorUni={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(0,0)=bufferDescriptorUni;
