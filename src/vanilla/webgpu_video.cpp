@@ -596,7 +596,6 @@ let SiZ=parseInt(window.innerHeight);
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
 let cnvb=document.getElementById('canvas');
-
 // /*
 const context = cnvb.getContext("webgpu");
 const gpu = navigator.gpu;
@@ -617,7 +616,6 @@ device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.h
 // */
   
  /*
-// const H=Module.HEAPU8.buffer;
 const gl2=cnv.getContext('2d',{willReadFrequently:true,alpha:true});
 gl2.drawImage(vv,0,0);
 let image=gl2.getImageData(0,0,cnv.width,cnv.height);
@@ -628,7 +626,8 @@ gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
 imageData=image.data;
  */
-  
+setInterval(function(){
+
 pixelData=new Uint8ClampedArray(imageData);
   
 FS.writeFile('/video/frame.gl',pixelData);
