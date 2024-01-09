@@ -195,19 +195,6 @@ inline char wgl_cmp_src[2000]=
 "}"
 "}";
 
-Vertex nvertices[]={
-{-1.0f,-1.0f,1.0f,1.0f},
-{1.0f,-1.0f,1.0f,1.0f},
-{1.0f,1.0f,1.0f,1.0f},
-{-1.0f,1.0f,1.0f,1.0f},
-{-1.0f,-1.0f,-1.0f,1.0f},
-{1.0f,-1.0f,-1.0f,1.0f},
-{1.0f,1.0f,-1.0f,1.0f},
-{-1.0f,1.0f,1.0f,1.0f}
-};
-
-uint16_t indices[35]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
-
 const char * vertexShader =
 "@vertex\n"
 "fn main(@location(0) position: vec4<f32>) -> @builtin(position) vec4<f32> {\n"
@@ -344,6 +331,19 @@ Vertex vertices[]={
 {1.0f,-1.0f,0.0f,1.0f},
 {-1.0f,-1.0f,0.0f,1.0f}
 };
+
+Vertex nvertices[]={
+{-1.0f,-1.0f,1.0f,1.0f},
+{1.0f,-1.0f,1.0f,1.0f},
+{1.0f,1.0f,1.0f,1.0f},
+{-1.0f,1.0f,1.0f,1.0f},
+{-1.0f,-1.0f,-1.0f,1.0f},
+{1.0f,-1.0f,-1.0f,1.0f},
+{1.0f,1.0f,-1.0f,1.0f},
+{-1.0f,1.0f,1.0f,1.0f}
+};
+
+uint16_t indices[35]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
