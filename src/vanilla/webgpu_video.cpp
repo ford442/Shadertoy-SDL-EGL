@@ -317,7 +317,7 @@ if(stat!=0){
 fclose(file2);
 return nullptr;
 }
-result2=static_cast<uint8_t *>(malloc((length+1)*sizeof(uint8_t)*4));
+result2=static_cast<uint8_t *>(malloc((length+1)*sizeof(uint8_t)));
 if(result2){
 size_t actual_length=fread(result2,sizeof(uint8_t),length,file2);
 result[actual_length++]={'\0'};
@@ -707,16 +707,16 @@ let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
 setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
-var pixelData=new Uint8Array(imageData.data.buffer);
-const rgbaData=new Uint8Array(imageData.data.buffer,0,imageData.width*imageData.height*4);
-const rgbaView=new Uint8Array(rgbaData.buffer,0,imageData.width*4,imageData.width*4);
-console.log(pixelData.length);
+var pixelData=new Uint8ClampedArray(imageData.data.buffer);
+// const rgbaData=new Uint8Array(imageData.data.buffer,0,imageData.width*imageData.height*4);
+// const rgbaView=new Uint8Array(rgbaData.buffer,0,imageData.width*4,imageData.width*4);
+// console.log(pixelData.length);
 // var heapArray=new Uint8Array(H);
-FS.writeFile('/video/frame.gl',pixelData);
+FS.writeFile('/video/frame.gl',pixelData,'w+');
 
 // heapArray.set(pixelData);
 // Module.ccall("frm",null,["Number"],[0]);
-},50);
+},16.666);
 }
   
 function normalResStart(){
