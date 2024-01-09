@@ -1,5 +1,32 @@
 #include "../../include/video/video_jebus.hpp"
 
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <cstdarg>
+#include <cmath>
+#include <cstdio>
+#include <cstdint>
+#include <cstdlib>
+#include <ctime>
+#include <chrono>
+#include <unistd.h>
+#include <SDL2/SDL.h>
+
+#define GL_GLEXT_PROTOTYPES 1
+#define GL_FRAGMENT_PRECISION_HIGH 1
+#define GL3_PROTOTYPES 1
+
+#include <GLES3/gl3.h>
+// #include <GLES3/gl31.h>
+// #include <GLES3/gl32.h>
+#include <GLES3/gl3platform.h>
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+#include <EGL/eglplatform.h>
+#include <GL/gl.h>
+#include <GL/glext.h>
+
 void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
 float max=0.0f;
 float min=1.0f;
@@ -44,8 +71,8 @@ extern "C" {
 EM_JS(void,ma,(),{
 "use strict";
 const pnnl=document.body;
-var vv=document.getElementById("mv");
-var intervalBackward;
+let vv=document.getElementById("mv");
+let intervalBackward;
 
 function back(){
 intervalBackward=setInterval(function(){
@@ -57,7 +84,7 @@ vv.currentTime+=-(0.008);
 },16.6);
 };
 
-var intervalForward;
+let intervalForward;
 
 function forward(){
 intervalForward=setInterval(function(){
@@ -75,11 +102,11 @@ f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
-vv.currentTime+=-(0.0166);
+vv.currentTime+=-0.016;
 }else{
 f=false;
 }}else if(vv.currentTime<b){
-vv.currentTime+=(0.0166);
+vv.currentTime+=0.016;
 }else{
 f=true;
 }
@@ -128,6 +155,10 @@ let la=h$*h$*4;
 let pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
 let sz=(h$*h$)/8;
+
+let blank$=Math.max((((w$-h$)*0)/2),0);
+let nblank$=Math.max((((h$-w$)*0)/2),0);
+
 var avag=0.750;
 var min=1.0;
 var max=0.0;
@@ -138,6 +169,7 @@ const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{colorType:'float32',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:true,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 // contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+/*
 // contx.getExtension('WEBGL_compatibility'); // limits to WebGL 1.0
 contx.getExtension('ARB_robust_buffer_access_behavior');
 contx.getExtension('ARB_ES3_compatibility');
@@ -323,6 +355,8 @@ contx.getExtension('EGL_EXT_request_priority');
 contx.getExtension('EGL_EXT_create_surface_from_window');
 contx.getExtension('EGL_EXT_surface_attachment');
 contx.getExtension('EXT_texture_storage');
+*/
+
 // contx.disable(gl.DITHER);
 // contx.drawingBufferColorMetadata={mode:'extended'};
 // contx.drawingBufferColorSpace='display-p3';
@@ -393,8 +427,8 @@ this.color(p[0],p[1],p[2],aveg);
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
-var blank$=Math.max((((w$-h$)*0)/2),0);
-var nblank$=Math.max((((h$-w$)*0)/2),0);
+blank$=Math.max((((w$-h$)*0)/2),0);
+nblank$=Math.max((((h$-w$)*0)/2),0);
 la=h$*h$*4;
 sz=(h$*h$)/8;
 pointa=77*la;
@@ -418,8 +452,8 @@ eval("$"+j+".set($$1);");
 var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
-var blank$=Math.max((((w$-h$)*0)/2),0);
-var nblank$=Math.max((((h$-w$)*0)/2),0);
+blank$=Math.max((((w$-h$)*0)/2),0);
+nblank$=Math.max((((h$-w$)*0)/2),0);
 la=h$*h$*4;
 sz=(h$*h$)/8;
 pointa=77*la;
@@ -464,19 +498,6 @@ T=true;
 })
 
 }
-
-#include <iostream>
-#include <algorithm>
-#include <cstring>
-#include <cstdarg>
-#include <cmath>
-#include <cstdio>
-#include <cstdint>
-#include <cstdlib>
-#include <ctime>
-#include <chrono>
-#include <unistd.h>
-#include <SDL2/SDL.h>
 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 static const char8_t *read_file(const char *filename);
@@ -545,19 +566,6 @@ return;
 
 }
 
-#define GL_GLEXT_PROTOTYPES 1
-#define GL_FRAGMENT_PRECISION_HIGH 1
-#define GL3_PROTOTYPES 1
-
-#include <GLES3/gl3.h>
-// #include <GLES3/gl31.h>
-// #include <GLES3/gl32.h>
-#include <GLES3/gl3platform.h>
-#include <EGL/egl.h>
-#include <EGL/eglext.h>
-#include <EGL/eglplatform.h>
-#include <GL/gl.h>
-#include <GL/glext.h>
 
 GLfloat x;
 GLfloat y;
