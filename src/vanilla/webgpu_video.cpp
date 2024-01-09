@@ -712,7 +712,7 @@ var pixelData=new Uint8ClampedArray(imageData.data.buffer);
 // const rgbaView=new Uint8Array(rgbaData.buffer,0,imageData.width*4,imageData.width*4);
 // console.log(pixelData.length);
 // var heapArray=new Uint8Array(H);
-FS.writeFile('/video/frame.gl',pixelData,'w+');
+FS.writeFile('/video/frame.gl',pixelData);
 
 // heapArray.set(pixelData);
 // Module.ccall("frm",null,["Number"],[0]);
