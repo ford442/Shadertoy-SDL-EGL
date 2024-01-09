@@ -5,6 +5,7 @@
 WGpuVertexAttribute vertAtt={};
 WGpuVertexBufferLayout vertBufLayout={};
 WGpuBufferDescriptor bufferDescriptor_vertex={};
+WGpuBufferDescriptor bufferDescriptor_indice={};
 WGpuBuffer vertex_Buffer;
 WGpuBuffer indice_Buffer;
 WGpuBufferBindingLayout bufferBindingLayoutV={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
