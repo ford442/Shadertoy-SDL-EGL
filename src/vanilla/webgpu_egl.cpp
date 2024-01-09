@@ -5,9 +5,7 @@
 WGpuVertexAttribute vertAtt={};
 WGpuVertexBufferLayout vertBufLayout={};
 WGpuBufferDescriptor bufferDescriptor_vertex={};
-WGpuBufferDescriptor bufferDescriptor_indice={};
 WGpuBuffer vertex_Buffer;
-WGpuBuffer indice_Buffer;
 WGpuBufferBindingLayout bufferBindingLayoutV={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 WGpuShaderModuleCompilationHint fragHint={};
 WGpuTextureView depthTextureView;
@@ -347,19 +345,6 @@ Vertex vertices[]={
 {-1.0f,-1.0f,0.0f,1.0f}
 };
 
-Vertex nvertices[]={
-{-1.0f,-1.0f,1.0f,1.0f},
-{1.0f,-1.0f,1.0f,1.0f},
-{1.0f,1.0f,1.0f,1.0f},
-{-1.0f,1.0f,1.0f,1.0f},
-{-1.0f,-1.0f,-1.0f,1.0f},
-{1.0f,-1.0f,-1.0f,1.0f},
-{1.0f,1.0f,-1.0f,1.0f},
-{-1.0f,1.0f,1.0f,1.0f}
-};
-
-uint16_t indices[35]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
-
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
@@ -548,11 +533,9 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(1,1),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_uni.at(2,2),sizeof(uint64_t));
-wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(3,3),0,sizeof(vertices));
-// wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT16,0,sizeof(indices));
+wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
-//   wgpu_render_pass_encoder_draw_indexed(wrpe.at(0,0),35,1,0,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
@@ -563,11 +546,9 @@ wce.at(1,1)=wceB;
 wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
-wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(1,1),0,wb.at(3,3),0,sizeof(vertices));
-// wgpu_render_pass_encoder_set_index_buffer(wrpe.at(1,1),wb.at(4,4),WGPU_INDEX_FORMAT_UINT16,0,sizeof(indices));
+wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
-  //  wgpu_render_pass_encoder_draw_indexed(wrpe.at(1,1),35,1,0,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(1,1));
 wcb.at(1,1)=wgpu_command_encoder_finish(wce.at(1,1));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(1,1));
@@ -633,6 +614,7 @@ bindGroupLayoutEntries[2].binding=3;
 bindGroupLayoutEntries[2].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[2].type=1;
 bindGroupLayoutEntries[2].layout.buffer=wbbl.at(1,1);
+  
 bindGroupLayoutEntries[3].binding=2;
 bindGroupLayoutEntries[3].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[3].type=4;
@@ -676,6 +658,7 @@ mms.at(0,1)=0.5*float_size.at(0,0);
 mms.at(1,0)=0.5*float_size.at(0,0);
 mms.at(1,1)=0.5*float_size.at(0,0);
 // mms.at(1,1)=0.5*(mms2.at(0,1)-float_size.at(0,0));
+
 mms.at(2,0)=float_size.at(0,0)*0.5;
 mms.at(2,1)=(mms2.at(0,1)-float_size.at(0,0))*0.5;
   //  glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,1),mms.at(1,0));
@@ -706,7 +689,7 @@ config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 // config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_SRGB;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
-emscripten_get_element_css_size("canvas",&szh,&szw);
+// emscripten_get_element_css_size("canvas",&szh,&szw);
 emscripten_get_canvas_element_size("canvas",&szhI,&szwI);
 u64_siz.at(0,0)=szhI;
 sze.at(0,0)=szhI;
@@ -746,11 +729,8 @@ vs=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(0,0));
 wsm.at(0,0)=vs;
 fs=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(1,1));
 wsm.at(1,1)=fs;
-bufferDescriptor_vertex={sizeof(vertices),WGPU_BUFFER_USAGE_VERTEX|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+bufferDescriptor_vertex={sizeof(vertices),WGPU_BUFFER_USAGE_VERTEX|WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(3,3)=bufferDescriptor_vertex;
-bufferDescriptor_indice={sizeof(indices),WGPU_BUFFER_USAGE_INDEX|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
-wbd.at(4,4)=bufferDescriptor_indice;
-/*
 vertAtt.offset=0;
 vertAtt.shaderLocation=0;
 vertAtt.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
@@ -763,9 +743,6 @@ bufferBindingLayoutV.type=WGPU_BUFFER_BINDING_TYPE_STORAGE;
 bufferBindingLayoutV.hasDynamicOffset=0,
 bufferBindingLayoutV.minBindingSize=sizeof(vertices);
 wbbl.at(1,1)=bufferBindingLayoutV;
-*/
-indice_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
-wb.at(4,4)=indice_Buffer;
 vertex_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 wb.at(3,3)=vertex_Buffer;
 depthState={};
@@ -810,9 +787,9 @@ wfs.at(1,1)=fragState;
 iChannel0SamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 iChannel0SamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 iChannel0SamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
-iChannel0SamplerDescriptor.magFilter=WGPU_FILTER_MODE_NEAREST;
-iChannel0SamplerDescriptor.minFilter=WGPU_FILTER_MODE_NEAREST;
-iChannel0SamplerDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_NEAREST;
+iChannel0SamplerDescriptor.magFilter=WGPU_FILTER_MODE_LINEAR;
+iChannel0SamplerDescriptor.minFilter=WGPU_FILTER_MODE_LINEAR;
+iChannel0SamplerDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_LINEAR;
 iChannel0SamplerDescriptor.lodMinClamp=0;
 iChannel0SamplerDescriptor.lodMaxClamp=32;
 // iChannel0SamplerDescriptor.compare;  // default = WGPU_COMPARE_FUNCTION_INVALID (not used)
@@ -1020,7 +997,6 @@ wbge.at(0,0)=bindgroup_entries;
 // wrbe.at(0,0)=renderBundleEncoder;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,vertices,sizeof(vertices));
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(4,4),0,indices,sizeof(indices));
 wgpu_queue_write_buffer(wq.at(0,0),WGPU_Buffers.at(1,1,1),0,vertices,sizeof(vertices));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
