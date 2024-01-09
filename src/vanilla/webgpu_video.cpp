@@ -698,7 +698,7 @@ let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
 let cnvb=document.getElementById('canvas');
 // const H=Module.HEAPU8.buffer;
-const gl2=cnv.getContext('2d',{willReadFrequently:true});
+const gl2=cnv.getContext('2d',{willReadFrequently:true,alpha:true});
 gl2.drawImage(vv,0,0);
 let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
 setInterval(function(){
