@@ -1020,8 +1020,7 @@ on.at(0,0)=1;
 }
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
-int sizzA;
-int sizzB;
+double sizzA,sizzB;
 emscripten_get_element_css_size("canvas",&sizzB,&sizzA);
 EGLint numSamples;
 EGLint numSamplesNV;
