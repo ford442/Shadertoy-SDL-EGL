@@ -155,10 +155,8 @@ let la=h$*h$*4;
 let pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
 let sz=(h$*h$)/8;
-
 let blank$=Math.max((((w$-h$)*0)/2),0);
 let nblank$=Math.max((((h$-w$)*0)/2),0);
-
 var avag=0.750;
 var min=1.0;
 var max=0.0;
@@ -169,7 +167,6 @@ const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{colorType:'float32',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:true,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 // contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-/*
 // contx.getExtension('WEBGL_compatibility'); // limits to WebGL 1.0
 contx.getExtension('ARB_robust_buffer_access_behavior');
 contx.getExtension('ARB_ES3_compatibility');
@@ -355,9 +352,8 @@ contx.getExtension('EGL_EXT_request_priority');
 contx.getExtension('EGL_EXT_create_surface_from_window');
 contx.getExtension('EGL_EXT_surface_attachment');
 contx.getExtension('EXT_texture_storage');
-*/
 
-// contx.disable(gl.DITHER);
+contx.disable(gl.DITHER);
 // contx.drawingBufferColorMetadata={mode:'extended'};
 // contx.drawingBufferColorSpace='display-p3';
 
