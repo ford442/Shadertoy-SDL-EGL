@@ -827,6 +827,7 @@ attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 // emscripten_webgl_enable_extension(ctx,"WEBGL_compatibility"); // limits to WebGL 1.0
+  /*
 emscripten_webgl_enable_extension(ctx,"ARB_robust_buffer_access_behavior");
 emscripten_webgl_enable_extension(ctx,"ARB_ES3_compatibility");
 emscripten_webgl_enable_extension(ctx,"GL_EXTENSIONS");
@@ -970,7 +971,6 @@ emscripten_webgl_enable_extension(ctx,"ARB_depth_texture");
 //  emscripten_webgl_enable_extension(ctx,"ARB_multisample"); // OLD 2001!!
 emscripten_webgl_enable_extension(ctx,"ARB_framebuffer_multisample");
 //  emscripten_webgl_enable_extension(ctx,"ARB_shader_objects"); // OLD 2004!!
-  
 emscripten_webgl_enable_extension(ctx,"OES_vertex_array_object");
 emscripten_webgl_enable_extension(ctx,"WEBGL_compressed_texture_s3tc");
 emscripten_webgl_enable_extension(ctx,"WEBGL_compressed_texture_etc");
@@ -1012,6 +1012,7 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_request_priority");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_create_surface_from_window");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_surface_attachment");
 emscripten_webgl_enable_extension(ctx,"EXT_texture_storage");
+*/
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 eglInitialize(display,&v3,&v0);
 eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
