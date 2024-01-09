@@ -365,7 +365,7 @@ const glslGoldR=`float GoldR(float a){return((a+0.831+0.831+0.831+((a+0.831)/2.0
 const glslGoldG=`float GoldG(float a){return((a+0.686+0.686+0.686+((a+0.686)/2.0))/5.0);}`;
 const glslGoldB=`float GoldB(float a){return((a+0.215+0.215+0.215+((a+0.215)/2.0))/5.0);}`;
 
-/// const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
+// const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/4.0);}`;
 // const glslAlphe=`float Alphe(float a,float b,float c,float d,float e,float f,float g){return((g+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/4.0);}`;
   
 const glslAlphe=`float Alphe(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
@@ -389,10 +389,9 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
-// var minuss=(av$-0.9)*(av$/(av$-0.9));
-// av$=av$-(minuss*(av$*0.01));
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
+
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $fmax=this.constants.fmax;
@@ -401,29 +400,14 @@ var $amax=this.constants.amax;
 var $amin=this.constants.amin;
 var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
+//   var alph=Alphe($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
 var alph=Alphe($amax,$amin,$aavg,p[3]);
-var Min=(4.0*(($fmax-($favg-$fmin))/2.0));
+var Min=4.0*(($amax-($favg-$amin))/2.0);
 var ouT=Math.max(Min,alph);
-  /* STONE
-  // send p[0],p[1],p[2],ouT => return grr
-  var rng=Stone(p[0],p[1],p[2],ouT);
-// var rng=ouT-(ouT*0.5);
-// var grr=(p[0]-rng)+(p[1]-rng)+(p[2]-rng);
-// grr=grr*4.0;
-// grr=Math.max(grr,0.0);
-    // send p[x],p[x] => return r/g/b
-var rr=Stoned(p[0],p[1],rng);
-var gg=Stoned(p[1],p[3],rng);
-var bb=Stoned(p[2],p[3],rng);
-// var rr=Math.min((p[0]+grr),1.0)-((p[1])*0.14);
-// var gg=Math.min((p[1]+grr),1.0)-((p[3]*0.3)*0.14);
-// var bb=Math.min((p[2]+grr),1.0)-((p[3]*0.3)*0.14);
-  var ss=(Ave(rr,gg,bb)-p[3]);
-  */
-  var aveg=Aveg(p[3],ouT);
+var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-// this.color(rr,gg,bb,aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
+
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
