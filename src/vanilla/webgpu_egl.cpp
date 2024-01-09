@@ -764,7 +764,7 @@ bufferBindingLayoutV.hasDynamicOffset=0,
 bufferBindingLayoutV.minBindingSize=sizeof(vertices);
 wbbl.at(1,1)=bufferBindingLayoutV;
 */
-vertex_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
+indice_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
 wb.at(4,4)=indice_Buffer;
 vertex_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 wb.at(3,3)=vertex_Buffer;
