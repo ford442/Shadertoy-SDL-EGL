@@ -219,9 +219,9 @@ const char * fragEntry="main_1";
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.wgsl");
 const char * FnmB=reinterpret_cast<const char *>("/shader/shader.wgsl");
 
-static char8_t * result=NULL;
-static char * results=NULL;
-static long int length=0;
+char8_t * result=NULL;
+char * results=NULL;
+long int length=0;
 
 static wq_tensor WGPU_Queue=wq_tensor{1,1,2};
 static wcb_tensor WGPU_CommandBuffer=wcb_tensor{1,1,3};
@@ -262,14 +262,12 @@ uint32_t OutputBufferBytes=64*4;
 uint32_t InputBufferUnits=64;
 uint32_t InputBufferBytes=64*4;
 uint64_t WGPU_InputRangeSize=OutputBufferBytes;
-
 const char * Entry="computeStuff";
 // uint32_t invocationCount=BufferMapSize/sizeof(int);
 // uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
 void * userDataB;
-
 WGpuTexture textureA;
 // WGpuAdapter adapter=0;
 // WGpuDevice device=0;
@@ -614,7 +612,6 @@ bindGroupLayoutEntries[2].binding=3;
 bindGroupLayoutEntries[2].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[2].type=1;
 bindGroupLayoutEntries[2].layout.buffer=wbbl.at(1,1);
-
   
 bindGroupLayoutEntries[3].binding=2;
 bindGroupLayoutEntries[3].visibility=WGPU_SHADER_STAGE_COMPUTE;
@@ -696,10 +693,10 @@ u64_siz.at(0,0)=szhI;
 sze.at(0,0)=szhI;
 sze.at(0,1)=szhI;
 multiSamp={};
-multiSamp.count=1;
+multiSamp.count=4;
 multiSamp.mask=-1;
 multiSamp2={};
-multiSamp2.count=1; // 4;
+multiSamp2.count=4; // 4;
 multiSamp2.mask=-1;
 wms.at(1,1)=multiSamp2;
 colorTarget.format=wtf.at(0,0);
@@ -922,7 +919,7 @@ depthTextureDescriptor.width=sze.at(0,0);
 depthTextureDescriptor.height=sze.at(0,0); // default = 1;
 depthTextureDescriptor.depthOrArrayLayers=1;
 depthTextureDescriptor.mipLevelCount=1;
-depthTextureDescriptor.sampleCount=1; // 4;
+depthTextureDescriptor.sampleCount=4; // 4;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthViewFormats[0]={wtf.at(2,2)};
 depthTextureDescriptor.viewFormats=&depthViewFormats[0];
@@ -936,7 +933,7 @@ colorTextureDescriptor.width=sze.at(0,0);
 colorTextureDescriptor.height=sze.at(0,0); // default = 1;
 colorTextureDescriptor.depthOrArrayLayers=1;
 colorTextureDescriptor.mipLevelCount=1;
-colorTextureDescriptor.sampleCount=1; // 4;
+colorTextureDescriptor.sampleCount=4; // 4;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 colorViewFormats[0]={wtf.at(4,4)};
 colorTextureDescriptor.viewFormats=&colorViewFormats[0];
@@ -955,8 +952,8 @@ highbitTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 colorViewFormats[0]={WGPU_TEXTURE_FORMAT_RGBA32FLOAT};
 highbitTextureDescriptor.viewFormats=&colorViewFormats[0];
 wtd.at(2,2)=highbitTextureDescriptor;
-__128bit_Texture__=wgpu_device_create_texture(wd.at(0,0),&wtd.at(2,2));
-wt.at(2,2)=__128bit_Texture__;
+// __128bit_Texture__=wgpu_device_create_texture(wd.at(0,0),&wtd.at(2,2));
+// wt.at(2,2)=__128bit_Texture__;
 bindgroup_entries[0]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_entries[0].binding=0;
 bindgroup_entries[0].resource=wb.at(0,0);
@@ -999,7 +996,6 @@ wbge.at(0,0)=bindgroup_entries;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,vertices,sizeof(vertices));
 wgpu_queue_write_buffer(wq.at(0,0),WGPU_Buffers.at(1,1,1),0,vertices,sizeof(vertices));
-
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),3);
