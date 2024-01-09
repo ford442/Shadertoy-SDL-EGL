@@ -1021,13 +1021,26 @@ on.at(0,0)=1;
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
 
+EGLint numSamples;
+EGLint numSamplesNV;
+EGLint numBuffersNV;
+EGLint numGreen;
+EGLint numRed;
+EGLint numBlue;
+EGLint numAlpha;
+EGLint numDepth;
+EGLint numStencil;
+EGLint numBuffer;
+EGLint numMBuffers;
+EGLint colorSpace;
+EGLint colorFormat;
 EGLDisplay display;
 EGLSurface surface;
 EGLContext contextegl;
 EGLConfig eglconfig=NULL;
 EGLint config_size,major,minor,atb_pos;
-Size=(int)hi;
-S=(GLfloat)Size;
+int Size=(int)hi;
+float S=(float)Size;
 display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
 PFNEGLGETCONFIGATTRIBPROC eglGetConfigAttribHI = reinterpret_cast<PFNEGLGETCONFIGATTRIBPROC>(eglGetProcAddress("eglGetConfigAttribHI"));
 eglInitialize(display,&major,&minor);
