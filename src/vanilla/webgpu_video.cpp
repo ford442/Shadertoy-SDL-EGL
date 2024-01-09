@@ -703,19 +703,15 @@ let cnvb=document.getElementById('canvas');
 // const H=Module.HEAPU8.buffer;
 const gl2=cnv.getContext('2d',{willReadFrequently:true,alpha:true});
 gl2.drawImage(vv,0,0);
-let imageData=gl2.getImageData(0,0,cnv.width,cnv.height);
+let image=gl2.getImageData(0,0,cnv.width,cnv.height);
+let imageData=image.data;
+let pixelData=new Uint8ClampedArray(imageData);
 setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
-var pixelData=new Uint8ClampedArray(imageData.data.buffer);
-// const rgbaData=new Uint8Array(imageData.data.buffer,0,imageData.width*imageData.height*4);
-// const rgbaView=new Uint8Array(rgbaData.buffer,0,imageData.width*4,imageData.width*4);
-// console.log(pixelData.length);
-// var heapArray=new Uint8Array(H);
+imageData=image.data;
+pixelData=new Uint8ClampedArray(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
-
-// heapArray.set(pixelData);
-// Module.ccall("frm",null,["Number"],[0]);
 },16.666);
 }
   
