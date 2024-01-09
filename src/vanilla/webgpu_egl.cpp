@@ -1162,6 +1162,8 @@ Module.ccall('str',{async:true});
 setTimeout(function(){
 document.querySelector('#circle').width=window.innerWidth;
 document.querySelector('#circle').height=window.innerHeight;
+document.querySelector('#canvas').width=window.innerHeight;
+document.querySelector('#canvas').height=window.innerHeight;
 document.querySelector('#scanvas').width=window.innerHeight;
 document.querySelector('#scanvas').height=window.innerHeight;
 document.querySelector('#di').click();
