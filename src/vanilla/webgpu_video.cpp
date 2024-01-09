@@ -172,7 +172,7 @@ const char * frag_body=
 "@group(0) @binding(2) var myTexture : texture_2d <f32>;\n"
 "@fragment\n"
 "fn main(@location(0) fragUV : vec2<f32>) -> @location(0) vec4<f32> {\n"
-"var sample1 = textureSample( tex, tex_sampler, uv );"
+"var sample1 = textureSample( myTexture, mySampler, fragUV );"
 "var outColor: vec4<f32> = sample1;"
 "return vec4<f32>(outColor);"
 "}\n";
@@ -611,7 +611,7 @@ FS.mkdir('/video');
 
 async function videoFrames(){
 let SiZ=parseInt(window.innerHeight);
-let dSiz=SiZ*SiZ*4;
+  
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
 let cnvb=document.getElementById('canvas');
@@ -625,8 +625,12 @@ setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
 imageData=image.data;
+
+  
 pixelData=new Uint8ClampedArray(imageData);
+  
 FS.writeFile('/video/frame.gl',pixelData);
+  
 },16.666);
 }
   
