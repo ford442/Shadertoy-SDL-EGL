@@ -103,6 +103,18 @@ video_resurection_webgpu:
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 --extern-post-js js/pagec_webgpu.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js --extern-pre-js js/gpujsx.js --memory-init-file 0 --closure 0
 
+video_resurection_webgpu2:
+	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
+	 em++ lib/lib_webgpu.cpp $(STDS) -static
+	 emcc src/video/video_jebus2.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++20 $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 emcc video_jebus.o -fPIC -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o $(BIN_NAME)-res.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) -I/content/RAMDRIVE2/b3/include/vanilla/ -sFORCE_FILESYSTEM=1 \
+	 -sINITIAL_MEMORY=2048mb -sALLOW_MEMORY_GROWTH=0 -sUSE_SDL=2 -std=c++20 \
+	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --extern-pre-js js/fluid.js --extern-pre-js js/flui.js --extern-pre-js js/setUp.js --extern-pre-js js/startUp.js -lmath.js -lhtml5.js -lint53.js \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 --extern-post-js js/pagec_webgpu.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js --extern-pre-js js/gpujsx.js --memory-init-file 0 --closure 0
+
 b3_video_google_llvm:
 	 em++ src/video/main_google_street.cpp -c -std=c++20 -fno-math-errno -O0 \
 	 -msimd128 -mavx -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 \
