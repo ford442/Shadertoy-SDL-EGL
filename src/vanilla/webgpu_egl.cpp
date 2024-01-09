@@ -1004,7 +1004,7 @@ wbge.at(0,0)=bindgroup_entries;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,vertices,sizeof(vertices));
 wgpu_queue_write_buffer(wq.at(0,0),WGPU_Buffers.at(1,1,1),0,vertices,sizeof(vertices));
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(4,4),0,indices,sizeof(indices));
+// wgpu_queue_write_buffer(wq.at(0,0),wb.at(4,4),0,indices,sizeof(indices));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),3);
