@@ -108,6 +108,35 @@ static wsd_tensor wsd=wsd_tensor{2,2};
 static ws_tensor ws=ws_tensor{2,2};
 static v_tensor imgData=v_tensor{2,2};
 
+const char * vertexShadera1=
+"struct VertexOutput{\n"
+"@builtin(position) Position : vec4<f32>,\n"
+"@location(0) fragUV : vec2<f32>\n"
+"};\n"
+"@vertex\n"
+"fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
+"const pos=array<vec2<f32>,6>(\n"
+"vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(-1.0f,1.0f),\n"
+"vec2<f32>(-1.0f,-1.0f),\n"
+"vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(1.0f,-1.0f),\n"
+"vec2<f32>(-1.0f,-1.0f)\n"
+");\n"
+"const uv=array<vec2<f32>,6>(\n"
+"vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(-1.0f,1.0f),\n"
+"vec2<f32>(-1.0f,-1.0f),\n"
+"vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(1.0f,-1.0f),\n"
+"vec2<f32>(-1.0f,-1.0f)\n"
+");\n"
+"var output : VertexOutput;\n"
+"output.Position=vec4(pos[VertexIndex],0.0f,1.0f);\n"
+"output.fragUV=uv[VertexIndex];\n"
+"return output;\n"
+"}\n";
+
 const char * vertexShadera=
 "struct VertexOutput{\n"
 "@builtin(position) Position : vec4<f32>,\n"
