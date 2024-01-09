@@ -317,7 +317,7 @@ if(stat!=0){
 fclose(file2);
 return nullptr;
 }
-result2=static_cast<uint8_t *>(malloc((length+1)*sizeof(uint8_t)));
+result2=static_cast<uint8_t *>(malloc((length+1)*sizeof(uint8_t)*4));
 if(result2){
 size_t actual_length=fread(result2,sizeof(uint8_t),length,file2);
 result[actual_length++]={'\0'};
