@@ -108,23 +108,6 @@ static wsd_tensor wsd=wsd_tensor{2,2};
 static ws_tensor ws=ws_tensor{2,2};
 static v_tensor imgData=v_tensor{2,2};
 
-/*
-const char *vertexShader =
-"@vertex\n"
-"fn main(@builtin(vertex_index) vertexIndex : u32) -> @builtin(position) vec4<f32> {\n"
-"var pos = array<vec2<f32>, 6>(\n"
-"vec2<f32>(1.0f, 1.0f),\n"
-"vec2<f32>(1.0f, -1.0f),\n"
-"vec2<f32>(-1.0f, -1.0f),\n"
-"vec2<f32>(-1.0f, 1.0f),\n"
-"vec2<f32>(1.0f, 1.0f),\n"
-"vec2<f32>(-1.0f, -1.0f)\n"
-");\n"
-"return vec4<f32>(pos[vertexIndex], 0.0f, 1.0f);\n"
-"}\n";
-*/
-
-
 const char * vertexShadera=
 "struct VertexOutput{\n"
 "@builtin(position) Position : vec4<f32>,\n"
@@ -151,106 +134,6 @@ const char * vertexShadera=
 "var output : VertexOutput;\n"
 "output.Position=vec4(pos[VertexIndex],0.0f,1.0f);\n"
 "output.fragUV=uv[VertexIndex];\n"
-"return output;\n"
-"}\n";
-
-
-const char * vertexShaderb=
-"struct VertexOutput{\n"
-"@builtin(position) Position : vec4<f32>,\n"
-"@location(0) fragUV : vec2<f32>\n"
-"};\n"
-"@vertex\n"
-"fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
-"const pos = array<vec4<f32>, 36>(\n"
-"vec4<f32>( 1.0f, -1.0f, 1.0f, 1.0f  ),\n"
- "vec4<f32>(   -1.0f, -1.0f, 1.0f, 1.0f ),\n"
- "vec4<f32>(   -1.0f, -1.0f, -1.0f, 1.0f ),\n"
- "vec4<f32>(   1.0f, -1.0f, -1.0f, 1.0f ),\n"
- "vec4<f32>(   1.0f, -1.0f, 1.0f, 1.0f  ),\n"
- "vec4<f32>(   -1.0f, -1.0f, -1.0f, 1.0f ),\n"
-
- "vec4<f32>(   1.0f, 1.0f, 1.0f, 1.0f    ),\n"
- "vec4<f32>(   1.0f, -1.0f, 1.0f, 1.0f  ),\n"
-  "vec4<f32>(  1.0f, -1.0f, -1.0f, 1.0f ),\n"
- "vec4<f32>(   1.0f, 1.0f, -1.0f, 1.0f ),\n"
- "vec4<f32>(   1.0f, 1.0f, 1.0f, 1.0f  ),\n"
- "vec4<f32>(   1.0f, -1.0f, -1.0f, 1.0f ),\n"
-
- "vec4<f32>(   -1.0f, 1.0f, 1.0f, 1.0f  ),\n"
- "vec4<f32>(   1.0f, 1.0f, 1.0f, 1.0f  ),\n"
- "vec4<f32>(   1.0f, 1.0f, -1.0f, 1.0f  ),\n"
- "vec4<f32>(   -1.0f, 1.0f, -1.0f, 1.0f ),\n"
- "vec4<f32>(   -1.0f, 1.0f, 1.0f, 1.0f  ),\n"
- "vec4<f32>(   1.0f, 1.0f, -1.0f, 1.0f  ),\n"
-
- "vec4<f32>(   -1.0f, -1.0f, 1.0f, 1.0f ),\n"
- "vec4<f32>(   -1.0f, 1.0f, 1.0f, 1.0f  ),\n"
- "vec4<f32>(   -1.0f, 1.0f, -1.0f, 1.0f ),\n"
-  "vec4<f32>(  -1.0f, -1.0f, -1.0f, 1.0f ),\n"
-"vec4<f32>(    -1.0f, -1.0f, 1.0f, 1.0f ),\n"
-  "vec4<f32>(  -1.0f, 1.0f, -1.0f, 1.0f ),\n"
-
- "vec4<f32>(   1.0f, 1.0f, 1.0f, 1.0f   ),\n"
- "vec4<f32>(   -1.0f, 1.0f, 1.0f, 1.0f ),\n"
- "vec4<f32>(   -1.0f, -1.0f, 1.0f, 1.0f ),\n"
- "vec4<f32>(   -1.0f, -1.0f, 1.0f, 1.0f ),\n"
- "vec4<f32>(   1.0f, -1.0f, 1.0f, 1.0f  ),\n"
- "vec4<f32>(   1.0f, 1.0f, 1.0f, 1.0f  ),\n"
-
- "vec4<f32>(   1.0f, -1.0f, -1.0f, 1.0f ),\n"
- "vec4<f32>(   -1.0f, -1.0f, -1.0f, 1.0f),\n"
- "vec4<f32>(   -1.0f, 1.0f, -1.0f, 1.0f ),\n"
- "vec4<f32>(   1.0f, 1.0f, -1.0f, 1.0f   ),\n"
-"vec4<f32>(    1.0f, -1.0f, -1.0f, 1.0f ),\n"
- "vec4<f32>(   -1.0f, 1.0f, -1.0f, 1.0f )\n"
-");\n"
-"const uv = array<vec2<f32>, 36>(\n"
-"vec2( 1.0f, 1.0f),\n"
-"vec2(     0.0f, 1.0f),\n"
-"vec2(     0.0f, 0.0f),\n"
-"vec2(   1.0f, 0.0f),\n"
-"vec2(     1.0f, 1.0f),\n"
-"vec2(    0.0f, 0.0f),\n"
-
- "vec2(  1.0f, 1.0f),\n"
- "vec2(    0.0f, 1.0f),\n"
- "vec2(    0.0f, 0.0f),\n"
- "vec2(    1.0f, 0.0f),\n"
- "vec2(    1.0f, 1.0f),\n"
-"vec2(    0.0f, 0.0f),\n"
-
-"vec2(    1.0f, 1.0f),\n"
- "vec2(  0.0f, 1.0f),\n"
- "vec2(   0.0f, 0.0f),\n"
-"vec2(   1.0f, 0.0f),\n"
-"vec2(   1.0f, 1.0f),\n"
-"vec2(    0.0f, 0.0f),\n"
-
- "vec2(    1.0f, 1.0f),\n"
-"vec2(     0.0f, 1.0f),\n"
-"vec2(     0.0f, 0.0f),\n"
-"vec2(     1.0f, 0.0f),\n"
-"vec2(    1.0f, 1.0f),\n"
-"vec2(   0.0f, 0.0f),\n"
-
- "vec2(   1.0f, 1.0f),\n"
- "vec2(  0.0f, 1.0f),\n"
- "vec2( 0.0f, 0.0f),\n"
- "vec2(    0.0f, 0.0f),\n"
- "vec2(   1.0f, 0.0f),\n"
- "vec2(   1.0f, 1.0f),\n"
-
-"vec2(     1.0f, 1.0f),\n"
-"vec2(    0.0f, 1.0f),\n"
-"vec2(    0.0f, 0.0f),\n"
-"vec2(   1.0f, 0.0f),\n"
- "vec2(  1.0f, 1.0f),\n"
- "vec2(    0.0f, 0.0f)\n"
-");\n"
-"var output : VertexOutput;\n"
-"output.Position = vec4(pos[VertexIndex]);\n"
-"output.fragUV = uv[VertexIndex];\n"
 "return output;\n"
 "}\n";
 
@@ -298,9 +181,9 @@ return nullptr;
 
 const char * Fnm2=reinterpret_cast<const char *>("/video/frame.gl");
 
-static uint8_t * result2=NULL;
-static uint8_t * results2=NULL;
-static long int length2=0;
+uint8_t * result2=NULL;
+uint8_t * results2=NULL;
+long int length2=0;
 
 void * rd_frm(const char * Fnm2){
 FILE * file2=fopen(Fnm,"r");
@@ -375,8 +258,8 @@ wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
-wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
 wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),fram,sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
