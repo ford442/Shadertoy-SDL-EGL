@@ -323,7 +323,7 @@ struct Vertex{
 float position[4];
 };
 
-Vertex vertices[]={
+Vertex nvertices[]={
 {1.0f,1.0f,0.0f,1.0f},
 {-1.0f,1.0f,0.0f,1.0f},
 {-1.0f,-1.0f,0.0f,1.0f},
@@ -332,7 +332,7 @@ Vertex vertices[]={
 {-1.0f,-1.0f,0.0f,1.0f}
 };
 
-Vertex nvertices[]={
+Vertex vertices[]={
 {-1.0f,-1.0f,1.0f,1.0f},
 {1.0f,-1.0f,1.0f,1.0f},
 {1.0f,1.0f,1.0f,1.0f},
@@ -536,8 +536,8 @@ wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_uni.at(2,2),sizeof(uint64_t
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(3,3),0,sizeof(vertices));
 wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT16,0,36*sizeof(uint16_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
-wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
-  //   wgpu_render_pass_encoder_draw_indexed(wrpe.at(0,0),36,1,0,0,0);
+  //  wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
+ wgpu_render_pass_encoder_draw_indexed(wrpe.at(0,0),36,1,0,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
@@ -551,8 +551,8 @@ wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(1,1),0,wb.at(3,3),0,sizeof(vertices));
 wgpu_render_pass_encoder_set_index_buffer(wrpe.at(1,1),wb.at(4,4),WGPU_INDEX_FORMAT_UINT16,0,36*sizeof(uint16_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
-wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
-  //  wgpu_render_pass_encoder_draw_indexed(wrpe.at(0,0),36,1,0,0,0);
+  // wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
+ wgpu_render_pass_encoder_draw_indexed(wrpe.at(0,0),36,1,0,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(1,1));
 wcb.at(1,1)=wgpu_command_encoder_finish(wce.at(1,1));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(1,1));
