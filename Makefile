@@ -86,7 +86,7 @@ b3_compute:
 b3_compute_egl:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/webgpu_egl.cpp -fchar8_t -std=c++14 -ffast-math -ffp-contract=off -mbulk-memory -matomics \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -O2 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -openmp-simd -pthread -D__EMSCRIPTEN__ $(LDFLAGS) -O2 -std=c++14 -fchar8_t --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-egl.js \
+	 em++ -lEGL -openmp-simd -pthread -D__EMSCRIPTEN__ $(LDFLAGS) -O2 -std=c++14 -fchar8_t --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-egl.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 -ffast-math -ffp-contract=off -mbulk-memory -matomics \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 -rtlib=compiler-rt \
 	 -sDEMANGLE_SUPPORT=0 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
