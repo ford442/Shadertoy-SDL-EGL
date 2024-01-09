@@ -596,7 +596,7 @@ let SiZ=parseInt(window.innerHeight);
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
 let cnvb=document.getElementById('canvas');
-// /*
+
 const context = cnvb.getContext("webgpu");
 const gpu = navigator.gpu;
 const format = gpu.getPreferredCanvasFormat();
@@ -609,13 +609,6 @@ format: "rgba8unorm",
 size: [SiZ, SiZ, 2],
 usage:GPUTextureUsage.COPY_DST|GPUTextureUsage.RENDER_ATTACHMENT|GPUTextureUsage.TEXTURE_BINDING,
 }); 
-
-device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[texture.size[0], texture.size[1], 2]);
-const imageData = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
-device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageData.buffer, imageData.byteOffset, [texture.size[0],texture.size[1], 2]);
-// */
-  
- /*
 const gl2=cnv.getContext('2d',{willReadFrequently:true,alpha:true});
 gl2.drawImage(vv,0,0);
 let image=gl2.getImageData(0,0,cnv.width,cnv.height);
@@ -625,13 +618,11 @@ setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
 imageData=image.data;
- */
-setInterval(function(){
-
 let pixelData=new Uint8ClampedArray(imageData);
-  
-FS.writeFile('/video/frame.gl',pixelData);
-  
+device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[texture.size[0], texture.size[1], 2]);
+const imageDataW = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
+device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageDataW.buffer, imageDataW.byteOffset, [texture.size[0],texture.size[1], 2]);
+FS.writeFile('/video/frame.gl',imageDataW);
 },16.666);
 }
   
