@@ -151,6 +151,7 @@ pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
 let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
+let S$=parseInt(document.getElementById("pmhig").innerHTML,10);
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
 let la=h$*h$*8;
@@ -392,7 +393,7 @@ let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
+}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([S$,S$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
@@ -408,7 +409,7 @@ var Min=4.0*(($amax-($favg-$amin))/2.0);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([S$,S$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
