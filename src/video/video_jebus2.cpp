@@ -1079,9 +1079,8 @@ glDisable(GL_DITHER);
   
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
-  emscripten_set_main_loop_timing(2,1);
-
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
+emscripten_set_main_loop_timing(2,1);
 return;
 }
 
