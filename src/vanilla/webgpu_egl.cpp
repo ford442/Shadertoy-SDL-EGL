@@ -1125,7 +1125,7 @@ surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglBindAPI(EGL_OPENGL_API);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_set_main_loop((void(*)())raf,0,0);
-emscripten_set_main_loop_timing(2,1);
+// emscripten_set_main_loop_timing(2,1);
 // emscripten_request_animation_frame_loop(raf,0);
 on.at(0,0)=1;
 }
