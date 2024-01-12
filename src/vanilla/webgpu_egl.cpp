@@ -4,7 +4,6 @@
 
 WGpuBufferDescriptor bufferDescriptor_indice={};
 WGpuBuffer indice_Buffer;
-
 WGpuVertexAttribute vertAtt={};
 WGpuVertexBufferLayout vertBufLayout={};
 WGpuBufferDescriptor bufferDescriptor_vertex={};
@@ -95,6 +94,7 @@ uint64_t tme;
 
 static i_tensor on=i_tensor{2,2};
 static i_tensor sze=i_tensor{2,2};
+static f_tensor sze_f=f_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
 static wrpe_tensor wrpe=wrpe_tensor{2,2};
 static wcb_tensor wcb=wcb_tensor{2,2};
@@ -535,7 +535,7 @@ wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(1,1),sizeof(uint64_t
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_uni.at(2,2),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(3,3),0,sizeof(vertices));
 wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT16,0,36*sizeof(uint16_t));
-wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
+wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
   //  wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
  wgpu_render_pass_encoder_draw_indexed(wrpe.at(0,0),36,1,0,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
@@ -550,7 +550,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(1,1),0,wb.at(3,3),0,sizeof(vertices));
 wgpu_render_pass_encoder_set_index_buffer(wrpe.at(1,1),wb.at(4,4),WGPU_INDEX_FORMAT_UINT16,0,36*sizeof(uint16_t));
-wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
+wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
   // wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
 wgpu_render_pass_encoder_draw_indexed(wrpe.at(1,1),36,1,0,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(1,1));
@@ -694,6 +694,7 @@ wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 // emscripten_get_element_css_size("canvas",&szh,&szw);
 emscripten_get_canvas_element_size("canvas",&szhI,&szwI);
 u64_siz.at(0,0)=szhI;
+szef.at(0,0)=float(szhI);
 sze.at(0,0)=szhI;
 sze.at(0,1)=szhI;
 multiSamp={};
@@ -1059,9 +1060,9 @@ eglGetConfigAttrib(display,eglconfig,EGL_COVERAGE_BUFFERS_NV,&numBuffersNV);
 eglGetConfigAttrib(display,eglconfig,EGL_GL_COLORSPACE,&colorSpace);
 eglGetConfigAttrib(display,eglconfig,EGL_COLOR_FORMAT_HI,&colorFormat);
 static EGLint ctx_att[]={
-EGL_CONTEXT_CLIENT_TYPE,EGL_OPENGL_API,
-EGL_CONTEXT_CLIENT_VERSION,3,
-EGL_CONTEXT_MAJOR_VERSION_KHR,3,
+EGL_CONTEXT_CLIENT_TYPE,EGL_OPENGL_ES_API,
+EGL_CONTEXT_CLIENT_VERSION,4,
+EGL_CONTEXT_MAJOR_VERSION_KHR,6,
 EGL_CONTEXT_MINOR_VERSION_KHR,0,
 // EGL_CONTEXT_FLAGS_KHR,EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE_BIT_KHR,
 EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
@@ -1088,7 +1089,7 @@ EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT
 EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,  // EGL 1.5 needed  (WASM cannot Window surface)
 // EGL_RENDERABLE_TYPE,EGL_NONE,
-// EGL_CONFORMANT,EGL_OPENGL_BIT,
+// EGL_CONFORMANT,EGL_OPENGL_ES_API,
 // EGL_CONFORMANT,EGL_NONE,
 //  EGL_CONFIG_CAVEAT,EGL_NONE,
 EGL_CONTEXT_OPENGL_ROBUST_ACCESS_EXT,EGL_TRUE,
@@ -1121,8 +1122,8 @@ EGL_NONE
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
-// eglBindAPI(EGL_OPENGL_ES_API);
-eglBindAPI(EGL_OPENGL_API);
+eglBindAPI(EGL_OPENGL_ES_API);
+// eglBindAPI(EGL_OPENGL_API);
 eglMakeCurrent(display,surface,surface,contextegl);
 emscripten_set_main_loop((void(*)())raf,0,0);
 // emscripten_set_main_loop_timing(2,1);
@@ -1131,7 +1132,6 @@ on.at(0,0)=1;
 }
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
-
 wa.at(0,0)=result;
 deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
 // deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8|WGPU_FEATURE_FLOAT32_FILTERABLE|WGPU_FEATURE_RG11B10UFLOAT_RENDERABLE;
