@@ -94,7 +94,7 @@ uint64_t tme;
 
 static i_tensor on=i_tensor{2,2};
 static i_tensor sze=i_tensor{2,2};
-static f_tensor sze_f=f_tensor{2,2};
+static f_tensor szef=f_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
 static wrpe_tensor wrpe=wrpe_tensor{2,2};
 static wcb_tensor wcb=wcb_tensor{2,2};
