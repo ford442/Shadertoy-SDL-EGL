@@ -1,4 +1,5 @@
 #include "../../include/vanilla/main_render.hpp"
+
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
 WGpuTextureView videoTextureView;
@@ -67,6 +68,7 @@ WGpuUniform wTime;
 uint64_t tme;
 
 static i_tensor sze=i_tensor{2,2};
+static f_tensor szef=f_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
 static wrpe_tensor wrpe=wrpe_tensor{2,2};
 static wcb_tensor wcb=wcb_tensor{2,2};
@@ -292,7 +294,7 @@ wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t
 wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),fram,sze.at(0,0)*sizeof(float),sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
-wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0f,1.0f);
+wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
