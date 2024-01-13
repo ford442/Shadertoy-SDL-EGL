@@ -343,7 +343,7 @@ Vertex vertices[]={
 {-1.0f,1.0f,1.0f,1.0f}
 };
 
-uint16_t indices[35]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
+uint32_t indices[35]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
@@ -534,7 +534,7 @@ wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(1,1),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_uni.at(2,2),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(3,3),0,sizeof(vertices));
-wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT16,0,36*sizeof(uint16_t));
+wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
   //  wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
  wgpu_render_pass_encoder_draw_indexed(wrpe.at(0,0),36,1,0,0,0);
@@ -549,7 +549,7 @@ wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(1,1),0,wb.at(3,3),0,sizeof(vertices));
-wgpu_render_pass_encoder_set_index_buffer(wrpe.at(1,1),wb.at(4,4),WGPU_INDEX_FORMAT_UINT16,0,36*sizeof(uint16_t));
+wgpu_render_pass_encoder_set_index_buffer(wrpe.at(1,1),wb.at(4,4),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
   // wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
 wgpu_render_pass_encoder_draw_indexed(wrpe.at(1,1),36,1,0,0,0);
@@ -748,7 +748,7 @@ bufferBindingLayoutV.minBindingSize=sizeof(vertices);
 wbbl.at(1,1)=bufferBindingLayoutV;
 vertex_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 wb.at(3,3)=vertex_Buffer;
-bufferDescriptor_indice={36*sizeof(uint16_t),WGPU_BUFFER_USAGE_INDEX|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+bufferDescriptor_indice={36*sizeof(uint32_t),WGPU_BUFFER_USAGE_INDEX|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(4,4)=bufferDescriptor_indice;
 indice_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
 wb.at(4,4)=indice_Buffer;
@@ -774,7 +774,7 @@ wvs.at(0,0)=vertState;
 priState={};
 priState.topology=WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP;
 // priState.stripIndexFormat=WGPU_INDEX_FORMAT_UINT32;
-priState.stripIndexFormat=WGPU_INDEX_FORMAT_UINT16;
+priState.stripIndexFormat=WGPU_INDEX_FORMAT_UINT32;
 priState.frontFace=WGPU_FRONT_FACE_CCW; // Defaults to WGPU_FRONT_FACE_CCW ('ccw')
 priState.cullMode=WGPU_CULL_MODE_NONE; // Defaults to WGPU_CULL_MODE_NONE ('none')
 priState.unclippedDepth=EM_FALSE; // defaults to EM_FALSE.
@@ -1005,7 +1005,7 @@ wbge.at(0,0)=bindgroup_entries;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,vertices,sizeof(vertices));
 wgpu_queue_write_buffer(wq.at(0,0),WGPU_Buffers.at(1,1,1),0,vertices,sizeof(vertices));
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(4,4),0,indices,36*sizeof(uint16_t));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(4,4),0,indices,36*sizeof(uint32_t));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),3);
