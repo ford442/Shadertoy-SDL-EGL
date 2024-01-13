@@ -618,7 +618,7 @@ let pixelData=new Uint8ClampedArray(imageData);
 setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
-imageData=image.data;
+imageData=image.data.buffer;
 pixelData=new Uint8ClampedArray(imageData);
 /*
 device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[texture.size[0], texture.size[1], 2]);
