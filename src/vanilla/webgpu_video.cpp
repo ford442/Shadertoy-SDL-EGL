@@ -574,7 +574,7 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 }
 
 EM_BOOL framm(uint16_t * em){
-js_data_pointer.at(0,0)=(uint8_t)em;
+js_data_pointer.at(0,0)=em;
 return EM_TRUE;
 }
 
