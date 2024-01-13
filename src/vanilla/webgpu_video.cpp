@@ -598,14 +598,13 @@ let SiZ=parseInt(window.innerHeight);
 let vv=document.getElementById('mv');
 let cnv=document.getElementById('bcanvas');
 let cnvb=document.getElementById('canvas');
-
 const context = cnvb.getContext("webgpu");
 const gpu = navigator.gpu;
 const format = gpu.getPreferredCanvasFormat();
 const adapter = await gpu.requestAdapter();
 const device = await adapter.requestDevice();
 context.configure({ device, format, alphaMode: "opaque" });
-
+ /*
 let texture = device.createTexture({
 format: "rgba8unorm",
 size: [SiZ, SiZ, 2],
@@ -616,7 +615,9 @@ gl2.drawImage(vv,0,0);
 let image=gl2.getImageData(0,0,cnv.width,cnv.height);
 let imageData=image.data;
 let pixelData=new Uint16Array(imageData);
+*/
 setInterval(function(){
+/*
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
 imageData=image.data;
@@ -624,6 +625,11 @@ let pixelData=new Uint16Array(imageData);
 device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[texture.size[0], texture.size[1], 2]);
 const imageDataW = new Uint16Array(cnv.height * cnv.height * 4); // Assuming RGBA format
 device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageDataW.buffer, imageDataW.byteOffset, [texture.size[0],texture.size[1], 2]);
+*/
+const externalTexture=device.importExternalTexture({source:vv});
+const imageDataW=new Uint8Array(vv.videoWidth*vv.videoHeight*4);
+device.queue.readTexture({externalTexture,bytesPerRow:4*vv.videoWidth,rowsPerImage:vv.videoHeight,
+},imageDataW.buffer,imageDataW.byteOffset);
 FS.writeFile('/video/frame.gl',imageDataW);
 },16.666);
 }
