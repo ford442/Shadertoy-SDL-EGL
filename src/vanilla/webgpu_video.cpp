@@ -214,8 +214,8 @@ return nullptr;
 
 const char * Fnm2=reinterpret_cast<const char *>("/video/frame.gl");
 
-uint8_t * result2=NULL;
-uint8_t * results2=NULL;
+uint16_t * result2=NULL;
+uint16_t * results2=NULL;
 long int length2=0;
 
 void * rd_frm(const char * Fnm2){
@@ -233,9 +233,9 @@ if(stat!=0){
 fclose(file2);
 return nullptr;
 }
-result2=static_cast<uint8_t *>(malloc((length+1)*sizeof(uint8_t)));
+result2=static_cast<uint16_t *>(malloc((length+1)*sizeof(uint16_t)));
 if(result2){
-size_t actual_length=fread(result2,sizeof(uint8_t),length,file2);
+size_t actual_length=fread(result2,sizeof(uint16_t),length,file2);
 result[actual_length++]={'\0'};
 }
 fclose(file2);
@@ -285,13 +285,13 @@ passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
-// uint8_t * fram=(uint8_t*)rd_frm(Fnm2);
+// uint16_t * fram=(uint16_t*)rd_frm(Fnm2);
 void * fram=(void*)rd_frm(Fnm2);
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),fram,sze.at(0,0)*sizeof(float),sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),fram,sze.at(0,0)*sizeof(uint16_t),sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
@@ -573,14 +573,14 @@ wao.at(0,0)=options;
 navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 }
 
-EM_BOOL framm(uint8_t * em){
+EM_BOOL framm(uint16_t * em){
 js_data_pointer.at(0,0)=em;
 return EM_TRUE;
 }
 
 extern "C"{
 
-void frm(uint8_t * h){
+void frm(uint16_t * h){
 framm(h);
 return;
 }
@@ -615,14 +615,14 @@ const gl2=cnv.getContext('2d',{willReadFrequently:true,alpha:true});
 gl2.drawImage(vv,0,0);
 let image=gl2.getImageData(0,0,cnv.width,cnv.height);
 let imageData=image.data;
-let pixelData=new Uint8ClampedArray(imageData);
+let pixelData=new Uint16ClampedArray(imageData);
 setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
 imageData=image.data;
-let pixelData=new Uint8ClampedArray(imageData);
+let pixelData=new Uint16ClampedArray(imageData);
 device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[texture.size[0], texture.size[1], 2]);
-const imageDataW = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
+const imageDataW = new Uint16Array(cnv.height * cnv.height * 4); // Assuming RGBA format
 device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageDataW.buffer, imageDataW.byteOffset, [texture.size[0],texture.size[1], 2]);
 FS.writeFile('/video/frame.gl',imageDataW);
 },16.666);
@@ -686,7 +686,6 @@ slt=tem.innerHTML;
 document.getElementById('startBtn').addEventListener('click',function(){
 // var pth="https://glsl.1ink.us/wgsl/galaxy.wgsl";
   var pth=document.querySelector('#path').innerHTML;
-
 // var pth="https://test.1ink.us/3arth/melt.wgsl";
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
