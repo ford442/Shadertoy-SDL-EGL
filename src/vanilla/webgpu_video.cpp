@@ -613,19 +613,19 @@ const gl2=cnv.getContext('2d',{willReadFrequently:true,alpha:true});
 gl2.drawImage(vv,0,0);
 let image=gl2.getImageData(0,0,cnv.width,cnv.height);
 let imageData=image.data;
-let pixelData=new Uint8Array(imageData);
+let pixelData=new Uint8ClampedArray(imageData);
 
 setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
 imageData=image.data;
-pixelData=new Uint8Array(imageData);
+pixelData=new Uint8ClampedArray(imageData);
 /*
 device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[texture.size[0], texture.size[1], 2]);
-const imageDataW = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
+const imageDataW = new Uint8ClampedArray(cnv.height * cnv.height * 4); // Assuming RGBA format
 device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageDataW.buffer, imageDataW.byteOffset, [texture.size[0],texture.size[1], 2]);
 const externalTexture=device.importExternalTexture({source:vv});
-const imageDataW=new Uint8Array(vv.videoWidth*vv.videoHeight*4);
+const imageDataW=new Uint8ClampedArray(vv.videoWidth*vv.videoHeight*4);
 device.queue.readTexture({externalTexture,bytesPerRow:4*vv.videoWidth,rowsPerImage:vv.videoHeight,
 },imageDataW.buffer,imageDataW.byteOffset);
   */
