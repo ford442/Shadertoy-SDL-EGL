@@ -153,7 +153,14 @@ let w$=parseInt(document.getElementById("wid").innerHTML,10);
 let h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 let $H=Module.HEAPF32.buffer;
-let la=(((w$*h$*8)/4)*4);
+function nearestPowerOf2(n){
+if(n&(n-1)){
+return Math.pow(2,Math.ceil(Math.log2(n)));
+}else{
+return n;
+}
+}
+let la=nearestPowerOf2(((w$*h$*8)/4)*4);
 let pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
 let sz=(w$*h$)/8;
@@ -414,7 +421,7 @@ h$=parseInt(document.getElementById("hig").innerHTML,10);
 vv=document.getElementById("mv");
 blank$=Math.max((((w$-h$)*1)/2),0);
 nblank$=Math.max((((h$-w$)*1)/2),0);
-la=(((w$*h$*8)/4)*4);
+la=nearestPowerOf2(((w$*h$*8)/4)*4);
 sz=(w$*h$)/8;
 pointa=77*la;
 // agav=new Float32Array($H,pointa,300);
@@ -439,7 +446,7 @@ w$=parseInt(document.getElementById("wid").innerHTML,10);
 h$=parseInt(document.getElementById("hig").innerHTML,10);
 blank$=Math.max((((w$-h$)*1)/2),0);
 nblank$=Math.max((((h$-w$)*1)/2),0);
-la=(((w$*h$*8)/4)*4);
+la=nearestPowerOf2(((w$*h$*8)/4)*4);
 sz=(w$*h$)/8;
 pointa=77*la;
 // var agav=new Float32Array($H,pointa,300);
