@@ -462,7 +462,8 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 function M(){
 vv=document.getElementById("mv");
-t.setConstants({nblnk:nblank$,blnk:blank$});
+// t.setConstants({nblnk:nblank$,blnk:blank$});
+t.setConstants({nblnk:0,blnk:0});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
 for(i=64;i>0;i--){
