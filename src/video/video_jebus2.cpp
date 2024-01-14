@@ -442,7 +442,7 @@ var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:0,blnk:0,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 ti.setConstants({nblnk:nblank$,blnk:blank$});
-var $$1=t(vv);
+var $$1=ti(vv);
 for (i=0;i<65;i++){
 var j=i+1;
 eval("$"+j+".set($$1);");
