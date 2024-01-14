@@ -395,8 +395,14 @@ var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setOutput([sz]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
-let t=g.createKernel(function(v){
+let ti=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+var av$=Ave(P[0],P[1],P[2]);
+return[P[0],P[1],P[2],av$];
+}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
+
+let to=g.createKernel(function(v){
+var P=v[this.thread.y][this.thread.x];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
@@ -435,7 +441,7 @@ var $B=new Float32Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:0,blnk:0,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
-t.setConstants({nblnk:nblank$,blnk:blank$});
+ti.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
 for (i=0;i<65;i++){
 var j=i+1;
@@ -458,17 +464,17 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:0,blnk:0,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
-t.setConstants({nblnk:nblank$,blnk:blank$});
+ti.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 function M(){
 vv=document.getElementById("mv");
-t.setConstants({nblnk:nblank$,blnk:blank$});
+ti.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:0,blnk:0,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
 for(i=64;i>0;i--){
 var loca=$F+1;if(loca>64){loca=1;}
 var locb=$Bu+1;if(locb>64){locb=1;}
-eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
+eval("if ($F==="+i+"){var $r"+i+"=to($"+i+");r($r"+i+");var $$"+$Bu+"=ti(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
