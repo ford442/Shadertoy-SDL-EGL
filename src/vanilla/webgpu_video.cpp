@@ -249,7 +249,7 @@ uint8_t * result2=NULL;
 uint8_t * results2=NULL;
 long int length2=0;
 
-void * rd_frm(const char * Fnm2){
+uint8_t * rd_frm(const char * Fnm2){
 FILE * file2=fopen(Fnm,"r");
 ::boost::tuples::tie(result2,results2,file2);
 if(file2){
@@ -275,7 +275,8 @@ return result2;
 return nullptr;
 }
 
-void * fram;
+// void * fram;
+uint8_t * fram;
 
 void raf(){
 u64_uni.at(3,3)++;
@@ -319,8 +320,8 @@ passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
 // videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 // wtv.at(2,2)=videoTextureView;
-// uint8_t * fram=(uint8_t*)rd_frm(Fnm2);
-fram=(void*)rd_frm(Fnm2);
+fram=rd_frm(Fnm2);
+// fram=(void*)rd_frm(Fnm2);
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
@@ -645,19 +646,19 @@ const gl2=cnv.getContext('2d',{willReadFrequently:true,alpha:true});
 gl2.drawImage(vv,0,0);
 let image=gl2.getImageData(0,0,cnv.width,cnv.height);
 let imageData=image.data;
-let pixelData=new Uint8ClampedArray(imageData);
+let pixelData=new Uint8Array(imageData);
 
 setInterval(function(){
 gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
 imageData=image.data.buffer;
-pixelData=new Uint8ClampedArray(imageData);
+pixelData=new Uint8Array(imageData);
 /*
 device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[texture.size[0], texture.size[1], 2]);
-const imageDataW = new Uint8ClampedArray(cnv.height * cnv.height * 4); // Assuming RGBA format
+const imageDataW = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
 device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageDataW.buffer, imageDataW.byteOffset, [texture.size[0],texture.size[1], 2]);
 const externalTexture=device.importExternalTexture({source:vv});
-const imageDataW=new Uint8ClampedArray(vv.videoWidth*vv.videoHeight*4);
+const imageDataW=new Uint8Array(vv.videoWidth*vv.videoHeight*4);
 device.queue.readTexture({externalTexture,bytesPerRow:4*vv.videoWidth,rowsPerImage:vv.videoHeight,
 },imageDataW.buffer,imageDataW.byteOffset);
   */
