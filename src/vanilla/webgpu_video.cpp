@@ -174,7 +174,7 @@ const char * vertexShaderb=
 "struct VertexOutput {\n"
 "@builtin(position) Position : vec4<f32>,\n"
 "@location(0) fragUV : vec2<f32>,\n"
-"}\n"
+"};\n"
 "@vertex\n"
 "fn main(@builtin(vertex_index) VertexIndex : u32) ->\n"
 "VertexOutput {\n"
