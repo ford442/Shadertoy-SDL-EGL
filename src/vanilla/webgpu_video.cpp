@@ -116,7 +116,8 @@ const char * vertexShadera1=
 "@location(0) fragUV : vec2<f32>\n"
 "};\n"
 "@vertex\n"
-"fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
+"fn main(@builtin(vertex_index) VertexIndex : u32) ->
+VertexOutput {   \n"
 "const pos=array<vec2<f32>,6>(\n"
 "vec2<f32>(1.0f,1.0f),\n"
 "vec2<f32>(-1.0f,1.0f),\n"
@@ -168,15 +169,45 @@ const char * vertexShadera=
 "return output;\n"
 "}\n";
 
+
+const char * vertexShaderb=
+"struct VertexOutput {\n"
+"@builtin(position) Position : vec4<f32>,\n"
+"@location(0) fragUV : vec2<f32>,\n"
+"}\n"
+"@vertex\n"
+"fn main(@builtin(vertex_index) VertexIndex : u32) ->\n"
+"VertexOutput {\n"
+"const pos=array(\n"
+"vec2(1.0f,1.0f),\n"
+"vec2(1.0f,-1.0f),\n"
+"vec2(-1.0f,-1.0f),\n"
+"vec2(1.0f,1.0f),\n"
+"vec2(-1.0f,-1.0f),\n"
+"vec2(-1.0f,1.0f),\n"
+");\n"
+"const uv=array(\n"
+"vec2(1.0f,0.0f),\n"
+"vec2(1.0f,1.0f),\n"
+"vec2(0.0f,1.0f),\n"
+"vec2(1.0f,0.0f),\n"
+"vec2(0.0f,1.0f),\n"
+"vec2(0.0f,0.0f),\n"
+");\n"
+"var output : VertexOutput;\n"
+"output.Position=vec4(pos[VertexIndex],0.0f,1.0f);\n"
+"output.fragUV=uv[VertexIndex];\n"
+"return output;\n"
+"}\n";
+
 const char * frag_body=
 "@group(0) @binding(0) var <uniform> iTime : u32;\n"
 "@group(0) @binding(1) var mySampler : sampler;\n"
 "@group(0) @binding(2) var myTexture : texture_2d <f32>;\n"
 "@fragment\n"
-"fn main(@location(0) fragUV : vec2<f32>) -> @location(0) vec4<f32> {\n"
-"var sample1 = textureSample( myTexture, mySampler, fragUV );"
-"var outColor: vec4<f32> = sample1;"
-"return vec4<f32>(outColor);"
+"fn main(@location(0) fragUV : vec2<f32>) ->\n"
+"@location(0) vec4<f32> {\n"
+"return textureSample(myTexture,mySampler,fragUV);"
 "}\n";
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
@@ -244,6 +275,8 @@ return result2;
 return nullptr;
 }
 
+void * fram;
+
 void raf(){
 u64_uni.at(3,3)++;
 u_time.t3=u_time.t2;
@@ -279,16 +312,15 @@ depthAttachment.depthStoreOp=WGPU_STORE_OP_STORE;
 // depthAttachment.stencilLoadOp=WGPU_LOAD_OP_LOAD;
 // depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE;
 wrpdsa.at(0,0)=depthAttachment;
-
 passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
-videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
-wtv.at(2,2)=videoTextureView;
+// videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
+// wtv.at(2,2)=videoTextureView;
 // uint8_t * fram=(uint8_t*)rd_frm(Fnm2);
-void * fram=(void*)rd_frm(Fnm2);
+fram=(void*)rd_frm(Fnm2);
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
