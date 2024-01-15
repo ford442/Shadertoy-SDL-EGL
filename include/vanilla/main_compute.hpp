@@ -177,6 +177,7 @@ using wrpdsa_tensor=boost::numeric::ublas::tensor<WGpuRenderPassDepthStencilAtta
 using u64_tensor=boost::numeric::ublas::tensor<uint32_t>;
 using i_tensor=boost::numeric::ublas::tensor<int>;
 // using i_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
+using ui32_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
 using wt_tensor=boost::numeric::ublas::tensor<WGpuTexture>;
 using wtd_tensor=boost::numeric::ublas::tensor<WGpuTextureDescriptor>;
 using wtvd_tensor=boost::numeric::ublas::tensor<WGpuTextureViewDescriptor>;
