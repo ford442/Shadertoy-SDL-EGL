@@ -681,7 +681,7 @@ return n;
 }
 
 async function videoFrames(){
-let SiZ=parseInt(window.innerHeight);
+let SiZ=window.innerHeight;
 let vv=document.getElementById('mv');
 let la=nearestPowerOf2(((SiZ*SiZ*4)/4)*4);
 let w$=parseInt(document.getElementById("mv").videoWidth);
