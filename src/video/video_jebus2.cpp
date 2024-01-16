@@ -73,7 +73,7 @@ extern "C" {
 EM_JS(void,ma,(),{
 "use strict";
 const pnnl=document.body;
-let vv=document.getElementById("mv");
+let vv=document.querySelector("#mv");
 let intervalBackward;
 
 function back(){
@@ -132,14 +132,14 @@ let Mov=1;
 function doKey(e){
 if(e.code=='Space'){
 e.preventDefault();
-if(Mov==1){vv=document.getElementById("mv");Mov=0;vv.pause();}
-else if(Mov==0){vv=document.getElementById("mv");Mov=1;vv.play();}
+if(Mov==1){vv=document.querySelector("#mv");Mov=0;vv.pause();}
+else if(Mov==0){vv=document.querySelector("#mv");Mov=1;vv.play();}
 }
-if (e.code=='KeyW'){vv=document.getElementById("mv");Mov=1;vv.pause();forward();}
-if (e.code=='KeyS'){vv=document.getElementById("mv");Mov=1;vv.pause();back();}
-if (e.code=='KeyZ'){vv=document.getElementById("mv");Mov=1;vv.pause();var stp=vv.currentTime*1000.0;
+if (e.code=='KeyW'){vv=document.querySelector("#mv");Mov=1;vv.pause();forward();}
+if (e.code=='KeyS'){vv=document.querySelector("#mv");Mov=1;vv.pause();back();}
+if (e.code=='KeyZ'){vv=document.querySelector("#mv");Mov=1;vv.pause();var stp=vv.currentTime*1000.0;
 backForth(stp);}
-if (e.code=='KeyX'){vv=document.getElementById("mv");stpBackForth();vv.play();}
+if (e.code=='KeyX'){vv=document.querySelector("#mv");stpBackForth();vv.play();}
 }
 
 function doKeyUp(e){
@@ -149,9 +149,9 @@ if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
-let w$=parseInt(document.getElementById("wid").innerHTML,10);
-let h$=parseInt(document.getElementById("hig").innerHTML,10);
-vv=document.getElementById("mv");
+let w$=parseInt(document.querySelector("#wid").innerHTML,10);
+let h$=parseInt(document.querySelector("#hig").innerHTML,10);
+vv=document.querySelector("#mv");
 let $H=Module.HEAPF32.buffer;
 function nearestPowerOf2(n){
 if(n&(n-1)){
@@ -172,7 +172,7 @@ var max=0.0;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
-const bcanvas=document.getElementById("bcanvas");
+const bcanvas=document.querySelector("#bcanvas");
 const contx=bcanvas.getContext("webgl2",{colorType:'float32',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
@@ -416,9 +416,9 @@ var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
-vv=document.getElementById("mv");
+w$=parseInt(document.querySelector("#wid").innerHTML,10);
+h$=parseInt(document.querySelector("#hig").innerHTML,10);
+vv=document.querySelector("#mv");
 blank$=Math.max((((w$-h$)*1)/1),0);
 nblank$=Math.max((((h$-w$)*1)/1),0);
 la=nearestPowerOf2(((h$*h$*4)/4)*4);
@@ -442,8 +442,8 @@ var j=i+1;
 eval("$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
-w$=parseInt(document.getElementById("wid").innerHTML,10);
-h$=parseInt(document.getElementById("hig").innerHTML,10);
+w$=parseInt(document.querySelector("#wid").innerHTML,10);
+h$=parseInt(document.querySelector("#hig").innerHTML,10);
 blank$=Math.max((((w$-h$)*1)/1),0);
 nblank$=Math.max((((h$-w$)*1)/1),0);
 la=nearestPowerOf2(((h$*h$*4)/4)*4);
@@ -461,7 +461,7 @@ r.setConstants({nblnk:0,blnk:0,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200]
 t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 function M(){
-vv=document.getElementById("mv");
+vv=document.querySelector("#mv");
 t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:0,blnk:0,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
@@ -479,7 +479,7 @@ M();
 },16.66);
 }
 M();
-document.getElementById("di").onclick=function(){
+document.querySelector("#di").onclick=function(){
 T=true;
 S();
 };
