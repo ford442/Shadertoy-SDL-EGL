@@ -710,6 +710,10 @@ ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
+  console.log(sfil[12]);
+  console.log(sfil[42]);
+  console.log(sfil[52]);
+
 FS.writeFile('/video/frame.gl',sfil);
 document.querySelector('#stat').innerHTML='Downloaded Image';
 document.querySelector('#stat').style.backgroundColor='blue';
