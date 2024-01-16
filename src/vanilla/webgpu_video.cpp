@@ -672,6 +672,14 @@ FS.mkdir('/video');
 const g=new GPUX();
 let $H=Module.HEAPF32.buffer;
 
+function nearestPowerOf2(n){
+if(n&(n-1)){
+return Math.pow(2,Math.ceil(Math.log2(n)));
+}else{
+return n;
+}
+}
+
 async function videoFrames(){
 let SiZ=parseInt(window.innerHeight);
 let vv=document.getElementById('mv');
