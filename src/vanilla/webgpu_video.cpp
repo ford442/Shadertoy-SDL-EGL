@@ -718,7 +718,7 @@ document.getElementById('bcanvas').width=parseInt(window.innerHeight,10);
 document.getElementById('di').click();
 videoFrames();
 Module.ccall("startWebGPU");
-},500);
+},1500);
 document.getElementById('status').style.backgroundColor="green";
 }
 document.getElementById('status').height=20;
