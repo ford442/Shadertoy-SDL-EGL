@@ -626,9 +626,9 @@ return;
 /*
 async function videoFrames(){
 let SiZ=parseInt(window.innerHeight);
-let vv=document.queryselector('#mv');
-let cnv=document.queryselector('#bcanvas');
-let cnvb=document.queryselector('#canvas');
+let vv=document.querySelector('#mv');
+let cnv=document.querySelector('#bcanvas');
+let cnvb=document.querySelector('#canvas');
 const context = cnvb.getContext("webgpu");
 const gpu = navigator.gpu;
 const format = gpu.getPreferredCanvasFormat();
@@ -681,13 +681,13 @@ return n;
 }
 }
   
-let vv=document.queryselector('#mv');
+let vv=document.querySelector('#mv');
   
 async function videoFrames(){
 let SiZ=window.innerHeight;
 let la=nearestPowerOf2(((SiZ*SiZ*4)/4)*4);
-let w$=parseInt(document.queryselector("#mv").width);
-let h$=parseInt(document.queryselector("#mv").height);
+let w$=parseInt(document.querySelector("#mv").width);
+let h$=parseInt(document.querySelector("#mv").height);
 let blank$=Math.max((((w$-h$)*1)/1),0);
 let nblank$=Math.max((((h$-w$)*1)/1),0);
 let t=g.createKernel(function(v){
@@ -722,33 +722,33 @@ FS.writeFile('/video/frame.gl',frrm);
     
 function normalResStart(){
 setTimeout(function(){
-document.queryselector('#shut').innerHTML=2;
-document.queryselector('#circle').width=window.innerWidth;
-document.queryselector('#circle').height=window.innerHeight;
-document.queryselector('#pmhig').innerHTML=parseInt(window.innerHeight,10);
-document.queryselector('#ihig').innerHTML=parseInt(window.innerHeight,10);
-document.queryselector('#canvas').height=parseInt(window.innerHeight,10);
-document.queryselector('#bcanvas').height=parseInt(window.innerHeight,10);
-document.queryselector('#canvas').width=parseInt(window.innerHeight,10);
-document.queryselector('#bcanvas').width=parseInt(window.innerHeight,10);
-document.queryselector('#di').click();
+document.querySelector('#shut').innerHTML=2;
+document.querySelector('#circle').width=window.innerWidth;
+document.querySelector('#circle').height=window.innerHeight;
+document.querySelector('#pmhig').innerHTML=parseInt(window.innerHeight,10);
+document.querySelector('#ihig').innerHTML=parseInt(window.innerHeight,10);
+document.querySelector('#canvas').height=parseInt(window.innerHeight,10);
+document.querySelector('#bcanvas').height=parseInt(window.innerHeight,10);
+document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
+document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
+document.querySelector('#di').click();
 videoFrames();
 Module.ccall("startWebGPU");
 },1500);
-document.queryselector('#status').style.backgroundColor="green";
+document.querySelector('#status').style.backgroundColor="green";
 }
-document.queryselector('#status').height=20;
-document.queryselector('#status').width=parseInt(window.innerHeight,10);
-const tem=document.queryselector('#tim');
-const ban=document.queryselector('#menuBtn');
-const sfr=document.queryselector('#slideframe');
+document.querySelector('#status').height=20;
+document.querySelector('#status').width=parseInt(window.innerHeight,10);
+const tem=document.querySelector('#tim');
+const ban=document.querySelector('#menuBtn');
+const sfr=document.querySelector('#slideframe');
 var $lt=tem.innerHTML;
 function grab$lt(){
 $lt=Math.round($lt);
 }
 $lt=tem.innerHTML;
 grab$lt();
-const slo=new Slideout({'panel':document.queryselector('#panel'),'menu':document.queryselector('#menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
+const slo=new Slideout({'panel':document.querySelector('#panel'),'menu':document.querySelector('#menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
 ban.addEventListener('click',function(){slo.toggle();sfr.innerHTML="";
 setTimeout(function(){
 grab$lt();
@@ -763,7 +763,7 @@ slt=slt*100;
 slt=Math.round(slt);
 slt=slt/100;
 tsl.setValues(slt);
-document.queryselector('#menu').addEventListener('click',function(){
+document.querySelector('#menu').addEventListener('click',function(){
 $ll=tsl.getValue();
 $ll=$ll*100;
 $ll=Math.round($ll);
@@ -776,7 +776,7 @@ slt=tem.innerHTML;
 },16);
 });
   
-document.queryselector('#startBtn').addEventListener('click',function(){
+document.querySelector('#startBtn').addEventListener('click',function(){
 // var pth="https://glsl.1ink.us/wgsl/galaxy.wgsl";
   var pth=document.querySelector('#path').innerHTML;
 // var pth="https://test.1ink.us/3arth/melt.wgsl";
@@ -799,9 +799,9 @@ ff.send(null);
 });
   
 setTimeout(function(){
-document.queryselector('#circle').width=window.innerWidth;
-document.queryselector('#circle').height=window.innerHeight;
-document.queryselector('#di').click();
+document.querySelector('#circle').width=window.innerWidth;
+document.querySelector('#circle').height=window.innerHeight;
+document.querySelector('#di').click();
 },500);
 });
 
