@@ -686,18 +686,16 @@ let vv=document.queryselector('#mv');
 async function videoFrames(){
 let SiZ=window.innerHeight;
 let la=nearestPowerOf2(((SiZ*SiZ*4)/4)*4);
-let w$=parseInt(document.queryselector("#mv").videoWidth);
-let h$=parseInt(document.queryselector("#mv").videoHeight);
+let w$=parseInt(document.queryselector("#mv").width);
+let h$=parseInt(document.queryselector("#mv").height);
 let blank$=Math.max((((w$-h$)*1)/1),0);
 let nblank$=Math.max((((h$-w$)*1)/1),0);
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 return[P[0],P[1],P[2],P[3]];
-}).setTactic("precision").setGraphical(false).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([400,400]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
+}).setTactic("precision").setGraphical(false).setArgumentTypes(["HTMLImage"]).setDynamicOutput(true).setOutput([400,400]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 t.setConstants({nblnk:nblank$,blnk:blank$});
-
-  let frrm=new Float32Array($H,0,la);
-
+let frrm=new Float32Array($H,0,la);
 if (vv.readyState >= vv.HAVE_METADATA) {
 $$1 = t(vv);
 } else {
@@ -707,7 +705,7 @@ frrm.set($$1);
 FS.writeFile('/video/frame.gl',frrm);
 });
 }
-
+/*
 setInterval(function(){
 if (vv.readyState >= vv.HAVE_METADATA) {
 $$1 = t(vv);
@@ -719,7 +717,7 @@ FS.writeFile('/video/frame.gl',frrm);
 });
 }
 },100);
-
+*/
 }
     
 function normalResStart(){
