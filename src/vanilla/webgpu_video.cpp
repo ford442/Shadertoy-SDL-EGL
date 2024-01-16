@@ -695,18 +695,18 @@ return[P[0],P[1],P[2],P[3]];
 }).setTactic("precision").setGraphical(false).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([400,400]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 t.setConstants({nblnk:nblank$,blnk:blank$});
 let frrm=new Float32Array($H,0,la);
-if (vv.readyState >= video.HAVE_METADATA) {
+if (vv.readyState >= vv.HAVE_METADATA) {
 $$1 = t(vv);
 } else {
 vv.addEventListener('loadedmetadata', function() {
 $$1 = t(vv);
-  frrm.set($$1);
+frrm.set($$1);
 FS.writeFile('/video/frame.gl',frrm);
 });
 }
 
 setInterval(function(){
-if (vv.readyState >= video.HAVE_METADATA) {
+if (vv.readyState >= vv.HAVE_METADATA) {
 $$1 = t(vv);
 } else {
 vv.addEventListener('loadedmetadata', function() {
