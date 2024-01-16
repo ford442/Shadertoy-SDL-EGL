@@ -691,7 +691,7 @@ let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let blank$=Math.max((((w$-h$)*1)/1),0);
 let nblank$=Math.max((((h$-w$)*1)/1),0);
 let t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+var P=v[this.thread.y][this.thread.x];
 return P[0],P[1],P[2],P[3];
 }).setTactic("precision").setGraphical(false).setDynamicOutput(true).setOutput([400,400]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 t.setConstants({nblnk:nblank$,blnk:blank$});
@@ -702,6 +702,18 @@ console.log(frrm[12]);
 console.log(frrm[32]);
 console.log(frrm[52]);
 FS.writeFile('/video/frame.gl',frrm);
+
+let cnv=document.querySelector('#bcanvas');
+const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true});
+gl2.drawImage(vv,0,0);
+let image=gl2.getImageData(0,0,cnv.width,cnv.height);
+let imageData=image.data.buffer;
+  console.log(imageData[12]);
+  console.log(imageData[32]);
+  console.log(imageData[62]);
+let pixelData=new Uint8Array(imageData);
+FS.writeFile('/video/frame.gl',pixelData);
+
 var pth="./test.png";
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
