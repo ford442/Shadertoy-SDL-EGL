@@ -680,10 +680,11 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }
 }
-
+  
+let vv=document.getElementById('mv');
+  
 async function videoFrames(){
 let SiZ=window.innerHeight;
-let vv=document.getElementById('mv');
 let la=nearestPowerOf2(((SiZ*SiZ*4)/4)*4);
 let w$=parseInt(document.getElementById("mv").videoWidth);
 let h$=parseInt(document.getElementById("mv").videoHeight);
