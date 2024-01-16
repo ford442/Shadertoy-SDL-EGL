@@ -92,60 +92,60 @@ boost::chrono::high_resolution_clock::time_point t3;
 WGpuUniform wTime;
 uint64_t tme;
 
-static i_tensor on=i_tensor{2,2};
-static i_tensor sze=i_tensor{2,2};
-static f_tensor szef=f_tensor{2,2};
-static wce_tensor wce=wce_tensor{2,2};
-static wrpe_tensor wrpe=wrpe_tensor{2,2};
-static wcb_tensor wcb=wcb_tensor{2,2};
-static wd_tensor wd=wd_tensor{2,2};
-static wq_tensor wq=wq_tensor{2,2};
-static wa_tensor wa=wa_tensor{2,2};
-static wcc_tensor wcc=wcc_tensor{2,2};
-static wccf_tensor wccf=wccf_tensor{2,2};
-static wrp_tensor wrp=wrp_tensor{2,2};
-static wpl_tensor wrpl=wpl_tensor{2,2};
-static wb_tensor wb=wb_tensor{8,8};
-static wbgle_tensor wbgle=wbgle_tensor{2,2};
-static wbge_tensor wbge=wbge_tensor{2,2};
-static wbgl_tensor wbgl=wbgl_tensor{2,2};
-static wbg_tensor wbg=wbg_tensor{2,2};
-static wrpd_tensor wrpd=wrpd_tensor{2,2};
-static wrpca_tensor wrpca=wrpca_tensor{2,2};
-static wbbl_tensor wbbl=wbbl_tensor{2,2};
-static wbd_tensor wbd=wbd_tensor{8,8};
-static wao_tensor wao=wao_tensor{2,2};
-static wdd_tensor wdd=wdd_tensor{2,2};
-static u64_tensor u64_uni=u64_tensor{8,8};
-static u64_tensor u64_siz=u64_tensor{1,1};
-static wrbe_tensor wrbe=wrbe_tensor{2,2};
-static wrbed_tensor wrbed=wrbed_tensor{2,2};
-static wrpdsa_tensor wrpdsa=wrpdsa_tensor{2,2};
-static wt_tensor wt=wt_tensor{3,3};
-static wtd_tensor wtd=wtd_tensor{3,3};
-static wtvd_tensor wtvd=wtvd_tensor{2,2};
-static wtf_tensor wtf=wtf_tensor{5,5};
-static wtv_tensor wtv=wtv_tensor{2,2};
-static wms_tensor wms=wms_tensor{2,2};
-static wsm_tensor wsm=wsm_tensor{2,2};
-static wsmd_tensor wsmd=wsmd_tensor{2,2};
-static wcts_tensor wcts=wcts_tensor{2,2};
-static wdss_tensor wdss=wdss_tensor{2,2};
-static wvs_tensor wvs=wvs_tensor{2,2};
-static wps_tensor wps=wps_tensor{2,2};
-static wfs_tensor wfs=wfs_tensor{2,2};
-static wrpid_tensor wrpid=wrpid_tensor{2,2};
-static wtbl_tensor wtbl=wtbl_tensor{2,2};
-static c_tensor wgsl=c_tensor{2,2};
-static wsd_tensor wsd=wsd_tensor{2,2};
-static ws_tensor wgpu_sampler=ws_tensor{2,2};
-static wsbl_tensor wsbl=wsbl_tensor{2,2};
-static wvbl_tensor wvbl=wvbl_tensor{2,2};
-static wict_tensor wict=wict_tensor{2,2};
+i_tensor on=i_tensor{2,2};
+i_tensor sze=i_tensor{2,2};
+f_tensor szef=f_tensor{2,2};
+wce_tensor wce=wce_tensor{2,2};
+wrpe_tensor wrpe=wrpe_tensor{2,2};
+wcb_tensor wcb=wcb_tensor{2,2};
+wd_tensor wd=wd_tensor{2,2};
+wq_tensor wq=wq_tensor{2,2};
+wa_tensor wa=wa_tensor{2,2};
+wcc_tensor wcc=wcc_tensor{2,2};
+wccf_tensor wccf=wccf_tensor{2,2};
+wrp_tensor wrp=wrp_tensor{2,2};
+wpl_tensor wrpl=wpl_tensor{2,2};
+wb_tensor wb=wb_tensor{8,8};
+wbgle_tensor wbgle=wbgle_tensor{2,2};
+wbge_tensor wbge=wbge_tensor{2,2};
+wbgl_tensor wbgl=wbgl_tensor{2,2};
+wbg_tensor wbg=wbg_tensor{2,2};
+wrpd_tensor wrpd=wrpd_tensor{2,2};
+wrpca_tensor wrpca=wrpca_tensor{2,2};
+wbbl_tensor wbbl=wbbl_tensor{2,2};
+wbd_tensor wbd=wbd_tensor{8,8};
+wao_tensor wao=wao_tensor{2,2};
+wdd_tensor wdd=wdd_tensor{2,2};
+u64_tensor u64_uni=u64_tensor{8,8};
+u64_tensor u64_siz=u64_tensor{1,1};
+wrbe_tensor wrbe=wrbe_tensor{2,2};
+wrbed_tensor wrbed=wrbed_tensor{2,2};
+wrpdsa_tensor wrpdsa=wrpdsa_tensor{2,2};
+wt_tensor wt=wt_tensor{3,3};
+wtd_tensor wtd=wtd_tensor{3,3};
+wtvd_tensor wtvd=wtvd_tensor{2,2};
+wtf_tensor wtf=wtf_tensor{5,5};
+wtv_tensor wtv=wtv_tensor{2,2};
+wms_tensor wms=wms_tensor{2,2};
+wsm_tensor wsm=wsm_tensor{2,2};
+wsmd_tensor wsmd=wsmd_tensor{2,2};
+wcts_tensor wcts=wcts_tensor{2,2};
+wdss_tensor wdss=wdss_tensor{2,2};
+wvs_tensor wvs=wvs_tensor{2,2};
+wps_tensor wps=wps_tensor{2,2};
+wfs_tensor wfs=wfs_tensor{2,2};
+wrpid_tensor wrpid=wrpid_tensor{2,2};
+wtbl_tensor wtbl=wtbl_tensor{2,2};
+c_tensor wgsl=c_tensor{2,2};
+wsd_tensor wsd=wsd_tensor{2,2};
+ws_tensor wgpu_sampler=ws_tensor{2,2};
+wsbl_tensor wsbl=wsbl_tensor{2,2};
+wvbl_tensor wvbl=wvbl_tensor{2,2};
+wict_tensor wict=wict_tensor{2,2};
 
 /*
-static mouse_tensor mms=mouse_tensor{2,2};
-static mouse_tensor mms2=mouse_tensor{2,2};
+mouse_tensor mms=mouse_tensor{2,2};
+mouse_tensor mms2=mouse_tensor{2,2};
 
 inline struct{
 boost::compute::double_ wi=0.0;
@@ -212,38 +212,38 @@ char8_t * result=NULL;
 char * results=NULL;
 long int length=0;
 
-static wq_tensor WGPU_Queue=wq_tensor{1,1,2};
-static wcb_tensor WGPU_CommandBuffer=wcb_tensor{1,1,3};
-static wb_tensor WGPU_Buffers=wb_tensor{3,3,3};
-static wce_tensor WGPU_CommandEncoder=wce_tensor{1,1,4};
-static wcpe_tensor WGPU_ComputePassCommandEncoder=wcpe_tensor{1,1,3};
-static wcpd_tensor WGPU_ComputePassDescriptor=wcpd_tensor{1,1,3};
-static wcp_tensor WGPU_ComputePipeline=wcp_tensor{1,1,1};
-static wpl_tensor WGPU_ComputePipelineLayout=wpl_tensor{1,1,1};
-static wsm_tensor WGPU_ComputeModule=wsm_tensor{1,1,1};
-static wbg_tensor WGPU_BindGroup=wbg_tensor{1,1,2};
-static wbgl_tensor WGPU_BindGroupLayout=wbgl_tensor{1,1,2};
-static wbgle_tensor WGPU_BindGroupLayoutEntries=wbgle_tensor{1,1,2};
-static wbge_tensor WGPU_BindGroupEntries=wbge_tensor{1,1,2};
-static wbmc_tensor WGPU_MapCallback=wbmc_tensor{1,1,3};
-static wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,3};
-static wbbl_tensor WGPU_BufferBindingLayout=wbbl_tensor{1,1,4};
-static wbd_tensor WGPU_BufferDescriptor=wbd_tensor{1,1,4};
-static wsmd_tensor WGPU_ShaderModuleDescriptor=wsmd_tensor{1,1,3};
-static di_tensor WGPU_BufferMappedRange=di_tensor{1,1,1};
-static void_tensor WGPU_UserData=void_tensor{1,1,2};
-static fptr_tensor WGPU_ResultBuffer=fptr_tensor{1,1,1};
-static fptr_tensor WGPU_InputBuffer=fptr_tensor{1,1,1};
-static i53_tensor WGPU_BufferRange=i53_tensor{1,1,2};
-static i53_tensor WGPU_BufferSize=i53_tensor{1,1,1};
-static wt_tensor WGPU_Texture=wt_tensor{1,1,1};
-static wtd_tensor WGPU_TextureDescriptor=wtd_tensor{1,1,1};
-static wstbl_tensor WGPU_StorageTextureBindingLayout=wstbl_tensor{1,1,1};
-static wtvd_tensor WGPU_TextureViewDescriptor=wtvd_tensor{1,1,1};
-static wtv_tensor WGPU_TextureView=wtv_tensor{1,1,1};
-static uiptr_tensor WGPU_ColorBuffer=uiptr_tensor{1,1,1};
-static wced_tensor WGPU_CommandEncoderDescriptor=wced_tensor{1,1,1};
-static wbms_tensor WGPU_BufferStatus=wbms_tensor{1,1,1};
+wq_tensor WGPU_Queue=wq_tensor{1,1,2};
+wcb_tensor WGPU_CommandBuffer=wcb_tensor{1,1,3};
+wb_tensor WGPU_Buffers=wb_tensor{3,3,3};
+wce_tensor WGPU_CommandEncoder=wce_tensor{1,1,4};
+wcpe_tensor WGPU_ComputePassCommandEncoder=wcpe_tensor{1,1,3};
+wcpd_tensor WGPU_ComputePassDescriptor=wcpd_tensor{1,1,3};
+wcp_tensor WGPU_ComputePipeline=wcp_tensor{1,1,1};
+wpl_tensor WGPU_ComputePipelineLayout=wpl_tensor{1,1,1};
+wsm_tensor WGPU_ComputeModule=wsm_tensor{1,1,1};
+wbg_tensor WGPU_BindGroup=wbg_tensor{1,1,2};
+wbgl_tensor WGPU_BindGroupLayout=wbgl_tensor{1,1,2};
+wbgle_tensor WGPU_BindGroupLayoutEntries=wbgle_tensor{1,1,2};
+wbge_tensor WGPU_BindGroupEntries=wbge_tensor{1,1,2};
+wbmc_tensor WGPU_MapCallback=wbmc_tensor{1,1,3};
+wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,3};
+wbbl_tensor WGPU_BufferBindingLayout=wbbl_tensor{1,1,4};
+wbd_tensor WGPU_BufferDescriptor=wbd_tensor{1,1,4};
+wsmd_tensor WGPU_ShaderModuleDescriptor=wsmd_tensor{1,1,3};
+di_tensor WGPU_BufferMappedRange=di_tensor{1,1,1};
+void_tensor WGPU_UserData=void_tensor{1,1,2};
+fptr_tensor WGPU_ResultBuffer=fptr_tensor{1,1,1};
+fptr_tensor WGPU_InputBuffer=fptr_tensor{1,1,1};
+i53_tensor WGPU_BufferRange=i53_tensor{1,1,2};
+i53_tensor WGPU_BufferSize=i53_tensor{1,1,1};
+wt_tensor WGPU_Texture=wt_tensor{1,1,1};
+wtd_tensor WGPU_TextureDescriptor=wtd_tensor{1,1,1};
+wstbl_tensor WGPU_StorageTextureBindingLayout=wstbl_tensor{1,1,1};
+wtvd_tensor WGPU_TextureViewDescriptor=wtvd_tensor{1,1,1};
+wtv_tensor WGPU_TextureView=wtv_tensor{1,1,1};
+uiptr_tensor WGPU_ColorBuffer=uiptr_tensor{1,1,1};
+wced_tensor WGPU_CommandEncoderDescriptor=wced_tensor{1,1,1};
+wbms_tensor WGPU_BufferStatus=wbms_tensor{1,1,1};
 
 uint32_t workgroupSize=64;
 uint32_t OutputBufferUnits=64;
@@ -1060,7 +1060,7 @@ eglGetConfigAttrib(display,eglconfig,EGL_BUFFER_SIZE,&numBuffer);
 eglGetConfigAttrib(display,eglconfig,EGL_COVERAGE_BUFFERS_NV,&numBuffersNV);
 eglGetConfigAttrib(display,eglconfig,EGL_GL_COLORSPACE,&colorSpace);
 eglGetConfigAttrib(display,eglconfig,EGL_COLOR_FORMAT_HI,&colorFormat);
-static EGLint ctx_att[]={
+EGLint ctx_att[]={
 EGL_CONTEXT_CLIENT_TYPE,EGL_OPENGL_ES_API,
 EGL_CONTEXT_CLIENT_VERSION,4,
 EGL_CONTEXT_MAJOR_VERSION_KHR,6,
@@ -1070,7 +1070,7 @@ EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_REALTIME_NV,
 // EGL_CONTEXT_PRIORITY_LEVEL_IMG,EGL_CONTEXT_PRIORITY_HIGH_IMG,
 EGL_NONE
 };
-static EGLint att_lst2[]={ 
+EGLint att_lst2[]={ 
 /*
   Google Colab
 If BT-2020 is set to linear, it will degrade the fidelity of image representation. 
@@ -1082,7 +1082,7 @@ and the image will not be as accurate as it would be if it were in the original 
 EGL_GL_COLORSPACE_KHR,colorSpace,
 EGL_NONE
 };
-static EGLint att_lst[]={
+EGLint att_lst[]={
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
