@@ -701,13 +701,13 @@ frrm.set($$1);
 console.log(frrm[12]);
 console.log(frrm[32]);
 console.log(frrm[52]);
-FS.writeFile('/video/frame.gl',frrm);
+// FS.writeFile('/video/frame.gl',frrm);
 
 let cnv=document.querySelector('#bcanvas');
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true});
 gl2.drawImage(vv,0,0);
 let image=gl2.getImageData(0,0,cnv.width,cnv.height);
-let imageData=image.data.buffer;
+let imageData=image.data;
   console.log(imageData[12]);
   console.log(imageData[32]);
   console.log(imageData[62]);
