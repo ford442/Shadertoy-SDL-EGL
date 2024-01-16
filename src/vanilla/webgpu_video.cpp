@@ -670,7 +670,7 @@ EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
 FS.mkdir('/video');
 const g=new GPUX();
-let $H=Module.HEAPF32.buffer;
+let $H=Module.HEAPU8.buffer;
 let $$1;
   
 function nearestPowerOf2(n){
@@ -695,11 +695,13 @@ var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 return P[0],P[1],P[2],P[3];
 }).setTactic("precision").setGraphical(false).setDynamicOutput(true).setOutput([400,400]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 t.setConstants({nblnk:nblank$,blnk:blank$});
-let frrm=new Float32Array($H,0,la);
-console.log(frrm[12]);
+let frrm=new Uint8Array($H,0,la);
 $$1=t(vv);
 frrm.set($$1);
-// FS.writeFile('/video/frame.gl',frrm);
+console.log(frrm[12]);
+console.log(frrm[32]);
+console.log(frrm[52]);
+FS.writeFile('/video/frame.gl',frrm);
 var pth="./test.png";
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
@@ -713,8 +715,7 @@ let sfil=new Uint8ClampedArray(sarrayBuffer);
   console.log(sfil[12]);
   console.log(sfil[42]);
   console.log(sfil[52]);
-
-FS.writeFile('/video/frame.gl',sfil);
+// FS.writeFile('/video/frame.gl',sfil);
 document.querySelector('#stat').innerHTML='Downloaded Image';
 document.querySelector('#stat').style.backgroundColor='blue';
 }
