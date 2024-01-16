@@ -1,4 +1,6 @@
 #include "../../include/vanilla/main_render.hpp"
+#include <boost/gil/gil_all.hpp>
+#include <boost/gil/extension/io/png_dynamic_io.hpp>
 
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
@@ -331,7 +333,7 @@ wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),fram,sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+// wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),fram,sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
@@ -585,6 +587,11 @@ u_time.t3=boost::chrono::high_resolution_clock::now();
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 // emscripten_set_main_loop_timing(2,1);
+  
+  boost::gil::rgb8_image_t image;
+boost::gil::png_read_image("./image.png", image);
+  wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),image,sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+
 emscripten_set_main_loop((void(*)())raf,0,0);
 // emscripten_request_animation_frame_loop(raf,0);
 }
@@ -696,10 +703,26 @@ return P[0],P[1],P[2],P[3];
 }).setTactic("precision").setGraphical(false).setDynamicOutput(true).setOutput([400,400]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 t.setConstants({nblnk:nblank$,blnk:blank$});
 let frrm=new Float32Array($H,0,la);
-  console.log(frrm[12]);
+console.log(frrm[12]);
 $$1=t(vv);
 frrm.set($$1);
 FS.writeFile('/video/frame.gl',frrm);
+var pth="./test.png";
+const ff=new XMLHttpRequest();
+ff.open('GET',pth,true);
+ff.responseType='arraybuffer';
+document.querySelector('#stat').innerHTML='Downloading Image';
+document.querySelector('#stat').style.backgroundColor='yellow';
+ff.addEventListener("load",function(){
+let sarrayBuffer=ff.response;
+if(sarrayBuffer){
+let sfil=new Uint8ClampedArray(sarrayBuffer);
+FS.writeFile('/image.png',sfil);
+document.querySelector('#stat').innerHTML='Downloaded Image';
+document.querySelector('#stat').style.backgroundColor='blue';
+}
+});
+ff.send(null);
 }
     
 function normalResStart(){
