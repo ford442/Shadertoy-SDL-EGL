@@ -275,8 +275,8 @@ return result2;
 return nullptr;
 }
 
-// void * fram;
-uint8_t * fram;
+void * fram;
+// uint8_t * fram;
 
 void raf(){
 u64_uni.at(3,3)++;
@@ -711,7 +711,7 @@ let imageData=image.data;
   console.log(imageData[12]);
   console.log(imageData[32]);
   console.log(imageData[62]);
-let pixelData=new Uint8Array(imageData);
+let pixelData=new Uint8ClampedArray(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 
 var pth="./test.png";
