@@ -623,11 +623,7 @@ return;
 }
 
 
-
-EM_JS(void,js_main,(),{
-FS.mkdir('/shader');
-FS.mkdir('/video');
-
+/*
 async function videoFrames(){
 let SiZ=parseInt(window.innerHeight);
 let vv=document.getElementById('mv');
@@ -644,7 +640,8 @@ format: "rgba8unorm",
 size: [SiZ, SiZ, 2],
 usage:GPUTextureUsage.COPY_DST|GPUTextureUsage.RENDER_ATTACHMENT|GPUTextureUsage.TEXTURE_BINDING,
 }); 
-const gl2=cnv.getContext('2d',{willReadFrequently:true,alpha:true});
+// const gl2=cnv.getContext('2d',{willReadFrequently:true,alpha:true});
+const gl2=cnv.getContext('2d');
 gl2.drawImage(vv,0,0);
 let image=gl2.getImageData(0,0,cnv.width,cnv.height);
 let imageData=image.data;
@@ -655,7 +652,7 @@ gl2.drawImage(vv,0,0);
 imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
 imageData=image.data;
 pixelData=new Uint8Array(imageData);
-/*
+
 device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[texture.size[0], texture.size[1], 2]);
 const imageDataW = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
 device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageDataW.buffer, imageDataW.byteOffset, [texture.size[0],texture.size[1], 2]);
@@ -663,11 +660,42 @@ const externalTexture=device.importExternalTexture({source:vv});
 const imageDataW=new Uint8Array(vv.videoWidth*vv.videoHeight*4);
 device.queue.readTexture({externalTexture,bytesPerRow:4*vv.videoWidth,rowsPerImage:vv.videoHeight,
 },imageDataW.buffer,imageDataW.byteOffset);
-  */
 FS.writeFile('/video/frame.gl',pixelData);
 },16.666);
 }
-  
+*/
+
+EM_JS(void,js_main,(),{
+
+FS.mkdir('/shader');
+FS.mkdir('/video');
+const g=new GPUX();
+let $H=Module.HEAPF32.buffer;
+
+async function videoFrames(){
+let SiZ=parseInt(window.innerHeight);
+let vv=document.getElementById('mv');
+let la=nearestPowerOf2(((SiZ*SiZ*4)/4)*4);
+let w$=parseInt(document.getElementById("mv").videoWidth);
+let h$=parseInt(document.getElementById("mv").videoHeight);
+let blank$=Math.max((((w$-h$)*1)/1),0);
+let nblank$=Math.max((((h$-w$)*1)/1),0);
+let t=g.createKernel(function(v){
+var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+return[P[0],P[1],P[2],P[3]];
+}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([SiZ,SiZ]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
+t.setConstants({nblnk:nblank$,blnk:blank$});
+let frrm=new Float32Array($H,0,la);
+var $$1=t(vv);
+frrm.set($$1);
+FS.writeFile('/video/frame.gl',frrm);
+setInterval(function(){
+$$1=t(vv);
+frrm.set($$1);
+FS.writeFile('/video/frame.gl',frrm);
+},100);
+}
+    
 function normalResStart(){
 setTimeout(function(){
 document.getElementById('shut').innerHTML=2;
