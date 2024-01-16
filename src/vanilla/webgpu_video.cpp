@@ -695,7 +695,9 @@ var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
 return[P[0],P[1],P[2],P[3]];
 }).setTactic("precision").setGraphical(false).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([400,400]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 t.setConstants({nblnk:nblank$,blnk:blank$});
-let frrm=new Float32Array($H,0,la);
+
+  let frrm=new Float32Array($H,0,la);
+  /*
 if (vv.readyState >= vv.HAVE_METADATA) {
 $$1 = t(vv);
 } else {
@@ -717,6 +719,7 @@ FS.writeFile('/video/frame.gl',frrm);
 });
 }
 },100);
+  */
 }
     
 function normalResStart(){
@@ -774,6 +777,7 @@ slt=tem.innerHTML;
 },8);
 },16);
 });
+  
 document.getElementById('startBtn').addEventListener('click',function(){
 // var pth="https://glsl.1ink.us/wgsl/galaxy.wgsl";
   var pth=document.querySelector('#path').innerHTML;
