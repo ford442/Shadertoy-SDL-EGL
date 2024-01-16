@@ -685,9 +685,9 @@ let vv=document.querySelector('#mv');
   
 async function videoFrames(){
 let SiZ=window.innerHeight;
-let la=nearestPowerOf2(((SiZ*SiZ*4)/4)*4);
 let w$=parseInt(document.querySelector("#mv").width);
 let h$=parseInt(document.querySelector("#mv").height);
+let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let blank$=Math.max((((w$-h$)*1)/1),0);
 let nblank$=Math.max((((h$-w$)*1)/1),0);
 let t=g.createKernel(function(v){
@@ -696,11 +696,8 @@ return[P[0],P[1],P[2],P[3]];
 }).setTactic("precision").setGraphical(false).setArgumentTypes(["HTMLImage"]).setDynamicOutput(true).setOutput([400,400]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 t.setConstants({nblnk:nblank$,blnk:blank$});
 let frrm=new Float32Array($H,0,la);
-if (vv.readyState >= vv.HAVE_METADATA) {
-$$1 = t(vv);
-} else {
-vv.addEventListener('loadedmetadata', function() {
-$$1 = t(vv);
+  console.log(frrm[12]);
+$$1=t(vv);
 frrm.set($$1);
 FS.writeFile('/video/frame.gl',frrm);
 });
