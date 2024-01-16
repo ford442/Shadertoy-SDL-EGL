@@ -701,7 +701,6 @@ $$1=t(vv);
 frrm.set($$1);
 FS.writeFile('/video/frame.gl',frrm);
 });
-}
 /*
 setInterval(function(){
 if (vv.readyState >= vv.HAVE_METADATA) {
