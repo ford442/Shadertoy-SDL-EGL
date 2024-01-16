@@ -700,7 +700,6 @@ let frrm=new Float32Array($H,0,la);
 $$1=t(vv);
 frrm.set($$1);
 FS.writeFile('/video/frame.gl',frrm);
-});
 }
     
 function normalResStart(){
