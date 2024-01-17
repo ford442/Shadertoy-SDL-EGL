@@ -210,11 +210,11 @@ const char * frag_body=
 "@group(0) @binding(0) var <uniform> iTime : u32;\n"
 "@group(0) @binding(1) var mySampler : sampler;\n"
 "@group(0) @binding(2) var myTexture : texture_2d <f32>;\n"
-"@group(0) @binding(3) var extTexture : texture_2d <f32>;\n"
+// "@group(0) @binding(3) var extTexture : texture_2d <f32>;\n"
 "@fragment\n"
 "fn main(@location(0) fragUV : vec2<f32>) ->\n"
 "@location(0) vec4<f32> {\n"
-"return textureSample(extTexture,mySampler,fragUV);"
+"return textureSample(myTexture,mySampler,fragUV);"
 "}\n";
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
@@ -335,7 +335,7 @@ wtv.at(2,2)=videoTextureView;
 // fram=static_cast<uint8_t *>(rd_frm(Fnm2));
 fram=(void*)rd_frm(Fnm2);
 wetd.at(0,0).source=texid.at(0,0);
-wet.at(0,0)=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
+// wet.at(0,0)=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
@@ -472,8 +472,8 @@ wtv.at(2,2)=videoTextureView;
 extTextureDescriptor.source=texid.at(0,0);
 extTextureDescriptor.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 wetd.at(0,0)=extTextureDescriptor;
-extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
-wet.at(0,0)=extTexture;
+// extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
+// wet.at(0,0)=extTexture;
 WGpuOrigin3D xyz={};
 xyz.x=0;
 xyz.y=0;
@@ -521,7 +521,7 @@ bindgroup_layout_entries[3].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_EXTERNAL_TEXTURE;
 bindgroup_layout_entries[3].layout.externalTexture=extTextureBindingLayout;
 wbgle.at(0,0)=bindgroup_layout_entries;
-bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),4);
+bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3);
 wbgl.at(0,0)=bindgroup_layout;
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
 wrpl.at(0,0)=pipeline_layout;
@@ -598,7 +598,7 @@ wtd.at(1,1)=colorTextureDescriptor;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
-bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),4);
+bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),3);
 wbg.at(0,0)=bindgroup;
 u64_uni.at(0,0)=0;
 u64_uni.at(3,3)=0;
