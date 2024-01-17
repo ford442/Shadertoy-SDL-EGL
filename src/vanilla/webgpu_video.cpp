@@ -70,6 +70,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 WGpuUniform wTime;
 uint64_t tme;
 
+static wetd_tensor wetd=wetd_tensor{2,2};
 static wet_tensor wet=wet_tensor{2,2};
 static i_tensor texid=i_tensor{2,2};
 static i_tensor sze=i_tensor{2,2};
