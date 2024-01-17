@@ -2,7 +2,7 @@
 
 WGpuExternalTexture extTexture;
 WGpuExternalTextureBindingLayout extTextureBindingLayout={};
-WGpuExternalTextureDescriptor‎ extTextureDescriptor={};
+WGpuExternalTextureDescriptor extTextureDescriptor={};
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
 WGpuTextureView videoTextureView;
