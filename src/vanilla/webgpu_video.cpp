@@ -597,7 +597,7 @@ wtd.at(1,1)=colorTextureDescriptor;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
-bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),3);
+bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),4);
 wbg.at(0,0)=bindgroup;
 u64_uni.at(0,0)=0;
 u64_uni.at(3,3)=0;
@@ -764,7 +764,7 @@ const device = await adapter.requestDevice();
 const externalTexture=device.importExternalTexture({source:vvi});
 let mm=wgpuStore(externalTexture);
 console.log(mm);
-// Module.ccall("frm",null,[Number],[mm]);
+Module.ccall("frm",null,[Number],[mm]);
 }
   
 function normalResStart(){
