@@ -1,5 +1,8 @@
 #include "../../include/vanilla/main_render.hpp"
 
+WGpuExternalTexture extTexture;
+WGpuExternalTextureBindingLayout extTextureBindingLayout={};
+WGpuExternalTextureDescriptor‎ extTextureDescriptor={};
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
 WGpuTextureView videoTextureView;
@@ -32,8 +35,8 @@ WGpuBufferDescriptor bufferDescriptorDst={};
 // WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
 // WGpuPipelineLayout pipeline_layout=0;
 WGpuBindGroupLayout bindgroup_layout=0;
-WGpuBindGroupLayoutEntry bindgroup_layout_entries[3]={};
-WGpuBindGroupEntry bindgroup_entries[3]={};
+WGpuBindGroupLayoutEntry bindgroup_layout_entries[4]={};
+WGpuBindGroupEntry bindgroup_entries[4]={};
 WGpuBindGroup bindgroup=0;
 // WGpuRenderPipelineDescriptor renderPipelineDesc;
 WGpuRenderBundleEncoder renderBundleEncoder;
@@ -67,6 +70,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 WGpuUniform wTime;
 uint64_t tme;
 
+static i_tensor texid=i_tensor{2,2};
 static i_tensor sze=i_tensor{2,2};
 static f_tensor szef=f_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
@@ -204,10 +208,11 @@ const char * frag_body=
 "@group(0) @binding(0) var <uniform> iTime : u32;\n"
 "@group(0) @binding(1) var mySampler : sampler;\n"
 "@group(0) @binding(2) var myTexture : texture_2d <f32>;\n"
+"@group(0) @binding(3) var extTexture : texture_2d <f32>;\n"
 "@fragment\n"
 "fn main(@location(0) fragUV : vec2<f32>) ->\n"
 "@location(0) vec4<f32> {\n"
-"return textureSample(myTexture,mySampler,fragUV);"
+"return textureSample(extTexture,mySampler,fragUV);"
 "}\n";
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
@@ -327,6 +332,7 @@ videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
 // fram=static_cast<uint8_t *>(rd_frm(Fnm2));
 fram=(void*)rd_frm(Fnm2);
+wet.at(0,0)=wgpu_device_import_external_texture(wd.at(0,0),wetd.at(0,0));
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
@@ -459,6 +465,12 @@ videoTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(2,2)=videoTextureViewDescriptor;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
+texid.at(0,0)=0;
+extTextureDescriptor.‎source=texid.at(0,0);
+extTextureDescriptor.‎colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
+wetd.at(0,0)=extTextureDescriptor;
+extTexture=wgpu_device_import_external_texture(wd.at(0,0),wetd.at(0,0));
+wet.at(0,0)=extTexture;
 WGpuOrigin3D xyz={};
 xyz.x=0;
 xyz.y=0;
@@ -500,8 +512,13 @@ bindgroup_layout_entries[2].binding=2;
 bindgroup_layout_entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
 bindgroup_layout_entries[2].layout.texture=textureBindingLayout1;
+bindgroup_layout_entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_layout_entries[3].binding=3;
+bindgroup_layout_entries[3].visibility=WGPU_SHADER_STAGE_FRAGMENT;
+bindgroup_layout_entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_EXTERNAL_TEXTURE;
+bindgroup_layout_entries[3].layout.externalTexture=extTextureBindingLayout;
 wbgle.at(0,0)=bindgroup_layout_entries;
-bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3);
+bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),4);
 wbgl.at(0,0)=bindgroup_layout;
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
 wrpl.at(0,0)=pipeline_layout;
@@ -526,6 +543,9 @@ bindgroup_entries[1].resource=ws.at(0,0);
 bindgroup_entries[2]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_entries[2].binding=2;
 bindgroup_entries[2].resource=wtv.at(2,2);
+bindgroup_entries[3]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
+bindgroup_entries[3].binding=3;
+bindgroup_entries[3].resource=wet.at(0,0);
 wbge.at(0,0)=bindgroup_entries;
 // renderBundleEncoderDescriptor.sampleCount=1;
 // renderBundleEncoderDescriptor.depthStencilFormat=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
@@ -608,14 +628,14 @@ wao.at(0,0)=options;
 navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 }
 
-EM_BOOL framm(uint8_t * em){
-js_data_pointer.at(0,0)=em;
+EM_BOOL framm(int em){
+texid.at(0,0)=em;
 return EM_TRUE;
 }
 
 extern "C"{
 
-void frm(uint8_t * h){
+void frm(int h){
 framm(h);
 return;
 }
@@ -713,7 +733,7 @@ let imageData=image.data;
   console.log(imageData[32]);
   console.log(imageData[62]);
 let pixelData=new Uint8ClampedArray(imageData);
-FS.writeFile('/video/frame.gl',pixelData);
+// FS.writeFile('/video/frame.gl',pixelData);
 
 var pth="./test.png";
 const ff=new XMLHttpRequest();
@@ -742,6 +762,7 @@ const device = await adapter.requestDevice();
 const externalTexture=device.importExternalTexture({source:vvi});
 let mm=wgpuStore(externalTexture);
 console.log(mm);
+Module.ccall("frm",null,[Number],[mm]);
 }
   
 function normalResStart(){
