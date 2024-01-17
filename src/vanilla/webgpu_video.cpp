@@ -738,7 +738,6 @@ const gpu = navigator.gpu;
 const format = gpu.getPreferredCanvasFormat();
 const adapter = await gpu.requestAdapter();
 const device = await adapter.requestDevice();
-context.configure({ device, format, alphaMode: "opaque" });
 const externalTexture=device.importExternalTexture({source:vv});
 let mm=wgpuStore(externalTexture);
 console.log(mm);
