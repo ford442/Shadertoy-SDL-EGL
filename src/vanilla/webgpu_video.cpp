@@ -682,6 +682,7 @@ return n;
 }
   
 let vv=document.querySelector('#mv');
+let vvi=document.querySelector('#mvi');
   
 async function videoFrames(){
 let SiZ=window.innerHeight;
@@ -738,7 +739,7 @@ const gpu = navigator.gpu;
 const format = gpu.getPreferredCanvasFormat();
 const adapter = await gpu.requestAdapter();
 const device = await adapter.requestDevice();
-const externalTexture=device.importExternalTexture({source:vv});
+const externalTexture=device.importExternalTexture({source:vvi});
 let mm=wgpuStore(externalTexture);
 console.log(mm);
 }
