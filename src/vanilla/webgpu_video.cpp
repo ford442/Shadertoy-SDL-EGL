@@ -334,6 +334,7 @@ videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
 // fram=static_cast<uint8_t *>(rd_frm(Fnm2));
 fram=(void*)rd_frm(Fnm2);
+wetd.at(0,0).source=texid.at(0,0);
 wet.at(0,0)=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
