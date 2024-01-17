@@ -732,8 +732,8 @@ document.querySelector('#stat').innerHTML='Downloaded Image';
 document.querySelector('#stat').style.backgroundColor='blue';
 }
 });
-ff.send(null);
-
+  ff.send(null);
+  
 const gpu = navigator.gpu;
 const format = gpu.getPreferredCanvasFormat();
 const adapter = await gpu.requestAdapter();
@@ -742,7 +742,8 @@ context.configure({ device, format, alphaMode: "opaque" });
 const externalTexture=device.importExternalTexture({source:vv});
 let mm=wgpuStore(externalTexture);
 console.log(mm);
-    
+}
+  
 function normalResStart(){
 setTimeout(function(){
 document.querySelector('#shut').innerHTML=2;
