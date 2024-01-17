@@ -706,7 +706,7 @@ return n;
   
 let vv=document.querySelector('#mv');
 let vvi=document.querySelector('#mvi');
-  
+  /*
 async function videoFrames(){
 let SiZ=window.innerHeight;
 let w$=parseInt(document.querySelector("#mv").width);
@@ -722,9 +722,9 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 let frrm=new Uint8Array($H,0,la);
 $$1=t(vv);
 frrm.set($$1);
-console.log(frrm[12]);
-console.log(frrm[32]);
-console.log(frrm[52]);
+// console.log(frrm[12]);
+// console.log(frrm[32]);
+// console.log(frrm[52]);
 // FS.writeFile('/video/frame.gl',frrm);
 
 let cnv=document.querySelector('#bcanvas');
@@ -737,7 +737,7 @@ let imageData=image.data;
   console.log(imageData[62]);
 let pixelData=new Uint8ClampedArray(imageData);
 // FS.writeFile('/video/frame.gl',pixelData);
-
+*/
 var pth="./test.png";
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
@@ -748,16 +748,16 @@ ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
-  console.log(sfil[12]);
-  console.log(sfil[42]);
-  console.log(sfil[52]);
-// FS.writeFile('/video/frame.gl',sfil);
+//  console.log(sfil[12]);
+//  console.log(sfil[42]);
+//  console.log(sfil[52]);
+FS.writeFile('/video/frame.gl',sfil);
 document.querySelector('#stat').innerHTML='Downloaded Image';
 document.querySelector('#stat').style.backgroundColor='blue';
 }
 });
   ff.send(null);
-  
+  /*
 const gpu = navigator.gpu;
 const format = gpu.getPreferredCanvasFormat();
 const adapter = await gpu.requestAdapter();
@@ -766,6 +766,7 @@ const externalTexture=device.importExternalTexture({source:vvi});
 let mm=wgpuStore(externalTexture);
 console.log(mm);
 Module.ccall("frm",null,[Number],[mm]);
+  */
 }
   
 function normalResStart(){
