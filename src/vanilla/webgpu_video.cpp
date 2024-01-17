@@ -692,7 +692,7 @@ let blank$=Math.max((((w$-h$)*1)/1),0);
 let nblank$=Math.max((((h$-w$)*1)/1),0);
 let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x];
-return P[0],P[1],P[2],P[3];
+return (P[0],P[1],P[2],P[3]);
 }).setTactic("precision").setGraphical(false).setDynamicOutput(true).setOutput([400,400]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 t.setConstants({nblnk:nblank$,blnk:blank$});
 let frrm=new Uint8Array($H,0,la);
@@ -733,7 +733,15 @@ document.querySelector('#stat').style.backgroundColor='blue';
 }
 });
 ff.send(null);
-}
+
+const gpu = navigator.gpu;
+const format = gpu.getPreferredCanvasFormat();
+const adapter = await gpu.requestAdapter();
+const device = await adapter.requestDevice();
+context.configure({ device, format, alphaMode: "opaque" });
+const externalTexture=device.importExternalTexture({source:vv});
+let mm=wgpuStore(externalTexture);
+console.log(mm);
     
 function normalResStart(){
 setTimeout(function(){
