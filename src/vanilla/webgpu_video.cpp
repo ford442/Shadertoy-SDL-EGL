@@ -696,12 +696,12 @@ return P[0],P[1],P[2],P[3];
 }).setTactic("precision").setGraphical(false).setDynamicOutput(true).setOutput([400,400]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 t.setConstants({nblnk:nblank$,blnk:blank$});
 let frrm=new Uint8Array($H,0,la);
-$$1=t(vv).getPixels();
+$$1=t(vv);
 frrm.set($$1);
 console.log(frrm[12]);
 console.log(frrm[32]);
 console.log(frrm[52]);
-FS.writeFile('/video/frame.gl',frrm);
+// FS.writeFile('/video/frame.gl',frrm);
 
 let cnv=document.querySelector('#bcanvas');
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true});
@@ -712,7 +712,7 @@ let imageData=image.data;
   console.log(imageData[32]);
   console.log(imageData[62]);
 let pixelData=new Uint8ClampedArray(imageData);
-// FS.writeFile('/video/frame.gl',pixelData);
+FS.writeFile('/video/frame.gl',pixelData);
 
 var pth="./test.png";
 const ff=new XMLHttpRequest();
