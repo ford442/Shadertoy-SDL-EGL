@@ -5,6 +5,8 @@
 #include "../../include/vanilla/boost_defs.hpp"
 #include "../../lib/lib_webgpu_cpp20.cpp"
 #include <SDL2/SDL.h>
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
 
 using namespace std;
 #include <cstdio> // C++ style
