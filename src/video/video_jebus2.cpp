@@ -164,8 +164,8 @@ let la=nearestPowerOf2(((h$*h$*4)/4)*4);
 let pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
 let sz=(w$*h$)/8;
-let blank$=Math.max((((w$-h$)*1)/2),0);
-let nblank$=Math.max((((h$-w$)*1)/2),0);
+let blank$=Math.max(((w$-(h$/2)))/2,0);
+let nblank$=Math.max(((h$-(w$/2)))/2,0);
 var avag=0.750;
 var min=1.0;
 var max=0.0;
@@ -396,14 +396,14 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setOutput([sz]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
-// var P=v[this.thread.y][this.thread.x];
+// var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+var P=v[this.thread.y][this.thread.x];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x+this.constants.nblnk+this.constants.blnk];
+var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $fmax=this.constants.fmax;
 var $fmin=this.constants.fmin;
 var $amax=this.constants.amax;
@@ -437,8 +437,8 @@ this.color(p[0],p[1],p[2],aveg);
 w$=parseInt(document.querySelector("#wid").innerHTML,10);
 h$=parseInt(document.querySelector("#hig").innerHTML,10);
 vv=document.querySelector("#mv");
-blank$=Math.max((((w$-h$)*1)/2),0);
-nblank$=Math.max((((h$-w$)*1)/2),0);
+blank$=Math.max(((w$-(h$/2)))/2,0);
+nblank$=Math.max(((h$-(w$/2)))/2,0);
 la=nearestPowerOf2(((h$*h$*4)/4)*4);
 sz=(w$*h$)/8;
 pointa=77*la;
@@ -462,8 +462,8 @@ eval("$"+j+".set($$1);");
 var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.querySelector("#wid").innerHTML,10);
 h$=parseInt(document.querySelector("#hig").innerHTML,10);
-blank$=Math.max((((w$-h$)*1)/2),0);
-nblank$=Math.max((((h$-w$)*1)/2),0);
+blank$=Math.max(((w$-(h$/2)))/2,0);
+nblank$=Math.max(((h$-(w$/2)))/2,0);
 la=nearestPowerOf2(((h$*h$*4)/4)*4);
 sz=(w$*h$)/8;
 pointa=77*la;
