@@ -712,7 +712,7 @@ async function videoFrames(){
 let SiZ=window.innerHeight;
 let w$=parseInt(document.querySelector("#mv").width);
 let h$=parseInt(document.querySelector("#mv").height);
-  /*
+ /*
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let blank$=Math.max((((w$-h$)*1)/1),0);
 let nblank$=Math.max((((h$-w$)*1)/1),0);
@@ -723,12 +723,12 @@ return (P[0],P[1],P[2],P[3]);
 t.setConstants({nblnk:nblank$,blnk:blank$});
 let frrm=new Uint8Array($H,0,la);
 $$1=t(vv);
-frrm.set($$1);
+frrm.set($$1.toBlob());
 // console.log(frrm[12]);
 // console.log(frrm[32]);
 // console.log(frrm[52]);
-// FS.writeFile('/video/frame.gl',frrm);
-
+FS.writeFile('/video/frame.gl',frrm);
+ */
 let cnv=document.querySelector('#bcanvas');
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true});
 gl2.drawImage(vv,0,0);
@@ -738,8 +738,8 @@ let imageData=image.data;
   console.log(imageData[32]);
   console.log(imageData[62]);
 let pixelData=new Uint8ClampedArray(imageData);
-// FS.writeFile('/video/frame.gl',pixelData);
-
+FS.writeFile('/video/frame.gl',pixelData);
+/*
 var pth="./test.png";
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
@@ -758,18 +758,20 @@ document.querySelector('#stat').innerHTML='Downloaded Image';
 document.querySelector('#stat').style.backgroundColor='blue';
 }
 });
-  ff.send(null);
-*/ 
+ff.send(null);
+
 const gpu = navigator.gpu;
 const format = gpu.getPreferredCanvasFormat();
 const adapter = await gpu.requestAdapter();
 const device = await adapter.requestDevice();
-  setInterval(function(){
+setInterval(function(){
 const externalTexture=device.importExternalTexture({source:vvi});
+    
 var mm=wgpuStore(externalTexture);
 // console.log(mm);
 Module.ccall("frm",null,[Number],[mm]);
-  },16.666);
+},16.666);
+*/  
 }
   
 function normalResStart(){
