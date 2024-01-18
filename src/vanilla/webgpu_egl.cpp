@@ -195,8 +195,8 @@ inline char wgl_cmp_src[2000]=
 
 const char * vertexShader =
 "@vertex\n"
-"fn main(@location(0) position: vec4<f64>) -> @builtin(position) vec4<f64> {\n"
-"return vec4<f64>(position.xyzw);"
+"fn main(@location(0) position: vec4<f32>) -> @builtin(position) vec4<f32> {\n"
+"return vec4<f32>(position.xyzw);"
 "}\n";
 
 const char * fragHeader="";
