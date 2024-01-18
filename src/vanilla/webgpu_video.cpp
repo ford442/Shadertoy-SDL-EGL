@@ -124,16 +124,20 @@ const char * vertexShadera1=
 "@vertex\n"
 "fn main(@builtin(vertex_index) VertexIndex : u32) ->\n"
 "VertexOutput {\n"
-"const pos=array<vec2<f32>,4>(\n"
-"vec2<f32>(-1.0f,-1.0f),\n"
-"vec2<f32>(1.0f,-1.0f),\n"
+"const pos=array<vec2<f32>,6>(\n"
 "vec2<f32>(1.0f,1.0f),\n"
-"vec2<f32>(-1.0f,1.0f)\n"
+"vec2<f32>(-1.0f,1.0f),\n"
+"vec2<f32>(-1.0f,-1.0f),\n"
+"vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(1.0f,-1.0f),\n"
+"vec2<f32>(-1.0f,-1.0f)\n"
 ");\n"
-"const uv=array<vec2<f32>,4>(\n"
-"vec2<f32>(0.0f,0.0f),\n"
+"const uv=array<vec2<f32>,6>(\n"
 "vec2<f32>(0.0f,1.0f),\n"
 "vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(0.0f,0.0f),\n"
+"vec2<f32>(0.0f,1.0f),\n"
+"vec2<f32>(0.0f,0.0f),\n"
 "vec2<f32>(1.0f,0.0f)\n"
 ");\n"
 "var output : VertexOutput;\n"
@@ -339,7 +343,7 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&fram,sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
-wgpu_render_pass_encoder_draw(wrpe.at(0,0),4,1,0,0);
+wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
