@@ -229,10 +229,10 @@ document.getElementById('ldv').height=document.innerHeight;
 loadV.addEventListener('canplay',function(){
 loadV.width=this.videoWidth;
 loadV.height=this.videoHeight;
-document.getElementById('wid').innerHTML=this.videoWidth;
-document.getElementById('hig').innerHTML=this.videoHeight;
-// document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
-// document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
+// document.getElementById('wid').innerHTML=this.videoWidth;
+// document.getElementById('hig').innerHTML=this.videoHeight;
+document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
 var $sc=this.duration;
 var mic=Math.round($sc*1000000);
 $pt=Math.random()*mic;
