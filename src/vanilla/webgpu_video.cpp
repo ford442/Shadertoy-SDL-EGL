@@ -431,9 +431,9 @@ xy.y=0;
 videoFrm.origin=xy;
 videoFrm.flipY=EM_FALSE;
   */
-videoSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_REPEAT;
-videoSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_REPEAT;
-videoSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_REPEAT;
+videoSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
+videoSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
+videoSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 videoSamplerDescriptor.magFilter=WGPU_FILTER_MODE_LINEAR;
 videoSamplerDescriptor.minFilter=WGPU_FILTER_MODE_LINEAR;
 videoSamplerDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_LINEAR;
