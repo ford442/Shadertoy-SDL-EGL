@@ -10,7 +10,6 @@ using namespace std;
 #include <cstdio> // C++ style
 #include <cstdarg> // C++ style
 
-
 #include "/content/RAMDRIVE2/aubio/src/aubio.h"
 #include "/content/RAMDRIVE2/aubio/src/utils/parameter.c"
 #include "/content/RAMDRIVE2/aubio/src/types.h"
@@ -109,8 +108,6 @@ inline int rNd4(int);
 // static void WGPU_Run();
 
 // static void ObtainedWebGpuDeviceStart(WGpuDevice,void *);
-inline boost::function ObtainedWebGpuDeviceStart(WGpuDevice,void *);
-
 static void ObtainedWebGpuAdapterStart(WGpuAdapter,void *);
 
 // static void WGPU_Start();
