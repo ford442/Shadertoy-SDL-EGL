@@ -282,8 +282,8 @@ return result2;
 return nullptr;
 }
 
-void * fram;
-// uint8_t * fram;
+// void * fram;
+uint8_t * fram;
 
 void raf(){
 u64_uni.at(3,3)++;
