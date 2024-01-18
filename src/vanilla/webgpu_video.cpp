@@ -282,8 +282,8 @@ return result2;
 return nullptr;
 }
 
-void * fram;
-// uint8_t * fram;
+// void * fram;
+uint8_t * fram;
 
 void raf(){
 u64_uni.at(3,3)++;
@@ -332,8 +332,8 @@ passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
-// fram=static_cast<uint8_t *>(rd_frm(Fnm2));
-fram=rd_frm(Fnm2);
+fram=static_cast<uint8_t *>(rd_frm(Fnm2));
+// fram=rd_frm(Fnm2);
 wetd.at(0,0).source=texid.at(0,0);
 // extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 // wet.at(0,0)=extTexture;
