@@ -107,7 +107,7 @@ typedef ResultType result_type;
 
 inline int rNd4(int);
 // static void WGPU_Run();
-static void ObtainedWebGpuDeviceStart(WGpuDevice,void *);
+// static void ObtainedWebGpuDeviceStart(WGpuDevice,void *);
 static void ObtainedWebGpuAdapterStart(WGpuAdapter,void *);
 
 // static void WGPU_Start();
