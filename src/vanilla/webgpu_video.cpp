@@ -345,7 +345,7 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
   
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,&fram,sze.at(0,0)*sze.at(0,0));
-wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),wb.at(3,3),wb.at(4,4),sze.at(0,0),sze.at(0,0),1);
+wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),&wb.at(3,3),wb.at(4,4),sze.at(0,0),sze.at(0,0),1);
 
 wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&wb.at(4,4),sze.at(0,0)*sze.at(0,0),sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
