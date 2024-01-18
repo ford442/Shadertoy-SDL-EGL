@@ -341,8 +341,8 @@ wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&fram,sze.at(0,0)*sze.at(0,0),sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&fram,sze.at(0,0)*sze.at(0,0),sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
@@ -731,15 +731,13 @@ FS.writeFile('/video/frame.gl',frrm);
  */
 let cnv=document.querySelector('#bcanvas');
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true});
+gl2.drawImage(vvi,0,0);
 let image=gl2.getImageData(0,0,cnv.width,cnv.height);
 let imageData=image.data;
 setInterval(function(){
 gl2.drawImage(vvi,0,0);
 image=gl2.getImageData(0,0,cnv.width,cnv.height);
 imageData=image.data;
-  console.log(imageData[12]);
-  console.log(imageData[32]);
-  console.log(imageData[62]);
 let pixelData=new Uint8ClampedArray(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
