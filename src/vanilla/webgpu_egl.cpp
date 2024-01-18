@@ -1,4 +1,4 @@
-#include "../../include/vanilla/main_compute.hpp"
+#include "../../include/vanilla/webgpu_egl.hpp"
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 
