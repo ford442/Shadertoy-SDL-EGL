@@ -419,7 +419,8 @@ wgsl.at(0,0)=frag_body;
 return;
 }
 
-void raf(){
+inline boost::function<EM_BOOL()>render=[](){
+// void raf(){
 /*
 if(ms_l==true){
 mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,1));
@@ -445,7 +446,6 @@ else{
 clk_l=true;
 }
 */
-
 u64_uni.at(1,1)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -558,11 +558,15 @@ wgpu_render_pass_encoder_end(wrpe.at(1,1));
 wcb.at(1,1)=wgpu_command_encoder_finish(wce.at(1,1));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(1,1));
 wceB={};
-return;
+return EM_TRUE;
+};
+
+void raf(){
+render();
 }
 
-// void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
-inline boost::function<void[](int,void *)>ObtainedWebGpuDeviceStart=[](WGpuDevice result, void *userData){
+void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
+// inline boost::function<void(WGpuDevice,void *)>ObtainedWebGpuDeviceStart=[](WGpuDevice result, void *userData){
 wd.at(0,0)=result;
 WGPU_UserData.at(0,0,0)=userData;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
