@@ -561,7 +561,8 @@ wceB={};
 return;
 }
 
-void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
+// void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
+inline boost::function<void(WGpuDevice,void *)>ObtainedWebGpuDeviceStart=[](WGpuDevice result, void *userData){
 wd.at(0,0)=result;
 WGPU_UserData.at(0,0,0)=userData;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
@@ -850,7 +851,6 @@ bindgroup_layout_entries[2].binding=2;
 bindgroup_layout_entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindgroup_layout_entries[2].layout.buffer=wbbl.at(0,0);
-  
    /* 
 bindgroup_layout_entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[3].binding=3;
@@ -979,7 +979,6 @@ bindgroup_entries[2].binding=2;
 bindgroup_entries[2].resource=wb.at(2,2);
 bindgroup_entries[2].bufferBindOffset=0;
 bindgroup_entries[2].bufferBindSize=sizeof(uint64_t);
-  
     /*
 bindgroup_entries[3]={};
 bindgroup_entries[3].binding=3;
@@ -1130,7 +1129,8 @@ emscripten_set_main_loop((void(*)())raf,0,0);
 // emscripten_set_main_loop_timing(2,1);
 // emscripten_request_animation_frame_loop(raf,0);
 on.at(0,0)=1;
-}
+return;
+};
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
 wa.at(0,0)=result;
@@ -1141,6 +1141,7 @@ WGPU_FEATURES_BITFIELD ftr=wgpu_adapter_or_device_get_features(wa.at(0,0));
 deviceDesc.requiredFeatures=ftr;
 wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
+return;
 }
 
 void WGPU_Start(){
@@ -1150,6 +1151,7 @@ options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
 options.forceFallbackAdapter=EM_FALSE;
 wao.at(0,0)=options;
 navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
+return;
 }
 
 EM_JS(void,js_main,(),{
