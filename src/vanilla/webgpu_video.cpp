@@ -731,14 +731,18 @@ FS.writeFile('/video/frame.gl',frrm);
  */
 let cnv=document.querySelector('#bcanvas');
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true});
-gl2.drawImage(vv,0,0);
 let image=gl2.getImageData(0,0,cnv.width,cnv.height);
 let imageData=image.data;
+setInterval(function(){
+gl2.drawImage(vvi,0,0);
+image=gl2.getImageData(0,0,cnv.width,cnv.height);
+imageData=image.data;
   console.log(imageData[12]);
   console.log(imageData[32]);
   console.log(imageData[62]);
 let pixelData=new Uint8ClampedArray(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
+  },16.6);
 /*
 var pth="./test.png";
 const ff=new XMLHttpRequest();
