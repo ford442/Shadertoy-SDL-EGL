@@ -282,8 +282,8 @@ return result2;
 return nullptr;
 }
 
-void * fram;
-// uint8_t * fram;
+// void * fram;
+uint8_t * fram;
 
 void raf(){
 u64_uni.at(3,3)++;
@@ -712,7 +712,7 @@ async function videoFrames(){
 let SiZ=window.innerHeight;
 let w$=parseInt(document.querySelector("#mv").width);
 let h$=parseInt(document.querySelector("#mv").height);
- /*
+/*
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let blank$=Math.max((((w$-h$)*1)/1),0);
 let nblank$=Math.max((((h$-w$)*1)/1),0);
@@ -742,7 +742,7 @@ imageData=image.data;
   console.log(imageData[62]);
 let pixelData=new Uint8ClampedArray(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
-  },16.6);
+},16.6);
 /*
 var pth="./test.png";
 const ff=new XMLHttpRequest();
