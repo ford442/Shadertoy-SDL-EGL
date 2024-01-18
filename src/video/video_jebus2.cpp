@@ -161,12 +161,12 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }
 }
-let la=nearestPowerOf2(((h$*h$*4)/4)*4);
+let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
 let sz=(ch$*ch$)/8;
-let blank$=Math.max(((w$-(ch$/2)))/2,0);
-let nblank$=Math.max(((ch$-(w$/2)))/2,0);
+let blank$=Math.max((w$-h$)/2,0);
+let nblank$=Math.max((h$-w$)/2,0);
 var avag=0.750;
 var min=1.0;
 var max=0.0;
@@ -397,11 +397,11 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setOutput([sz]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let t=g.createKernel(function(v){
-// var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
-var P=v[this.thread.y][this.thread.x];
+var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+// var P=v[this.thread.y][this.thread.x];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
+}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
@@ -417,7 +417,7 @@ var Min=4.0*(($amax-($favg-$amin))/2.0);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let rR=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
@@ -438,10 +438,9 @@ this.color(p[0],p[1],p[2],aveg);
 w$=parseInt(document.querySelector("#wid").innerHTML,10);
 h$=parseInt(document.querySelector("#hig").innerHTML,10);
 vv=document.querySelector("#mv");
-blank$=Math.max(((w$-(ch$/2)))/2,0);
-nblank$=Math.max(((ch$-(w$/2)))/2,0);
-// la=nearestPowerOf2(((h$*h$*4)/4)*4);
-la=nearestPowerOf2(((ch$*ch$*4)/4)*4);
+blank$=Math.max((w$-h$)/2,0);
+nblank$=Math.max((h$-w$)/2,0);
+la=nearestPowerOf2(((w$*h$*4)/4)*4);
 sz=(ch$*ch$)/8;
 pointa=77*la;
 // agav=new Float32Array($H,pointa,300);
@@ -464,10 +463,10 @@ eval("$"+j+".set($$1);");
 var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.querySelector("#wid").innerHTML,10);
 h$=parseInt(document.querySelector("#hig").innerHTML,10);
-blank$=Math.max(((w$-(ch$/2)))/2,0);
-nblank$=Math.max(((ch$-(w$/2)))/2,0);
-la=nearestPowerOf2(((h$*h$*4)/4)*4);
-sz=(ch$*ch$)/8;
+blank$=Math.max((w$-h$)/2,0);
+nblank$=Math.max((h$-w$)/2,0);
+la=nearestPowerOf2(((w$*h$*4)/4)*4);
+  sz=(ch$*ch$)/8;
 pointa=77*la;
 // var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
