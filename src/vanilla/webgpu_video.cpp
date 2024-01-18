@@ -53,7 +53,7 @@ WGpuTextureBindingLayout textureBindingLayout1={};
 WGpuSamplerBindingLayout samplerBindingLayout={};
 WGpuImageCopyExternalImage videoFrm={};
 WGPUImageCopyBuffer videoFrmBfrSrc={};
-const WGPUImageCopyBuffer videoFrmBfrDst={};
+const WGPUImageCopyBuffer videoFrmBfrDstX={};
 double szh,szw;
 int szhI,szwI;
 
@@ -428,7 +428,7 @@ srcBuffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 dstBuffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
 wb.at(3,3)=srcBuffer;
 wb.at(4,4)=dstBuffer;
-wicb.at(1,1)=videoFrmBfrDst;
+wicb.at(1,1)=WGPUImageCopyBuffer videoFrmBfrDst;
 WGpuOrigin2D xy={};
 xy.x=0;
 xy.y=0;
