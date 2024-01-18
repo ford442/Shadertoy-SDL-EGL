@@ -738,7 +738,7 @@ let imageData=image.data;
 setInterval(function(){
 gl2.drawImage(vvi,0,0);
 image=gl2.getImageData(0,0,cnv.width,cnv.height);
-imageData=image.data;
+imageData=image.data.toBlob();
 let pixelData=new Uint8ClampedArray(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 },100);
