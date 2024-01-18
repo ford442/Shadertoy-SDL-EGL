@@ -403,7 +403,7 @@ return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x-this.constants.nblnk-this.constants.blnk];
+var p=f[this.thread.y-this.constants.nblnk-this.constants.blnk][this.thread.x-this.constants.nblnk-this.constants.blnk];
 var $fmax=this.constants.fmax;
 var $fmin=this.constants.fmin;
 var $amax=this.constants.amax;
