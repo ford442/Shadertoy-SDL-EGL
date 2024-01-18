@@ -32,6 +32,7 @@ WGpuFragmentState fragState;
 WGpuBufferDescriptor bufferDescriptorUni={};
 WGpuBufferDescriptor bufferDescriptorSrc={};
 WGpuBufferDescriptor bufferDescriptorDst={};
+WGpuBufferDescriptor bufferDescriptorVid={};
 // WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
 // WGpuPipelineLayout pipeline_layout=0;
 WGpuBindGroupLayout bindgroup_layout=0;
@@ -46,6 +47,7 @@ WGpuMultisampleState multiSamp;
 WGpuBuffer uniBuffer;
 WGpuBuffer srcBuffer;
 WGpuBuffer dstBuffer;
+WGpuBuffer vidBuffer;
 WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 WGpuTextureBindingLayout textureBindingLayout1={};
 WGpuSamplerBindingLayout samplerBindingLayout={};
@@ -341,7 +343,11 @@ wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&fram,sze.at(0,0)*sze.at(0,0),sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+  
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,&fram,sze.at(0,0)*sze.at(0,0));
+wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),wb.at(3,3),wb.at(4,4),sze.at(0,0),sze.at(0,0),1);
+
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&wb.at(4,4),sze.at(0,0)*sze.at(0,0),sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
@@ -413,8 +419,7 @@ fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&colorTarget;
-  /*
-u64_bfrSze.at(0,0)=sze.at(0,0)*sze.at(0,0)*4;
+u64_bfrSze.at(0,0)=sze.at(0,0)*sze.at(0,0);
 WGpuBufferDescriptor bufferDescriptorIn={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorOut={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 wbd.at(3,3)=bufferDescriptorIn;
@@ -430,7 +435,6 @@ xy.y=0;
 // videoFrm.source; // must point to a WGpuImageBitmap (could also point to a HTMLVideoElement, HTMLCanvasElement or OffscreenCanvas, but those are currently unimplemented)
 videoFrm.origin=xy;
 videoFrm.flipY=EM_FALSE;
-  */
 videoSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 videoSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 videoSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
