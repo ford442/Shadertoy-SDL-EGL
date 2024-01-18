@@ -165,8 +165,8 @@ let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
 let sz=(ch$*ch$)/8;
-let blank$=Math.max((w$-h$)/2,0);
-let nblank$=Math.max((h$-w$)/2,0);
+let blank$=Math.max((w$-h$)/4,0);
+let nblank$=Math.max((h$-w$)/4,0);
 var avag=0.750;
 var min=1.0;
 var max=0.0;
@@ -397,8 +397,8 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setOutput([sz]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let t=g.createKernel(function(v){
-// var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
- var P=v[this.thread.y][this.thread.x];
+var P=v[this.thread.y][this.thread.x-this.constants.blnk-this.constants.nblnk];
+//  var P=v[this.thread.y][this.thread.x];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
