@@ -176,12 +176,11 @@ const bcanvas=document.querySelector("#bcanvas");
 const contx=bcanvas.getContext("webgl2",{colorType:'float32',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-// contx.getExtension('WEBGL_compatibility'); // limits to WebGL 1.0
 contx.getExtension('ARB_robust_buffer_access_behavior');
-contx.getExtension('ARB_ES3_compatibility');
-contx.getExtension('GL_EXTENSIONS');
+// contx.getExtension('ARB_ES3_compatibility');
+// contx.getExtension('GL_EXTENSIONS');
 contx.getExtension('GL_ALL_EXTENSIONS');
-contx.getExtension('KHR_no_error');
+// contx.getExtension('KHR_no_error');
 // contx.getExtension('GL_REGAL_enable');
 // contx.getExtension('OES_fragment_precision_high'); // deprecated
 contx.getExtension('EGL_EXT_client_extensions');
