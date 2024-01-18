@@ -741,7 +741,7 @@ image=gl2.getImageData(0,0,cnv.width,cnv.height);
 imageData=image.data;
 let pixelData=new Uint8ClampedArray(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
-},16.6);
+},100);
 /*
 var pth="./test.png";
 const ff=new XMLHttpRequest();
