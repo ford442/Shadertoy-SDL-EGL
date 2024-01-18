@@ -562,7 +562,7 @@ return;
 }
 
 // void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
-inline boost::function<void(int,void *)>ObtainedWebGpuDeviceStart=[](WGpuDevice result, void *userData){
+inline boost::function<void[](int,void *)>ObtainedWebGpuDeviceStart=[](WGpuDevice result, void *userData){
 wd.at(0,0)=result;
 WGPU_UserData.at(0,0,0)=userData;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
