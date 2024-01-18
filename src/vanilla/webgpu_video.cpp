@@ -724,6 +724,7 @@ t.setConstants({nblnk:nblank$,blnk:blank$});
 let frrm=new Uint8Array($H,0,la);
 $$1=t(vv);
 frrm.set($$1.toBlob());
+frrm.set($$1.toBlob());
 // console.log(frrm[12]);
 // console.log(frrm[32]);
 // console.log(frrm[52]);
