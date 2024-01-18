@@ -1,6 +1,4 @@
 #include "../../include/vanilla/main_compute.hpp"
-#include <EGL/egl.h>
-#include <EGL/eglext.h>
 
 WGpuBufferDescriptor bufferDescriptor_indice={};
 WGpuBuffer indice_Buffer;
