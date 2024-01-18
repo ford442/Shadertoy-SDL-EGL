@@ -282,8 +282,8 @@ return result2;
 return nullptr;
 }
 
-// void * fram;
-uint8_t * fram;
+void * fram;
+// uint8_t * fram;
 
 void raf(){
 u64_uni.at(3,3)++;
@@ -332,8 +332,8 @@ passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
-fram=static_cast<uint8_t *>(rd_frm(Fnm2));
-// fram=(void*)rd_frm(Fnm2);
+// fram=static_cast<uint8_t *>(rd_frm(Fnm2));
+fram=(void*)rd_frm(Fnm2);
 wetd.at(0,0).source=texid.at(0,0);
 // extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 // wet.at(0,0)=extTexture;
@@ -341,7 +341,7 @@ wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&fram,sze.at(0,0)*32,sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&fram,sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
