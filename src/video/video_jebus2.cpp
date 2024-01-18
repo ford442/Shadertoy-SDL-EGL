@@ -417,7 +417,7 @@ var Min=4.0*(($amax-($favg-$amin))/2.0);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let rR=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
