@@ -164,11 +164,11 @@ const char * vertexShadera=
 "vec2<f32>(1.0f,0.0f)\n"
 ");\n"
 "const uv=array<vec2<f32>,6>(\n"
-"vec2<f32>(-1.0f,-1.0f),\n"
+"vec2<f32>(0.0f,0.0f),\n"
 "vec2<f32>(0.0f,1.0f),\n"
 "vec2<f32>(1.0f,1.0f),\n"
 "vec2<f32>(1.0f,0.0f),\n"
-"vec2<f32>(-1.0f,1.0f),\n"
+"vec2<f32>(0.0f,1.0f),\n"
 "vec2<f32>(0.0f,0.0f)\n"
 ");\n"
 "var output : VertexOutput;\n"
@@ -389,7 +389,7 @@ multiSamp.count=0;
 multiSamp.mask=-1;
 shaderModuleDescV={};
 shaderModuleDescF={};
-shaderModuleDescV.code=vertexShadera1;
+shaderModuleDescV.code=vertexShadera;
 vs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescV);
 shaderModuleDescF.code=frag_body;
 // shaderModuleDescF.code=fragmentShader;
