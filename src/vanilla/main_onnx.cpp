@@ -55,6 +55,7 @@ std::copy(infos[i].begin(),infos[i].end(),char_array+i*infos[0].size());
 std::cout << char_array << std::endl;
 
 Ort::Env ort_env;
+std::cout << "got ORT env" << std::endl;
 
 const char model_path[12]="/model.onnx";
 const int64_t batchSize=2;
@@ -70,14 +71,18 @@ sessionOptions.SetIntraOpNumThreads(1);
     // ORT_ENABLE_ALL -> To Enable All possible optimizations
 	
 sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL);
+	std::cout << "got ORT session/options" << std::endl;
+
 Ort::Session session(ort_env,model_path,Ort::SessionOptions{nullptr});
 Ort::AllocatorWithDefaultOptions allocator;
 
 size_t numInputNodes=session.GetInputCount();
 size_t numOutputNodes=session.GetOutputCount();
+	std::cout << "got ORT model" << std::endl;
 
 auto inputName=session.GetInputNameAllocated(0,allocator);
 // const char* inputName = session.Ort::detail::GetInputName(0, allocator);
+	std::cout << "got ORT input" << std::endl;
 
 Ort::TypeInfo inputTypeInfo=session.GetInputTypeInfo(0);
 auto inputTensorInfo=inputTypeInfo.GetTensorTypeAndShapeInfo();
