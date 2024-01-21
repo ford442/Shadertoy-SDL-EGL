@@ -7,6 +7,7 @@ T vectorProduct(const std::vector<T>& v)
 }
 
 using namespace std;
+/*
 
 vector<int32_t> to_int32(vector<string> tokens) {
   vector<int32_t> ints;
@@ -42,15 +43,19 @@ int max_wordlength=12;
 string text = "birds";
 vector<string> tokens = tokenize(text);
 vector<int32_t> ints = to_int32(tokens);
+*/
 
 void cltest(){
+/*
 std::vector<std::string> infos=Ort::GetAvailableProviders();
 char* char_array=new char[infos.size()*infos[0].size()];
 for (int i=0;i<infos.size();i++){
 std::copy(infos[i].begin(),infos[i].end(),char_array+i*infos[0].size());
 }
 std::cout << char_array << std::endl;
+*/
 Ort::Env ort_env;
+
 const char model_path[12]="/model.onnx";
 const int64_t batchSize=2;
 Ort::SessionOptions sessionOptions;
@@ -133,7 +138,7 @@ std::cout << "setting outputTensorSize " <<  std::endl;
 
 std::vector<float> outputTensorValues(outputTensorSize);
 std::cout << "setting outputTensorValues " <<  std::endl;
-
+/*
 std::string text_prompt="two birds";
 
 std::vector<float> text_prompt_vector;
@@ -211,6 +216,7 @@ std::cout << "Got data. " << std::endl;
 // emscripten_set_canvas_image_data(data, width, height);
 //	std::cout << "Output tensors updated." << std::endl;
 	return;
+ */
 }
 
 WGpuShaderModuleCompilationHint fragHint={};
