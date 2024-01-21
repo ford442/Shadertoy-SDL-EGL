@@ -70,7 +70,7 @@ const int64_t batchSize=2;
 std::cout << "got ORT session/options" << std::endl;
 		std::cout << "got ORT SessionOptions" << std::endl;
 // Ort::Session sesh=session(ort_env,model_path,sessionOptions );
-OrtInit();
+Ort::OrtInit();
 			std::cout << "got ORT Init()" << std::endl;
 
 	// from ms
