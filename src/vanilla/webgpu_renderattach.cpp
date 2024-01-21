@@ -325,8 +325,8 @@ wtv.at(1,1)=colorTextureView;
 // colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 colorAttachment.view=wtv.at(1,1);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
-// colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
-colorAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
+colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
+// colorAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
 colorAttachment.clearValue.r=1.0f;
 colorAttachment.clearValue.g=1.0f;
 colorAttachment.clearValue.b=1.0f;
@@ -346,8 +346,8 @@ depthAttachment.depthStoreOp=WGPU_STORE_OP_STORE;
 // depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE;
 wrpdsa.at(0,0)=depthAttachment;
 passDesc={};
-passDesc.numColorAttachments=1;
-passDesc.colorAttachments=&wrpca.at(1,1);
+passDesc.numColorAttachments=2;
+passDesc.colorAttachments=&wrpca.at(0,0),&wrpca.at(1,1);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
 fram=static_cast<uint8_t *>(rd_frm(Fnm2));
@@ -507,14 +507,14 @@ videoAttachmentTextureDescriptor.viewFormats=nullptr; // &videoAttachmentViewFor
 wtd.at(3,3)=videoAttachmentTextureDescriptor;
 videoAttachmentTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(3,3));
 wt.at(3,3)=videoAttachmentTexture;
-videoTextureViewDescriptor.format=wtf.at(0,0);
-videoTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
-videoTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
-videoTextureViewDescriptor.baseMipLevel=0; // default = 0
-videoTextureViewDescriptor.mipLevelCount=1;
-videoTextureViewDescriptor.baseArrayLayer=0; // default = 0
-videoTextureViewDescriptor.arrayLayerCount=1;
-wtvd.at(3,3)=videoTextureViewDescriptor;
+videoAttachmentTextureViewDescriptor.format=wtf.at(0,0);
+videoAttachmentTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+videoAttachmentTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
+videoAttachmentTextureViewDescriptor.baseMipLevel=0; // default = 0
+videoAttachmentTextureViewDescriptor.mipLevelCount=1;
+videoAttachmentTextureViewDescriptor.baseArrayLayer=0; // default = 0
+videoAttachmentTextureViewDescriptor.arrayLayerCount=1;
+wtvd.at(3,3)=videoAttachmentTextureViewDescriptor;
 videoAttachmentTextureView=wgpu_texture_create_view(wt.at(3,3),&wtvd.at(3,3));
 wtv.at(3,3)=videoAttachmentTextureView;
 texid.at(0,0)=77;
