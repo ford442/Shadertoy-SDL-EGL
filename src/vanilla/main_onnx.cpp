@@ -83,7 +83,8 @@ Ort::TypeInfo inputTypeInfo=session.GetInputTypeInfo(0);
 auto inputTensorInfo=inputTypeInfo.GetTensorTypeAndShapeInfo();
 
 ONNXTensorElementDataType inputType=inputTensorInfo.GetElementType();
-
+	
+/*
 std::vector<int64_t> inputDims=inputTensorInfo.GetShape();
 if (inputDims.at(0) == -1){
 std::cout << "Got dynamic batch size. Setting input batch size to " << batchSize << "." << std::endl;
@@ -107,7 +108,7 @@ std::cout << "Got dynamic batch size. Setting output batch size to "
 outputDims.at(0)=batchSize;
 }
 
-/*
+
 std::cout << "Input Name: " << inputName << std::endl;
 std::cout << "Input Type: " << inputType << std::endl;
 std::cout << "Input Dimensions 1: " <<  std::to_string(inputDims.at(0)) << std::endl;
