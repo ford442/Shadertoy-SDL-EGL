@@ -67,8 +67,7 @@ sessionOptions.SetIntraOpNumThreads(1);
     // ORT_ENABLE_ALL -> To Enable All possible optimizations
 sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL);
 std::cout << "got ORT session/options" << std::endl;
-
-Ort::Session session(ort_env,model_path,&sessionOptions);
+Ort::Session session(ort_env,model_path,Ort::SessionOptions{sessionOptions});
 		std::cout << "got ORT SessionOptions" << std::endl;
 
 Ort::AllocatorWithDefaultOptions allocator;
