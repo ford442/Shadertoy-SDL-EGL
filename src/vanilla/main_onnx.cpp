@@ -74,11 +74,15 @@ sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL
 	std::cout << "got ORT session/options" << std::endl;
 
 Ort::Session session(ort_env,model_path,Ort::SessionOptions{nullptr});
+		std::cout << "got ORT SessionOptions" << std::endl;
+
 Ort::AllocatorWithDefaultOptions allocator;
+		std::cout << "got ORT allocator" << std::endl;
 
 size_t numInputNodes=session.GetInputCount();
 size_t numOutputNodes=session.GetOutputCount();
-	std::cout << "got ORT model" << std::endl;
+	
+	std::cout << "got ORT nodes" << std::endl;
 
 auto inputName=session.GetInputNameAllocated(0,allocator);
 // const char* inputName = session.Ort::detail::GetInputName(0, allocator);
