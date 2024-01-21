@@ -59,7 +59,7 @@ b3_onnx:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_onnx.cpp -fchar8_t -std=c++20 -mbulk-memory -matomics \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O2 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -D__EMSCRIPTEN__ main_onnx.o libonnxruntime_webassembly.a -lc++ -O2 -std=c++20 -fchar8_t --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-onnx.js \
-	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -polly -sALLOW_MEMORY_GROWTH=1 -mbulk-memory -matomics \
+	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(LDFLAGS) $(wGL_FLAGS) -polly -sALLOW_MEMORY_GROWTH=1 -mbulk-memory -matomics \
 	 -sINITIAL_MEMORY=1024mb -lmath.js -lhtml5.js -lint53.js -mllvm -mtune=wasm32 \
 	 -sFORCE_FILESYSTEM=1 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS='["startWebGPU","_startWebGPUb"]' \
