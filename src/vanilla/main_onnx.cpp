@@ -83,7 +83,6 @@ Ort::TypeInfo inputTypeInfo=session.GetInputTypeInfo(0);
 auto inputTensorInfo=inputTypeInfo.GetTensorTypeAndShapeInfo();
 
 ONNXTensorElementDataType inputType=inputTensorInfo.GetElementType();
-	
 
 std::vector<int64_t> inputDims=inputTensorInfo.GetShape();
 if (inputDims.at(0) == -1){
@@ -107,7 +106,6 @@ std::cout << "Got dynamic batch size. Setting output batch size to "
 << batchSize << "." << std::endl;
 outputDims.at(0)=batchSize;
 }
-
 
 std::cout << "Input Name: " << inputName << std::endl;
 std::cout << "Input Type: " << inputType << std::endl;
@@ -167,9 +165,9 @@ memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),6));
 
 std::cout << "Establishing Tensors" << std::endl;
 
-// std::cout << "Creating CPU link " << std::endl;
+std::cout << "Creating CPU link " << std::endl;
 
-// Ort::RunOptions runOpts;
+ Ort::RunOptions runOpts;
   // google colab
 std::cout << "The Run function takes the text prompt and the desired output size as input.\n"
 << "The output size is the size of the desired image, in pixels.\n"
@@ -1158,7 +1156,7 @@ u_time.t3=boost::chrono::high_resolution_clock::now();
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 if(on.at(0,0)==1){emscripten_cancel_main_loop();}
-emscripten_set_main_loop_timing(2,1);
+// emscripten_set_main_loop_timing(2,1);
 emscripten_set_main_loop((void(*)())raf,0,0);
 // emscripten_request_animation_frame_loop(raf,0);
 on.at(0,0)=1;
@@ -1395,7 +1393,8 @@ return;
 void startWebGPU(){
 const char * FnmC=reinterpret_cast<const char *>("/shader/shader.wgsl");
 getCode(FnmC);
-WGPU_Start();
+cltest();
+// WGPU_Start();
 return;
 }
 
