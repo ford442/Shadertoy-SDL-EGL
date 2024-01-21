@@ -302,7 +302,7 @@ videoAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
 // colorTexture=wgpu_device_create_texture(wd.at(1,1),&wtd.at(1,1));
 videoAttachment=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
-videoAttachment.view=wtv.at(2,2);
+videoAttachment.view=&wtv.at(2,2);
 videoAttachment.storeOp=WGPU_STORE_OP_STORE;
 // videoAttachment.loadOp=WGPU_LOAD_OP_LOAD;
 videoAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
@@ -341,7 +341,7 @@ depthAttachment.depthStoreOp=WGPU_STORE_OP_STORE;
 wrpdsa.at(0,0)=depthAttachment;
 passDesc={};
 passDesc.numColorAttachments=2;
-passDesc.colorAttachments=[&wrpca.at(0,0),&wrpca.at(1,1)];
+passDesc.colorAttachments={&wrpca.at(0,0),&wrpca.at(1,1)};
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
 fram=static_cast<uint8_t *>(rd_frm(Fnm2));
@@ -357,7 +357,7 @@ wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,&fram,sze.at(0,0)*sze.at(0,0));
 
 // wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),&wicb.at(1,1),wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
-wgpu_queue_write_texture(wq.at(0,0),wict.at(0,0),&fram,sze.at(0,0)*sze.at(0,0),sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&fram,sze.at(0,0)*sze.at(0,0),sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
