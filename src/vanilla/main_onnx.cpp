@@ -70,8 +70,9 @@ const int64_t batchSize=2;
 std::cout << "got ORT session/options" << std::endl;
 		std::cout << "got ORT SessionOptions" << std::endl;
 // Ort::Session sesh=session(ort_env,model_path,sessionOptions );
-// Ort::Session sesh=OrtInit();
-	
+OrtInit();
+			std::cout << "got ORT Init()" << std::endl;
+
 	// from ms
   Ort::Session sesh{ort_env, "/model.onnx", Ort::SessionOptions{nullptr}};
 	
