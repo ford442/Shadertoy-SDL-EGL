@@ -73,7 +73,7 @@ std::cout << "got ORT session/options" << std::endl;
 // Ort::Session sesh=OrtInit();
 	
 	// from ms
-  Ort::Session session{ort_env, "/model.onnx", sessionOptions};
+  Ort::Session sesh{ort_env, "/model.onnx", sessionOptions};
 	
 		std::cout << "got ORT Session" << std::endl;
 
