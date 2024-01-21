@@ -494,7 +494,7 @@ wtv.at(2,2)=videoTextureView;
 
   videoAttachmentTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 videoAttachmentTextureDescriptor.format=wtf.at(0,0);
-videoAttachmentTextureDescriptor.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
+videoAttachmentTextureDescriptor.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_COPY_DST;
 videoAttachmentTextureDescriptor.width=sze.at(0,0);
 videoAttachmentTextureDescriptor.height=sze.at(0,0); // default = 1;
 videoAttachmentTextureDescriptor.depthOrArrayLayers=1;
