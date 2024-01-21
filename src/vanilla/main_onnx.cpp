@@ -56,7 +56,7 @@ Ort::Env ort_env;
 std::cout << "got ORT env" << std::endl;
 char model_path[12]="/model.onnx";
 const int64_t batchSize=2;
-const Ort::SessionOptions sessionOptions;
+ Ort::SessionOptions sessionOptions;
 	Ort::Session session(ort_env,model_path,sessionOptions );
 
 sessionOptions.SetIntraOpNumThreads(1);
