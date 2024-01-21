@@ -54,7 +54,7 @@ std::copy(infos[i].begin(),infos[i].end(),char_array+i*infos[0].size());
 std::cout << char_array << std::endl;
 Ort::Env ort_env;
 std::cout << "got ORT env" << std::endl;
-const char model_path[12]="/model.onnx";
+char model_path[12]="/model.onnx";
 const int64_t batchSize=2;
 Ort::SessionOptions sessionOptions;
 sessionOptions.SetIntraOpNumThreads(1);
@@ -68,7 +68,7 @@ sessionOptions.SetIntraOpNumThreads(1);
 sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL);
 std::cout << "got ORT session/options" << std::endl;
 
-Ort::Session session(ort_env,model_path,sessionOptions);
+Ort::Session session(ort_env,model_path,&sessionOptions);
 		std::cout << "got ORT SessionOptions" << std::endl;
 
 Ort::AllocatorWithDefaultOptions allocator;
