@@ -6,6 +6,7 @@ WGpuExternalTextureDescriptor extTextureDescriptor={};
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
 WGpuTextureView videoTextureView;
+WGpuTextureView videoAttachmentTextureView;
 WGpuTextureViewDescriptor depthTextureViewDescriptor={};
 WGpuTextureViewDescriptor colorTextureViewDescriptor={};
 WGpuTextureViewDescriptor videoTextureViewDescriptor={};
@@ -514,8 +515,8 @@ videoTextureViewDescriptor.mipLevelCount=1;
 videoTextureViewDescriptor.baseArrayLayer=0; // default = 0
 videoTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(3,3)=videoTextureViewDescriptor;
-videoTextureAttachmentView=wgpu_texture_create_view(wt.at(3,3),&wtvd.at(3,3));
-wtv.at(3,3)=videoTextureAttachmentView;
+videoAttachmentTextureView=wgpu_texture_create_view(wt.at(3,3),&wtvd.at(3,3));
+wtv.at(3,3)=videoAttachmentTextureView;
 texid.at(0,0)=77;
 extTextureDescriptor.source=texid.at(0,0);
 extTextureDescriptor.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
