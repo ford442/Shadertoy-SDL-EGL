@@ -121,7 +121,7 @@ std::cout << "Output Dimensions 2: " <<  std::to_string(outputDims.at(1)) << std
 std::cout << "Output Dimensions 3: " <<  std::to_string(outputDims.at(2)) << std::endl;
 std::cout << "Number of Input Nodes: " << numInputNodes << std::endl;
 std::cout << "Number of Output Nodes: " << numOutputNodes << std::endl;
-*/
+
 size_t inputTensorSize=vectorProduct(inputDims);
 
 std::cout << "setting inputTensorSize:" << inputTensorSize << std::endl;
@@ -139,7 +139,7 @@ std::cout << "setting outputTensorSize " <<  std::endl;
 
 std::vector<float> outputTensorValues(outputTensorSize);
 std::cout << "setting outputTensorValues " <<  std::endl;
-/*
+
 std::string text_prompt="two birds";
 
 std::vector<float> text_prompt_vector;
