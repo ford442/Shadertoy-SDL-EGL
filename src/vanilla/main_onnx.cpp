@@ -61,7 +61,7 @@ const char model_path[12]="/model.onnx";
 const int64_t batchSize=2;
 Ort::SessionOptions sessionOptions;
 sessionOptions.SetIntraOpNumThreads(1);
-	
+
 		 // Sets graph optimization level
     // Available levels are
     // ORT_DISABLE_ALL -> To disable all optimizations
@@ -1346,12 +1346,11 @@ if(e.code=='Digit3'){document.getElementById('sizeUp').click();};
 pnnl.addEventListener('keydown',Key);
 
 document.querySelector('#startBtn').addEventListener('click',function(){
-// var pth="https://glsl.1ink.us/wgsl/galaxy.wgsl";
 let shdMenu=document.querySelector('#sh1');
 let highRes=document.querySelector('#resMode').value;
-document.querySelector('#path').innerHTML='https://glsl.1ink.us/wgsl/'+shdMenu.value;
+                       //  get onnx model  //
+document.querySelector('#path').innerHTML='https://1ink.us/files/model.onnx';
 var pth=document.querySelector('#path').innerHTML;
-// var pth="https://test.1ink.us/3arth/melt.wgsl";
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
@@ -1362,7 +1361,7 @@ let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader.wgsl',sfil);
-document.querySelector('#stat').innerHTML='Downloaded Shader';
+document.querySelector('#stat').innerHTML='Downloaded Model';
 document.querySelector('#stat').style.backgroundColor='blue';
 normalResStart();
 }
