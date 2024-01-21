@@ -69,7 +69,12 @@ sessionOptions.SetIntraOpNumThreads(1);
 sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL);
 std::cout << "got ORT session/options" << std::endl;
 		std::cout << "got ORT SessionOptions" << std::endl;
-Ort::Session sesh=session(ort_env,model_path,sessionOptions );
+// Ort::Session sesh=session(ort_env,model_path,sessionOptions );
+// Ort::Session sesh=OrtInit();
+	
+	// from ms
+  Ort::Session session{ort_env, "/model.onnx", sessionOptions};
+	
 		std::cout << "got ORT Session" << std::endl;
 
 Ort::AllocatorWithDefaultOptions allocator;
