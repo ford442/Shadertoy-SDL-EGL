@@ -57,7 +57,6 @@ std::cout << "got ORT env" << std::endl;
 char model_path[12]="/model.onnx";
 const int64_t batchSize=2;
  Ort::SessionOptions sessionOptions;
-	Ort::Session session(ort_env,model_path,sessionOptions );
 
 sessionOptions.SetIntraOpNumThreads(1);
 		 // Sets graph optimization level
@@ -70,16 +69,18 @@ sessionOptions.SetIntraOpNumThreads(1);
 sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL);
 std::cout << "got ORT session/options" << std::endl;
 		std::cout << "got ORT SessionOptions" << std::endl;
+Ort::Session sesh=session(ort_env,model_path,sessionOptions );
+		std::cout << "got ORT Session" << std::endl;
 
 Ort::AllocatorWithDefaultOptions allocator;
 		std::cout << "got ORT allocator" << std::endl;
 
-size_t numInputNodes=session.GetInputCount();
-size_t numOutputNodes=session.GetOutputCount();
+size_t numInputNodes=sesh.GetInputCount();
+size_t numOutputNodes=sesh.GetOutputCount();
 	
 	std::cout << "got ORT nodes" << std::endl;
 
-auto inputName=session.GetInputNameAllocated(0,allocator);
+auto inputName=sesh.GetInputNameAllocated(0,allocator);
 // const char* inputName = session.Ort::detail::GetInputName(0, allocator);
 	std::cout << "got ORT input" << std::endl;
 
@@ -95,11 +96,11 @@ inputDims.at(0)=ints.size();
 inputDims.at(1)=max_wordlength;
 }
 
-auto outputName=session.GetOutputNameAllocated(0,allocator);
+auto outputName=sesh.GetOutputNameAllocated(0,allocator);
 	
-//   //   const char* outputName = session.Ort::detail::GetOutputName(0, allocator);
+//   //   const char* outputName = sesh.Ort::detail::GetOutputName(0, allocator);
 
-Ort::TypeInfo outputTypeInfo=session.GetOutputTypeInfo(0);
+Ort::TypeInfo outputTypeInfo=sesh.GetOutputTypeInfo(0);
 auto outputTensorInfo=outputTypeInfo.GetTensorTypeAndShapeInfo();
 
 ONNXTensorElementDataType outputType=outputTensorInfo.GetElementType();
@@ -183,7 +184,7 @@ std::cout << "The Run function takes the text prompt and the desired output size
 << std::endl;
 
 // Run inference
-// session.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),&outputTensors,1);
+// sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),&outputTensors,1);
 	
 //   void Run(const RunOptions& run_options, const char* const* input_names, const Value* input_values, size_t input_count,
 //                     const char* const* output_names, Value* output_values, size_t output_count);
