@@ -46,22 +46,18 @@ vector<int32_t> ints = to_int32(tokens);
 
 
 void cltest(){
-
 std::vector<std::string> infos=Ort::GetAvailableProviders();
 char* char_array=new char[infos.size()*infos[0].size()];
 for (int i=0;i<infos.size();i++){
 std::copy(infos[i].begin(),infos[i].end(),char_array+i*infos[0].size());
 }
 std::cout << char_array << std::endl;
-
 Ort::Env ort_env;
 std::cout << "got ORT env" << std::endl;
-
 const char model_path[12]="/model.onnx";
 const int64_t batchSize=2;
 Ort::SessionOptions sessionOptions;
 sessionOptions.SetIntraOpNumThreads(1);
-
 		 // Sets graph optimization level
     // Available levels are
     // ORT_DISABLE_ALL -> To disable all optimizations
@@ -69,11 +65,10 @@ sessionOptions.SetIntraOpNumThreads(1);
     // removals) ORT_ENABLE_EXTENDED -> To enable extended optimizations
     // (Includes level 1 + more complex optimizations like node fusions)
     // ORT_ENABLE_ALL -> To Enable All possible optimizations
-	
 sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL);
-	std::cout << "got ORT session/options" << std::endl;
+std::cout << "got ORT session/options" << std::endl;
 
-Ort::Session session(ort_env,model_path,Ort::SessionOptions{nullptr});
+Ort::Session session(ort_env,model_path,sessionOptions);
 		std::cout << "got ORT SessionOptions" << std::endl;
 
 Ort::AllocatorWithDefaultOptions allocator;
