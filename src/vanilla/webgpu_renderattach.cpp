@@ -506,14 +506,14 @@ videoAttachmentTextureDescriptor.viewFormats=&videoAttachmentViewFormats[0];
 wtd.at(3,3)=videoAttachmentTextureDescriptor;
 videoAttachmentTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(3,3));
 wt.at(3,3)=videoAttachmentTexture;
-videoTextureAttachmentViewDescriptor.format=wtf.at(0,0);
-videoTextureAttachmentViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
-videoTextureAttachmentViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
-videoTextureAttachmentViewDescriptor.baseMipLevel=0; // default = 0
-videoTextureAttachmentViewDescriptor.mipLevelCount=1;
-videoTextureAttachmentViewDescriptor.baseArrayLayer=0; // default = 0
-videoTextureAttachmentViewDescriptor.arrayLayerCount=1;
-wtvd.at(3,3)=videoTextureAttachmentViewDescriptor;
+videoTextureViewDescriptor.format=wtf.at(0,0);
+videoTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+videoTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
+videoTextureViewDescriptor.baseMipLevel=0; // default = 0
+videoTextureViewDescriptor.mipLevelCount=1;
+videoTextureViewDescriptor.baseArrayLayer=0; // default = 0
+videoTextureViewDescriptor.arrayLayerCount=1;
+wtvd.at(3,3)=videoTextureViewDescriptor;
 videoTextureAttachmentView=wgpu_texture_create_view(wt.at(3,3),&wtvd.at(3,3));
 wtv.at(3,3)=videoTextureAttachmentView;
 texid.at(0,0)=77;
