@@ -89,7 +89,7 @@ auto inputName=sesh.GetInputNameAllocated(0,allocator);
 // const char* inputName = session.Ort::detail::GetInputName(0, allocator);
 	std::cout << "got ORT input" << std::endl;
 
-Ort::TypeInfo inputTypeInfo=session.GetInputTypeInfo(0);
+Ort::TypeInfo inputTypeInfo=sesh.GetInputTypeInfo(0);
 auto inputTensorInfo=inputTypeInfo.GetTensorTypeAndShapeInfo();
 
 ONNXTensorElementDataType inputType=inputTensorInfo.GetElementType();
