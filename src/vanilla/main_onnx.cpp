@@ -70,17 +70,19 @@ const int64_t batchSize=2;
 std::cout << "got ORT session/options" << std::endl;
 		std::cout << "got ORT SessionOptions" << std::endl;
 // Ort::Session sesh=session(ort_env,model_path,sessionOptions );
-Ort::OrtInit();
-			std::cout << "got ORT Init()" << std::endl;
+  std::basic_string<ORTCHAR_T> model_uri = "./model.onnx";
 
-	// from ms
-  Ort::Session sesh{ort_env, "/model.onnx", Ort::SessionOptions{nullptr}};
 	
+  Ort::Session sesh(*ort_env, model_uri, Ort::SessionOptions{});
 		std::cout << "got ORT Session" << std::endl;
 
+	// from ms
+ // Ort::Session sesh{ort_env, "/model.onnx", Ort::SessionOptions{nullptr}};
+	
 Ort::AllocatorWithDefaultOptions allocator;
 		std::cout << "got ORT allocator" << std::endl;
 
+	
 size_t numInputNodes=sesh.GetInputCount();
 size_t numOutputNodes=sesh.GetOutputCount();
 	
@@ -88,7 +90,8 @@ size_t numOutputNodes=sesh.GetOutputCount();
 
 auto inputName=sesh.GetInputNameAllocated(0,allocator);
 // const char* inputName = session.Ort::detail::GetInputName(0, allocator);
-	std::cout << "got ORT input" << std::endl;
+
+std::cout << "got ORT input" << std::endl;
 
 Ort::TypeInfo inputTypeInfo=sesh.GetInputTypeInfo(0);
 auto inputTensorInfo=inputTypeInfo.GetTensorTypeAndShapeInfo();
@@ -102,6 +105,7 @@ inputDims.at(0)=ints.size();
 inputDims.at(1)=max_wordlength;
 }
 
+	
 auto outputName=sesh.GetOutputNameAllocated(0,allocator);
 	
 //   //   const char* outputName = sesh.Ort::detail::GetOutputName(0, allocator);
@@ -130,7 +134,7 @@ std::cout << "Output Dimensions 2: " <<  std::to_string(outputDims.at(1)) << std
 std::cout << "Output Dimensions 3: " <<  std::to_string(outputDims.at(2)) << std::endl;
 std::cout << "Number of Input Nodes: " << numInputNodes << std::endl;
 std::cout << "Number of Output Nodes: " << numOutputNodes << std::endl;
-
+*/
 size_t inputTensorSize=vectorProduct(inputDims);
 
 std::cout << "setting inputTensorSize:" << inputTensorSize << std::endl;
