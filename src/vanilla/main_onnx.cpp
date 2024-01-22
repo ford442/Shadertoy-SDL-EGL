@@ -73,9 +73,8 @@ std::cout << "got ORT session/options" << std::endl;
   std::basic_string<ORTCHAR_T> model_uri = "model.onnx";
 
 		// from ms
-//  Ort::Session sesh{ort_env, "model.onnx", Ort::SessionOptions{nullptr}};
-  Ort::InitApi();
-  ort_env = OrtEnv::Create();
+Ort::Session sesh{ort_env, "model.onnx", Ort::SessionOptions{}};
+
 			std::cout << "got ORT Session" << std::endl;
 
 Ort::AllocatorWithDefaultOptions allocator;
