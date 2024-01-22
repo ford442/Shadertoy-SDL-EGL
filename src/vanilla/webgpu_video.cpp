@@ -707,7 +707,7 @@ frrm.set($$1.toBlob());
 FS.writeFile('/video/frame.gl',frrm);
  */
 let cnv=document.querySelector('#bcanvas');
-const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true});
+const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true});
 gl2.drawImage(vvi,0,0);
 let image=gl2.getImageData(0,0,cnv.width,cnv.height);
 let imageData=image.data;
@@ -715,7 +715,7 @@ setInterval(function(){
 gl2.drawImage(vvi,0,0);
 image=gl2.getImageData(0,0,cnv.width,cnv.height);
 imageData=image.data;
-let pixelData=new Uint8ClampedArray(imageData);
+let pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 },16.666);
 /*
