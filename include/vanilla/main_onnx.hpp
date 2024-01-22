@@ -1,4 +1,6 @@
 #include <boost/cstdfloat.hpp>  // must be first include
+
+#define __EMCSCRIPTEN__ 1
 #include "../../include/vanilla/avx.hpp"
 #include "../../include/vanilla/defs.hpp"
 // #include "../../include/vanilla/gl.hpp"
@@ -11,7 +13,6 @@ using namespace std;
 #include <cstdio> // C++ style
 #include <cstdarg> // C++ style
 
-#define __EMCSCRIPTEN__ 1
 
 #include <cstdint>
 
