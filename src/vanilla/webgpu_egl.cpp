@@ -206,7 +206,7 @@ const char * fragEntry="main_1";
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.wgsl");
 const char * FnmB=reinterpret_cast<const char *>("/shader/shader.wgsl");
 
-char8_t * result=NULL;
+char * result=NULL;
 char * results=NULL;
 long int length=0;
 
@@ -399,9 +399,9 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
+result=static_cast<char *>(malloc((length+1)*sizeof(char)));
 if(result){
-size_t actual_length=fread(result,sizeof(char8_t),length,file);
+size_t actual_length=fread(result,sizeof(char),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
