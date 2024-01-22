@@ -73,7 +73,7 @@ std::cout << "got ORT session/options" << std::endl;
   std::basic_string<ORTCHAR_T> model_uri = "./model.onnx";
 
 	
-  Ort::Session sesh(*ort_env, model_uri, Ort::SessionOptions{});
+  Ort::Session sesh(&ort_env, model_uri, Ort::SessionOptions{});
 		std::cout << "got ORT Session" << std::endl;
 
 	// from ms
@@ -134,7 +134,7 @@ std::cout << "Output Dimensions 2: " <<  std::to_string(outputDims.at(1)) << std
 std::cout << "Output Dimensions 3: " <<  std::to_string(outputDims.at(2)) << std::endl;
 std::cout << "Number of Input Nodes: " << numInputNodes << std::endl;
 std::cout << "Number of Output Nodes: " << numOutputNodes << std::endl;
-*/
+
 size_t inputTensorSize=vectorProduct(inputDims);
 
 std::cout << "setting inputTensorSize:" << inputTensorSize << std::endl;
