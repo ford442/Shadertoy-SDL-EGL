@@ -54,7 +54,7 @@ std::copy(infos[i].begin(),infos[i].end(),char_array+i*infos[0].size());
 std::cout << char_array << std::endl;
 Ort::Env ort_env;
 std::cout << "got ORT env" << std::endl;
-char model_path[12]="/model.onnx";
+const char model_path[12]="/model.onnx";
 const int64_t batchSize=2;
  Ort::SessionOptions sessionOptions;
 
@@ -73,7 +73,7 @@ std::cout << "got ORT session/options" << std::endl;
   std::basic_string<ORTCHAR_T> model_uri = "./model.onnx";
 
 	
-  Ort::Session sesh(ort_env, model_uri, Ort::SessionOptions{});
+  Ort::Session sesh(ort_env, model_path, Ort::SessionOptions{});
 		std::cout << "got ORT Session" << std::endl;
 
 	// from ms
