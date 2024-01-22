@@ -73,7 +73,7 @@ std::cout << "got ORT session/options" << std::endl;
   std::basic_string<ORTCHAR_T> model_uri = "./model.onnx";
 
 	
-  Ort::Session sesh(&ort_env, model_uri, Ort::SessionOptions{});
+  Ort::Session sesh(ort_env, model_uri, Ort::SessionOptions{});
 		std::cout << "got ORT Session" << std::endl;
 
 	// from ms
