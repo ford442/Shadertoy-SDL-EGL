@@ -1,5 +1,6 @@
 #include "../../include/vanilla/main_render.hpp"
-
+#include <fstream>
+  
 WGpuExternalTexture extTexture;
 WGpuExternalTextureBindingLayout extTextureBindingLayout={};
 WGpuExternalTextureDescriptor extTextureDescriptor={};
@@ -304,7 +305,9 @@ wrpd.at(0,0)=passDesc;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
 // fram=static_cast<uint8_t *>(rd_frm(Fnm2));
-fram=(void *)rd_frm(Fnm2);
+// fram=(void *)rd_frm(Fnm2);
+std::ifstream fram(Fnm2,std::ios::binary);
+std::vector<char> data((std::istreambuf_iterator<char>(file)),(std::istreambuf_iterator<char>()));
 wetd.at(0,0).source=texid.at(0,0);
 // extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 // wet.at(0,0)=extTexture;
