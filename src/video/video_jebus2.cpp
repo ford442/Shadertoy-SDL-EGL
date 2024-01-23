@@ -165,8 +165,8 @@ let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
 let sz=(ch$*ch$)/8;
-let blank$=Math.max((w$-h$)/2,0);
-let nblank$=Math.max((h$-w$)/2,0);
+let blank$=Math.max((w$-h$)/2.0,0);
+let nblank$=Math.max((h$-w$)/2.0,0);
 
 var avag=0.750;
 var min=1.0;
@@ -195,7 +195,7 @@ contx.getExtension('OES_blend_func_separate');
 contx.getExtension('OES_blend_subtract');
 // contx.getExtension('ARB_texture_float'); // OpenGL 1.5/2.0
 contx.getExtension('OES_texture_float');
-contx.getExtension('ARB_compatibility');
+// contx.getExtension('ARB_compatibility');
 // contx.getExtension('ARB_texture_half_float'); // OpenGL 1.5/2.0
 contx.getExtension('OES_texture_half_float');
 contx.getExtension('OES_element_index_uint');
@@ -404,7 +404,7 @@ return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x];
+var p=f[this.thread.y][this.thread.x-this.constants.blank];
 var $fmax=this.constants.fmax;
 var $fmin=this.constants.fmin;
 var $amax=this.constants.amax;
@@ -438,8 +438,8 @@ this.color(p[0],p[1],p[2],aveg);
 w$=parseInt(document.querySelector("#wid").innerHTML,10);
 h$=parseInt(document.querySelector("#hig").innerHTML,10);
 vv=document.querySelector("#mv");
-blank$=Math.max((w$-h$)/2,0);
-nblank$=Math.max((h$-w$)/2,0);
+blank$=Math.max((w$-h$)/2.0,0);
+nblank$=Math.max((h$-w$)/2.0,0);
 la=nearestPowerOf2(((w$*h$*4)/4)*4);
 sz=(ch$*ch$)/8;
 pointa=77*la;
@@ -463,8 +463,8 @@ eval("$"+j+".set($$1);");
 var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.querySelector("#wid").innerHTML,10);
 h$=parseInt(document.querySelector("#hig").innerHTML,10);
-blank$=Math.max((w$-h$)/2,0);
-nblank$=Math.max((h$-w$)/2,0);
+blank$=Math.max((w$-h$)/2.0,0);
+nblank$=Math.max((h$-w$)/2.0,0);
 la=nearestPowerOf2(((w$*h$*4)/4)*4);
   sz=(ch$*ch$)/8;
 pointa=77*la;
