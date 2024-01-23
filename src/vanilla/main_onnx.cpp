@@ -3,28 +3,27 @@
 template <typename T>
 T vectorProduct(const std::vector<T>& v)
 {
-    return accumulate(v.begin(), v.end(), 1, std::multiplies<T>());
+return accumulate(v.begin(),v.end(),1,std::multiplies<T>());
 }
 
 using namespace std;
 
-
 vector<int32_t> to_int32(vector<string> tokens) {
-  vector<int32_t> ints;
-  for (string token : tokens) {
+vector<int32_t> ints;
+for (string token : tokens) {
 std::cout << token << std::endl;
-  }
-  return ints;
+}
+return ints;
 }
 
 vector<string> tokenize(string text) {
-  vector<string> tokens;
+vector<string> tokens;
   // Split the text into words.
-  stringstream ss(text);
-  string word;
-  while (getline(ss, word, ' ')) {
-    tokens.push_back(word);
-  }
+stringstream ss(text);
+string word;
+while (getline(ss, word, ' ')) {
+tokens.push_back(word);
+}
   // Remove punctuation and stop words.
 ///  vector<string> stop_words = {"the", "of", "and", "to", "is", "was", "were", "be", "am", "are", "has", "have", "had", "that", "this", "it", "its", "with", "for", "by", "on", "at", "in", "to"};
 ///  for (int i = 0; i < tokens.size(); i++) {
@@ -37,16 +36,16 @@ vector<string> tokenize(string text) {
 //  for (int i = 0; i < tokens.size(); i++) {
 //    tokens[i] = tolower(tokens[i]);
 //  }
-  return tokens;
+return tokens;
 }
-int max_wordlength=12;
-string text = "birds";
-vector<string> tokens = tokenize(text);
-vector<int32_t> ints = to_int32(tokens);
 
+int max_wordlength=12;
+string text="birds";
+vector<string>tokens=tokenize(text);
+vector<int32_t>ints=to_int32(tokens);
 
 void cltest(){
-std::vector<std::string> infos=Ort::GetAvailableProviders();
+std::vector<std::string>infos=Ort::GetAvailableProviders();
 char* char_array=new char[infos.size()*infos[0].size()];
 for (int i=0;i<infos.size();i++){
 std::copy(infos[i].begin(),infos[i].end(),char_array+i*infos[0].size());
@@ -56,8 +55,7 @@ Ort::Env ort_env;
 std::cout << "got ORT env" << std::endl;
 const char * model_path="model.onnx";
 const int64_t batchSize=2;
- Ort::SessionOptions sessionOptions;
-
+Ort::SessionOptions sessionOptions;
 sessionOptions.SetIntraOpNumThreads(1);
 		 // Sets graph optimization level
     // Available levels are
@@ -68,51 +66,36 @@ sessionOptions.SetIntraOpNumThreads(1);
     // ORT_ENABLE_ALL -> To Enable All possible optimizations
 // sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL);
 std::cout << "got ORT session/options" << std::endl;
-		std::cout << "got ORT SessionOptions" << std::endl;
-// Ort::Session sesh=session(ort_env,model_path,sessionOptions );
+std::cout << "got ORT SessionOptions" << std::endl;
+// Ort::Session sesh=session(ort_env,model_path,sessionOptions);
 
+/*
 		// from ms
 Ort::Session sesh(ort_env,model_path,sessionOptions);
-
-			std::cout << "got ORT Session" << std::endl;
-
+std::cout << "got ORT Session" << std::endl;
 Ort::AllocatorWithDefaultOptions allocator;
-		std::cout << "got ORT allocator" << std::endl;
-
-	
+std::cout << "got ORT allocator" << std::endl;
 size_t numInputNodes=sesh.GetInputCount();
 size_t numOutputNodes=sesh.GetOutputCount();
-	
-	std::cout << "got ORT nodes" << std::endl;
-
+std::cout << "got ORT nodes" << std::endl;
 auto inputName=sesh.GetInputNameAllocated(0,allocator);
 // const char* inputName = session.Ort::detail::GetInputName(0, allocator);
-
 std::cout << "got ORT input" << std::endl;
-
 Ort::TypeInfo inputTypeInfo=sesh.GetInputTypeInfo(0);
 auto inputTensorInfo=inputTypeInfo.GetTensorTypeAndShapeInfo();
-
 ONNXTensorElementDataType inputType=inputTensorInfo.GetElementType();
-
-std::vector<int64_t> inputDims=inputTensorInfo.GetShape();
+std::vector<int64_t>inputDims=inputTensorInfo.GetShape();
 if (inputDims.at(0) == -1){
 std::cout << "Got dynamic batch size. Setting input batch size to " << batchSize << "." << std::endl;
 inputDims.at(0)=ints.size();
 inputDims.at(1)=max_wordlength;
 }
-
-	
 auto outputName=sesh.GetOutputNameAllocated(0,allocator);
-	
-//   //   const char* outputName = sesh.Ort::detail::GetOutputName(0, allocator);
-
+//   //   const char* outputName=sesh.Ort::detail::GetOutputName(0, allocator);
 Ort::TypeInfo outputTypeInfo=sesh.GetOutputTypeInfo(0);
 auto outputTensorInfo=outputTypeInfo.GetTensorTypeAndShapeInfo();
-
 ONNXTensorElementDataType outputType=outputTensorInfo.GetElementType();
-
-std::vector<int64_t> outputDims=outputTensorInfo.GetShape();
+std::vector<int64_t>outputDims=outputTensorInfo.GetShape();
 if (outputDims.at(0) == -1){
 std::cout << "Got dynamic batch size. Setting output batch size to "
 << batchSize << "." << std::endl;
@@ -133,53 +116,39 @@ std::cout << "Number of Input Nodes: " << numInputNodes << std::endl;
 std::cout << "Number of Output Nodes: " << numOutputNodes << std::endl;
 
 size_t inputTensorSize=vectorProduct(inputDims);
-
 std::cout << "setting inputTensorSize:" << inputTensorSize << std::endl;
-
 std::vector<int32_t> inputTensorValues(inputTensorSize);
 std::cout << "setting inputTensorValues " <<  std::endl;
-   for (int64_t i = 0; i < batchSize; ++i)
-    {
-        std::copy(ints.begin(),ints.end(),inputTensorValues.begin()+i*inputTensorSize);
-    }
+for (int64_t i = 0; i < batchSize; ++i)
+{
+std::copy(ints.begin(),ints.end(),inputTensorValues.begin()+i*inputTensorSize);
+}
 	
 size_t outputTensorSize=vectorProduct(outputDims);
 std::cout << "setting outputTensorSize " <<  std::endl;
   //  589824 ?
-
 std::vector<float> outputTensorValues(outputTensorSize);
 std::cout << "setting outputTensorValues " <<  std::endl;
-
 std::string text_prompt="two birds";
-
-std::vector<float> text_prompt_vector;
+std::vector<float>text_prompt_vector;
 for(char c : text_prompt){
 text_prompt_vector.push_back(c);
 }
 	
 std::cout << "Establishing text input" << std::endl;
-
 std::vector<const char*>inputNames={"input_ids"};
 // std::vector<const char*>inputNames={inputName};
 std::vector<const char*>outputNames={"last_hidden_state","pooler_output"};
 // std::vector<const char*>outputNames={outputName};
-	
 std::cout << "Establishing tensor names" << std::endl;
-
 Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArenaAllocator,OrtMemTypeCPU);
 std::cout << "Establishing memoryInfo" << std::endl;
-
-std::vector<Ort::Value> inputTensors;
+std::vector<Ort::Value>inputTensors;
 Ort::Value outputTensors{nullptr};
-
-inputTensors.push_back(Ort::Value::CreateTensor<int32_t>(
-memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),6));
-
+inputTensors.push_back(Ort::Value::CreateTensor<int32_t>(memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),6));
 std::cout << "Establishing Tensors" << std::endl;
-
 std::cout << "Creating CPU link " << std::endl;
-
- Ort::RunOptions runOpts;
+Ort::RunOptions runOpts;
   // google colab
 std::cout << "The Run function takes the text prompt and the desired output size as input.\n"
 << "The output size is the size of the desired image, in pixels.\n"
@@ -189,20 +158,14 @@ std::cout << "The Run function takes the text prompt and the desired output size
 << "The tensor data is a vector of floats that represents the image. \n"
 << "You can use the cv::Mat class to convert the tensor data to an image.\n"
 << std::endl;
-
 // Run inference
 // sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),&outputTensors,1);
-	
 //   void Run(const RunOptions& run_options, const char* const* input_names, const Value* input_values, size_t input_count,
 //                     const char* const* output_names, Value* output_values, size_t output_count);
-	
 //   void Run(run_options,input_names,input_values,input_count,
 //                     output_names,output_values,output_count);
-
 // std::cout << "Running inferrence." << std::endl;
-
 // auto outputDataPtr = outputTensors.GetTensorRawData();
-		
 	// Get the shape of the tensor.
 //  std::vector<int64_t> shape = outputTensorInfo.GetShape();
   // Create a new image with the same shape as the tensor.
@@ -211,7 +174,6 @@ std::cout << "The Run function takes the text prompt and the desired output size
 //  outputTensors.CopyTo(image_data);
   // Save the image to a file.
 std::cout << "Got data. " << std::endl;
-
 
 //  emscripten_image_data_type* data = emscripten_new_typed_array(image_data, shape.size(), EMSCRIPTEN_TYPED_ARRAY_U8);
 //  emscripten_save_image(output_filename, data, shape[1], shape[0]);
@@ -227,7 +189,7 @@ std::cout << "Got data. " << std::endl;
 // emscripten_set_canvas_image_data(data, width, height);
 //	std::cout << "Output tensors updated." << std::endl;
 	return;
-
+*/
 }
 
 WGpuShaderModuleCompilationHint fragHint={};
