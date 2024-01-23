@@ -185,7 +185,7 @@ const char * frag_body=
 // "@group(0) @binding(3) var extTexture : texture_external;\n"
 "@fragment\n"
 "fn main(@location(0) fragUV : vec4<f32>) ->\n"
-"@location(0) vec4<f32> {\n"
+"@location(0) vec2<f32> {\n"
 "return textureSample(myTexture,mySampler,fragUV);"
 "}\n";
 
