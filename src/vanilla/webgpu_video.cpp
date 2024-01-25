@@ -172,9 +172,8 @@ const char * vertexShaderc=
 "vec2<f32>(0.0,1.0),\n"
 "vec2<f32>(0.0,0.0)\n"
 ");\n"
-
 "var output : VertexOutput;\n"
-"output.Position=vec4(pos[VertexIndex],0.0f,1.0f);\n"
+"output.Position=vec4(pos[VertexIndex],0.0,1.0);\n"
 "output.fragUV=uv[VertexIndex];\n"
 "return output;\n"
 "}\n";
