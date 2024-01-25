@@ -71,7 +71,7 @@ std::cout << "got ORT SessionOptions" << std::endl;
 
 
 		// from ms
-Ort::Session sesh(ort_env,model_path,sessionOptions);
+Ort::Session sesh=Ort::Session(ort_env,model_path,sessionOptions);
 std::cout << "got ORT Session" << std::endl;
 
 Ort::AllocatorWithDefaultOptions allocator;
