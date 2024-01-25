@@ -763,7 +763,7 @@ const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true});
 gl2.drawImage(vvi,offS,0);
 let image=gl2.getImageData(0,0,cnv.width,cnv.height);
 let imageData=image.data;
-
+Module.ccall("frm",null,['Number'],['Number'],w$,h$);
 setInterval(function(){
 gl2.drawImage(vvi,0,0);
 image=gl2.getImageData(0,0,cnv.width,cnv.height);
