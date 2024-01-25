@@ -256,7 +256,9 @@ return nullptr;
 const char * Fnm2=reinterpret_cast<const char *>("/video/frame.gl");
 
 uint8_t * result2=NULL;
+float * resultf=NULL;
 uint8_t * results2=NULL;
+float * resultsf=NULL;
 long int length2=0;
 
 uint8_t * rd_frm(const char * Fnm2){
@@ -300,13 +302,13 @@ if(stat!=0){
 fclose(file2);
 return nullptr;
 }
-result2=static_cast<float *>(malloc((length+1)*sizeof(float)));
-if(result2){
-size_t actual_length=fread(result2,sizeof(float),length,file2);
+resultf=static_cast<float *>(malloc((length+1)*sizeof(float)));
+if(resultf){
+size_t actual_length=fread(resultf,sizeof(float),length,file2);
 result[actual_length++]={'\0'};
 }
 fclose(file2);
-return result2;
+return resultf;
 }
 return nullptr;
 }
