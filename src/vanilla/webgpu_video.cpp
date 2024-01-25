@@ -713,7 +713,21 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }
 }
-  
+
+function cropFrameToSquare(frameData, width, height) {
+const cropSize = Math.min(width, height);
+const offsetX = (width - cropSize) / 2;
+const croppedData = new ImageData(cropSize, cropSize);
+for (let y = 0; y < cropSize; y++) {
+    for (let x = 0; x < cropSize; x++) {
+      const srcIndex = (y * width + x + offsetX) * 4;
+      const destIndex = (y * cropSize + x) * 4;
+      croppedData.data.set(frameData.data.slice(srcIndex, srcIndex + 4), destIndex);
+    }
+  }
+  return croppedData;
+}
+
 let vv=document.querySelector('#mv');
 let vvi=document.querySelector('#mvi');
 
@@ -746,10 +760,12 @@ const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true});
 gl2.drawImage(vvi,0,0);
 let image=gl2.getImageData(0,0,cnv.width,cnv.height);
 let imageData=image.data;
+
 setInterval(function(){
 gl2.drawImage(vvi,0,0);
 image=gl2.getImageData(0,0,cnv.width,cnv.height);
 imageData=image.data;
+imageData=cropFrameToSquare(imageData,w$,h$);
 let pixelData=new Uint8ClampedArray(imageData);
 FS.writeFile('/video/frame.gl',imageData);
 },16.666);
