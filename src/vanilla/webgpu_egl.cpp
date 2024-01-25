@@ -318,7 +318,7 @@ double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
 
 struct Vertex{
-float position[4];
+boost::compute::double_ position[4];
 };
 
 Vertex nvertices[]={
