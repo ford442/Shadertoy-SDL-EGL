@@ -90,7 +90,6 @@ using namespace std;
 #include <thrust/functional.h>
 #include <cstdlib>
 
-
 #include <functional>
 
 template<class ArgumentType,class ResultType>
@@ -120,7 +119,6 @@ void startWebGPU();
 void runWebGPU();
 
 }
-
 
 using dv_tensor=boost::numeric::ublas::tensor<SDL_AudioDeviceID>;
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
