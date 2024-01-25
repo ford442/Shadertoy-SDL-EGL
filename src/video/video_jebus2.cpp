@@ -99,7 +99,7 @@ let stp,a,b,f;
 
 function backForth(stp){
 a=stp/1000.0;
-b=(stp/1000.0)+1.0;
+b=(stp/1000.0)+3.0;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
@@ -161,7 +161,7 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }
 }
-let la=nearestPowerOf2(((w$*h$*4)/4)*4);
+let la=nearestPowerOf2(((h$*h$*4)/4)*4);
 let pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
 let sz=(ch$*ch$)/8;
@@ -404,7 +404,7 @@ return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x-this.constants.blank];
+var p=f[this.thread.y][this.thread.x+this.constants.blank];
 var $fmax=this.constants.fmax;
 var $fmin=this.constants.fmin;
 var $amax=this.constants.amax;
