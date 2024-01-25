@@ -643,8 +643,8 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 
 EM_BOOL framm(int h,int w){
 // texid.at(0,0)=em;
-sze.at(1,0)=h;
-sze.at(0,1)=w;
+sze.at(1,0)=1080;
+sze.at(0,1)=1920;
 return EM_TRUE;
 }
 
