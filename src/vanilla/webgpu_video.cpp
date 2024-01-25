@@ -350,7 +350,7 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 
 // wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),&wicb.at(1,1),wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&fram,sze.at(0,0)*4*sizeof(uint8_t),sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&fram,1920*4,1080,sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
@@ -740,8 +740,8 @@ frrm.set($$1.toBlob());
 FS.writeFile('/video/frame.gl',frrm);
  */
 let cnv=document.querySelector('#bcanvas');
-cnv.height=SiZ;
-cnv.width=SiZ;
+cnv.height=h$;
+cnv.width=w$;
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true});
 gl2.drawImage(vvi,0,0);
 let image=gl2.getImageData(0,0,cnv.width,cnv.height);
