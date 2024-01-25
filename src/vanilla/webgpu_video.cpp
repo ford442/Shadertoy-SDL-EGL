@@ -719,8 +719,8 @@ let vvi=document.querySelector('#mvi');
 
 async function videoFrames(){
 let SiZ=window.innerHeight;
-let w$=parseInt(document.querySelector("#mvi").width);
-let h$=parseInt(document.querySelector("#mvi").height);
+let w$=parseInt(document.querySelector("#mvi").videoWidth);
+let h$=parseInt(document.querySelector("#mvi").videoHeight);
 /*
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let blank$=Math.max((((w$-h$)*1)/1),0);
