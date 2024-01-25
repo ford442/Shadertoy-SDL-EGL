@@ -751,7 +751,7 @@ gl2.drawImage(vvi,0,0);
 image=gl2.getImageData(0,0,cnv.width,cnv.height);
 imageData=image.data;
 let pixelData=new Uint8ClampedArray(imageData);
-FS.writeFile('/video/frame.gl',pixelData);
+FS.writeFile('/video/frame.gl',imageData);
 },16.666);
 /*
 var pth="./test.png";
