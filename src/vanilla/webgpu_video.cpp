@@ -740,6 +740,8 @@ frrm.set($$1.toBlob());
 FS.writeFile('/video/frame.gl',frrm);
  */
 let cnv=document.querySelector('#bcanvas');
+cnv.height=SiZ;
+cnv.width=SiZ;
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true});
 gl2.drawImage(vvi,0,0);
 let image=gl2.getImageData(0,0,cnv.width,cnv.height);
