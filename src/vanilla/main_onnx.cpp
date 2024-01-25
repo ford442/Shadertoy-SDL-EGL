@@ -69,12 +69,14 @@ std::cout << "got ORT session/options" << std::endl;
 std::cout << "got ORT SessionOptions" << std::endl;
 // Ort::Session sesh=session(ort_env,model_path,sessionOptions);
 
-/*
+
 		// from ms
 Ort::Session sesh(ort_env,model_path,sessionOptions);
 std::cout << "got ORT Session" << std::endl;
+
 Ort::AllocatorWithDefaultOptions allocator;
 std::cout << "got ORT allocator" << std::endl;
+/*
 size_t numInputNodes=sesh.GetInputCount();
 size_t numOutputNodes=sesh.GetOutputCount();
 std::cout << "got ORT nodes" << std::endl;
