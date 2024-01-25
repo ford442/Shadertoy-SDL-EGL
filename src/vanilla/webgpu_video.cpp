@@ -363,9 +363,9 @@ wrpd.at(0,0)=passDesc;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
 // fram=static_cast<uint8_t *>(rd_frm(Fnm2));
-// fram=(void *)rd_frm(Fnm2);
-std::ifstream fram(Fnm2,std::ios::binary);
-std::vector<char> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+fram=(void *)rd_frmf(Fnm2);
+// std::ifstream fram(Fnm2,std::ios::binary);
+// std::vector<char> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 wetd.at(0,0).source=texid.at(0,0);
 // extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 // wet.at(0,0)=extTexture;
@@ -765,6 +765,8 @@ async function videoFrames(){
 let SiZ=window.innerHeight;
 let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
+Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+
 /*
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let blank$=Math.max((((w$-h$)*1)/1),0);
@@ -797,8 +799,8 @@ gl2.drawImage(vvi,offS,0);
 image=gl2.getImageData(0,0,cnv.height,cnv.height);
 imageData=image.data;
 // imageData=cropFrameToSquare(imageData,w$,h$);
-// let pixelData=new Float32Array(imageData);
-FS.writeFile('/video/frame.gl',imageData);
+let pixelData=new Float32Array(imageData);
+FS.writeFile('/video/frame.gl',pixelData);
 },16.666);
 /*
 var pth="./test.png";
