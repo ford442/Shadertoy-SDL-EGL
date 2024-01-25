@@ -285,6 +285,32 @@ return result2;
 return nullptr;
 }
 
+float * rd_frmf(const char * Fnm2){
+FILE * file2=fopen(Fnm,"r");
+::boost::tuples::tie(result2,results2,file2);
+if(file2){
+int32_t stat=fseek(file2,0,SEEK_END);
+if(stat!=0){
+fclose(file2);
+return nullptr;
+}
+length=ftell(file2);
+stat=fseek(file2,0,SEEK_SET);
+if(stat!=0){
+fclose(file2);
+return nullptr;
+}
+result2=static_cast<float *>(malloc((length+1)*sizeof(float)));
+if(result2){
+size_t actual_length=fread(result2,sizeof(float),length,file2);
+result[actual_length++]={'\0'};
+}
+fclose(file2);
+return result2;
+}
+return nullptr;
+}
+
 void * fram;
 // uint8_t * fram;
 
@@ -705,8 +731,8 @@ EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
 FS.mkdir('/video');
 const g=new GPUX();
-let $H=Module.HEAPU8.buffer;
-let $$1;
+// let $H=Module.HEAPU8.buffer;
+// let $$1;
   
 function nearestPowerOf2(n){
 if(n&(n-1)){
@@ -759,7 +785,7 @@ let cnv=document.querySelector('#bcanvas');
 cnv.height=SiZ;
 cnv.width=SiZ;
 let offS=0.0-(Math.floor((w$-h$)/2.0));
-const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true});
+const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true});
 gl2.drawImage(vvi,offS,0);
 let image=gl2.getImageData(0,0,cnv.width,cnv.height);
 let imageData=image.data;
@@ -769,7 +795,7 @@ gl2.drawImage(vvi,0,0);
 image=gl2.getImageData(0,0,cnv.width,cnv.height);
 imageData=image.data;
 // imageData=cropFrameToSquare(imageData,w$,h$);
-let pixelData=new Uint8Array(imageData);
+let pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 },16.666);
 /*
