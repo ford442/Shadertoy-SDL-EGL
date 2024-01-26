@@ -766,7 +766,7 @@ async function videoFrames(){
 let SiZ=window.innerHeight;
 let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
-// Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+Module.ccall("frm",null,['Number'],['Number'],h$,h$);
   console.log("vid size: ",w$,", ",h$);
 /*
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
