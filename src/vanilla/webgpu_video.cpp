@@ -764,8 +764,8 @@ let vvi=document.querySelector('#mvi');
 
 async function videoFrames(){
 let SiZ=window.innerHeight;
-let w$=parseInt(document.querySelector("#mv").videoWidth);
-let h$=parseInt(document.querySelector("#mv").videoHeight);
+let w$=parseInt(document.querySelector("#mv").width);
+let h$=parseInt(document.querySelector("#mv").height);
 Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
   console.log("vid size: ",w$,", ",h$);
 /*
