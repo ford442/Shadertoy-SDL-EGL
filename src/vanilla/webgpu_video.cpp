@@ -792,12 +792,12 @@ cnv.height=h$;
 cnv.width=w$;
 let offS=0.0-(Math.floor((w$-h$)/2.0));
 const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true});
-gl2.drawImage(vvi,offS,0);
+gl2.drawImage(vvi,offS,0,h$,h$,0,0,h$,h$);
 let image=gl2.getImageData(0,0,cnv.height,cnv.height);
 let imageData=image.data;
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 setInterval(function(){
-gl2.drawImage(vvi,offS,0);
+gl2.drawImage(vvi,offS,0,h$,h$,0,0,h$,h$);
 image=gl2.getImageData(0,0,cnv.height,cnv.height);
 imageData=image.data;
 // imageData=cropFrameToSquare(imageData,w$,h$);
