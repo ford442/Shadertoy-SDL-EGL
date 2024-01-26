@@ -791,7 +791,7 @@ let cnv=document.querySelector('#bcanvas');
 cnv.height=h$;
 cnv.width=h$;
 let offS=0.0-(Math.floor((w$-h$)/2.0));
-const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true});
+const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // colorType:'float32',
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,h$,h$);
 let image=gl2.getImageData(0,0,cnv.height,cnv.height);
 let imageData=image.data;
@@ -803,7 +803,7 @@ imageData=image.data;
 // imageData=cropFrameToSquare(imageData,w$,h$);
 // let pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',imageData);
-},16.666);
+},16.6);
 /*
 var pth="./test.png";
 const ff=new XMLHttpRequest();
