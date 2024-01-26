@@ -764,8 +764,8 @@ let vvi=document.querySelector('#mvi');
 
 async function videoFrames(){
 let SiZ=window.innerHeight;
-let w$=parseInt(document.querySelector("#mvi").videoWidth);
-let h$=parseInt(document.querySelector("#mvi").videoHeight);
+let w$=parseInt(document.querySelector("#mv").videoWidth);
+let h$=parseInt(document.querySelector("#mv").videoHeight);
 Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
   console.log("vid size: ",w$,", ",h$);
 /*
@@ -791,10 +791,13 @@ cnv.height=SiZ;
 cnv.width=SiZ;
 let offS=Math.floor((w$-h$)/2.0);
 const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
-gl2.drawImage(vvi,offS,0,h$,h$,0,0,SiZ,SiZ);
+gl2.drawImage(vv,offS,0,h$,h$,0,0,SiZ,SiZ);
 let image=gl2.getImageData(0,0,SiZ,SiZ);
 let imageData=image.data;
-// Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+FS.writeFile('/video/frame.gl',imageData);
+
+/*
 setInterval(function(){
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,SiZ,SiZ);
 image=gl2.getImageData(0,0,SiZ,SiZ);
@@ -804,7 +807,7 @@ imageData=image.data;
 // let pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',imageData);
 },16.6);
-/*
+
 var pth="./test.png";
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
