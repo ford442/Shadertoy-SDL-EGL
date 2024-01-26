@@ -1316,7 +1316,7 @@ document.querySelector('#startBtn').addEventListener('click',function(){
 let shdMenu=document.querySelector('#sh1');
 let highRes=document.querySelector('#resMode').value;
                        //  get onnx model  //
-document.querySelector('#path').innerHTML='https://1ink.us/files/model.onnx';
+document.querySelector('#path').innerHTML='https://1ink.us/files/OverNet.onnx';
 var pth=document.querySelector('#path').innerHTML;
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
