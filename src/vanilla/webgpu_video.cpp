@@ -801,7 +801,7 @@ image=gl2.getImageData(0,0,cnv.height,cnv.height);
 imageData=image.data;
 // imageData=cropFrameToSquare(imageData,w$,h$);
 // let pixelData=new Uint8ClampedArray(imageData);
-let pixelData=new Float32Array(imageData);
+let pixelData=new Float32Array(image);
 FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
 /*
