@@ -56,7 +56,7 @@ std::cout << "got ORT env" << std::endl;
  std::string model_path="model.onnx";
 const int64_t batchSize=2;
 Ort::SessionOptions sessionOptions;
-sessionOptions.SetIntraOpNumThreads(1);
+// sessionOptions.SetIntraOpNumThreads(1);
 		 // Sets graph optimization level
     // Available levels are
     // ORT_DISABLE_ALL -> To disable all optimizations
@@ -68,7 +68,6 @@ sessionOptions.SetIntraOpNumThreads(1);
 std::cout << "got ORT session/options" << std::endl;
 std::cout << "got ORT SessionOptions" << std::endl;
 // Ort::Session sesh=session(ort_env,model_path,sessionOptions);
-
 
 		// from ms
 Ort::Session sesh=Ort::Session(ort_env,model_path.c_str(),sessionOptions);
