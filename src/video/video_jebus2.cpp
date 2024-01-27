@@ -420,7 +420,7 @@ this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([w$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let rR=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x+this.constants.blnk];
+var p=f[this.thread.y][this.thread.x];
 var $fmax=this.constants.fmax;
 var $fmin=this.constants.fmin;
 var $amax=this.constants.amax;
