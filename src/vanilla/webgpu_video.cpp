@@ -76,7 +76,7 @@ uint64_t tme;
 static wetd_tensor wetd=wetd_tensor{2,2};
 static wet_tensor wet=wet_tensor{2,2};
 static i_tensor texid=i_tensor{2,2};
-static i_tensor sze=i_tensor{2,2};
+static i_tensor sze=i_tensor{3,3};
 static f_tensor szef=f_tensor{2,2};
 static wce_tensor wce=wce_tensor{2,2};
 static wrpe_tensor wrpe=wrpe_tensor{2,2};
@@ -732,9 +732,9 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 
 EM_BOOL framm(int h,int w){
 // texid.at(0,0)=em;
-sze.at(1,0)=h;
-sze.at(0,1)=h;
-sze.at(1,1)=h;
+sze.at(1,0)=sze.at(0,0);
+sze.at(0,1)=sze.at(0,0);
+sze.at(1,1)=sze.at(0,0);
 return EM_TRUE;
 }
 
