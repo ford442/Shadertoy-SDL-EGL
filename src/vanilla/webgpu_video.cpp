@@ -829,7 +829,7 @@ let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
 document.querySelector("#mvi").height=h$;
 document.querySelector("#mvi").width=w$;
-Module.ccall("frm",null,['Number'],['Number'],h$,w$);
+Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
   console.log("vid size: ",h$,", ",w$);
 /*
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
