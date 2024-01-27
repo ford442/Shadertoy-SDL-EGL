@@ -408,7 +408,7 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 
 // wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),&wicb.at(1,1),wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&fram,sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&data,sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
@@ -704,6 +704,7 @@ EM_BOOL framm(int h,int w){
 // texid.at(0,0)=em;
 sze.at(1,0)=h;
 sze.at(0,1)=w;
+sze.at(1,1)=h;
 return EM_TRUE;
 }
 
@@ -794,10 +795,12 @@ let vvi=document.querySelector('#mvi');
 
 async function videoFrames(){
 let SiZ=window.innerHeight;
-let w$=parseInt(document.querySelector("#mv").width);
-let h$=parseInt(document.querySelector("#mv").height);
-Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
-  console.log("vid size: ",w$,", ",h$);
+let w$=parseInt(document.querySelector("#mvi").videoWidth);
+let h$=parseInt(document.querySelector("#mvi").videoHeight);
+document.querySelector("#mvi").height=h$;
+document.querySelector("#mvi").width=w$;
+Module.ccall("frm",null,['Number'],['Number'],h$,w$);
+  console.log("vid size: ",h$,", ",w$);
 /*
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let blank$=Math.max((((w$-h$)*1)/1),0);
@@ -821,13 +824,11 @@ cnv.height=SiZ;
 cnv.width=SiZ;
 let offS=Math.floor((w$-h$)/2.0);
 const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
-gl2.drawImage(vv,offS,0,h$,h$,0,0,SiZ,SiZ);
+gl2.drawImage(vvi,offS,0,h$,h$,0,0,SiZ,SiZ);
 let image=gl2.getImageData(0,0,SiZ,SiZ);
 let imageData=image.data;
 Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 FS.writeFile('/video/frame.gl',imageData);
-
-/*
 setInterval(function(){
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,SiZ,SiZ);
 image=gl2.getImageData(0,0,SiZ,SiZ);
@@ -837,7 +838,7 @@ imageData=image.data;
 // let pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',imageData);
 },16.6);
-
+/*
 var pth="./test.png";
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
