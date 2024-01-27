@@ -417,7 +417,7 @@ var Min=4.0*(($amax-($favg-$amin))/2.0);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([h$+blank$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let rR=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
@@ -470,7 +470,7 @@ sz=(h$*h$)/8;
 pointa=77*la;
 // var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
-r.setOutput([h$+blank$,h$]);
+r.setOutput([h$,h$]);
 t.setOutput([h$,h$]);
 rR.setOutput([h$,h$]);
 for(i=0;i<65;i++){
