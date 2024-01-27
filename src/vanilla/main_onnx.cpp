@@ -51,7 +51,7 @@ for (int i=0;i<infos.size();i++){
 std::copy(infos[i].begin(),infos[i].end(),char_array+i*infos[0].size());
 }
 std::cout << char_array << std::endl;
-Ort::Env ort_env;
+  std::shared_ptr<Ort::Env> mEnv;
 std::cout << "got ORT env" << std::endl;
  std::string model_path="model.onnx";
 const int64_t batchSize=2;
@@ -68,9 +68,12 @@ Ort::SessionOptions sessionOptions;
 std::cout << "got ORT session/options" << std::endl;
 std::cout << "got ORT SessionOptions" << std::endl;
 // Ort::Session sesh=session(ort_env,model_path,sessionOptions);
+  std::shared_ptr<Ort::Session> sesh;
 
 		// from ms
-Ort::Session sesh=Ort::Session(ort_env,model_path.c_str(),sessionOptions);
+// Ort::Session sesh=Ort::Session(ort_env,model_path.c_str(),sessionOptions);
+	sesh = std::make_shared<Ort::Session>(*mEnv, model_path.c_str(), sessionOptions);
+
 std::cout << "got ORT Session" << std::endl;
 
 Ort::AllocatorWithDefaultOptions allocator;
