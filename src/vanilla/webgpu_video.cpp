@@ -865,8 +865,8 @@ image=gl2.getImageData(0,0,SiZ,SiZ);
 imageData=image.data;
 // imageData=cropFrameToSquare(imageData,w$,h$);
 // let pixelData=new Uint8ClampedArray(imageData);
-// let pixelData=new Float32Array(imageData);
-FS.writeFile('/video/frame.gl',imageData);
+let pixelData=new Float32Array(imageData);
+FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
 /*
 var pth="./test.png";
