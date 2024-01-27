@@ -209,6 +209,36 @@ const char * vertexShaderc1=
 "}\n";
 
 
+const char * vertexShaderc2=
+"struct VertexOutput{\n"
+"@builtin(position) Position : vec4<f32>,\n"
+"@location(0) fragUV : vec2<f32>\n"
+"};\n"
+"@vertex\n"
+"fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
+"var pos=array<vec2<f32>,6>(\n"
+"vec2<f32>(1.0,1.0),\n"
+"vec2<f32>(1.0,-1.0),\n"
+"vec2<f32>(-1.0,-1.0),\n"
+"vec2<f32>(1.0,1.0),\n"
+"vec2<f32>(-1.0,-1.0),\n"
+"vec2<f32>(-1.0,1.0)\n"
+");\n"
+"var uv=array<vec2<f32>,6>(\n"
+"vec2(1.0f,1.0f),\n"
+"vec2(1.0f,0.0f),\n"
+"vec2(0.0f,0.0f),\n"
+"vec2(1.0f,1.0f),\n"
+"vec2(0.0f,0.0f),\n"
+"vec2(0.0f,1.0f),\n"
+");\n"
+"var output : VertexOutput;\n"
+"output.Position=vec4(pos[VertexIndex],0.0,1.0);\n"
+"output.fragUV=uv[VertexIndex];\n"
+"return output;\n"
+"}\n";
+
+
 const char * vertexShaderb=
 "struct VertexOutput {\n"
 "@builtin(position) Position : vec4<f32>,\n"
@@ -451,7 +481,7 @@ multiSamp.count=0;
 multiSamp.mask=-1;
 shaderModuleDescV={};
 shaderModuleDescF={};
-shaderModuleDescV.code=vertexShaderc1;
+shaderModuleDescV.code=vertexShaderc2;
 vs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescV);
 shaderModuleDescF.code=frag_body;
 // shaderModuleDescF.code=fragmentShader;
