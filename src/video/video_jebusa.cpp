@@ -167,7 +167,6 @@ let agav=new Float32Array($H,pointa,300);
 let sz=(h$*h$)/8;
 let blank$=Math.max((w$-h$)/2,0);
 let nblank$=Math.max((h$-w$)/2,0);
-
 var avag=0.750;
 var min=1.0;
 var max=0.0;
@@ -439,6 +438,7 @@ h$=parseInt(document.querySelector("#hig").innerHTML,10);
 vv=document.querySelector("#mv");
 blank$=Math.max((w$-h$)/2,0);
 nblank$=Math.max((h$-w$)/2,0);
+
 la=nearestPowerOf2(((h$*h$*4)/4)*4);
 sz=(h$*h$)/8;
 pointa=77*la;
@@ -453,8 +453,7 @@ var $B=new Float32Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
-t.setConstants({nblnk:nblank$,blnk:blank$});
-rR.setConstants({nblnk:nblank$,blnk:blank$});
+rR.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 var $$1=t(vv);
 for (i=0;i<65;i++){
 var j=i+1;
@@ -470,9 +469,6 @@ sz=(h$*h$)/8;
 pointa=77*la;
 // var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
-r.setOutput([h$,h$]);
-t.setOutput([h$,h$]);
-rR.setOutput([h$,h$]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
@@ -480,12 +476,10 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 pointb=66*la;
 var $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
-t.setConstants({nblnk:nblank$,blnk:blank$});
 rR.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 var T=false;
 function M(){
 vv=document.querySelector("#mv");
-t.setConstants({nblnk:nblank$,blnk:blank$});
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 rR.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 if(T){return;}
