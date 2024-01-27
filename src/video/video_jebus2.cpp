@@ -401,7 +401,7 @@ let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
+}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$+$blank,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x+this.constants.blank];
@@ -417,10 +417,10 @@ var Min=4.0*(($amax-($favg-$amin))/2.0);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
-}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
+}).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([h$+blank$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let rR=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x];
+var p=f[this.thread.y][this.thread.x-this.constants.blank];
 var $fmax=this.constants.fmax;
 var $fmin=this.constants.fmin;
 var $amax=this.constants.amax;
@@ -455,6 +455,7 @@ var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$});
+rR.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
 for (i=0;i<65;i++){
 var j=i+1;
