@@ -404,8 +404,8 @@ return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let tt=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x];
-return[P[0],P[1],P[2]];
+var y=v[this.thread.y][this.thread.x];
+this.color(y[0],y[1],y[2],y[3]);
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let r=g.createKernel(function(f){
