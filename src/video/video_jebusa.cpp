@@ -398,13 +398,13 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setOutput([sz]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x-this.constants.blnk];
+var P=v[this.thread.y][this.thread.x];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let r=g.createKernel(function(f){
-var p=f[this.thread.y][this.thread.x];
+var p=f[this.thread.y][this.thread.x-this.constants.blnk];
 var $fmax=this.constants.fmax;
 var $fmin=this.constants.fmin;
 var $amax=this.constants.amax;
@@ -453,7 +453,7 @@ eval("$"+j+".set($$1);");
 var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.querySelector("#wid").innerHTML,10);
 h$=parseInt(document.querySelector("#hig").innerHTML,10);
-  blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
+blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
 blank$=Math.max((w$-h$)/4,0);
 nblank$=Math.max((h$-w$)/2,0);
 la=nearestPowerOf2(((h$*h$*4)/4)*4);
