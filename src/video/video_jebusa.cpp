@@ -155,6 +155,7 @@ let blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
 let ch$=parseInt(window.innerHeight,10);
 vv=document.querySelector("#mv");
 let $H=Module.HEAPF32.buffer;
+
 function nearestPowerOf2(n){
 if(n&(n-1)){
 return Math.pow(2,Math.ceil(Math.log2(n)));
@@ -162,6 +163,7 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }
 }
+
 let la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
 let pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
@@ -398,7 +400,7 @@ return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setOutput([sz]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 let t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x+this.constants.blnk];
+var P=v[this.thread.y][this.thread.x-this.constants.blnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$+(blank$$*2),h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
