@@ -162,7 +162,7 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }
 }
-let la=nearestPowerOf2((((h$+blank$$)*h$*4)/4)*4);
+let la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
 let pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
 let sz=(h$*h$)/8;
@@ -425,7 +425,7 @@ blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
 vv=document.querySelector("#mv");
 blank$=Math.max((w$-h$)/4,0);
 nblank$=Math.max((h$-w$)/2,0);
-la=nearestPowerOf2((((h$+blank$$)*h$*4)/4)*4);
+la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
 sz=(h$*h$)/8;
 pointa=77*la;
 // agav=new Float32Array($H,pointa,300);
@@ -451,7 +451,7 @@ h$=parseInt(document.querySelector("#hig").innerHTML,10);
 blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
 blank$=Math.max((w$-h$)/4,0);
 nblank$=Math.max((h$-w$)/2,0);
-la=nearestPowerOf2((((h$+blank$$)*h$*4)/4)*4);
+la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
 sz=(h$*h$)/8;
 pointa=77*la;
 // var agav=new Float32Array($H,pointa,300);
