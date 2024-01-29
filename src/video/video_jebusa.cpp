@@ -403,6 +403,11 @@ var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([w$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
+let t=g.createKernel(function(v){
+var P=v[this.thread.y][this.thread.x];
+return[P[0],P[1],P[2],P[3]];
+}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
+
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
 var $fmax=this.constants.fmax;
