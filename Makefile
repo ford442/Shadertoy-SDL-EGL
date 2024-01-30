@@ -57,6 +57,45 @@ vanilla_test_gpujs:
 	 emcc src/vanilla/main_gpujs.cpp -o $(NAMESTAMP) \
 	 --extern-pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
+video_resurection_webgpua:
+	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
+	 em++ lib/lib_webgpu.cpp $(STDS) -static
+	 emcc src/video/video_jebusa.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++20 $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 emcc video_jebusa.o -fPIC -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o $(BIN_NAME)-resA.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -sFORCE_FILESYSTEM=1 \
+	 -sINITIAL_MEMORY=1024mb -sALLOW_MEMORY_GROWTH=0 -sUSE_SDL=2 -std=c++20 \
+	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js js/fluid.js --pre-js js/flui.js --pre-js js/setUp.js --pre-js js/startUp.js -lmath.js -lhtml5.js -lint53.js \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 --post-js js/pagec_webgpu.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --memory-init-file 0 --closure 0
+
+video_resurection_webgpub:
+	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
+	 em++ lib/lib_webgpu.cpp $(STDS) -static
+	 emcc src/video/video_jebusb.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++20 $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 emcc video_jebusb.o -fPIC -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o $(BIN_NAME)-resB.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -sFORCE_FILESYSTEM=1 \
+	 -sINITIAL_MEMORY=1024mb -sALLOW_MEMORY_GROWTH=0 -sUSE_SDL=2 -std=c++20 \
+	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js js/fluid.js --pre-js js/flui.js --pre-js js/setUp.js --pre-js js/startUp.js -lmath.js -lhtml5.js -lint53.js \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 --post-js js/pagec_webgpub.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --memory-init-file 0 --closure 0
+
+video_resurection_webgpuc:
+	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
+	 em++ lib/lib_webgpu.cpp $(STDS) -static
+	 emcc src/video/video_jebusc.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++20 $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 emcc video_jebusb.o -fPIC -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o $(BIN_NAME)-resC.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -sFORCE_FILESYSTEM=1 \
+	 -sINITIAL_MEMORY=1024mb -sALLOW_MEMORY_GROWTH=0 -sUSE_SDL=2 -std=c++20 \
+	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js js/fluid.js --pre-js js/flui.js --pre-js js/setUp.js --pre-js js/startUp.js -lmath.js -lhtml5.js -lint53.js \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 --post-js js/pagec_webgpuc.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --memory-init-file 0 --closure 0
+
 video_test:
 	 em++ $(STDS) -c src/video/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
 	 em++ $(STDS) -c src/video/video_test.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
@@ -108,32 +147,6 @@ video_resurection_webgpu2:
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
 	 emcc src/video/video_jebus2.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++20 $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc video_jebus2.o -fPIC -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o $(BIN_NAME)-res.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) \
-	 -I/content/RAMDRIVE2/b3/include/vanilla/ -sFORCE_FILESYSTEM=1 \
-	 -sINITIAL_MEMORY=1024mb -sALLOW_MEMORY_GROWTH=0 -sUSE_SDL=2 -std=c++20 \
-	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
-	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js js/fluid.js --pre-js js/flui.js --pre-js js/setUp.js --pre-js js/startUp.js -lmath.js -lhtml5.js -lint53.js \
-	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --post-js js/pagec_webgpu.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --memory-init-file 0 --closure 0
-
-video_resurection_webgpua:
-	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
-	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 emcc src/video/video_jebusa.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++20 $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc video_jebusa.o -fPIC -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o $(BIN_NAME)-resA.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) \
-	 -I/content/RAMDRIVE2/b3/include/vanilla/ -sFORCE_FILESYSTEM=1 \
-	 -sINITIAL_MEMORY=1024mb -sALLOW_MEMORY_GROWTH=0 -sUSE_SDL=2 -std=c++20 \
-	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
-	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js js/fluid.js --pre-js js/flui.js --pre-js js/setUp.js --pre-js js/startUp.js -lmath.js -lhtml5.js -lint53.js \
-	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --post-js js/pagec_webgpu.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --memory-init-file 0 --closure 0
-
-video_resurection_webgpub:
-	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
-	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 emcc src/video/video_jebusb.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++20 $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 emcc video_jebusb.o -fPIC -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o $(BIN_NAME)-resB.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -sFORCE_FILESYSTEM=1 \
 	 -sINITIAL_MEMORY=1024mb -sALLOW_MEMORY_GROWTH=0 -sUSE_SDL=2 -std=c++20 \
 	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
