@@ -273,6 +273,8 @@ vide[1].id=mv;
 document.getElementById('mv').play();
 document.getElementById('ldv').src=document.getElementById('isrc').innerHTML;
 // document.getElementById('mv').height=document.innerHeight;
+  document.getElementById('ldv').width=wi;
+document.getElementById('ldv').height=he;
 document.getElementById('ldv').currentTime=document.getElementById('itim').innerHTML;
 document.getElementById('ldv').load();
 $iwid.innerHTML=parseInt($w,10);
