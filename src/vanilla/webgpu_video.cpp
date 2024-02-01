@@ -830,7 +830,7 @@ let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
 document.querySelector("#mvi").height=h$;
 document.querySelector("#mvi").width=w$;
-Module.ccall("frm",null,['Number'],['Number'],w$,h$);
+Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
   console.log("vid size: ",h$,", ",w$);
 /*
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
@@ -851,18 +851,18 @@ frrm.set($$1.toBlob());
 FS.writeFile('/video/frame.gl',frrm);
  */
 let cnv=document.querySelector('#bcanvas');
-cnv.height=h$;
-cnv.width=h$;
+cnv.height=SiZ;
+cnv.width=SiZ;
 let offS=Math.floor((w$-h$)/2.0);
 const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
-gl2.drawImage(vvi,offS,0,h$,h$,0,0,h$,h$);
-let image=gl2.getImageData(0,0,h$,h$);
+gl2.drawImage(vvi,offS,0,h$,h$,0,0,SiZ,SiZ);
+let image=gl2.getImageData(0,0,SiZ,SiZ);
 let imageData=image.data;
-Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
 FS.writeFile('/video/frame.gl',imageData);
 setInterval(function(){
-gl2.drawImage(vvi,offS,0,h$,h$,0,0,h$,h$);
-image=gl2.getImageData(0,0,h$,h$);
+gl2.drawImage(vvi,offS,0,h$,h$,0,0,SiZ,SiZ);
+image=gl2.getImageData(0,0,SiZ,SiZ);
 imageData=image.data;
 // imageData=cropFrameToSquare(imageData,w$,h$);
 // let pixelData=new Uint8ClampedArray(imageData);
@@ -889,14 +889,12 @@ document.querySelector('#stat').style.backgroundColor='blue';
 }
 });
 ff.send(null);
-
 const gpu = navigator.gpu;
 const format = gpu.getPreferredCanvasFormat();
 const adapter = await gpu.requestAdapter();
 const device = await adapter.requestDevice();
 setInterval(function(){
 const externalTexture=device.importExternalTexture({source:vvi});
-    
 var mm=wgpuStore(externalTexture);
 // console.log(mm);
 Module.ccall("frm",null,[Number],[mm]);
