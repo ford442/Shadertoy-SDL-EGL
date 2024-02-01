@@ -73,7 +73,7 @@ Ort::Session sesh{ort_env,"/model/model.onnx",Ort::SessionOptions{nullptr}};
 std::cout << "got ORT Session" << std::endl;
 Ort::AllocatorWithDefaultOptions allocator;
 std::cout << "got ORT allocator" << std::endl;
-/*
+
 size_t numInputNodes=sesh.GetInputCount();
 size_t numOutputNodes=sesh.GetOutputCount();
 std::cout << "got ORT nodes" << std::endl;
@@ -188,7 +188,6 @@ std::cout << "Got data. " << std::endl;
 // emscripten_set_canvas_image_data(data, width, height);
 //	std::cout << "Output tensors updated." << std::endl;
 	return;
-*/
 }
 
 WGpuShaderModuleCompilationHint fragHint={};
