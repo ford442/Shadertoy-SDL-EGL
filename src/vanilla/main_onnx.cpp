@@ -51,7 +51,7 @@ for (int i=0;i<infos.size();i++){
 std::copy(infos[i].begin(),infos[i].end(),char_array+i*infos[0].size());
 }
 std::cout << char_array << std::endl;
-  std::shared_ptr<Ort::Env> ort_env;
+Ort::Env ort_env;
 std::cout << "got ORT env" << std::endl;
  std::string model_path="/model.onnx";
 const int64_t batchSize=2;
