@@ -53,10 +53,10 @@ std::copy(infos[i].begin(),infos[i].end(),char_array+i*infos[0].size());
 std::cout << char_array << std::endl;
   std::shared_ptr<Ort::Env> ort_env;
 std::cout << "got ORT env" << std::endl;
- std::string model_path="model.onnx";
+ std::string model_path="/model.onnx";
 const int64_t batchSize=2;
-Ort::SessionOptions sessionOptions;
-sessionOptions.SetIntraOpNumThreads(1);
+// Ort::SessionOptions sessionOptions;
+// sessionOptions.SetIntraOpNumThreads(1);
 		 // Sets graph optimization level
     // Available levels are
     // ORT_DISABLE_ALL -> To disable all optimizations
@@ -64,15 +64,14 @@ sessionOptions.SetIntraOpNumThreads(1);
     // removals) ORT_ENABLE_EXTENDED -> To enable extended optimizations
     // (Includes level 1 + more complex optimizations like node fusions)
     // ORT_ENABLE_ALL -> To Enable All possible optimizations
-sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL);
+// sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL);
 std::cout << "got ORT session/options" << std::endl;
 std::cout << "got ORT SessionOptions" << std::endl;
 // Ort::Session sesh=session(ort_env,model_path,sessionOptions);
   std::shared_ptr<Ort::Session> sesh;
 
 		// from ms
-// Ort::Session sesh=Ort::Session(ort_env,model_path.c_str(),sessionOptions);
-	sesh = std::make_shared<Ort::Session>(*ort_env, model_path.c_str(), sessionOptions);
+  Ort::Session sesh{ort_env, "/model.onnx", Ort::SessionOptions{nullptr}};
 
 std::cout << "got ORT Session" << std::endl;
 
