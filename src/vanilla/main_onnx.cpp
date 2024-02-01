@@ -1326,7 +1326,7 @@ ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
-FS.writeFile('/shader/shader.wgsl',sfil);
+FS.writeFile('/shader/model.onnx',sfil);
 document.querySelector('#stat').innerHTML='Downloaded Model';
 document.querySelector('#stat').style.backgroundColor='blue';
 normalResStart();
