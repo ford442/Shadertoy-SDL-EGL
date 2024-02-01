@@ -69,10 +69,8 @@ std::cout << "got ORT session/options" << std::endl;
 std::cout << "got ORT SessionOptions" << std::endl;
 
 		// from ms
-  Ort::Session sesh{ort_env, "/model.onnx", Ort::SessionOptions{nullptr}};
-
+Ort::Session sesh{ort_env,"model.onnx",Ort::SessionOptions{nullptr}};
 std::cout << "got ORT Session" << std::endl;
-
 Ort::AllocatorWithDefaultOptions allocator;
 std::cout << "got ORT allocator" << std::endl;
 /*
