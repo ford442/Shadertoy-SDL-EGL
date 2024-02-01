@@ -53,7 +53,7 @@ std::copy(infos[i].begin(),infos[i].end(),char_array+i*infos[0].size());
 std::cout << char_array << std::endl;
 Ort::Env ort_env;
 std::cout << "got ORT env" << std::endl;
- std::string model_path="model.onnx";
+ std::string model_path="/model/model.onnx";
 const int64_t batchSize=2;
 // Ort::SessionOptions sessionOptions;
 // sessionOptions.SetIntraOpNumThreads(1);
@@ -69,7 +69,7 @@ std::cout << "got ORT session/options" << std::endl;
 std::cout << "got ORT SessionOptions" << std::endl;
 
 		// from ms
-Ort::Session sesh{ort_env,"model.onnx",Ort::SessionOptions{nullptr}};
+Ort::Session sesh{ort_env,"/model/model.onnx",Ort::SessionOptions{nullptr}};
 std::cout << "got ORT Session" << std::endl;
 Ort::AllocatorWithDefaultOptions allocator;
 std::cout << "got ORT allocator" << std::endl;
@@ -1324,7 +1324,7 @@ ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
-FS.writeFile('/shader/model.onnx',sfil);
+FS.writeFile('/model/model.onnx',sfil);
 document.querySelector('#stat').innerHTML='Downloaded Model';
 document.querySelector('#stat').style.backgroundColor='blue';
 normalResStart();
