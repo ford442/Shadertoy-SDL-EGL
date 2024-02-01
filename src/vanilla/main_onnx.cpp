@@ -67,8 +67,6 @@ const int64_t batchSize=2;
 // sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL);
 std::cout << "got ORT session/options" << std::endl;
 std::cout << "got ORT SessionOptions" << std::endl;
-// Ort::Session sesh=session(ort_env,model_path,sessionOptions);
-  std::shared_ptr<Ort::Session> sesh;
 
 		// from ms
   Ort::Session sesh{ort_env, "/model.onnx", Ort::SessionOptions{nullptr}};
