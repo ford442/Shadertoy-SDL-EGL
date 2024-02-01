@@ -1157,6 +1157,7 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 
 EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
+FS.mkdir('/model');
 window.scroll(0,0);
 function highResStart(){
 document.querySelector('#shut').innerHTML=2;
