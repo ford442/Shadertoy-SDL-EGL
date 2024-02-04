@@ -187,9 +187,10 @@ std::cout << "The Run function takes the text prompt and the desired output size
 std::vector<Value> Run(const RunOptions& run_options, const char* const* input_names, const Value* input_values, size_t input_count,
                                    const char* const* output_names, size_t output_count);
 */
-outputTensors[0]=sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),1);
+Ort::Value output=sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),1);
 // sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),outputTensors.data(),1);
-std::cout << "Running inferrence." << std::endl;
+outputTensors[0]=output;
+	std::cout << "Running inferrence." << std::endl;
 auto outputDataPtr = outputTensors[0].GetTensorRawData();
 	// Get the shape of the tensor.
 std::vector<int64_t> shape = outputTensorInfo.GetShape();
