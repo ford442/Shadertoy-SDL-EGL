@@ -144,7 +144,7 @@ Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArena
 std::cout << "Establishing memoryInfo" << std::endl;
 	
 std::array<Ort::Value> inputTensors;
-Ort::Value outputTensors{nullptr};
+std::array<Ort::Value> outputTensors;
 inputTensors.push_back(Ort::Value::CreateTensor<int32_t>(memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),6));
 	
 std::cout << "Establishing Tensors" << std::endl;
