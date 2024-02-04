@@ -183,7 +183,7 @@ std::cout << "The Run function takes the text prompt and the desired output size
 << "You can use the cv::Mat class to convert the tensor data to an image.\n"
 << std::endl;
 // Run inference
-sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),outputTensors.data(),1);
+sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),&outputTensors.data(),1);
 std::cout << "Running inferrence." << std::endl;
 auto outputDataPtr = outputTensors[0].GetTensorRawData();
 	// Get the shape of the tensor.
