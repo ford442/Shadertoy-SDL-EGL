@@ -145,7 +145,7 @@ std::vector<Ort::Value>inputTensors;
 
 Ort::Value outputTensors{nullptr};
 	
-inputTensors.push_back(Ort::Value::CreateTensor<int32_t>(memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),6));
+inputTensors.push_back(Ort::Value::CreateTensor<int32_t>(memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),2));
 	
 std::cout << "Establishing Tensors" << std::endl;
 std::cout << "Creating CPU link " << std::endl;
