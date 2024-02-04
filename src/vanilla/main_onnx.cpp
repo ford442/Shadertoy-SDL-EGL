@@ -15,6 +15,14 @@ std::cout << token << std::endl;
 return ints;
 }
 
+std::vector<float> to_floats(vector<string> tokens) {
+std::vector<float> floats;
+for (string token : tokens) {
+std::cout << token << std::endl;
+}
+return floats;
+}
+
 std::vector<string> tokenize(string text) {
 std::vector<string> tokens;
   // Split the text into words.
@@ -42,6 +50,7 @@ int max_wordlength=12;
 string text="birds";
 std::vector<string>tokens=tokenize(text);
 std::vector<int64_t>ints=to_int32(tokens);
+std::vector<float>floats=to_floats(tokens);
 
 void cltest(){
 std::vector<std::string>infos=Ort::GetAvailableProviders();
@@ -85,7 +94,7 @@ ONNXTensorElementDataType inputType=inputTensorInfo.GetElementType();
 std::vector<int64_t>inputDims=inputTensorInfo.GetShape();
 if (inputDims.at(0) == -1){
 std::cout << "Got dynamic batch size. Setting input batch size to " << batchSize << "." << std::endl;
-inputDims.at(0)=ints.size();
+inputDims.at(0)=floats.size();
 inputDims.at(1)=max_wordlength;
 }
 auto outputName=sesh.GetOutputNameAllocated(0,allocator);
@@ -115,11 +124,11 @@ std::cout << "Number of Output Nodes: " << numOutputNodes << std::endl;
 
 size_t inputTensorSize=vectorProduct(inputDims);
 std::cout << "setting inputTensorSize:" << inputTensorSize << std::endl;
-std::vector<int64_t> inputTensorValues(inputTensorSize);
+std::vector<float> inputTensorValues(inputTensorSize);
 std::cout << "setting inputTensorValues " <<  std::endl;
 for (int64_t i = 0; i < batchSize; ++i)
 {
-std::copy(ints.begin(),ints.end(),inputTensorValues.begin()+i*inputTensorSize);
+std::copy(floats.begin(),floats.end(),inputTensorValues.begin()+i*inputTensorSize);
 }
 	
 size_t outputTensorSize=vectorProduct(outputDims);
@@ -145,7 +154,7 @@ std::vector<Ort::Value>inputTensors;
 
 Ort::Value outputTensors{nullptr};
 	
-inputTensors.push_back(Ort::Value::CreateTensor<int64_t>(memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),2));
+inputTensors.push_back(Ort::Value::CreateTensor<float>(memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),2));
 	
 std::cout << "Establishing Tensors" << std::endl;
 std::cout << "Creating CPU link " << std::endl;
