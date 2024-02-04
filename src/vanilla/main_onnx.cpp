@@ -172,7 +172,7 @@ std::vector<int64_t> shape = outputTensorInfo.GetShape();
   // Create a new image with the same shape as the tensor.
 unsigned char* image_data = new unsigned char[shape.size()];
   // Copy the data from the tensor to the image.
-outputTensors.CopyTo(image_data);
+// outputTensors.CopyTo(image_data);
   // Save the image to a file.
 std::cout << "Got data. " << std::endl;
 
@@ -188,7 +188,7 @@ delete[] image_data;
 
 // Display the image.
 // emscripten_set_canvas_image_data(data, width, height);
-	std::cout << "Output tensors updated." << std::endl;
+//	std::cout << "Output tensors updated." << std::endl;
 	return;
 }
 
