@@ -104,7 +104,7 @@ std::cout << "Input Name: " << inputName << std::endl;
 std::cout << "Input Type: " << inputType << std::endl;
 std::cout << "Input Dimensions 1: " <<  std::to_string(inputDims.at(0)) << std::endl;
 std::cout << "Input Dimensions 2: " <<  std::to_string(inputDims.at(1)) << std::endl;
-std::cout << "Input Dimensions 3: " <<  std::to_string(inputDims.at(2)) << std::endl;
+// std::cout << "Input Dimensions 3: " <<  std::to_string(inputDims.at(2)) << std::endl;
 std::cout << "Output Name: " << outputName << std::endl;
 std::cout << "Output Type: " << outputType << std::endl;
 std::cout << "Output Dimensions 1: " <<  std::to_string(outputDims.at(0)) << std::endl;
