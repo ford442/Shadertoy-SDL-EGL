@@ -103,12 +103,17 @@ Ort::TypeInfo outputTypeInfo=sesh.GetOutputTypeInfo(0);
 auto outputTensorInfo=outputTypeInfo.GetTensorTypeAndShapeInfo();
 ONNXTensorElementDataType outputType=outputTensorInfo.GetElementType();
 std::vector<int64_t>outputDims=outputTensorInfo.GetShape();
+	std::cout << ".at(0)" << outputDims.at(0) << "." << std::endl;
+	std::cout << ".at(1)" << outputDims.at(1) << "." << std::endl;
+	std::cout << ".at(2)" << outputDims.at(2) << "." << std::endl;
+/*
 if (outputDims.at(0) == -1){
 std::cout << "Got dynamic batch size. Setting output batch size to "
 << batchSize << "." << std::endl;
 outputDims.at(0)=batchSize;
 }
-
+*/
+	
 std::cout << "Input Name: " << inputName << std::endl;
 std::cout << "Input Type: " << inputType << std::endl;
 std::cout << "Input Dimensions 1: " <<  std::to_string(inputDims.at(0)) << std::endl;
