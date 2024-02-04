@@ -900,7 +900,6 @@ device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv
 const imageDataW = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
 device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageDataW.buffer, imageDataW.byteOffset, [texture.size[0],texture.size[1], 2]);
 const externalTexture=device.importExternalTexture({source:vv});
-const imageDataW=new Uint8Array(vv.videoWidth*vv.videoHeight*4);
 device.queue.readTexture({externalTexture,bytesPerRow:4*vv.videoWidth,rowsPerImage:vv.videoHeight,
 },imageDataW.buffer,imageDataW.byteOffset);
 FS.writeFile('/video/frame.gl',pixelData);
