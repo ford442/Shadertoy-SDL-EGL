@@ -189,7 +189,7 @@ std::vector<Value> Run(const RunOptions& run_options, const char* const* input_n
 */
 std::vector<Ort::Value> output=sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),1);
 // sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),outputTensors.data(),1);
-outputTensors[0]=output;
+outputTensors[0]=output[0];
 	std::cout << "Running inferrence." << std::endl;
 auto outputDataPtr = outputTensors[0].GetTensorRawData();
 	// Get the shape of the tensor.
