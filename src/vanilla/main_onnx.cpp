@@ -113,7 +113,11 @@ std::cout << "Got dynamic batch size. Setting output batch size to "
 outputDims.at(0)=batchSize;
 }
 */
-	
+outputDims.at(0)=batchSize;
+outputDims.at(1)=3;
+outputDims.at(2)=768;
+outputDims.at(3)=768;
+
 std::cout << "Input Name: " << inputName << std::endl;
 std::cout << "Input Type: " << inputType << std::endl;
 std::cout << "Input Dimensions 1: " <<  std::to_string(inputDims.at(0)) << std::endl;
