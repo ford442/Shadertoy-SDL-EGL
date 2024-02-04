@@ -152,10 +152,10 @@ text_prompt_vector.push_back(c);
 }
 	
 std::cout << "Establishing text input" << std::endl;
-std::vector<const char*>inputNames={"latents"};
-// std::vector<const char*>inputNames={inputName};
-std::vector<const char*>outputNames={"sample"};
-// std::vector<const char*>outputNames={outputName};
+// std::vector<const char*>inputNames={"latents"};
+std::vector<const char*>inputNames={inputName};
+// std::vector<const char*>outputNames={"sample"};
+std::vector<const char*>outputNames={outputName};
 std::cout << "Establishing tensor names" << std::endl;
 Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArenaAllocator,OrtMemTypeCPU);
 std::cout << "Establishing memoryInfo" << std::endl;
