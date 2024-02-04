@@ -811,8 +811,11 @@ frrm.set($$1.toBlob());
 FS.writeFile('/video/frame.gl',frrm);
  */
 let cnv=document.querySelector('#bcanvas');
+let cnvb=document.querySelector('#canvas');
 cnv.height=SiZ;
+cnvb.height=SiZ;
 cnv.width=SiZ;
+cnvb.width=SiZ;
 let offS=Math.floor((w$-h$)/2.0);
 const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,SiZ,SiZ);
@@ -927,7 +930,7 @@ document.querySelector('#bcanvas').height=parseInt(window.innerHeight,10);
 document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
-GvideoFrames();
+videoFrames();
 Module.ccall("startWebGPU");
 },1500);
 document.querySelector('#status').style.backgroundColor="green";
