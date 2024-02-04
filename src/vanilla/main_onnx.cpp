@@ -7,16 +7,16 @@ return accumulate(v.begin(),v.end(),1,std::multiplies<T>());
 
 using namespace std;
 
-std::vector<int32_t> to_int32(vector<string> tokens) {
-std::vector<int32_t> ints;
+std::vector<int64_t> to_int32(vector<string> tokens) {
+std::vector<int64_t> ints;
 for (string token : tokens) {
 std::cout << token << std::endl;
 }
 return ints;
 }
 
-vector<string> tokenize(string text) {
-vector<string> tokens;
+std::vector<string> tokenize(string text) {
+std::vector<string> tokens;
   // Split the text into words.
 stringstream ss(text);
 string word;
@@ -41,7 +41,7 @@ return tokens;
 int max_wordlength=12;
 string text="birds";
 std::vector<string>tokens=tokenize(text);
-std::vector<int32_t>ints=to_int32(tokens);
+std::vector<int64_t>ints=to_int32(tokens);
 
 void cltest(){
 std::vector<std::string>infos=Ort::GetAvailableProviders();
@@ -115,7 +115,7 @@ std::cout << "Number of Output Nodes: " << numOutputNodes << std::endl;
 
 size_t inputTensorSize=vectorProduct(inputDims);
 std::cout << "setting inputTensorSize:" << inputTensorSize << std::endl;
-std::vector<int32_t> inputTensorValues(inputTensorSize);
+std::vector<int64_t> inputTensorValues(inputTensorSize);
 std::cout << "setting inputTensorValues " <<  std::endl;
 for (int64_t i = 0; i < batchSize; ++i)
 {
@@ -145,7 +145,7 @@ std::vector<Ort::Value>inputTensors;
 
 Ort::Value outputTensors{nullptr};
 	
-inputTensors.push_back(Ort::Value::CreateTensor<int32_t>(memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),2));
+inputTensors.push_back(Ort::Value::CreateTensor<int64_t>(memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),2));
 	
 std::cout << "Establishing Tensors" << std::endl;
 std::cout << "Creating CPU link " << std::endl;
