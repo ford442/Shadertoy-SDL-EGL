@@ -85,6 +85,8 @@ std::cout << "got ORT allocator" << std::endl;
 size_t numInputNodes=sesh.GetInputCount();
 size_t numOutputNodes=sesh.GetOutputCount();
 std::cout << "got ORT nodes" << std::endl;
+std::cout << "input ORT nodes" << numInputNodes << std::endl;
+std::cout << "output ORT nodes" << numOutputNodes << std::endl;
 auto inputName=sesh.GetInputNameAllocated(0,allocator);
 // const char* inputName = session.Ort::detail::GetInputName(0, allocator);
 std::cout << "got ORT input" << std::endl;
@@ -151,25 +153,21 @@ for(char c : text_prompt){
 text_prompt_vector.push_back(c);
 }
 	
+std::vector<const char*> inputNames;
+std::vector<const char*> outputNames;
+inputNames.reserve(1);
 std::cout << "Establishing text input" << std::endl;
-// std::vector<const char*>inputNames={"latents"};
-std::vector<const char*>inputNames={&inputName};
-// std::vector<const char*>outputNames={"sample"};
-std::vector<const char*>outputNames={&outputName};
+inputNames.push_back(inputName.get());
+outputNames.push_back(outputName.get());
 std::cout << "Establishing tensor names" << std::endl;
 Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArenaAllocator,OrtMemTypeCPU);
 std::cout << "Establishing memoryInfo" << std::endl;
 std::vector<Ort::Value>inputTensors;
 std::vector<Ort::Value>outputTensors;
-
 // Ort::Value outputTensors{nullptr};
 	
 inputTensors.push_back(Ort::Value::CreateTensor<float>(memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),4));
 outputTensors.push_back(Ort::Value::CreateTensor<float>(memoryInfo,nullptr,outputTensorSize,&outputDims.at(0),4));
-		std::cout << ".at(0)" << outputDims.at(0) << "." << std::endl;
-	std::cout << ".at(1)" << outputDims.at(1) << "." << std::endl;
-	std::cout << ".at(2)" << outputDims.at(2) << "." << std::endl;
-
 std::cout << "Establishing Tensors" << std::endl;
 std::cout << "Creating CPU link " << std::endl;
 Ort::RunOptions runOpts;
