@@ -160,19 +160,19 @@ std::cout << "The Run function takes the text prompt and the desired output size
 << "You can use the cv::Mat class to convert the tensor data to an image.\n"
 << std::endl;
 // Run inference
-// sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),&outputTensors,1);
+sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),&outputTensors,1);
 //   void Run(const RunOptions& run_options, const char* const* input_names, const Value* input_values, size_t input_count,
 //                     const char* const* output_names, Value* output_values, size_t output_count);
 //   void Run(run_options,input_names,input_values,input_count,
 //                     output_names,output_values,output_count);
-// std::cout << "Running inferrence." << std::endl;
-// auto outputDataPtr = outputTensors.GetTensorRawData();
+std::cout << "Running inferrence." << std::endl;
+auto outputDataPtr = outputTensors.GetTensorRawData();
 	// Get the shape of the tensor.
-//  std::vector<int64_t> shape = outputTensorInfo.GetShape();
+std::vector<int64_t> shape = outputTensorInfo.GetShape();
   // Create a new image with the same shape as the tensor.
-//  unsigned char* image_data = new unsigned char[shape.size()];
+unsigned char* image_data = new unsigned char[shape.size()];
   // Copy the data from the tensor to the image.
-//  outputTensors.CopyTo(image_data);
+outputTensors.CopyTo(image_data);
   // Save the image to a file.
 std::cout << "Got data. " << std::endl;
 
@@ -180,7 +180,7 @@ std::cout << "Got data. " << std::endl;
 //  emscripten_save_image(output_filename, data, shape[1], shape[0]);
 
   // Delete the image data.
-//  delete[] image_data;
+delete[] image_data;
 	
 // int width = 400; // emscripten_get_image_width("output.png");
 // int height = 400; // emscripten_get_image_height("output.png");
@@ -188,7 +188,7 @@ std::cout << "Got data. " << std::endl;
 
 // Display the image.
 // emscripten_set_canvas_image_data(data, width, height);
-//	std::cout << "Output tensors updated." << std::endl;
+	std::cout << "Output tensors updated." << std::endl;
 	return;
 }
 
