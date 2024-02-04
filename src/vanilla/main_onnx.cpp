@@ -151,8 +151,9 @@ std::cout << "Establishing tensor names" << std::endl;
 Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArenaAllocator,OrtMemTypeCPU);
 std::cout << "Establishing memoryInfo" << std::endl;
 std::vector<Ort::Value>inputTensors;
+std::vector<Ort::Value>outputTensors;
 
-Ort::Value outputTensors{nullptr};
+// Ort::Value outputTensors{nullptr};
 	
 inputTensors.push_back(Ort::Value::CreateTensor<float>(memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),4));
 	
@@ -170,10 +171,6 @@ std::cout << "The Run function takes the text prompt and the desired output size
 << std::endl;
 // Run inference
 sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),outputTensors.data(),1);
-//   void Run(const RunOptions& run_options, const char* const* input_names, const Value* input_values, size_t input_count,
-//                     const char* const* output_names, Value* output_values, size_t output_count);
-//   void Run(run_options,input_names,input_values,input_count,
-//                     output_names,output_values,output_count);
 std::cout << "Running inferrence." << std::endl;
 auto outputDataPtr = outputTensors.GetTensorRawData();
 	// Get the shape of the tensor.
