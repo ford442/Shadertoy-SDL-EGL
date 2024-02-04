@@ -745,52 +745,15 @@ return;
 }
 
 
-/*
-async function videoFrames(){
-let SiZ=parseInt(window.innerHeight);
-let vv=document.querySelector('#mv');
-let cnv=document.querySelector('#bcanvas');
-let cnvb=document.querySelector('#canvas');
-const context = cnvb.getContext("webgpu");
-const gpu = navigator.gpu;
-const format = gpu.getPreferredCanvasFormat();
-const adapter = await gpu.requestAdapter();
-const device = await adapter.requestDevice();
-context.configure({ device, format, alphaMode: "opaque" });
-let texture = device.createTexture({
-format: "rgba8unorm",
-size: [SiZ, SiZ, 2],
-usage:GPUTextureUsage.COPY_DST|GPUTextureUsage.RENDER_ATTACHMENT|GPUTextureUsage.TEXTURE_BINDING,
-}); 
-// const gl2=cnv.getContext('2d',{willReadFrequently:true,alpha:true});
-const gl2=cnv.getContext('2d');
-gl2.drawImage(vv,0,0);
-let image=gl2.getImageData(0,0,cnv.width,cnv.height);
-let imageData=image.data;
-let pixelData=new Uint8Array(imageData);
 
-setInterval(function(){
-gl2.drawImage(vv,0,0);
-imageData=gl2.getImageData(0,0,cnv.height,cnv.height);
-imageData=image.data;
-pixelData=new Uint8Array(imageData);
 
-device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[texture.size[0], texture.size[1], 2]);
-const imageDataW = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
-device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageDataW.buffer, imageDataW.byteOffset, [texture.size[0],texture.size[1], 2]);
-const externalTexture=device.importExternalTexture({source:vv});
-const imageDataW=new Uint8Array(vv.videoWidth*vv.videoHeight*4);
-device.queue.readTexture({externalTexture,bytesPerRow:4*vv.videoWidth,rowsPerImage:vv.videoHeight,
-},imageDataW.buffer,imageDataW.byteOffset);
-FS.writeFile('/video/frame.gl',pixelData);
-},16.666);
-}
-*/
+
 
 EM_JS(void,js_main,(),{
 
 FS.mkdir('/shader');
 FS.mkdir('/video');
+
 const g=new GPUX();
 // let $H=Module.HEAPU8.buffer;
 // let $$1;
@@ -899,6 +862,52 @@ Module.ccall("frm",null,[Number],[mm]);
 */  
 }
   
+async function GvideoFrames(){
+let SiZ=parseInt(window.innerHeight);
+let vv=document.querySelector('#mv');
+let cnv=document.querySelector('#bcanvas');
+let cnvb=document.querySelector('#canvas');
+const context = cnvb.getContext("webgpu");
+const gpu = navigator.gpu;
+const format = gpu.getPreferredCanvasFormat();
+const adapter = await gpu.requestAdapter();
+const device = await adapter.requestDevice();
+context.configure({ device, format, alphaMode: "opaque" });
+let texture = device.createTexture({
+format: "rgba8unorm",
+size: [SiZ, SiZ, 2],
+usage:GPUTextureUsage.COPY_DST|GPUTextureUsage.RENDER_ATTACHMENT|GPUTextureUsage.TEXTURE_BINDING,
+}); 
+// const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
+const gl2=cnv.getContext('2d');
+cnvb.height=SiZ;
+cnvb.width=SiZ;
+cnv.height=SiZ;
+cnv.width=SiZ;
+let offS=Math.floor((w$-h$)/2.0);
+gl2.drawImage(vvi,offS,0,h$,h$,0,0,SiZ,SiZ);
+let image=gl2.getImageData(0,0,SiZ,SiZ);
+let imageData=image.data;
+Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
+let pixelData=new Uint8Array(imageData);
+
+setInterval(function(){
+gl2.drawImage(vv,0,0);
+image=gl2.getImageData(0,0,SiZ,SiZ);
+imageData=image.data;
+pixelData=new Uint8Array(imageData);
+device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[texture.size[0], texture.size[1], 2]);
+const imageDataW = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
+device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageDataW.buffer, imageDataW.byteOffset, [texture.size[0],texture.size[1], 2]);
+const externalTexture=device.importExternalTexture({source:vv});
+const imageDataW=new Uint8Array(vv.videoWidth*vv.videoHeight*4);
+device.queue.readTexture({externalTexture,bytesPerRow:4*vv.videoWidth,rowsPerImage:vv.videoHeight,
+},imageDataW.buffer,imageDataW.byteOffset);
+FS.writeFile('/video/frame.gl',pixelData);
+},16.666);
+
+}
+
 function normalResStart(){
 setTimeout(function(){
 document.querySelector('#shut').innerHTML=2;
@@ -911,7 +920,7 @@ document.querySelector('#bcanvas').height=parseInt(window.innerHeight,10);
 document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
-videoFrames();
+GvideoFrames();
 Module.ccall("startWebGPU");
 },1500);
 document.querySelector('#status').style.backgroundColor="green";
