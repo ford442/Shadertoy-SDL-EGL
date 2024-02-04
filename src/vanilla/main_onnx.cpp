@@ -166,7 +166,10 @@ std::vector<Ort::Value>outputTensors;
 	
 inputTensors.push_back(Ort::Value::CreateTensor<float>(memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),4));
 outputTensors.push_back(Ort::Value::CreateTensor<float>(memoryInfo,nullptr,outputTensorSize,&outputDims.at(0),3));
-	
+		std::cout << ".at(0)" << outputDims.at(0) << "." << std::endl;
+	std::cout << ".at(1)" << outputDims.at(1) << "." << std::endl;
+	std::cout << ".at(2)" << outputDims.at(2) << "." << std::endl;
+
 std::cout << "Establishing Tensors" << std::endl;
 std::cout << "Creating CPU link " << std::endl;
 Ort::RunOptions runOpts;
