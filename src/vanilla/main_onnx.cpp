@@ -1,15 +1,14 @@
 #include "../../include/vanilla/main_onnx.hpp"
 
 template <typename T>
-T vectorProduct(const std::vector<T>& v)
-{
+T vectorProduct(const std::vector<T>& v){
 return accumulate(v.begin(),v.end(),1,std::multiplies<T>());
 }
 
 using namespace std;
 
-vector<int32_t> to_int32(vector<string> tokens) {
-vector<int32_t> ints;
+std::vector<int32_t> to_int32(vector<string> tokens) {
+std::vector<int32_t> ints;
 for (string token : tokens) {
 std::cout << token << std::endl;
 }
@@ -41,8 +40,8 @@ return tokens;
 
 int max_wordlength=12;
 string text="birds";
-vector<string>tokens=tokenize(text);
-vector<int32_t>ints=to_int32(tokens);
+std::vector<string>tokens=tokenize(text);
+std::vector<int32_t>ints=to_int32(tokens);
 
 void cltest(){
 std::vector<std::string>infos=Ort::GetAvailableProviders();
@@ -105,7 +104,7 @@ std::cout << "Input Name: " << inputName << std::endl;
 std::cout << "Input Type: " << inputType << std::endl;
 std::cout << "Input Dimensions 1: " <<  std::to_string(inputDims.at(0)) << std::endl;
 std::cout << "Input Dimensions 2: " <<  std::to_string(inputDims.at(1)) << std::endl;
-// std::cout << "Input Dimensions 3: " <<  std::to_string(inputDims.at(2)) << std::endl;
+std::cout << "Input Dimensions 3: " <<  std::to_string(inputDims.at(2)) << std::endl;
 std::cout << "Output Name: " << outputName << std::endl;
 std::cout << "Output Type: " << outputType << std::endl;
 std::cout << "Output Dimensions 1: " <<  std::to_string(outputDims.at(0)) << std::endl;
@@ -143,8 +142,6 @@ std::cout << "Establishing tensor names" << std::endl;
 Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArenaAllocator,OrtMemTypeCPU);
 std::cout << "Establishing memoryInfo" << std::endl;
 std::vector<Ort::Value>inputTensors;
-	int inSiz=vectorProduct(inputDims);
-	inputTensors.resize(inSiz);
 
 Ort::Value outputTensors{nullptr};
 	
