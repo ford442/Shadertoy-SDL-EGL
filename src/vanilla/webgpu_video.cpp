@@ -863,8 +863,14 @@ Module.ccall("frm",null,[Number],[mm]);
 }
   
 async function GvideoFrames(){
-let SiZ=parseInt(window.innerHeight);
-let vv=document.querySelector('#mv');
+let SiZ=window.innerHeight;
+document.querySelector("#mvi").height=SiZ;
+let w$=parseInt(document.querySelector("#mvi").videoWidth);
+let h$=parseInt(document.querySelector("#mvi").videoHeight);
+document.querySelector("#mvi").height=h$;
+document.querySelector("#mvi").width=w$;
+
+let vv=document.querySelector('#mvi');
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
 const context = cnvb.getContext("webgpu");
