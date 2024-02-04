@@ -156,6 +156,7 @@ std::vector<Ort::Value>outputTensors;
 // Ort::Value outputTensors{nullptr};
 	
 inputTensors.push_back(Ort::Value::CreateTensor<float>(memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),4));
+outputTensors.push_back(Ort::Value::CreateTensor<float>(memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),4));
 	
 std::cout << "Establishing Tensors" << std::endl;
 std::cout << "Creating CPU link " << std::endl;
@@ -172,7 +173,7 @@ std::cout << "The Run function takes the text prompt and the desired output size
 // Run inference
 sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),outputTensors.data(),1);
 std::cout << "Running inferrence." << std::endl;
-auto outputDataPtr = outputTensors.GetTensorRawData();
+auto outputDataPtr = outputTensors[0].GetTensorRawData();
 	// Get the shape of the tensor.
 std::vector<int64_t> shape = outputTensorInfo.GetShape();
   // Create a new image with the same shape as the tensor.
