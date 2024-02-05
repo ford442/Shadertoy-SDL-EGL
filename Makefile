@@ -68,7 +68,7 @@ video_resurection_webgpua:
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/fluid.js --pre-js js/flui.js --pre-js js/setUp.js --pre-js js/startUp.js -lmath.js -lhtml5.js -lint53.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --post-js js/pagec_webgpu.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --memory-init-file 0 --closure 0
+	 --post-js js/pagec_webgpua.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --memory-init-file 0 --closure 0
 
 video_resurection_webgpub:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
