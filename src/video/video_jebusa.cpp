@@ -186,7 +186,7 @@ contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 contx.blendColor(0.0,0.0,0.0,0.0);
 contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 contx.blendEquationSeparate(gl.FUNC_ADD,gl.MAX);
-contx.getExtension('ARB_robust_buffer_access_behavior');
+// contx.getExtension('ARB_robust_buffer_access_behavior');
 // contx.getExtension('ARB_ES3_compatibility');
 // contx.getExtension('GL_EXTENSIONS');
 contx.getExtension('GL_ALL_EXTENSIONS');
@@ -401,29 +401,29 @@ g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 
 const R=g2.createKernel(function(tv){
-const Pa=tv[this.thread.y][this.thread.x*4];
+let Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setOutput([sz]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 const t=g.createKernel(function(v){
-const P=v[this.thread.y][this.thread.x+this.constants.blnk];
-const av$=Ave(P[0],P[1],P[2]);
+let P=v[this.thread.y][this.thread.x+this.constants.blnk];
+let av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
 const r=g.createKernel(function(f){
-const p=f[this.thread.y][this.thread.x];
-const $fmax=this.constants.fmax;
-const $fmin=this.constants.fmin;
-const $amax=this.constants.amax;
-const $amin=this.constants.amin;
-const $favg=this.constants.favg;
-const $aavg=this.constants.aavg;
+let p=f[this.thread.y][this.thread.x];
+let $fmax=this.constants.fmax;
+let $fmin=this.constants.fmin;
+let $amax=this.constants.amax;
+let $amin=this.constants.amin;
+let $favg=this.constants.favg;
+let $aavg=this.constants.aavg;
 // var alph=AlpheV1($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
- const alph=AlpheV2($amax,$amin,$aavg,p[3]);
-const Min=4.0*(($fmax-($favg-$fmin))/2.0);
-const ouT=Math.max(Min,alph);
-const aveg=Aveg(p[3],ouT);
+ let alph=AlpheV2($amax,$amin,$aavg,p[3]);
+let Min=4.0*(($fmax-($favg-$fmin))/2.0);
+let ouT=Math.max(Min,alph);
+let aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
