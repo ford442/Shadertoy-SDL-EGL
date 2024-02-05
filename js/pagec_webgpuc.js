@@ -225,7 +225,7 @@ pnnl.addEventListener('keydown',spKey);
 
 function loada(){
 if(lockVid!=1){
-// document.getElementById('ldv').height=document.innerHeight;
+document.getElementById('ldv').height=document.innerHeight;
 loadV.addEventListener('canplay',function(){
 loadV.width=this.videoWidth;
 loadV.height=this.videoHeight;
