@@ -99,7 +99,7 @@ let stp,a,b,f;
 
 function backForth(stp){
 a=stp/1000.0;
-b=(stp/1000.0)+1.0;
+b=(stp/1000.0)+3.0;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
@@ -415,7 +415,7 @@ var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 var alph=AlpheV1($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
 //  var alph=AlpheV2($amax,$amin,$aavg,p[3]);
-var Min=4.0*(($fmax-($aavg-$fmin))/2.0);
+var Min=4.0*(($fmax-($favg-$fmin))/2.0);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
