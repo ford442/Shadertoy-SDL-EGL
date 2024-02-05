@@ -405,11 +405,6 @@ var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
-let tt=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x];
-return[P[0],P[1],P[2],P[3]];
-}).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
-
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
 var $fmax=this.constants.fmax;
@@ -420,7 +415,7 @@ var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 var alph=AlpheV1($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
 //  var alph=AlpheV2($amax,$amin,$aavg,p[3]);
-var Min=4.0*(($amax-($aavg-$amin))/2.0);
+var Min=4.0*(($fmax-($favg-$fmin))/2.0);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
