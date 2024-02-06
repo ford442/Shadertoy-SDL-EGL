@@ -1202,8 +1202,6 @@ void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 }
 
-}
-
 EM_JS(void,js_main,(),{
 "use strict";
 FS.mkdir('/shader');
@@ -1820,7 +1818,9 @@ return()=>{
 T=true;
 };
 }
-});
+})
+
+}
 
 void uniUp(){
 u64_uni.at(2,2)=int(u64_uni.at(2,2)*1.01);
