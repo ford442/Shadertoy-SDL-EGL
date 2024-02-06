@@ -437,7 +437,7 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 
 wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&data,sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
-wgpu_render_pass_encoder_draw(wrpe.at(0,0),3,1,0,0);
+wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
@@ -905,6 +905,7 @@ gl2.drawImage(vv,0,0);
 image=gl2.getImageData(0,0,SiZ,SiZ);
 imageData=image.data;
 pixelData=new Uint8Array(imageData);
+if(texture.loaded==true){
 device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[SiZ,SiZ, 2]);
 // device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[texture.size[0], texture.size[1], 2]);
 const imageDataW = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
@@ -914,6 +915,7 @@ const externalTexture=device.importExternalTexture({source:vv});
 device.queue.readTexture({externalTexture,bytesPerRow:4*vv.videoWidth,rowsPerImage:vv.videoHeight,
 },imageDataW.buffer,imageDataW.byteOffset);
 FS.writeFile('/video/frame.gl',pixelData);
+}
 },16.666);
 
 }
@@ -930,7 +932,7 @@ document.querySelector('#bcanvas').height=parseInt(window.innerHeight,10);
 document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
-videoFrames();
+GvideoFrames();
 Module.ccall("startWebGPU");
 },1500);
 document.querySelector('#status').style.backgroundColor="green";
