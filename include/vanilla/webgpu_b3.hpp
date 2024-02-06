@@ -106,7 +106,7 @@ void runWebGPU();
 
 }
 
-using dv_tensor=boost::numeric::ublas::tensor<SDL_AudioDeviceID>;
+// using dv_tensor=boost::numeric::ublas::tensor<SDL_AudioDeviceID>;
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
 using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
 using ub_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
