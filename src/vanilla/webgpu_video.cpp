@@ -784,7 +784,8 @@ let vv=document.querySelector('#mv');
 let vvi=document.querySelector('#mvi');
 
 async function videoFrames(){
-let SiZ=window.innerHeight*0.75;
+let SiZ=window.innerHeight;
+let tstSiZ=window.innerHeight*0.75;
 document.querySelector("#mvi").height=SiZ;
 let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
@@ -818,14 +819,14 @@ cnv.width=SiZ;
 cnvb.width=SiZ;
 let offS=Math.floor((w$-h$)/2.0);
 const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
-gl2.drawImage(vvi,offS,0,h$,h$,0,0,SiZ,SiZ);
-let image=gl2.getImageData(0,0,SiZ,SiZ);
+gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
+let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 let imageData=image.data;
 Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
 FS.writeFile('/video/frame.gl',imageData);
 setInterval(function(){
-gl2.drawImage(vvi,offS,0,h$,h$,0,0,SiZ,SiZ);
-image=gl2.getImageData(0,0,SiZ,SiZ);
+gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
+image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 imageData=image.data;
 // imageData=cropFrameToSquare(imageData,w$,h$);
 // let pixelData=new Uint8ClampedArray(imageData);
