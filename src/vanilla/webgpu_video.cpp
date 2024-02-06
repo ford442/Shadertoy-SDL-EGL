@@ -435,7 +435,7 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 
 // wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),&wicb.at(1,1),wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&data,sze.at(0,0)*8,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&data,sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
@@ -450,11 +450,11 @@ js_data_pointer.at(0,0)=0;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 // const char * frag_body=(char*)rd_fl(Fnm);
 WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
-// wtf.at(0,0)=canvasFormat;
+wtf.at(2,2)=canvasFormat;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
-wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
+// wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
 WGPU_TEXTURE_FORMAT canvasViewFormat[1]={wtf.at(0,0)};
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 config.device=wd.at(0,0);
