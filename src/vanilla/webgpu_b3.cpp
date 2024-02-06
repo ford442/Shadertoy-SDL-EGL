@@ -1,4 +1,4 @@
-#include "../../include/vanilla/webgpu_egl.hpp"
+#include "../../include/vanilla/webgpu_b3.hpp"
 
 WGpuBufferDescriptor bufferDescriptor_indice={};
 WGpuBuffer indice_Buffer;
