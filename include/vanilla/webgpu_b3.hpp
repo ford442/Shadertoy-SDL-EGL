@@ -6,6 +6,26 @@
 #include "../../lib/lib_webgpu_cpp20.cpp"
 #include <SDL2/SDL.h>
 
+void avgFrm(int Fnum,int leng,float *ptr,float *aptr);
+
+void clrclr(GLfloat rlc,GLfloat alc,GLfloat avr);
+
+// void uni(float xx,float yy,GLfloat time,EGLint fram);
+
+// GLuint compile_shader(GLenum type,GLsizei nsources,const char **dsources);
+
+void renderFrame();
+
+void strt();
+
+EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
+
+// void SDLCALL bfr(void *unused,Uint8* stm,int len);
+
+EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
+
+static const char8_t *read_file(const char *filename);
+
 using namespace std;
 #include <cstdio> // C++ style
 #include <cstdarg> // C++ style
