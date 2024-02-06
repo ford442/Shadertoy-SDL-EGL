@@ -1822,6 +1822,75 @@ T=true;
 }
 })
 
+
+function loada(){
+if(lockVid!=1){
+document.getElementById('ldv').height=document.innerHeight;
+loadV.addEventListener('canplay',function(){
+loadV.width=this.videoWidth;
+loadV.height=this.videoHeight;
+document.getElementById('wid').innerHTML=this.videoWidth;
+document.getElementById('hig').innerHTML=this.videoHeight;
+document.getElementById('blnnk').innerHTML=Math.max((this.videoWidth-this.videoHeight)/2.0,0);
+// document.getElementById('wid').innerHTML=parseInt(window.innerHeight,10);
+//document.getElementById('hig').innerHTML=parseInt(window.innerHeight,10);
+var $sc=this.duration;
+var mic=Math.round($sc*1000000);
+$pt=Math.random()*mic;
+$pt=$pt*1000000;
+$pt=$pt/1000000;
+$pt=Math.round($pt);
+$pt=$pt/1000000;
+document.getElementById('idur').innerHTML=mic/1000000;
+document.getElementById('itim').innerHTML=$pt;
+});
+var vide=document.querySelectorAll('video');
+document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
+hii=window.innerHeight;
+document.getElementById('ihid').innerHTML=hii;
+$lt=Math.round(tem.innerHTML);
+var $ldt=document.getElementById('tim').innerHTML;
+$ls=$lt/1000;
+$ls=$ls*1000;
+$ls=Math.round($ls);
+$ls=$ls/1000;
+var rnum=Math.floor((Math.random()*($vids[0]-5))+5);
+document.getElementById('isrc').innerHTML=$vids[rnum];
+$h=window.innerHeight;
+he=document.getElementById('hig').innerHTML;
+wi=document.getElementById('wid').innerHTML;
+r$=he/$h;
+$w=wi/r$;
+hii=$ihigB.innerHTML;
+var $hi=$h-hii;
+if($hi>1){$h=$ihigB.innerHTML;$ihig.innerHTML=$h;$r=$h/he;$r=$r*1000;$r=$r/1000;$w=wi*$r;};
+$hg=$h+'px';
+window.scroll(0,0);
+mv=vide[0].id;
+lo=vide[1].id;
+vide[0].id=lo;
+vide[1].id=mv;
+document.getElementById('mv').play();
+document.getElementById('ldv').src=document.getElementById('isrc').innerHTML;
+document.getElementById('mv').height=document.innerHeight;
+document.getElementById('ldv').currentTime=document.getElementById('itim').innerHTML;
+document.getElementById('ldv').load();
+document.getElementById('ldv').height=he;
+document.getElementById('ldv').width=wi;
+$iwid.innerHTML=parseInt($w,10);
+$ihig.innerHTML=parseInt(window.innerHeight,10);
+document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
+document.getElementById('circle').height=parseInt(window.innerHeight,10);
+document.getElementById('circle').width=parseInt(window.innerWidth,10);
+document.getElementById('di').click();
+};
+setTimeout(function(){
+loada();
+},$ldt);
+}
+
+loada();
+
 });
 
 void uniUp(){
