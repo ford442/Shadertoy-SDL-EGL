@@ -166,8 +166,8 @@ std::vector<Ort::Value>inputTensors;
 std::vector<Ort::Value>outputTensors;
 // Ort::Value outputTensors{nullptr};
 	
-inputTensors.push_back(Ort::Value::CreateTensor<float>(memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),4));
-outputTensors.push_back(Ort::Value::CreateTensor<float>(memoryInfo,nullptr,outputTensorSize,&outputDims.at(0),4));
+inputTensors.push_back(Ort::Value::CreateTensor<float>(memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),3));
+outputTensors.push_back(Ort::Value::CreateTensor<float>(memoryInfo,outputTensorValues.data(),outputTensorSize,&outputDims.at(0),4));
 std::cout << "Establishing Tensors" << std::endl;
 std::cout << "Creating CPU link " << std::endl;
 Ort::RunOptions runOpts;
@@ -190,7 +190,7 @@ void Run(const RunOptions& run_options, const char* const* input_names, const Va
 
 */
 // std::vector<Ort::Value> output=sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),1);
-sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors[0],1,outputNames.data(),outputTensors[0],1);
+sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors[0],1,outputNames.data(),&outputTensorData,1);
 // outputTensors[0]=std::move(output[0]);
 	std::cout << "Running inferrence." << std::endl;
 auto outputDataPtr = outputTensors[0].GetTensorRawData();
