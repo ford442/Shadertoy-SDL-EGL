@@ -191,7 +191,7 @@ void Run(const RunOptions& run_options, const char* const* input_names, const Va
 std::vector<Ort::Value> output=sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),1);
 
 */
-sesh.Run(Ort::RunOptions{},inputNames.data(),&inputTensors.data(),1,outputNames.data(),&outputTensors.data(),1);
+sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),&outputTensors.data(),1);
 // outputTensors[0]=std::move(output[0]);
 	std::cout << "Running inferrence." << std::endl;
 auto outputDataPtr = outputTensors[0].GetTensorRawData();
