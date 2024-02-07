@@ -96,7 +96,7 @@ ONNXTensorElementDataType inputType=inputTensorInfo.GetElementType();
 std::vector<int64_t>inputDims=inputTensorInfo.GetShape();
 if (inputDims.at(0) == -1){
 std::cout << "Got dynamic batch size. Setting input batch size to " << batchSize << "." << std::endl;
-inputDims.at(0)=ints.size();
+inputDims.at(0)=floats.size();
 inputDims.at(1)=max_wordlength;
 }
 auto outputName=sesh.GetOutputNameAllocated(0,allocator);
@@ -139,7 +139,7 @@ std::vector<float> inputTensorValues(inputTensorSize);
 std::cout << "setting inputTensorValues " <<  std::endl;
 for (int64_t i = 0; i < batchSize; ++i)
 {
-std::copy(ints.begin(),ints.end(),inputTensorValues.begin()+i*inputTensorSize);
+std::copy(floats.begin(),floats.end(),inputTensorValues.begin()+i*inputTensorSize);
 }
 	
 size_t outputTensorSize=vectorProduct(outputDims);
@@ -187,10 +187,11 @@ std::vector<Value> Run(const RunOptions& run_options, const char* const* input_n
 
 void Run(const RunOptions& run_options, const char* const* input_names, const Value* input_values, size_t input_count,
                      const char* const* output_names, Value* output_values, size_t output_count);
+		     
+std::vector<Ort::Value> output=sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),1);
 
 */
-// std::vector<Ort::Value> output=sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),1);
-sesh.Run(Ort::RunOptions{},inputNames.data(),&inputTensors[0],1,outputNames.data(),&outputTensors[0],1);
+sesh.Run(Ort::RunOptions{},inputNames.data(),&inputTensors.data(),1,outputNames.data(),&outputTensors.data(),1);
 // outputTensors[0]=std::move(output[0]);
 	std::cout << "Running inferrence." << std::endl;
 auto outputDataPtr = outputTensors[0].GetTensorRawData();
