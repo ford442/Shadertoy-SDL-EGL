@@ -821,7 +821,6 @@ const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alph
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 let imageData=image.data;
-let canvasData=cnv.toBlob();
 Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
 FS.writeFile('/video/frame.gl',imageData);
 setInterval(function(){
