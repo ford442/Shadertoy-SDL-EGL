@@ -96,7 +96,7 @@ ONNXTensorElementDataType inputType=inputTensorInfo.GetElementType();
 std::vector<int64_t>inputDims=inputTensorInfo.GetShape();
 if (inputDims.at(0) == -1){
 std::cout << "Got dynamic batch size. Setting input batch size to " << batchSize << "." << std::endl;
-inputDims.at(0)=floats.size();
+inputDims.at(0)=ints.size();
 inputDims.at(1)=max_wordlength;
 }
 auto outputName=sesh.GetOutputNameAllocated(0,allocator);
@@ -139,7 +139,7 @@ std::vector<float> inputTensorValues(inputTensorSize);
 std::cout << "setting inputTensorValues " <<  std::endl;
 for (int64_t i = 0; i < batchSize; ++i)
 {
-std::copy(floats.begin(),floats.end(),inputTensorValues.begin()+i*inputTensorSize);
+std::copy(ints.begin(),ints.end(),inputTensorValues.begin()+i*inputTensorSize);
 }
 	
 size_t outputTensorSize=vectorProduct(outputDims);
