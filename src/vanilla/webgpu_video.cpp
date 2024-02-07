@@ -821,16 +821,18 @@ const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alph
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 let imageData=image.data;
+let canvasData=cnv.toBlob();
 Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
 FS.writeFile('/video/frame.gl',imageData);
 setInterval(function(){
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
-imageData=image.data.toBlob();
+imageData=image.data;
+canvasData=cnv.toBlob();
 // imageData=cropFrameToSquare(imageData,w$,h$);
 // let pixelData=new Uint8ClampedArray(imageData);
 // let pixelData=new Float32Array(imageData);
-FS.writeFile('/video/frame.gl',imageData);
+FS.writeFile('/video/frame.gl',canvasData);
 },16.6);
 /*
 var pth="./test.png";
