@@ -113,6 +113,7 @@ static wtv_tensor wtv=wtv_tensor{3,3};
 static wicb_tensor wicb=wicb_tensor{3,3};
 static wicei_tensor wicei=wicei_tensor{2,2};
 static js_tensor js_data_pointer=js_tensor{2,2};
+static fjs_tensor fjs_data_pointer=fjs_tensor{2,2};
 static u64_tensor u64_bfrSze=u64_tensor{4,4};
 static wict_tensor wict=wict_tensor{4,4};
 static wsd_tensor wsd=wsd_tensor{2,2};
@@ -318,7 +319,7 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 
 // wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),&wicb.at(1,1),wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),js_data_pointer.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),fjs_data_pointer.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(0,0),sze.at(0,0),1);
 
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
@@ -331,6 +332,7 @@ return;
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 wd.at(0,0)=result;
 js_data_pointer.at(0,0)=0;
+fjs_data_pointer.at(0,0)=0;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 // const char * frag_body=(char*)rd_fl(Fnm);
 WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
@@ -628,11 +630,6 @@ return;
 
 }
 
-
-
-
-
-
 EM_JS(void,js_main,(),{
 
 FS.mkdir('/shader');
@@ -719,10 +716,10 @@ let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // let imageData=flipImageData(image);
 let imageData=image.data;
 let pixelData=new Uint8ClampedArray(imageData);
-  let frrm=new Uint8ClampedArray($H,0,imageData.length);
+  let frrm=new Uint8ClampedArray($H,0,pixelData.length);
 
 Module.ccall("frm",null,['Number'],['Number'],h$,h$);
-frrm.set(imageData);
+frrm.set(pixelData);
 // FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
@@ -730,8 +727,8 @@ image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // imageData=flipImageData(image);
 imageData=image.data;
 pixelData=new Uint8ClampedArray(image);
-  frrm=new Uint8ClampedArray($H,0,imageData.length);
-frrm.set(imageData);
+  frrm=new Uint8ClampedArray($H,0,pixelData.length);
+frrm.set(pixelData);
 // FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
 /*
