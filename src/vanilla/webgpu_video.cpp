@@ -786,10 +786,10 @@ async function videoFrames(){
 let SiZ=window.innerHeight;
 let tstSiZ=window.innerHeight;
 document.querySelector("#mvi").height=SiZ;
-let w$=1920; // parseInt(document.querySelector("#mvi").videoWidth);
-let h$=1080; // parseInt(document.querySelector("#mvi").videoHeight);
-document.querySelector("#mvi").height=h$;
-document.querySelector("#mvi").width=w$;
+let w$=parseInt(document.querySelector("#mvi").videoWidth);
+let h$=parseInt(document.querySelector("#mvi").videoHeight);
+// document.querySelector("#mvi").height=h$;
+// document.querySelector("#mvi").width=w$;
 Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
   console.log("vid size: ",h$,", ",w$);
 /*
@@ -812,10 +812,10 @@ FS.writeFile('/video/frame.gl',frrm);
  */
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
-cnv.height=SiZ;
-cnvb.height=SiZ;
-cnv.width=SiZ;
-cnvb.width=SiZ;
+cnv.height=h$;
+cnvb.height=h$;
+cnv.width=w$;
+cnvb.width=w$;
 let offS=Math.floor((w$-h$)/2.0);
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
