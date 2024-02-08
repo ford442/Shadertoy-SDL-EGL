@@ -716,7 +716,7 @@ const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); //
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // let imageData=flipImageData(image);
-let imageData=imageData.data;
+let imageData=image.data;
 let pixelData=new Uint8ClampedArray(imageData);
 Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
 FS.writeFile('/video/frame.gl',pixelData);
@@ -724,7 +724,7 @@ setInterval(function(){
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // imageData=flipImageData(image);
-imageData=imageData.data;
+imageData=image.data;
 pixelData=new Uint8ClampedArray(imageData);
 // let pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
