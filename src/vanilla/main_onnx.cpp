@@ -63,8 +63,8 @@ Ort::Env ort_env;
 std::cout << "got ORT env" << std::endl;
  std::string model_path="/model/model.onnx";
 const int64_t batchSize=2;
-// Ort::SessionOptions sessionOptions;
-// sessionOptions.SetIntraOpNumThreads(1);
+Ort::SessionOptions sessionOptions;
+sessionOptions.SetIntraOpNumThreads(1);
 		 // Sets graph optimization level
     // Available levels are
     // ORT_DISABLE_ALL -> To disable all optimizations
@@ -72,12 +72,12 @@ const int64_t batchSize=2;
     // removals) ORT_ENABLE_EXTENDED -> To enable extended optimizations
     // (Includes level 1 + more complex optimizations like node fusions)
     // ORT_ENABLE_ALL -> To Enable All possible optimizations
-// sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL);
+sessionOptions.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL);
 std::cout << "got ORT session/options" << std::endl;
 std::cout << "got ORT SessionOptions" << std::endl;
 
 		// from ms
-Ort::Session sesh{ort_env,"/model/model.onnx",Ort::SessionOptions{nullptr}};
+Ort::Session sesh{ort_env,"/model/model.onnx",sessionOptions};
 std::cout << "got ORT Session" << std::endl;
 Ort::AllocatorWithDefaultOptions allocator;
 std::cout << "got ORT allocator" << std::endl;
@@ -188,12 +188,14 @@ std::vector<Value> Run(const RunOptions& run_options, const char* const* input_n
 void Run(const RunOptions& run_options, const char* const* input_names, const Value* input_values, size_t input_count,
                      const char* const* output_names, Value* output_values, size_t output_count);
 		     
-std::vector<Ort::Value> output=sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),1);
 
 */
-sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),outputTensors.data(),1);
-// outputTensors[0]=std::move(output[0]);
+std::vector<Ort::Value> output=sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),1);
+
+// sesh.Run(Ort::RunOptions{},inputNames.data(),inputTensors.data(),1,outputNames.data(),outputTensors.data(),1);
 	std::cout << "Running inferrence." << std::endl;
+outputTensors[0]=std::move(output[0]);
+
 auto outputDataPtr = outputTensors[0].GetTensorRawData();
 	// Get the shape of the tensor.
 std::vector<int64_t> shape = outputTensorInfo.GetShape();
