@@ -321,7 +321,7 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 
 // wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),&wicb.at(1,1),wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
@@ -358,9 +358,9 @@ emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
 emscripten_get_element_css_size("canvas",&szw,&szh);
 u64_siz.at(0,0)=szhI;
 sze.at(0,0)=int(szhI);
-sze.at(1,1)=sze.at(0,0);
+sze.at(1,1)=720;
 szef.at(0,0)=float(szh);
-sze.at(0,1)=szh;
+// sze.at(0,1)=szh;
 multiSamp={};
 multiSamp.count=0;
 multiSamp.mask=-1;
@@ -430,8 +430,8 @@ ws.at(0,0)=videoSampler;
 videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 videoTextureDescriptor.format=wtf.at(2,2);
 videoTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
-videoTextureDescriptor.width=sze.at(0,0);
-videoTextureDescriptor.height=sze.at(0,0); // default = 1;
+videoTextureDescriptor.width=sze.at(1,1);
+videoTextureDescriptor.height=sze.at(1,1); // default = 1;
 videoTextureDescriptor.depthOrArrayLayers=1;
 videoTextureDescriptor.mipLevelCount=1;
 videoTextureDescriptor.sampleCount=1;
