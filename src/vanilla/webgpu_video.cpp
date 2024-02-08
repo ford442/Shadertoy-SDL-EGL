@@ -715,8 +715,8 @@ let la=nearestPowerOf2(((h$*h$*4)/4)*4);
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
-// let  imageData=flipImageData(image);
-let imageData=image.data;
+let  mageData=flipImageData(image);
+let imageData=mageData.data;
 let pixelData=new Uint8ClampedArray(imageData);
 //  let frrm=new Uint8ClampedArray($H,0,imageData.length);
 Module.ccall("frm",null,['Number'],['Number'],h$,h$);
@@ -725,8 +725,8 @@ FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
-// imageData=flipImageData(image);
-imageData=image.data;
+mageData=flipImageData(image);
+imageData=mageData.data;
 pixelData=new Uint8ClampedArray(imageData);
 //  frrm=new Uint8ClampedArray($H,0,imageData.length);
 // frrm.set(imageData);
