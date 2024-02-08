@@ -712,7 +712,7 @@ cnvb.height=SiZ;
 cnv.width=w$;
 cnvb.width=SiZ;
 let offS=Math.floor((w$-h$)/2.0);
-let la=nearestPowerOf2(((SiZ*SiZ*4)/4)*4);
+let la=nearestPowerOf2(((h$*h$*4)/4)*4);
 let frrm=new Uint8ClampedArray($H,0,la);
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
