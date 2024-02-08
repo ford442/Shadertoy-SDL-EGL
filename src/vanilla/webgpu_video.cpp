@@ -716,10 +716,10 @@ let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // let imageData=flipImageData(image);
 let imageData=image.data;
 let pixelData=new Uint8ClampedArray(imageData);
-  let frrm=new Uint8ClampedArray($H,0,pixelData.length);
+  let frrm=new Uint8ClampedArray($H,0,imageData.length);
 
 Module.ccall("frm",null,['Number'],['Number'],h$,h$);
-frrm.set(pixelData);
+frrm.set(imageData);
 // FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
@@ -727,8 +727,8 @@ image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // imageData=flipImageData(image);
 imageData=image.data;
 pixelData=new Uint8ClampedArray(image);
-  frrm=new Uint8ClampedArray($H,0,pixelData.length);
-frrm.set(pixelData);
+  frrm=new Uint8ClampedArray($H,0,imageData.length);
+frrm.set(imageData);
 // FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
 /*
