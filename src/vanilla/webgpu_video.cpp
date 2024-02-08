@@ -823,7 +823,7 @@ let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 let imageData=image.data;
 let pixelData=new Uint8ClampedArray(imageData);
 Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
-FS.writeFile('/video/frame.gl',pixelData);
+FS.writeFile('/video/frame.gl',pixelData.buffer);
 setInterval(function(){
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
@@ -831,7 +831,7 @@ imageData=image.data;
 // imageData=cropFrameToSquare(imageData,w$,h$);
 pixelData=new Uint8ClampedArray(imageData);
 // let pixelData=new Float32Array(imageData);
-FS.writeFile('/video/frame.gl',pixelData);
+FS.writeFile('/video/frame.gl',pixelData.buffer);
 },16.6);
 /*
 var pth="./test.png";
@@ -906,17 +906,19 @@ gl2.drawImage(vv,0,0);
 image=gl2.getImageData(0,0,SiZ,SiZ);
 imageData=image.data;
 pixelData=new Uint8Array(imageData);
-if(texture.loaded==true){
-device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[SiZ,SiZ, 2]);
+device.queue.writeTexture({texture}, pixelData.buffer, {},{SiZ,SiZ});
+// device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[SiZ,SiZ, 2]);
 // device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[texture.size[0], texture.size[1], 2]);
 const imageDataW = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
-device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageDataW.buffer, imageDataW.byteOffset, [SiZ,SiZ, 2]);
+device.queue.readTexture({texture},imageDataW.buffer, {},{SiZ,SiZ});
+// device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageDataW.buffer, imageDataW.byteOffset, [SiZ,SiZ, 2]);
 // device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageDataW.buffer, imageDataW.byteOffset, [texture.size[0],texture.size[1], 2]);
 const externalTexture=device.importExternalTexture({source:vv});
-device.queue.readTexture({externalTexture,bytesPerRow:4*vv.videoWidth,rowsPerImage:vv.videoHeight,
-},imageDataW.buffer,imageDataW.byteOffset);
+device.queue.readTexture({externalTexture},imageDataW.buffer,{},{SiZ,SiZ});
+// device.queue.readTexture({externalTexture,bytesPerRow:4*vv.videoWidth,rowsPerImage:vv.videoHeight,
+// },imageDataW.buffer,imageDataW.byteOffset);
 FS.writeFile('/video/frame.gl',pixelData);
-}
+
 },16.666);
 
 }
