@@ -730,7 +730,7 @@ image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // imageData=flipImageData(image);
 imageData=image.data;
 pixelData=new Uint8ClampedArray(image);
-  frrm=new Uint8ClampedArray($H,0,imageData.length);
+  frrm=new Uint8ClampedArray($H,0,image.length);
 frrm.set(image);
 // FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
