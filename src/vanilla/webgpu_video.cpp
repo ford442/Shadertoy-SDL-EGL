@@ -318,7 +318,7 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 
 // wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),&wicb.at(1,1),wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&js_data_pointer.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&js_data_pointer.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(0,0),sze.at(0,0),1);
 
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
@@ -392,7 +392,7 @@ fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&colorTarget;
-u64_bfrSze.at(0,0)=sze.at(0,0)*sze.at(0,0);
+u64_bfrSze.at(0,0)=sze.at(1,1)*sze.at(1,1);
 WGpuBufferDescriptor bufferDescriptorIn={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorOut={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 wbd.at(3,3)=bufferDescriptorIn;
@@ -426,8 +426,8 @@ ws.at(0,0)=videoSampler;
 videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 videoTextureDescriptor.format=wtf.at(2,2);
 videoTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
-videoTextureDescriptor.width=sze.at(0,0);
-videoTextureDescriptor.height=sze.at(0,0); // default = 1;
+videoTextureDescriptor.width=sze.at(1,1);
+videoTextureDescriptor.height=sze.at(1,1); // default = 1;
 videoTextureDescriptor.depthOrArrayLayers=1;
 videoTextureDescriptor.mipLevelCount=1;
 videoTextureDescriptor.sampleCount=1;
@@ -613,9 +613,9 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 
 EM_BOOL framm(int h,int w){
 // texid.at(0,0)=em;
-sze.at(1,0)=sze.at(0,0);
-sze.at(0,1)=sze.at(0,0);
-sze.at(1,1)=sze.at(0,0);
+sze.at(1,0)=h;
+sze.at(0,1)=w;
+sze.at(1,1)=720;
 return EM_TRUE;
 }
 
