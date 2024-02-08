@@ -679,23 +679,26 @@ return n;
 }
 }
 
-function cropFrameToSquare(frameData, width, height) {
-const cropSize = Math.min(width, height);
-const offsetX = (width - cropSize) / 2;
-const croppedData = new ImageData(cropSize, cropSize);
-for (let y = 0; y < cropSize; y++) {
-    for (let x = 0; x < cropSize; x++) {
-      const srcIndex = (y * width + x + offsetX) * 4;
-      const destIndex = (y * cropSize + x) * 4;
-      croppedData.data.set(frameData.data.slice(srcIndex, srcIndex + 4), destIndex);
-    }
-  }
-  return croppedData;
-}
 
 let vv=document.querySelector('#mv');
 let vvi=document.querySelector('#mvi');
-
+  
+function flipImageData(imageData) {
+const width = imageData.width;
+const height = imageData.height;
+const data = imageData.data;
+for (let y = 0; y < height / 2; y++) {
+for (let x = 0; x < width; x++) {
+const topIndex = (y * width + x) * 4;
+const bottomIndex = ((height - 1 - y) * width + x) * 4;
+for (let c = 0; c < 4; c++) {
+[data[topIndex + c], data[bottomIndex + c]] = [data[bottomIndex + c], data[topIndex + c]];
+}
+}
+}
+return imageData;
+}
+  
 async function videoFrames(){
 let SiZ=window.innerHeight;
 let tstSiZ=window.innerHeight;
@@ -734,15 +737,15 @@ let offS=Math.floor((w$-h$)/2.0);
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
-let imageData=image.data;
+  
+let imageData=flipImageData(image.data);
 let pixelData=new Uint8ClampedArray(imageData);
 Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
-imageData=image.data;
-// imageData=cropFrameToSquare(imageData,w$,h$);
+imageData=flipImageData(image.data);
 pixelData=new Uint8ClampedArray(imageData);
 // let pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
