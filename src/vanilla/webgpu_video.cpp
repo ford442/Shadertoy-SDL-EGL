@@ -129,23 +129,23 @@ const char * vertexShader=
 "@vertex\n"
 "fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
 "var pos=array<vec2<f32>,6>(\n"
-"vec2<f32>(1.0,1.0),\n"
-"vec2<f32>(1.0,-1.0),\n"
-"vec2<f32>(-1.0,-1.0),\n"
-"vec2<f32>(1.0,1.0),\n"
-"vec2<f32>(-1.0,-1.0),\n"
-"vec2<f32>(-1.0,1.0)\n"
+"vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(1.0f,-1.0f),\n"
+"vec2<f32>(-1.0f,-1.0f),\n"
+"vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(-1.0f,-1.0f),\n"
+"vec2<f32>(-1.0f,1.0f)\n"
 ");\n"
 "var uv=array<vec2<f32>,6>(\n"
-"vec2<f32>(1.0,0.0),\n"
-"vec2<f32>(1.0,1.0),\n"
-"vec2<f32>(0.0,1.0),\n"
-"vec2<f32>(1.0,0.0),\n"
-"vec2<f32>(0.0,1.0),\n"
-"vec2<f32>(0.0,0.0)\n"
+"vec2<f32>(1.0f,0.0f),\n"
+"vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(0.0f,1.0f),\n"
+"vec2<f32>(1.0f,0.0f),\n"
+"vec2<f32>(0.0f,1.0f),\n"
+"vec2<f32>(0.0f,0.0f)\n"
 ");\n"
 "var output : VertexOutput;\n"
-"output.Position=vec4(pos[VertexIndex],0.0,1.0);\n"
+"output.Position=vec4(pos[VertexIndex],0.0f,1.0f);\n"
 "output.fragUV=uv[VertexIndex];\n"
 "return output;\n"
 "}\n";
@@ -702,13 +702,13 @@ let SiZ=window.innerHeight;
 let tstSiZ=h$;
 // document.querySelector("#mvi").height=h$;
 // document.querySelector("#mvi").width=w$;
-Module.ccall("frm",null,['Number'],['Number'],h$,w$);
+Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
 cnv.height=h$;
 cnvb.height=SiZ;
-cnv.width=w$;
+cnv.width=h$;
 cnvb.width=SiZ;
 let offS=Math.floor((w$-h$)/2.0);
 let la=nearestPowerOf2(((h$*h$*4)/4)*4);
