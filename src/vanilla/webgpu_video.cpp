@@ -786,8 +786,8 @@ async function videoFrames(){
 let SiZ=window.innerHeight;
 let tstSiZ=window.innerHeight;
 document.querySelector("#mvi").height=SiZ;
-let w$=parseInt(document.querySelector("#mvi").videoWidth);
-let h$=parseInt(document.querySelector("#mvi").videoHeight);
+let w$=1920; // parseInt(document.querySelector("#mvi").videoWidth);
+let h$=1080; // parseInt(document.querySelector("#mvi").videoHeight);
 document.querySelector("#mvi").height=h$;
 document.querySelector("#mvi").width=w$;
 Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
@@ -821,7 +821,7 @@ const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alph
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,tstSiZ,tstSiZ,tstSiZ);
 let imageData=image.data;
-let pixelData=new Uint8Array(imageData);
+let pixelData=new Uint8ClampedArray(imageData);
 Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
@@ -829,7 +829,7 @@ gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,tstSiZ,tstSiZ,tstSiZ);
 imageData=image.data;
 // imageData=cropFrameToSquare(imageData,w$,h$);
-pixelData=new Uint8Array(imageData);
+pixelData=new Uint8ClampedArray(imageData);
 // let pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
