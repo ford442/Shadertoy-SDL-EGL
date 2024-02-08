@@ -148,6 +148,34 @@ const char * vertexShader=
 "return output;\n"
 "}\n";
 
+const char * vertexShader2=
+"struct VertexOutput{\n"
+"@builtin(position) Position : vec4<f32>,\n"
+"@location(0) fragUV : vec2<f32>\n"
+"};\n"
+"@vertex\n"
+"fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
+"var pos=array<vec2<f32>,6>(\n" 
+"vec2<f32>(1.0,1.0),\n"
+"vec2<f32>(-1.0,1.0),\n"
+"vec2<f32>(-1.0,-1.0),\n"
+"vec2<f32>(1.0,1.0),\n"
+"vec2<f32>(-1.0,-1.0),\n"
+"vec2<f32>(1.0,-1.0)\n" 
+");"
+"var uv=array<vec2<f32>,6>(\n"
+"vec2<f32>(1.0,0.0),\n"
+"vec2<f32>(1.0,1.0),\n"
+"vec2<f32>(0.0,1.0),\n"
+"vec2<f32>(1.0,0.0),\n"
+"vec2<f32>(0.0,1.0),\n"
+"vec2<f32>(0.0,0.0)\n"
+");\n"
+"var output : VertexOutput;\n"
+"output.Position=vec4(pos[VertexIndex],0.0,1.0);\n"
+"output.fragUV=uv[VertexIndex];\n"
+"return output;\n"
+"}\n";
 
 const char * frag_body=
 "@group(0) @binding(0) var <uniform> iTime : u32;\n"
