@@ -699,7 +699,7 @@ async function videoFrames(){
 // document.querySelector("#mvi").height=SiZ;
 let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
-  let SiZ=window.innerHeight;
+let SiZ=window.innerHeight;
 let tstSiZ=h$;
 // document.querySelector("#mvi").height=h$;
 // document.querySelector("#mvi").width=w$;
@@ -730,6 +730,7 @@ image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // imageData=flipImageData(image);
 imageData=image.data;
 pixelData=new Uint8ClampedArray(imageData);
+  frrm=new Uint8ClampedArray($H,0,imageData.length);
 frrm.set(imageData);
 // FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
