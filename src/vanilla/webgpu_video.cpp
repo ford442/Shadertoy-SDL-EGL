@@ -639,8 +639,8 @@ FS.mkdir('/shader');
 FS.mkdir('/video');
 
 const g=new GPUX();
-// let $H=Module.HEAPU8.buffer;
-// let $$1;
+let $H=Module.HEAPU8.buffer;
+let $$1;
   
 function nearestPowerOf2(n){
 if(n&(n-1)){
@@ -670,10 +670,35 @@ for (let c = 0; c < 4; c++) {
 return imageData;
 }
   
+async function videoFramesG(){
+let SiZ=window.innerHeight;
+let w$=parseInt(document.querySelector("#mvi").videoWidth);
+let h$=parseInt(document.querySelector("#mvi").videoHeight);
+Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
+console.log("vid size: ",h$,", ",w$);
+let la=nearestPowerOf2(((w$*h$*4)/4)*4);
+let blank$=Math.max((((w$-h$))/2.0),0);
+let nblank$=Math.max((((h$-w$)*1)/1),0);
+let t=g.createKernel(function(v){
+var P=v[this.thread.y][this.thread.x];
+return (P[0],P[1],P[2],P[3]);
+}).setTactic("precision").setGraphical(false).setDynamicOutput(true).setOutput([400,400]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
+t.setConstants({nblnk:nblank$,blnk:blank$});
+let frrm=new Uint8ClampedArray($H,0,la);
+$$1=t(vv);
+frrm.set($$1);
+FS.writeFile('/video/frame.gl',frrm);
+setInterval(function(){
+$$1=t(vv);
+frrm.set($$1);
+FS.writeFile('/video/frame.gl',frrm);
+},16.6);
+}
+  
 async function videoFrames(){
 let SiZ=window.innerHeight;
 let tstSiZ=window.innerHeight;
-document.querySelector("#mvi").height=SiZ;
+// document.querySelector("#mvi").height=SiZ;
 let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
 // document.querySelector("#mvi").height=h$;
