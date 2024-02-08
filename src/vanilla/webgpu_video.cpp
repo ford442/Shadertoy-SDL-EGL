@@ -369,8 +369,8 @@ return resultf;
 return nullptr;
 }
 
-void * fram;
-// uint8_t * fram;
+// void * fram;
+uint8_t * fram;
 
 void raf(){
 u64_uni.at(3,3)++;
@@ -422,7 +422,7 @@ wtv.at(2,2)=videoTextureView;
 // fram=(void *)rd_frmf(Fnm2);
 std::ifstream fram(Fnm2,std::ios::binary);
 // std::vector<char> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-std::vector<uint8_t> data((std::istreambuf_iterator<uint8_t>(fram)),(std::istreambuf_iterator<uint8_t>()));
+std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 wetd.at(0,0).source=texid.at(0,0);
 // extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 // wet.at(0,0)=extTexture;
