@@ -1125,6 +1125,7 @@ int main(void){
 EM_ASM({
 FS.mkdir("/snd");
 FS.mkdir("/shader");
+FS.mkdir("/video");
 });
 return 1;
 }
