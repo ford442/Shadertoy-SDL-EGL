@@ -680,9 +680,9 @@ let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let blank$=Math.max((((w$-h$))/2.0),0);
 let nblank$=Math.max((((h$-w$)*1)/1),0);
 let t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x];
+var P=v[this.thread.y][this.thread.x+this.constants.blank$];
 return (P[0],P[1],P[2],P[3]);
-}).setTactic("precision").setGraphical(false).setDynamicOutput(true).setOutput([400,400]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
+}).setTactic("precision").setGraphical(false).setDynamicOutput(true).setOutput([SiZ,SiZ]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 t.setConstants({nblnk:nblank$,blnk:blank$});
 let frrm=new Uint8ClampedArray($H,0,la);
 $$1=t(vv);
@@ -704,25 +704,7 @@ let h$=parseInt(document.querySelector("#mvi").videoHeight);
 // document.querySelector("#mvi").height=h$;
 // document.querySelector("#mvi").width=w$;
 Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
-  console.log("vid size: ",h$,", ",w$);
-/*
-let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-let blank$=Math.max((((w$-h$)*1)/1),0);
-let nblank$=Math.max((((h$-w$)*1)/1),0);
-let t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x];
-return (P[0],P[1],P[2],P[3]);
-}).setTactic("precision").setGraphical(false).setDynamicOutput(true).setOutput([400,400]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
-t.setConstants({nblnk:nblank$,blnk:blank$});
-let frrm=new Uint8Array($H,0,la);
-$$1=t(vv);
-frrm.set($$1.toBlob());
-frrm.set($$1.toBlob());
-// console.log(frrm[12]);
-// console.log(frrm[32]);
-// console.log(frrm[52]);
-FS.writeFile('/video/frame.gl',frrm);
- */
+console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
 cnv.height=h$;
@@ -733,15 +715,15 @@ let offS=Math.floor((w$-h$)/2.0);
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
-let imageData=flipImageData(image);
-imageData=imageData.data;
+// let imageData=flipImageData(image);
+let imageData=imageData.data;
 let pixelData=new Uint8ClampedArray(imageData);
 Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
-imageData=flipImageData(image);
+// imageData=flipImageData(image);
 imageData=imageData.data;
 pixelData=new Uint8ClampedArray(imageData);
 // let pixelData=new Float32Array(imageData);
@@ -849,7 +831,7 @@ document.querySelector('#bcanvas').height=parseInt(window.innerHeight,10);
 document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
-videoFramesG();
+videoFrames();
 Module.ccall("startWebGPU");
 },1500);
 document.querySelector('#status').style.backgroundColor="green";
