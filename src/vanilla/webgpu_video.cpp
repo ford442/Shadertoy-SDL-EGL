@@ -530,7 +530,7 @@ videoSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 videoSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 videoSamplerDescriptor.magFilter=WGPU_FILTER_MODE_LINEAR;
 videoSamplerDescriptor.minFilter=WGPU_FILTER_MODE_LINEAR;
-videoSamplerDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_LINEAR;
+// videoSamplerDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_LINEAR;
 videoSamplerDescriptor.lodMinClamp=0;
 videoSamplerDescriptor.lodMaxClamp=32;
 // videoSamplerDescriptor.compare;  // default = WGPU_COMPARE_FUNCTION_INVALID (not used)
@@ -817,7 +817,7 @@ cnvb.height=SiZ;
 cnv.width=SiZ;
 cnvb.width=SiZ;
 let offS=Math.floor((w$-h$)/2.0);
-const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
+const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,tstSiZ,tstSiZ,tstSiZ);
 let imageData=image.data;
