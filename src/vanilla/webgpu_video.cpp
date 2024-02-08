@@ -304,9 +304,9 @@ videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
 // fram=static_cast<uint8_t *>(rd_frm(Fnm2));
 // fram=(void *)rd_frmf(Fnm2);
-  // std::ifstream fram(Fnm2,std::ios::binary);
+std::ifstream fram(Fnm2,std::ios::binary);
 // std::vector<char> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-  // std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 wetd.at(0,0).source=texid.at(0,0);
 // extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 // wet.at(0,0)=extTexture;
@@ -319,7 +319,7 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 
 // wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),&wicb.at(1,1),wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),fjs_data_pointer.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&data,sze.at(1,1)*4,sze.at(1,1),sze.at(0,0),sze.at(0,0),1);
 
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
@@ -716,23 +716,21 @@ let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // let imageData=flipImageData(image);
 let imageData=image.data;
 let pixelData=new Uint8ClampedArray(imageData);
-  let frrm=new Uint8ClampedArray($H,0,imageData.length);
-
+//  let frrm=new Uint8ClampedArray($H,0,imageData.length);
 Module.ccall("frm",null,['Number'],['Number'],h$,h$);
-frrm.set(imageData);
-// FS.writeFile('/video/frame.gl',pixelData);
+// frrm.set(pixelData);
+FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // imageData=flipImageData(image);
 imageData=image.data;
-pixelData=new Uint8ClampedArray(image);
-  frrm=new Uint8ClampedArray($H,0,imageData.length);
-frrm.set(imageData);
-// FS.writeFile('/video/frame.gl',pixelData);
+pixelData=new Uint8ClampedArray(imageData);
+//  frrm=new Uint8ClampedArray($H,0,imageData.length);
+// frrm.set(imageData);
+FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
 /*
-
 
 var pth="./test.png";
 const ff=new XMLHttpRequest();
