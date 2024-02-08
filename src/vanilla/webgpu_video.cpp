@@ -318,7 +318,7 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 
 // wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),&wicb.at(1,1),wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&fram,sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&js_data_pointer.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
@@ -712,6 +712,8 @@ cnvb.height=SiZ;
 cnv.width=w$;
 cnvb.width=SiZ;
 let offS=Math.floor((w$-h$)/2.0);
+let la=nearestPowerOf2(((w$*h$*4)/4)*4);
+let frrm=new Uint8ClampedArray($H,0,la);
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
@@ -719,17 +721,20 @@ let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 let imageData=image.data;
 let pixelData=new Uint8ClampedArray(imageData);
 Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
-FS.writeFile('/video/frame.gl',pixelData);
+frrm.set(pixelData);
+// FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // imageData=flipImageData(image);
 imageData=image.data;
 pixelData=new Uint8ClampedArray(imageData);
-// let pixelData=new Float32Array(imageData);
-FS.writeFile('/video/frame.gl',pixelData);
+frrm.set(pixelData);
+// FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
 /*
+
+
 var pth="./test.png";
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
