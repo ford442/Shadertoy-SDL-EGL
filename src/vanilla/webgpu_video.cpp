@@ -703,7 +703,7 @@ let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
 // document.querySelector("#mvi").height=h$;
 // document.querySelector("#mvi").width=w$;
-Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
+Module.ccall("frm",null,['Number'],['Number'],h$,w$);
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
@@ -720,8 +720,8 @@ let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // let imageData=flipImageData(image);
 let imageData=image.data;
 let pixelData=new Uint8ClampedArray(imageData);
-Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
-frrm.set(pixelData);
+Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+frrm.set(imageData);
 // FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
@@ -729,7 +729,7 @@ image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // imageData=flipImageData(image);
 imageData=image.data;
 pixelData=new Uint8ClampedArray(imageData);
-frrm.set(pixelData);
+frrm.set(imageData);
 // FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
 /*
