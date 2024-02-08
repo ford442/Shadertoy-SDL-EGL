@@ -815,7 +815,7 @@ let cnvb=document.querySelector('#canvas');
 cnv.height=h$;
 cnvb.height=h$;
 cnv.width=w$;
-cnvb.width=w$;
+cnvb.width=h$;
 let offS=Math.floor((w$-h$)/2.0);
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
