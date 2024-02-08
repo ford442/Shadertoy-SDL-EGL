@@ -148,35 +148,6 @@ const char * vertexShader=
 "return output;\n"
 "}\n";
 
-const char * vertexShader2=
-"struct VertexOutput{\n"
-"@builtin(position) Position : vec4<f32>,\n"
-"@location(0) fragUV : vec2<f32>\n"
-"};\n"
-"@vertex\n"
-"fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
-"var pos=array<vec2<f32>,6>(\n" 
-"vec2<f32>(1.0,1.0),\n"
-"vec2<f32>(-1.0,1.0),\n"
-"vec2<f32>(-1.0,-1.0),\n"
-"vec2<f32>(1.0,1.0),\n"
-"vec2<f32>(-1.0,-1.0),\n"
-"vec2<f32>(1.0,-1.0)\n" 
-");"
-"var uv=array<vec2<f32>,6>(\n"
-"vec2<f32>(1.0,0.0),\n"
-"vec2<f32>(1.0,1.0),\n"
-"vec2<f32>(0.0,1.0),\n"
-"vec2<f32>(1.0,0.0),\n"
-"vec2<f32>(0.0,1.0),\n"
-"vec2<f32>(0.0,0.0)\n"
-");\n"
-"var output : VertexOutput;\n"
-"output.Position=vec4(pos[VertexIndex],0.0,1.0);\n"
-"output.fragUV=uv[VertexIndex];\n"
-"return output;\n"
-"}\n";
-
 const char * frag_body=
 "@group(0) @binding(0) var <uniform> iTime : u32;\n"
 "@group(0) @binding(1) var mySampler : sampler;\n"
@@ -391,7 +362,7 @@ multiSamp.count=0;
 multiSamp.mask=-1;
 shaderModuleDescV={};
 shaderModuleDescF={};
-shaderModuleDescV.code=vertexShader2;
+shaderModuleDescV.code=vertexShader;
 vs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescV);
 shaderModuleDescF.code=frag_body;
 // shaderModuleDescF.code=fragmentShader;
@@ -737,15 +708,16 @@ let offS=Math.floor((w$-h$)/2.0);
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
-  
-let imageData=flipImageData(image.data);
+let imageData=flipImageData(image);
+imageData=imageData.data;
 let pixelData=new Uint8ClampedArray(imageData);
 Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
-imageData=flipImageData(image.data);
+imageData=flipImageData(image);
+imageData=imageData.data;
 pixelData=new Uint8ClampedArray(imageData);
 // let pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
