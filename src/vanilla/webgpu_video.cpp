@@ -696,11 +696,12 @@ FS.writeFile('/video/frame.gl',frrm);
 }
   
 async function videoFrames(){
-let SiZ=window.innerHeight;
-let tstSiZ=window.innerHeight;
+
 // document.querySelector("#mvi").height=SiZ;
 let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
+  let SiZ=window.innerHeight;
+let tstSiZ=h$;
 // document.querySelector("#mvi").height=h$;
 // document.querySelector("#mvi").width=w$;
 Module.ccall("frm",null,['Number'],['Number'],h$,w$);
