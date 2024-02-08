@@ -686,11 +686,11 @@ return (P[0],P[1],P[2],P[3]);
 t.setConstants({nblnk:nblank$,blnk:blank$});
 let frrm=new Uint8ClampedArray($H,0,la);
 $$1=t(vv);
-frrm.set($$1);
+frrm.set($$1,0);
 FS.writeFile('/video/frame.gl',frrm);
 setInterval(function(){
 $$1=t(vv);
-frrm.set($$1);
+frrm.set($$1,0);
 FS.writeFile('/video/frame.gl',frrm);
 },16.6);
 }
