@@ -849,7 +849,7 @@ document.querySelector('#bcanvas').height=parseInt(window.innerHeight,10);
 document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
-videoFrames();
+videoFramesG();
 Module.ccall("startWebGPU");
 },1500);
 document.querySelector('#status').style.backgroundColor="green";
