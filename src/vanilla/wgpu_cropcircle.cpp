@@ -637,7 +637,7 @@ EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
 FS.mkdir('/video');
 
-const g=new GPUX();
+// const g=new GPUX();
 let $H=Module.HEAPU8.buffer;
 let $$1;
   
