@@ -135,6 +135,7 @@ wfs_tensor wfs=wfs_tensor{2,2};
 wrpid_tensor wrpid=wrpid_tensor{2,2};
 wtbl_tensor wtbl=wtbl_tensor{2,2};
 c_tensor wgsl=c_tensor{2,2};
+c32_tensor wgsl32=c32_tensor{2,2};
 wsd_tensor wsd=wsd_tensor{2,2};
 ws_tensor wgpu_sampler=ws_tensor{2,2};
 wsbl_tensor wsbl=wsbl_tensor{2,2};
@@ -422,8 +423,35 @@ return results;
 return nullptr;
 }
 
+const inline char32_t * rd_fl_32(const char * Fnm){
+FILE * file=fopen(Fnm,"r");
+::boost::tuples::tie(result,results,file);
+if(file){
+int32_t stat=fseek(file,(int32_t)0,SEEK_END);
+if(stat!=0){
+fclose(file);
+return nullptr;
+}
+length=ftell(file);
+stat=fseek(file,(int32_t)0,SEEK_SET);
+if(stat!=0){
+fclose(file);
+return nullptr;
+}
+result=static_cast<char32_t *>(malloc((length+1)*sizeof(char32_t)));
+if(result){
+size_t actual_length=fread(result,sizeof(char32_t),length,file);
+result[actual_length++]={'\0'};
+}
+fclose(file);
+results=reinterpret_cast<char32_t *>(result);
+return results;
+}
+return nullptr;
+}
+
 void getCode(const char * Fnm){
-const char * frag_body=(char *)rd_fl(Fnm);
+const char32_t * frag_body=(char32_t *)rd_fl(Fnm);
 wgsl.at(0,0)=frag_body;
 return;
 }
