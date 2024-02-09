@@ -708,10 +708,10 @@ let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
 cnv.height=h$;
 cnvb.height=SiZ;
-cnv.width=h$;
+cnv.width=w$;
 cnvb.width=SiZ;
 let offS=Math.floor((w$-h$)/2.0);
-let la=nearestPowerOf2(((h$*h$*4)/4)*4);
+let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
