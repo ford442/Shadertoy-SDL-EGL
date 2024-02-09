@@ -335,7 +335,7 @@ void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 wd.at(0,0)=result;
 js_data_pointer.at(0,0)=0;
 fjs_data_pointer.at(0,0)=0;
-wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
+wcc.at(0,0)=wgpu_canvas_get_webgpu_context("imag");
 // const char * frag_body=(char*)rd_fl(Fnm);
 WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
 wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
@@ -354,8 +354,8 @@ config.viewFormats=&canvasViewFormat[0];
 // config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
-emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
-emscripten_get_element_css_size("canvas",&szw,&szh);
+emscripten_get_canvas_element_size("imag",&szwI,&szhI);
+emscripten_get_element_css_size("imag",&szw,&szh);
 u64_siz.at(0,0)=szhI;
 sze.at(0,0)=int(szhI);
 sze.at(1,1)=720;
@@ -650,7 +650,7 @@ return n;
 }
 
 let vv=document.querySelector('#mv');
-let vvi=document.querySelector('#mvi');
+let vvi=document.querySelector('#myvideo');
   
 function flipImageData(imageData) {
 const width = imageData.width;
@@ -670,16 +670,16 @@ return imageData;
   
 async function videoFrames(){
 // document.querySelector("#mvi").height=SiZ;
-let w$=parseInt(document.querySelector("#mv").videoWidth);
-let h$=parseInt(document.querySelector("#mv").videoHeight);
+let w$=parseInt(document.querySelector("#myvideo").videoWidth);
+let h$=parseInt(document.querySelector("#myvideo").videoHeight);
 let SiZ=window.innerHeight;
 let tstSiZ=h$;
 // document.querySelector("#mvi").height=h$;
 // document.querySelector("#mvi").width=w$;
 Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 console.log("vid size: ",h$,", ",w$);
-let cnv=document.querySelector('#bcanvas');
-let cnvb=document.querySelector('#canvas');
+let cnv=document.querySelector('#imag2');
+let cnvb=document.querySelector('#imag');
 cnv.height=h$;
 cnvb.height=SiZ;
 cnv.width=h$;
