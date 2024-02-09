@@ -454,7 +454,7 @@ return nullptr;
 
 void getCode(const char * Fnm){
 const char32_t * frag_body=(char32_t *)rd_fl_32(Fnm);
-wgsl.at(0,0)=frag_body;
+wgsl32.at(0,0)=frag_body;
 return;
 }
 
@@ -765,7 +765,7 @@ wcts.at(1,1)=colorTarget2;
 shaderModuleDescV={};
 shaderModuleDescF={};
 fragHint.entryPointName=fragEntry;
-shaderModuleDescF.code=wgsl.at(0,0);
+shaderModuleDescF.code=wgsl32.at(0,0);
 // shaderModuleDescF.hint=fragHint;
 shaderModuleDescV.code=vertexShader;
 wsmd.at(0,0)=shaderModuleDescV;
