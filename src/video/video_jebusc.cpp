@@ -832,7 +832,15 @@ attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 // emscripten_webgl_enable_extension(ctx,"WEBGL_compatibility"); // limits to WebGL 1.0
-
+display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
+eglInitialize(display,&v3,&v0);
+eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
+contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
+surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
+eglMakeCurrent(display,surface,surface,contextegl);
+emscripten_webgl_make_context_current(ctx);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 emscripten_webgl_enable_extension(ctx,"ARB_robust_buffer_access_behavior");
 emscripten_webgl_enable_extension(ctx,"ARB_ES3_compatibility");
 emscripten_webgl_enable_extension(ctx,"GL_EXTENSIONS");
@@ -1018,15 +1026,7 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_create_surface_from_window");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_surface_attachment");
 emscripten_webgl_enable_extension(ctx,"EXT_texture_storage");
 
-display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-eglInitialize(display,&v3,&v0);
-eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
-contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
-surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
-eglMakeCurrent(display,surface,surface,contextegl);
-emscripten_webgl_make_context_current(ctx);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+
 // glHint(GL_LINE_SMOOTH_HINT,GL_NICEST);
 // glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST);
 // glHint(GL_TEXTURE_COMPRESSION_HINT,GL_NICEST);
