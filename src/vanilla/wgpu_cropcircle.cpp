@@ -649,7 +649,6 @@ return n;
 }
 }
 
-let vv=document.querySelector('#mv');
 let vvi=document.querySelector('#myvideo');
   
 function flipImageData(imageData) {
@@ -669,13 +668,10 @@ return imageData;
 }
   
 async function videoFrames(){
-// document.querySelector("#mvi").height=SiZ;
 let w$=parseInt(document.querySelector("#myvideo").imageWidth);
 let h$=parseInt(document.querySelector("#myvideo").imageHeight);
 let SiZ=window.innerHeight;
 let tstSiZ=h$;
-// document.querySelector("#mvi").height=h$;
-// document.querySelector("#mvi").width=w$;
 Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#imag2');
