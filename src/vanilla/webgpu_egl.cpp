@@ -451,7 +451,7 @@ return nullptr;
 }
 
 void getCode(const char * Fnm){
-const char32_t * frag_body=(char32_t *)rd_fl(Fnm);
+const char32_t * frag_body=(char32_t *)rd_fl_32(Fnm);
 wgsl.at(0,0)=frag_body;
 return;
 }
