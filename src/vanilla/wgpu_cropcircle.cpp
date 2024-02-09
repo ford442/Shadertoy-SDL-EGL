@@ -728,43 +728,7 @@ document.querySelector('#status').style.backgroundColor="green";
 }
 document.querySelector('#status').height=20;
 document.querySelector('#status').width=parseInt(window.innerHeight,10);
-const tem=document.querySelector('#tim');
-const ban=document.querySelector('#menuBtn');
-const sfr=document.querySelector('#slideframe');
-var $lt=tem.innerHTML;
-function grab$lt(){
-$lt=Math.round($lt);
-}
-$lt=tem.innerHTML;
-grab$lt();
-const slo=new Slideout({'panel':document.querySelector('#panel'),'menu':document.querySelector('#menu'),'padding':384,'tolerance':70,'easing':'cubic-bezier(.32,2,.55,.27)'});
-ban.addEventListener('click',function(){slo.toggle();sfr.innerHTML="";
-setTimeout(function(){
-grab$lt();
-slt=$lt/1000;
-slt=Math.round(slt);
-sfr.innerHTML='<input type='+'"te'+'xt" id'+'="time'+'slider"/'+'>';
-const tsl=new rSlider({target:'#timeslider',values:{min:0.25,max:30.00},
-step:[0.25],labels:false,tooltip:true,scale:false,});
-grab$lt();
-slt=($lt/1000);
-slt=slt*100;
-slt=Math.round(slt);
-slt=slt/100;
-tsl.setValues(slt);
-document.querySelector('#menu').addEventListener('click',function(){
-$ll=tsl.getValue();
-$ll=$ll*100;
-$ll=Math.round($ll);
-$ll=$ll/100;$ll=($ll*1000);
-tem.innerHTML=$ll;
-});
-setTimeout(function(){
-slt=tem.innerHTML;
-},8);
-},16);
-});
-  
+
 document.querySelector('#startBtn').addEventListener('click',function(){
 // var pth="https://glsl.1ink.us/wgsl/galaxy.wgsl";
   var pth=document.querySelector('#path').innerHTML;
