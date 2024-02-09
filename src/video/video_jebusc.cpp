@@ -177,7 +177,7 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.querySelector("#bcanvas");
-const contx=bcanvas.getContext("webgl2",{colorType:'float32',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:true,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
+const contx=bcanvas.getContext("webgl2",{colorType:'float32',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // contx.blendColor(1.0,1.0,1.0,1.0);
@@ -189,7 +189,7 @@ contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_
 contx.getExtension('ARB_robust_buffer_access_behavior');
 // contx.getExtension('ARB_ES3_compatibility');
 // contx.getExtension('GL_EXTENSIONS');
-// contx.getExtension('GL_ALL_EXTENSIONS');
+contx.getExtension('GL_ALL_EXTENSIONS');
 // contx.getExtension('KHR_no_error');
 // contx.getExtension('GL_REGAL_enable');
 // contx.getExtension('OES_fragment_precision_high'); // deprecated
@@ -372,7 +372,7 @@ contx.getExtension('EGL_EXT_surface_attachment');
 contx.getExtension('EXT_texture_storage');
 
 contx.disable(gl.DITHER);
-contx.drawingBufferColorMetadata={mode:'extended'};
+// contx.drawingBufferColorMetadata={mode:'extended'};
 // contx.drawingBufferColorSpace='display-p3';
 
 const g=new GPUX({canvas:bcanvas,webGl:contx});
@@ -805,15 +805,15 @@ EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,
 // EGL_DEPTH_ENCODING_NV,EGL_DEPTH_ENCODING_NONLINEAR_NV,
 EGL_RENDER_BUFFER,EGL_QUADRUPLE_BUFFER_NV,
 // EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE,EGL_TRUE,
-EGL_RED_SIZE,16,
-EGL_GREEN_SIZE,16,
-EGL_BLUE_SIZE,16,
-EGL_ALPHA_SIZE,16,
+EGL_RED_SIZE,8,
+EGL_GREEN_SIZE,8,
+EGL_BLUE_SIZE,8,
+EGL_ALPHA_SIZE,8,
 EGL_DEPTH_SIZE,32,
-EGL_STENCIL_SIZE,16,
+EGL_STENCIL_SIZE,8,
 EGL_BUFFER_SIZE,64,
-EGL_SAMPLE_BUFFERS,4,
-EGL_SAMPLES,4,
+EGL_SAMPLE_BUFFERS,16,
+EGL_SAMPLES,16,
 EGL_NONE
 };
   
@@ -832,15 +832,7 @@ attr.majorVersion=2;
 attr.minorVersion=0;
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 // emscripten_webgl_enable_extension(ctx,"WEBGL_compatibility"); // limits to WebGL 1.0
-display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
-eglInitialize(display,&v3,&v0);
-eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
-contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
-surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
-eglMakeCurrent(display,surface,surface,contextegl);
-emscripten_webgl_make_context_current(ctx);
-glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
-glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
+  /*
 emscripten_webgl_enable_extension(ctx,"ARB_robust_buffer_access_behavior");
 emscripten_webgl_enable_extension(ctx,"ARB_ES3_compatibility");
 emscripten_webgl_enable_extension(ctx,"GL_EXTENSIONS");
@@ -1025,8 +1017,16 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_request_priority");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_create_surface_from_window");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_surface_attachment");
 emscripten_webgl_enable_extension(ctx,"EXT_texture_storage");
-
-
+*/
+display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
+eglInitialize(display,&v3,&v0);
+eglChooseConfig(display,attribute_list,&eglconfig,1,&config_size);
+contextegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,anEglCtxAttribs2);
+surface=eglCreateWindowSurface(display,eglconfig,0,attribut_list);
+eglMakeCurrent(display,surface,surface,contextegl);
+emscripten_webgl_make_context_current(ctx);
+glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
+glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 // glHint(GL_LINE_SMOOTH_HINT,GL_NICEST);
 // glHint(GL_POLYGON_SMOOTH_HINT,GL_NICEST);
 // glHint(GL_TEXTURE_COMPRESSION_HINT,GL_NICEST);
