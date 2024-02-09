@@ -81,7 +81,7 @@ intervalBackward=setInterval(function(){
 if(vv.currentTime==0){
 clearInterval(intervalBackward);
 }else{
-vv.currentTime+=-0.032;
+vv.currentTime+=-0.0333;
 }
 },16);
 };
@@ -90,7 +90,7 @@ let intervalForward;
 
 function forward(){
 intervalForward=setInterval(function(){
-vv.currentTime+=-0.032;
+vv.currentTime+=-0.0333;
 },16);
 };
 
@@ -104,11 +104,11 @@ f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>a){
-vv.currentTime+=-0.016;
+vv.currentTime+=-0.0333;
 }else{
 f=false;
 }}else if(vv.currentTime<b){
-vv.currentTime+=0.016;
+vv.currentTime+=0.0333;
 }else{
 f=true;
 }
