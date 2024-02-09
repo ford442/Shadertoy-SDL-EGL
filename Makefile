@@ -250,13 +250,12 @@ b3_vanilla_cropcircle:
 	 em++ src/vanilla/wgpu_cropcircle.cpp -std=c++20 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ $(LDFLAGS) -O0 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-crp.js \
-	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=1 \
+	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) -sASSERTIONS=1 \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
 	 -sINITIAL_MEMORY=1400mb -lmath.js -lhtml5.js -lint53.js \
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS=['startWebGPU'] \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 --memory-init-file 0 wgpu_cropcircle.o 
 
