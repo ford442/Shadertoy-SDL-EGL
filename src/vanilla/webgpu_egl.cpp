@@ -209,6 +209,8 @@ const char * FnmB=reinterpret_cast<const char *>("/shader/shader.wgsl");
 
 char * result=NULL;
 char * results=NULL;
+char32_t * result32=NULL;
+char32_t * results32=NULL;
 long int length=0;
 
 wq_tensor WGPU_Queue=wq_tensor{1,1,2};
@@ -425,7 +427,7 @@ return nullptr;
 
 const inline char32_t * rd_fl_32(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
-::boost::tuples::tie(result,results,file);
+::boost::tuples::tie(result32,results32,file);
 if(file){
 int32_t stat=fseek(file,(int32_t)0,SEEK_END);
 if(stat!=0){
@@ -438,14 +440,14 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char32_t *>(malloc((length+1)*sizeof(char32_t)));
-if(result){
-size_t actual_length=fread(result,sizeof(char32_t),length,file);
-result[actual_length++]={'\0'};
+result32=static_cast<char32_t *>(malloc((length+1)*sizeof(char32_t)));
+if(result32){
+size_t actual_length=fread(result32,sizeof(char32_t),length,file);
+result32[actual_length++]={'\0'};
 }
 fclose(file);
-results=reinterpret_cast<char32_t *>(result);
-return results;
+results32=reinterpret_cast<char32_t *>(result32);
+return results32;
 }
 return nullptr;
 }
@@ -599,9 +601,9 @@ void raf(){
 render();
 }
 
-void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
+void ObtainedWebGpuDeviceStart(WGpuDevice resultD, void *userData){
 // inline boost::function<void(WGpuDevice,void *)>ObtainedWebGpuDeviceStart=[](WGpuDevice result, void *userData){
-wd.at(0,0)=result;
+wd.at(0,0)=resultD;
 WGPU_UserData.at(0,0,0)=userData;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
@@ -1170,8 +1172,8 @@ on.at(0,0)=1;
 return;
 };
 
-void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
-wa.at(0,0)=result;
+void ObtainedWebGpuAdapterStart(WGpuAdapter resultA, void *userData){
+wa.at(0,0)=resultA;
 deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
 // deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8|WGPU_FEATURE_FLOAT32_FILTERABLE|WGPU_FEATURE_RG11B10UFLOAT_RENDERABLE;
 // deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8;
