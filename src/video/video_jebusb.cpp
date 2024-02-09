@@ -149,12 +149,12 @@ if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
-var w$=parseInt(document.querySelector("#wid").innerHTML,10);
-var h$=parseInt(document.querySelector("#hig").innerHTML,10);
-var blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
-var ch$=parseInt(window.innerHeight,10);
+let w$=parseInt(document.querySelector("#wid").innerHTML,10);
+let h$=parseInt(document.querySelector("#hig").innerHTML,10);
+let blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
+let ch$=parseInt(window.innerHeight,10);
 vv=document.querySelector("#mv");
-var $H=Module.HEAPF32.buffer;
+let $H=Module.HEAPF32.buffer;
 
 function nearestPowerOf2(n){
 if(n&(n-1)){
@@ -164,15 +164,15 @@ return n;
 }
 }
 
-var la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
-var pointa=77*la;
-var agav=new Float32Array($H,pointa,300);
-var sz=(h$*h$)/8;
-var blank$=Math.max((w$-h$)/4,0);
-var nblank$=Math.max((h$-w$)/2,0);
-var avag=0.750;
-var min=1.0;
-var max=0.0;
+let la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
+let pointa=77*la;
+let agav=new Float32Array($H,pointa,300);
+let sz=(h$*h$)/8;
+let blank$=Math.max((w$-h$)/4,0);
+let nblank$=Math.max((h$-w$)/2,0);
+let avag=0.750;
+let min=1.0;
+let max=0.0;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
@@ -372,8 +372,8 @@ contx.getExtension('EGL_EXT_surface_attachment');
 contx.getExtension('EXT_texture_storage');
 
 contx.disable(gl.DITHER);
-// contx.drawingBufferColorMetadata={mode:'extended'};
-// contx.drawingBufferColorSpace='display-p3';
+contx.drawingBufferColorMetadata={mode:'extended'};
+contx.drawingBufferColorSpace='display-p3';
 
 const g=new GPUX({canvas:bcanvas,webGl:contx});
 const g2=new GPUX();
@@ -400,30 +400,30 @@ g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 
-const R=g2.createKernel(function(tv){
-let Pa=tv[this.thread.y][this.thread.x*4];
+let R=g2.createKernel(function(tv){
+var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setOutput([sz]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
-const t=g.createKernel(function(v){
-let P=v[this.thread.y][this.thread.x+this.constants.blnk];
-let av$=Ave(P[0],P[1],P[2]);
+let t=g.createKernel(function(v){
+var P=v[this.thread.y][this.thread.x+this.constants.blnk];
+var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
-const r=g.createKernel(function(f){
-let p=f[this.thread.y][this.thread.x];
-let $fmax=this.constants.fmax;
-let $fmin=this.constants.fmin;
-let $amax=this.constants.amax;
-let $amin=this.constants.amin;
-let $favg=this.constants.favg;
-let $aavg=this.constants.aavg;
-// var alph=AlpheV1($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
-let alph=AlpheV2($amax,$amin,$aavg,p[3]);
-let Min=4.0*(($fmax-($favg-$fmin))/2.0);
-let ouT=Math.max(Min,alph);
-let aveg=Aveg(p[3],ouT);
+let r=g.createKernel(function(f){
+var p=f[this.thread.y][this.thread.x];
+var $fmax=this.constants.fmax;
+var $fmin=this.constants.fmin;
+var $amax=this.constants.amax;
+var $amin=this.constants.amin;
+var $favg=this.constants.favg;
+var $aavg=this.constants.aavg;
+var alph=AlpheV1($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
+// var alph=AlpheV2($amax,$amin,$aavg,p[3]);
+var Min=4.0*(($amax-($favg-$amin))/2.0);
+var ouT=Math.max(Min,alph);
+var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([h$,h$]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
 
@@ -481,8 +481,7 @@ t.setConstants({nblnk:nblank$,blnk:blank$$});
 for(i=64;i>0;i--){
 var loca=$F+1;if(loca>64){loca=1;}
 var locb=$Bu+1;if(locb>64){locb=1;}
-// eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
-eval("if ($F==="+i+"){var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");FS.writeFile('/video/frame"+$Bu+".gl',$"+$Bu+");$F="+loca+";$Bu="+locb+";var ff=new Float32Array(FS.readFile('/video/frame"+$Bu+".gl',{encoding:'binary'}));var $r"+i+"=t(ff);r($r"+i+");}");
+eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$Bu+".set($$"+$Bu+");$F="+loca+";$Bu="+locb+";}");
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
@@ -823,7 +822,7 @@ attr.alpha=EM_TRUE;
 attr.stencil=EM_TRUE;
 attr.depth=EM_TRUE;
 attr.antialias=EM_TRUE;
-attr.premultipliedAlpha=EM_TRUE;
+attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_TRUE;
 attr.enableExtensionsByDefault=EM_TRUE;
 attr.renderViaOffscreenBackBuffer=EM_FALSE;
@@ -1125,7 +1124,6 @@ int main(void){
 EM_ASM({
 FS.mkdir("/snd");
 FS.mkdir("/shader");
-FS.mkdir("/video");
 });
 return 1;
 }
