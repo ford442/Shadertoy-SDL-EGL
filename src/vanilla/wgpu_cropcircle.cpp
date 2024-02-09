@@ -670,8 +670,8 @@ return imageData;
   
 async function videoFrames(){
 // document.querySelector("#mvi").height=SiZ;
-let w$=parseInt(document.querySelector("#myvideo").videoWidth);
-let h$=parseInt(document.querySelector("#myvideo").videoHeight);
+let w$=parseInt(document.querySelector("#myvideo").imageWidth);
+let h$=parseInt(document.querySelector("#myvideo").imageHeight);
 let SiZ=window.innerHeight;
 let tstSiZ=h$;
 // document.querySelector("#mvi").height=h$;
@@ -745,6 +745,8 @@ WGPU_Start();
 }
 
 int main(){
+  
 js_main();
+  startWebGPU();
 return 0;
 }
