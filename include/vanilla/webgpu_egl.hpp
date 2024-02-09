@@ -142,6 +142,7 @@ using di_tensor=boost::numeric::ublas::tensor<boost::uint_t<64>::exact>;
 using wdc_tensor=boost::numeric::ublas::tensor<WGpuOnSubmittedWorkDoneCallback>;
 using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using c_tensor=boost::numeric::ublas::tensor<const char *>;
+using c32_tensor=boost::numeric::ublas::tensor<const char32_t *>;
 using f_tensor=boost::numeric::ublas::tensor<float>;
 using fptr_tensor=boost::numeric::ublas::tensor<float *>;
 using wce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
