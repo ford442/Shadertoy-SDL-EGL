@@ -99,15 +99,15 @@ let stp,a,b,f;
 
 function backForth(stp){
 a=stp/1000.0;
-b=(stp/1000.0)+3.0;
+b=(stp/1000.0)+3.33;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
-if(vv.currentTime>a){
+if(vv.currentTime>=a){
 vv.currentTime+=-0.0333;
 }else{
 f=false;
-}}else if(vv.currentTime<b){
+}}else if(vv.currentTime<=b){
 vv.currentTime+=0.0333;
 }else{
 f=true;
