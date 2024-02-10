@@ -183,6 +183,7 @@ using wtvd_tensor=boost::numeric::ublas::tensor<WGpuTextureViewDescriptor>;
 using wtf_tensor=boost::numeric::ublas::tensor<WGPU_TEXTURE_FORMAT>;
 using wtv_tensor=boost::numeric::ublas::tensor<WGpuTextureView>;
 using js_tensor=boost::numeric::ublas::tensor<uint8_t *>;
+using js_data_tensor=boost::numeric::ublas::tensor<std::vector<uint8_t>>;
 using wicb_tensor=boost::numeric::ublas::tensor<WGPUImageCopyBuffer>;
 using wicei_tensor=boost::numeric::ublas::tensor<WGpuImageCopyExternalImage>;
 using wict_tensor=boost::numeric::ublas::tensor<WGpuImageCopyTexture>;
