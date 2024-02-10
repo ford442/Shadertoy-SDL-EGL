@@ -1435,8 +1435,8 @@ powerPreference:'high-performance',
 antialias:false}); // 
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
-let mageData=flipImageData(image);
-let imageData=mageData.data;
+// let mageData=flipImageData(image);
+let imageData=image.data;
 let pixelData=new Uint8Array(imageData);
 //  let frrm=new Uint8ClampedArray($H,0,imageData.length);
 Module.ccall("frm",null,['Number'],['Number'],h$,offS);
@@ -1445,8 +1445,8 @@ FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
-mageData=flipImageData(image);
-imageData=mageData.data;
+// mageData=flipImageData(image);
+imageData=image.data;
 pixelData=new Uint8Array(imageData);
 //  frrm=new Uint8ClampedArray($H,0,imageData.length);
 // frrm.set(imageData);
