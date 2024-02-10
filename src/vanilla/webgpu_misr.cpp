@@ -507,7 +507,7 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-resultf=static_cast<char *>(malloc((length+1)*sizeof(float)));
+resultf=static_cast<float *>(malloc((length+1)*sizeof(float)));
 if(resultf){
 size_t actual_length=fread(resultf,sizeof(float),length,file);
 resultf[actual_length++]={'\0'};
