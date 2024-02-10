@@ -618,8 +618,8 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 
 EM_BOOL framm(int h,int w){
 // texid.at(0,0)=em;
-sze.at(1,0)=h;
-sze.at(0,1)=w;
+// sze.at(1,0)=h;
+// sze.at(0,1)=w;
 sze.at(1,1)=h;
 return EM_TRUE;
 }
@@ -709,7 +709,7 @@ let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
 cnv.height=h$;
 cnvb.height=SiZ;
-cnv.width=w$;
+cnv.width=h$;
 cnvb.width=SiZ;
 let offS=Math.floor((w$-h$)/2.0);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
