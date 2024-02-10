@@ -1,4 +1,4 @@
-#include "../../include/vanilla/main_compute.hpp"
+#include "../../include/vanilla/webgpu_egl.hpp"
 
 WGpuBufferDescriptor bufferDescriptor_indice={};
 WGpuBuffer indice_Buffer;
@@ -135,6 +135,7 @@ wfs_tensor wfs=wfs_tensor{2,2};
 wrpid_tensor wrpid=wrpid_tensor{2,2};
 wtbl_tensor wtbl=wtbl_tensor{2,2};
 c_tensor wgsl=c_tensor{2,2};
+c32_tensor wgsl32=c32_tensor{2,2};
 wsd_tensor wsd=wsd_tensor{2,2};
 ws_tensor wgpu_sampler=ws_tensor{2,2};
 wsbl_tensor wsbl=wsbl_tensor{2,2};
@@ -206,8 +207,10 @@ const char * fragEntry="main_1";
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.wgsl");
 const char * FnmB=reinterpret_cast<const char *>("/shader/shader.wgsl");
 
-char8_t * result=NULL;
+char * result=NULL;
 char * results=NULL;
+char32_t * result32=NULL;
+char32_t * results32=NULL;
 long int length=0;
 
 wq_tensor WGPU_Queue=wq_tensor{1,1,2};
@@ -318,7 +321,7 @@ double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
 
 struct Vertex{
-float position[4];
+GLfloat position[4];
 };
 
 Vertex nvertices[]={
@@ -330,7 +333,7 @@ Vertex nvertices[]={
 {-1.0f,-1.0f,0.0f,1.0f}
 };
 
-Vertex vertices[]={
+Vertex lvertices[]={
 {-1.0f,-1.0f,1.0f,1.0f},
 {1.0f,-1.0f,1.0f,1.0f},
 {1.0f,1.0f,1.0f,1.0f},
@@ -339,6 +342,17 @@ Vertex vertices[]={
 {1.0f,-1.0f,-1.0f,1.0f},
 {1.0f,1.0f,-1.0f,1.0f},
 {-1.0f,1.0f,1.0f,1.0f}
+};
+
+Vertex vertices[]={
+{-1.0,-1.0,1.0,1.0},
+{1.0,-1.0,1.0,1.0},
+{1.0,1.0,1.0,1.0},
+{-1.0,1.0,1.0,1.0},
+{-1.0,-1.0,-1.0,1.0},
+{1.0,-1.0,-1.0,1.0},
+{1.0,1.0,-1.0,1.0},
+{-1.0,1.0,1.0,1.0}
 };
 
 uint32_t indices[35]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
@@ -399,14 +413,41 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
+result=static_cast<char *>(malloc((length+1)*sizeof(char)));
 if(result){
-size_t actual_length=fread(result,sizeof(char8_t),length,file);
+size_t actual_length=fread(result,sizeof(char),length,file);
 result[actual_length++]={'\0'};
 }
 fclose(file);
 results=reinterpret_cast<char *>(result);
 return results;
+}
+return nullptr;
+}
+
+const inline char32_t * rd_fl_32(const char * Fnm){
+FILE * file=fopen(Fnm,"r");
+::boost::tuples::tie(result32,results32,file);
+if(file){
+int32_t stat=fseek(file,(int32_t)0,SEEK_END);
+if(stat!=0){
+fclose(file);
+return nullptr;
+}
+length=ftell(file);
+stat=fseek(file,(int32_t)0,SEEK_SET);
+if(stat!=0){
+fclose(file);
+return nullptr;
+}
+result32=static_cast<char32_t *>(malloc((length+1)*sizeof(char32_t)));
+if(result32){
+size_t actual_length=fread(result32,sizeof(char32_t),length,file);
+result32[actual_length++]={'\0'};
+}
+fclose(file);
+results32=reinterpret_cast<char32_t *>(result32);
+return results32;
 }
 return nullptr;
 }
@@ -461,16 +502,16 @@ colorAttachment.view=wtv.at(1,1);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
 colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
 // colorAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
-colorAttachment.clearValue.r=1.0f;
-colorAttachment.clearValue.g=1.0f;
-colorAttachment.clearValue.b=1.0f;
-colorAttachment.clearValue.a=1.0f;
+colorAttachment.clearValue.r=1.0;
+colorAttachment.clearValue.g=1.0;
+colorAttachment.clearValue.b=1.0;
+colorAttachment.clearValue.a=1.0;
 wrpca.at(0,0)=colorAttachment;
 // depthAttachment={};
 depthTextureView=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
 wtv.at(0,0)=depthTextureView;
 depthAttachment.view=wtv.at(0,0);
-depthAttachment.depthClearValue=1.0f;
+depthAttachment.depthClearValue=1.0;
 depthAttachment.stencilClearValue=0;
 depthAttachment.depthReadOnly=0;
 depthAttachment.stencilReadOnly=0;
@@ -528,15 +569,13 @@ wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
-  // wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,WGPU_ResultBuffer.at(0,0,0),sizeof(vertices));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(1,1),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_uni.at(2,2),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(3,3),0,sizeof(vertices));
-wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
-  //  wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
- wgpu_render_pass_encoder_draw_indexed(wrpe.at(0,0),36,1,0,0,0);
+wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0,1.0);
+wgpu_render_pass_encoder_draw_indexed(wrpe.at(0,0),36,1,0,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
@@ -549,8 +588,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
 wgpu_render_pass_encoder_set_index_buffer(wrpe.at(1,1),wb.at(4,4),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(1,1),0,wb.at(3,3),0,sizeof(vertices));
-wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
-  // wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
+wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0,1.0);
 wgpu_render_pass_encoder_draw_indexed(wrpe.at(1,1),36,1,0,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(1,1));
 wcb.at(1,1)=wgpu_command_encoder_finish(wce.at(1,1));
@@ -563,9 +601,9 @@ void raf(){
 render();
 }
 
-void ObtainedWebGpuDeviceStart(WGpuDevice result, void *userData){
+void ObtainedWebGpuDeviceStart(WGpuDevice resultD, void *userData){
 // inline boost::function<void(WGpuDevice,void *)>ObtainedWebGpuDeviceStart=[](WGpuDevice result, void *userData){
-wd.at(0,0)=result;
+wd.at(0,0)=resultD;
 WGPU_UserData.at(0,0,0)=userData;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
@@ -679,9 +717,9 @@ mms.at(2,1)=(mms2.at(0,1)-float_size.at(0,0))*0.5;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RG11B10UFLOAT;
 // canvasFormat=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
-wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
-wtf.at(3,3)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
-wtf.at(4,4)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
+wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
+wtf.at(3,3)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
+wtf.at(4,4)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 // wtf.at(3,3)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
 canvasViewFormats[0]={wtf.at(3,3)};
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
@@ -691,14 +729,14 @@ config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BIN
 config.viewFormats=&canvasViewFormats[0];
 config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 // config.alphaMode=WGPU_CANVAS_ALPHA_MODE_OPAQUE;
-// config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
+config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 // config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_SRGB;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 emscripten_get_element_css_size("canvas",&szh,&szw);
 emscripten_get_canvas_element_size("canvas",&szhI,&szwI);
 u64_siz.at(0,0)=(szhI/4)*4;
-szef.at(0,0)=floor(float((szhI/4)*4));
+szef.at(0,0)=floor(float((szh/4.0)*4.0));
 sze.at(0,0)=(szhI/4)*4;
 sze.at(0,1)=szhI;
 multiSamp={};
@@ -1134,8 +1172,8 @@ on.at(0,0)=1;
 return;
 };
 
-void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
-wa.at(0,0)=result;
+void ObtainedWebGpuAdapterStart(WGpuAdapter resultA, void *userData){
+wa.at(0,0)=resultA;
 deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
 // deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8|WGPU_FEATURE_FLOAT32_FILTERABLE|WGPU_FEATURE_RG11B10UFLOAT_RENDERABLE;
 // deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8;
