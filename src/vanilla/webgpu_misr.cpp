@@ -489,65 +489,12 @@ return results;
 return nullptr;
 }
 
-const inline char32_t * rd_fl_32(const char * Fnm){
-FILE * file=fopen(Fnm,"r");
-::boost::tuples::tie(result32,results32,file);
-if(file){
-int32_t stat=fseek(file,(int32_t)0,SEEK_END);
-if(stat!=0){
-fclose(file);
-return nullptr;
-}
-length=ftell(file);
-stat=fseek(file,(int32_t)0,SEEK_SET);
-if(stat!=0){
-fclose(file);
-return nullptr;
-}
-result32=static_cast<char32_t *>(malloc((length+1)*sizeof(char32_t)));
-if(result32){
-size_t actual_length=fread(result32,sizeof(char32_t),length,file);
-result32[actual_length++]={'\0'};
-}
-fclose(file);
-results32=reinterpret_cast<char32_t *>(result32);
-return results32;
-}
-return nullptr;
-}
-
 const char * Fnm2=reinterpret_cast<const char *>("/video/frame.gl");
 
 void getCode(const char * Fnm){
 // const char * frag_body=(char *)rd_fl(Fnm);
 wgsl.at(0,0)=frag_body;
 return;
-}
-
-uint8_t * rd_frm(const char * Fnm2){
-FILE * file2=fopen(Fnm,"r");
-::boost::tuples::tie(result2,results2,file2);
-if(file2){
-int32_t stat=fseek(file2,0,SEEK_END);
-if(stat!=0){
-fclose(file2);
-return nullptr;
-}
-length=ftell(file2);
-stat=fseek(file2,0,SEEK_SET);
-if(stat!=0){
-fclose(file2);
-return nullptr;
-}
-result2=static_cast<uint8_t *>(malloc((length+1)*sizeof(uint8_t)));
-if(result2){
-size_t actual_length=fread(result2,sizeof(uint8_t),length,file2);
-result[actual_length++]={'\0'};
-}
-fclose(file2);
-return result2;
-}
-return nullptr;
 }
 
 inline boost::function<EM_BOOL()>render=[](){
