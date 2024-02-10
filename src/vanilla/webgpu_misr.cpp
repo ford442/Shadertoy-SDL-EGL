@@ -1535,8 +1535,8 @@ scanShaders();
 
 document.querySelector('#pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.querySelector('#ihig').innerHTML=parseInt(window.innerHeight,10);
-document.querySelector('#scanvas').height=parseInt(window.innerHeight,10);
-document.querySelector('#scanvas').width=parseInt(window.innerHeight,10);
+document.querySelector('#bcanvas').height=parseInt(window.innerHeight,10);
+document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#canvas').height=parseInt(window.innerHeight,10);
 document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#status').height=20;
