@@ -523,6 +523,32 @@ wgsl.at(0,0)=frag_body;
 return;
 }
 
+uint8_t * rd_frm(const char * Fnm2){
+FILE * file2=fopen(Fnm,"r");
+::boost::tuples::tie(result2,results2,file2);
+if(file2){
+int32_t stat=fseek(file2,0,SEEK_END);
+if(stat!=0){
+fclose(file2);
+return nullptr;
+}
+length=ftell(file2);
+stat=fseek(file2,0,SEEK_SET);
+if(stat!=0){
+fclose(file2);
+return nullptr;
+}
+result2=static_cast<uint8_t *>(malloc((length+1)*sizeof(uint8_t)));
+if(result2){
+size_t actual_length=fread(result2,sizeof(uint8_t),length,file2);
+result[actual_length++]={'\0'};
+}
+fclose(file2);
+return result2;
+}
+return nullptr;
+}
+
 inline boost::function<EM_BOOL()>render=[](){
 // void raf(){
 /*
@@ -632,18 +658,18 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 //wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,OutputBufferBytes);
 // }
   // Render pass A (color)
-//  fram=(void *)rd_frmf(Fnm2);
+fram=(uint8_t *)rd_frm(Fnm2);
 
-std::ifstream fram(Fnm2,std::ios::binary);
-std::vector<int> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-// frame_tensor.at(0,0)=data;
+//  std::ifstream fram(Fnm2,std::ios::binary);
+std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+frame_tensor.at(0,0)=data;
 
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&data,sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(1,1),sizeof(uint64_t));
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_uni.at(2,2),sizeof(uint64_t));
