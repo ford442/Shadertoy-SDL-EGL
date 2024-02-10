@@ -1426,10 +1426,10 @@ Module.ccall("frm",null,['Number'],['Number'],h$,offS);
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
-cnv.height=h$;
-cnvb.height=SiZ;
-cnv.width=h$;
-cnvb.width=SiZ;
+// cnv.height=h$;
+// cnvb.height=SiZ;
+// cnv.width=h$;
+// cnvb.width=SiZ;
 let la=nearestPowerOf2(((h$*h$*4)/4)*4);
 const gl2=cnv.getContext('2d',{
 // colorType:'float32',
@@ -1452,7 +1452,7 @@ let imageData=image.data;
 let pixelData=new Uint8Array(imageData);
 //  let frrm=new Uint8ClampedArray($H,0,imageData.length);
 // frrm.set(pixelData);
-FS.writeFile('/video/frame.gl',pixelData);
+FS.writeFile('/video/frame.gl',pixelData,{encoding:"binary",flag:"w+",mode:0o666});
 setInterval(function(){
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
