@@ -633,7 +633,7 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 // }
   // Render pass A (color)
 std::ifstream fram(Fnm2,std::ios::binary);
-std::vector<float> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+std::vector<char> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
@@ -1397,7 +1397,7 @@ return imageData;
 }
 
 async function videoFrames(){
-let $H=Module.HEAPU8.buffer;
+let $H=Module.HEAPF32.buffer;
 // document.querySelector("#mvi").height=SiZ;
 let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
