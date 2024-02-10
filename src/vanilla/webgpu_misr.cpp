@@ -815,7 +815,7 @@ u64_siz.at(0,0)=(szhI/4)*4;
 szef.at(0,0)=float((szh/4.0)*4.0);
 sze.at(0,0)=float((szh/4.0)*4.0);
 sze.at(0,1)=szhI;
-// sze.at(1,1)=720;
+sze.at(1,1)=1080;
 
 multiSamp={};
 multiSamp.count=0;
