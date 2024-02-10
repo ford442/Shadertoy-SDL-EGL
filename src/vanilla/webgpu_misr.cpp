@@ -824,7 +824,7 @@ sze.at(0,1)=280;
 
 
   
-// sze.at(1,1)=780;
+sze.at(1,1)=780;
 
   
 
@@ -974,7 +974,7 @@ wtvd.at(2,2)=videoTextureViewDescriptor;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
 WGpuOrigin3D xyz={};
-xyz.x=0;
+xyz.x=sze.at(0,1);
 xyz.y=0;
 xyz.z=0;
 WGpuImageCopyTexture videoTextureCopy;
