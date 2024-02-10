@@ -16,8 +16,8 @@ COMMON_FLAGS = -D__EMSCRIPTEN__ -fopenmp-simd -sSUPPORT_LONGJMP=emscripten -pthr
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer -fno-vectorize
 
-tCOMMON_FLAGS = -D__EMSCRIPTEN__ -sSUPPORT_LONGJMP=emscripten -pipe -mextended-const \
-	 -mbulk-memory -matomics -sWASM_WORKERS=0 -sSHARED_MEMORY=0 -stdlib=libc++ \
+tCOMMON_FLAGS = -D__EMSCRIPTEN__ -fopenmp-simd -sSUPPORT_LONGJMP=emscripten -pthread -pipe -mextended-const \
+	 -mbulk-memory -matomics -sWASM_WORKERS=1 -sSHARED_MEMORY=0 -stdlib=libc++ \
 	 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fPIE -finline-functions -funroll-loops \
 	 -m32 -fmerge-all-constants -ffast-math -ffinite-math-only -funsafe-math-optimizations \
 	 -fno-trapping-math -ffp-contract=off -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno \
