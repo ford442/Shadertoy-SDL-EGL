@@ -47,13 +47,13 @@ LINK_FLAGS = $(LDFLAGS) -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 -sDEFAULT_T
 	 --memory-init-file 0 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
 
 tLINK_FLAGS = $(LDFLAGS) -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -sOFFSCREENCANVAS_SUPPORT=0 \
-	 -sTEXTDECODER=0 -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
+	 -sTEXTDECODER=0 -sALLOW_TABLE_GROWTH=0 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
 	 -sDEMANGLE_SUPPORT=0 -sASSERTIONS=0 --typed-function-references --enable-reference-types \
 	 --use-preload-plugins --closure 0 --closureFriendly -logg -lvorbis -lpthread \
 	 -sWASM=1 -sENVIRONMENT='web,worker' -sSTRICT_JS=1 \
 	 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
-	 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=512mb --output_eol linux -mllvm -mtune=wasm32 -march=native -wasm-enable-eh \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb --output_eol linux -mllvm -mtune=wasm32 -march=native -wasm-enable-eh \
 	 --memory-init-file 0 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
 
 WEBGPU_FLAGS = -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
