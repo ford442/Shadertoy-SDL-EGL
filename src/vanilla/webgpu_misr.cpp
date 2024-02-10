@@ -1421,6 +1421,8 @@ let offS=Math.floor((w$-h$)/2.0);
 // document.querySelector("#mvi").height=h$;
 // document.querySelector("#mvi").width=w$;
 Module.ccall("frm",null,['Number'],['Number'],h$,offS);
+  Module.ccall("startWebGPU",{async:true});
+
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
@@ -1491,7 +1493,6 @@ document.querySelector('#circle').width=window.innerWidth;
 document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#di').click();
   videoFrames();
-Module.ccall("startWebGPU",{async:true});
 },100);
 document.querySelector('#status').style.backgroundColor="green";
 }
