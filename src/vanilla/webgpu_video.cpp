@@ -304,17 +304,11 @@ wrpd.at(0,0)=passDesc;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
 // fram=static_cast<uint8_t *>(rd_frm(Fnm2));
-fram=(void *)rd_frmf(Fnm2);
-  /*
+// fram=(void *)rd_frmf(Fnm2);
 std::ifstream fram(Fnm2,std::ios::binary);
 // std::vector<char> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-    int offset_size = sze.at(0,1); // Example offset of 10 bytes
-    data.insert(data.begin(), offset_size, 0);
-    std::copy(data.begin() + offset_size, data.end(), data.begin());
-    data.resize(data.size() - offset_size);
-    frame_tensor.at(0,0)=data;
-*/
+frame_tensor.at(0,0)=data;
   wetd.at(0,0).source=texid.at(0,0);
 // extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 // wet.at(0,0)=extTexture;
@@ -327,7 +321,7 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 
 // wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),&wicb.at(1,1),wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&fram,sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
@@ -366,7 +360,7 @@ u64_siz.at(0,0)=szhI;
 sze.at(0,0)=int(szhI);
 sze.at(1,1)=720;
 szef.at(0,0)=float(szh);
-sze.at(0,1)=280;
+// sze.at(0,1)=szh;
 multiSamp={};
 multiSamp.count=0;
 multiSamp.mask=-1;
@@ -621,18 +615,18 @@ wao.at(0,0)=options;
 navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 }
 
-EM_BOOL framm(int h,int offs){
+EM_BOOL framm(int h,int w){
 // texid.at(0,0)=em;
 sze.at(1,0)=h;
-sze.at(0,1)=offs;
+sze.at(0,1)=w;
 sze.at(1,1)=h;
 return EM_TRUE;
 }
 
 extern "C"{
 
-void frm(int h,int offs){
-framm(h,offs);
+void frm(int h,int w){
+framm(h,w);
 return;
 }
 
@@ -706,39 +700,26 @@ let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
 let SiZ=window.innerHeight;
 let tstSiZ=h$;
-let offS=Math.floor((w$-h$)/2.0);
 // document.querySelector("#mvi").height=h$;
 // document.querySelector("#mvi").width=w$;
-Module.ccall("frm",null,['Number'],['Number'],h$,offS);
+Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
 cnv.height=h$;
 cnvb.height=SiZ;
-cnv.width=h$;
+cnv.width=w$;
 cnvb.width=SiZ;
-let la=nearestPowerOf2(((h$*h$*4)/4)*4);
-const gl2=cnv.getContext('2d',{
-colorType:'float32',
-precision:'highp',
-preferLowPowerToHighPerformance:false,
-alpha:true,
-depth:true,
-stencil:true,
-// preserveDrawingBuffer:false,
-premultipliedAlpha:false,
-// imageSmoothingEnabled:false,
-willReadFrequently:true,
-lowLatency:false,
-powerPreference:'high-performance',
-antialias:false}); // 
+let offS=Math.floor((w$-h$)/2.0);
+let la=nearestPowerOf2(((w$*h$*4)/4)*4);
+const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 let mageData=flipImageData(image);
 let imageData=mageData.data;
-let pixelData=new Float32Array(imageData);
+let pixelData=new Uint8Array(imageData);
 //  let frrm=new Uint8ClampedArray($H,0,imageData.length);
-Module.ccall("frm",null,['Number'],['Number'],h$,offS);
+Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 // frrm.set(pixelData);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
@@ -746,7 +727,7 @@ gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 mageData=flipImageData(image);
 imageData=mageData.data;
-pixelData=new Float32Array(imageData);
+pixelData=new Uint8Array(imageData);
 //  frrm=new Uint8ClampedArray($H,0,imageData.length);
 // frrm.set(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
