@@ -77,6 +77,17 @@ b3_audio_sdl:
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--extern-post-js js/rSlider.js --extern-post-js js/slideOut.js main.o audio_sdl.o 
 
+b3_audio_tensor:
+	em++ $(STDS) -c src/audio/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	em++ $(STDS) -c src/audio/audio_sdl.cpp -O2 $(COMMON_FLAGS) \
+	-Wno-incompatible-function-pointer-types $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0
+	em++ $(STDS) -o $(BIN_NAME) -O2 $(COMMON_FLAGS) $(LINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
+	-sFORCE_FILESYSTEM=1 -Wno-incompatible-function-pointer-types \
+	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	--extern-post-js js/rSlider.js --extern-post-js js/slideOut.js main.o audio_sdl.o libonnxruntime_webassembly.a
+
 b3_audio_lab:
 	em++ -c src/audio/main.cpp -O0 $(SIMD_FLAGS) $(BOOST_FLAGS)
 	em++ -c src/audio/audio_sdl.cpp -O0 -D__EMSCRIPTEN__ \
