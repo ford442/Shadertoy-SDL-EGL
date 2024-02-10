@@ -304,7 +304,8 @@ wrpd.at(0,0)=passDesc;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
 // fram=static_cast<uint8_t *>(rd_frm(Fnm2));
-// fram=(void *)rd_frmf(Fnm2);
+fram=(void *)rd_frmf(Fnm2);
+  /*
 std::ifstream fram(Fnm2,std::ios::binary);
 // std::vector<char> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
@@ -312,8 +313,8 @@ std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambu
     data.insert(data.begin(), offset_size, 0);
     std::copy(data.begin() + offset_size, data.end(), data.begin());
     data.resize(data.size() - offset_size);
-
-frame_tensor.at(0,0)=data;
+*/
+frame_tensor.at(0,0)=fram;
   wetd.at(0,0).source=texid.at(0,0);
 // extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 // wet.at(0,0)=extTexture;
@@ -714,15 +715,28 @@ let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
 cnv.height=h$;
 cnvb.height=SiZ;
-cnv.width=w$;
+cnv.width=h$;
 cnvb.width=SiZ;
-let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
+let la=nearestPowerOf2(((h$*h$*4)/4)*4);
+const gl2=cnv.getContext('2d',{
+colorType:'float32',
+precision:'highp',
+preferLowPowerToHighPerformance:false,
+alpha:true,
+depth:true,
+stencil:true,
+// preserveDrawingBuffer:false,
+premultipliedAlpha:false,
+// imageSmoothingEnabled:false,
+willReadFrequently:true,
+lowLatency:false,
+powerPreference:'high-performance',
+antialias:false}); // 
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 let mageData=flipImageData(image);
 let imageData=mageData.data;
-let pixelData=new Uint8Array(imageData);
+let pixelData=new Float32Array(imageData);
 //  let frrm=new Uint8ClampedArray($H,0,imageData.length);
 Module.ccall("frm",null,['Number'],['Number'],h$,offS);
 // frrm.set(pixelData);
@@ -732,7 +746,7 @@ gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 mageData=flipImageData(image);
 imageData=mageData.data;
-pixelData=new Uint8Array(imageData);
+pixelData=new Float32Array(imageData);
 //  frrm=new Uint8ClampedArray($H,0,imageData.length);
 // frrm.set(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
