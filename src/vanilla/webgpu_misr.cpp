@@ -637,10 +637,10 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 // }
   // Render pass A (color)
   
-// ffram=(float *)rd_frm_f(Fnm2);
-std::ifstream ffram(Fnm2,std::ios::binary);
+ffram=(float *)rd_frm_f(Fnm2);
+// std::ifstream ffram(Fnm2,std::ios::binary);
 std::vector<float> data((std::istreambuf_iterator<char>(ffram)),(std::istreambuf_iterator<char>()));
-frame_tensorf.at(0,0)=data;
+frame_tensorf.at(0,0)=ffram;
 
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
