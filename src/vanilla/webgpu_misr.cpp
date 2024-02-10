@@ -492,7 +492,7 @@ return nullptr;
 }
 
 
-const inline char * rd_frm_f(const char * Fnm){
+const inline float * rd_frm_f(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(resultf,resultsf,file);
 if(file){
