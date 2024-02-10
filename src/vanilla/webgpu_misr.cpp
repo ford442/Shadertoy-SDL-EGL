@@ -1469,6 +1469,7 @@ document.querySelector('#bcanvas').height=window.innerHeight;
 document.querySelector('#di').click();
 },150);
 }
+
 function normalResStart(){
 setTimeout(function(){
 document.querySelector('#shut').innerHTML=2;
@@ -1480,6 +1481,7 @@ Module.ccall("startWebGPU",{async:true});
 },100);
 document.querySelector('#status').style.backgroundColor="green";
 }
+
 var $shds=[];
 
 function shds(xml){
@@ -1604,6 +1606,9 @@ if(e.code=='Digit3'){document.getElementById('sizeUp').click();};
 pnnl.addEventListener('keydown',Key);
 
 document.querySelector('#startBtn').addEventListener('click',function(){
+normalResStart();
+
+/*
 // var pth="https://glsl.1ink.us/wgsl/galaxy.wgsl";
 let shdMenu=document.querySelector('#sh1');
 let highRes=document.querySelector('#resMode').value;
@@ -1626,6 +1631,7 @@ normalResStart();
 }
 });
 ff.send(null);
+*/
 });
   
 setTimeout(function(){
