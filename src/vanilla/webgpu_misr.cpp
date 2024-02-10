@@ -165,6 +165,7 @@ wict_tensor wict=wict_tensor{2,2};
 u64_tensor u64_bfrSze=u64_tensor{4,4};
 wicb_tensor wicb=wicb_tensor{3,3};
 js_data_tensor frame_tensor=js_data_tensor{2,2};
+js_data_tensorf frame_tensorf=js_data_tensorf{2,2};
 
 /*
 mouse_tensor mms=mouse_tensor{2,2};
@@ -609,8 +610,8 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 //  ufram=(uint8_t *)rd_frm(Fnm2);
 
 std::ifstream ufram(Fnm2,std::ios::binary);
-std::vector<uint8_t> data((std::istreambuf_iterator<char>(ufram)),(std::istreambuf_iterator<char>()));
-frame_tensor.at(0,0)=data;
+std::vector<float> data((std::istreambuf_iterator<char>(ufram)),(std::istreambuf_iterator<char>()));
+frame_tensorf.at(0,0)=data;
 
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
