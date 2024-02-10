@@ -167,7 +167,7 @@ u64_tensor u64_bfrSze=u64_tensor{4,4};
 wicb_tensor wicb=wicb_tensor{3,3};
 js_data_tensor frame_tensor=js_data_tensor{2,2};
 js_data_tensorf frame_tensorf=js_data_tensorf{2,2};
-frame_tensorGL frame_tensorGL=frame_tensorGL{2,2};
+js_data_tensorGL frame_tensorGL=js_data_tensorGL{2,2};
 
 /*
 mouse_tensor mms=mouse_tensor{2,2};
