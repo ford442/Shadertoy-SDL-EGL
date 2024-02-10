@@ -321,7 +321,7 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 
 // wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),&wicb.at(1,1),wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(0,0)-sze.at(0,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
@@ -615,18 +615,18 @@ wao.at(0,0)=options;
 navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 }
 
-EM_BOOL framm(int h,int w){
+EM_BOOL framm(int h,int offs){
 // texid.at(0,0)=em;
 sze.at(1,0)=h;
-sze.at(0,1)=w;
+sze.at(0,1)=offs;
 sze.at(1,1)=h;
 return EM_TRUE;
 }
 
 extern "C"{
 
-void frm(int h,int w){
-framm(h,w);
+void frm(int h,int offs){
+framm(h,offs);
 return;
 }
 
@@ -700,9 +700,10 @@ let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
 let SiZ=window.innerHeight;
 let tstSiZ=h$;
+let offS=Math.floor((w$-h$)/2.0);
 // document.querySelector("#mvi").height=h$;
 // document.querySelector("#mvi").width=w$;
-Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+Module.ccall("frm",null,['Number'],['Number'],h$,offS);
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
@@ -710,7 +711,6 @@ cnv.height=h$;
 cnvb.height=SiZ;
 cnv.width=w$;
 cnvb.width=SiZ;
-let offS=Math.floor((w$-h$)/2.0);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
