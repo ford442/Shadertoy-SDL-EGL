@@ -1531,7 +1531,7 @@ shds(this);
 dxhttp.open('GET','https://glsl.1ink.us/wgsl/',true);
 dxhttp.send();
 }
-scanShaders();
+// scanShaders();
 
 document.querySelector('#pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.querySelector('#ihig').innerHTML=parseInt(window.innerHeight,10);
