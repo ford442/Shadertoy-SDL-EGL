@@ -160,6 +160,7 @@ ws_tensor wgpu_sampler=ws_tensor{2,2};
 wsbl_tensor wsbl=wsbl_tensor{2,2};
 wvbl_tensor wvbl=wvbl_tensor{2,2};
 wict_tensor wict=wict_tensor{2,2};
+u64_tensor u64_bfrSze=u64_tensor{4,4};
 
 /*
 mouse_tensor mms=mouse_tensor{2,2};
