@@ -1,4 +1,4 @@
-BIN_NAME = a0-002.js
+BIN_NAME = a0-002
 
 LDFLAGS = -Wl,-O3,--lto-O3,-lc,-lc++,-lc++abi,-lm,-lpthread,-lrt,-ldl,-S
 
@@ -71,7 +71,7 @@ b3_audio_sdl:
 	em++ $(STDS) -c src/audio/audio_sdl.cpp -O0 $(COMMON_FLAGS) \
 	-Wno-incompatible-function-pointer-types $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0
-	em++ $(STDS) -o $(BIN_NAME) -O0 $(COMMON_FLAGS) $(LINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	em++ $(STDS) -o $(BIN_NAME).js -O0 $(COMMON_FLAGS) $(LINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
 	-sFORCE_FILESYSTEM=1 -Wno-incompatible-function-pointer-types \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -82,7 +82,7 @@ b3_audio_tensor:
 	em++ $(STDS) -c src/audio/audio_sdl.cpp -O2 $(COMMON_FLAGS) \
 	-Wno-incompatible-function-pointer-types $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0
-	em++ $(STDS) -o $(BIN_NAME) -O2 $(COMMON_FLAGS) $(LINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	em++ $(STDS) -o $(BIN_NAME)-tnsr.js -O2 $(COMMON_FLAGS) $(LINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
 	-sFORCE_FILESYSTEM=1 -Wno-incompatible-function-pointer-types \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -93,7 +93,7 @@ b3_audio_lab:
 	em++ -c src/audio/audio_sdl.cpp -O0 -D__EMSCRIPTEN__ \
 	-Wno-incompatible-function-pointer-types $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0
-	em++ -o $(BIN_NAME) -O0 $(LINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	em++ -o $(BIN_NAME).js -O0 $(LINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
 	-sFORCE_FILESYSTEM=1 -Wno-incompatible-function-pointer-types \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -104,7 +104,7 @@ b3_audio_queue:
 	em++ $(STDS) -c src/audio/audio_queue.cpp -O0 $(COMMON_FLAGS) \
 	-Wno-incompatible-function-pointer-types $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0
-	em++ $(STDS) -o $(BIN_NAME) -O0 $(COMMON_FLAGS) $(LINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	em++ $(STDS) -o $(BIN_NAME).js -O0 $(COMMON_FLAGS) $(LINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
 	-sFORCE_FILESYSTEM=1 -Wno-incompatible-function-pointer-types \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
@@ -115,7 +115,7 @@ b3_audio_test:
 	em++ $(STDS) -c src/audio/audio.cpp -O2 $(COMMON_FLAGS) \
 	-Wno-incompatible-function-pointer-types $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_MIXER=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0
-	em++ $(STDS) -o $(BIN_NAME) -O2 $(COMMON_FLAGS) $(LINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	em++ $(STDS) -o $(BIN_NAME).js -O2 $(COMMON_FLAGS) $(LINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_MIXER=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
 	-sFORCE_FILESYSTEM=1 -Wno-incompatible-function-pointer-types \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
