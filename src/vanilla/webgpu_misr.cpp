@@ -29,6 +29,8 @@ WGpuTexture __128bit_Texture__;
 WGpuSamplerDescriptor videoSamplerDescriptor={};
 WGpuTextureDescriptor depthTextureDescriptor={};
 WGpuTextureDescriptor colorTextureDescriptor={};
+WGpuTextureDescriptor videoTextureDescriptor={};
+
 WGpuTextureDescriptor highbitTextureDescriptor={};
 WGpuRenderPassDescriptor passDesc={};
 WGpuRenderPassDescriptor passDesc2={};
@@ -157,7 +159,6 @@ c_tensor wgsl=c_tensor{2,2};
 c32_tensor wgsl32=c32_tensor{2,2};
 wsd_tensor wsd=wsd_tensor{2,2};
 ws_tensor wgpu_sampler=ws_tensor{2,2};
-wicb_tensor wicb=wicb_tensor{3,3};
 wsbl_tensor wsbl=wsbl_tensor{2,2};
 wvbl_tensor wvbl=wvbl_tensor{2,2};
 wict_tensor wict=wict_tensor{2,2};
