@@ -719,7 +719,7 @@ let mageData=flipImageData(image);
 let imageData=mageData.data;
 let pixelData=new Uint8Array(imageData);
 //  let frrm=new Uint8ClampedArray($H,0,imageData.length);
-Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+Module.ccall("frm",null,['Number'],['Number'],h$,offS);
 // frrm.set(pixelData);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
