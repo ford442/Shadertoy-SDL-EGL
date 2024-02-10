@@ -1423,7 +1423,7 @@ imageData=image.data;
 pixelData=new Uint8Array(imageData);
 //  frrm=new Uint8ClampedArray($H,0,imageData.length);
 // frrm.set(imageData);
-FS.writeFile('/video/frame.gl',pixelData);
+FS.writeFile('/video/frame.gl',pixelData,{encoding:"binary",flag:"w+",mode:0o666});
 },16.6);
 }
 
