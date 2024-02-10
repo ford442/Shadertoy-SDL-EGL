@@ -948,7 +948,7 @@ videoTextureDescriptor.viewFormats=nullptr; // &videoViewFormats[0];
 wtd.at(2,2)=videoTextureDescriptor;
 videoTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(2,2));
 wt.at(2,2)=videoTexture;
-videoTextureViewDescriptor.format=wtf.at(2,2);
+videoTextureViewDescriptor.format=wtf.at(0,0);
 videoTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 videoTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 videoTextureViewDescriptor.baseMipLevel=0; // default = 0
