@@ -637,10 +637,10 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 // }
   // Render pass A (color)
   
-ffram=(float *)rd_frm_f(Fnm2);
-// std::ifstream ffram(Fnm2,std::ios::binary);
+// ffram=(float *)rd_frm_f(Fnm2);
+std::ifstream ffram(Fnm2,std::ios::binary);
 std::vector<float> data((std::istreambuf_iterator<char>(ffram)),(std::istreambuf_iterator<char>()));
-frame_tensorf.at(0,0)=ffram;
+frame_tensor.at(0,0)=data;
 
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
@@ -653,7 +653,7 @@ wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(1
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_uni.at(2,2),sizeof(uint64_t));
 //  wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
 // wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(3,3),0,sizeof(vertices));
-wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0,1.0);
+wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0,1.0);
 // wgpu_render_pass_encoder_draw_indexed(wrpe.at(0,0),36,1,0,0,0);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
@@ -668,7 +668,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
 // wgpu_render_pass_encoder_set_index_buffer(wrpe.at(1,1),wb.at(4,4),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
 // wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(1,1),0,wb.at(3,3),0,sizeof(vertices));
-wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0,1.0);
+wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,sze.at(0,0),sze.at(0,0),0.0,1.0);
 // wgpu_render_pass_encoder_draw_indexed(wrpe.at(1,1),36,1,0,0,0);
 wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(1,1));
@@ -820,7 +820,12 @@ u64_siz.at(0,0)=(szhI/4)*4;
 szef.at(0,0)=float((szh/4.0)*4.0);
 sze.at(0,0)=float((szh/4.0)*4.0);
 sze.at(0,1)=280;
-sze.at(1,1)=720;
+
+
+  
+sze.at(1,1)=780;
+
+  
 
 multiSamp={};
 multiSamp.count=0;
