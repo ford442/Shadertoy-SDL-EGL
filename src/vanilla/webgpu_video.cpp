@@ -314,7 +314,7 @@ std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambu
     std::copy(data.begin() + offset_size, data.end(), data.begin());
     data.resize(data.size() - offset_size);
 */
-frame_tensor.at(0,0)=fram;
+frame_tensor.at(0,0)=&fram;
   wetd.at(0,0).source=texid.at(0,0);
 // extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 // wet.at(0,0)=extTexture;
