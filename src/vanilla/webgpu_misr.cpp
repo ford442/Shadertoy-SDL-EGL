@@ -1419,7 +1419,7 @@ cnv.width=h$;
 cnvb.width=SiZ;
 let la=nearestPowerOf2(((h$*h$*4)/4)*4);
 const gl2=cnv.getContext('2d',{
-colorType:'float32',
+// colorType:'float32',
 precision:'highp',
 preferLowPowerToHighPerformance:false,
 alpha:true,
@@ -1436,7 +1436,7 @@ gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 let mageData=flipImageData(image);
 let imageData=mageData.data;
-let pixelData=new Uint8ClampedArray(imageData);
+let pixelData=new Uint8Array(imageData);
 //  let frrm=new Uint8ClampedArray($H,0,imageData.length);
 Module.ccall("frm",null,['Number'],['Number'],h$,offS);
 // frrm.set(pixelData);
@@ -1446,7 +1446,7 @@ gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 mageData=flipImageData(image);
 imageData=mageData.data;
-pixelData=new Uint8ClampedArray(imageData);
+pixelData=new Uint8Array(imageData);
 //  frrm=new Uint8ClampedArray($H,0,imageData.length);
 // frrm.set(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
