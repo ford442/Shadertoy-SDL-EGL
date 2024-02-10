@@ -274,8 +274,8 @@ const char * FnmB=reinterpret_cast<const char *>("/shader/shader.wgsl");
 
 char * result=NULL;
 char * results=NULL;
-char32_t * result32=NULL;
-char32_t * results32=NULL;
+float * resultf=NULL;
+float * resultsf=NULL;
 long int length=0;
 
 wq_tensor WGPU_Queue=wq_tensor{1,1,2};
@@ -486,6 +486,34 @@ result[actual_length++]={'\0'};
 fclose(file);
 results=reinterpret_cast<char *>(result);
 return results;
+}
+return nullptr;
+}
+
+
+const inline char * rd_frm_f(const char * Fnm){
+FILE * file=fopen(Fnm,"r");
+::boost::tuples::tie(resultf,resultsf,file);
+if(file){
+int32_t stat=fseek(file,(int32_t)0,SEEK_END);
+if(stat!=0){
+fclose(file);
+return nullptr;
+}
+length=ftell(file);
+stat=fseek(file,(int32_t)0,SEEK_SET);
+if(stat!=0){
+fclose(file);
+return nullptr;
+}
+resultf=static_cast<char *>(malloc((length+1)*sizeof(float)));
+if(resultf){
+size_t actual_length=fread(resultf,sizeof(float),length,file);
+resultf[actual_length++]={'\0'};
+}
+fclose(file);
+resultsf=reinterpret_cast<float *>(resultf);
+return resultsf;
 }
 return nullptr;
 }
