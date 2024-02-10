@@ -659,9 +659,9 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 //wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,OutputBufferBytes);
 // }
   // Render pass A (color)
-ufram=(uint8_t *)rd_frm(Fnm2);
+//  ufram=(uint8_t *)rd_frm(Fnm2);
 
-//  std::ifstream fram(Fnm2,std::ios::binary);
+std::ifstream ufram(Fnm2,std::ios::binary);
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(ufram)),(std::istreambuf_iterator<char>()));
 frame_tensor.at(0,0)=data;
 
