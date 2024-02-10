@@ -639,16 +639,16 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
   
 // ffram=(float *)rd_frm_f(Fnm2);
 std::ifstream fram(Fnm2,std::ios::binary);
-std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+std::vector<char> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 
-frame_tensor.at(0,0)=data;
+// frame_tensor.at(0,0)=data;
 
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&data,sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(1,1),sizeof(uint64_t));
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_uni.at(2,2),sizeof(uint64_t));
@@ -935,8 +935,8 @@ wicb.at(1,1)=videoFrmBfrDst;
 videoSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 videoSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 videoSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
-// videoSamplerDescriptor.magFilter=WGPU_FILTER_MODE_LINEAR;
-// videoSamplerDescriptor.minFilter=WGPU_FILTER_MODE_LINEAR;
+videoSamplerDescriptor.magFilter=WGPU_FILTER_MODE_LINEAR;
+videoSamplerDescriptor.minFilter=WGPU_FILTER_MODE_LINEAR;
 videoSamplerDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_LINEAR;
 videoSamplerDescriptor.lodMinClamp=0;
 videoSamplerDescriptor.lodMaxClamp=32;
@@ -1414,12 +1414,11 @@ let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
 let SiZ=window.innerHeight;
 let tstSiZ=h$;
-let offS=Math.floor((w$-h$)/2.0);
+let offS=Math.floor((w$-h$)/2);
 // document.querySelector("#mvi").height=h$;
 // document.querySelector("#mvi").width=w$;
 Module.ccall("frm",null,['Number'],['Number'],h$,offS);
   Module.ccall("startWebGPU",{async:true});
-
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
@@ -1429,7 +1428,7 @@ cnv.width=h$;
 cnvb.width=SiZ;
 let la=nearestPowerOf2(((h$*h$*4)/4)*4);
 const gl2=cnv.getContext('2d',{
-// colorType:'float32',
+// colorType:'uint',
 precision:'highp',
 preferLowPowerToHighPerformance:false,
 alpha:true,
