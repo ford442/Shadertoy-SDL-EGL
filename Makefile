@@ -16,6 +16,15 @@ COMMON_FLAGS = -D__EMSCRIPTEN__ -fopenmp-simd -sSUPPORT_LONGJMP=emscripten -pthr
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer -fno-vectorize
 
+tCOMMON_FLAGS = -D__EMSCRIPTEN__ -sSUPPORT_LONGJMP=emscripten -pipe -mextended-const \
+	 -mbulk-memory -matomics -sWASM_WORKERS=0 -sSHARED_MEMORY=0 -stdlib=libc++ \
+	 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fPIE -finline-functions -funroll-loops \
+	 -m32 -fmerge-all-constants -ffast-math -ffinite-math-only -funsafe-math-optimizations \
+	 -fno-trapping-math -ffp-contract=off -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno \
+	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
+	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
+	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer -fno-vectorize
+
 STATIC_LINK_FLAGS = -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O2 -fmerge-all-constants \
 	 -ffast-math -ffp-contract=off \
 	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno \
@@ -88,11 +97,11 @@ b3_audio_sdl:
 	--extern-post-js js/rSlider.js --extern-post-js js/slideOut.js main.o audio_sdl.o 
 
 b3_audio_tensor:
-	em++ $(STDS) -c src/audio/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	em++ $(STDS) -c src/audio/audio_sdl.cpp -O2 $(COMMON_FLAGS) \
+	em++ $(STDS) -c src/audio/main.cpp -O2 $(tCOMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	em++ $(STDS) -c src/audio/audio_sdl.cpp -O2 $(tCOMMON_FLAGS) \
 	-Wno-incompatible-function-pointer-types $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0
-	em++ $(STDS) -o $(BIN_NAME)-tnsr.js -O2 $(COMMON_FLAGS) $(tLINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	em++ $(STDS) -o $(BIN_NAME)-tnsr.js -O2 $(tCOMMON_FLAGS) $(tLINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
 	-sFORCE_FILESYSTEM=1 -Wno-incompatible-function-pointer-types \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
