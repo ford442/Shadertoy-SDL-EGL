@@ -60,10 +60,45 @@ aptr[200]=maxSum/32;
 return;
 }
 
+void avgFrmD(int Fnum,int leng,double *ptr,double *aptr){
+double max=0.0;
+double min=1.0;
+double sum=0.0;
+double avgSum=0.0;
+double minSum=0.0;
+double maxSum=0.0;
+for (int i=0;i<leng;i++){
+sum+=ptr[i];
+if(max<ptr[i]){max=ptr[i];}
+if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
+}
+sum=sum/leng;
+aptr[Fnum]=sum;
+aptr[Fnum+100]=min;
+aptr[Fnum+200]=max;
+for(int i=33;i<65;i++){
+avgSum+=aptr[i];
+}
+aptr[0]=avgSum/32.0;
+for(int i=33;i<65;i++){
+minSum+=aptr[i+100];
+}
+aptr[100]=minSum/32.0;
+for(int i=33;i<65;i++){
+maxSum+=aptr[i+200];
+}
+aptr[200]=maxSum/32.0;
+return;
+}
+
 extern "C" {
 
 void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
+}
+
+void nanoD(int Fnum,int leng,double *ptr,double *aptr){
+avgFrmD(Fnum,leng,ptr,aptr);
 }
 
 }
@@ -154,7 +189,7 @@ let h$=parseInt(document.querySelector("#hig").innerHTML,10);
 let blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
 let ch$=parseInt(window.innerHeight,10);
 vv=document.querySelector("#mv");
-let $H=Module.HEAPF32.buffer;
+let $H=Module.HEAPF64.buffer;
 
 function nearestPowerOf2(n){
 if(n&(n-1)){
@@ -164,9 +199,9 @@ return n;
 }
 }
 
-let la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
+let la=nearestPowerOf2((((h$+(blank$$*2))*h$*16)/4)*4);
 let pointa=77*la;
-let agav=new Float32Array($H,pointa,300);
+let agav=new Float64Array($H,pointa,300);
 let sz=(h$*h$)/8;
 let blank$=Math.max((w$-h$)/4,0);
 let nblank$=Math.max((h$-w$)/2,0);
@@ -177,7 +212,7 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.querySelector("#bcanvas");
-const contx=bcanvas.getContext("webgl2",{colorType:'float32',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
+const contx=bcanvas.getContext("webgl2",{colorType:'float64',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // contx.blendColor(1.0,1.0,1.0,1.0);
@@ -372,8 +407,8 @@ contx.getExtension('EGL_EXT_surface_attachment');
 contx.getExtension('EXT_texture_storage');
 
 contx.disable(gl.DITHER);
-// contx.drawingBufferColorMetadata={mode:'extended'};
-// contx.drawingBufferColorSpace='display-p3';
+contx.drawingBufferColorMetadata={mode:'extended'};
+contx.drawingBufferColorSpace='display-p3';
 
 const g=new GPUX({canvas:bcanvas,webGl:contx});
 const g2=new GPUX();
@@ -436,14 +471,14 @@ nblank$=Math.max((h$-w$)/2,0);
 la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
 sz=(h$*h$)/8;
 pointa=77*la;
-// agav=new Float32Array($H,pointa,300);
+// agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 }
 var pointb=77*la;
-var $B=new Float32Array($H,pointb,sz);
+var $B=new Float64Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -459,17 +494,17 @@ h$=parseInt(document.querySelector("#hig").innerHTML,10);
 blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
 blank$=Math.max((w$-h$)/4,0);
 nblank$=Math.max((h$-w$)/2,0);
-la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
+la=nearestPowerOf2((((h$+(blank$$*2))*h$*16)/4)*4);
 sz=(h$*h$)/8;
 pointa=77*la;
-// var agav=new Float32Array($H,pointa,300);
+// var agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 }
 pointb=66*la;
-var $B=new Float32Array($H,pointb,sz);
+var $B=new Float64Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$$});
 var T=false;
@@ -486,7 +521,7 @@ eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$B
 var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
-Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+Module.ccall("nanoD",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
 },16.66);
