@@ -53,7 +53,7 @@ tLINK_FLAGS = $(LDFLAGS) -DEMMALLOC_USE_64BIT_OPS=1 -sDEFAULT_TO_CXX=1 -sLEGALIZ
 	 --use-preload-plugins --closure 0 --closureFriendly -logg -lvorbis -lpthread \
 	 -sWASM=1 -sENVIRONMENT='web,worker' -sSTRICT_JS=1 \
 	 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
-	 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1024mb --output_eol linux -mllvm -mtune=wasm32 -march=native -wasm-enable-eh \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1024mb --output_eol linux -mllvm -mtune=wasm32 -march=native -wasm-enable-eh \
 	 --memory-init-file 0 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
 
 WEBGPU_FLAGS = -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
