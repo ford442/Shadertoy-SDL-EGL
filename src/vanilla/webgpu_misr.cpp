@@ -1,7 +1,5 @@
 #include "../../include/vanilla/webgpu_egl.hpp"
-#include "../../../glslang/glslang/Public/ShaderLang.h"
-#include "../../../glslang/glslang/CInterface/glslang_c_interface.cpp"
-#include "../../../glslang/SPIRV/GlslangToSpv.h"
+
 
 WGpuBufferDescriptor bufferDescriptor_indice={};
 WGpuBuffer indice_Buffer;
