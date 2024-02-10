@@ -110,6 +110,7 @@ WGpuUniform wTime;
 uint64_t tme;
 void * fram;
 uint8_t * ufram;
+float * ffram;
 
 i_tensor on=i_tensor{2,2};
 i_tensor sze=i_tensor{2,2};
@@ -635,10 +636,10 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 //wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,OutputBufferBytes);
 // }
   // Render pass A (color)
-//  ufram=(uint8_t *)rd_frm(Fnm2);
-
-std::ifstream ufram(Fnm2,std::ios::binary);
-std::vector<float> data((std::istreambuf_iterator<char>(ufram)),(std::istreambuf_iterator<char>()));
+  
+// ffram=(float *)rd_frm_f(Fnm2);
+std::ifstream ffram(Fnm2,std::ios::binary);
+std::vector<float> data((std::istreambuf_iterator<char>(ffram)),(std::istreambuf_iterator<char>()));
 frame_tensorf.at(0,0)=data;
 
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
