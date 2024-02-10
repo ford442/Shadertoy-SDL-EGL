@@ -821,13 +821,10 @@ u64_siz.at(0,0)=(szhI/4)*4;
 szef.at(0,0)=float((szh/4.0)*4.0);
 sze.at(0,0)=float((szh/4.0)*4.0);
 sze.at(0,1)=280;
-
-
-  
-sze.at(1,1)=720;
-
-  
-
+sze.at(1,1)=EM_ASM_INT({
+var sz=parseInt(document.querySelector("#mvi").videoHeight);
+return sz;
+});
 multiSamp={};
 multiSamp.count=0;
 multiSamp.mask=-1;
@@ -1552,8 +1549,8 @@ dxhttp.send();
 
 document.querySelector('#pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.querySelector('#ihig').innerHTML=parseInt(window.innerHeight,10);
-document.querySelector('#bcanvas').height=parseInt(window.innerHeight,10);
-document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
+// document.querySelector('#bcanvas').height=parseInt(window.innerHeight,10);
+// document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#canvas').height=parseInt(window.innerHeight,10);
 document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#status').height=20;
