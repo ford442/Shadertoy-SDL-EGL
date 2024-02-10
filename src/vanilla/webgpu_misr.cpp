@@ -167,6 +167,7 @@ u64_tensor u64_bfrSze=u64_tensor{4,4};
 wicb_tensor wicb=wicb_tensor{3,3};
 js_data_tensor frame_tensor=js_data_tensor{2,2};
 js_data_tensorf frame_tensorf=js_data_tensorf{2,2};
+frame_tensorGL frame_tensorGL=frame_tensorGL{2,2};
 
 /*
 mouse_tensor mms=mouse_tensor{2,2};
@@ -491,34 +492,6 @@ return results;
 return nullptr;
 }
 
-
-const inline float * rd_frm_f(const char * Fnm){
-FILE * file=fopen(Fnm,"r");
-::boost::tuples::tie(resultf,resultsf,file);
-if(file){
-int32_t stat=fseek(file,(int32_t)0,SEEK_END);
-if(stat!=0){
-fclose(file);
-return nullptr;
-}
-length=ftell(file);
-stat=fseek(file,(int32_t)0,SEEK_SET);
-if(stat!=0){
-fclose(file);
-return nullptr;
-}
-resultf=static_cast<float *>(malloc((length+1)*sizeof(float)));
-if(resultf){
-size_t actual_length=fread(resultf,sizeof(float),length,file);
-resultf[actual_length++]={'\0'};
-}
-fclose(file);
-resultsf=reinterpret_cast<float *>(resultf);
-return resultsf;
-}
-return nullptr;
-}
-
 const char * Fnm2=reinterpret_cast<const char *>("/video/frame.gl");
 
 void getCode(const char * Fnm){
@@ -639,16 +612,16 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
   
 // ffram=(float *)rd_frm_f(Fnm2);
 std::ifstream fram(Fnm2,std::ios::binary);
-std::vector<unsigned char> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+std::vector<GLubyte> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 
-// frame_tensor.at(0,0)=data;
+frame_tensorGL.at(0,0)=data;
 
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(1,1),&data,sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(1,1),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(1,1),sizeof(uint64_t));
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_uni.at(2,2),sizeof(uint64_t));
