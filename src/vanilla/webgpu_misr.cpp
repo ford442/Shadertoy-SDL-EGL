@@ -1451,8 +1451,8 @@ FS.writeFile('/video/frame.gl',pixelData);
 
 function highResStart(){
 document.querySelector('#shut').innerHTML=2;
-document.querySelector('#scanvas').width=window.innerWidth*4;
-document.querySelector('#scanvas').height=window.innerHeight*4;
+document.querySelector('#bcanvas').width=window.innerWidth*4;
+document.querySelector('#bcanvas').height=window.innerHeight*4;
 document.querySelector('#di').click();
 setTimeout(function(){
 document.querySelector('#stat').innerHTML='Sending Start';
@@ -1464,8 +1464,8 @@ document.querySelector('#circle').width=window.innerWidth;
 document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#canvas').width=window.innerHeight;
 document.querySelector('#canvas').height=window.innerHeight;
-document.querySelector('#scanvas').width=window.innerHeight;
-document.querySelector('#scanvas').height=window.innerHeight;
+document.querySelector('#bcanvas').width=window.innerHeight;
+document.querySelector('#bcanvas').height=window.innerHeight;
 document.querySelector('#di').click();
 },150);
 }
