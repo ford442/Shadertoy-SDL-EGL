@@ -815,7 +815,7 @@ u64_siz.at(0,0)=(szhI/4)*4;
 szef.at(0,0)=float((szh/4.0)*4.0);
 sze.at(0,0)=float((szh/4.0)*4.0);
 sze.at(0,1)=szhI;
-sze.at(1,1)=1080;
+sze.at(1,1)=720;
 
 multiSamp={};
 multiSamp.count=0;
@@ -1400,7 +1400,7 @@ return imageData;
 }
 
 async function videoFrames(){
-let $H=Module.HEAPF32.buffer;
+let $H=Module.HEAPU8.buffer;
 // document.querySelector("#mvi").height=SiZ;
 let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
@@ -1436,7 +1436,7 @@ gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 let mageData=flipImageData(image);
 let imageData=mageData.data;
-let pixelData=new Float32Array(imageData);
+let pixelData=new Uint8ClampedArray(imageData);
 //  let frrm=new Uint8ClampedArray($H,0,imageData.length);
 Module.ccall("frm",null,['Number'],['Number'],h$,offS);
 // frrm.set(pixelData);
@@ -1446,7 +1446,7 @@ gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 mageData=flipImageData(image);
 imageData=mageData.data;
-pixelData=new Float32Array(imageData);
+pixelData=new Uint8ClampedArray(imageData);
 //  frrm=new Uint8ClampedArray($H,0,imageData.length);
 // frrm.set(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
