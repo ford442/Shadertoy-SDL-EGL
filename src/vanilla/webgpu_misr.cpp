@@ -1423,10 +1423,10 @@ Module.ccall("frm",null,['Number'],['Number'],h$,offS);
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
-// cnv.height=h$;
-// cnvb.height=SiZ;
-// cnv.width=h$;
-// cnvb.width=SiZ;
+cnv.height=h$;
+cnvb.height=SiZ;
+cnv.width=h$;
+cnvb.width=SiZ;
 let la=nearestPowerOf2(((h$*h$*4)/4)*4);
 const gl2=cnv.getContext('2d',{
 // colorType:'float32',
