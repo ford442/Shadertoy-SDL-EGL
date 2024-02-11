@@ -80,7 +80,6 @@ WGpuTextureBindingLayout textureBindingLayout2={};
 WGpuTextureBindingLayout textureBindingLayout3={};
 WGpuSamplerBindingLayout samplerBindingLayout={};
 WGPUImageCopyBuffer videoFrmBfrSrc={};
-
 WGpuColorTargetState colorTarget={};
 WGpuColorTargetState colorTarget2={};
 WGpuCommandEncoder wceA={};
@@ -204,7 +203,7 @@ return EM_TRUE;
 inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<f32,64>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<f32,64>;"
-"@group(0)@binding(2)var textureA:texture_storage_2d<rgba8unorm,read>;"
+"@group(0)@binding(2)var textureA:texture_storage_2d<rgba8unorm, read>;"
   // "@group(0)@binding(3)var textureB:texture_storage_2d<rgba8unorm,write>;"
 // "@group(0)@binding(4)var<storage,read_write>vertexBuffer:array<u32,64>;"
 "@compute@workgroup_size(4,1,64)"
