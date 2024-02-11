@@ -753,10 +753,8 @@ u64_siz.at(0,0)=(szhI/4)*4;
 szef.at(0,0)=float((szh/4.0)*4.0);
 sze.at(0,0)=float((szh/4.0)*4.0);
 sze.at(0,1)=280;
-sze.at(1,1)=EM_ASM_INT({
-var sz=parseInt(document.querySelector("#mvi").videoHeight);
-return sz;
-});
+sze.at(1,1)=720;
+// sze.at(1,1)=EM_ASM_INT({var sz=parseInt(document.querySelector("#mvi").videoHeight);return sz;});
 WGPU_UserData.at(0,0,0)=userData;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 textureDescriptorA.dimension=WGPU_TEXTURE_DIMENSION_2D;
