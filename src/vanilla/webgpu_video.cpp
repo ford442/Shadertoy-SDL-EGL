@@ -381,7 +381,7 @@ emscripten_get_element_css_size("canvas",&szw,&szh);
 u64_siz.at(0,0)=szhI;
 sze.at(0,0)=int(szhI);
 sze.at(1,1)=720;
-szef.at(0,0)=float(szh);
+szef.at(0,0)=float(szh)+1.0;
 // sze.at(0,1)=szh;
 multiSamp={};
 multiSamp.count=0;
