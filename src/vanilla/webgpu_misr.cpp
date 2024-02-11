@@ -216,7 +216,7 @@ inline char wgl_cmp_src[2000]=
 "@compute@workgroup_size(4,1,64)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "let INtexCoord = vec2<f32>(global_id.xy) / vec2<f32>(textureIN.size.x, textureIN.size.y);\n"
-"let INcolor = texture.sample(mySampler, INtexCoord);\n"
+"let INcolor = texture.sample(resizeSampler, INtexCoord);\n"
 "let index : u32=global_id.x;\n"
 "let arrayLength: u32=64;\n"
 "if(index<arrayLength){\n"
