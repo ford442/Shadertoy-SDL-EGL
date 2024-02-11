@@ -813,7 +813,13 @@ textureBindingLayout3.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_DEPTH;
 textureBindingLayout3.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureBindingLayout3.multisampled=0;
 wtbl.at(2,2)=textureBindingLayout3;
-textureViewDescriptorA={18,WGPU_TEXTURE_VIEW_DIMENSION_2D};
+textureViewDescriptorA.format=wtf.at(0,0);
+textureViewDescriptorA.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureViewDescriptorA.aspect=WGPU_TEXTURE_ASPECT_ALL;
+textureViewDescriptorA.baseMipLevel=0; // default = 0
+textureViewDescriptorA.mipLevelCount=1;
+textureViewDescriptorA.baseArrayLayer=0; // default = 0
+textureViewDescriptorA.arrayLayerCount=1;
 WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorA;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Array;
 WGPU_InputBuffer.at(0,0,0)=WGPU_Input_Array;
