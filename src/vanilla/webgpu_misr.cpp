@@ -202,6 +202,7 @@ return EM_TRUE;
 */
 
 inline char wgl_cmp_src[2000]=
+"import 'std';"
 "@group(0)@binding(0)var<storage,read>inputBuffer:buffer<f32>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:buffer<f32>;"
 "@group(0)@binding(2)var textureA:texture_storage_2d<r32float,write>;"
