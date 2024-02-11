@@ -202,8 +202,8 @@ return EM_TRUE;
 */
 
 inline char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var<storage,read>inputBuffer:array<f32,64>;"
-"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<f32,64>;"
+"@group(0)@binding(0)var<storage,read>inputBuffer:buffer<f32>;"
+"@group(0)@binding(1)var<storage,read_write>outputBuffer:buffer<f32>;"
 "@group(0)@binding(2)var textureA:texture_storage_2d<r32float,write>;"
 // "@group(0)@binding(3)var<storage,read_write>vertexBuffer:array<u32,64>;"
 "@compute@workgroup_size(4,1,64)"
