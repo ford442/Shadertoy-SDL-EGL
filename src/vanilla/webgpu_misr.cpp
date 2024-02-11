@@ -876,7 +876,7 @@ bindGroupEntry[1].resource=WGPU_Buffers.at(0,0,0);
 bindGroupEntry[1].bufferBindOffset=0;
 bindGroupEntry[1].bufferBindSize=OutputBufferBytes;
 bindGroupEntry[2].binding=2;
-bindGroupEntry[2].resource=wict.at(2,2); 
+bindGroupEntry[2].resource=&wict.at(2,2); 
 /*
 
 bindGroupEntry[3].binding=3;
