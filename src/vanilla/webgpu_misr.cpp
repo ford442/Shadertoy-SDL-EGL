@@ -209,9 +209,9 @@ return EM_TRUE;
 inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<f32,64>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<f32,64>;"
-"@group(0)@binding(2)var textureIN: texture_2d <f32>;"
-"@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;"
-"@group(0)@binding(4)var<sampler> resizeSampler: sampler;"
+"@group(0)@binding(2)var textureIN:texture_2d<f32>;"
+"@group(0)@binding(3)var textureOUT:texture_storage_2d<rgba8unorm,write>;"
+"@group(0)@binding(4)var resizeSampler:sampler;"
 // "@group(0)@binding(4)var<storage,read_write>vertexBuffer:array<u32,64>;"
 "@compute@workgroup_size(4,1,64)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
