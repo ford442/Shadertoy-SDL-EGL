@@ -162,7 +162,7 @@ wsd_tensor wsd=wsd_tensor{2,2};
 ws_tensor wgpu_sampler=ws_tensor{2,2};
 wsbl_tensor wsbl=wsbl_tensor{2,2};
 wvbl_tensor wvbl=wvbl_tensor{2,2};
-wict_tensor wict=wict_tensor{2,2};
+wict_tensor wict=wict_tensor{3,3};
 u64_tensor u64_bfrSze=u64_tensor{4,4};
 wicb_tensor wicb=wicb_tensor{3,3};
 js_data_tensor frame_tensor=js_data_tensor{2,2};
@@ -569,6 +569,12 @@ passDesc2.numColorAttachments=0;
 passDesc2.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(1,1)=passDesc2;
       // Compute Pass
+  
+// ffram=(float *)rd_frm_f(Fnm2);
+std::ifstream fram(Fnm2,std::ios::binary);
+std::vector<GLubyte> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+
+frame_tensorGL.at(0,0)=data;
 /*
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
@@ -579,6 +585,9 @@ WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
+
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+
 // raN=rNd4(256);
 // WGPU_InputBuffer.at(0,0,0)[0]=raN;
 // wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
@@ -609,18 +618,13 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 // }
   // Render pass A (color)
   
-// ffram=(float *)rd_frm_f(Fnm2);
-std::ifstream fram(Fnm2,std::ios::binary);
-std::vector<GLubyte> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-
-frame_tensorGL.at(0,0)=data;
 
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(1,1),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(0,0),sze.at(1,1),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(1,1),sizeof(uint64_t));
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_uni.at(2,2),sizeof(uint64_t));
@@ -758,6 +762,7 @@ WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescri
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
 WGPU_Output_Image.texture=WGPU_Texture.at(0,0,1);
+wict.at(2,2)=WGPU_Input_Image;
 wict.at(0,0)=WGPU_Output_Image;
 textureViewDescriptorA={18,WGPU_TEXTURE_VIEW_DIMENSION_2D};
 WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorA;
