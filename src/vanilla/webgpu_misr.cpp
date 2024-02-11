@@ -569,11 +569,12 @@ passDesc2.numColorAttachments=0;
 passDesc2.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(1,1)=passDesc2;
       // Compute Pass
-
+/*
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
 WGPU_Output_Image.texture=WGPU_Texture.at(0,0,1);
+*/
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
@@ -726,8 +727,30 @@ return sz;
 });
 WGPU_UserData.at(0,0,0)=userData;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
-textureDescriptorA={sze.at(1,1),1,1,1,1,WGPU_TEXTURE_DIMENSION_2D,WGPU_TEXTURE_FORMAT_RGBA8UNORM,WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST};
-textureDescriptorB={sze.at(0,0),1,1,1,1,WGPU_TEXTURE_DIMENSION_2D,WGPU_TEXTURE_FORMAT_RGBA8UNORM,WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC};
+textureDescriptorA.dimension=WGPU_TEXTURE_DIMENSION_2D;
+textureDescriptorA.format=wtf.at(0,0);
+textureDescriptorA.usage=WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
+textureDescriptorA.width=sze.at(1,1);
+textureDescriptorA.height=sze.at(1,1); // default = 1;
+textureDescriptorA.depthOrArrayLayers=1;
+textureDescriptorA.mipLevelCount=1;
+textureDescriptorA.sampleCount=1;
+textureDescriptorA.dimension=WGPU_TEXTURE_DIMENSION_2D;
+WGPU_TEXTURE_FORMAT textureAviewFormats[1]={wtf.at(0,0)};
+textureDescriptorA.numViewFormats=0; // &textureAviewFormats[0];
+textureDescriptorA.viewFormats=nullptr; // &textureAviewFormats[0];
+textureDescriptorB.dimension=WGPU_TEXTURE_DIMENSION_2D;
+textureDescriptorB.format=wtf.at(0,0);
+textureDescriptorB.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC;
+textureDescriptorB.width=sze.at(0,0);
+textureDescriptorB.height=sze.at(0,0); // default = 1;
+textureDescriptorB.depthOrArrayLayers=1;
+textureDescriptorB.mipLevelCount=1;
+textureDescriptorB.sampleCount=1;
+textureDescriptorB.dimension=WGPU_TEXTURE_DIMENSION_2D;
+WGPU_TEXTURE_FORMAT textureBviewFormats[1]={wtf.at(0,0)};
+videoTextureDescriptor.numViewFormats=0; // &textureBviewFormats[0];
+videoTextureDescriptor.viewFormats=nullptr; // &textureBviewFormats[0];
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
 WGPU_TextureDescriptor.at(0,0,1)=textureDescriptorB;
 WGPU_CommandEncoderDescriptor.at(0,0,0)=commandEncoderDescriptor;
