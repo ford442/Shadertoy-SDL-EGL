@@ -203,7 +203,7 @@ return EM_TRUE;
 inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<f32,64>;"
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<f32,64>;"
-// "@group(0)@binding(2)var textureIN: texture_storage_2d<rgba8unorm, read>;"
+"@group(0)@binding(2)var textureIN: texture_2d<rgba8unorm, read>;"
   // "@group(0)@binding(3)var textureB:texture_storage_2d<rgba8unorm,write>;"
 // "@group(0)@binding(4)var<storage,read_write>vertexBuffer:array<u32,64>;"
 "@compute@workgroup_size(4,1,64)"
@@ -758,7 +758,7 @@ WGPU_UserData.at(0,0,0)=userData;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 textureDescriptorA.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorA.format=wtf.at(0,0);
-textureDescriptorA.usage=WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST;
+textureDescriptorA.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
 textureDescriptorA.width=sze.at(1,1);
 textureDescriptorA.height=sze.at(1,1); // default = 1;
 textureDescriptorA.depthOrArrayLayers=1;
@@ -789,6 +789,18 @@ WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
 WGPU_Output_Image.texture=WGPU_Texture.at(0,0,1);
 wict.at(2,2)=WGPU_Input_Image;
 wict.at(0,0)=WGPU_Output_Image;
+textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
+textureBindingLayout1.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureBindingLayout1.multisampled=0;
+wtbl.at(0,0)=textureBindingLayout1;
+textureBindingLayout2.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
+textureBindingLayout2.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureBindingLayout2.multisampled=0;
+wtbl.at(1,1)=textureBindingLayout2;
+textureBindingLayout3.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_DEPTH;
+textureBindingLayout3.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureBindingLayout3.multisampled=0;
+wtbl.at(2,2)=textureBindingLayout3;
 textureViewDescriptorA={18,WGPU_TEXTURE_VIEW_DIMENSION_2D};
 WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorA;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Array;
@@ -838,8 +850,8 @@ bindGroupLayoutEntries[1].type=1;
 bindGroupLayoutEntries[1].layout.buffer=WGPU_BufferBindingLayout.at(0,0,2);
 bindGroupLayoutEntries[2].binding=2;
 bindGroupLayoutEntries[2].visibility=WGPU_SHADER_STAGE_COMPUTE;
-bindGroupLayoutEntries[2].type=4;
-bindGroupLayoutEntries[2].layout.storageTexture=WGPU_StorageTextureBindingLayout.at(0,0,0);
+bindGroupLayoutEntries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
+bindGroupLayoutEntries[2].layout.texture=wtbl.at(1,1);
    /*
 bindGroupLayoutEntries[3].binding=3;
 bindGroupLayoutEntries[3].visibility=WGPU_SHADER_STAGE_COMPUTE;
@@ -1065,18 +1077,6 @@ bufferBindingLayoutR.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayoutR.hasDynamicOffset=0,
 bufferBindingLayoutR.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayoutR;
-textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
-textureBindingLayout1.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
-textureBindingLayout1.multisampled=0;
-wtbl.at(0,0)=textureBindingLayout1;
-textureBindingLayout2.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
-textureBindingLayout2.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
-textureBindingLayout2.multisampled=0;
-wtbl.at(1,1)=textureBindingLayout2;
-textureBindingLayout3.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_DEPTH;
-textureBindingLayout3.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
-textureBindingLayout3.multisampled=0;
-wtbl.at(2,2)=textureBindingLayout3;
 bindgroup_layout_entries[0]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_layout_entries[0].binding=0;
 bindgroup_layout_entries[0].visibility=WGPU_SHADER_STAGE_FRAGMENT;
