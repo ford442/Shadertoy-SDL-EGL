@@ -222,7 +222,7 @@ inline char wgl_cmp_src[2000]=
 "for(var y=0u;y<sizeOUTu;y++){\n"
 "for(var x=0u;x<sizeOUTu;x++){\n"
 "if(x*y<=sizeOUTu*sizeOUTu){\n"
-"let INtexCoord:vec2<f32>=vec2<f32>(x,y)/vec2<f32>(sizeINf);\n"
+"let INtexCoord:vec2<u32>=vec2<u32>(x,y)/vec2<u32>(sizeINu.x);\n"
 "let color=textureLoad(textureIN,INtexCoord,0);\n"
 "textureOUT[x*y]=color;\n"
 "}"
