@@ -216,7 +216,7 @@ inline char wgl_cmp_src[2000]=
 "@compute@workgroup_size(1)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "var sizeINu=textureDimensions(textureIN,0);\n"
-"var sizeINf=<f32>(sizeINu);\n"
+"var sizeINf:f32=f32(sizeINu);\n"
 "var sizeOUTf=inputBuffer[1];\n"
 "var sizeOUTu:u32=u32(sizeOUTf);\n"
 "for(var y=0u;y<sizeOUTu;y++){\n"
