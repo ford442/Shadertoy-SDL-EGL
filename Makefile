@@ -21,12 +21,12 @@ COMMON_FLAGS += -sSUPPORT_LONGJMP=emscripten -pthread -pipe -mextended-const -mb
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer -fno-vectorize
 
 COMMON_FLAGS_safe += -openmp-simd -pthread -pipe -mextended-const -mbulk-memory -matomics \
-	 -fPIC -fPIE -finline-functions -funroll-loops \
-	 -m32 -fmerge-all-constants -ffast-math -ffp-contract=off \
-	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno \
+	 -fPIC -fPIE -finline-functions -funroll-loops -msign-ext -funsafe-math-optimizations \
+	 -m32 -fmerge-all-constants -ffast-math -ffp-contract=off -fno-math-errno \
+	 -ftree-vectorize -fstrict-vtable-pointers \
 	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 	 -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
-	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer -fno-vectorize
+	 -mmutable-globals -mnontrapping-fptoint -fno-omit-frame-pointer -fno-vectorize
 
 STATIC_LINK_FLAGS := -sDISABLE_EXCEPTION_CATCHING=1 -mno-tail-call -O3 -fmerge-all-constants -ffast-math -ffp-contract=off \
 	 -ftree-vectorize -fstrict-vtable-pointers -funsafe-math-optimizations -fno-math-errno \
@@ -70,7 +70,9 @@ video_resurection_webgpua:
 	 em++ lib/lib_webgpu.cpp $(STDS) $(STATIC_LINK_FLAGS) -static
 	 emcc src/video/video_jebusa.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(STDS) $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc video_jebusa.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o $(BIN_NAME)-resA.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) \
-	 -I/content/RAMDRIVE2/b3/include/vanilla/ -sFORCE_FILESYSTEM=1 \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -sFORCE_FILESYSTEM=1 -openmp-simd -pthread -pipe -mextended-const -mbulk-memory -matomics \
+	 -fPIC -fPIE -finline-functions -funroll-loops -msign-ext -funsafe-math-optimizations \
+	 -m32 -fmerge-all-constants -ffast-math -ffp-contract=off -fno-math-errno \
 	 -sINITIAL_MEMORY=1984mb -sALLOW_MEMORY_GROWTH=0 -sUSE_SDL=2 $(STDS) \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_nanoD"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
