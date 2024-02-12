@@ -223,7 +223,7 @@ inline char wgl_cmp_src[2000]=
 "for(var x=0u;x<sizeOUTu;x++){\n"
 "if(x*y<=sizeOUTu*sizeOUTu){\n"
 "let INtexCoord:vec2<f32>=vec2<f32>(f32(x),f32(y))/vec2<f32>(sizeINf);\n"
-"let color:rgba8unorm=textureLoad(textureIN,INtexCoord,0);\n"
+"let color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
 "textureStore(textureOUT,INtexCoord,color);\n"
 "}"
 "}"
