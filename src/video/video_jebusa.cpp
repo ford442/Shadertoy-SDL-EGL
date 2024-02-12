@@ -175,10 +175,10 @@ if (e.code=='KeyZ'){
 vv=document.querySelector("#mv");
 Mov=1;
 vv.pause();
-var end=vv.currentTime/1000;
-var begin=vv.currentTime-3.0)/1000;
+var ends=vv.currentTime/1000.0;
+var begins=vv.currentTime-3.0)/1000.0;
 var fps=1000/vv.frameRate;
-backForth(end,begin,fps);
+backForth(ends,begins,fps);
 }
 if (e.code=='KeyX'){vv=document.querySelector("#mv");stpBackForth();vv.play();}
 }
