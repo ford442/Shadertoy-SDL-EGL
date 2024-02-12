@@ -176,7 +176,7 @@ vv=document.querySelector("#mv");
 Mov=1;
 vv.pause();
 var ends=vv.currentTime/1000.0;
-var begins=vv.currentTime-3.0)/1000.0;
+var begins=(vv.currentTime-3.0)/1000.0;
 var fps=1000/vv.frameRate;
 backForth(ends,begins,fps);
 }
