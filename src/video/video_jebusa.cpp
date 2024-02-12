@@ -137,11 +137,11 @@ f=true;
 var frm=rate*0.001;
 intervalLoop=setInterval(function(){
 if(f==true){
-if(vv.currentTime>stp+(rate*0.1)){
+if(vv.currentTime>=stp){
 vv.currentTime+=0.016;
 }else{
 f=false;
-}}else if(vv.currentTime<strt-(rate*0.1)){
+}}else if(vv.currentTime<=strt){
 vv.currentTime+=0.016;
 }else{
 f=true;
@@ -175,8 +175,8 @@ if (e.code=='KeyZ'){
 vv=document.querySelector("#mv");
 Mov=1;
 vv.pause();
-var stp=vv.currentTime;
-var strt=vv.currentTime-3.0;
+var stp=vv.currentTime+3.0;
+var strt=vv.currentTime;
 var fps=1000/vv.frameRate;
 backForth(stp,strt,fps);
 }
