@@ -137,11 +137,11 @@ f=true;
 var frm=rate*0.001;
 intervalLoop=setInterval(function(){
 if(f==true){
-if(vv.currentTime>=stp){
+if(vv.currentTime>=strt*1000){
 vv.currentTime+=0.016;
 }else{
 f=false;
-}}else if(vv.currentTime<=strt){
+}}else if(vv.currentTime<=stp*1000){
 vv.currentTime+=0.016;
 }else{
 f=true;
@@ -175,10 +175,10 @@ if (e.code=='KeyZ'){
 vv=document.querySelector("#mv");
 Mov=1;
 vv.pause();
-var stp=vv.currentTime+3.0;
-var strt=vv.currentTime;
+var end=vv.currentTime/1000;
+var begin=vv.currentTime-3.0)/1000;
 var fps=1000/vv.frameRate;
-backForth(stp,strt,fps);
+backForth(end,begin,fps);
 }
 if (e.code=='KeyX'){vv=document.querySelector("#mv");stpBackForth();vv.play();}
 }
@@ -462,7 +462,7 @@ var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 // var alph=AlpheV1($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
 var alph=AlpheV2($amax,$amin,$aavg,p[3]);
-var Min=4.0*(($fmax-($favg-$fmin))/2.0);
+var Min=4.0*(($fmax-($favg-$amin))/2.0);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
