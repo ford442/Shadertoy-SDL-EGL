@@ -224,7 +224,8 @@ inline char wgl_cmp_src[2000]=
 // "if(x*y<=sizeOUTu*sizeOUTu){\n"
 "let INtexCoord:vec2<u32>=vec2<u32>(u32(x),u32(y))/vec2<u32>(sizeINu.x);\n"
 "let color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
-"textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),color);\n"
+"let color32u:vec4<u32>=clamp(round(color*255.0),vec4<u32>(0u,0u,0u,0u),vec4<u32>(255u,255u,255u,255u));\n"
+"textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),color32u);\n"
 // "}"
 "}"
 "}"
@@ -630,9 +631,9 @@ wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,WGPU_Input
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Input_Image,&WGPU_ColorBuffer.at(0,0,0),1024,0,1,1,1);
   
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),wgs,wgs,wgs);
-    wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
+    wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 
  // wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 //  WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,3));
