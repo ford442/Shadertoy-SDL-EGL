@@ -138,11 +138,11 @@ var frm=rate*0.001;
 intervalLoop=setInterval(function(){
 if(f==true){
 if(vv.currentTime>stp+(rate*0.1)){
-vv.currentTime+=frm;
+vv.currentTime+=0.016;
 }else{
 f=false;
 }}else if(vv.currentTime<strt-(rate*0.1)){
-vv.currentTime+=frm;
+vv.currentTime+=0.016;
 }else{
 f=true;
 }
