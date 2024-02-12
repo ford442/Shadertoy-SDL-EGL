@@ -32,13 +32,13 @@ GL_FLAGS += -sFULL_ES3=1 -sFULL_ES2=0 -sLEGACY_GL_EMULATION=0 -lGL -lEGL -sUSE_G
 	 -sOFFSCREENCANVAS_SUPPORT=1 -sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR=1 \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=0
 
-LINK_FLAGS += -DQUAD -DDOUBLE $(LDFLAGS) -sWASM_BIGINT=0 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -sOFFSCREENCANVAS_SUPPORT=1 \
-	 -sTEXTDECODER=1 -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
+LINK_FLAGS += -DQUAD -DDOUBLE $(LDFLAGS) -sWASM_BIGINT=1 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -sOFFSCREENCANVAS_SUPPORT=1 \
+	 -sTEXTDECODER=0 -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sSUPPORT_BIG_ENDIAN=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
 	 -sDEMANGLE_SUPPORT=1 -sASSERTIONS=1 -sSUPPORT_BIG_ENDIAN=1 \
 	 --use-preload-plugins --closure 0 --closureFriendly --typed-function-references --enable-reference-types \
 	 -march=native -sWASM=1 -sTOTAL_STACK=65536 -sENVIRONMENT='web,worker' -sSTRICT_JS=0 \
-	 -sGLOBAL_BASE=352321536 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
+	 -sGLOBAL_BASE=352321536 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2147483648 --output_eol linux -mllvm -mtune=wasm32 -wasm-enable-eh \
 	 --memory-init-file 0 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
 
@@ -60,10 +60,10 @@ vanilla_test_gpujs:
 video_resurection_webgpua:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
-	 emcc src/video/video_jebusa.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c -std=c++20 $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 emcc src/video/video_jebusa.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(STDS) $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc video_jebusa.o -fPIC -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o $(BIN_NAME)-resA.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -sFORCE_FILESYSTEM=1 \
-	 -sINITIAL_MEMORY=1536mb -sALLOW_MEMORY_GROWTH=0 -sUSE_SDL=2 -std=c++20 \
+	 -sINITIAL_MEMORY=1536mb -sALLOW_MEMORY_GROWTH=0 -sUSE_SDL=2 $(STDS) \
 	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_nanoD"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/fluid.js --pre-js js/flui.js --pre-js js/setUp.js --pre-js js/startUp.js -lmath.js -lhtml5.js -lint53.js \
