@@ -73,7 +73,7 @@ video_resurection_webgpua:
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -sFORCE_FILESYSTEM=1 -pipe -mextended-const -mbulk-memory -matomics \
 	 -fPIC -finline-functions -funroll-loops -msign-ext -funsafe-math-optimizations \
 	 -m32 -fmerge-all-constants -ffast-math -ffp-contract=off -fno-math-errno \
-	 -sINITIAL_MEMORY=1984mb -sALLOW_MEMORY_GROWTH=0 -sUSE_SDL=2 $(STDS) \
+	 -sINITIAL_MEMORY=1984mb -sALLOW_MEMORY_GROWTH=0 -sUSE_SDL=2 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_nanoD"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/fluid.js --pre-js js/flui.js --pre-js js/setUp.js --pre-js js/startUp.js -lmath.js -lhtml5.js -lint53.js \
