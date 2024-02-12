@@ -60,10 +60,45 @@ aptr[200]=maxSum/32;
 return;
 }
 
+void avgFrmD(int Fnum,int leng,double *ptr,double *aptr){
+double max=0.0;
+double min=1.0;
+double sum=0.0;
+double avgSum=0.0;
+double minSum=0.0;
+double maxSum=0.0;
+for (int i=0;i<leng;i++){
+sum+=ptr[i];
+if(max<ptr[i]){max=ptr[i];}
+if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
+}
+sum=sum/leng;
+aptr[Fnum]=sum;
+aptr[Fnum+100]=min;
+aptr[Fnum+200]=max;
+for(int i=33;i<65;i++){
+avgSum+=aptr[i];
+}
+aptr[0]=avgSum/32.0;
+for(int i=33;i<65;i++){
+minSum+=aptr[i+100];
+}
+aptr[100]=minSum/32.0;
+for(int i=33;i<65;i++){
+maxSum+=aptr[i+200];
+}
+aptr[200]=maxSum/32.0;
+return;
+}
+
 extern "C" {
 
 void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
+}
+
+void nanoD(int Fnum,int leng,double *ptr,double *aptr){
+avgFrmD(Fnum,leng,ptr,aptr);
 }
 
 }
@@ -81,7 +116,7 @@ intervalBackward=setInterval(function(){
 if(vv.currentTime==0){
 clearInterval(intervalBackward);
 }else{
-vv.currentTime+=-0.0333;
+vv.currentTime+=-0.032;
 }
 },16);
 };
@@ -90,7 +125,7 @@ let intervalForward;
 
 function forward(){
 intervalForward=setInterval(function(){
-vv.currentTime+=-0.0333;
+vv.currentTime+=-0.032;
 },16);
 };
 
@@ -99,16 +134,16 @@ let stp,a,b,f;
 
 function backForth(stp){
 a=stp/1000.0;
-b=(stp/1000.0)+3.33;
+b=(stp/1000.0)+3.0;
 f=true;
 intervalLoop=setInterval(function(){
 if(f==true){
-if(vv.currentTime>=a){
-vv.currentTime+=-0.0333;
+if(vv.currentTime>a){
+vv.currentTime+=-0.016;
 }else{
 f=false;
-}}else if(vv.currentTime<=b){
-vv.currentTime+=0.0333;
+}}else if(vv.currentTime<b){
+vv.currentTime+=0.016;
 }else{
 f=true;
 }
@@ -154,7 +189,7 @@ let h$=parseInt(document.querySelector("#hig").innerHTML,10);
 let blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
 let ch$=parseInt(window.innerHeight,10);
 vv=document.querySelector("#mv");
-let $H=Module.HEAPF32.buffer;
+let $H=Module.HEAPF64.buffer;
 
 function nearestPowerOf2(n){
 if(n&(n-1)){
@@ -164,9 +199,9 @@ return n;
 }
 }
 
-let la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
+let la=nearestPowerOf2((((h$+(blank$$*2))*h$*16)/4)*4);
 let pointa=77*la;
-let agav=new Float32Array($H,pointa,300);
+let agav=new Float64Array($H,pointa,300);
 let sz=(h$*h$)/8;
 let blank$=Math.max((w$-h$)/4,0);
 let nblank$=Math.max((h$-w$)/2,0);
@@ -419,9 +454,9 @@ var $amax=this.constants.amax;
 var $amin=this.constants.amin;
 var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
-var alph=AlpheV1($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
-// var alph=AlpheV2($amax,$amin,$aavg,p[3]);
-var Min=4.0*(($amax-($favg-$amin))/2.0);
+// var alph=AlpheV1($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
+var alph=AlpheV2($amax,$amin,$aavg,p[3]);
+var Min=4.0*(($fmax-($favg-$fmin))/2.0);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
@@ -436,14 +471,14 @@ nblank$=Math.max((h$-w$)/2,0);
 la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
 sz=(h$*h$)/8;
 pointa=77*la;
-// agav=new Float32Array($H,pointa,300);
+// agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 }
 var pointb=77*la;
-var $B=new Float32Array($H,pointb,sz);
+var $B=new Float64Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
 r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
@@ -459,17 +494,17 @@ h$=parseInt(document.querySelector("#hig").innerHTML,10);
 blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
 blank$=Math.max((w$-h$)/4,0);
 nblank$=Math.max((h$-w$)/2,0);
-la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
+la=nearestPowerOf2((((h$+(blank$$*2))*h$*16)/4)*4);
 sz=(h$*h$)/8;
 pointa=77*la;
-// var agav=new Float32Array($H,pointa,300);
+// var agav=new Float64Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
+eval("var point"+j+"="+i+"*la;var $"+j+"=new Float64Array($H,point"+j+",la);");
 }
 pointb=66*la;
-var $B=new Float32Array($H,pointb,sz);
+var $B=new Float64Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$$});
 var T=false;
@@ -486,7 +521,7 @@ eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$B
 var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
-Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+Module.ccall("nanoD",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
 },16.66);
