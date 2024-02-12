@@ -71,7 +71,7 @@ video_resurection_webgpua:
 	 emcc src/video/video_jebusa.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(STDS) $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 emcc video_jebusa.o -openmp-simd -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o $(BIN_NAME)-resA.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS) $(LINK_SIMD_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -sFORCE_FILESYSTEM=1 -pipe -mextended-const \
-	 -sINITIAL_MEMORY=1984mb -sALLOW_MEMORY_GROWTH=0 -sUSE_SDL=2 \
+	 -sINITIAL_MEMORY=1984mb -sALLOW_MEMORY_GROWTH=0 -sUSE_SDL=2 -mbulk-memory \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_nanoD"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/fluid.js --pre-js js/flui.js --pre-js js/setUp.js --pre-js js/startUp.js -lmath.js -lhtml5.js -lint53.js \
