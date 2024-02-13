@@ -636,7 +636,7 @@ WGPU_InputBuffer.at(0,0,0)[0]=szef.at(1,1);
 WGPU_InputBuffer.at(0,0,0)[1]=szef.at(0,0);
 WGPU_InputBuffer.at(0,0,0)[2]=u64_uni.at(0,0)/22.0f;
 WGPU_InputBuffer.at(0,0,0)[3]=u64_uni.at(1,1)*0.001f;
-WGPU_InputBuffer.at(0,0,0)[4]=u64_uni.at(1,1)%1.0f;
+WGPU_InputBuffer.at(0,0,0)[4]=float(u64_uni.at(1,1))%1.0f;
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Input_Image,&WGPU_ColorBuffer.at(0,0,0),1024,0,1,1,1);
   
