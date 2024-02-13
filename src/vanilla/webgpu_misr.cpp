@@ -224,7 +224,7 @@ inline char wgl_cmp_src[2000]=
 // "if(x*y<=sizeOUTu*sizeOUTu){\n"
 "var INtexCoord:vec2<u32>=vec2<u32>(x,y)/vec2<u32>(sizeINu.x,sizeINu.y);\n"
 // "var color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
-"var color:vec4<f32>=vec4<f32>(inputBuffer[2],inputBuffer[3],acos(inputBuffer[4]),1.0f);\n"
+"var color:vec4<f32>=vec4<f32>(f32(x)/sizeOUTf,0.0,f32(y)*0.001,1.0f);\n"
 // "let color32u:vec4<f32>=clamp(vec4<f32>(round(color*255.0)),vec4<u32>(0u,0u,0u,0u),vec4<u32>(255u,255u,255u,255u));\n"
 // "outputBuffer[0]=0.7777-(0.0001*);\n"
 "textureStore(textureOUT,vec2<u32>(x,y),color);\n"
@@ -623,13 +623,13 @@ std::vector<float> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_
 frame_tensorf.at(0,0)=data;
 // wg_size.at(0,0,0)=int(floor(std::cbrt(sze.at(0,0)*sze.at(0,0))))+1;
 int wgs=int(floor(std::cbrt((sze.at(0,0)*sze.at(0,0))/1000)));
-    
+    wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorf.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
 
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorf.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 
 // raN=rNd4(256);
 WGPU_InputBuffer.at(0,0,0)[0]=szef.at(1,1);
