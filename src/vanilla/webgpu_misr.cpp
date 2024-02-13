@@ -613,9 +613,7 @@ WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescri
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
 WGPU_Output_Image.texture=WGPU_Texture.at(0,0,1);
-wict.at(2,2)=WGPU_Input_Image;
-wict.at(0,0)=WGPU_Output_Image;
-  
+
 // ffram=(float *)rd_frm_f(Fnm2);
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<GLubyte> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
@@ -628,18 +626,18 @@ WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
 
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+// wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 
 // raN=rNd4(256);
-WGPU_InputBuffer.at(0,0,0)[0]=szef.at(1,1);
-WGPU_InputBuffer.at(0,0,0)[1]=szef.at(0,0);
+WGPU_InputBuffer.at(0,0,0)[0]=float(sze.at(1,1));
+WGPU_InputBuffer.at(0,0,0)[1]=float(sze.at(0,0));
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Input_Image,&WGPU_ColorBuffer.at(0,0,0),1024,0,1,1,1);
   
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),1,1,1);
 
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
-wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+//  wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 
     //  get result for test
 
@@ -676,7 +674,7 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
-// wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
@@ -686,7 +684,7 @@ void wgpu_command_encoder_copy_texture_to_texture(WGpuCommandEncoder commandEnco
 */
 
   // wgpu_queue_write_texture(wq.at(0,0),&wict.at(1,1),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
-// wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(1,1),sizeof(uint64_t));
@@ -785,20 +783,18 @@ wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 emscripten_get_element_css_size("canvas",&szh,&szw);
 emscripten_get_canvas_element_size("canvas",&szhI,&szwI);
 u64_siz.at(0,0)=(szhI/4)*4;
+szef.at(0,0)=float((szh/4.0)*4.0);
+sze.at(0,0)=float((szh/4.0)*4.0);
 sze.at(0,1)=280;
 sze.at(1,1)=720;
-szef.at(0,0)=float((szh/4.0)*4.0);
-szef.at(1,1)=float(sze.at(1,1));
-sze.at(0,0)=float((szh/4.0)*4.0);
-
 // sze.at(1,1)=EM_ASM_INT({var sz=parseInt(document.querySelector("#mvi").videoHeight);return sz;});
 WGPU_UserData.at(0,0,0)=userData;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 textureDescriptorA.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorA.format=wtf.at(0,0);
 textureDescriptorA.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
-textureDescriptorA.width=sze.at(1,1);
-textureDescriptorA.height=sze.at(1,1); // default = 1;
+textureDescriptorA.width=sze.at(0,0);
+textureDescriptorA.height=sze.at(0,0); // default = 1;
 textureDescriptorA.depthOrArrayLayers=1;
 textureDescriptorA.mipLevelCount=1;
 textureDescriptorA.sampleCount=1;
@@ -1491,7 +1487,6 @@ EM_BOOL framm(int h,int offs){
 sze.at(1,0)=h;
 sze.at(0,1)=offs;
 sze.at(1,1)=h;
-szef.at(1,1)=float(sze.at(1,1));
 return EM_TRUE;
 }
 
