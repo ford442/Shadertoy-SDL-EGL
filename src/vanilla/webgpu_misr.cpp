@@ -394,7 +394,7 @@ WGpuBindGroupLayoutEntry bindGroupLayoutEntries[8]={};
 WGpuBindGroupLayoutEntry bindGroupLayoutEntriesB[2]={};
 WGpuBindGroupEntry bindGroupEntry[8]={};
 WGpuBindGroupEntry bindGroupEntryB[2]={};
-WGpuBufferBindingLayout bufferBindingLayout1={2};
+WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
 WGpuBufferBindingLayout bufferBindingLayout4={2};
@@ -609,13 +609,14 @@ passDesc2.numColorAttachments=0;
 passDesc2.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(1,1)=passDesc2;
       // Compute Pass
-
+/*
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
 WGPU_Output_Image.texture=WGPU_Texture.at(0,0,1);
 wict.at(2,2)=WGPU_Input_Image;
 wict.at(0,0)=WGPU_Output_Image;
+  */
   
 // ffram=(float *)rd_frm_f(Fnm2);
 std::ifstream fram(Fnm2,std::ios::binary);
@@ -634,9 +635,7 @@ wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_Bind
 // raN=rNd4(256);
 WGPU_InputBuffer.at(0,0,0)[0]=szef.at(1,1);
 WGPU_InputBuffer.at(0,0,0)[1]=szef.at(0,0);
-WGPU_InputBuffer.at(0,0,0)[2]=u64_uni.at(0,0)/22.0f;
-WGPU_InputBuffer.at(0,0,0)[3]=u64_uni.at(1,1)*0.001f;
-WGPU_InputBuffer.at(0,0,0)[4]=float(u64_uni.at(1,1));
+
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Input_Image,&WGPU_ColorBuffer.at(0,0,0),1024,0,1,1,1);
   
@@ -681,6 +680,7 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
+wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
@@ -707,7 +707,7 @@ wceA={};
   // Render pass B (depth)
 wceB=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(1,1)=wceB;
-wgpu_command_encoder_copy_texture_to_texture(wce.at(1,1),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+// wgpu_command_encoder_copy_texture_to_texture(wce.at(1,1),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 
 wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
@@ -791,7 +791,7 @@ sze.at(0,0)=float((szh/4.0)*4.0);
 sze.at(0,1)=280;
 sze.at(1,1)=720;
 szef.at(1,1)=float(sze.at(1,1));
-OutputBufferBytes=sze.at(0,0)*sze.at(0,0)*4;
+OutputBufferBytes=64*4;
 InputBufferUnits=64;
 InputBufferBytes=64*4;
 std::vector<uint8_t>input(InputBufferBytes);
@@ -950,8 +950,7 @@ bindGroupEntry[0].bufferBindOffset=0;
 bindGroupEntry[0].bufferBindSize=InputBufferBytes;
 bindGroupEntry[1]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindGroupEntry[1].binding=1;
-// bindGroupEntry[1].resource=WGPU_Buffers.at(0,0,0);
-bindGroupEntry[1].resource=wb.at(4,4);
+bindGroupEntry[1].resource=WGPU_Buffers.at(0,0,0);
 bindGroupEntry[1].bufferBindOffset=0;
 bindGroupEntry[1].bufferBindSize=OutputBufferBytes;
 bindGroupEntry[2]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
@@ -1068,8 +1067,8 @@ fragState2.entryPoint="main";
 fragState2.numTargets=0;
 // fragState2.targets=&wcts.at(1,1);
 wfs.at(1,1)=fragState;
-u64_bfrSze.at(1,1)=sze.at(1,1)*sze.at(1,1);
-u64_bfrSze.at(0,0)=sze.at(0,0)*sze.at(0,0);
+u64_bfrSze.at(1,1)=64*4;
+u64_bfrSze.at(0,0)=64*4;
 WGpuBufferDescriptor bufferDescriptorIn={u64_bfrSze.at(1,1),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorOut={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 wbd.at(3,3)=bufferDescriptorIn;
