@@ -618,8 +618,8 @@ WGPU_Output_Image.texture=WGPU_Texture.at(0,0,1);
 
 // ffram=(float *)rd_frm_f(Fnm2);
 std::ifstream fram(Fnm2,std::ios::binary);
-std::vector<GLubyte> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-frame_tensorGL.at(0,0)=data;
+std::vector<char> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+frame_tensor.at(0,0)=data;
 // wg_size.at(0,0,0)=int(floor(std::cbrt(sze.at(0,0)*sze.at(0,0))))+1;
 int wgs=int(floor(std::cbrt((sze.at(0,0)*sze.at(0,0))/1000)));
     
@@ -628,7 +628,7 @@ WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
 
-// wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 
 // raN=rNd4(256);
 WGPU_InputBuffer.at(0,0,0)[0]=sze.at(1,1);
