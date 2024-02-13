@@ -227,7 +227,7 @@ inline char wgl_cmp_src[2000]=
 "var color:vec4<f32>=vec4<f32>(f32(x)/sizeOUTf,0.0,f32(y)*0.001,1.0f);\n"
 // "let color32u:vec4<f32>=clamp(vec4<f32>(round(color*255.0)),vec4<u32>(0u,0u,0u,0u),vec4<u32>(255u,255u,255u,255u));\n"
 // "outputBuffer[0]=0.7777-(0.0001*);\n"
-"textureStore(textureOUT,vec2<u32>(x,y),color);\n"
+"textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),color);\n"
 // "}"
 "}"
 "}"
