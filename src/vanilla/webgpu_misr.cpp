@@ -224,10 +224,10 @@ inline char wgl_cmp_src[2000]=
 // "if(x*y<=sizeOUTu*sizeOUTu){\n"
 "var INtexCoord:vec2<u32>=vec2<u32>(x,y)/vec2<u32>(sizeINu.x,sizeINu.y);\n"
 // "var color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
-"var color:vec4<f32>=vec4<f32>(f32(x)/sizeOUTf,0.0,f32(y)*0.001,1.0f);\n"
+"var color:vec4<f32>=(1.0f,0.0f,y*0.001f,1.0f);\n"
 // "let color32u:vec4<f32>=clamp(vec4<f32>(round(color*255.0)),vec4<u32>(0u,0u,0u,0u),vec4<u32>(255u,255u,255u,255u));\n"
-"outputBuffer[x*y]=color;\n"
-// "textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),color);\n"
+// "outputBuffer[x*y]=color;\n"
+"textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),color);\n"
 // "}"
 "}"
 "}"
@@ -660,8 +660,7 @@ document.getElementById('outText').innerHTML=$0;
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_ComputePassCommandEncoder.at(0,0,0),wb.at(3,3),0,WGPU_Buffers.at(1,1,1),0,sizeof(vertices));
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
   // wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Output_Image,64,1,1);
-  const WGPUImageCopyBuffer *source=&wicb.at(1,1);
-wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),*source,&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+    // wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),*source,&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
   // wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image,&WGPU_Mapped_Buffer,64,1,1);
 // wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image,&wb.at(3,3),1,64,1);
@@ -682,7 +681,7 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
-// wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
