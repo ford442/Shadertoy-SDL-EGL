@@ -224,7 +224,7 @@ inline char wgl_cmp_src[2000]=
 // "if(x*y<=sizeOUTu*sizeOUTu){\n"
 "var INtexCoord:vec2<u32>=vec2<u32>(x,y)/vec2<u32>(sizeINu.x,sizeINu.y);\n"
 // "var color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
-"var color:vec4<f32>=vec4<f32>(inputBuffer[2],inputBuffer[3],inputBuffer[4],1.0f);\n"
+"var color:vec4<f32>=vec4<f32>(inputBuffer[2],inputBuffer[3],acos(inputBuffer[4]),1.0f);\n"
 // "let color32u:vec4<f32>=clamp(vec4<f32>(round(color*255.0)),vec4<u32>(0u,0u,0u,0u),vec4<u32>(255u,255u,255u,255u));\n"
 // "outputBuffer[0]=0.7777-(0.0001*);\n"
 "textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),color);\n"
@@ -636,7 +636,7 @@ WGPU_InputBuffer.at(0,0,0)[0]=szef.at(1,1);
 WGPU_InputBuffer.at(0,0,0)[1]=szef.at(0,0);
 WGPU_InputBuffer.at(0,0,0)[2]=u64_uni.at(0,0)/22.0f;
 WGPU_InputBuffer.at(0,0,0)[3]=u64_uni.at(1,1)*0.001f;
-WGPU_InputBuffer.at(0,0,0)[4]=float(u64_uni.at(1,1))%1.0f;
+WGPU_InputBuffer.at(0,0,0)[4]=float(u64_uni.at(1,1));
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Input_Image,&WGPU_ColorBuffer.at(0,0,0),1024,0,1,1,1);
   
