@@ -223,7 +223,6 @@ inline char wgl_cmp_src[2000]=
 "for(var x=0u;x<sizeOUTu;x++){\n"
 // "if(x*y<=sizeOUTu*sizeOUTu){\n"
 "var INtexCoord:vec2<u32>=vec2<u32>(x,y)/vec2<u32>(sizeINu.x,sizeINu.y);\n"
-
 // "var color:vec4<u32>=textureLoad(textureIN,INtexCoord,0);\n"
 "var color:vec4<u32>=textureLoad(textureIN,vec2<u32>(42,42),0);\n"
 // "let color32u:vec4<f32>=clamp(vec4<f32>(round(color*255.0)),vec4<u32>(0u,0u,0u,0u),vec4<u32>(255u,255u,255u,255u));\n"
@@ -618,8 +617,8 @@ WGPU_Output_Image.texture=WGPU_Texture.at(0,0,1);
 
 // ffram=(float *)rd_frm_f(Fnm2);
 std::ifstream fram(Fnm2,std::ios::binary);
-std::vector<char> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-frame_tensor.at(0,0)=&data;
+std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+frame_tensor.at(0,0)=data;
 // wg_size.at(0,0,0)=int(floor(std::cbrt(sze.at(0,0)*sze.at(0,0))))+1;
 int wgs=int(floor(std::cbrt((sze.at(0,0)*sze.at(0,0))/1000)));
     
