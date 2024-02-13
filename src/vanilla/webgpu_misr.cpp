@@ -208,10 +208,10 @@ return EM_TRUE;
 
 inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var<storage,read>inputBuffer:array<f32,64>;\n"
-"@group(0)@binding(1)var<storage,read_write>outputBuffer:array<f32,64>;\n"
+// "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<f32,64>;\n"
 "@group(0)@binding(2)var textureIN:texture_2d<f32>;\n"
 "@group(0)@binding(3)var textureOUT:texture_storage_2d<rgba8unorm,write>;\n"
-"@group(0)@binding(4)var resizeSampler:sampler;\n"
+// "@group(0)@binding(4)var resizeSampler:sampler;\n"
 // "@group(0)@binding(4)var<storage,read_write>vertexBuffer:array<u32,64>;\n"
 "@compute@workgroup_size(1)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
@@ -222,8 +222,9 @@ inline char wgl_cmp_src[2000]=
 "for(var y=0u;y<sizeOUTu;y++){\n"
 "for(var x=0u;x<sizeOUTu;x++){\n"
 // "if(x*y<=sizeOUTu*sizeOUTu){\n"
-"let INtexCoord:vec2<u32>=vec2<u32>(u32(x),u32(y))/vec2<u32>(sizeINu.x,sizeINu.y);\n"
-"let color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
+"var INtexCoord:vec2<u32>=vec2<u32>(u32(x),u32(y))/vec2<u32>(sizeINu.x,sizeINu.y);\n"
+// "var color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
+"var color:vec4<f32>=vec4<f32>(0.7f,0.0f,0.3f,1.0f);\n"
 // "let color32u:vec4<f32>=vec4<f32>(clamp(vec4<f32>(round(color*255.0)),vec4<u32>(0u,0u,0u,0u),vec4<u32>(255u,255u,255u,255u)));\n"
 "textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),color);\n"
 // "}"
@@ -661,7 +662,7 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
-// wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
@@ -936,7 +937,7 @@ bindGroupEntry[2].binding=2;
 bindGroupEntry[2].resource=wtv.at(3,3);
 bindGroupEntry[3]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindGroupEntry[3].binding=3;
-bindGroupEntry[3].resource=wtv.at(1,1); // wtv.at(4,4); 
+bindGroupEntry[3].resource=wtv.at(4,4); 
 bindGroupEntry[4]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindGroupEntry[4].binding=4;
 bindGroupEntry[4].resource=wgpu_sampler.at(3,3);
