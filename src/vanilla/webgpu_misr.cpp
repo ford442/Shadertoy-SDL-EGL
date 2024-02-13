@@ -225,8 +225,8 @@ inline char wgl_cmp_src[2000]=
 "var INtexCoord:vec2<u32>=vec2<u32>(x,y)/vec2<u32>(sizeINu.x,sizeINu.y);\n"
 "var color:vec4<u32>=textureLoad(textureIN,INtexCoord,0);\n"
 // "let color32u:vec4<f32>=clamp(vec4<f32>(round(color*255.0)),vec4<u32>(0u,0u,0u,0u),vec4<u32>(255u,255u,255u,255u));\n"
-"outputBuffer[0]=f32(color[0]);\n"
-"textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),color);\n"
+"outputBuffer[0]=f32(color[42]);\n"
+// "textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),color);\n"
 // "}"
 "}"
 "}"
@@ -646,7 +646,7 @@ WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 EM_ASM({
 document.getElementById('outText').innerHTML=$0;
-},WGPU_ResultBuffer.at(0,0,0)[42]);
+},WGPU_ResultBuffer.at(0,0,0)[0]);
   
  // wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 //  WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,3));
