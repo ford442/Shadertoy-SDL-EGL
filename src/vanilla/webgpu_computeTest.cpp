@@ -1518,12 +1518,14 @@ return;
 EM_JS(void,js_page,(),{
 
 let obbj=document.querySelector('#tileNum').innerHTML;
+let contain=document.querySelector('#contain1');
 let nmTile=parseInt(obbj,10);
   
 function addChart(nmChart){
+  
 for (var i=0;i<nmChart;i++){
 var rows=Math.floor(nmTile/10);
-var column=(nmChart%10)*300;
+var column=(nmTile%10)*300;
 var topp=rows*300;
 var chrt=document.createElement("div");
 nmTile+=1;
@@ -1532,7 +1534,7 @@ chrt.id='chrt'+nmTile;
 chrt.className='chrt';
 chrt.style.top=topp+'px';
 chrt.style.left=column+'px';
-document.body.appendChild(chrt);
+contain.appendChild(chrt);
 var thisChrt;
 eval("thisChrt=document.querySelector('#chrt"+nmTile+"');");
 for(var y=0;y<9;y++){
