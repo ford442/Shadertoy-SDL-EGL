@@ -1522,10 +1522,10 @@ let nmTile=parseInt(obbj,10);
   
 function addChart(nmChart){
 for (var i=0;i<nmChart;i++){
-let rows=Math.floor(nmTile/10);
-let column=(nmChart%10)*300;
-let topp=rows*300;
-const chrt=document.createElement("div");
+var rows=Math.floor(nmTile/10);
+var column=(nmChart%10)*300;
+var topp=rows*300;
+var chrt=document.createElement("div");
 nmTile+=1;
 obbj=nmTile;
 chrt.id='chrt'+nmTile;
@@ -1533,10 +1533,10 @@ chrt.class='chrt';
 chrt.style.top=topp+'px';
 chrt.style.left=column+'px';
 document.body.appendChild(chrt);
-let thisChrt;
+var thisChrt;
 eval("thisChrt=document.querySelector('#chrt"+nmTile+"');");
 for(var y=0;y<9;y++){
-const note=document.createElement("div");
+var note=document.createElement("div");
   note.style.left=column+(y*100)+'px';
   note.style.top=topp+((y%3)*100)+'px';
   note.innerHTML=y;
@@ -1548,8 +1548,8 @@ const note=document.createElement("div");
 
 
 function addData(nm){
-let tns=Math.floor(nm/10);
-let chrt=obbj;
+var tns=Math.floor(nm/10);
+var chrt=obbj;
 addChart(tns);
   for (var i=0;i<tns;i++){
 
@@ -1557,7 +1557,7 @@ addChart(tns);
   
   }
 
-  addData(11);
+  addData(31);
   
 });
 
