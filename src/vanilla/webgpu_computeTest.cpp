@@ -1529,7 +1529,7 @@ var chrt=document.createElement("div");
 nmTile+=1;
 obbj=nmTile;
 chrt.id='chrt'+nmTile;
-chrt.class='chrt';
+chrt.className='chrt';
 chrt.style.top=topp+'px';
 chrt.style.left=column+'px';
 document.body.appendChild(chrt);
