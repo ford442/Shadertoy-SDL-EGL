@@ -1517,7 +1517,7 @@ return;
 
 EM_JS(void,js_page,(),{
 
-let obbj=querySelector('#tileNum').innerHTML;
+let obbj=document.querySelector('#tileNum').innerHTML;
 let nmTile=parseInt(obbj,10);
   
 function addChart(nmChart){
@@ -1534,7 +1534,7 @@ chrt.style.top=topp+'px';
 chrt.style.left=column+'px';
 document.body.appendChild(chrt);
 let thisChrt;
-eval("thisChrt=querySelector('#chrt"+nmTile+"');");
+eval("thisChrt=document.querySelector('#chrt"+nmTile+"');");
 for(var y=0;y<9;y++){
 const note=document.createElement("div");
   note.style.left=column+(y*100)+'px';
