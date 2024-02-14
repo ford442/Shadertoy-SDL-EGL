@@ -1561,7 +1561,7 @@ addChart(tns);
   
 });
 
-extern "c"{
+extern"C"{
 
 void page_js(){
 js_page();
