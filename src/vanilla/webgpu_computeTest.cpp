@@ -1519,17 +1519,17 @@ EM_JS(void,js_page,(),{
 
 let obbj=document.querySelector('#tileNum').innerHTML;
 let contain=document.querySelector('#contain1a');
-let nmTile=parseInt(obbj,10);
+var nmTile=parseInt(obbj,10);
   
 function addChart(nmChart){
-  
-for (var i=0;i<nmChart;i++){
-var rows=Math.floor(nmTile/10);
+  var rows=Math.floor(nmTile/10);
 var column=(nmTile%10)*300;
 var topp=rows*300;
+for (var i=0;i<nmChart;i++){
+
+
 var chrt=document.createElement("div");
-nmTile+=1;
-obbj=nmTile;
+
 chrt.id='chrt'+nmTile;
 chrt.className='chrt';
 chrt.style.top=topp+'px';
@@ -1538,13 +1538,19 @@ contain.appendChild(chrt);
 var thisChrt;
 eval("thisChrt=document.querySelector('#chrt"+nmTile+"');");
 for(var y=0;y<9;y++){
+  
 var note=document.createElement("div");
   note.style.left=column+((y%3)*100)+'px';
-  note.style.top=topp+(y*100)+'px';
+  note.style.top=topp+((y/3)*100)+'px';
   note.innerHTML=y;
   note.id='chrt'+nmTile+'note'+y;
   thisChrt.appendChild(note);
 }
+nmTile+=1;
+obbj=nmTile;
+rows=Math.floor(nmTile/10);
+column=(nmTile%10)*300;
+topp=rows*300;
 }
 }
 
