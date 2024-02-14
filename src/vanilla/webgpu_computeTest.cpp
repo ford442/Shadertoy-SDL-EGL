@@ -1685,7 +1685,7 @@ document.querySelector('#shut').innerHTML=2;
 document.querySelector('#circle').width=window.innerWidth;
 document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#di').click();
-  videoFrames();
+//  videoFrames();
 },100);
 document.querySelector('#status').style.backgroundColor="green";
 }
