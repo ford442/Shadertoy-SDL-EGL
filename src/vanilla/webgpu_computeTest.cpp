@@ -1521,7 +1521,7 @@ let obbj=querySelector('#tileNum').innerHTML;
 let nmTile=parseInt(obbj,10);
   
 function addChart(nmChart){
-for (var i=0;i<nmChart;i++;){
+for (var i=0;i<nmChart;i++){
 let rows=Math.floor(nmTile/10);
 let column=(nmChart%10)*300;
 let topp=rows*300;
