@@ -1514,6 +1514,61 @@ return;
 
 }
 
+
+EM_JS(void,js_page,(),{
+
+let obbj=querySelector('#tileNum').innerHTML;
+let nmTile=parseInt(obbj,10);
+  
+function addChart(nmChart){
+for (var i=0;i<nmChart;i++;){
+let rows=Math.floor(nmTile/10);
+let column=(nmChart%10)*300;
+let topp=rows*300;
+const chrt=document.createElement("div");
+nmTile+=1;
+obbj=nmTile;
+chrt.id='chrt'+nmTile;
+chrt.class='chrt';
+chrt.style.top=topp+'px';
+chrt.style.left=column+'px';
+document.body.appendChild(chrt);
+let thisChrt;
+eval("thisChrt=querySelector('#chrt"+nmTile+"');");
+for(var y=0;y<9;y++){
+const note=document.createElement("div");
+  note.style.left=column+(y*100)+'px';
+  note.style.top=topp+((y%3)*100)+'px';
+  note.innerHTML=y;
+  note.id='chrt'+nmTile+'note'+y;
+  thisChrt.appendChild(note);
+}
+}
+}
+
+
+function addData(nm){
+let tns=Math.floor(nm/10);
+let chrt=obbj;
+addChart(tns);
+  for (var i=0;i<tns;i++){
+
+  }
+  
+  }
+
+  addData(11);
+  
+});
+
+extern "c"{
+
+void page_js(){
+js_page();
+}
+
+}
+
 EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
 FS.mkdir('/video');
@@ -1526,7 +1581,9 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }
 }
-
+document.querySelector('#testBtn').addEventListener('click'.function(){
+Module.ccall('page_js');
+});
 
 let vv=document.querySelector('#mv');
 let vvi=document.querySelector('#mvi');
