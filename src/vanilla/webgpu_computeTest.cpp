@@ -1581,7 +1581,7 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }
 }
-document.querySelector('#testBtn').addEventListener('click'.function(){
+document.querySelector('#testBtn').addEventListener('click',function(){
 Module.ccall('page_js');
 });
 
