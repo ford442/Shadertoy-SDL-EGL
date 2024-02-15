@@ -1521,8 +1521,8 @@ let contain=document.querySelector('#contain1a');
 var nmTile=parseInt(obbj,10);
   
 function addChart(nmChart){
-var rows=Math.floor(nmTile/10);
-var column=(nmTile%10)*300;
+var rows=Math.floor(nmTile/3);
+var column=(nmTile%3)*300;
 var topp=rows*300;
 for (var i=0;i<nmChart;i++){
 
@@ -1558,14 +1558,14 @@ thisChrt.appendChild(note);
 }
 nmTile+=1;
 obbj=nmTile;
-rows=Math.floor(nmTile/10);
-column=(nmTile%10)*300;
+rows=Math.floor(nmTile/3);
+column=(nmTile%3)*300;
 topp=rows*300;
 }
 }
 
 function addData(nm){
-var tns=Math.floor(nm/10);
+var tns=Math.floor(nm/3);
 var chrt=obbj;
 addChart(tns);
 for(var i=0;i<tns;i++){
