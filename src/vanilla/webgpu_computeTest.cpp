@@ -1527,14 +1527,14 @@ var topp=rows*300;
 for (var i=0;i<nmChart;i++){
 
 var chrt=document.createElement("div");
-
 chrt.id='chrt'+nmTile;
 chrt.className='chrt';
 chrt.style.top=topp+'px';
 chrt.style.left=column+'px';
 contain.appendChild(chrt);
-var thisChrt;
-  var place;var side;
+let thisChrt;
+let place;
+let side;
 eval("thisChrt=document.querySelector('#chrt"+nmTile+"');");
 for(var y=0;y<9;y++){
 if(y==1){place=0;side=0;}
