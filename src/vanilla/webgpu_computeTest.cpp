@@ -1552,6 +1552,7 @@ var note=document.createElement("div");
 note.style.left=ll+'px';
 note.style.top=tt+'px';
 note.innerHTML=y;
+note.className='note';
 note.id='chrt'+nmTile+'note'+y;
 thisChrt.appendChild(note);
 }
