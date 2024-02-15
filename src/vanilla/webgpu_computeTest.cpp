@@ -1534,12 +1534,21 @@ chrt.style.top=topp+'px';
 chrt.style.left=column+'px';
 contain.appendChild(chrt);
 var thisChrt;
+  var place;var side;
 eval("thisChrt=document.querySelector('#chrt"+nmTile+"');");
 for(var y=0;y<9;y++){
-  
+if(y==1){place=0;side=0;}
+if(y==2){place=100;side=0;}
+if(y==3){place=200;side=0;}
+if(y==4){place=0;side=100;}
+if(y==5){place=100;side=100;}
+if(y==6){place=200;side=100;}
+if(y==7){place=0;side=200;}
+if(y==8){place=100;side=200;}
+if(y==9){place=200;side=200;}
 var note=document.createElement("div");
-note.style.left=column+((y%3)*100)+'px';
-note.style.top=topp+((y%3)*100)+'px';
+note.style.left=column+place+'px';
+note.style.top=topp+side+'px';
 note.innerHTML=y;
 note.id='chrt'+nmTile+'note'+y;
 thisChrt.appendChild(note);
@@ -1551,7 +1560,6 @@ column=(nmTile%10)*300;
 topp=rows*300;
 }
 }
-
 
 function addData(nm){
 var tns=Math.floor(nm/10);
