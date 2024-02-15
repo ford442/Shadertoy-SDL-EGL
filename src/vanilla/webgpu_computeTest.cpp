@@ -1546,9 +1546,11 @@ if(y==6){place=200;side=100;}
 if(y==7){place=0;side=200;}
 if(y==8){place=100;side=200;}
 if(y==9){place=200;side=200;}
+var ll=column+place;
+var tt=topp+side;
 var note=document.createElement("div");
-note.style.left=column+place+'px';
-note.style.top=topp+side+'px';
+note.style.left=ll+'px';
+note.style.top=tt+'px';
 note.innerHTML=y;
 note.id='chrt'+nmTile+'note'+y;
 thisChrt.appendChild(note);
