@@ -627,13 +627,12 @@ std::vector<GLubyte> data((std::istreambuf_iterator<char>(fram)),(std::istreambu
 frame_tensorGL.at(0,0)=data;
 // wg_size.at(0,0,0)=int(floor(std::cbrt(sze.at(0,0)*sze.at(0,0))))+1;
 // int wgs=int(floor(std::cbrt((sze.at(0,0)*sze.at(0,0))/1000)));
-    wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
-
 
 // raN=rNd4(256);
 WGPU_InputBuffer.at(0,0,0)[0]=szef.at(1,1);
@@ -1522,11 +1521,10 @@ let contain=document.querySelector('#contain1a');
 var nmTile=parseInt(obbj,10);
   
 function addChart(nmChart){
-  var rows=Math.floor(nmTile/10);
+var rows=Math.floor(nmTile/10);
 var column=(nmTile%10)*300;
 var topp=rows*300;
 for (var i=0;i<nmChart;i++){
-
 
 var chrt=document.createElement("div");
 
@@ -1540,11 +1538,11 @@ eval("thisChrt=document.querySelector('#chrt"+nmTile+"');");
 for(var y=0;y<9;y++){
   
 var note=document.createElement("div");
-  note.style.left=column+((y%3)*100)+'px';
-  note.style.top=topp+((y/3)*100)+'px';
-  note.innerHTML=y;
-  note.id='chrt'+nmTile+'note'+y;
-  thisChrt.appendChild(note);
+note.style.left=column+((y%3)*100)+'px';
+note.style.top=topp+((y%3)*100)+'px';
+note.innerHTML=y;
+note.id='chrt'+nmTile+'note'+y;
+thisChrt.appendChild(note);
 }
 nmTile+=1;
 obbj=nmTile;
@@ -1559,13 +1557,13 @@ function addData(nm){
 var tns=Math.floor(nm/10);
 var chrt=obbj;
 addChart(tns);
-  for (var i=0;i<tns;i++){
+for(var i=0;i<tns;i++){
 
-  }
+}
   
-  }
+}
 
-  addData(31);
+addData(31);
   
 });
 
