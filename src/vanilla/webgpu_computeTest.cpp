@@ -1518,7 +1518,7 @@ EM_JS(void,js_page,(),{
 
 let obbj=document.querySelector('#tileNum').innerHTML;
 let contain=document.querySelector('#contain1a');
-var nmTile=parseInt(obbj,10);
+let nmTile=parseInt(obbj,10);
 let thisChrt;
 let place;
 let side;
