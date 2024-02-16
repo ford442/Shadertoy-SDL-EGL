@@ -1519,38 +1519,43 @@ EM_JS(void,js_page,(),{
 let obbj=document.querySelector('#tileNum').innerHTML;
 let contain=document.querySelector('#contain1a');
 var nmTile=parseInt(obbj,10);
-  
-function addChart(nmChart){
-var rows=Math.floor(nmTile/3);
-var column=(nmTile%3)*300;
-var topp=rows*300;
-for (var i=0;i<nmChart;i++){
-
-var chrt=document.createElement("div");
-chrt.id='chrt'+nmTile;
-chrt.className='chrt';
-chrt.style.top=topp+'px';
-chrt.style.left=column+'px';
-contain.appendChild(chrt);
 let thisChrt;
 let place;
 let side;
-eval("thisChrt=document.querySelector('#chrt"+nmTile+"');");
-for(var y=0;y<9;y++){
+  
+function sizeData(y,nm){
 if(y==1){place=0;side=0;}
-if(y==2){place=100;side=0;}
-if(y==3){place=200;side=0;}
-if(y==4){place=0;side=100;}
-if(y==5){place=100;side=100;}
-if(y==6){place=200;side=100;}
-if(y==7){place=0;side=200;}
-if(y==8){place=100;side=200;}
-if(y==9){place=200;side=200;}
+if(y==2){place=50;side=0;}
+if(y==3){place=100;side=0;}
+if(y==4){place=0;side=50;}
+if(y==5){place=50;side=50;}
+if(y==6){place=100;side=50;}
+if(y==7){place=0;side=100;}
+if(y==8){place=50;side=100;}
+if(y==9){place=100;side=100;}
+var rows=Math.floor(nm/3);
+var column=(nm%3)*150;
+var topp=rows*150;
 var ll=column+place;
 var tt=topp+side;
+return{noteTop:tt,noteLeft:ll,tileLeft:column,tileTop:topp};
+}
+  
+function addChart(nmChart){
+for (var i=0;i<nmChart;i++){
+var chrtDat=sizeData(i,nmChart);
+var chrt=document.createElement("div");
+chrt.id='chrt'+nmTile;
+chrt.className='chrt';
+chrt.style.top=tileDat.chartTop+'px';
+chrt.style.left=tileDat.chartLeft+'px';
+contain.appendChild(chrt);
+eval("thisChrt=document.querySelector('#chrt"+nmTile+"');");
+for(var y=0;y<9;y++){
+var noteDat=sizeData(i,nmChart);
 var note=document.createElement("div");
-note.style.left=ll+'px';
-note.style.top=tt+'px';
+note.style.left=noteDat.noteLeft+'px';
+note.style.top=noteDat.noteTop+'px';
 note.innerHTML=y;
 note.className='note';
 note.id='chrt'+nmTile+'note'+y;
@@ -1558,9 +1563,6 @@ thisChrt.appendChild(note);
 }
 nmTile+=1;
 obbj=nmTile;
-rows=Math.floor(nmTile/3);
-column=(nmTile%3)*300;
-topp=rows*300;
 }
 }
 
@@ -1574,7 +1576,7 @@ for(var i=0;i<tns;i++){
   
 }
 
-addData(31);
+addData(21);
   
 });
 
