@@ -1538,7 +1538,7 @@ var column=(nm%3)*150;
 var topp=rows*150;
 var ll=column+place;
 var tt=topp+side;
-  console.log(tt+','+ll+','+'column+','+top);
+  console.log(tt+','+ll+','+'column+','+topp);
 return{noteTop:tt,noteLeft:ll,tileLeft:column,tileTop:topp};
 }
   
