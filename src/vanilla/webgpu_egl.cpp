@@ -1370,8 +1370,8 @@ ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 
-// let sfil=new Uint8ClampedArray(sarrayBuffer);
-let sfil=new Uint16Array(sarrayBuffer);
+let sfil=new Uint8Array(sarrayBuffer);
+// let sfil=new Uint16Array(sarrayBuffer);
 
 FS.writeFile('/shader/shader.wgsl',sfil);
 document.querySelector('#stat').innerHTML='Downloaded Shader';
