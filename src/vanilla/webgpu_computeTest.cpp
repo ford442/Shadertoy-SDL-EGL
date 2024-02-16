@@ -1543,7 +1543,7 @@ return{noteTop:tt,noteLeft:ll,tileLeft:column,tileTop:topp};
   
 function addChart(nmChart){
 for (var i=0;i<nmChart;i++){
-var chrtDat=sizeData(i,nmChart);
+var chrtDat=sizeData(i,nmTile);
 var chrt=document.createElement("div");
 chrt.id='chrt'+nmTile;
 chrt.className='chrt';
