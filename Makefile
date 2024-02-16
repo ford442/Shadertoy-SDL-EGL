@@ -1,4 +1,4 @@
-BIN_NAME = a0-002
+BIN_NAME = a0-003
 
 LDFLAGS = -Wl,-O3,--lto-O3,-lc,-lc++,-lc++abi,-lm,-lpthread,-lrt,-ldl,-S
 
