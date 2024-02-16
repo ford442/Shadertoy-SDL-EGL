@@ -1538,10 +1538,12 @@ var column=(nm%3)*150;
 var topp=rows*150;
 var ll=column+place;
 var tt=topp+side;
+  console.log(tt+','+ll+','+'column+','+top);
 return{noteTop:tt,noteLeft:ll,tileLeft:column,tileTop:topp};
 }
   
 function addChart(nmChart){
+  
 for (var i=0;i<nmChart;i++){
 var chrtDat=sizeData(i,nmTile);
 var chrt=document.createElement("div");
