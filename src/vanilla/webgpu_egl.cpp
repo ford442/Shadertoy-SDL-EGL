@@ -321,7 +321,8 @@ double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
 
 struct Vertex{
-GLfloat position[4];
+// GLfloat position[4];
+float position[4];
 };
 
 Vertex nvertices[]={
