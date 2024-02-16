@@ -1547,8 +1547,8 @@ var chrtDat=sizeData(i,nmChart);
 var chrt=document.createElement("div");
 chrt.id='chrt'+nmTile;
 chrt.className='chrt';
-chrt.style.top=tileDat.chartTop+'px';
-chrt.style.left=tileDat.chartLeft+'px';
+chrt.style.top=chrtDat.tileTop+'px';
+chrt.style.left=chrtDat.tileLeft+'px';
 contain.appendChild(chrt);
 eval("thisChrt=document.querySelector('#chrt"+nmTile+"');");
 for(var y=0;y<9;y++){
