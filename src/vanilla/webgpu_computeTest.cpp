@@ -1524,7 +1524,7 @@ let place;
 let side;
   
 function sizeData(y,nm){
-  let szz=document.innerHeight*0.25;
+let szz=parseInt(document.innerHeight*0.25);
 if(y==1){place=0;side=0;}
 if(y==2){place=20;side=0;}
 if(y==3){place=40;side=0;}
