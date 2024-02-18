@@ -1533,11 +1533,11 @@ if(y==6){place=100;side=50;}
 if(y==7){place=0;side=100;}
 if(y==8){place=50;side=100;}
 if(y==9){place=100;side=100;}
-var rows=Math.floor(nm/3);
-var column=(nm%3)*150;
-var topp=rows*150;
-var ll=column+place;
-var tt=topp+side;
+let rows=Math.floor(nm/3);
+let column=(nm%3)*150;
+let topp=rows*150;
+let ll=column+place;
+let tt=topp+side;
   console.log(tt+','+ll+','+column+','+topp);
 return{noteTop:tt,noteLeft:ll,tileLeft:column,tileTop:topp};
 }
@@ -1545,8 +1545,8 @@ return{noteTop:tt,noteLeft:ll,tileLeft:column,tileTop:topp};
 function addChart(nmChart){
   
 for (var i=0;i<nmChart;i++){
-var chrtDat=sizeData(i,nmTile);
-var chrt=document.createElement("div");
+let chrtDat=sizeData(i,nmTile);
+let chrt=document.createElement("div");
 chrt.id='chrt'+nmTile;
 chrt.className='chrt';
 chrt.style.top=chrtDat.tileTop+'px';
@@ -1554,8 +1554,8 @@ chrt.style.left=chrtDat.tileLeft+'px';
 contain.appendChild(chrt);
 eval("thisChrt=document.querySelector('#chrt"+nmTile+"');");
 for(var y=0;y<9;y++){
-var noteDat=sizeData(i,nmChart);
-var note=document.createElement("div");
+let noteDat=sizeData(i,nmChart);
+let note=document.createElement("div");
 note.style.left=noteDat.noteLeft+'px';
 note.style.top=noteDat.noteTop+'px';
 note.innerHTML=y;
@@ -1569,8 +1569,8 @@ obbj=nmTile;
 }
 
 function addData(nm){
-var tns=Math.floor(nm/3);
-var chrt=obbj;
+let tns=Math.floor(nm/3);
+let chrt=obbj;
 addChart(tns);
 for(var i=0;i<tns;i++){
 
