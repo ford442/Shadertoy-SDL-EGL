@@ -1525,17 +1525,17 @@ let side;
   
 function sizeData(y,nm){
 if(y==1){place=0;side=0;}
-if(y==2){place=50;side=0;}
-if(y==3){place=100;side=0;}
-if(y==4){place=0;side=50;}
-if(y==5){place=50;side=50;}
-if(y==6){place=100;side=50;}
-if(y==7){place=0;side=100;}
-if(y==8){place=50;side=100;}
-if(y==9){place=100;side=100;}
+if(y==2){place=20;side=0;}
+if(y==3){place=40;side=0;}
+if(y==4){place=0;side=20;}
+if(y==5){place=20;side=20;}
+if(y==6){place=40;side=20;}
+if(y==7){place=0;side=40;}
+if(y==8){place=20;side=40;}
+if(y==9){place=40;side=40;}
 let rows=Math.floor(nm/3);
-let column=(nm%3)*150;
-let topp=rows*150;
+let column=(nm%3)*60;
+let topp=rows*60;
 let ll=column+place;
 let tt=topp+side;
   console.log(tt+','+ll+','+column+','+topp);
@@ -1569,7 +1569,7 @@ obbj=nmTile;
 }
 
 function addData(nm){
-let tns=Math.floor(nm/3);
+let tns=Math.floor(nm/10);
 let chrt=obbj;
 addChart(tns);
 for(var i=0;i<tns;i++){
