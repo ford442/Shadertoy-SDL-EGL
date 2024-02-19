@@ -1393,13 +1393,13 @@ document.querySelector('#di').click();
 
 void uniUp(){
 u64_uni.at(2,2)=u64_uni.at(2,2)+int(u64_uni.at(3,3)*0.01);
-resf.at(1,1)=resf.at(1,1)+float(u64_uni.at(3,3)*0.01);
+szef.at(1,1)=szef.at(1,1)+float(u64_uni.at(3,3)*0.01);
 return;
 }
 
 void uniDown(){
 u64_uni.at(2,2)=u64_uni.at(2,2)-int(u64_uni.at(3,3)*0.01);
-resf.at(1,1)=resf.at(1,1)-float(u64_uni.at(3,3)*0.01);
+szef.at(1,1)=szef.at(1,1)-float(u64_uni.at(3,3)*0.01);
 return;
 }
 
