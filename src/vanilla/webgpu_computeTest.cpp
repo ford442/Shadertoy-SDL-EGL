@@ -207,7 +207,7 @@ return EM_TRUE;
 */
 
 inline char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var <storage,read> inputBuffer: array <f32,2>;\n"
+"@group(0)@binding(0)var <storage,read> inputBuffer: array <f32,64>;\n"
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array <f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
@@ -654,7 +654,7 @@ wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 
     //  get result for test
 
-WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
+WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,64*sizeof(float));
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 WGPU_ResultBuffer.at(0,0,0)[2]=1024;
