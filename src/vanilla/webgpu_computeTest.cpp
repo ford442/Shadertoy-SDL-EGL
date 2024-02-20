@@ -660,10 +660,10 @@ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),
 WGPU_ResultBuffer.at(0,0,0)[2]=1024;
 WGPU_ResultBuffer.at(0,0,0)[3]=1024.1024;
   EM_ASM({
-document.getElementById('outText').innerHTML='Buffer at [0]:'+$0;
-document.getElementById('outText').innerHTML='Buffer at [1]:'+$1;
-document.getElementById('outText').innerHTML='Buffer at [2] (int):'+$2;
-document.getElementById('outText').innerHTML='Buffer at [3] (float):'+$3;
+document.getElementById('outText').innerHTML+='Buffer at [0]:'+$0;
+document.getElementById('outText').innerHTML+='Buffer at [1]:'+$1;
+document.getElementById('outText').innerHTML+='Buffer at [2] (int):'+$2;
+document.getElementById('outText').innerHTML+='Buffer at [3] (float):'+$3;
 },WGPU_ResultBuffer.at(0,0,0)[0],WGPU_ResultBuffer.at(0,0,0)[1],WGPU_ResultBuffer.at(0,0,0)[2],WGPU_ResultBuffer.at(0,0,0)[3]);
 
  // wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
