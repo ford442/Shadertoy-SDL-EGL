@@ -215,8 +215,8 @@ inline char wgl_cmp_src[2000]=
 // "@group(0)@binding(4)var<storage,read_write>vertexBuffer:array<u32,64>;\n"
 "@compute@workgroup_size(1,1,1)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
-"var buffSizIn=inputBuffer[0];\n"
-"var buffSizOut=inputBuffer[1];\n"
+"var buffSizIn:f32=inputBuffer[0];\n"
+"var buffSizOut:f32=inputBuffer[1];\n"
 "var sizeINu=textureDimensions(textureIN,0);\n"
 "var sizeINf:f32=f32(sizeINu.x);\n"
 "var sizeOUTf=inputBuffer[1];\n"
@@ -659,7 +659,8 @@ WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 EM_ASM({
 document.getElementById('outText').innerHTML='Buffer at [0]:'+$0;
-},&WGPU_ResultBuffer.at(0,0,0)[0]);
+document.getElementById('outText').innerHTML='Buffer at [1]:'+$1;
+},WGPU_ResultBuffer.at(0,0,0)[0],WGPU_ResultBuffer.at(0,0,0)[1]);
 
  // wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 //  WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,3));
