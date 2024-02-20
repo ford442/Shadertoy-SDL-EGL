@@ -41,7 +41,7 @@ function pll(){Module.ccall('pl');}
 
 const fll=new BroadcastChannel('file');
 fll.addEventListener('message',ea=>{
-const fill=new Uint8Array(ea.data.data);
+const fill=new Uint16Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
 setTimeout(function(){pll();},500);
 const shutDown=new BroadcastChannel('shutDown');
@@ -104,7 +104,7 @@ ff.responseType='arraybuffer';
 ff.onload=function(oEvent){
 const sarrayBuffer=ff.response;
 if(sarrayBuffer){
-const sfil=new Uint8ClampedArray(sarrayBuffer);
+const sfil=new Uint8Array(sarrayBuffer);
 setTimeout(function(){
 FS.writeFile('/shader/shader1.toy',sfil);
 },150);
