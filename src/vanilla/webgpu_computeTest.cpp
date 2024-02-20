@@ -660,7 +660,7 @@ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),
 EM_ASM({
 document.getElementById('outText').innerHTML='Buffer at [0]:'+$0;
 document.getElementById('outText').innerHTML='Buffer at [1]:'+$1;
-},WGPU_ResultBuffer.at(0,0,0)[0],WGPU_ResultBuffer.at(0,0,0)[1]);
+},*WGPU_ResultBuffer.at(0,0,0)[0],*WGPU_ResultBuffer.at(0,0,0)[1]);
 
  // wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 //  WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,3));
