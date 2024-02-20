@@ -76,7 +76,7 @@ alpha:true,
 depth:true,
 stencil:true,
 imageSmoothingEnabled:true,
-// imageSmoothingQuality:'high',
+imageSmoothingQuality:'high',
 preserveDrawingBuffer:false,
 premultipliedAlpha:false,
 desynchronized:false,
@@ -88,7 +88,7 @@ xrCompatible:false,
 majorVersion:2,
 minorVersion:0};
 var gl=canvas.getContext('webgl2',{
-colorType:'float32',
+colorType:'float64',
 preferLowPowerToHighPerformance:false,
 precision:'highp',
 logarithmicDepthBuffer:true,
@@ -117,7 +117,7 @@ if(isWebGL2){
 gl.getExtension('EXT_color_buffer_float');
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-// gl.disable(gl.DITHER);
+gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
 gl.getExtension('EXT_color_buffer_float');
 // gl.getExtension('OES_texture_float_linear');
@@ -126,7 +126,7 @@ supportLinearFiltering=gl.getExtension('OES_texture_float_linear');
 }else{
 gl.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 gl.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-// gl.disable(gl.DITHER);
+gl.disable(gl.DITHER);
 gl.drawingBufferColorSpace='display-p3';
 halfFloat=gl.getExtension('OES_texture_half_float');
 // gl.getExtension('EXT_color_buffer_float');
