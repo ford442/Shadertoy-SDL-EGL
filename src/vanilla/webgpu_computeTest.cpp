@@ -659,7 +659,7 @@ WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 EM_ASM({
 document.getElementById('outText').innerHTML='Buffer at [0]:'+$0;
-},WGPU_ResultBuffer.at(0,0,0)[0]);
+},&WGPU_ResultBuffer.at(0,0,0)[0]);
 
  // wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 //  WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,3));
