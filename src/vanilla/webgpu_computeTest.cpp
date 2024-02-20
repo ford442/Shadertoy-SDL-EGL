@@ -618,8 +618,8 @@ wtv.at(4,4)=OUTTextureView;
       // Compute Pass
 
 // raN=rNd4(256);
-WGPU_InputBuffer.at(0,0,0)[0]=szef.at(1,1);
-WGPU_InputBuffer.at(0,0,0)[1]=szef.at(0,0);
+WGPU_InputBuffer.at(0,0,0)[0]=szef.at(0,0);
+WGPU_InputBuffer.at(0,0,0)[1]=float(1024);szef.at(0,0);
 WGPU_InputBuffer.at(0,0,0)[2]=u64_uni.at(0,0)/22.0f;
 WGPU_InputBuffer.at(0,0,0)[3]=u64_uni.at(1,1)*0.001f;
 WGPU_InputBuffer.at(0,0,0)[4]=float(u64_uni.at(1,1));
