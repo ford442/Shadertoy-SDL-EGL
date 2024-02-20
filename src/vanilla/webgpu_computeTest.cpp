@@ -664,7 +664,7 @@ document.getElementById('outText').innerHTML='Buffer at [0]:'+$0;
 document.getElementById('outText').innerHTML+='Buffer at [1]:'+$1;
 document.getElementById('outText').innerHTML+='Buffer at [2] (int):'+$2;
 document.getElementById('outText').innerHTML+='Buffer at [3] (float):'+$3;
-},WGPU_ResultBuffer.at(0,0,0)[0],WGPU_ResultBuffer.at(0,0,0)[1],WGPU_ResultBuffer.at(0,0,0)[2],WGPU_ResultBuffer.at(0,0,0)[3]);
+},&WGPU_ResultBuffer.at(0,0,0)[0],&WGPU_ResultBuffer.at(0,0,0)[1],&WGPU_ResultBuffer.at(0,0,0)[2],&WGPU_ResultBuffer.at(0,0,0)[3]);
 
  // wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 //  WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,3));
