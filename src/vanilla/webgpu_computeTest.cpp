@@ -491,9 +491,9 @@ if(WGPU_BufferStatus.at(0,0,0)==3){
 WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
-EM_ASM({
-document.getElementById('outText').innerHTML=$0+' '+$1;
-},WGPU_ResultBuffer.at(0,0,0)[0],WGPU_ResultBuffer.at(0,0,0)[1]);
+// EM_ASM({
+// document.getElementById('outText').innerHTML=$0+' '+$1;
+// },WGPU_ResultBuffer.at(0,0,0)[0],WGPU_ResultBuffer.at(0,0,0)[1]);
 // wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wb.at(3,3),1,64,1);
 // std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
 }
@@ -658,7 +658,7 @@ WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,Output
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 EM_ASM({
-document.getElementById('outText').innerHTML=$0;
+document.getElementById('outText').innerHTML='Buffer at [0]:'+$0;
 },WGPU_ResultBuffer.at(0,0,0)[0]);
 
  // wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
@@ -908,7 +908,7 @@ resizeSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(1,1));
 wgpu_sampler.at(3,3)=resizeSampler;
 raN=rNd4(256);
 input[0]=raN;
-WGPU_InputBuffer.at(0,0,0)[0]=raN;
+  // WGPU_InputBuffer.at(0,0,0)[0]=raN;
 // std::cout << "Random input:" << std::endl;
 // std::cout << raN << std::endl;
 WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
