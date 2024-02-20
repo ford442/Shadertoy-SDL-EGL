@@ -96,7 +96,9 @@ $shds[i+1]='https://glsl.1ink.us/shaders/'+txxt;
 };
 var randShade=Math.random();
 randShade=Math.floor($shds[0]*randShade)+5;
+if(document.querySelector('#sh1').value=='Random'){
 document.getElementById('path').innerHTML=$shds[randShade];
+}
 var pth=document.getElementById('path').innerHTML;
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
