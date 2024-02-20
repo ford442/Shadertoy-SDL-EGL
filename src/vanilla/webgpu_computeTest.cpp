@@ -228,8 +228,8 @@ inline char wgl_cmp_src[2000]=
 "var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
 "var color:vec4<f32>=vec4<f32>(0.0f,0.88f,0.0f,1.0f);\n"
 // "let color32u:vec4<f32>=clamp(vec4<f32>(round(color*255.0)),vec4<u32>(0u,0u,0u,0u),vec4<u32>(255u,255u,255u,255u));\n"
-"outputBuffer[0]=f32(buffSizIn);\n"
-"outputBuffer[1]=f32(buffSizOut);\n"
+"outputBuffer[0]=420.42f;\n"
+"outputBuffer[1]=2048.2048;\n"
 "textureStore(textureOUT,vec2<u32>(x,y),color);\n"
 // "}"
 "}"
@@ -660,7 +660,7 @@ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),
 WGPU_ResultBuffer.at(0,0,0)[2]=1024;
 WGPU_ResultBuffer.at(0,0,0)[3]=1024.1024;
   EM_ASM({
-document.getElementById('outText').innerHTML+='Buffer at [0]:'+$0;
+document.getElementById('outText').innerHTML='Buffer at [0]:'+$0;
 document.getElementById('outText').innerHTML+='Buffer at [1]:'+$1;
 document.getElementById('outText').innerHTML+='Buffer at [2] (int):'+$2;
 document.getElementById('outText').innerHTML+='Buffer at [3] (float):'+$3;
