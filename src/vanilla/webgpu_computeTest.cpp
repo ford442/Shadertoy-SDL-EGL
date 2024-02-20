@@ -1525,15 +1525,15 @@ return;
 
 EM_JS(void,js_page,(),{
 
-let obbj=document.querySelector('#tileNum').innerHTML;
-let contain=document.querySelector('#contain1a');
-let nmTile=parseInt(obbj,10);
-let thisChrt;
-let place;
-let side;
+var obbj=document.querySelector('#tileNum').innerHTML;
+var contain=document.querySelector('#contain1a');
+var nmTile=parseInt(obbj,10);
+var thisChrt;
+var place;
+var side;
   
 function sizeData(y,nm){
-let szz=parseInt(document.innerHeight*0.25);
+var szz=parseInt(document.innerHeight*0.25);
 if(y==1){place=0;side=0;}
 if(y==2){place=20;side=0;}
 if(y==3){place=40;side=0;}
@@ -1543,11 +1543,11 @@ if(y==6){place=40;side=20;}
 if(y==7){place=0;side=40;}
 if(y==8){place=20;side=40;}
 if(y==9){place=40;side=40;}
-let rows=Math.floor(nm/3);
-let column=((nm%3)*60)+szz;
-let topp=rows*60;
-let ll=column+place;
-let tt=topp+side;
+var rows=Math.floor(nm/3);
+var column=((nm%3)*60)+szz;
+var topp=rows*60;
+var ll=column+place;
+var tt=topp+side;
   console.log(tt+','+ll+','+column+','+topp);
 return{noteTop:tt,noteLeft:ll,tileLeft:column,tileTop:topp};
 }
@@ -1578,8 +1578,8 @@ obbj=nmTile;
 }
 
 function addData(nm){
-let tns=Math.floor(nm/10);
-let chrt=obbj;
+var tns=Math.floor(nm/10);
+var chrt=obbj;
 addChart(tns);
 for(var i=0;i<tns;i++){
 
