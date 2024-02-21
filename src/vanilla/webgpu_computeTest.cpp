@@ -211,6 +211,7 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array <f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
+"@group(0)@binding(4)var<uniform> iResolution : u32;\n"
 // "@group(0)@binding(4)var resizeSampler:sampler;\n"
 // "@group(0)@binding(4)var<storage,read_write>vertexBuffer:array<u32,64>;\n"
 "@compute@workgroup_size(1,1,1)\n"
@@ -222,7 +223,7 @@ inline char wgl_cmp_src[2000]=
 "var sizeOUTf=inputBuffer[1];\n"
 "var sizeOUTu:u32=u32(sizeOUTf);\n"
 "outputBuffer[0]=0.777f;\n"
-"outputBuffer[1]=0.2048f;\n"
+"outputBuffer[1]=f32(iResolution);\n"
 "for(var y=0u;y<sizeOUTu;y++){\n"
 "for(var x=0u;x<sizeOUTu;x++){\n"
 // "if(x*y<=sizeOUTu*sizeOUTu){\n"
@@ -708,7 +709,7 @@ void wgpu_command_encoder_copy_texture_to_texture(WGpuCommandEncoder commandEnco
 
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(1,1),sizeof(uint64_t));
-// wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_uni.at(2,2),sizeof(uint64_t));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_uni.at(2,2),sizeof(uint64_t));
 //  wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
 // wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(3,3),0,sizeof(vertices));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0,1.0);
@@ -804,9 +805,9 @@ wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 emscripten_get_element_css_size("canvas",&szh,&szw);
 emscripten_get_canvas_element_size("canvas",&szhI,&szwI);
-u64_siz.at(0,0)=(szhI/4)*4;
+u64_siz.at(0,0)=int(szh); // (szhI/4)*4;
 szef.at(0,0)=float((szh/4.0)*4.0);
-sze.at(0,0)=float((szh/4.0)*4.0);
+sze.at(0,0)=int(szh); // float((szh/4.0)*4.0);
 sze.at(0,1)=280;
 sze.at(1,1)=720;
 szef.at(1,1)=float(sze.at(1,1));
