@@ -48,7 +48,8 @@ const shutDown=new BroadcastChannel('shutDown');
 shutDown.postMessage({data:222});
 });
 
-var $h,$pt,slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv,he,wi;
+var slt,$ll,r$,$w,$r,$lt,$hg,$ls,lo,mv;
+let he,wi$h,$pt;
 
 const $iwid=document.getElementById('iwid');
 var mV=document.getElementById('mv');
