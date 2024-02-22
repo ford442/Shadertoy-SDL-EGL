@@ -225,6 +225,7 @@ contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // contx.blendColor(1.0,1.0,1.0,0.0);
 // contx.blendColor(0.0,0.0,0.0,1.0);
 // contx.blendColor(0.0,0.0,0.0,0.0);
+contx.blendColor(0.0,0.0,0.0,0.5);
 contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 // contx.blendEquationSeparate(gl.FUNC_ADD,gl.MAX);
 contx.getExtension('ARB_robust_buffer_access_behavior');
@@ -413,8 +414,8 @@ contx.getExtension('EGL_EXT_surface_attachment');
 contx.getExtension('EXT_texture_storage');
 
 contx.disable(gl.DITHER);
-contx.drawingBufferColorMetadata={mode:'extended'};
-contx.drawingBufferColorSpace='display-p3';
+// contx.drawingBufferColorMetadata={mode:'extended'};
+// contx.drawingBufferColorSpace='display-p3';
 
 const g=new GPUX({canvas:bcanvas,webGl:contx});
 const g2=new GPUX();
@@ -464,7 +465,7 @@ var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 var alph=AlpheV1($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
 // var alph=AlpheV2($amax,$amin,$aavg,p[3]);
-var Min=4.0*(($fmax-($favg-$fmin))/2.0);
+var Min=4.0*(($amax-($aavg-$amin))/2.0);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
