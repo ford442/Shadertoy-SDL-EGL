@@ -417,7 +417,7 @@ contx.disable(gl.DITHER);
 // contx.drawingBufferColorMetadata={mode:'extended'};
 // contx.drawingBufferColorSpace='display-p3';
 
-const g=new GPUX({context:contx});
+const g=new GPUX({canvas:bcanvas,context:contx});
 const g2=new GPUX();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0);}`;
