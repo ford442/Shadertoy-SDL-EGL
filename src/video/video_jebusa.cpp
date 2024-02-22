@@ -1136,7 +1136,7 @@ glEnable(GL_DEPTH_TEST);
 // glDepthFunc(GL_LESS);
 // glFrontFace(GL_CW);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-// glEnable(GL_BLEND);
+glEnable(GL_BLEND);
 // glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 glBlendColor(F0,F0,F0,0.5);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
