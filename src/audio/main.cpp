@@ -85,7 +85,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},1300);
+},1700);
 });
 
 const tem=document.getElementById('tim');
