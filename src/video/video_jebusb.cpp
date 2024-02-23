@@ -218,8 +218,8 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.querySelector("#bcanvas");
-const contx=bcanvas.getContext("webgl2",{colorType:'float32',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
-
+const contx=bcanvas.getContext("webgl2",{colorType:'float32',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
+/*  new ext list
 contx.getExtension('ARB_robust_buffer_access_behavior');
 // contx.getExtension('ARB_ES3_compatibility');
 // contx.getExtension('GL_EXTENSIONS');
@@ -404,6 +404,46 @@ contx.getExtension('EGL_EXT_request_priority');
 contx.getExtension('EGL_EXT_create_surface_from_window');
 contx.getExtension('EGL_EXT_surface_attachment');
 contx.getExtension('EXT_texture_storage');
+*/ // 'new' ext list
+
+//  'old' ext list
+gl.getExtension('WEBGL_color_buffer_float');
+gl.getExtension('WEBGL_color_buffer_half_float');
+gl.getExtension('GL_OES_texture_float_linear');
+gl.getExtension('GL_OES_texture_half_float_linear');
+gl.getExtension('GL_EXT_float_blend');
+gl.getExtension('GL_EXT_frag_depth');
+gl.getExtension('GL_EXT_shader_texture_lod');
+gl.getExtension('GL_EXT_sRGB');
+gl.getExtension('GL_EXT_blend_minmax');
+gl.getExtension('ANGLE_instanced_arrays');
+// gl.getExtension('EXT_disjoint_timer_query');
+gl.getExtension('GL_EXT_clip_cull_distance');
+// gl.getExtension('EXT_disjoint_timer_query_webgl2');
+gl.getExtension('KHR_parallel_shader_compile');
+gl.getExtension('GL_OES_draw_buffers_indexed');
+gl.getExtension('GL_OES_element_index_uint');
+gl.getExtension('GL_OES_fbo_render_mipmap');
+gl.getExtension('GL_OES_standard_derivatives');
+gl.getExtension('GL_OES_vertex_array_object');
+gl.getExtension('WEBGL_blend_equation_advanced_coherent');
+gl.getExtension('WEBGL_depth_texture');
+gl.getExtension('WEBGL_draw_buffers');
+gl.getExtension('WEBGL_provoking_vertex');
+gl.getExtension('EXT_framebuffer_sRGB');
+gl.getExtension('OES_depth32');
+gl.getExtension('GL_OES_fixed_point');
+gl.getExtension('GL_OES_shader_multisample_interpolation');
+gl.getExtension('WEBGL_webcodecs_video_frame');
+gl.getExtension('GL_OES_single_precision');
+// gl.getExtension('GL_EXT_texture_shadow_lod');
+gl.getExtension('EGL_NV_memory_attachment');
+gl.getExtension('EGL_NV_depth_nonlinear');
+gl.getExtension('EGL_EXT_gl_colorspace_display_p3');
+gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
+gl.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
+gl.getExtension('GL_ARB_multisample');
+
 contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // contx.blendColor(1.0,1.0,1.0,1.0);
