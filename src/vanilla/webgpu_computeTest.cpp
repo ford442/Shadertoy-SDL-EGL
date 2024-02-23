@@ -211,7 +211,7 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array <f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
-"@group(0)@binding(4)var<uniform> iResolution : u32;\n"
+// "@group(0)@binding(4)var<uniform> iResolution : u32;\n"
 // "@group(0)@binding(4)var resizeSampler:sampler;\n"
 // "@group(0)@binding(4)var<storage,read_write>vertexBuffer:array<u32,64>;\n"
 "@compute@workgroup_size(1,1,1)\n"
