@@ -218,7 +218,7 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.querySelector("#bcanvas");
-const contx=bcanvas.getContext("webgl2",{colorType:'float64',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
+const contx=bcanvas.getContext("webgl2",{colorType:'float32',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // contx.blendColor(1.0,1.0,1.0,1.0);
@@ -231,7 +231,7 @@ contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 contx.getExtension('ARB_robust_buffer_access_behavior');
 // contx.getExtension('ARB_ES3_compatibility');
 // contx.getExtension('GL_EXTENSIONS');
-contx.getExtension('GL_ALL_EXTENSIONS');
+// contx.getExtension('GL_ALL_EXTENSIONS');
 // contx.getExtension('KHR_no_error');
 // contx.getExtension('GL_REGAL_enable');
 // contx.getExtension('OES_fragment_precision_high'); // deprecated
@@ -417,7 +417,7 @@ contx.disable(gl.DITHER);
 // contx.drawingBufferColorMetadata={mode:'extended'};
 // contx.drawingBufferColorSpace='display-p3';
 
-const g=new GPUX({canvas:bcanvas,webGl:contx});
+const g=new GPUX({canvas:bcanvas,context:contx});
 const g2=new GPUX();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0);}`;
@@ -429,7 +429,7 @@ const glslAlphe1=`float AlpheV1(float a,float b,float c,float d,float e,float f,
 // const glslAlphe1=`float AlpheV1(float a,float b,float c,float d,float e,float f,float g){return((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/3.0);}`;
 // const glslAlphe1=`float AlpheV1(float a,float b,float c,float d,float e,float f,float g){return((g+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/4.0);}`;
 // const glslAlphe1=`float AlpheV1(float a,float b,float c,float d,float e,float f,float g){return((g+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
-  
+
 const glslAlphe2=`float AlpheV2(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
 
@@ -463,8 +463,8 @@ var $amax=this.constants.amax;
 var $amin=this.constants.amin;
 var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
-var alph=AlpheV1($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
-// var alph=AlpheV2($amax,$amin,$aavg,p[3]);
+// var alph=AlpheV1($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
+var alph=AlpheV2($amax,$amin,$aavg,p[3]);
 var Min=4.0*(($amax-($aavg-$amin))/2.0);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
@@ -691,8 +691,7 @@ GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,
 void renderFrame(){
 EMSCRIPTEN_RESULT ret;
 t2=steady_clock::now();
-glClear(GL_COLOR_BUFFER_BIT);
-// glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
@@ -1128,7 +1127,7 @@ uni_res=glGetUniformLocation(shd_prg,"iResolution");
 uni_mse=glGetUniformLocation(shd_prg,"iMouse");
 glUniform3f(uni_res,S,S,1.0f);
 glUniform3f(smp_chn_res,S,S,1.0f);
-glClearColor(gF,gF,gF,gF);
+glClearColor(gF0,gF0,gF0,gF);
 // glEnable(GL_CULL_FACE);
 glEnable(GL_DEPTH_TEST);
 // glDisable(GL_BLEND);
@@ -1137,7 +1136,7 @@ glEnable(GL_DEPTH_TEST);
 // glDepthFunc(GL_LESS);
 // glFrontFace(GL_CW);
 glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-// glEnable(GL_BLEND);
+glEnable(GL_BLEND);
 // glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 glBlendColor(F0,F0,F0,0.5);
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
