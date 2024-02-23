@@ -219,15 +219,7 @@ agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.querySelector("#bcanvas");
 const contx=bcanvas.getContext("webgl2",{colorType:'float32',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
-contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-// contx.blendColor(1.0,1.0,1.0,1.0);
-// contx.blendColor(1.0,1.0,1.0,0.0);
-// contx.blendColor(0.0,0.0,0.0,1.0);
-// contx.blendColor(0.0,0.0,0.0,0.0);
- // contx.blendColor(0.0,0.0,0.0,0.5);
-  // contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-// contx.blendEquationSeparate(gl.FUNC_ADD,gl.MAX);
+
 contx.getExtension('ARB_robust_buffer_access_behavior');
 // contx.getExtension('ARB_ES3_compatibility');
 // contx.getExtension('GL_EXTENSIONS');
@@ -412,7 +404,18 @@ contx.getExtension('EGL_EXT_request_priority');
 contx.getExtension('EGL_EXT_create_surface_from_window');
 contx.getExtension('EGL_EXT_surface_attachment');
 contx.getExtension('EXT_texture_storage');
-
+contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+// contx.blendColor(1.0,1.0,1.0,1.0);
+// contx.blendColor(1.0,1.0,1.0,0.0);
+// contx.blendColor(0.0,0.0,0.0,1.0);
+// contx.blendColor(0.0,0.0,0.0,0.0);
+ // contx.blendColor(0.0,0.0,0.0,0.5);
+contx.blendColor(1.0,1.0,1.0,1.0);
+contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+contx.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+  // contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+// contx.blendEquationSeparate(gl.FUNC_ADD,gl.MAX);
 contx.disable(gl.DITHER);
 // contx.drawingBufferColorMetadata={mode:'extended'};
 // contx.drawingBufferColorSpace='display-p3';
@@ -1135,10 +1138,16 @@ glEnable(GL_DEPTH_TEST);
 // glDisable(GL_SCISSOR_TEST);
 // glDepthFunc(GL_LESS);
 // glFrontFace(GL_CW);
-glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+ 
+//glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+ 
+glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
+glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
+ 
 glEnable(GL_BLEND);
 // glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-glBlendColor(F0,F0,F0,0.5);
+// glBlendColor(F0,F0,F0,0.5);
+ 
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glDisable(GL_DITHER);
 t1=steady_clock::now();
