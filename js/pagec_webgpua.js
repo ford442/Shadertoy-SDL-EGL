@@ -172,7 +172,7 @@ document.getElementById('musicBtn').addEventListener('click',function(){
 window.open('./flac');
 setTimeout(function(){
 snd();
-},1450);
+},2450);
 });
 
 const tem=document.getElementById('tim');
