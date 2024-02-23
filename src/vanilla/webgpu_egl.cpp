@@ -385,7 +385,7 @@ WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,Output
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 // EM_ASM({
-// document.getElementById('outText').innerHTML=$0;
+// document.querySelector('#outText').innerHTML=$0;
 // },WGPU_ResultBuffer.at(0,0,0)[0]);
 // wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wb.at(3,3),1,64,1);
 // std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
@@ -1243,7 +1243,7 @@ var txxts=preList[i].href;
 var Self=location.href;
 Self=Self.replace(/1ink.1ink/,"");
 txxts=txxts.replace(Self,"");
-var x=document.getElementById("sh1");
+var x=document.querySelector("#sh1");
 var option=document.createElement("option");
 option.text=txxts;
 $shds[i+1]='https://glsl.1ink.us/wgsl/'+txxts;
@@ -1329,28 +1329,28 @@ slt=tem.innerHTML;
 },16);
 });
 
-document.getElementById('uniUp').addEventListener('click',function(){
+document.querySelector('#uniUp').addEventListener('click',function(){
 Module.ccall('resUp');
 });
 
-document.getElementById('uniDown').addEventListener('click',function(){
+document.querySelector('#uniDown').addEventListener('click',function(){
 Module.ccall('resDown');
 });
 
 const pnnl=document.body;
 function Key(e){
-if(e.code=='KeyQ'){document.getElementById('startBtn').click();};
-if(e.code=='KeyE'){document.getElementById('startBtn2').click();};
-if(e.code=='KeyD'){document.getElementById('uniUp').click();};
-if(e.code=='KeyA'){document.getElementById('uniDown').click();};
-if(e.code=='KeyW'){document.getElementById('viewUp').click();};
-if(e.code=='KeyS'){document.getElementById('viewDown').click();};
-if(e.code=='KeyJ'){document.getElementById('moveLeft').click();};
-if(e.code=='KeyK'){document.getElementById('moveRight').click();};
-if(e.code=='KeyI'){document.getElementById('moveDown').click();};
-if(e.code=='KeyM'){document.getElementById('moveUp').click();};
-if(e.code=='Digit1'){document.getElementById('sizeDown').click();};
-if(e.code=='Digit3'){document.getElementById('sizeUp').click();};
+if(e.code=='KeyQ'){document.querySelector('#startBtn').click();};
+if(e.code=='KeyE'){document.querySelector('#startBtn2').click();};
+if(e.code=='KeyD'){document.querySelector('#uniUp').click();};
+if(e.code=='KeyA'){document.querySelector('#uniDown').click();};
+if(e.code=='KeyW'){document.querySelector('#viewUp').click();};
+if(e.code=='KeyS'){document.querySelector('#viewDown').click();};
+if(e.code=='KeyJ'){document.querySelector('#moveLeft').click();};
+if(e.code=='KeyK'){document.querySelector('#moveRight').click();};
+if(e.code=='KeyI'){document.querySelector('#moveDown').click();};
+if(e.code=='KeyM'){document.querySelector('#moveUp').click();};
+if(e.code=='Digit1'){document.querySelector('#sizeDown').click();};
+if(e.code=='Digit3'){document.querySelector('#sizeUp').click();};
 }
 pnnl.addEventListener('keydown',Key);
 
