@@ -496,8 +496,8 @@ t.setConstants({nblnk:nblank$,blnk:blank$$});
 var $$1=t(vv);
 for (i=0;i<65;i++){
 var j=i+1;
-// eval("$"+j+".set($$1);");
-eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
+eval("$"+j+".set($$1);");
+// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.querySelector("#wid").innerHTML,10);
