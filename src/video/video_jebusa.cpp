@@ -108,7 +108,7 @@ extern "C" {
 EM_JS(void,ma,(),{
 "use strict";
 const pnnl=document.body;
-let vv=document.querySelector("#mv");
+var vv=document.querySelector("#mv");
 let intervalBackward;
 
 function back(){
@@ -480,7 +480,7 @@ nblank$=Math.max((h$-w$)/2,0);
 la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
 sz=(h$*h$)/8;
 pointa=77*la;
-// agav=new Float32Array($H,pointa,300);
+agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
@@ -500,9 +500,9 @@ eval("$"+j+".set($$1);");
 var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.querySelector("#wid").innerHTML,10);
 h$=parseInt(document.querySelector("#hig").innerHTML,10);
-blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
-blank$=Math.max((w$-h$)/4,0);
-nblank$=Math.max((h$-w$)/2,0);
+var blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
+var blank$=Math.max((w$-h$)/4,0);
+var nblank$=Math.max((h$-w$)/2,0);
 la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
 sz=(h$*h$)/8;
 pointa=77*la;
