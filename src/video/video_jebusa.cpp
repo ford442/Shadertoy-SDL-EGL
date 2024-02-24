@@ -218,7 +218,7 @@ agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.querySelector("#bcanvas");
-const contx=bcanvas.getContext("webgl2",{colorType:'float64',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
+const contx=bcanvas.getContext("webgl2",{colorType:'float32',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 contx.blendColor(1.0,1.0,1.0,1.0);
@@ -444,30 +444,30 @@ g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 
-const R=g2.createKernel(function(tv){
-const Pa=tv[this.thread.y][this.thread.x*4];
+var R=g2.createKernel(function(tv){
+var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setImmutable(true).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setOutput([sz]);
 
-const t=g.createKernel(function(v){
-const P=v[this.thread.y][this.thread.x+this.constants.blnk];
-const av$=Ave(P[0],P[1],P[2]);
+var t=g.createKernel(function(v){
+var P=v[this.thread.y][this.thread.x+this.constants.blnk];
+var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setImmutable(true).setTactic("precision").setPipeline(true).setPrecision('single').setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]);
 
-const r=g.createKernel(function(f){
-const p=f[this.thread.y][this.thread.x];
-const $fmax=this.constants.fmax;
-const $fmin=this.constants.fmin;
-const $amax=this.constants.amax;
-const $amin=this.constants.amin;
-const $favg=this.constants.favg;
-const $aavg=this.constants.aavg;
-// const alph=AlpheV1($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
-const alph=AlpheV2($amax,$amin,$aavg,p[3]);
-const Min=4.0*(($amax-($aavg-$amin))/2.0);
-const ouT=Math.max(Min,alph);
-const aveg=Aveg(p[3],ouT);
+var r=g.createKernel(function(f){
+var p=f[this.thread.y][this.thread.x];
+var $fmax=this.constants.fmax;
+var $fmin=this.constants.fmin;
+var $amax=this.constants.amax;
+var $amin=this.constants.amin;
+var $favg=this.constants.favg;
+var $aavg=this.constants.aavg;
+// var alph=AlpheV1($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
+var alph=AlpheV2($amax,$amin,$aavg,p[3]);
+var Min=4.0*(($amax-($aavg-$amin))/2.0);
+var ouT=Math.max(Min,alph);
+var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
 }).setImmutable(true).setTactic("precision").setGraphical(true).setArgumentTypes(['HTMLVideo']).setDynamicOutput(true).setOutput([h$,h$]);
 
@@ -529,7 +529,7 @@ eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$B
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
-pointb=66*la;
+var pointb=66*la;
 Module.ccall("nanoD",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 setTimeout(function(){
 M();
