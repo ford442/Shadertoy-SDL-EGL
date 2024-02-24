@@ -499,8 +499,8 @@ var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
-// w$=parseInt(document.querySelector("#wid").innerHTML,10);
-// h$=parseInt(document.querySelector("#hig").innerHTML,10);
+w$=parseInt(document.querySelector("#wid").innerHTML,10);
+h$=parseInt(document.querySelector("#hig").innerHTML,10);
 var blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
 var blank$=Math.max((w$-h$)/4,0);
 var nblank$=Math.max((h$-w$)/2,0);
