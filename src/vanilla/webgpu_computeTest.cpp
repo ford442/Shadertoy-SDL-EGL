@@ -222,7 +222,7 @@ inline char wgl_cmp_src[2000]=
 "var sizeINf:f32=f32(sizeINu.x);\n"
 "var sizeOUTf=inputBuffer[1];\n"
 "var sizeOUTu:u32=u32(sizeOUTf);\n"
-"outputBuffer[0]=0.777f;\n"
+"outputBuffer[0]=f32(iResolution);\n"
 "outputBuffer[1]=4096.4096f;\n"
 "for(var y=0u;y<sizeOUTu;y++){\n"
 "for(var x=0u;x<sizeOUTu;x++){\n"
@@ -620,7 +620,7 @@ wtv.at(4,4)=OUTTextureView;
 
 // raN=rNd4(256);
 WGPU_InputBuffer.at(0,0,0)[0]=szef.at(0,0);
-WGPU_InputBuffer.at(0,0,0)[1]=float(1024);szef.at(0,0);
+WGPU_InputBuffer.at(0,0,0)[1]=float(1024); // szef.at(0,0);
 WGPU_InputBuffer.at(0,0,0)[2]=u64_uni.at(0,0)/22.0f;
 WGPU_InputBuffer.at(0,0,0)[3]=u64_uni.at(1,1)*0.001f;
 WGPU_InputBuffer.at(0,0,0)[4]=float(u64_uni.at(1,1));
