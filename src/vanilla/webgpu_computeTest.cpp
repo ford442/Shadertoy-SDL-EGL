@@ -639,7 +639,10 @@ frame_tensorGL.at(0,0)=data;
 // wg_size.at(0,0,0)=int(floor(std::cbrt(sze.at(0,0)*sze.at(0,0))))+1;
 // int wgs=int(floor(std::cbrt((sze.at(0,0)*sze.at(0,0))/1000)));
 wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
-
+WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
+if(WGPU_BufferStatus.at(0,0,0)!=1){
+wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
+}
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
@@ -680,13 +683,14 @@ document.querySelector('#outText').innerHTML+='Buffer at [1]:'+$1;
   // wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image,&WGPU_Mapped_Buffer,64,1,1);
 // wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image,&wb.at(3,3),1,64,1);
 // wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),wb.at(3,3),0,WGPU_ResultBuffer.at(0,0,0),sizeof(vertices));
-WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
+WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)!=1){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
-wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
+// wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
+
 // WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 //  if(WGPU_BufferStatus.at(0,0,0)!=3){
 // wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
