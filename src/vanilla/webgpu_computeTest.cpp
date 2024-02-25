@@ -211,9 +211,9 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array <f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
-// "@group(0)@binding(4)var<uniform> iResolution : u32;\n"
-// "@group(0)@binding(4)var resizeSampler:sampler;\n"
-// "@group(0)@binding(4)var<storage,read_write>vertexBuffer:array<u32,64>;\n"
+"@group(0)@binding(5)var<uniform> iResolution : u32;\n"
+"@group(0)@binding(4)var resizeSampler:sampler;\n"
+// "@group(0)@binding(6)var<storage,read_write>vertexBuffer:array<u32,64>;\n"
 "@compute@workgroup_size(1,1,1)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "var buffSizIn:f32=inputBuffer[0];\n"
@@ -398,7 +398,7 @@ WGpuBindGroupLayoutEntry bindGroupLayoutEntries[8]={};
 WGpuBindGroupLayoutEntry bindGroupLayoutEntriesB[2]={};
 WGpuBindGroupEntry bindGroupEntry[8]={};
 WGpuBindGroupEntry bindGroupEntryB[2]={};
-WGpuBufferBindingLayout bufferBindingLayout1={3};
+WGpuBufferBindingLayout bufferBindingLayout1={2};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
 WGpuBufferBindingLayout bufferBindingLayout4={2};
@@ -951,12 +951,12 @@ bindGroupLayoutEntries[4].binding=4;
 bindGroupLayoutEntries[4].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[4].type=WGPU_BIND_GROUP_LAYOUT_TYPE_SAMPLER;
 bindGroupLayoutEntries[4].layout.sampler=wsbl.at(0,0);
-    /*
+  
 bindGroupLayoutEntries[5].binding=5;
 bindGroupLayoutEntries[5].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[5].type=1;
-bindGroupLayoutEntries[5].layout.buffer=wbbl.at(1,1);
-*/
+bindGroupLayoutEntries[5].layout.buffer=wbbl.at(0,0);
+
 WGPU_BindGroupLayoutEntries.at(0,0,0)=bindGroupLayoutEntries;
 WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(wd.at(0,0),WGPU_BindGroupLayoutEntries.at(0,0,0),5);
 WGPU_ComputePipelineLayout.at(0,0,0)=wgpu_device_create_pipeline_layout(wd.at(0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
@@ -980,12 +980,12 @@ bindGroupEntry[3].resource=wtv.at(4,4);
 bindGroupEntry[4]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindGroupEntry[4].binding=4;
 bindGroupEntry[4].resource=wgpu_sampler.at(3,3);
-/*
+
 bindGroupEntry[5].binding=5;
-bindGroupEntry[5].resource=wb.at(3,3);
+bindGroupEntry[5].resource=wb.at(2,2);
 bindGroupEntry[5].bufferBindOffset=0;
-bindGroupEntry[5].bufferBindSize=sizeof(vertices);
-*/
+bindGroupEntry[5].bufferBindSize=sizeof(uint64_t);
+
 WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
 WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),5);
 WGPU_ComputePassDescriptor.at(0,0,0)=computePassDescriptor;
