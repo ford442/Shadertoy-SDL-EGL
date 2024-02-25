@@ -212,7 +212,7 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@group(0)@binding(4)var resizeSampler:sampler;\n"
-"@group(0)@binding(5)var<uniform> iResolution : u32;\n"
+"@group(0)@binding(5)var <uniform> iResolution: u32;\n"
 // "@group(0)@binding(6)var<storage,read_write>vertexBuffer:array<u32,64>;\n"
 "@compute@workgroup_size(1,1,1)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
@@ -659,7 +659,7 @@ wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Bu
 // WGPU_ResultBuffer.at(0,0,0)[1]=111.111;
 WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,64*sizeof(float));
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),64*sizeof(float));
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_Range_PointerB,0,WGPU_ResultBuffer.at(0,0,0),64*sizeof(float));
 WGPU_ResultBuffer.at(0,0,0)[2]=1024;
 WGPU_ResultBuffer.at(0,0,0)[3]=1024.1024;
 
