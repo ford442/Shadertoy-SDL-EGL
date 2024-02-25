@@ -970,7 +970,7 @@ bindGroupLayoutEntries[4].layout.sampler=wsbl.at(0,0);
   
 bindGroupLayoutEntries[5].binding=5;
 bindGroupLayoutEntries[5].visibility=WGPU_SHADER_STAGE_COMPUTE;
-bindGroupLayoutEntries[5].type=1;
+bindGroupLayoutEntries[5].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindGroupLayoutEntries[5].layout.buffer=wbbl.at(0,0);
 
 WGPU_BindGroupLayoutEntries.at(0,0,0)=bindGroupLayoutEntries;
