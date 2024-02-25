@@ -211,8 +211,8 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array <f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
-"@group(0)@binding(4)var resizeSampler : sampler;\n"
-"@group(0)@binding(5)var <uniform> iResolution : u32;\n"
+"@group(0)@binding(4)var resizeSampler:sampler;\n"
+"@group(0)@binding(5)var<uniform> iResolution : u32;\n"
 // "@group(0)@binding(6)var<storage,read_write>vertexBuffer:array<u32,64>;\n"
 "@compute@workgroup_size(1,1,1)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
@@ -659,7 +659,7 @@ wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Bu
 // WGPU_ResultBuffer.at(0,0,0)[1]=111.111;
 WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,64*sizeof(float));
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_Range_PointerB,0,WGPU_ResultBuffer.at(0,0,0),64*sizeof(float));
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),64*sizeof(float));
 WGPU_ResultBuffer.at(0,0,0)[2]=1024;
 WGPU_ResultBuffer.at(0,0,0)[3]=1024.1024;
 
@@ -892,20 +892,6 @@ WGPU_Buffers.at(1,1,1)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescript
 WGPU_Buffers.at(0,0,0)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,1));
 WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,2));
 WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,3));
-  
-  bufferDescriptor_iTime={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
-wbd.at(0,0)=bufferDescriptor_iTime;
-uni_iTime_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iTime);
-wb.at(0,0)=uni_iTime_Buffer;
-bufferDescriptor_iFrame={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
-wbd.at(1,1)=bufferDescriptor_iFrame;
-uni_iFrame_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iFrame);
-wb.at(1,1)=uni_iFrame_Buffer;
-bufferDescriptor_iResolution={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
-wbd.at(2,2)=bufferDescriptor_iResolution;
-uni_iResolution_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iResolution);
-wb.at(2,2)=uni_iResolution_Buffer;
-  
 // WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 // if(WGPU_BufferStatus.at(0,0,0)!=1){
 // wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
@@ -1059,8 +1045,6 @@ bufferDescriptor_indice={36*sizeof(uint32_t),WGPU_BUFFER_USAGE_INDEX|WGPU_BUFFER
 wbd.at(4,4)=bufferDescriptor_indice;
 indice_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
 wb.at(4,4)=indice_Buffer;
-
-  
 depthState={};
 depthState.format=WGPU_TEXTURE_FORMAT_INVALID;
 depthState.depthWriteEnabled=0;
@@ -1173,9 +1157,18 @@ iChannel0Sampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(0,0));
 wgpu_sampler.at(0,0)=iChannel0Sampler;
 samplerBindingLayout.type=WGPU_SAMPLER_BINDING_TYPE_FILTERING;
 wsbl.at(1,1)=samplerBindingLayout;
-
-
-  
+bufferDescriptor_iTime={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+wbd.at(0,0)=bufferDescriptor_iTime;
+uni_iTime_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iTime);
+wb.at(0,0)=uni_iTime_Buffer;
+bufferDescriptor_iFrame={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+wbd.at(1,1)=bufferDescriptor_iFrame;
+uni_iFrame_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iFrame);
+wb.at(1,1)=uni_iFrame_Buffer;
+bufferDescriptor_iResolution={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+wbd.at(2,2)=bufferDescriptor_iResolution;
+uni_iResolution_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iResolution);
+wb.at(2,2)=uni_iResolution_Buffer;
 bufferBindingLayoutR.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayoutR.hasDynamicOffset=0,
 bufferBindingLayoutR.minBindingSize=sizeof(uint64_t);
