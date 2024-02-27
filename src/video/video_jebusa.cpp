@@ -108,7 +108,7 @@ extern "C" {
 EM_JS(void,ma,(),{
 "use strict";
 const pnnl=document.body;
-var vv=document.querySelector("#mv");
+let vv=document.querySelector("#mv");
 let intervalBackward;
 
 function back(){
@@ -190,12 +190,12 @@ if (e.code=='KeyW'){Mov=0;stpForward();vv.pause();}
 
 pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
-var w$=parseInt(document.querySelector("#wid").innerHTML,10);
-var h$=parseInt(document.querySelector("#hig").innerHTML,10);
+let w$=parseInt(document.querySelector("#wid").innerHTML,10);
+let h$=parseInt(document.querySelector("#hig").innerHTML,10);
 let blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
 let ch$=parseInt(window.innerHeight,10);
 vv=document.querySelector("#mv");
-const $H=Module.HEAPF32.buffer;
+let $H=Module.HEAPF32.buffer;
 
 function nearestPowerOf2(n){
 if(n&(n-1)){
@@ -205,30 +205,21 @@ return n;
 }
 }
 
-var  la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
-var  pointa=77*la;
-var  agav=new Float32Array($H,pointa,300);
-var  sz=(h$*h$)/8;
-var  blank$=Math.max((w$-h$)/4,0);
-var  nblank$=Math.max((h$-w$)/2,0);
-var  avag=0.750;
-var  min=1.0;
-var  max=0.0;
+let la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
+let pointa=77*la;
+let agav=new Float32Array($H,pointa,300);
+let sz=(h$*h$)/8;
+let blank$=Math.max((w$-h$)/4,0);
+let nblank$=Math.max((h$-w$)/2,0);
+let avag=0.750;
+let min=1.0;
+let max=0.0;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.querySelector("#bcanvas");
 const contx=bcanvas.getContext("webgl2",{colorType:'float32',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
-contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-  // contx.blendColor(1.0,1.0,1.0,1.0);
-// contx.blendColor(1.0,1.0,1.0,0.0);
-// contx.blendColor(0.0,0.0,0.0,1.0);
-// contx.blendColor(0.0,0.0,0.0,0.0);
- // contx.blendColor(0.0,0.0,0.0,0.5);
-  // contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-// contx.blendEquationSeparate(gl.FUNC_ADD,gl.MAX);
-  // contx.blendEquationSeparate(gl.FUNC_ADD,gl.FUNC_SUBTRACT);
+/*  new ext list
 contx.getExtension('ARB_robust_buffer_access_behavior');
 // contx.getExtension('ARB_ES3_compatibility');
 // contx.getExtension('GL_EXTENSIONS');
@@ -413,7 +404,58 @@ contx.getExtension('EGL_EXT_request_priority');
 contx.getExtension('EGL_EXT_create_surface_from_window');
 contx.getExtension('EGL_EXT_surface_attachment');
 contx.getExtension('EXT_texture_storage');
+*/ // 'new' ext list
 
+//  'old' ext list
+gl.getExtension('WEBGL_color_buffer_float');
+gl.getExtension('WEBGL_color_buffer_half_float');
+gl.getExtension('GL_OES_texture_float_linear');
+gl.getExtension('GL_OES_texture_half_float_linear');
+gl.getExtension('GL_EXT_float_blend');
+gl.getExtension('GL_EXT_frag_depth');
+gl.getExtension('GL_EXT_shader_texture_lod');
+gl.getExtension('GL_EXT_sRGB');
+gl.getExtension('GL_EXT_blend_minmax');
+gl.getExtension('ANGLE_instanced_arrays');
+// gl.getExtension('EXT_disjoint_timer_query');
+gl.getExtension('GL_EXT_clip_cull_distance');
+// gl.getExtension('EXT_disjoint_timer_query_webgl2');
+gl.getExtension('KHR_parallel_shader_compile');
+gl.getExtension('GL_OES_draw_buffers_indexed');
+gl.getExtension('GL_OES_element_index_uint');
+gl.getExtension('GL_OES_fbo_render_mipmap');
+gl.getExtension('GL_OES_standard_derivatives');
+gl.getExtension('GL_OES_vertex_array_object');
+gl.getExtension('WEBGL_blend_equation_advanced_coherent');
+gl.getExtension('WEBGL_depth_texture');
+gl.getExtension('WEBGL_draw_buffers');
+gl.getExtension('WEBGL_provoking_vertex');
+gl.getExtension('EXT_framebuffer_sRGB');
+gl.getExtension('OES_depth32');
+gl.getExtension('GL_OES_fixed_point');
+gl.getExtension('GL_OES_shader_multisample_interpolation');
+gl.getExtension('WEBGL_webcodecs_video_frame');
+gl.getExtension('GL_OES_single_precision');
+// gl.getExtension('GL_EXT_texture_shadow_lod');
+gl.getExtension('EGL_NV_memory_attachment');
+gl.getExtension('EGL_NV_depth_nonlinear');
+gl.getExtension('EGL_EXT_gl_colorspace_display_p3');
+gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
+gl.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
+gl.getExtension('GL_ARB_multisample');
+
+contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+// contx.blendColor(1.0,1.0,1.0,1.0);
+// contx.blendColor(1.0,1.0,1.0,0.0);
+// contx.blendColor(0.0,0.0,0.0,1.0);
+// contx.blendColor(0.0,0.0,0.0,0.0);
+ // contx.blendColor(0.0,0.0,0.0,0.5);
+contx.blendColor(1.0,1.0,1.0,1.0);
+contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+contx.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+  // contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+// contx.blendEquationSeparate(gl.FUNC_ADD,gl.MAX);
 contx.disable(gl.DITHER);
 // contx.drawingBufferColorMetadata={mode:'extended'};
 // contx.drawingBufferColorSpace='display-p3';
@@ -445,18 +487,18 @@ g.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Aveg',glslAveg,{returnType:'Number'});
 g2.addNativeFunction('Ave',glslAve,{returnType:'Number'});
 
-var R=g2.createKernel(function(tv){
+let R=g2.createKernel(function(tv){
 var Pa=tv[this.thread.y][this.thread.x*4];
 return Ave(Pa[0],Pa[1],Pa[2]);
 }).setImmutable(true).setTactic("speed").setDynamicOutput(true).setOptimizeFloatMemory(true).setOutput([sz]);
 
-var t=g.createKernel(function(v){
+let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
 }).setImmutable(true).setTactic("precision").setPipeline(true).setPrecision('single').setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]);
 
-var r=g.createKernel(function(f){
+let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
 var $fmax=this.constants.fmax;
 var $fmin=this.constants.fmin;
@@ -466,7 +508,7 @@ var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 // var alph=AlpheV1($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
 var alph=AlpheV2($amax,$amin,$aavg,p[3]);
-var Min=4.0*(($amax-($aavg-$fmin))/2.0);
+var Min=4.0*(($amax-($aavg-$amin))/2.0);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
 this.color(p[0],p[1],p[2],aveg);
@@ -481,7 +523,7 @@ nblank$=Math.max((h$-w$)/2,0);
 la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
 sz=(h$*h$)/8;
 pointa=77*la;
-agav=new Float32Array($H,pointa,300);
+// agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
@@ -497,14 +539,13 @@ var $$1=t(vv);
 for (i=0;i<65;i++){
 var j=i+1;
 eval("$"+j+".set($$1);");
-// eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);$"+j+".set($$1);");
 }
 var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.querySelector("#wid").innerHTML,10);
 h$=parseInt(document.querySelector("#hig").innerHTML,10);
-var blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
-var blank$=Math.max((w$-h$)/4,0);
-var nblank$=Math.max((h$-w$)/2,0);
+blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
+blank$=Math.max((w$-h$)/4,0);
+nblank$=Math.max((h$-w$)/2,0);
 la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
 sz=(h$*h$)/8;
 pointa=77*la;
@@ -523,7 +564,7 @@ function M(){
 vv=document.querySelector("#mv");
 r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$$});
-if(T){return;}
+  if(T){return;}
 for(i=64;i>0;i--){
 var loca=$F+1;if(loca>64){loca=1;}
 var locb=$Bu+1;if(locb>64){locb=1;}
@@ -1137,10 +1178,16 @@ glEnable(GL_DEPTH_TEST);
 // glDisable(GL_SCISSOR_TEST);
 // glDepthFunc(GL_LESS);
 // glFrontFace(GL_CW);
-// glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+ 
+//glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+ 
+glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
+glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
+ 
 glEnable(GL_BLEND);
 // glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendColor(F0,F0,F0,0.5);
+ 
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 glDisable(GL_DITHER);
 t1=steady_clock::now();
