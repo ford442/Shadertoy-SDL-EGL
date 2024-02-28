@@ -698,10 +698,10 @@ wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 
 // WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-//  if(WGPU_BufferStatus.at(0,0,0)!=3){
-// wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
+if(WGPU_BufferStatus.at(0,0,0)!=3){
+wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,64*sizeof(float));  
 //wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,OutputBufferBytes);
-// }
+}
   // Render pass A (color)
 
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
