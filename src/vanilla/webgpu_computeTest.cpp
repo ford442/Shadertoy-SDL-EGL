@@ -669,8 +669,8 @@ WGPU_ResultBuffer.at(0,0,0)[2]=1024;
 WGPU_ResultBuffer.at(0,0,0)[3]=1024.1024;
 
 EM_ASM({
-document.querySelector('#outText').innerHTML='Buffer at [0]:'+$0;
-document.querySelector('#outText').innerHTML+='Buffer at [1]:'+$1;
+document.querySelector('#outText').innerHTML='Buffer at [0]:'+$0.toFixed(2);
+document.querySelector('#outText').innerHTML+='Buffer at [1]:'+$1.toFixed(2);
 // document.querySelector('#outText').innerHTML+='Buffer at [2] (int):'+$2;
 // document.querySelector('#outText').innerHTML+='Buffer at [3] (float):'+$3;
 },WGPU_ResultBuffer.at(0,0,0)[0],WGPU_ResultBuffer.at(0,0,0)[1],WGPU_ResultBuffer.at(0,0,0)[2],WGPU_ResultBuffer.at(0,0,0)[3]);
