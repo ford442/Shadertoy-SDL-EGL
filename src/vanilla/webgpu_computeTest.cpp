@@ -501,8 +501,11 @@ document.querySelector('#outText').innerHTML=$0+', '+$1;
 // std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
 }
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-if(WGPU_BufferStatus.at(0,0,0)==NULL){
+if(WGPU_BufferStatus.at(0,0,0)!=3){
+on.at(1,1)=1;
+  if(on.at(1,1)!=1){
 wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
+  }
 //wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,OutputBufferBytes);
 }
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
@@ -692,6 +695,7 @@ WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)!=1){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
+on.at(1,1)=0;
 }
   
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
@@ -1491,6 +1495,7 @@ emscripten_set_main_loop((void(*)())raf,0,0);
 // emscripten_set_main_loop_timing(2,1);
 // emscripten_request_animation_frame_loop(raf,0);
 on.at(0,0)=1;
+on.at(1,1)=0;
 return;
 };
 
