@@ -223,7 +223,7 @@ inline char wgl_cmp_src[2000]=
 "var sizeOUTf=inputBuffer[1];\n"
 "var sizeOUTu:u32=u32(sizeOUTf);\n"
 "outputBuffer[0]=f32(iResolution);\n"
-"outputBuffer[1]=4096.4096f;\n"
+"outputBuffer[1]=inputBuffer[0];\n"
 /*
 "for(var y=0u;y<sizeOUTu;y++){\n"
 "for(var x=0u;x<sizeOUTu;x++){\n"
