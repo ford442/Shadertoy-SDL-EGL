@@ -451,9 +451,9 @@ contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // contx.blendColor(0.0,0.0,0.0,1.0);
 // contx.blendColor(0.0,0.0,0.0,0.0);
  // contx.blendColor(0.0,0.0,0.0,0.5);
-contx.blendColor(1.0,1.0,1.0,1.0);
-contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-contx.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+   // contx.blendColor(1.0,1.0,1.0,1.0);
+   // contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+   // contx.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
   // contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 // contx.blendEquationSeparate(gl.FUNC_ADD,gl.MAX);
 contx.disable(gl.DITHER);
@@ -540,6 +540,7 @@ for (i=0;i<65;i++){
 var j=i+1;
 eval("$"+j+".set($$1);");
 }
+
 var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.querySelector("#wid").innerHTML,10);
 h$=parseInt(document.querySelector("#hig").innerHTML,10);
@@ -556,7 +557,7 @@ var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 pointb=66*la;
-var $B=new Float32Array($H,pointb,sz);
+$B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$$});
 var T=false;
@@ -564,7 +565,7 @@ function M(){
 vv=document.querySelector("#mv");
 r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$$});
-  if(T){return;}
+if(T){return;}
 for(i=64;i>0;i--){
 var loca=$F+1;if(loca>64){loca=1;}
 var locb=$Bu+1;if(locb>64){locb=1;}
