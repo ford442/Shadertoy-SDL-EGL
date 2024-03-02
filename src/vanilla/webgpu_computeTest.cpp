@@ -208,7 +208,7 @@ return EM_TRUE;
 
 inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,4665600>;\n"
-"@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,35000000>;\n"
+"@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,34000000>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@group(0)@binding(4)var resizeSampler:sampler;\n"
@@ -806,8 +806,8 @@ render();
 
 void ObtainedWebGpuDeviceStart(WGpuDevice resultD, void *userData){
 workgroupSize=64;
-OutputBufferUnits=35000000;
-OutputBufferBytes=35000000*4;
+OutputBufferUnits=34000000;
+OutputBufferBytes=34000000*4;
 InputBufferUnits=4665600;
 InputBufferBytes=4665600*4;
 WGPU_InputRangeSize=OutputBufferBytes;
