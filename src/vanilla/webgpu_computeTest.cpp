@@ -235,7 +235,7 @@ inline char wgl_cmp_src[2000]=
 "}"
 "}"
 "}"
-"outputBuffer[1]=color.g;\n"
+"outputBuffer[1]=inputBuffer[3]+1;\n"
 "}";
 
 const char * vertexShaderA =
