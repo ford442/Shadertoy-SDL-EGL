@@ -222,8 +222,9 @@ inline char wgl_cmp_src[2000]=
 "var sizeINf:f32=f32(sizeINu.x);\n"
 "var sizeOUTf=inputBuffer[1];\n"
 "var sizeOUTu:u32=u32(sizeOUTf);\n"
-// "outputBuffer[0]=inputBuffer[0];\n"
-// "outputBuffer[1]=inputBuffer[1];\n"
+"outputBuffer[0]=inputBuffer[0];\n"
+"outputBuffer[1]=inputBuffer[1];\n"
+/*
 "for(var y:f32=0.0;y<sizeOUTf;y=y+1.0){\n"
 "for(var x:f32=0.0;x<sizeOUTf;x=x+1.0){\n"
 "if(x*y<=sizeOUTf*sizeOUTf){\n"
@@ -235,6 +236,7 @@ inline char wgl_cmp_src[2000]=
 "}"
 "}"
 "}"
+*/
 "}";
 
 const char * vertexShaderA =
