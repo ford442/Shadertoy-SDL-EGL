@@ -241,6 +241,25 @@ inline char wgl_cmp_src[2000]=
 "outputBuffer[1]=inputBuffer[1];\n"
 "}";
 
+inline char wgl_cmp_srcB[2000]=
+"@group(0)@binding(0)var <storage,read> inputBuffer: array <f32,64>;\n"
+"@group(0)@binding(1)var <storage,read_write> outputBuffer: array <f32,64>;\n"
+"@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
+"@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
+"@group(0)@binding(4)var resizeSampler:sampler;\n"
+"@group(0) @binding(5) var <uniform> iResolution : u32;\n"
+"@compute @workgroup_size(1)\n"
+"fn main(@builtin(global_invocation_id) globalID : vec3<u32>) {\n"
+"let coords : vec2<i32> = vec2<i32>(globalID.xy);\n"
+"if (coords.x < i32(textureOUT.get_dimensions().x) &&\n"
+"coords.y < i32(textureOUT.get_dimensions().y)) { \n"
+"let color = vec4<f32>(coords.x / float(textureOUT.get_dimensions().x), \n"
+"coords.y / float(textureOUT.get_dimensions().y), \n"
+"0.0, 1.0);\n"
+"imageStore(textureOUT, coords, color);\n"
+"}\n"
+"}\n";
+
 const char * vertexShaderA =
 "@vertex\n"
 "fn main(@location(0) position: vec4<f32>,@location(1) uv: vec2<f32>) -> @builtin(position) vec4<f32> {\n"
@@ -438,7 +457,7 @@ WGpuBufferDescriptor bufferDescriptorC={};
 WGpuTextureDescriptor textureDescriptorA={};
 WGpuTextureDescriptor textureDescriptorB={};
 WGpuTextureViewDescriptor textureViewDescriptorA={};
-char * cmp_bdy=wgl_cmp_src;
+char * cmp_bdy=wgl_cmp_srcB;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
