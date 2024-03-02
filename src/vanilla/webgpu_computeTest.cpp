@@ -515,7 +515,8 @@ WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,Output
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 EM_ASM({
-document.querySelector('#outText').innerHTML=$0+', '+$1;
+document.querySelector('#outText1').innerHTML=$0;
+document.querySelector('#outText2').innerHTML=$1;
 },WGPU_ResultBuffer.at(0,0,0)[0],WGPU_ResultBuffer.at(0,0,0)[1]);
 // wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wb.at(3,3),1,64,1);
 // std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
@@ -644,6 +645,7 @@ wrpd.at(1,1)=passDesc2;
 WGPU_InputBuffer.at(0,0,0)[0]=szef.at(0,0);
 WGPU_InputBuffer.at(0,0,0)[1]=szef.at(1,1);
 WGPU_InputBuffer.at(0,0,0)[2]=float(u64_uni.at(1,1));
+WGPU_InputBuffer.at(0,0,0)[3]=EM_ASM_INT({return parseInt(document.querySelector('#outText2').innerHTML,10);});
   
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
