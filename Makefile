@@ -8,7 +8,7 @@ STDS = -std=gnu17 -std=c2x -std=c++11 -std=c++14 -std=c++17 -std=gnu++17 -std=c+
 	 -std=c++23 -std=gnu++23 -std=c++26 -std=gnu++26
 
 COMMON_FLAGS = -D__EMSCRIPTEN__ -fopenmp-simd -sSUPPORT_LONGJMP=emscripten -pthread -pipe -mextended-const \
-	 -mbulk-memory -matomics -sWASM_WORKERS=0 -sSHARED_MEMORY=0 -stdlib=libc++ \
+	 -mbulk-memory -matomics -sWASM_WORKERS=1 -sSHARED_MEMORY=1 -stdlib=libc++ \
 	 -sDISABLE_EXCEPTION_CATCHING=1 -fPIC -fPIE -finline-functions -funroll-loops \
 	 -m32 -fmerge-all-constants -ffast-math -ffinite-math-only -funsafe-math-optimizations \
 	 -fno-trapping-math -ffp-contract=off -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno \
@@ -95,6 +95,17 @@ b3_audio_sdl:
 	-sFORCE_FILESYSTEM=1 -Wno-incompatible-function-pointer-types \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--extern-post-js js/rSlider.js --extern-post-js js/slideOut.js main.o audio_sdl.o 
+
+b3_audio_safe:
+	em++ $(STDS) -c src/audio/main.cpp -O2 $(SIMD_FLAGS) $(BOOST_FLAGS)
+	em++ $(STDS) -c src/audio/audio_sdl.cpp -O2  \
+	-Wno-incompatible-function-pointer-types $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	-sUSE_SDL=2 \
+	em++ $(STDS) -o $(BIN_NAME)-safe.js -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	-sUSE_SDL=2 \
+	-sFORCE_FILESYSTEM=1 \
+	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	--post-js js/rSlider.js --post-js js/slideOut.js main.o audio_sdl.o 
 
 b3_audio_tensor:
 	em++ $(STDS) -c src/audio/main.cpp -O2 $(tCOMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
