@@ -100,7 +100,7 @@ b3_audio_safe:
 	em++ $(STDS) -c src/audio/main.cpp -O2 $(SIMD_FLAGS) $(BOOST_FLAGS)
 	em++ $(STDS) -c src/audio/audio_sdl.cpp -O2  \
 	-Wno-incompatible-function-pointer-types $(SIMD_FLAGS) $(BOOST_FLAGS) \
-	-sUSE_SDL=2 \
+	-sUSE_SDL=2
 	em++ $(STDS) -o $(BIN_NAME)-safe.js -O2 $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 \
 	-sFORCE_FILESYSTEM=1 \
