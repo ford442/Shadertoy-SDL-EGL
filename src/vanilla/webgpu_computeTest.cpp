@@ -229,7 +229,7 @@ inline char wgl_cmp_src[2000]=
 // "if(x*y<=sizeOUTf*sizeOUTf){\n"
 // "var INtexCoord:vec2<u32>=round(vec2<u32>(vec2<u32>(u32(x),u32(y))*(sizeINu/sizeOUTu)));\n"
 "var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(u32(x),u32(y))*(sizeINu/sizeOUTu));\n"
-"var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord);\n"
+"var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
 // "var colorTest:vec4<f32>=vec4<f32>(0.7,0.0,0.88,1.0);\n"
 "textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),colorTest,0);\n"
 "}"
