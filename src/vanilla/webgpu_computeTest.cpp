@@ -253,9 +253,8 @@ inline char wgl_cmp_srcB[2000]=
 "let coords : vec2<i32> = vec2<i32>(globalID.xy);\n"
 "if (coords.x < i32(inputBuffer[1]) &&\n"
 "coords.y < i32(inputBuffer[1])) { \n"
-"let color = vec4<f32>(coords.x / float(inputBuffer[1]), \n"
-"coords.y / float(inputBuffer[1]), \n"
-"0.0, 1.0);\n"
+"let color = vec4<f32>(coords.x / f32(inputBuffer[1]), \n"
+"coords.y / f32(inputBuffer[1]),0.0,1.0);\n"
 "imageStore(textureOUT, coords, color);\n"
 "}\n"
 "}\n";
