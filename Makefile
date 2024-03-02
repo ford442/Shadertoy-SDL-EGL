@@ -35,7 +35,7 @@ LINK_FLAGS = -DQUAD $(LDFLAGS) -sWASM_BIGINT=0 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_
 	 -march=native -sWASM=1 -sTOTAL_STACK=65536 -sENVIRONMENT='web,worker' -sSTRICT_JS=1 \
 	 -sGLOBAL_BASE=352321536 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2147483648 --output_eol linux -mllvm -mtune=wasm32 -wasm-enable-eh \
-	 --memory-init-file 0 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
+	 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
 
 b3_video_google_mk:
 	 em++ $(STDS) src/video/video_google_street.cpp -c $(COMMON_FLAGS) -O2 $(SIMD_FLAGS)
