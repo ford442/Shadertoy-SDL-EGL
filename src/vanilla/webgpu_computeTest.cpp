@@ -232,8 +232,8 @@ inline char wgl_cmp_src[2000]=
 "outputBuffer[(x*y*4)+3]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+3];\n"
 "}"
 "}"
-"outputBuffer[0]=sizeINu;\n"
-"outputBuffer[1]=loopx;\n"
+// "outputBuffer[0]=sizeINu;\n"
+// "outputBuffer[1]=loopx;\n"
 "}";
 
 inline char wgl_cmp_srcB[2000]=
@@ -657,12 +657,7 @@ wrpd.at(1,1)=passDesc2;
 
       // Compute Pass
 
-// raN=rNd4(256);
-WGPU_InputBuffer.at(0,0,0)[0]=szef.at(1,1);
-WGPU_InputBuffer.at(0,0,0)[1]=szef.at(0,0);
-WGPU_InputBuffer.at(0,0,0)[2]=float(u64_uni.at(1,1));
-WGPU_InputBuffer.at(0,0,0)[3]=EM_ASM_INT({return parseInt(document.querySelector('#outText2').innerHTML,10);});
-  
+
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
@@ -676,13 +671,23 @@ wtv.at(3,3)=INTextureView;
 wtv.at(4,4)=OUTTextureView;
 
 // ffram=(float *)rd_frm_f(Fnm2);
+// wg_size.at(0,0,0)=int(floor(std::cbrt(sze.at(0,0)*sze.at(0,0))))+1;
+// int wgs=int(floor(std::cbrt((sze.at(0,0)*sze.at(0,0))/1000)));
+
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 frame_tensorGL.at(0,0)=data;
-// wg_size.at(0,0,0)=int(floor(std::cbrt(sze.at(0,0)*sze.at(0,0))))+1;
-// int wgs=int(floor(std::cbrt((sze.at(0,0)*sze.at(0,0))/1000)));
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
-// wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+  
+// wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+
+  // raN=rNd4(256);
+WGPU_InputBuffer.at(0,0,0)[0]=szef.at(1,1);
+WGPU_InputBuffer.at(0,0,0)[1]=szef.at(0,0);
+WGPU_InputBuffer.at(0,0,0)[2]=float(u64_uni.at(1,1));
+WGPU_InputBuffer.at(0,0,0)[3]=EM_ASM_INT({return parseInt(document.querySelector('#outText2').innerHTML,10);});
+  
+  
+  // wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 // if(WGPU_BufferStatus.at(0,0,0)!=1){
 // wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
@@ -692,8 +697,13 @@ WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
-wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
-// wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Input_Image,&WGPU_ColorBuffer.at(0,0,0),1024,0,1,1,1);
+
+  
+//  wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
+  wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,frame_tensorGL.at(0,0),InputBufferBytes);
+
+  
+  // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Input_Image,&WGPU_ColorBuffer.at(0,0,0),1024,0,1,1,1);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),1,1,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,64*sizeof(float));
@@ -795,10 +805,10 @@ render();
 
 void ObtainedWebGpuDeviceStart(WGpuDevice resultD, void *userData){
 workgroupSize=64;
-OutputBufferUnits=64;
-OutputBufferBytes=64*4;
-InputBufferUnits=64;
-InputBufferBytes=64*4;
+OutputBufferUnits=36000000;
+OutputBufferBytes=36000000*4;
+InputBufferUnits=4665600;
+InputBufferBytes=4665600*4;
 WGPU_InputRangeSize=OutputBufferBytes;
 float * WGPU_Result_Array=new float[OutputBufferBytes];
 float * WGPU_Input_Array=new float[InputBufferBytes];
