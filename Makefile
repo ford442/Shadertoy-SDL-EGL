@@ -40,7 +40,7 @@ LINK_FLAGS = $(LDFLAGS) -sDEFAULT_TO_CXX=1 -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNC
 	 -march=haswell -sWASM=1 -sTOTAL_STACK=65536 \
 	 -sGLOBAL_BASE=352321536 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=3221225472 --output_eol linux -mllvm -mtune=wasm32 \
-	 -sMALLOC=emmalloc --memory-init-file 0 -rtlib=compiler-rt-mt -sAUTO_ARCHIVE_INDEXES=0 -wasm-enable-eh
+	 -sMALLOC=emmalloc -rtlib=compiler-rt-mt -sAUTO_ARCHIVE_INDEXES=0 -wasm-enable-eh
 
 WEBGPU_FLAGS = -sASYNCIFY=0 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -lmath.js -lhtml5.js -lint53.js
@@ -80,7 +80,7 @@ b3_compute:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb","_resUp","_resDown"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js -sMALLOC=none -sPRECISE_F32=1 \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 main_compute.o
+	 main_compute.o
 
 b3_compute_egl:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/webgpu_egl.cpp -fchar8_t -std=c++14 -ffp-contract=off -mbulk-memory -matomics \
@@ -96,7 +96,7 @@ b3_compute_egl:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb","_resUp","_resDown"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 webgpu_egl.o
+	 webgpu_egl.o
 
 b3_compute_egl_b3:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/webgpu_b3.cpp -fchar8_t -std=c++14 -ffp-contract=off -mbulk-memory -matomics \
@@ -112,7 +112,7 @@ b3_compute_egl_b3:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb","_resUp","_resDown"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --pre-js js/webgpu_b3.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 webgpu_b3.o
+	 webgpu_b3.o
 
 b3_compute_f16:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/webgpu_f16.cpp -fchar8_t -std=c++14 -ffp-contract=off -mbulk-memory -matomics \
@@ -128,7 +128,7 @@ b3_compute_f16:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb","_resUp","_resDown"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 webgpu_f16.o
+	 webgpu_f16.o
 
 b3_compute_misr:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/webgpu_misr.cpp -fchar8_t -std=c++14 -ffp-contract=off -mbulk-memory -matomics \
@@ -144,7 +144,7 @@ b3_compute_misr:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb","_resUp","_resDown","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 webgpu_misr.o
+	 webgpu_misr.o
 
 b3_compute_test:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/webgpu_computeTest.cpp -fchar8_t -std=c++14 -ffp-contract=off -mbulk-memory -matomics \
@@ -160,7 +160,7 @@ b3_compute_test:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb","_resUp","_resDown","_frm","_page_js"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 webgpu_computeTest.o
+	 webgpu_computeTest.o
 
 b3_nostatic:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/nostatic.cpp -fchar8_t -std=c++14 -ffp-contract=off -mbulk-memory -matomics \
@@ -176,7 +176,7 @@ b3_nostatic:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb","_resUp","_resDown"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 nostatic.o
+	 nostatic.o
 
 b3_drum:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_drum.cpp -fchar8_t -std=c++14 -ffp-contract=off \
@@ -190,7 +190,7 @@ b3_drum:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb","_resUp","_resDown","_tempoSet","_kickDrum","_r4nd","_pl","_get_bpm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 main_drum.o
+	 main_drum.o
 
 b3_webgpu_default:
 	 em++ -D__EMSCRIPTEN__ -fopenmp-simd src/vanilla/webgpu_default.cpp -std=c++20 -ffp-contract=off \
@@ -204,7 +204,7 @@ b3_webgpu_default:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb","_resUp","_resDown"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js -sWASM_BIGINT=1 \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 webgpu_default.o
+	 webgpu_default.o
 
 b3_vanilla_2pass:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_2pass.cpp -std=c++20 -ffp-contract=fast \
@@ -218,7 +218,7 @@ b3_vanilla_2pass:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 main_2pass.o 
+	 main_2pass.o 
 
 b3_vanilla_2pass_b:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_2pass.cpp -std=c++20 -ffp-contract=fast \
@@ -232,7 +232,7 @@ b3_vanilla_2pass_b:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 main_2pass.o 
+	 main_2pass.o 
 
 b3_vanilla_2pass_c:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_2pass.cpp -std=c++20 -ffp-contract=fast \
@@ -246,7 +246,7 @@ b3_vanilla_2pass_c:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 main_2pass.o 
+	 main_2pass.o 
 
 b3_vanilla_128:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_128f.cpp -std=c++20 -ffp-contract=off \
@@ -260,7 +260,7 @@ b3_vanilla_128:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb","_resUp","_resDown"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 main_128f.o
+	 main_128f.o
 
 b3_vanilla_cropcircle:
 	 em++ src/vanilla/wgpu_cropcircle.cpp -std=c++20 $(wGL_FLAGS) \
@@ -273,7 +273,7 @@ b3_vanilla_cropcircle:
 	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS=['startWebGPU'] \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 wgpu_cropcircle.o 
+	 wgpu_cropcircle.o 
 
 b3_vanilla_video_a:
 	 em++ src/vanilla/webgpu_video.cpp -std=c++20 $(wGL_FLAGS) \
@@ -287,7 +287,7 @@ b3_vanilla_video_a:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 webgpu_video.o 
+	 webgpu_video.o 
 
 b3_vanilla_video_b:
 	 em++ src/vanilla/webgpu_renderattach.cpp -std=c++20 $(wGL_FLAGS) \
@@ -301,7 +301,7 @@ b3_vanilla_video_b:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 webgpu_renderattach.o 
+	 webgpu_renderattach.o 
 
 b3_vanilla_render_a:
 	 em++ src/vanilla/main_render.cpp -std=c++20 \
@@ -315,7 +315,7 @@ b3_vanilla_render_a:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 main_render.o 
+	 main_render.o 
 
 b3_vanilla_render_b:
 	 em++ src/vanilla/main_render.cpp -std=c++20 \
@@ -329,7 +329,7 @@ b3_vanilla_render_b:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 main_render.o 
+	 main_render.o 
 
 b3_vanilla_render_c:
 	 em++ src/vanilla/main_render.cpp -std=c++20 \
@@ -343,7 +343,7 @@ b3_vanilla_render_c:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 main_render.o 
+	 main_render.o 
 
 b3_vanilla_webgpu:
 	 em++ -c src/vanilla/main_webgpu.cpp -std=c++20 $(BOOST_FLAGS) $(SIMD_FLAGS) 
@@ -355,7 +355,7 @@ b3_vanilla_webgpu:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-post-js src/vanilla/filesys.js --extern-post-js js/rSlider.js --extern-post-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js \
-	 --memory-init-file 0 --closure-args=--externs=lib/webgpu-closure-externs.js main_webgpu.o
+	 --closure-args=--externs=lib/webgpu-closure-externs.js main_webgpu.o
 
 b3_vanilla_webgpu2:
 	 emcc src/vanilla/main_webgpu.cpp -std=c++20 \
@@ -370,7 +370,7 @@ b3_vanilla_webgpu2:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_runWebGPU","_runWebGPU2"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 main_webgpu.o 
+	 main_webgpu.o 
 
 b3_vanilla_render:
 	 em++ src/vanilla/main_render.cpp -std=c++20 \
@@ -384,7 +384,7 @@ b3_vanilla_render:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 main_render.o 
+	 main_render.o 
 
 b3_vanilla_render2:
 	 emcc src/vanilla/main_render.cpp -std=c++20 \
@@ -400,7 +400,7 @@ b3_vanilla_render2:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 main_render.o 
+	 main_render.o 
 
 b3_glsl_render:
 	 emcc src/vanilla/glsl_main.cpp -std=c++20 \
@@ -419,7 +419,7 @@ b3_glsl_render:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 glsl_main.o glsl_load.o
+	 glsl_main.o glsl_load.o
 
 b3_glsl_render2:
 	 emcc src/vanilla/glsl_main.cpp -std=c++17 \
@@ -437,7 +437,7 @@ b3_glsl_render2:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_str","_swp","_r4nd","_ud","_uu","_vd","_vu","_ml","_mr","_mu","_md"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0 glsl_load.o glsl_main.o
+	 glsl_load.o glsl_main.o
 
 vanilla_opt_gpujs:
 	 em++ $(STDS) $(COMMON_FLAGS) src/vanilla/main_gpujs.cpp -c
@@ -457,7 +457,7 @@ b3_vanilla_icc:
 	 -sPRECISE_F32=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_icctest","_js_simd","_js_tuple_float_short","_js_tuple_float_long","_js_tuple_gl","_js_tuple_avx","_js_tuple_avx_gl","_js_Tensors","_js_double","_js_noblock"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js rSlider.js --pre-js slideOut.js \
-	 --memory-init-file 0 --closure 0
+	 --closure 0
 
 b3_vanilla_webgpu_debug:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
