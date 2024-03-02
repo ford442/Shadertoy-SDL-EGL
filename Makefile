@@ -65,7 +65,7 @@ b3_onnx:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb","_resUp","_resDown"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --memory-init-file 0
+	 
 
 b3_compute:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_compute.cpp -fchar8_t -std=c++14 -ffast-math -ffp-contract=off -mbulk-memory -matomics \
