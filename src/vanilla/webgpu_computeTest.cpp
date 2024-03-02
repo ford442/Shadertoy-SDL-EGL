@@ -228,13 +228,13 @@ inline char wgl_cmp_src[2000]=
 // "var INtexCoord:vec2<u32>=round(vec2<u32>(vec2<u32>(u32(x),u32(y))*(sizeINu/sizeOUTu)));\n"
 "var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(u32(x),u32(y))*(sizeINu/sizeOUTu));\n"
 "var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
+"outputBuffer[0]=colorTest.r;\n"
 "var color:vec4<f32>=vec4<f32>(0.0f,0.88f,0.0f,1.0f);\n"
 // "let color32u:vec4<f32>=clamp(vec4<f32>(round(color*255.0)),vec4<u32>(0u,0u,0u,0u),vec4<u32>(255u,255u,255u,255u));\n"
 "textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),colorTest);\n"
 "}"
 "}"
 "}"
-"outputBuffer[0]=colorTest.r;\n"
 "outputBuffer[1]=color.g;\n"
 "}";
 
@@ -270,6 +270,27 @@ const char * vertexShader=
 "var output : VertexOutput;\n"
 "output.Position=vec4(pos[VertexIndex],0.0f,1.0f);\n"
 "output.fragUV=uv[VertexIndex];\n"
+"return output;\n"
+"}\n";
+
+const char * vertexShaderB=
+"struct VertexOutput{\n"
+"@builtin(position) Position : vec4<f32>,\n"
+"@location(0) fragUV : vec2<f32>\n"
+"};\n"
+"@vertex\n"
+"fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
+"var pos=array<vec2<f32>,6>(\n"
+"vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(1.0f,-1.0f),\n"
+"vec2<f32>(-1.0f,-1.0f),\n"
+"vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(-1.0f,-1.0f),\n"
+"vec2<f32>(-1.0f,1.0f)\n"
+");\n"
+"var output : VertexOutput;\n"
+"output.Position=vec4(pos[VertexIndex],0.0f,1.0f);\n"
+"output.fragUV = vec2<f32>(output.Position.x + 1.0f, output.Position.y + 1.0f) * 0.5f;\n"
 "return output;\n"
 "}\n";
 
@@ -1042,7 +1063,7 @@ shaderModuleDescF={};
 fragHint.entryPointName=fragEntry;
 shaderModuleDescF.code=wgsl.at(0,0);
 // shaderModuleDescF.hint=fragHint;
-shaderModuleDescV.code=vertexShader;
+shaderModuleDescV.code=vertexShaderB;
 wsmd.at(0,0)=shaderModuleDescV;
 wsmd.at(1,1)=shaderModuleDescF;
 vs=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(0,0));
