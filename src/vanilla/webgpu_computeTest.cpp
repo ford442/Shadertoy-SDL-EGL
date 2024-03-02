@@ -668,8 +668,8 @@ std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambu
 frame_tensorGL.at(0,0)=data;
 // wg_size.at(0,0,0)=int(floor(std::cbrt(sze.at(0,0)*sze.at(0,0))))+1;
 // int wgs=int(floor(std::cbrt((sze.at(0,0)*sze.at(0,0))/1000)));
-// wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+// wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 // if(WGPU_BufferStatus.at(0,0,0)!=1){
 // wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
