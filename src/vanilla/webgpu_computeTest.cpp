@@ -815,7 +815,7 @@ wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 emscripten_get_element_css_size("canvas",&szh,&szw);
 emscripten_get_canvas_element_size("canvas",&szhI,&szwI);
 u64_siz.at(0,0)=int(szh); // (szhI/4)*4;
-szef.at(0,0)=float((szh/4.0)*4.0);
+szef.at(0,0)=floor(float((szh/4.0)*4.0));
 sze.at(0,0)=int(szh); // float((szh/4.0)*4.0);
 sze.at(0,1)=280;
 sze.at(1,1)=720;
