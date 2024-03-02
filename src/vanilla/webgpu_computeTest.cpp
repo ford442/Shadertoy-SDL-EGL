@@ -225,7 +225,7 @@ inline char wgl_cmp_src[2000]=
 // "outputBuffer[0]=inputBuffer[0];\n"
 // "outputBuffer[1]=inputBuffer[1];\n"
 "for(var y:f32=0.0;y<sizeOUTf;y=y+1.0){\n"
-"for(var x:f32=0u;x<sizeOUTf;x=x+1.0){\n"
+"for(var x:f32=0.0;x<sizeOUTf;x=x+1.0){\n"
 "if(x*y<=sizeOUTu*sizeOUTu){\n"
 "var INtexCoord:vec2<f32>=round(vec2<f32>(x,y)*(sizeINf/sizeOUTf));\n"
 "var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
