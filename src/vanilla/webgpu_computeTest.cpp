@@ -665,7 +665,8 @@ std::vector<GLubyte> data((std::istreambuf_iterator<char>(fram)),(std::istreambu
 frame_tensorGL.at(0,0)=data;
 // wg_size.at(0,0,0)=int(floor(std::cbrt(sze.at(0,0)*sze.at(0,0))))+1;
 // int wgs=int(floor(std::cbrt((sze.at(0,0)*sze.at(0,0))/1000)));
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+// wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 // if(WGPU_BufferStatus.at(0,0,0)!=1){
 // wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
@@ -754,7 +755,7 @@ wceA={};
   // Render pass B (depth)
 wceB=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(1,1)=wceB;
-  wgpu_command_encoder_copy_texture_to_texture(wce.at(1,1),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+//  wgpu_command_encoder_copy_texture_to_texture(wce.at(1,1),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 
 wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
