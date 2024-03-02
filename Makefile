@@ -42,7 +42,7 @@ LINK_FLAGS = $(LDFLAGS) -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 -sDEFAULT_T
 	 -sASSERTIONS=0 --typed-function-references --enable-reference-types \
 	 --use-preload-plugins --closure 0 --closureFriendly -logg -lvorbis -lpthread \
 	 -sWASM=1 -sTOTAL_STACK=65536 -sENVIRONMENT='web,worker' -sSTRICT_JS=1 \
-	 -sGLOBAL_BASE=352321536 -sSUPPORT_ERRNO=0 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
+	 -sGLOBAL_BASE=352321536 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2147483648 --output_eol linux -mllvm -mtune=wasm32 -march=native -wasm-enable-eh \
 	 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
 
