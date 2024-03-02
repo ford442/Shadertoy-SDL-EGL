@@ -222,20 +222,20 @@ inline char wgl_cmp_src[2000]=
 "var sizeINf:f32=f32(sizeINu.x);\n"
 "var sizeOUTf=inputBuffer[1];\n"
 "var sizeOUTu:u32=u32(sizeOUTf);\n"
-"outputBuffer[0]=inputBuffer[0];\n"
-"outputBuffer[1]=inputBuffer[1];\n"
 "for(var y:f32=0.0;y<sizeOUTf;y=y+1.0){\n"
 "for(var x:f32=0.0;x<sizeOUTf;x=x+1.0){\n"
 "if(x*y<=sizeOUTf*sizeOUTf){\n"
 // "var INtexCoord:vec2<u32>=round(vec2<u32>(vec2<u32>(u32(x),u32(y))*(sizeINu/sizeOUTu)));\n"
 "var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(u32(x),u32(y))*(sizeINu/sizeOUTu));\n"
 "var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
-// "var color:vec4<f32>=vec4<f32>(0.0f,0.88f,0.0f,1.0f);\n"
+"var color:vec4<f32>=vec4<f32>(0.0f,0.88f,0.0f,1.0f);\n"
 // "let color32u:vec4<f32>=clamp(vec4<f32>(round(color*255.0)),vec4<u32>(0u,0u,0u,0u),vec4<u32>(255u,255u,255u,255u));\n"
 "textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),colorTest);\n"
 "}"
 "}"
 "}"
+"outputBuffer[0]=colorTest.r;\n"
+"outputBuffer[1]=color.g;\n"
 "}";
 
 const char * vertexShaderA =
