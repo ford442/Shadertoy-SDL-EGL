@@ -226,7 +226,7 @@ inline char wgl_cmp_src[2000]=
 "var sizeOUTu:u32=u32(sizeOUTf);\n"
 "for(var y:f32=0.0;y<sizeOUTf;y=y+1.0){\n"
 "for(var x:f32=0.0;x<sizeOUTf;x=x+1.0){\n"
-"if(x*y<=sizeOUTf*sizeOUTf){\n"
+// "if(x*y<=sizeOUTf*sizeOUTf){\n"
 // "var INtexCoord:vec2<u32>=round(vec2<u32>(vec2<u32>(u32(x),u32(y))*(sizeINu/sizeOUTu)));\n"
 "var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(u32(x),u32(y))*(sizeINu/sizeOUTu));\n"
 "var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
@@ -236,7 +236,7 @@ inline char wgl_cmp_src[2000]=
 "textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),colorTest);\n"
 "}"
 "}"
-"}"
+// "}"
 "outputBuffer[0]=inputBuffer[0];\n"
 "outputBuffer[1]=inputBuffer[1];\n"
 "}";
