@@ -48,7 +48,7 @@ LINK_FLAGS += -DQUAD -DDOUBLE $(LDFLAGS) -sWASM_BIGINT=0 -sDEFAULT_TO_CXX=1 -sLE
 	 -march=native -sWASM=1 -sTOTAL_STACK=65536 -sENVIRONMENT='web,worker' -sSTRICT_JS=0 \
 	 -sGLOBAL_BASE=352321536 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1984mb --output_eol linux -mllvm -mtune=wasm32 -wasm-enable-eh \
-	 --memory-init-file 0 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
+	 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
 
 LINK_FLAGS_safe += $(LDFLAGS) \
 	 --use-preload-plugins --closure 0 --closureFriendly \
@@ -75,7 +75,7 @@ video_resurection_webgpua:
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_nanoD"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/fluid.js --pre-js js/flui.js --pre-js js/setUp.js --pre-js js/startUp.js -lmath.js -lhtml5.js -lint53.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --post-js js/pagec_webgpua.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --memory-init-file 0 --closure 0
+	 --post-js js/pagec_webgpua.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --closure 0
 
 video_resurection_webgpub:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
@@ -87,7 +87,7 @@ video_resurection_webgpub:
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_nanoD"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/fluid.js --pre-js js/flui.js --pre-js js/setUp.js --pre-js js/startUp.js -lmath.js -lhtml5.js -lint53.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --post-js js/pagec_webgpub.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --memory-init-file 0 --closure 0
+	 --post-js js/pagec_webgpub.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --closure 0
 
 video_resurection_webgpuc:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
@@ -99,7 +99,7 @@ video_resurection_webgpuc:
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_nanoD"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/fluid.js --pre-js js/flui.js --pre-js js/setUp.js --pre-js js/startUp.js -lmath.js -lhtml5.js -lint53.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --post-js js/pagec_webgpuc.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --memory-init-file 0 --closure 0
+	 --post-js js/pagec_webgpuc.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --closure 0
 
 video_test:
 	 em++ $(STDS) -c src/video/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
@@ -145,7 +145,7 @@ video_resurection_webgpu:
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --extern-pre-js js/fluid.js --extern-pre-js js/flui.js --extern-pre-js js/setUp.js --extern-pre-js js/startUp.js -lmath.js -lhtml5.js -lint53.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --extern-post-js js/pagec_webgpu.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js --extern-pre-js js/gpujsx.js --memory-init-file 0 --closure 0
+	 --extern-post-js js/pagec_webgpu.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js --extern-pre-js js/gpujsx.js --closure 0
 
 video_resurection_webgpu2:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
@@ -158,7 +158,7 @@ video_resurection_webgpu2:
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/fluid.js --pre-js js/flui.js --pre-js js/setUp.js --pre-js js/startUp.js -lmath.js -lhtml5.js -lint53.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 --post-js js/pagec_webgpu.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --memory-init-file 0 --closure 0
+	 --post-js js/pagec_webgpu.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --closure 0
 
 b3_video_google_llvm:
 	 em++ src/video/main_google_street.cpp -c -std=c++20 -fno-math-errno -O0 \
