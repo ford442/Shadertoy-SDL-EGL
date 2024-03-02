@@ -32,7 +32,7 @@ shutDown.postMessage({data:222});
 },3000);
   
 fll.addEventListener('message',ea=>{
-const fill=new Uint16Array(ea.data.data);
+const fill=new Uint8Array(ea.data.data);
 FS.writeFile('/snd/sample.wav',fill);
 setTimeout(function(){
 shutDown.postMessage({data:222});
