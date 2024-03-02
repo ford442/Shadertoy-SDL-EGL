@@ -214,7 +214,7 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(4)var resizeSampler:sampler;\n"
 "@group(0) @binding(5) var <uniform> iResolution : u32;\n"
 // "@group(0)@binding(6)var<storage,read_write>vertexBuffer:array<u32,64>;\n"
-"@compute@workgroup_size(1,1,1)\n"
+"@compute@workgroup_size(1,1,64)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "var buffSizIn:f32=inputBuffer[0];\n"
 "var buffSizOut:f32=inputBuffer[1];\n"
