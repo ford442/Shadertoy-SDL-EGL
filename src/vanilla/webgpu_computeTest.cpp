@@ -222,21 +222,19 @@ inline char wgl_cmp_src[2000]=
 "var sizeINf:f32=f32(sizeINu.x);\n"
 "var sizeOUTf=inputBuffer[1];\n"
 "var sizeOUTu:u32=u32(sizeOUTf);\n"
-"outputBuffer[0]=f32(iResolution);\n"
-"outputBuffer[1]=inputBuffer[0];\n"
-/*
-"for(var y=0u;y<sizeOUTu;y++){\n"
-"for(var x=0u;x<sizeOUTu;x++){\n"
-// "if(x*y<=sizeOUTu*sizeOUTu){\n"
-"var INtexCoord:vec2<u32>=vec2<u32>(x,y)/vec2<u32>(sizeINu.x,sizeINu.y);\n"
+// "outputBuffer[0]=inputBuffer[0];\n"
+// "outputBuffer[1]=inputBuffer[1];\n"
+"for(var y:f32=0.0;y<sizeOUTu;y=y+1.0){\n"
+"for(var x:f32=0u;x<sizeOUTu;x=x+1.0){\n"
+"if(x*y<=sizeOUTu*sizeOUTu){\n"
+"var INtexCoord:vec2<f32>=round(vec2<f32>(x,y)*(sizeINf/sizeOUTf));\n"
 "var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
-"var color:vec4<f32>=vec4<f32>(0.0f,0.88f,0.0f,1.0f);\n"
+// "var color:vec4<f32>=vec4<f32>(0.0f,0.88f,0.0f,1.0f);\n"
 // "let color32u:vec4<f32>=clamp(vec4<f32>(round(color*255.0)),vec4<u32>(0u,0u,0u,0u),vec4<u32>(255u,255u,255u,255u));\n"
-"textureStore(textureOUT,vec2<u32>(x,y),color);\n"
-// "}"
+"textureStore(textureOUT,vec2<u32>(x,y),colorTest);\n"
 "}"
 "}"
-*/
+"}"
 "}";
 
 const char * vertexShaderA =
@@ -622,10 +620,8 @@ wrpd.at(1,1)=passDesc2;
 
 // raN=rNd4(256);
 WGPU_InputBuffer.at(0,0,0)[0]=szef.at(0,0);
-WGPU_InputBuffer.at(0,0,0)[1]=float(1024); // szef.at(0,0);
-WGPU_InputBuffer.at(0,0,0)[2]=u64_uni.at(0,0)/22.0f;
-WGPU_InputBuffer.at(0,0,0)[3]=u64_uni.at(1,1)*0.001f;
-WGPU_InputBuffer.at(0,0,0)[4]=float(u64_uni.at(1,1));
+WGPU_InputBuffer.at(0,0,0)[1]=szef.at(1,1);
+WGPU_InputBuffer.at(0,0,0)[2]=float(u64_uni.at(1,1));
   
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
@@ -657,7 +653,7 @@ wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_Bind
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Input_Image,&WGPU_ColorBuffer.at(0,0,0),1024,0,1,1,1);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),1,1,1);
-// wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,64*sizeof(float));
 wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Output_Image,64,1,1);
@@ -1112,8 +1108,9 @@ fragState2.entryPoint="main";
 fragState2.numTargets=0;
 // fragState2.targets=&wcts.at(1,1);
 wfs.at(1,1)=fragState;
-  u64_bfrSze.at(0,0)=sze.at(1,1)*sze.at(1,1);
-WGpuBufferDescriptor bufferDescriptorIn={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
+  u64_bfrSze.at(0,0)=sze.at(0,0)*sze.at(0,0)*4;
+  u64_bfrSze.at(1,1)=sze.at(1,1)*sze.at(1,1)*4;
+WGpuBufferDescriptor bufferDescriptorIn={u64_bfrSze.at(1,1),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorOut={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 wbd.at(3,3)=bufferDescriptorIn;
 wbd.at(4,4)=bufferDescriptorOut;
