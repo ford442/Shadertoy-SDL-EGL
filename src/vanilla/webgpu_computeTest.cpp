@@ -687,7 +687,8 @@ WGPU_InputBuffer.at(0,0,0)[1]=szef.at(0,0);
   frame_tensorGL.at(0,0)[0]=szef.at(1,1);
   frame_tensorGL.at(0,0)[0]=szef.at(0,0);
 
-    
+      wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&frame_tensorGL.at(0,0),InputBufferBytes);
+
   // wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 // if(WGPU_BufferStatus.at(0,0,0)!=1){
@@ -701,7 +702,6 @@ wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_Bind
 
   
 //  wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
-  wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&frame_tensorGL.at(0,0),InputBufferBytes);
 
   
   // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Input_Image,&WGPU_ColorBuffer.at(0,0,0),1024,0,1,1,1);
