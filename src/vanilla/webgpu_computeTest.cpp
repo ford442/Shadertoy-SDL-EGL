@@ -232,8 +232,8 @@ inline char wgl_cmp_src[2000]=
 "outputBuffer[(x*y*4)+3]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+3];\n"
 "}"
 "}"
-// "outputBuffer[0]=sizeINu;\n"
-// "outputBuffer[1]=loopx;\n"
+"outputBuffer[0]=inputBuffer[420];\n"
+"outputBuffer[1]=loopx;\n"
 "}";
 
 inline char wgl_cmp_srcB[2000]=
@@ -714,8 +714,8 @@ wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,64*sizeof(float));
 wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Output_Image,sze.at(0,0),sze.at(0,0),1);
 wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image,&WGPU_Mapped_Buffer,64,1,1);
-// wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image,&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
-wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image,&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+// wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 
   /*
     //  get result for test
