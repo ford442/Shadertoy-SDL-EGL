@@ -773,7 +773,7 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 void wgpu_command_encoder_copy_texture_to_texture(WGpuCommandEncoder commandEncoder, const WGpuImageCopyTexture *source NOTNULL, const WGpuImageCopyTexture *destination NOTNULL, uint32_t copyWidth, uint32_t copyHeight _WGPU_DEFAULT_VALUE(1), uint32_t copyDepthOrArrayLayers _WGPU_DEFAULT_VALUE(1));
 */
 
-  // wgpu_queue_write_texture(wq.at(0,0),&wict.at(1,1),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(1,1),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 // wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
