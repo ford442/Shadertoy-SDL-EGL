@@ -103,8 +103,6 @@ avgFrmD(Fnum,leng,ptr,aptr);
 
 }
 
-extern "C" {
-
 EM_JS(void,ma,(),{
 "use strict";
 const pnnl=document.body;
@@ -451,11 +449,11 @@ contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // contx.blendColor(0.0,0.0,0.0,1.0);
 // contx.blendColor(0.0,0.0,0.0,0.0);
  // contx.blendColor(0.0,0.0,0.0,0.5);
-contx.blendColor(1.0,1.0,1.0,1.0);
+  // contx.blendColor(1.0,1.0,1.0,1.0);
 contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-contx.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+// contx.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
   // contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-// contx.blendEquationSeparate(gl.FUNC_ADD,gl.MAX);
+contx.blendEquationSeparate(gl.FUNC_ADD,gl.MAX);
 contx.disable(gl.DITHER);
 // contx.drawingBufferColorMetadata={mode:'extended'};
 // contx.drawingBufferColorSpace='display-p3';
@@ -587,15 +585,11 @@ return()=>{
 T=true;
 };
 }
-})
-
-}
+});
 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 static const char8_t *read_file(const char *filename);
   
-extern "C" {
-
 SDL_AudioDeviceID dev;
 struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
 
@@ -655,9 +649,6 @@ wave.spec.callback=bfr;
 opn_aud();
 return;
 }
-
-}
-
 
 GLfloat x;
 GLfloat y;
