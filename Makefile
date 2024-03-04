@@ -47,6 +47,8 @@ LINK_FLAGS = $(LDFLAGS) -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 -sDEFAULT_T
 	 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
 
 test_LINK_FLAGS = \
+	 -sTEXTDECODER=1 -sSUPPORT_BIG_ENDIAN=1 \
+
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
 	 -sASSERTIONS=0 \
 	 --use-preload-plugins --closure 0 --closureFriendly -logg -lvorbis -lpthread \
