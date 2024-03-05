@@ -103,8 +103,6 @@ avgFrmD(Fnum,leng,ptr,aptr);
 
 }
 
-extern "C" {
-
 EM_JS(void,ma,(),{
 "use strict";
 const pnnl=document.body;
@@ -535,7 +533,7 @@ eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$B
 var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
-Module.ccall("nanoD",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
 dbg_fmax=agav[$F+200];
 dbg_fmin=agav[$F+100];
 dbg_avag=agav[0];
@@ -560,13 +558,9 @@ T=true;
 }
 })
 
-}
-
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 static const char8_t *read_file(const char *filename);
   
-extern "C" {
-
 SDL_AudioDeviceID dev;
 struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
 
@@ -626,9 +620,6 @@ wave.spec.callback=bfr;
 opn_aud();
 return;
 }
-
-}
-
 
 GLfloat x;
 GLfloat y;
