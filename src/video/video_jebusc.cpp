@@ -94,7 +94,7 @@ return;
 extern "C" {
 
 void nano(int Fnum,int leng,float *ptr,float *aptr){
-avgFrm(Fnum,leng,ptr,aptr);
+avgFrm(Fnum,leng,&ptr,&aptr);
 }
 
 void nanoD(int Fnum,int leng,double *ptr,double *aptr){
@@ -540,8 +540,6 @@ dbg_avag=agav[0];
 dbg_favg=agav[$F];
 dbg_amin=agav[100];
 dbg_amax=agav[200];
-
-
  
 setTimeout(function(){
 M();
