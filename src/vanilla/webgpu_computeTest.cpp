@@ -694,7 +694,8 @@ wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 // wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Buffers.at(0,0,0),&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&WGPU_Mapped_Buffer,64,1,1);
-wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+// wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(1,1),&WGPU_Output_Image,sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
   /*
     //  get result for test
 // WGPU_ResultBuffer.at(0,0,0)[0]=1010;
@@ -946,8 +947,8 @@ WGPU_Output_Buffer.buffer=WGPU_Buffers.at(0,0,0);
 WGPU_Output_Buffer.bytesPerRow=(floor((sze.at(0,0)*4)/256)+1)*256;
 WGPU_Output_Buffer.rowsPerImage=sze.at(0,0);
 WGPU_Mapped_Buffer.buffer=WGPU_Buffers.at(2,0,2);
-WGPU_Mapped_Buffer.bytesPerRow=512;
-WGPU_Mapped_Buffer.rowsPerImage=64;
+WGPU_Mapped_Buffer.bytesPerRow=(floor((sze.at(0,0)*4)/256)+1)*256;
+WGPU_Mapped_Buffer.rowsPerImage=sze.at(0,0);
 resizeSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 resizeSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 resizeSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
