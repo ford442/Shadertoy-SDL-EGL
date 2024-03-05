@@ -204,7 +204,12 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }
 }
-
+let dbg_avag=querySelector('#dbg_avag').innerHTML;
+let dbg_amin=querySelector('#dbg_amin').innerHTML;
+let dbg_amax=querySelector('#dbg_amax').innerHTML;
+let dbg_favg=querySelector('#dbg_favg').innerHTML;
+let dbg_fmin=querySelector('#dbg_fmin').innerHTML;
+let dbg_fmax=querySelector('#dbg_fmax').innerHTML;
 let la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
 let pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
@@ -531,6 +536,15 @@ var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66*la;
 Module.ccall("nanoD",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+dbg_fmax=agav[$F+200];
+dbg_fmin=agav[$F+100];
+dbg_avag=agav[0];
+dbg_favg=favg[$F];
+dbg_amin=amin[100];
+dbg_amax=amax[200];
+
+
+ 
 setTimeout(function(){
 M();
 },16.66);
