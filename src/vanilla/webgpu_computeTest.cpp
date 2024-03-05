@@ -211,9 +211,9 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,33000000>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
-"@group(0)@binding(4)var resizeSampler: sampler;\n"
+"@group(0)@binding(4)var resizeSampler:sampler;\n"
 "@group(0) @binding(5) var <uniform> iResolution : u32;\n"
-"@compute@workgroup_size(1,1,1)\n"
+"@compute@workgroup_size(64,1,1)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "var sizeINf=inputBuffer[0];\n"
 "var loopx:u32=u32(sizeINf);\n"
@@ -694,7 +694,7 @@ wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 // wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&WGPU_Mapped_Buffer,64,1,1);
-wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+// wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 // wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
   /*
     //  get result for test
@@ -736,7 +736,7 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
   
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
-// wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
