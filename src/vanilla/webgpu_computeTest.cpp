@@ -674,11 +674,12 @@ frame_tensorGL.at(0,0)=data;
   
 // wgpu_queue_write_texture(wq.at(0,0),&wict.at(2,2),&frame_tensorGL.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
   // raN=rNd4(256);
+
+// frame_tensorGL.at(0,0)[0]=szef.at(1,1);
+// frame_tensorGL.at(0,0)[0]=szef.at(0,0);
+wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&frame_tensorGL.at(0,0),InputBufferBytes);
 WGPU_InputBuffer.at(0,0,0)[0]=szef.at(1,1);
 WGPU_InputBuffer.at(0,0,0)[1]=szef.at(0,0);
-frame_tensorGL.at(0,0)[0]=szef.at(1,1);
-frame_tensorGL.at(0,0)[0]=szef.at(0,0);
-wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&frame_tensorGL.at(0,0),InputBufferBytes);
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
