@@ -678,8 +678,8 @@ frame_tensorGL.at(0,0)=data;
 // frame_tensorGL.at(0,0)[0]=szef.at(1,1);
 // frame_tensorGL.at(0,0)[0]=szef.at(0,0);
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&frame_tensorGL.at(0,0),InputBufferBytes);
-WGPU_InputBuffer.at(0,0,0)[0]=szef.at(1,1);
-WGPU_InputBuffer.at(0,0,0)[1]=szef.at(0,0);
+WGPU_InputBuffer.at(0,0,0)[0]=sze.at(1,1);
+WGPU_InputBuffer.at(0,0,0)[1]=sze.at(0,0);
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
@@ -692,10 +692,10 @@ wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,64*sizeof(float));
 // wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Output_Image,64,1,1);
 // wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
-wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
-wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&WGPU_Mapped_Buffer,64,1,1);
-// wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(1,1),&wict.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+  // wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
+  // wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&WGPU_Mapped_Buffer,64,1,1);
+  // wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(1,1),&WGPU_Output_Buffer,sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
   /*
     //  get result for test
 // WGPU_ResultBuffer.at(0,0,0)[0]=1010;
