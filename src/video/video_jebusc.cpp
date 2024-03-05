@@ -539,9 +539,9 @@ Module.ccall("nanoD",null,["Number","Number","Number","Number"],[$F,sz,pointb,po
 dbg_fmax=agav[$F+200];
 dbg_fmin=agav[$F+100];
 dbg_avag=agav[0];
-dbg_favg=favg[$F];
-dbg_amin=amin[100];
-dbg_amax=amax[200];
+dbg_favg=agav[$F];
+dbg_amin=agav[100];
+dbg_amax=agav[200];
 
 
  
