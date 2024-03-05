@@ -96,11 +96,11 @@ b3_audio:
 	--pre-js rSlider.js --pre-js slideOut.js
 
 b3_audio_sdl:
-	em++ $(STDS) -c src/audio/main.cpp -O2 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	em++ $(STDS) -c src/audio/audio_sdl.cpp -O2 $(COMMON_FLAGS) \
+	em++ $(STDS) -c src/audio/main.cpp -O0 $(COMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
+	em++ $(STDS) -c src/audio/audio_sdl.cpp -O0 $(COMMON_FLAGS) \
 	-Wno-incompatible-function-pointer-types $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0
-	em++ $(STDS) -o $(BIN_NAME).js -O2 $(COMMON_FLAGS) $(LINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	em++ $(STDS) -o $(BIN_NAME).js -O0 $(COMMON_FLAGS) $(LINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
 	-sFORCE_FILESYSTEM=1 -Wno-incompatible-function-pointer-types \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
