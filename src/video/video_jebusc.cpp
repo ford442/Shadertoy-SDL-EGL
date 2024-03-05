@@ -204,12 +204,12 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }
 }
-let dbg_avag=querySelector('#dbg_avag').innerHTML;
-let dbg_amin=querySelector('#dbg_amin').innerHTML;
-let dbg_amax=querySelector('#dbg_amax').innerHTML;
-let dbg_favg=querySelector('#dbg_favg').innerHTML;
-let dbg_fmin=querySelector('#dbg_fmin').innerHTML;
-let dbg_fmax=querySelector('#dbg_fmax').innerHTML;
+let dbg_avag=document.querySelector('#dbg_avag').innerHTML;
+let dbg_amin=document.querySelector('#dbg_amin').innerHTML;
+let dbg_amax=document.querySelector('#dbg_amax').innerHTML;
+let dbg_favg=document.querySelector('#dbg_favg').innerHTML;
+let dbg_fmin=document.querySelector('#dbg_fmin').innerHTML;
+let dbg_fmax=document.querySelector('#dbg_fmax').innerHTML;
 let la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
 let pointa=77*la;
 let agav=new Float32Array($H,pointa,300);
