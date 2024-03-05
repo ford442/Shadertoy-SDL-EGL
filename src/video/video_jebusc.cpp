@@ -94,7 +94,7 @@ return;
 extern "C" {
 
 void nano(int Fnum,int leng,float *ptr,float *aptr){
-avgFrm(Fnum,leng,&ptr,&aptr);
+avgFrm(Fnum,leng,ptr,aptr);
 }
 
 void nanoD(int Fnum,int leng,double *ptr,double *aptr){
