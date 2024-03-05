@@ -96,8 +96,9 @@ ONNXTensorElementDataType inputType=inputTensorInfo.GetElementType();
 std::vector<int64_t>inputDims=inputTensorInfo.GetShape();
 if (inputDims.at(0) == -1){
 std::cout << "Got dynamic batch size. Setting input batch size to " << batchSize << "." << std::endl;
-inputDims.at(0)=floats.size();
-inputDims.at(1)=max_wordlength;
+inputDims.at(0)=1;
+inputDims.at(1)=3;
+inputDims.at(2)=96;
 }
 auto outputName=sesh.GetOutputNameAllocated(0,allocator);
 //   //   const char* outputName=sesh.Ort::detail::GetOutputName(0, allocator);
@@ -124,12 +125,13 @@ std::cout << "Input Name: " << inputName << std::endl;
 std::cout << "Input Type: " << inputType << std::endl;
 std::cout << "Input Dimensions 1: " <<  std::to_string(inputDims.at(0)) << std::endl;
 std::cout << "Input Dimensions 2: " <<  std::to_string(inputDims.at(1)) << std::endl;
-// std::cout << "Input Dimensions 3: " <<  std::to_string(inputDims.at(2)) << std::endl;
+std::cout << "Input Dimensions 3: " <<  std::to_string(inputDims.at(2)) << std::endl;
 std::cout << "Output Name: " << outputName << std::endl;
 std::cout << "Output Type: " << outputType << std::endl;
 std::cout << "Output Dimensions 1: " <<  std::to_string(outputDims.at(0)) << std::endl;
 std::cout << "Output Dimensions 2: " <<  std::to_string(outputDims.at(1)) << std::endl;
 std::cout << "Output Dimensions 3: " <<  std::to_string(outputDims.at(2)) << std::endl;
+std::cout << "Output Dimensions 4: " <<  std::to_string(outputDims.at(3)) << std::endl;
 std::cout << "Number of Input Nodes: " << numInputNodes << std::endl;
 std::cout << "Number of Output Nodes: " << numOutputNodes << std::endl;
 
