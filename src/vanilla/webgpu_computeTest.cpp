@@ -173,6 +173,7 @@ wicb_tensor wicb=wicb_tensor{3,3};
 js_data_tensor frame_tensor=js_data_tensor{2,2};
 js_data_tensorf frame_tensorf=js_data_tensorf{2,2};
 js_data_tensorGL frame_tensorGL=js_data_tensorGL{2,2};
+js_data_tensor64 frame_tensor64=js_data_tensor64{2,2};
 
 /*
 mouse_tensor mms=mouse_tensor{2,2};
@@ -670,7 +671,7 @@ wtv.at(4,4)=OUTTextureView;
 
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-frame_tensorGL.at(0,0)=data;
+frame_tensor.at(0,0)=data;
   
   // raN=rNd4(256);
 
