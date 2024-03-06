@@ -244,6 +244,8 @@ inline char wgl_cmp_srcB[2000]=
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@group(0)@binding(4)var resizeSampler:sampler;\n"
 "@group(0) @binding(5) var <uniform> iResolution : u32;\n"
+  // "@group(0) @binding(6) var videoTexture : texture_2d <f32>;\n"
+
 "@compute @workgroup_size(1)\n"
 "fn main(@builtin(global_invocation_id) globalID : vec3<u32>) {\n"
 "let coords : vec2<i32> = vec2<i32>(globalID.xy);\n"
@@ -1062,7 +1064,7 @@ shaderModuleDescF={};
 fragHint.entryPointName=fragEntry;
 shaderModuleDescF.code=wgsl.at(0,0);
 // shaderModuleDescF.hint=fragHint;
-shaderModuleDescV.code=vertexShaderB;
+shaderModuleDescV.code=vertexShader;
 wsmd.at(0,0)=shaderModuleDescV;
 wsmd.at(1,1)=shaderModuleDescF;
 vs=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(0,0));
