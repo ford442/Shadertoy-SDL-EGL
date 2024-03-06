@@ -57,6 +57,8 @@ for(int i=33;i<65;i++){
 maxSum+=aptr[i+200];
 }
 aptr[200]=maxSum/32;
+ std::cout << maxSum/32 << std::endl;
+
 return;
 }
 
