@@ -126,7 +126,7 @@ b3_audio_tensor:
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
 	-sFORCE_FILESYSTEM=1 -Wno-incompatible-function-pointer-types \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	--extern-post-js js/rSlider.js --extern-post-js js/slideOut.js main.o audio_sdl.o libonnxruntime_webassembly.a
+	--extern-post-js js/rSlider.js --extern-post-js js/slideOut.js main.o audio_tensor.o libonnxruntime_webassembly.a
 
 b3_audio_lab:
 	em++ -c src/audio/main.cpp -O0 $(SIMD_FLAGS) $(BOOST_FLAGS)
