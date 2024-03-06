@@ -2,6 +2,13 @@
 #include "../../include/shader/intrins.hpp"
 #include "../../onnxruntime/include/onnxruntime/core/session/onnxruntime_cxx_api.h"
 
+template <typename T>
+T vectorProduct(const std::vector<T>& v){
+return accumulate(v.begin(),v.end(),1,std::multiplies<T>());
+}
+
+using namespace std;
+
 extern "C"{  
   
 EM_BOOL pl();
@@ -137,6 +144,89 @@ snd_pos(sound_pos.at(0,0)+len);
 // });
 // }
 return;
+}
+
+const static inline boost::function<const EM_BOOL()>ort=[](){
+Ort::AllocatorWithDefaultOptions allocator;
+std::cout << "got ORT allocator" << std::endl;
+size_t numInputNodes=sesh.GetInputCount();
+size_t numOutputNodes=sesh.GetOutputCount();
+std::cout << "got ORT nodes" << std::endl;
+std::cout << "input ORT nodes" << numInputNodes << std::endl;
+std::cout << "output ORT nodes" << numOutputNodes << std::endl;
+auto inputName=sesh.GetInputNameAllocated(0,allocator);
+// const char* inputName = session.Ort::detail::GetInputName(0, allocator);
+std::cout << "got ORT input" << std::endl;
+Ort::TypeInfo inputTypeInfo=sesh.GetInputTypeInfo(0);
+auto inputTensorInfo=inputTypeInfo.GetTensorTypeAndShapeInfo();
+ONNXTensorElementDataType inputType=inputTensorInfo.GetElementType();
+std::vector<int64_t>inputDims=inputTensorInfo.GetShape();
+if (inputDims.at(0) == -1){
+std::cout << "Got dynamic batch size. Setting input batch size to " << batchSize << "." << std::endl;
+inputDims.at(0)=1;
+inputDims.at(1)=3;
+inputDims.at(2)=96;
+}
+auto outputName=sesh.GetOutputNameAllocated(0,allocator);
+//   //   const char* outputName=sesh.Ort::detail::GetOutputName(0, allocator);
+Ort::TypeInfo outputTypeInfo=sesh.GetOutputTypeInfo(0);
+auto outputTensorInfo=outputTypeInfo.GetTensorTypeAndShapeInfo();
+ONNXTensorElementDataType outputType=outputTensorInfo.GetElementType();
+std::vector<int64_t>outputDims=outputTensorInfo.GetShape();
+	std::cout << ".at(0)" << outputDims.at(0) << "." << std::endl;
+	std::cout << ".at(1)" << outputDims.at(1) << "." << std::endl;
+	std::cout << ".at(2)" << outputDims.at(2) << "." << std::endl;
+/*
+if (outputDims.at(0) == -1){
+std::cout << "Got dynamic batch size. Setting output batch size to "
+<< batchSize << "." << std::endl;
+outputDims.at(0)=batchSize;
+}
+*/
+outputDims.at(0)=1;
+outputDims.at(1)=3;
+outputDims.at(2)=768;
+outputDims.at(3)=768;
+std::cout << "Input Name: " << inputName << std::endl;
+std::cout << "Input Type: " << inputType << std::endl;
+std::cout << "Input Dimensions 1: " <<  std::to_string(inputDims.at(0)) << std::endl;
+std::cout << "Input Dimensions 2: " <<  std::to_string(inputDims.at(1)) << std::endl;
+std::cout << "Input Dimensions 3: " <<  std::to_string(inputDims.at(2)) << std::endl;
+std::cout << "Output Name: " << outputName << std::endl;
+std::cout << "Output Type: " << outputType << std::endl;
+std::cout << "Output Dimensions 1: " <<  std::to_string(outputDims.at(0)) << std::endl;
+std::cout << "Output Dimensions 2: " <<  std::to_string(outputDims.at(1)) << std::endl;
+std::cout << "Output Dimensions 3: " <<  std::to_string(outputDims.at(2)) << std::endl;
+std::cout << "Output Dimensions 4: " <<  std::to_string(outputDims.at(3)) << std::endl;
+std::cout << "Number of Input Nodes: " << numInputNodes << std::endl;
+std::cout << "Number of Output Nodes: " << numOutputNodes << std::endl;
+size_t inputTensorSize=vectorProduct(inputDims);
+std::cout << "setting inputTensorSize:" << inputTensorSize << std::endl;
+std::vector<float> inputTensorValues(inputTensorSize);
+std::cout << "setting inputTensorValues " <<  std::endl;
+for (int64_t i = 0; i < batchSize; ++i)
+{
+std::copy(floats.begin(),floats.end(),inputTensorValues.begin()+i*inputTensorSize);
+}
+size_t outputTensorSize=vectorProduct(outputDims);
+std::cout << "setting outputTensorSize " <<  std::endl;
+  //  589824 ?
+std::vector<float> outputTensorValues(outputTensorSize);
+std::cout << "setting outputTensorValues " <<  std::endl;
+std::string text_prompt="two birds";
+std::vector<float>text_prompt_vector;
+for(char c : text_prompt){
+text_prompt_vector.push_back(c);
+}
+Ort::MemoryInfo memoryInfo=Ort::MemoryInfo::CreateCpu(OrtAllocatorType::OrtArenaAllocator,OrtMemTypeCPU);
+std::cout << "Establishing memoryInfo" << std::endl;
+std::vector<Ort::Value>inputTensors;
+std::vector<Ort::Value>outputTensors;
+// Ort::Value outputTensors{nullptr};
+inputTensors.push_back(Ort::Value::CreateTensor<float>(memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),4));
+outputTensors.push_back(Ort::Value::CreateTensor<float>(memoryInfo,outputTensorValues.data(),outputTensorSize,&outputDims.at(0),4));
+std::cout << "Establishing Tensors" << std::endl;
+return EM_TRUE;
 }
 
 const boost::function<EM_BOOL()>plt=[this](){
