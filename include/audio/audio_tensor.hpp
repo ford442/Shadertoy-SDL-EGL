@@ -147,10 +147,11 @@ return;
 }
 
 const static inline boost::function<const EM_BOOL()>ort=[](){
+std::vector<int64_t>inputDims;
 Ort::AllocatorWithDefaultOptions allocator;
 std::cout << "got ORT allocator" << std::endl;
 if (inputDims.at(0) == -1){
-std::cout << "Got dynamic batch size. Setting input batch size to " << batchSize << "." << std::endl;
+std::cout << "Got dynamic batch size. Setting input batch size to " << 1 << "." << std::endl;
 inputDims.at(0)=1;
 inputDims.at(1)=3;
 inputDims.at(2)=96;
@@ -161,7 +162,7 @@ std::vector<float> inputTensorValues(inputTensorSize);
 std::cout << "setting inputTensorValues " <<  std::endl;
 std::vector<float>floats={7.0f,7.0f,1.0f,1.0f,10.0f};
 
-for (int64_t i = 0; i < batchSize; ++i)
+for (int64_t i = 0; i < 1; ++i)
 {
 std::copy(floats.begin(),floats.end(),inputTensorValues.begin()+i*inputTensorSize);
 }
@@ -176,7 +177,7 @@ std::vector<Ort::Value>inputTensors;
 inputTensors.push_back(Ort::Value::CreateTensor<float>(memoryInfo,inputTensorValues.data(),inputTensorSize,&inputDims.at(0),4));
 std::cout << "Establishing Tensor" << std::endl;
 return EM_TRUE;
-}
+};
 
 const boost::function<EM_BOOL()>plt=[this](){
 ::boost::tuples::tie(sound,sound_pos,sound_pos_u);
