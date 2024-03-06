@@ -211,7 +211,7 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,4665600>;\n"
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,33000000>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
-"@group(0)@binding(3)var textureOUT: texture_storage_2d <bgra8unorm,write>;\n"
+"@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@group(0)@binding(4)var resizeSampler:sampler;\n"
 "@group(0) @binding(5) var <uniform> iResolution : u32;\n"
 "@compute@workgroup_size(64,1,1)\n"
@@ -824,9 +824,9 @@ canvasFormat=navigator_gpu_get_preferred_canvas_format();
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RG11B10UFLOAT;
 // canvasFormat=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
-wtf.at(0,0)=canvasFormat;
-wtf.at(3,3)=canvasFormat;
-wtf.at(4,4)=canvasFormat;
+wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
+wtf.at(3,3)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
+wtf.at(4,4)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 // wtf.at(3,3)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
 canvasViewFormats[0]={wtf.at(3,3)};
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
