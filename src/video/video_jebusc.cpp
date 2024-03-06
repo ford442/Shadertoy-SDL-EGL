@@ -97,16 +97,18 @@ extern "C" {
 
 void nano(int Fnum,int leng,float *ptr,float *aptr){
 avgFrm(Fnum,leng,ptr,aptr);
+return;
 }
 
 void nanoD(int Fnum,int leng,double *ptr,double *aptr){
 avgFrmD(Fnum,leng,ptr,aptr);
+return;
 }
 
 }
 
 EM_JS(void,ma,(),{
-"use strict";
+ // "use strict";
 const pnnl=document.body;
 let vv=document.querySelector("#mv");
 let intervalBackward;
