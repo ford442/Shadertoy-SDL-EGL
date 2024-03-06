@@ -48,9 +48,7 @@ LINK_FLAGS = $(LDFLAGS) -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 -sDEFAULT_T
 
 test_LINK_FLAGS = \
 	 -sTEXTDECODER=2 \
-	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
-	 -sASSERTIONS=0 \
-	 --use-preload-plugins --closure 0 --closureFriendly -logg -lvorbis -lpthread \
+	 --use-preload-plugins --closure 0 --closureFriendly -logg -lvorbis \
 	 -sWASM=1 -sTOTAL_STACK=65536 -sENVIRONMENT='web,worker' -sSTRICT_JS=1 \
 	 -sGLOBAL_BASE=352321536 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2147483648 --output_eol linux -mllvm -mtune=wasm32 -march=native -wasm-enable-eh \
@@ -122,7 +120,7 @@ b3_audio_tensor:
 	em++ $(STDS) -c src/audio/audio_tensor.cpp -O2 \
 	-Wno-incompatible-function-pointer-types $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0
-	em++ $(STDS) -o $(BIN_NAME)-tnsr.js -O2 $(tLINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
+	em++ $(STDS) -o $(BIN_NAME)-tnsr.js -O2 $(test_LINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
 	-sFORCE_FILESYSTEM=1 -Wno-incompatible-function-pointer-types \
 	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
