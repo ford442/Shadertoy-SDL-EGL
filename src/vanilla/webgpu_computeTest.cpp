@@ -214,7 +214,9 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@group(0)@binding(4)var resizeSampler:sampler;\n"
 "@group(0) @binding(5) var <uniform> iResolution : u32;\n"
-"@compute@workgroup_size(64,1,1)\n"
+"@group(0) @binding(6) var videoTexture : texture_2d <f32>;\n"
+
+"@compute@workgroup_size(1,1,1)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "var sizeINf=inputBuffer[0];\n"
 "var loopx:u32=u32(sizeINf);\n"
@@ -244,7 +246,6 @@ inline char wgl_cmp_srcB[2000]=
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@group(0)@binding(4)var resizeSampler:sampler;\n"
 "@group(0) @binding(5) var <uniform> iResolution : u32;\n"
-  // "@group(0) @binding(6) var videoTexture : texture_2d <f32>;\n"
 
 "@compute @workgroup_size(1)\n"
 "fn main(@builtin(global_invocation_id) globalID : vec3<u32>) {\n"
@@ -1006,8 +1007,12 @@ bindGroupLayoutEntries[5].binding=5;
 bindGroupLayoutEntries[5].visibility=WGPU_SHADER_STAGE_COMPUTE;
 bindGroupLayoutEntries[5].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 bindGroupLayoutEntries[5].layout.buffer=wbbl.at(0,0);
+bindGroupLayoutEntries[6].binding=6;
+bindGroupLayoutEntries[6].visibility=WGPU_SHADER_STAGE_COMPUTE;
+bindGroupLayoutEntries[6].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
+bindGroupLayoutEntries[6].layout.texture=wtbl.at(1,1);
 WGPU_BindGroupLayoutEntries.at(0,0,0)=bindGroupLayoutEntries;
-WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(wd.at(0,0),WGPU_BindGroupLayoutEntries.at(0,0,0),6);
+WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(wd.at(0,0),WGPU_BindGroupLayoutEntries.at(0,0,0),7);
 WGPU_ComputePipelineLayout.at(0,0,0)=wgpu_device_create_pipeline_layout(wd.at(0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
 WGPU_ComputePipeline.at(0,0,0)=wgpu_device_create_compute_pipeline(wd.at(0,0),WGPU_ComputeModule.at(0,0,0),Entry,WGPU_ComputePipelineLayout.at(0,0,0),NULL,0);
 bindGroupEntry[0]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
@@ -1033,8 +1038,11 @@ bindGroupEntry[5].binding=5;
 bindGroupEntry[5].resource=wb.at(2,2);
 bindGroupEntry[5].bufferBindOffset=0;
 bindGroupEntry[5].bufferBindSize=sizeof(uint64_t);
+bindGroupEntry[6]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
+bindGroupEntry[6].binding=6;
+bindGroupEntry[6].resource=wtv.at(2,2);
 WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
-WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),6);
+WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),7);
 WGPU_ComputePassDescriptor.at(0,0,0)=computePassDescriptor;
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(wd.at(0,0));
 multiSamp={};
