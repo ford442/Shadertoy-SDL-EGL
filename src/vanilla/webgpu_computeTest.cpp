@@ -214,7 +214,7 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@group(0)@binding(4)var resizeSampler: sampler;\n"
 "@group(0)@binding(5)var <uniform> iResolution: u32;\n"
-"@group(0)@binding(6)var videoTexture: texture_2d <f32>;\n"
+// "@group(0)@binding(6)var videoTexture: texture_2d <f32>;\n"
 "@compute@workgroup_size(1,1,1)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "var sizeINf=inputBuffer[0];\n"
