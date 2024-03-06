@@ -119,7 +119,7 @@ b3_audio_safe:
 
 b3_audio_tensor:
 	em++ $(STDS) -c src/audio/main.cpp -O2 $(tCOMMON_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS)
-	em++ $(STDS) -c src/audio/audio_sdl.cpp -O2 $(tCOMMON_FLAGS) \
+	em++ $(STDS) -c src/audio/audio_tensor.cpp -O2 $(tCOMMON_FLAGS) \
 	-Wno-incompatible-function-pointer-types $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0
 	em++ $(STDS) -o $(BIN_NAME)-tnsr.js -O2 $(tCOMMON_FLAGS) $(tLINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
