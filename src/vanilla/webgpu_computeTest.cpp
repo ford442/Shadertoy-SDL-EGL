@@ -257,15 +257,15 @@ inline char wgl_cmp_srcB[2000]=
 "}\n";
 
 inline char wgl_cmp_srcC[2000]=
-"@group(0) @binding(0) var textureIN: texture_2d<f32>;\n"
-"@group(0) @binding(1) var textureOUT: texture_storage_2d<rgba8unorm, write>;\n"
-"@compute @workgroup_size(8, 8)\n"
-"fn computeStuff(@builtin(global_invocation_id) globalID: vec3<u32>) {\n"
-"let inputSize = textureDimensions(textureIN);\n"
-"let outputSize = textureDimensions(textureOUT);\n"
+"@group(0)@binding(2)var textureIN: texture_2d<f32>;\n"
+"@group(0)@binding(3)var textureOUT: texture_storage_2d<rgba8unorm, write>;\n"
+"@compute @workgroup_size(8,8)\n"
+"fn computeStuff(@builtin(global_invocation_id)globalID: vec3<u32>) {\n"
+"let inputSize=textureDimensions(textureIN);\n"
+"let outputSize=textureDimensions(textureOUT);\n"
     // Scale factors
-"let scaleX = f32(inputSize.x) / f32(outputSize.x);\n"
-"let scaleY = f32(inputSize.y) / f32(outputSize.y);\n"
+"let scaleX=f32(inputSize.x)/f32(outputSize.x);\n"
+"let scaleY=f32(inputSize.y)/f32(outputSize.y);\n"
     // Calculate corresponding input pixel coordinate 
 "let inputX = clamp(i32(f32(globalID.x) * f32(scaleX)), i32(0), i32(inputSize.x - 1));\n"
 "let inputY = clamp(i32(f32(globalID.y) * f32(scaleY)), i32(0), i32(inputSize.y - 1));\n"
