@@ -261,8 +261,8 @@ inline char wgl_cmp_srcC[2000]=
 "@group(0) @binding(1) var textureOUT: texture_storage_2d<rgba8unorm, write>;\n"
 "@compute @workgroup_size(8, 8)\n"
 "fn main(@builtin(global_invocation_id) globalID: vec3<u32>) {\n"
-"let inputSize = textureDimensions(textureIN, 0);\n"
-"let outputSize = textureDimensions(textureOUT, 0);\n"
+"let inputSize = textureDimensions(textureIN);\n"
+"let outputSize = textureDimensions(textureOUT);\n"
     // Scale factors
 "let scaleX = float(inputSize.x) / float(outputSize.x);\n"
 "let scaleY = float(inputSize.y) / float(outputSize.y);\n"
