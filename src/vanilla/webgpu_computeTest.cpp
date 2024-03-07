@@ -246,7 +246,7 @@ inline char wgl_cmp_srcB[2000]=
 "@group(0)@binding(4)var resizeSampler:sampler;\n"
 "@group(0) @binding(5) var <uniform> iResolution : u32;\n"
 "@compute @workgroup_size(1)\n"
-"fn main(@builtin(global_invocation_id) globalID : vec3<u32>) {\n"
+"fn computeStuff(@builtin(global_invocation_id) globalID : vec3<u32>) {\n"
 "let coords : vec2<i32> = vec2<i32>(globalID.xy);\n"
 "if (coords.x < i32(inputBuffer[1]) &&\n"
 "coords.y < i32(inputBuffer[1])) { \n"
@@ -260,7 +260,7 @@ inline char wgl_cmp_srcC[2000]=
 "@group(0) @binding(0) var textureIN: texture_2d<f32>;\n"
 "@group(0) @binding(1) var textureOUT: texture_storage_2d<rgba8unorm, write>;\n"
 "@compute @workgroup_size(8, 8)\n"
-"fn main(@builtin(global_invocation_id) globalID: vec3<u32>) {\n"
+"fn computeStuff(@builtin(global_invocation_id) globalID: vec3<u32>) {\n"
 "let inputSize = textureDimensions(textureIN);\n"
 "let outputSize = textureDimensions(textureOUT);\n"
     // Scale factors
