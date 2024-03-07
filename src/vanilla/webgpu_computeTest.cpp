@@ -245,7 +245,6 @@ inline char wgl_cmp_srcB[2000]=
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@group(0)@binding(4)var resizeSampler:sampler;\n"
 "@group(0) @binding(5) var <uniform> iResolution : u32;\n"
-
 "@compute @workgroup_size(1)\n"
 "fn main(@builtin(global_invocation_id) globalID : vec3<u32>) {\n"
 "let coords : vec2<i32> = vec2<i32>(globalID.xy);\n"
@@ -256,6 +255,24 @@ inline char wgl_cmp_srcB[2000]=
 "textureStore(textureOUT, coords, color);\n"
 "}\n"
 "}\n";
+
+inline char wgl_cmp_srcC[2000]=
+"@group(0) @binding(0) var textureIN: texture_2d<f32>;\n"
+"@group(0) @binding(1) var textureOUT: texture_storage_2d<rgba8unorm, write>;\n"
+"@compute @workgroup_size(8, 8)\n"
+"fn main(@builtin(global_invocation_id) globalID: vec3<u32>) {\n"
+"let inputSize = textureDimensions(textureIN, 0);\n"
+"let outputSize = textureDimensions(textureOUT, 0);\n"
+    // Scale factors
+"let scaleX = float(inputSize.x) / float(outputSize.x);\n"
+"let scaleY = float(inputSize.y) / float(outputSize.y);\n"
+    // Calculate corresponding input pixel coordinate 
+"let inputX = clamp(int(globalID.x * scaleX), 0, inputSize.x - 1);\n"
+"let inputY = clamp(int(globalID.y * scaleY), 0, inputSize.y - 1);\n"
+    // Sample input texture and write directly to output
+"textureStore(textureOUT, globalID.xy, textureLoad(textureIN, vec2<i32>(inputX, inputY), 0));\n"
+"}\n";
+
 
 const char * vertexShaderA =
 "@vertex\n"
@@ -454,7 +471,7 @@ WGpuBufferDescriptor bufferDescriptorC={};
 WGpuTextureDescriptor textureDescriptorA={};
 WGpuTextureDescriptor textureDescriptorB={};
 WGpuTextureViewDescriptor textureViewDescriptorA={};
-char * cmp_bdy=wgl_cmp_src;
+char * cmp_bdy=wgl_cmp_srcC;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
@@ -697,7 +714,7 @@ wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_
   // wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
   // wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&WGPU_Mapped_Buffer,64,1,1);
   // wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&WGPU_Output_Buffer,sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+   // wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&WGPU_Output_Buffer,sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 // wgpu_queue_write_texture(wq.at(0,0),&wict.at(1,1),&WGPU_ResultBuffer.at(0,0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 
   /*
