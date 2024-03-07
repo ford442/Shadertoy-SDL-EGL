@@ -243,10 +243,10 @@ inline char wgl_cmp_srcB[2000]=
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array <f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
-"@group(0)@binding(4)var resizeSampler:sampler;\n"
-"@group(0) @binding(5) var <uniform> iResolution : u32;\n"
+"@group(0)@binding(4)var resizeSampler: sampler;\n"
+"@group(0)@binding(5)var <uniform> iResolution: u32;\n"
 "@compute @workgroup_size(1)\n"
-"fn computeStuff(@builtin(global_invocation_id) globalID : vec3<u32>) {\n"
+"fn computeStuff(@builtin(global_invocation_id)globalID : vec3<u32>) {\n"
 "let coords : vec2<i32> = vec2<i32>(globalID.xy);\n"
 "if (coords.x < i32(inputBuffer[1]) &&\n"
 "coords.y < i32(inputBuffer[1])) { \n"
@@ -308,6 +308,7 @@ const char * vertexShader=
 "output.fragUV=uv[VertexIndex];\n"
 "return output;\n"
 "}\n";
+
 
 const char * vertexShaderB=
 "struct VertexOutput{\n"
@@ -841,9 +842,9 @@ canvasFormat=navigator_gpu_get_preferred_canvas_format();
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RG11B10UFLOAT;
 // canvasFormat=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
-wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
-wtf.at(3,3)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
-wtf.at(4,4)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
+wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
+wtf.at(3,3)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
+wtf.at(4,4)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 // wtf.at(3,3)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
 canvasViewFormats[0]={wtf.at(3,3)};
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
