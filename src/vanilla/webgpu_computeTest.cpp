@@ -264,8 +264,8 @@ inline char wgl_cmp_srcC[2000]=
 "let inputSize = textureDimensions(textureIN);\n"
 "let outputSize = textureDimensions(textureOUT);\n"
     // Scale factors
-"let scaleX = float(inputSize.x) / float(outputSize.x);\n"
-"let scaleY = float(inputSize.y) / float(outputSize.y);\n"
+"let scaleX = f32(inputSize.x) / f32(outputSize.x);\n"
+"let scaleY = f32(inputSize.y) / f32(outputSize.y);\n"
     // Calculate corresponding input pixel coordinate 
 "let inputX = clamp(int(globalID.x * scaleX), 0, inputSize.x - 1);\n"
 "let inputY = clamp(int(globalID.y * scaleY), 0, inputSize.y - 1);\n"
