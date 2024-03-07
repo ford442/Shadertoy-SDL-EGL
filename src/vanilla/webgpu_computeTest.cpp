@@ -267,8 +267,8 @@ inline char wgl_cmp_srcC[2000]=
 "let scaleX = f32(inputSize.x) / f32(outputSize.x);\n"
 "let scaleY = f32(inputSize.y) / f32(outputSize.y);\n"
     // Calculate corresponding input pixel coordinate 
-"let inputX = clamp(i32(f32(globalID.x) * f32(scaleX)), 0, inputSize.x - 1);\n"
-"let inputY = clamp(i32(f32(globalID.y) * f32(scaleY)), 0, inputSize.y - 1);\n"
+"let inputX = clamp(i32(f32(globalID.x) * f32(scaleX)), i32(0), i32(inputSize.x - 1));\n"
+"let inputY = clamp(i32(f32(globalID.y) * f32(scaleY)), i32(0), i32(inputSize.y - 1));\n"
     // Sample input texture and write directly to output
 "textureStore(textureOUT, globalID.xy, textureLoad(textureIN, vec2<i32>(inputX, inputY), 0));\n"
 "}\n";
