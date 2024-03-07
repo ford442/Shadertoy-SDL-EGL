@@ -472,7 +472,7 @@ WGpuBufferDescriptor bufferDescriptorC={};
 WGpuTextureDescriptor textureDescriptorA={};
 WGpuTextureDescriptor textureDescriptorB={};
 WGpuTextureViewDescriptor textureViewDescriptorA={};
-char * cmp_bdy=wgl_cmp_srcC;
+char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
