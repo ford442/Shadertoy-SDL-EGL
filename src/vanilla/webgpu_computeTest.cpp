@@ -377,9 +377,9 @@ const char * frag_bodyLu=
 "@fragment\n"
 "fn main(\n"
 "@location(0) fragUV: vec2<f32>,\n"
-"@location(1) fragPosition: vec4<f32>\n"
+// "@location(1) fragPosition: vec4<f32>\n"
 ") -> @location(0) vec4<f32> {\n"
-"var test: vec4<f32> = textureSample(myTexture, mySampler, fragUV) * fragPosition; \n"
+// "var test: vec4<f32> = textureSample(myTexture, mySampler, fragUV) * fragPosition; \n"
 "return vec4<f32>(1.0f, 0.0f, 0.0f, 1.0f);\n"
 "}\n";
 
