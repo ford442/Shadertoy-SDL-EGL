@@ -493,9 +493,9 @@ int raND=0;
 
 WGpuImageCopyTexture WGPU_Input_Image={};
 WGpuImageCopyTexture WGPU_Output_Image={};
-WGpuImageCopyBuffer WGPU_Input_Buffer={};
-WGpuImageCopyBuffer WGPU_Output_Buffer={};
-WGpuImageCopyBuffer WGPU_Mapped_Buffer={};
+WGPUImageCopyBuffer WGPU_Input_Buffer={};
+WGPUImageCopyBuffer WGPU_Output_Buffer={};
+WGPUImageCopyBuffer WGPU_Mapped_Buffer={};
 uint32_t outP;
 double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
