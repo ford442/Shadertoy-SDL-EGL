@@ -188,7 +188,7 @@ using js_data_tensorf=boost::numeric::ublas::tensor<std::vector<float>>;
 using js_data_tensorGL=boost::numeric::ublas::tensor<std::vector<GLubyte>>;
 using js_data_tensor64=boost::numeric::ublas::tensor<std::vector<uint64_t>>;
 
-using wicb_tensor=boost::numeric::ublas::tensor<const WGPUImageCopyBuffer>;
+using wicb_tensor=boost::numeric::ublas::tensor<WGPUImageCopyBuffer>;
 using wicei_tensor=boost::numeric::ublas::tensor<WGpuImageCopyExternalImage>;
 using wict_tensor=boost::numeric::ublas::tensor<WGpuImageCopyTexture>;
 using ws_tensor=boost::numeric::ublas::tensor<WGpuSampler>;
