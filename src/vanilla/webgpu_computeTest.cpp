@@ -701,7 +701,6 @@ OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureView
 wtv.at(3,3)=INTextureView;
 wtv.at(4,4)=OUTTextureView;
 
-
   // raN=rNd4(256);
   std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
@@ -769,10 +768,11 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 
   // Render pass A (color)
 
-  wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
+      wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
