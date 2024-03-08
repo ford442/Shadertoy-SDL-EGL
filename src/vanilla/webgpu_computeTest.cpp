@@ -371,6 +371,18 @@ const char * frag_body=
 "return textureSample(videoTexture,videoSampler,fragUV);"
 "}\n";
 
+const char * frag_bodyLu=
+"@group(0)@binding(1)var mySampler: sampler;\n"
+"@group(0)@binding(2)var myTexture: texture_2d<f32>;\n"
+"@fragment\n"
+"fn main(\n"
+"@location(0) fragUV: vec2<f32>,\n"
+"@location(1) fragPosition: vec4<f32>\n"
+") -> @location(0) vec4<f32> {\n"
+"var test: vec4<f32> = textureSample(myTexture, mySampler, fragUV) * fragPosition; \n"
+"return vec4<f32>(1.0f, 0.0f, 0.0f, 1.0f);\n"
+"}\n";
+
 const char * fragHeader="";
 
 const char * fragEntry="main_1";
@@ -601,7 +613,7 @@ const char * Fnm2=reinterpret_cast<const char *>("/video/frame.gl");
 
 void getCode(const char * Fnm){
 // const char * frag_body=(char *)rd_fl(Fnm);
-wgsl.at(0,0)=frag_body;
+wgsl.at(0,0)=frag_bodyLu;
 return;
 }
 
