@@ -29,7 +29,7 @@
 #include <GL/glext.h>
 #include <emscripten/html5_webgl.h>
 
-void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
+void avgFrm(int Fnum,int leng,float * ptr,float * aptr){
 float max=0.0f;
 float min=1.0f;
 float sum=0.0f;
@@ -48,15 +48,15 @@ aptr[Fnum+200]=max;
 for(int i=33;i<65;i++){
 avgSum+=aptr[i];
 }
-aptr[0]=avgSum/32;
+aptr[0]=avgSum/32.0;
 for(int i=33;i<65;i++){
 minSum+=aptr[i+100];
 }
-aptr[100]=minSum/32;
+aptr[100]=minSum/32.0;
 for(int i=33;i<65;i++){
 maxSum+=aptr[i+200];
 }
-aptr[200]=maxSum/32;
+aptr[200]=maxSum/32.0;
 return;
 }
 
@@ -93,11 +93,11 @@ return;
 
 extern "C" {
 
-void nano(int Fnum,int leng,float *ptr,float *aptr){
+void nano(int Fnum,int leng,float * ptr,float * aptr){
 avgFrm(Fnum,leng,ptr,aptr);
 }
 
-void nanoD(int Fnum,int leng,double *ptr,double *aptr){
+void nanoD(int Fnum,int leng,double * ptr,double * aptr){
 avgFrmD(Fnum,leng,ptr,aptr);
 }
 
@@ -110,7 +110,14 @@ EM_JS(void,ma,(),{
 const pnnl=document.body;
 let vv=document.querySelector("#mv");
 let intervalBackward;
-
+ 
+let dbg_avag=document.querySelector('#dbg_avag').innerHTML;
+let dbg_amin=document.querySelector('#dbg_amin').innerHTML;
+let dbg_amax=document.querySelector('#dbg_amax').innerHTML;
+let dbg_favg=document.querySelector('#dbg_favg').innerHTML;
+let dbg_fmin=document.querySelector('#dbg_fmin').innerHTML;
+let dbg_fmax=document.querySelector('#dbg_fmax').innerHTML;
+ 
 function back(){
 intervalBackward=setInterval(function(){
 if(vv.currentTime==0){
@@ -206,11 +213,11 @@ return n;
 }
 
 let la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
-let pointa=77*la;
+let pointa=77.0*la;
 let agav=new Float32Array($H,pointa,300);
 let sz=(h$*h$)/8;
-let blank$=Math.max((w$-h$)/4,0);
-let nblank$=Math.max((h$-w$)/2,0);
+let blank$=Math.max((w$-h$)/4.0,0);
+let nblank$=Math.max((h$-w$)/2.0,0);
 let avag=0.750;
 let min=1.0;
 let max=0.0;
@@ -522,14 +529,14 @@ blank$=Math.max((w$-h$)/4,0);
 nblank$=Math.max((h$-w$)/2,0);
 la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
 sz=(h$*h$)/8;
-pointa=77*la;
+pointa=77.0*la;
 // agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
-var pointb=77*la;
+var pointb=77.0*la;
 var $B=new Float32Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
@@ -544,18 +551,18 @@ var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.querySelector("#wid").innerHTML,10);
 h$=parseInt(document.querySelector("#hig").innerHTML,10);
 blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
-blank$=Math.max((w$-h$)/4,0);
-nblank$=Math.max((h$-w$)/2,0);
+blank$=Math.max((w$-h$)/4.0,0);
+nblank$=Math.max((h$-w$)/2.0,0);
 la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
 sz=(h$*h$)/8;
-pointa=77*la;
+pointa=77.0*la;
 // var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
-pointb=66*la;
+pointb=66.0*la;
 $B=new Float32Array($H,pointb,sz);
 r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$$});
@@ -572,8 +579,14 @@ eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$B
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
-pointb=66*la;
-Module.ccall("nanoD",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+pointb=66.0*la;
+Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
+dbg_fmax=agav[$F+200];
+dbg_fmin=agav[$F+100];
+dbg_avag=agav[0];
+dbg_favg=agav[$F];
+dbg_amin=agav[100];
+dbg_amax=agav[200];
 setTimeout(function(){
 M();
 },16.66);
