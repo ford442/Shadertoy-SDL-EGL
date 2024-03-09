@@ -209,8 +209,8 @@ const char * FnmB=reinterpret_cast<const char *>("/shader/shader.wgsl");
 
 char * result=NULL;
 char * results=NULL;
-char32_t * result32=NULL;
-char32_t * results32=NULL;
+char8_t * result32=NULL;
+char8_t * results32=NULL;
 long int length=0;
 
 wq_tensor WGPU_Queue=wq_tensor{1,1,2};
@@ -426,7 +426,7 @@ return results;
 return nullptr;
 }
 
-const inline char32_t * rd_fl_32(const char * Fnm){
+const inline char8_t * rd_fl_32(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result32,results32,file);
 if(file){
@@ -441,20 +441,20 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result32=static_cast<char32_t *>(malloc((length+1)*sizeof(char32_t)));
+result32=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
 if(result32){
-size_t actual_length=fread(result32,sizeof(char32_t),length,file);
+size_t actual_length=fread(result32,sizeof(char8_t),length,file);
 result32[actual_length++]={'\0'};
 }
 fclose(file);
-results32=reinterpret_cast<char32_t *>(result32);
+results32=reinterpret_cast<char8_t *>(result32);
 return results32;
 }
 return nullptr;
 }
 
 void getCode(const char * Fnm){
-const char * frag_body=(char *)rd_fl(Fnm);
+const char * frag_body=(char *)rd_fl_32(Fnm);
 wgsl.at(0,0)=frag_body;
 return;
 }
