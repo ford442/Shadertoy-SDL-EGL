@@ -48,15 +48,15 @@ aptr[Fnum+200]=max;
 for(int i=33;i<65;i++){
 avgSum+=aptr[i];
 }
-aptr[0]=avgSum/32.0;
+aptr[0]=avgSum/32.0f;
 for(int i=33;i<65;i++){
 minSum+=aptr[i+100];
 }
-aptr[100]=minSum/32.0;
+aptr[100]=minSum/32.0f;
 for(int i=33;i<65;i++){
 maxSum+=aptr[i+200];
 }
-aptr[200]=maxSum/32.0;
+aptr[200]=maxSum/32.0f;
 return;
 }
 
