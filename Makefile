@@ -77,6 +77,18 @@ video_resurection_webgpua:
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 --post-js js/pagec_webgpua.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --closure 0
 
+video_resurection_webgpua_safe:
+	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) $(STATIC_LINK_FLAGS) -static
+	 em++ lib/lib_webgpu.cpp $(STDS) $(STATIC_LINK_FLAGS) -static
+	 emcc src/video/video_jebusa.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -o video_jebusa.o -c $(STDS) $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 emcc video_jebusa.o -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o $(BIN_NAME)-resA-safe.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -sFORCE_FILESYSTEM=1 -sUSE_SDL=2 \
+	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_nanoD"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js js/fluid.js --pre-js js/flui.js --pre-js js/setUp.js --pre-js js/startUp.js -lmath.js -lhtml5.js -lint53.js \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 --post-js js/pagec_webgpua.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --closure 0
+
 video_resurection_webgpub:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) -static
