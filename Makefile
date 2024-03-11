@@ -88,7 +88,7 @@ b3_compute_egl:
 	 em++ -lEGL -lGL -openmp-simd -pthread -D__EMSCRIPTEN__ $(LDFLAGS) -O3 -std=c++14 -fchar8_t \
 	 --js-library lib/lib_webgpu.js -fPIC -fPIE -mfma -DCOMPUTE -o $(WGL_BIN_NAME)-egl.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) -sPRECISE_F32=2 -DDOUBLE -sASSERTIONS=0 -ffp-contract=off -mbulk-memory -matomics \
-	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 -rtlib=compiler-rt \
+	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 -rtlib=compiler-rt -sDISABLE_EXCEPTION_CATCHING=0 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
 	 -sINITIAL_MEMORY=1536mb -lmath.js -lhtml5.js -lint53.js -mllvm -mtune=wasm32 \
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=1 -sUSE_GLFW=0 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
