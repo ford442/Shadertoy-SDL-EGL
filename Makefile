@@ -1,9 +1,9 @@
 WGL_BIN_NAME = w0-003
 
-LDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lpthread,-lc++abi,-lm,-lrt,-ldl,-S
+LDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lpthread,-lc++abi,-lm,-lrt,-ldl
 oLDFLAGS = -Wl,-lc++,-lm,-lpthread,-lrt,-ldl,-S
 
-SIMD_FLAGS = -DSIMD=2 -msimd128 -mavx
+SIMD_FLAGS = -DSIMD=AVX -msimd128 -mavx
 
 STDS = -std=gnu17 -std=c2x -std=c++11 -std=c++14 -std=c++17 -std=gnu++17 -std=c++20 -std=gnu++20 \
 	 -std=c++23 -std=gnu++23 -std=c++26 -std=gnu++26
@@ -85,7 +85,7 @@ b3_compute:
 b3_compute_egl:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/webgpu_egl.cpp -fchar8_t -std=c++14 -ffp-contract=fast -mbulk-memory -matomics \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -O3 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -lEGL -lGL -openmp-simd -pthread -D__EMSCRIPTEN__ $(LDFLAGS) -O3 -std=c++14 -fchar8_t \
+	 em++ -lEGL -lGL -dead_strip -openmp-simd -pthread -D__EMSCRIPTEN__ $(LDFLAGS) -O3 -std=c++14 -fchar8_t \
 	 --js-library lib/lib_webgpu.js -fPIC -fPIE -mfma -DCOMPUTE -o $(WGL_BIN_NAME)-egl.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) -sPRECISE_F32=2 -DDOUBLE -sASSERTIONS=0 -ffp-contract=off -mbulk-memory -matomics \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 -rtlib=compiler-rt -sDISABLE_EXCEPTION_CATCHING=0 \
