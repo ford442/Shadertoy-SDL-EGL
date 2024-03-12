@@ -174,7 +174,7 @@ b3_compute_test_v:
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=0 -sUSE_GLFW=0 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS='["startWebGPU","_startWebGPUb"]' -sTEXTDECODER=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
+	 --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 webgpu_video.o
 
