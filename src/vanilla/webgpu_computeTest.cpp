@@ -1813,6 +1813,7 @@ pixelData=new Uint8ClampedArray(imageData);
 // frrm.set(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
+}
 
 function highResStart(){
 document.querySelector('#shut').innerHTML=2;
