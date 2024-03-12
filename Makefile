@@ -165,7 +165,7 @@ b3_compute_test:
 b3_compute_test_v:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/webgpu_videog.cpp -fchar8_t -std=c++14 -ffp-contract=off -mbulk-memory -matomics \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -O3 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -lEGL -lGL -sGL_ENABLE_GET_PROC_ADDRESS -openmp-simd -pthread -D__EMSCRIPTEN__ $(LDFLAGS) -O3 -std=c++14 -fchar8_t \
+	 em++ $(GL_FLAGS) -openmp-simd -pthread -D__EMSCRIPTEN__ $(LDFLAGS) -O3 -std=c++14 -fchar8_t \
 	 --js-library lib/lib_webgpu.js -fPIC -fPIE -mfma -DCOMPUTE -o $(WGL_BIN_NAME)-testv.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) -sPRECISE_F32=2 -DDOUBLE -sASSERTIONS=0 -ffp-contract=off -mbulk-memory -matomics \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 -rtlib=compiler-rt \
