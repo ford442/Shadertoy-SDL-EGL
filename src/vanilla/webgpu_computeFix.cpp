@@ -613,7 +613,7 @@ const char * Fnm2=reinterpret_cast<const char *>("/video/frame.gl");
 
 void getCode(const char * Fnm){
 // const char * frag_body=(char *)rd_fl(Fnm);
-wgsl.at(0,0)=frag_body;
+wgsl.at(0,0)=frag_bodyLu;
 return;
 }
 
