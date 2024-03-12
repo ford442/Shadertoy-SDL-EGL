@@ -910,7 +910,7 @@ textureDescriptorA.numViewFormats=0; // &textureAviewFormats[0];
 textureDescriptorA.viewFormats=nullptr; // &textureAviewFormats[0];
 textureDescriptorB.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorB.format=wtf.at(0,0);
-textureDescriptorB.usage=WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC;
+textureDescriptorB.usage=WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST;
 textureDescriptorB.width=sze.at(0,0);
 textureDescriptorB.height=sze.at(0,0); // default = 1;
 textureDescriptorB.depthOrArrayLayers=1;
