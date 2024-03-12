@@ -162,6 +162,22 @@ b3_compute_test:
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 webgpu_computeTest.o
 
+b3_compute_test_v:
+	 em++ -D__EMSCRIPTEN__ src/vanilla/webgpu_video.cpp -fchar8_t -std=c++14 -ffp-contract=off -mbulk-memory -matomics \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -O3 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ -lEGL -openmp-simd -pthread -D__EMSCRIPTEN__ $(LDFLAGS) -O3 -std=c++14 -fchar8_t \
+	 --js-library lib/lib_webgpu.js -fPIC -fPIE -mfma -DCOMPUTE -o $(WGL_BIN_NAME)-testv.js \
+	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) -sPRECISE_F32=2 -DDOUBLE -sASSERTIONS=0 -ffp-contract=off -mbulk-memory -matomics \
+	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=0 -rtlib=compiler-rt \
+	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
+	 -sINITIAL_MEMORY=1536mb -lmath.js -lhtml5.js -lint53.js -mllvm -mtune=wasm32 \
+	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sWASM_BIGINT=0 -sUSE_GLFW=0 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
+	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS='["startWebGPU","_startWebGPUb"]' -sTEXTDECODER=1 \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_frm"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 webgpu_video.o
+
 b3_compute_test_b:
 	 em++ src/vanilla/webgpu_computeTest.cpp -fchar8_t -std=c++14 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
