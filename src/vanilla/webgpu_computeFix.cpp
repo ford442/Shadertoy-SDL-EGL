@@ -689,8 +689,8 @@ wrpd.at(1,1)=passDesc2;
 
      //  video texture from js
   
-videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
-wtv.at(2,2)=videoTextureView;
+// videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
+// wtv.at(2,2)=videoTextureView;
 // fram=static_cast<uint8_t *>(rd_frm(Fnm2));
 // fram=(void *)rd_frmf(Fnm2);
   std::ifstream fram(Fnm2,std::ios::binary);
@@ -898,7 +898,7 @@ WGPU_UserData.at(0,0,0)=userData;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 textureDescriptorA.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorA.format=wtf.at(0,0);
-textureDescriptorA.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST;
+textureDescriptorA.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
 textureDescriptorA.width=sze.at(1,1);
 textureDescriptorA.height=sze.at(1,1); // default = 1;
 textureDescriptorA.depthOrArrayLayers=1;
@@ -910,7 +910,7 @@ textureDescriptorA.numViewFormats=0; // &textureAviewFormats[0];
 textureDescriptorA.viewFormats=nullptr; // &textureAviewFormats[0];
 textureDescriptorB.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorB.format=wtf.at(0,0);
-textureDescriptorB.usage=WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST;
+textureDescriptorB.usage=WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC;
 textureDescriptorB.width=sze.at(0,0);
 textureDescriptorB.height=sze.at(0,0); // default = 1;
 textureDescriptorB.depthOrArrayLayers=1;
