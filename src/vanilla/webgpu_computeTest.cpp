@@ -617,8 +617,7 @@ wgsl.at(0,0)=frag_body;
 return;
 }
 
-// inline boost::function<EM_BOOL()>render=[](){
-void raf(){
+inline boost::function<EM_BOOL()>render=[](){
 /*
 if(ms_l==true){
 mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,1));
@@ -811,8 +810,8 @@ wgpu_render_pass_encoder_end(wrpe.at(1,1));
 wcb.at(1,1)=wgpu_command_encoder_finish(wce.at(1,1));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(1,1));
 wceB={};
-return;
-}
+return EM_TRUE;
+};
 
 void raf(){
 render();
@@ -1116,7 +1115,7 @@ shaderModuleDescF={};
 fragHint.entryPointName=fragEntry;
 shaderModuleDescF.code=wgsl.at(0,0);
 // shaderModuleDescF.hint=fragHint;
-shaderModuleDescV.code=vertexShaderB;
+shaderModuleDescV.code=vertexShaderA;
 wsmd.at(0,0)=shaderModuleDescV;
 wsmd.at(1,1)=shaderModuleDescF;
 vs=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(0,0));
