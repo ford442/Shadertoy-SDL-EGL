@@ -1779,7 +1779,9 @@ imageData=image.data;
 pixelData=new Uint8ClampedArray(imageData);
 //  frrm=new Uint8ClampedArray($H,0,imageData.length);
 // frrm.set(imageData);
-FS.writeFile('/video/frame.gl',pixelData,{encoding:"binary",flag:"w+",mode:0o666});
+// FS.writeFile('/video/frame.gl',pixelData,{encoding:"binary",flag:"w+",mode:0o666});
+    FS.writeFile('/video/frame.gl',pixelData);
+
 },16.6);
 }
 
