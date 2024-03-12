@@ -617,8 +617,8 @@ wgsl.at(0,0)=frag_body;
 return;
 }
 
-inline boost::function<EM_BOOL()>render=[](){
-// void raf(){
+// inline boost::function<EM_BOOL()>render=[](){
+void raf(){
 /*
 if(ms_l==true){
 mms.at(0,1)=round(mms2.at(0,0)/i_size.at(0,1));
@@ -811,8 +811,8 @@ wgpu_render_pass_encoder_end(wrpe.at(1,1));
 wcb.at(1,1)=wgpu_command_encoder_finish(wce.at(1,1));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(1,1));
 wceB={};
-return EM_TRUE;
-};
+return;
+}
 
 void raf(){
 render();
