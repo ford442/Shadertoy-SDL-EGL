@@ -693,8 +693,10 @@ videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
 // fram=static_cast<uint8_t *>(rd_frm(Fnm2));
 // fram=(void *)rd_frmf(Fnm2);
-std::ifstream fram(Fnm2,std::ios::binary);
-// std::vector<char> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+  std::ifstream fram(Fnm2,std::ios::binary);
+std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+frame_tensor.at(0,0)=data;
+    // std::vector<char> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
   
       // Compute Pass
   
@@ -710,9 +712,7 @@ wtv.at(3,3)=INTextureView;
 wtv.at(4,4)=OUTTextureView;
 
   // raN=rNd4(256);
-  std::ifstream fram(Fnm2,std::ios::binary);
-std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-frame_tensor.at(0,0)=data;
+
       // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&WGPU_Input_Image,&WGPU_ColorBuffer.at(0,0,0),1024,0,1,1,1);
 // wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 
