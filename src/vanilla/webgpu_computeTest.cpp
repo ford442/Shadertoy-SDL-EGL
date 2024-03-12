@@ -1775,6 +1775,45 @@ FS.writeFile('/video/frame.gl',pixelData,{encoding:"binary",flag:"w+",mode:0o666
 },16.6);
 }
 
+async function videoFrames2(){
+// document.querySelector("#mvi").height=SiZ;
+let w$=parseInt(document.querySelector("#mvi").videoWidth);
+let h$=parseInt(document.querySelector("#mvi").videoHeight);
+let SiZ=window.innerHeight;
+let tstSiZ=h$;
+// document.querySelector("#mvi").height=h$;
+// document.querySelector("#mvi").width=w$;
+Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+console.log("vid size: ",h$,", ",w$);
+let cnv=document.querySelector('#bcanvas');
+let cnvb=document.querySelector('#canvas');
+cnv.height=h$;
+cnvb.height=SiZ;
+cnv.width=h$;
+cnvb.width=SiZ;
+let offS=Math.floor((w$-h$)/2.0);
+let la=nearestPowerOf2(((w$*h$*4)/4)*4);
+const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
+gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
+let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
+// let mageData=flipImageData(image);
+let imageData=image.data;
+let pixelData=new Uint8ClampedArray(imageData);
+//  let frrm=new Uint8ClampedArray($H,0,imageData.length);
+Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+// frrm.set(pixelData);
+FS.writeFile('/video/frame.gl',pixelData);
+setInterval(function(){
+gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
+image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
+// mageData=flipImageData(image);
+imageData=image.data;
+pixelData=new Uint8ClampedArray(imageData);
+//  frrm=new Uint8ClampedArray($H,0,imageData.length);
+// frrm.set(imageData);
+FS.writeFile('/video/frame.gl',pixelData);
+},16.6);
+
 function highResStart(){
 document.querySelector('#shut').innerHTML=2;
 document.querySelector('#bcanvas').width=window.innerWidth*4;
@@ -1802,7 +1841,7 @@ document.querySelector('#shut').innerHTML=2;
 document.querySelector('#circle').width=window.innerWidth;
 document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#di').click();
-videoFrames();
+videoFrames2();
 },100);
 document.querySelector('#status').style.backgroundColor="green";
 }
