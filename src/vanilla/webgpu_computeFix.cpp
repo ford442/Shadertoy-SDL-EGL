@@ -667,7 +667,7 @@ emscripten_get_canvas_element_size("mvi",&szwIv,&szhIv);
 emscripten_get_element_css_size("canvas",&szw,&szh);
 u64_siz.at(0,0)=szhI;
 sze.at(0,0)=int(szhI);
-sze.at(1,1)=int(szhIv);
+sze.at(1,1)=720; // int(szhIv);
 szef.at(0,0)=floor(float(szh));
 // sze.at(0,1)=szh;
 WGpuOrigin3D xyz={};
