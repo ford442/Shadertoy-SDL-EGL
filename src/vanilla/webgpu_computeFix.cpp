@@ -1,16 +1,23 @@
 #include "../../include/vanilla/webgpu_egl.hpp"
   
-WGpuExternalTexture extTexture;
-WGpuExternalTextureBindingLayout extTextureBindingLayout={};
-WGpuExternalTextureDescriptor extTextureDescriptor={};
+WGpuBufferDescriptor bufferDescriptor_indice={};
+WGpuBuffer indice_Buffer;
+WGpuVertexAttribute vertAtt={};
+WGpuVertexBufferLayout vertBufLayout={};
+WGpuBufferDescriptor bufferDescriptor_vertex={};
+WGpuBuffer vertex_Buffer;
+WGpuBufferBindingLayout bufferBindingLayoutV={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
+WGpuShaderModuleCompilationHint fragHint={};
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
 WGpuTextureView videoTextureView;
 WGpuTextureViewDescriptor depthTextureViewDescriptor={};
 WGpuTextureViewDescriptor colorTextureViewDescriptor={};
 WGpuTextureViewDescriptor videoTextureViewDescriptor={};
-WGpuRenderPassColorAttachment colorAttachment;
-WGpuRenderPassDepthStencilAttachment depthAttachment;
+WGpuTextureViewDescriptor INTextureViewDescriptor={};
+WGpuTextureViewDescriptor OUTTextureViewDescriptor={};
+WGpuRenderPassColorAttachment colorAttachment={};
+WGpuRenderPassDepthStencilAttachment depthAttachment={};
 WGpuTexture depthTexture;
 WGpuTexture colorTexture;
 WGpuTexture videoTexture;
@@ -36,14 +43,20 @@ WGpuBufferDescriptor bufferDescriptorVid={};
 // WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
 // WGpuPipelineLayout pipeline_layout=0;
 WGpuBindGroupLayout bindgroup_layout=0;
-WGpuBindGroupLayoutEntry bindgroup_layout_entries[4]={};
-WGpuBindGroupEntry bindgroup_entries[4]={};
+WGpuBindGroupLayoutEntry bindgroup_layout_entries[8]={};
+WGpuBindGroupEntry bindgroup_entries[8]={};
 WGpuBindGroup bindgroup=0;
 // WGpuRenderPipelineDescriptor renderPipelineDesc;
 WGpuRenderBundleEncoder renderBundleEncoder;
 WGpuRenderBundleEncoderDescriptor renderBundleEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDesc={};
 WGpuMultisampleState multiSamp;
+
+WGpuFragmentState fragState2;
+WGpuBufferDescriptor bufferDescriptor_iTime={};
+WGpuBufferDescriptor bufferDescriptor_iResolution={};
+WGpuBufferDescriptor bufferDescriptor_iFrame={};
+WGpuBufferDescriptor bufferDescriptor_iTimeDelta={};
 WGpuBuffer uniBuffer;
 WGpuBuffer srcBuffer;
 WGpuBuffer dstBuffer;
