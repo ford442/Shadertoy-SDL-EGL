@@ -182,6 +182,8 @@ WGpuShaderModuleCompilationHint fragHint={};
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
 WGpuTextureView videoTextureView;
+WGpuTextureView INTextureView;
+WGpuTextureView OUTTextureView;
 WGpuTextureViewDescriptor depthTextureViewDescriptor={};
 WGpuTextureViewDescriptor colorTextureViewDescriptor={};
 WGpuTextureViewDescriptor videoTextureViewDescriptor={};
