@@ -1,8 +1,14 @@
 #include "../../include/vanilla/webgpu_egl.hpp"
-  
-WGpuExternalTexture extTexture;
-WGpuExternalTextureBindingLayout extTextureBindingLayout={};
-WGpuExternalTextureDescriptor extTextureDescriptor={};
+
+WGpuBufferDescriptor bufferDescriptor_indice={};
+WGpuBuffer indice_Buffer;
+WGpuVertexAttribute vertAtt={};
+WGpuVertexBufferLayout vertBufLayout={};
+WGpuBufferDescriptor bufferDescriptor_vertex={};
+WGpuBuffer vertex_Buffer;
+WGpuBufferBindingLayout bufferBindingLayoutV={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
+WGpuShaderModuleCompilationHint fragHint={};
+
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
 WGpuTextureView videoTextureView;
@@ -72,8 +78,6 @@ boost::chrono::high_resolution_clock::time_point t3;
 WGpuUniform wTime;
 uint64_t tme;
 
-static wetd_tensor wetd=wetd_tensor{2,2};
-static wet_tensor wet=wet_tensor{2,2};
 static i_tensor texid=i_tensor{2,2};
 static i_tensor sze=i_tensor{3,3};
 static f_tensor szef=f_tensor{2,2};
@@ -330,9 +334,6 @@ std::ifstream fram(Fnm2,std::ios::binary);
 // std::vector<char> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 frame_tensor.at(0,0)=data;
-wetd.at(0,0).source=texid.at(0,0);
-// extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
-// wet.at(0,0)=extTexture;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
@@ -473,12 +474,6 @@ videoTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(2,2)=videoTextureViewDescriptor;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
-texid.at(0,0)=77;
-extTextureDescriptor.source=texid.at(0,0);
-extTextureDescriptor.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
-wetd.at(0,0)=extTextureDescriptor;
-// extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
-// wet.at(0,0)=extTexture;
 WGpuOrigin3D xyz={};
 xyz.x=0;
 xyz.y=0;
