@@ -207,7 +207,6 @@ uint32_t OutputBufferUnits;
 uint32_t OutputBufferBytes;
 uint32_t InputBufferUnits;
 uint32_t InputBufferBytes;
-uint64_t WGPU_InputRangeSize;
 
 const char * Entry="computeStuff";
 // uint32_t invocationCount=BufferMapSize/sizeof(int);
@@ -245,7 +244,6 @@ WGpuBufferBindingLayout bufferBindingLayout3={2};
 WGpuBufferBindingLayout bufferBindingLayout4={2};
 WGpuStorageTextureBindingLayout storageTextureBindingLayout1={1,18,2};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
-
 WGpuBufferDescriptor bufferDescriptorI={};
 WGpuBufferDescriptor bufferDescriptorO={};
 WGpuBufferDescriptor bufferDescriptorM={};
@@ -259,7 +257,6 @@ int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
 int raN=0;
 int raND=0;
-
 WGpuImageCopyTexture WGPU_Input_Image={};
 WGpuImageCopyTexture WGPU_Output_Image={};
 WGpuImageCopyBuffer WGPU_Input_Buffer={};
