@@ -347,6 +347,19 @@ void * fram;
 
   //  compute shader vars
 
+struct Vertex{
+GLfloat position[4];
+};
+
+Vertex nvertices[]={
+{1.0f,1.0f,0.0f,1.0f},
+{-1.0f,1.0f,0.0f,1.0f},
+{-1.0f,-1.0f,0.0f,1.0f},
+{1.0f,1.0f,0.0f,1.0f},
+{1.0f,-1.0f,0.0f,1.0f},
+{-1.0f,-1.0f,0.0f,1.0f}
+};
+
 Vertex lvertices[]={
 {-1.0f,-1.0f,1.0f,1.0f},
 {1.0f,-1.0f,1.0f,1.0f},
@@ -481,19 +494,6 @@ WGpuImageCopyBuffer WGPU_Mapped_Buffer={};
 uint32_t outP;
 double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
-
-struct Vertex{
-GLfloat position[4];
-};
-
-Vertex nvertices[]={
-{1.0f,1.0f,0.0f,1.0f},
-{-1.0f,1.0f,0.0f,1.0f},
-{-1.0f,-1.0f,0.0f,1.0f},
-{1.0f,1.0f,0.0f,1.0f},
-{1.0f,-1.0f,0.0f,1.0f},
-{-1.0f,-1.0f,0.0f,1.0f}
-};
 
 void getCode(const char * Fnm){
 // const char * frag_body=(char *)rd_fl(Fnm);
