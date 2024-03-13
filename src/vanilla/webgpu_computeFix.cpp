@@ -1,5 +1,4 @@
-#include "../../include/vanilla/main_render.hpp"
-#include <fstream>
+#include "../../include/vanilla/webgpu_egl.hpp"
   
 WGpuExternalTexture extTexture;
 WGpuExternalTextureBindingLayout extTextureBindingLayout={};
@@ -39,9 +38,6 @@ WGpuVertexState vertState;
 WGpuPrimitiveState priState;
 WGpuFragmentState fragState;
 WGpuBufferDescriptor bufferDescriptorUni={};
-WGpuBufferDescriptor bufferDescriptorSrc={};
-WGpuBufferDescriptor bufferDescriptorDst={};
-WGpuBufferDescriptor bufferDescriptorVid={};
 // WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
 // WGpuPipelineLayout pipeline_layout=0;
 WGpuBindGroupLayout bindgroup_layout=0;
