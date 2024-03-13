@@ -674,6 +674,10 @@ sze.at(0,0)=int(szhI);
 sze.at(1,1)=720;
 szef.at(0,0)=floor(float(szh));
 // sze.at(0,1)=szh;
+  WGpuOrigin3D xyz={};
+xyz.x=0;
+xyz.y=0;
+xyz.z=0;
 /*
 WGPU_UserData.at(0,0,0)=userData;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
@@ -707,10 +711,7 @@ WGPU_TextureDescriptor.at(0,0,1)=textureDescriptorB;
 WGPU_CommandEncoderDescriptor.at(0,0,0)=commandEncoderDescriptor;
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
-WGpuOrigin3D xyz={};
-xyz.x=0;
-xyz.y=0;
-xyz.z=0;
+
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
 WGPU_Input_Image.origin=xyz;
 WGPU_Input_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
