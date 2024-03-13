@@ -793,9 +793,10 @@ resizeSamplerDescriptor.lodMaxClamp=32;
 // resizeSamplerDescriptor.compare;  // default = WGPU_COMPARE_FUNCTION_INVALID (not used)
 resizeSamplerDescriptor.maxAnisotropy=1;
 wsd.at(1,1)=resizeSamplerDescriptor;
-  */
 resizeSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(1,1));
 wgpu_sampler.at(3,3)=resizeSampler;
+  */
+
 raN=rNd4(256);
 input[0]=raN;
   // WGPU_InputBuffer.at(0,0,0)[0]=raN;
@@ -862,13 +863,10 @@ bindGroupEntry[2].resource=wtv.at(3,3);
 bindGroupEntry[3]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindGroupEntry[3].binding=3;
 bindGroupEntry[3].resource=wtv.at(4,4); 
-bindGroupEntry[4]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
-bindGroupEntry[4].binding=4;
-bindGroupEntry[4].resource=wgpu_sampler.at(3,3);
-bindGroupEntry[5].binding=5;
-bindGroupEntry[5].resource=wb.at(2,2);
-bindGroupEntry[5].bufferBindOffset=0;
-bindGroupEntry[5].bufferBindSize=sizeof(uint64_t);
+bindGroupEntry[4].binding=5;
+bindGroupEntry[4].resource=wb.at(2,2);
+bindGroupEntry[4].bufferBindOffset=0;
+bindGroupEntry[4].bufferBindSize=sizeof(uint64_t);
   /*
 bindGroupEntry[6]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindGroupEntry[6].binding=6;
@@ -971,13 +969,6 @@ wtvd.at(2,2)=videoTextureViewDescriptor;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
 texid.at(0,0)=77;
-
-// extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
-// wet.at(0,0)=extTexture;
-WGpuOrigin3D xyz={};
-xyz.x=0;
-xyz.y=0;
-xyz.z=0;
 WGpuImageCopyTexture videoTextureCopy;
 videoTextureCopy.texture=wt.at(2,2);
 videoTextureCopy.mipLevel=0;
