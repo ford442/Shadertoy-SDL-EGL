@@ -797,8 +797,6 @@ resizeSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(1,1));
 wgpu_sampler.at(3,3)=resizeSampler;
   */
 
-raN=rNd4(256);
-input[0]=raN;
   // WGPU_InputBuffer.at(0,0,0)[0]=raN;
 // std::cout << "Random input:" << std::endl;
 // std::cout << raN << std::endl;
