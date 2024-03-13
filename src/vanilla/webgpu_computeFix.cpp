@@ -492,8 +492,8 @@ return;
 
 
 
-inline boost::function<EM_BOOL()>render=[](){
-  workgroupSize=1;
+boost::function<EM_BOOL()>render=[](){
+workgroupSize=1;
 OutputBufferUnits=33000000;
 OutputBufferBytes=33000000*4;
 InputBufferUnits=4665600;
