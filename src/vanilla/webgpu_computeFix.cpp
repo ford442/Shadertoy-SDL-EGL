@@ -493,19 +493,7 @@ return;
 
 
 void raf(){
-workgroupSize=1;
-OutputBufferUnits=33000000;
-OutputBufferBytes=33000000*4;
-InputBufferUnits=4665600;
-InputBufferBytes=4665600*4;
-WGPU_InputRangeSize=OutputBufferBytes;
-float * WGPU_Result_Array=new float[OutputBufferBytes];
-float * WGPU_Input_Array=new float[InputBufferBytes];
-uint32_t * WGPU_Color_Input_Array=new uint32_t[InputBufferBytes];
-std::vector<float>color_input(InputBufferUnits);
-std::vector<uint8_t>input(InputBufferBytes);
-std::vector<uint8_t>outputd(OutputBufferBytes);
-std::vector<uint8_t>outpute(OutputBufferBytes);
+
 u64_uni.at(3,3)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
