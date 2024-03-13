@@ -238,6 +238,8 @@ WGpuBuffer dstBuffer;
 WGpuBuffer vidBuffer;
 WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 WGpuTextureBindingLayout textureBindingLayout1={};
+WGpuTextureBindingLayout textureBindingLayout2={};
+WGpuTextureBindingLayout textureBindingLayout3={};
 WGpuSamplerBindingLayout samplerBindingLayout={};
 WGpuImageCopyExternalImage videoFrm={};
 WGPUImageCopyBuffer videoFrmBfrSrc={};
