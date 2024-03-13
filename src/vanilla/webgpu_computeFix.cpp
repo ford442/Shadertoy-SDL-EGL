@@ -536,7 +536,7 @@ passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
-
+  
   //  frame data
 // fram=static_cast<uint8_t *>(rd_frm(Fnm2));
 // fram=(void *)rd_frmf(Fnm2);
@@ -664,7 +664,7 @@ config.viewFormats=&canvasViewFormat[0];
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
-emscripten_get_element_css_size("#canvas",&szw,&szh);
+emscripten_get_element_css_size("canvas",&szw,&szh);
 emscripten_get_element_css_size("#mvi",&szwDv,&szhDv);
 u64_siz.at(0,0)=szhI;
 sze.at(0,0)=int(szhI);
