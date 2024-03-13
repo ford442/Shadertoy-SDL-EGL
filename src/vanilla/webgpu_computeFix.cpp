@@ -1,6 +1,9 @@
 #include "../../include/vanilla/webgpu_egl.hpp"
 #include <fstream>
 
+WGpuExternalTexture extTexture;
+WGpuExternalTextureBindingLayout extTextureBindingLayout={};
+WGpuExternalTextureDescriptor extTextureDescriptor={};
 WGpuBufferDescriptor bufferDescriptor_indice={};
 WGpuBuffer indice_Buffer;
 WGpuVertexAttribute vertAtt={};
@@ -505,12 +508,6 @@ videoTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(2,2)=videoTextureViewDescriptor;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
-texid.at(0,0)=77;
-extTextureDescriptor.source=texid.at(0,0);
-extTextureDescriptor.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
-wetd.at(0,0)=extTextureDescriptor;
-// extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
-// wet.at(0,0)=extTexture;
 WGpuOrigin3D xyz={};
 xyz.x=0;
 xyz.y=0;
@@ -552,11 +549,6 @@ bindgroup_layout_entries[2].binding=2;
 bindgroup_layout_entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 bindgroup_layout_entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
 bindgroup_layout_entries[2].layout.texture=textureBindingLayout1;
-bindgroup_layout_entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
-bindgroup_layout_entries[3].binding=3;
-bindgroup_layout_entries[3].visibility=WGPU_SHADER_STAGE_FRAGMENT;
-bindgroup_layout_entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_EXTERNAL_TEXTURE;
-bindgroup_layout_entries[3].layout.externalTexture=extTextureBindingLayout;
 wbgle.at(0,0)=bindgroup_layout_entries;
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3);
 wbgl.at(0,0)=bindgroup_layout;
