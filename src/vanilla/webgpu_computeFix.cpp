@@ -520,6 +520,7 @@ return;
 };
 
 void raf(){
+  /*
 workgroupSize=1;
 OutputBufferUnits=33000000;
 OutputBufferBytes=33000000*4;
@@ -533,6 +534,7 @@ std::vector<float>color_input(InputBufferUnits);
 std::vector<uint8_t>input(InputBufferBytes);
 std::vector<uint8_t>outputd(OutputBufferBytes);
 std::vector<uint8_t>outpute(OutputBufferBytes);
+  */
 u64_uni.at(3,3)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
