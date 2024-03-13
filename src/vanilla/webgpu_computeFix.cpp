@@ -69,6 +69,13 @@ WGpuVertexState vertState;
 WGpuPrimitiveState priState;
 WGpuFragmentState fragState;
 WGpuBufferDescriptor bufferDescriptorUni={};
+WGpuBufferDescriptor bufferDescriptor_iTime={};
+WGpuBufferDescriptor bufferDescriptor_iResolution={};
+WGpuBufferDescriptor bufferDescriptor_iFrame={};
+WGpuBufferDescriptor bufferDescriptor_iTimeDelta={};
+WGpuBufferDescriptor bufferDescriptorSrc={};
+WGpuBufferDescriptor bufferDescriptorDst={};
+WGpuBufferDescriptor bufferDescriptorVid={};
 // WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
 // WGpuPipelineLayout pipeline_layout=0;
 WGpuBindGroupLayout bindgroup_layout=0;
@@ -487,7 +494,22 @@ WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 return;
 };
 
-void raf(){
+
+
+inline boost::function<EM_BOOL()>render=[](){
+  workgroupSize=1;
+OutputBufferUnits=33000000;
+OutputBufferBytes=33000000*4;
+InputBufferUnits=4665600;
+InputBufferBytes=4665600*4;
+WGPU_InputRangeSize=OutputBufferBytes;
+float * WGPU_Result_Array=new float[OutputBufferBytes];
+float * WGPU_Input_Array=new float[InputBufferBytes];
+uint32_t * WGPU_Color_Input_Array=new uint32_t[InputBufferBytes];
+std::vector<float>color_input(InputBufferUnits);
+std::vector<uint8_t>input(InputBufferBytes);
+std::vector<uint8_t>outputd(OutputBufferBytes);
+std::vector<uint8_t>outpute(OutputBufferBytes);
 u64_uni.at(3,3)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -558,7 +580,11 @@ wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
-return;
+return EM_TRUE;
+};
+
+void raf(){
+render();
 }
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
