@@ -1,9 +1,15 @@
-#include "../../include/vanilla/main_render.hpp"
+#include "../../include/vanilla/webgpu_egl.hpp"
 #include <fstream>
-  
-WGpuExternalTexture extTexture;
-WGpuExternalTextureBindingLayout extTextureBindingLayout={};
-WGpuExternalTextureDescriptor extTextureDescriptor={};
+
+WGpuBufferDescriptor bufferDescriptor_indice={};
+WGpuBuffer indice_Buffer;
+WGpuVertexAttribute vertAtt={};
+WGpuVertexBufferLayout vertBufLayout={};
+WGpuBufferDescriptor bufferDescriptor_vertex={};
+WGpuBuffer vertex_Buffer;
+WGpuBufferBindingLayout bufferBindingLayoutV={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
+WGpuShaderModuleCompilationHint fragHint={};
+
 WGpuTextureView depthTextureView;
 WGpuTextureView colorTextureView;
 WGpuTextureView videoTextureView;
