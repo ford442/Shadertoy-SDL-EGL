@@ -1,8 +1,8 @@
 #include "../../include/vanilla/webgpu_egl.hpp"
 
 inline char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,829440>;\n"
-"@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,829440>;\n"
+"@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
+"@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@group(0)@binding(4)var resizeSampler: sampler;\n"
@@ -20,11 +20,11 @@ inline char wgl_cmp_src[2000]=
 "var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(x,y)*(sizeINu/sizeOUTu));\n"
 // "var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
 // "var colorTest:vec4<f32>=inputBuffer[INtexCoord.x*INtexCoord.y*4];\n"
-// "textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),colorTest);\n"
-"outputBuffer[x*y*4]=inputBuffer[INtexCoord.x*INtexCoord.y*4];\n"
-"outputBuffer[(x*y*4)+1]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+1];\n"
-"outputBuffer[(x*y*4)+2]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+2];\n"
-"outputBuffer[(x*y*4)+3]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+3];\n"
+"textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),colorTest);\n"
+// "outputBuffer[x*y*4]=inputBuffer[INtexCoord.x*INtexCoord.y*4];\n"
+// "outputBuffer[(x*y*4)+1]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+1];\n"
+// "outputBuffer[(x*y*4)+2]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+2];\n"
+// "outputBuffer[(x*y*4)+3]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+3];\n"
 "}"
 "}"
 "outputBuffer[0]=inputBuffer[0];\n"
@@ -639,8 +639,6 @@ render();
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 wd.at(0,0)=result;
-
-
   
 js_data_pointer.at(0,0)=0;
 fjs_data_pointer.at(0,0)=0;
@@ -676,7 +674,6 @@ xyz.x=0;
 xyz.y=0;
 xyz.z=0;
     
-  //      ENRAGES AND FAILS  -->
 workgroupSize=1;
 OutputBufferUnits=64; // sze.at(0,0)*sze.at(0,0); // 33000000;
 OutputBufferBytes=64*4;   //  Too large of array fails..!
@@ -686,7 +683,7 @@ float * WGPU_Result_Array=new float[OutputBufferBytes];
 float * WGPU_Input_Array=new float[InputBufferBytes];
 
 
-  /*
+
   WGPU_UserData.at(0,0,0)=userData;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 textureDescriptorIn.dimension=WGPU_TEXTURE_DIMENSION_2D;
@@ -718,7 +715,7 @@ WGPU_TextureDescriptor.at(0,0,1)=textureDescriptorOut;
 WGPU_CommandEncoderDescriptor.at(0,0,0)=commandEncoderDescriptor;
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
-
+  /*
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
 WGPU_Input_Image.origin=xyz;
 WGPU_Input_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
