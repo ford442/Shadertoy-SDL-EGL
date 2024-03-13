@@ -52,7 +52,6 @@ WGpuTextureDescriptor highbitTextureDescriptor={};
 WGpuBufferDescriptor bufferDescriptorSrc={};
 WGpuBufferDescriptor bufferDescriptorDst={};
 WGpuBufferDescriptor bufferDescriptorVid={};
-
 WGpuSamplerDescriptor resizeSamplerDescriptor={};
 WGpuSamplerDescriptor videoSamplerDescriptor={};
 WGpuTextureDescriptor depthTextureDescriptor={};
@@ -73,9 +72,6 @@ WGpuBufferDescriptor bufferDescriptor_iTime={};
 WGpuBufferDescriptor bufferDescriptor_iResolution={};
 WGpuBufferDescriptor bufferDescriptor_iFrame={};
 WGpuBufferDescriptor bufferDescriptor_iTimeDelta={};
-WGpuBufferDescriptor bufferDescriptorSrc={};
-WGpuBufferDescriptor bufferDescriptorDst={};
-WGpuBufferDescriptor bufferDescriptorVid={};
 // WGpuPipelineLayoutDescriptor renderPipelineLayoutDesc;  // unused by webgpu.h
 // WGpuPipelineLayout pipeline_layout=0;
 WGpuBindGroupLayout bindgroup_layout=0;
