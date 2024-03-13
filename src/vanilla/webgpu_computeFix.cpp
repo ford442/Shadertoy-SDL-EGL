@@ -842,7 +842,7 @@ bindGroupLayoutEntries[6].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
 bindGroupLayoutEntries[6].layout.texture=wtbl.at(1,1);
 */
 WGPU_BindGroupLayoutEntries.at(0,0,0)=bindGroupLayoutEntries;
-WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(wd.at(0,0),WGPU_BindGroupLayoutEntries.at(0,0,0),6);
+WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(wd.at(0,0),WGPU_BindGroupLayoutEntries.at(0,0,0),5);
 WGPU_ComputePipelineLayout.at(0,0,0)=wgpu_device_create_pipeline_layout(wd.at(0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
 WGPU_ComputePipeline.at(0,0,0)=wgpu_device_create_compute_pipeline(wd.at(0,0),WGPU_ComputeModule.at(0,0,0),Entry,WGPU_ComputePipelineLayout.at(0,0,0),NULL,0);
 bindGroupEntry[0]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
