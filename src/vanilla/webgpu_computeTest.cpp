@@ -640,7 +640,6 @@ colorAttachment.clearValue.g=1.0f;
 colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
 wrpca.at(0,0)=colorAttachment;
-// depthAttachment={};
 depthTextureView=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
 wtv.at(0,0)=depthTextureView;
 depthAttachment.view=wtv.at(0,0);
