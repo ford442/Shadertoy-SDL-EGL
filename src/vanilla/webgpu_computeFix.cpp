@@ -77,7 +77,6 @@ boost::chrono::high_resolution_clock::time_point t3;
 WGpuUniform wTime;
 uint64_t tme;
 
-wpl_tensor wrpl=wpl_tensor{2,2};
 i_tensor on=i_tensor{2,2};
 wetd_tensor wetd=wetd_tensor{2,2};
 wet_tensor wet=wet_tensor{2,2};
