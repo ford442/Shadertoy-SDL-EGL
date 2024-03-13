@@ -221,9 +221,9 @@ let nblank$=Math.max((h$-w$)/2,0);
 let avag=0.750;
 let min=1.0;
 let max=0.0;
-agav.fill(avag,0,33);
-agav.fill(min,100,33);
-agav.fill(max,200,33);
+// agav.fill(avag,0,33);
+// agav.fill(min,100,33);
+// agav.fill(max,200,33);
 const bcanvas=document.querySelector("#bcanvas");
 const contx=bcanvas.getContext("webgl2",{colorType:'float32',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 /*  new ext list
