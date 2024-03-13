@@ -492,7 +492,7 @@ return;
 
 
 
-boost::function<EM_BOOL()>render=[](){
+void raf(){
 workgroupSize=1;
 OutputBufferUnits=33000000;
 OutputBufferBytes=33000000*4;
@@ -576,12 +576,10 @@ wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
-return EM_TRUE;
-};
-
-void raf(){
-render();
+return;
 }
+
+
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 wd.at(0,0)=result;
