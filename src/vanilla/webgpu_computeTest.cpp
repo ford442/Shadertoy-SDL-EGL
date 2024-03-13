@@ -459,7 +459,6 @@ WGpuCommandBuffer commandBuffer=0;
 WGpuCommandEncoder encoder=0;
 WGpuComputePassEncoder computePass=0;
 WGpuBindGroup bindGroup=0;
-WGpuBindGroup bindGroupB=0;
 WGpuPipelineLayout pipelineLayout=0;
 WGpuQuerySet querySet=0;
 WGpuComputePassDescriptor computePassDescriptor={};
@@ -467,9 +466,7 @@ WGpuCommandBufferDescriptor commandBufferDescriptor={};
 WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDescriptor={};
 WGpuBindGroupLayoutEntry bindGroupLayoutEntries[8]={};
-WGpuBindGroupLayoutEntry bindGroupLayoutEntriesB[2]={};
 WGpuBindGroupEntry bindGroupEntry[8]={};
-WGpuBindGroupEntry bindGroupEntryB[2]={};
 WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
@@ -481,7 +478,6 @@ WGpuBufferDescriptor bufferDescriptorI={};
 WGpuBufferDescriptor bufferDescriptorO={};
 WGpuBufferDescriptor bufferDescriptorM={};
 WGpuBufferDescriptor bufferDescriptorC={};
-// 14 = R32FLOAT   34 = RGBA32UINT
 WGpuTextureDescriptor textureDescriptorA={};
 WGpuTextureDescriptor textureDescriptorB={};
 WGpuTextureViewDescriptor textureViewDescriptorA={};
@@ -503,26 +499,6 @@ double_int53_t WGPU_Range_PointerC;
 
 struct Vertex{
 GLfloat position[4];
-};
-
-Vertex nvertices[]={
-{1.0f,1.0f,0.0f,1.0f},
-{-1.0f,1.0f,0.0f,1.0f},
-{-1.0f,-1.0f,0.0f,1.0f},
-{1.0f,1.0f,0.0f,1.0f},
-{1.0f,-1.0f,0.0f,1.0f},
-{-1.0f,-1.0f,0.0f,1.0f}
-};
-
-Vertex lvertices[]={
-{-1.0f,-1.0f,1.0f,1.0f},
-{1.0f,-1.0f,1.0f,1.0f},
-{1.0f,1.0f,1.0f,1.0f},
-{-1.0f,1.0f,1.0f,1.0f},
-{-1.0f,-1.0f,-1.0f,1.0f},
-{1.0f,-1.0f,-1.0f,1.0f},
-{1.0f,1.0f,-1.0f,1.0f},
-{-1.0f,1.0f,1.0f,1.0f}
 };
 
 Vertex vertices[]={
@@ -602,8 +578,6 @@ EM_ASM({
 document.querySelector('#outText1').innerHTML=$0;
 document.querySelector('#outText2').innerHTML=$1;
 },WGPU_ResultBuffer.at(0,0,0)[0],WGPU_ResultBuffer.at(0,0,0)[1]);
-// wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wb.at(3,3),1,64,1);
-// std::cout << WGPU_ResultBuffer.at(0,0,0)[0] << std::endl;
 }
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)!=3){
