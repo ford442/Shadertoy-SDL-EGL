@@ -677,7 +677,8 @@ WGpuOrigin3D xyz={};
 xyz.x=0;
 xyz.y=0;
 xyz.z=0;
-
+  
+  /*
   WGPU_UserData.at(0,0,0)=userData;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 textureDescriptorIn.dimension=WGPU_TEXTURE_DIMENSION_2D;
@@ -718,7 +719,7 @@ WGPU_Output_Image.origin=xyz;
 WGPU_Output_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(2,2)=WGPU_Input_Image;
 wict.at(0,0)=WGPU_Output_Image;
-  /*
+
 textureBindingLayoutFloat.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
 textureBindingLayoutFloat.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureBindingLayoutFloat.multisampled=0;
