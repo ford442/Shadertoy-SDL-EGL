@@ -482,6 +482,7 @@ return nullptr;
 void * fram;
 // uint8_t * fram;
 
+/*
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 return;
 };
@@ -518,6 +519,7 @@ wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 return;
 };
+*/
 
 void raf(){
   /*
