@@ -805,13 +805,9 @@ resizeSamplerDescriptor.maxAnisotropy=1;
 wsd.at(1,1)=resizeSamplerDescriptor;
 resizeSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(1,1));
 wgpu_sampler.at(3,3)=resizeSampler;
-  /*
+  
 
-raN=rNd4(256);
-input[0]=raN;
-  // WGPU_InputBuffer.at(0,0,0)[0]=raN;
-// std::cout << "Random input:" << std::endl;
-// std::cout << raN << std::endl;
+
 WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
 WGPU_ComputeModule.at(0,0,0)=wgpu_device_create_shader_module(wd.at(0,0),&WGPU_ShaderModuleDescriptor.at(0,0,0));
 WGPU_BufferBindingLayout.at(0,0,1)=bufferBindingLayout1;
@@ -878,7 +874,7 @@ WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
 WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),6);
 WGPU_ComputePassDescriptor.at(0,0,0)=computePassDescriptor;
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(wd.at(0,0));
-  */
+
 multiSamp={};
 multiSamp.count=0;
 multiSamp.mask=-1;
