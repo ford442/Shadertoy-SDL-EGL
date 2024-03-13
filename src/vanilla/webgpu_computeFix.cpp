@@ -1,5 +1,36 @@
 #include "../../include/vanilla/webgpu_egl.hpp"
 
+inline char wgl_cmp_src[2000]=
+"@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,4665600>;\n"
+"@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,33000000>;\n"
+"@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
+"@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
+"@group(0)@binding(4)var resizeSampler: sampler;\n"
+"@group(0)@binding(5)var <uniform> iResolution: u32;\n"
+// "@group(0)@binding(6)var videoTexture: texture_2d <f32>;\n"
+"@compute@workgroup_size(1,1,1)\n"
+"fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
+"var sizeINf=inputBuffer[0];\n"
+"var loopx:u32=u32(sizeINf);\n"
+"var sizeINu:u32=u32(sizeINf);\n"
+"var sizeOUTf=inputBuffer[1];\n"
+"var sizeOUTu:u32=u32(sizeOUTf);\n"
+"for(var y:u32=0u;y<loopx;y=y+1u){\n"
+"for(var x:u32=0u;x<loopx;x=x+1u){\n"
+"var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(x,y)*(sizeINu/sizeOUTu));\n"
+// "var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
+// "var colorTest:vec4<f32>=inputBuffer[INtexCoord.x*INtexCoord.y*4];\n"
+// "textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),colorTest);\n"
+"outputBuffer[x*y*4]=inputBuffer[INtexCoord.x*INtexCoord.y*4];\n"
+"outputBuffer[(x*y*4)+1]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+1];\n"
+"outputBuffer[(x*y*4)+2]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+2];\n"
+"outputBuffer[(x*y*4)+3]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+3];\n"
+"}"
+"}"
+"outputBuffer[0]=inputBuffer[0];\n"
+"outputBuffer[1]=inputBuffer[1];\n"
+"}";
+
 WGpuBufferDescriptor bufferDescriptor_indice={};
 WGpuBuffer indice_Buffer;
 WGpuVertexAttribute vertAtt={};
@@ -338,7 +369,6 @@ WGpuComputePipeline computePipeline=0;
 WGpuBuffer inputBuffer=0;
 WGpuBuffer outputBuffer=0;
 WGpuBuffer mapBuffer=0;
-WGpuBuffer uniBuffer=0;
 WGpuShaderModule cs=0;
 WGpuCommandBuffer commandBuffer=0;
 WGpuCommandEncoder encoder=0;
@@ -355,7 +385,6 @@ WGpuBindGroupLayoutEntry bindGroupLayoutEntries[8]={};
 WGpuBindGroupLayoutEntry bindGroupLayoutEntriesB[2]={};
 WGpuBindGroupEntry bindGroupEntry[8]={};
 WGpuBindGroupEntry bindGroupEntryB[2]={};
-WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
 WGpuBufferBindingLayout bufferBindingLayout4={2};
