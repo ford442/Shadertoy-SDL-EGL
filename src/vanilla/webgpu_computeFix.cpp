@@ -715,7 +715,7 @@ WGPU_TextureDescriptor.at(0,0,1)=textureDescriptorOut;
 WGPU_CommandEncoderDescriptor.at(0,0,0)=commandEncoderDescriptor;
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
-  /*
+
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
 WGPU_Input_Image.origin=xyz;
 WGPU_Input_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
@@ -749,7 +749,7 @@ textureViewDescriptorOut.baseMipLevel=0; // default = 0
 textureViewDescriptorOut.mipLevelCount=1;
 textureViewDescriptorOut.baseArrayLayer=0; // default = 0
 textureViewDescriptorOut.arrayLayerCount=1;
-
+  /*
 WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorIn;
 WGPU_TextureViewDescriptor.at(0,0,1)=textureViewDescriptorOut;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Array;
