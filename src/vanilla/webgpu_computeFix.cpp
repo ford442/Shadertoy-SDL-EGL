@@ -678,10 +678,10 @@ xyz.z=0;
     
   //      ENRAGES AND FAILS  -->
 workgroupSize=1;
-OutputBufferUnits=829440; // sze.at(0,0)*sze.at(0,0); // 33000000;
-OutputBufferBytes=829440*4;   //  Too large of array fails..!
-InputBufferUnits=829440;
-InputBufferBytes=829440*4;
+OutputBufferUnits=64; // sze.at(0,0)*sze.at(0,0); // 33000000;
+OutputBufferBytes=64*4;   //  Too large of array fails..!
+InputBufferUnits=64;
+InputBufferBytes=64*4;
 float * WGPU_Result_Array=new float[OutputBufferBytes];
 float * WGPU_Input_Array=new float[InputBufferBytes];
 
