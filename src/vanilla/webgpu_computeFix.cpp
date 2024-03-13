@@ -1,5 +1,4 @@
-#include "../../include/vanilla/main_render.hpp"
-#include <fstream>
+#include "../../include/vanilla/webgpu_egl.hpp"
   
 WGpuExternalTexture extTexture;
 WGpuExternalTextureBindingLayout extTextureBindingLayout={};
