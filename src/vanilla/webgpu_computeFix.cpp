@@ -31,6 +31,7 @@ inline char wgl_cmp_src[2000]=
 "outputBuffer[1]=inputBuffer[1];\n"
 "}";
 
+wtbl_tensor wtbl=wtbl_tensor{2,2};
 i_tensor on=i_tensor{2,2};
 wq_tensor WGPU_Queue=wq_tensor{1,1,2};
 wcb_tensor WGPU_CommandBuffer=wcb_tensor{1,1,3};
