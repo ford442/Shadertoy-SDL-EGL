@@ -788,6 +788,7 @@ void raf(){
 render();
 }
 
+// inline boost::function<void(WGpuDevice,void *)>ObtainedWebGpuDeviceStart=[](WGpuDevice result, void *userData){
 void ObtainedWebGpuDeviceStart(WGpuDevice resultD, void *userData){
 workgroupSize=1;
 OutputBufferUnits=33000000;
@@ -798,11 +799,6 @@ WGPU_InputRangeSize=OutputBufferBytes;
 float * WGPU_Result_Array=new float[OutputBufferBytes];
 float * WGPU_Input_Array=new float[InputBufferBytes];
 uint32_t * WGPU_Color_Input_Array=new uint32_t[InputBufferBytes];
-std::vector<float>color_input(InputBufferUnits);
-std::vector<uint8_t>input(InputBufferBytes);
-std::vector<uint8_t>outputd(OutputBufferBytes);
-std::vector<uint8_t>outpute(OutputBufferBytes);
-// inline boost::function<void(WGpuDevice,void *)>ObtainedWebGpuDeviceStart=[](WGpuDevice result, void *userData){
 wd.at(0,0)=resultD;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 // const char * frag_body=(char*)rd_fl(Fnm);
