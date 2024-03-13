@@ -129,8 +129,7 @@ using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 
 using namespace boost::chrono;
 
-using js_data_tensor=boost::numeric::ublas::tensor<std::vector<uint8_t>>;
-using js_data_tensor64=boost::numeric::ublas::tensor<std::vector<uint64_t>>;
+using fjs_tensor=boost::numeric::ublas::tensor<float *>;
 
 using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
 using wced_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoderDescriptor>;
