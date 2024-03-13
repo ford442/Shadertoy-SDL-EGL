@@ -384,13 +384,6 @@ Vertex vertices[]={
 
 uint32_t indices[35]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 
-inline int rNd4(int randomMax){
-entropySeed=(randomMax)*randomizer();
-std::srand(entropySeed);
-randomNumber=std::rand()%randomMax;
-return randomNumber;
-}
-
 wq_tensor WGPU_Queue=wq_tensor{1,1,2};
 wcb_tensor WGPU_CommandBuffer=wcb_tensor{1,1,3};
 wb_tensor WGPU_Buffers=wb_tensor{3,3,3};
@@ -494,6 +487,13 @@ WGpuImageCopyBuffer WGPU_Mapped_Buffer={};
 uint32_t outP;
 double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
+
+inline int rNd4(int randomMax){
+entropySeed=(randomMax)*randomizer();
+std::srand(entropySeed);
+randomNumber=std::rand()%randomMax;
+return randomNumber;
+}
 
 void getCode(const char * Fnm){
 // const char * frag_body=(char *)rd_fl(Fnm);
