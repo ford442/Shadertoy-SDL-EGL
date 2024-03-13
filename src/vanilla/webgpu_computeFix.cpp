@@ -110,7 +110,6 @@ WGpuUniform wTime;
 uint64_t tme;
 
 i_tensor on=i_tensor{2,2};
-i_tensor sze=i_tensor{2,2};
 static i_tensor texid=i_tensor{2,2};
 static i_tensor sze=i_tensor{3,3};
 static f_tensor szef=f_tensor{2,2};
@@ -466,9 +465,6 @@ wicb.at(1,1)=videoFrmBfrDst;
 WGpuOrigin2D xy={};
 xy.x=0;
 xy.y=0;
-// videoFrm.source; // must point to a WGpuImageBitmap (could also point to a HTMLVideoElement, HTMLCanvasElement or OffscreenCanvas, but those are currently unimplemented)
-videoFrm.origin=xy;
-videoFrm.flipY=EM_FALSE;
 videoSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_REPEAT;
 videoSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_REPEAT;
 videoSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_REPEAT;
