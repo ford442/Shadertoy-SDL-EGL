@@ -347,6 +347,9 @@ void * fram;
 
   //  compute shader vars
 
+c_tensor wgsl=c_tensor{2,2};
+c32_tensor wgsl32=c32_tensor{2,2};
+
 struct Vertex{
 GLfloat position[4];
 };
