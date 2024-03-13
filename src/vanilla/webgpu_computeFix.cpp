@@ -99,8 +99,9 @@ WGpuImageCopyExternalImage videoFrm={};
 WGPUImageCopyBuffer videoFrmBfrSrc={};
 // const WGPUImageCopyBuffer videoFrmBfrDst={};
 double szh,szw;
-int szhI,szwI,szhIv,szwIv;
-
+int szhI,szwI;
+double szhDv,szwDv;
+float szhFv,szwFv;
 struct WGpuUniform{
 uint64_t iTime;
 };
@@ -663,11 +664,11 @@ config.viewFormats=&canvasViewFormat[0];
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
-emscripten_get_canvas_element_size("mvi",&szwIv,&szhIv);
-emscripten_get_element_css_size("canvas",&szw,&szh);
+emscripten_get_element_css_size("#canvas",&szw,&szh);
+emscripten_get_element_css_size("#mvi",&szwDv,&szhDv);
 u64_siz.at(0,0)=szhI;
 sze.at(0,0)=int(szhI);
-sze.at(1,1)=720; // int(szhIv);
+sze.at(1,1)=int(szhDv); // 720; 
 szef.at(0,0)=floor(float(szh));
 // sze.at(0,1)=szh;
 WGpuOrigin3D xyz={};
