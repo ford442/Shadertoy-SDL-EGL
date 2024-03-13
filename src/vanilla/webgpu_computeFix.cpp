@@ -1,8 +1,8 @@
 #include "../../include/vanilla/webgpu_egl.hpp"
 
 inline char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,4665600>;\n"
-"@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,33000000>;\n"
+"@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,829440>;\n"
+"@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,829440>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@group(0)@binding(4)var resizeSampler: sampler;\n"
@@ -676,15 +676,15 @@ xyz.x=0;
 xyz.y=0;
 xyz.z=0;
     
-  /*      ENRAGES AND FAILS  -->
+  //      ENRAGES AND FAILS  -->
 workgroupSize=1;
-OutputBufferUnits=sze.at(0,0)*sze.at(0,0); // 33000000;
-OutputBufferBytes=sze.at(0,0)*sze.at(0,0)*4;   //  Too large of array fails..!
-InputBufferUnits=4665600;
-InputBufferBytes=4665600*4;
+OutputBufferUnits=829440; // sze.at(0,0)*sze.at(0,0); // 33000000;
+OutputBufferBytes=829440*4;   //  Too large of array fails..!
+InputBufferUnits=829440;
+InputBufferBytes=829440*4;
 float * WGPU_Result_Array=new float[OutputBufferBytes];
 float * WGPU_Input_Array=new float[InputBufferBytes];
-  */
+
 
   /*
   WGPU_UserData.at(0,0,0)=userData;
