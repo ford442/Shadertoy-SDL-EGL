@@ -104,7 +104,6 @@ WGpuBindGroupLayoutEntry bindGroupLayoutEntries[8]={};
 WGpuBindGroupLayoutEntry bindGroupLayoutEntriesB[2]={};
 WGpuBindGroupEntry bindGroupEntry[8]={};
 WGpuBindGroupEntry bindGroupEntryB[2]={};
-WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
 WGpuBufferBindingLayout bufferBindingLayout4={2};
