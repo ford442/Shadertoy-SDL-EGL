@@ -160,6 +160,9 @@ wtv_tensor WGPU_TextureView=wtv_tensor{3,3,3};
 uiptr_tensor WGPU_ColorBuffer=uiptr_tensor{1,1,1};
 wced_tensor WGPU_CommandEncoderDescriptor=wced_tensor{1,1,1};
 wbms_tensor WGPU_BufferStatus=wbms_tensor{1,1,1};
+
+c_tensor wgsl=c_tensor{2,2};
+
 uint32_t workgroupSize;
 uint32_t OutputBufferUnits;
 uint32_t OutputBufferBytes;
@@ -183,7 +186,7 @@ WGpuComputePipeline computePipeline=0;
 WGpuBuffer inputBuffer=0;
 WGpuBuffer outputBuffer=0;
 WGpuBuffer mapBuffer=0;
-WGpuBuffer uniBuffer=0;
+// WGpuBuffer uniBuffer=0;
 WGpuShaderModule cs=0;
 WGpuCommandBuffer commandBuffer=0;
 WGpuCommandEncoder encoder=0;
@@ -197,7 +200,7 @@ WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDescriptor={};
 WGpuBindGroupLayoutEntry bindGroupLayoutEntries[8]={};
 WGpuBindGroupEntry bindGroupEntry[8]={};
-WGpuBufferBindingLayout bufferBindingLayout1={3};
+// WGpuBufferBindingLayout bufferBindingLayout1={3};
 WGpuBufferBindingLayout bufferBindingLayout2={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
 WGpuBufferBindingLayout bufferBindingLayout4={2};
