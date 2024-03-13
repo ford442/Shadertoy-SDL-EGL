@@ -94,8 +94,8 @@ WGpuBuffer uni_iFrame_Buffer;
 WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 WGpuBufferBindingLayout bufferBindingLayoutR={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 WGpuTextureBindingLayout textureBindingLayout1={};
-WGpuTextureBindingLayout textureBindingLayout2={};
-WGpuTextureBindingLayout textureBindingLayout3={};
+WGpuTextureBindingLayout textureBindingLayoutFloat={};
+WGpuTextureBindingLayout textureBindingLayoutDepth={};
 WGpuSamplerBindingLayout samplerBindingLayout={};
 WGpuImageCopyExternalImage videoFrm={};
 WGPUImageCopyBuffer videoFrmBfrSrc={};
@@ -252,7 +252,7 @@ WGpuBufferDescriptor bufferDescriptorM={};
 WGpuBufferDescriptor bufferDescriptorC={};
 WGpuTextureDescriptor textureDescriptorA={};
 WGpuTextureDescriptor textureDescriptorB={};
-WGpuTextureViewDescriptor textureViewDescriptorA={};
+WGpuTextureViewDescriptor textureViewDescriptorIn={};
 char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
 int randomNumber=0,entropySeed=0;
@@ -718,7 +718,7 @@ videoTextureDescriptor.numViewFormats=0; // &textureBviewFormats[0];
 videoTextureDescriptor.viewFormats=nullptr; // &textureBviewFormats[0];
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorA;
 WGPU_TextureDescriptor.at(0,0,1)=textureDescriptorB;
-  /*
+
 WGPU_CommandEncoderDescriptor.at(0,0,0)=commandEncoderDescriptor;
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
@@ -734,26 +734,23 @@ WGPU_Output_Image.origin=xyz;
 WGPU_Output_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(2,2)=WGPU_Input_Image;
 wict.at(0,0)=WGPU_Output_Image;
-textureBindingLayout1.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
-textureBindingLayout1.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
-textureBindingLayout1.multisampled=0;
-wtbl.at(0,0)=textureBindingLayout1;
-textureBindingLayout2.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
-textureBindingLayout2.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
-textureBindingLayout2.multisampled=0;
-wtbl.at(1,1)=textureBindingLayout2;
-textureBindingLayout3.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_DEPTH;
-textureBindingLayout3.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
-textureBindingLayout3.multisampled=0;
-wtbl.at(2,2)=textureBindingLayout3;
-textureViewDescriptorA.format=wtf.at(0,0);
-textureViewDescriptorA.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
-textureViewDescriptorA.aspect=WGPU_TEXTURE_ASPECT_ALL;
-textureViewDescriptorA.baseMipLevel=0; // default = 0
-textureViewDescriptorA.mipLevelCount=1;
-textureViewDescriptorA.baseArrayLayer=0; // default = 0
-textureViewDescriptorA.arrayLayerCount=1;
-WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorA;
+
+textureBindingLayoutFloat.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
+textureBindingLayoutFloat.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureBindingLayoutFloat.multisampled=0;
+wtbl.at(1,1)=textureBindingLayoutFloat;
+textureBindingLayoutDepth.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_DEPTH;
+textureBindingLayoutDepth.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureBindingLayoutDepth.multisampled=0;
+wtbl.at(2,2)=textureBindingLayoutDepth;
+textureViewDescriptorIn.format=wtf.at(0,0);
+textureViewDescriptorIn.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureViewDescriptorIn.aspect=WGPU_TEXTURE_ASPECT_ALL;
+textureViewDescriptorIn.baseMipLevel=0; // default = 0
+textureViewDescriptorIn.mipLevelCount=1;
+textureViewDescriptorIn.baseArrayLayer=0; // default = 0
+textureViewDescriptorIn.arrayLayerCount=1;
+WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorIn;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Array;
 WGPU_InputBuffer.at(0,0,0)=WGPU_Input_Array;
 bufferDescriptorI={InputBufferBytes,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
@@ -808,6 +805,8 @@ resizeSamplerDescriptor.maxAnisotropy=1;
 wsd.at(1,1)=resizeSamplerDescriptor;
 resizeSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(1,1));
 wgpu_sampler.at(3,3)=resizeSampler;
+  /*
+
 raN=rNd4(256);
 input[0]=raN;
   // WGPU_InputBuffer.at(0,0,0)[0]=raN;
@@ -977,10 +976,7 @@ extTextureDescriptor.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 wetd.at(0,0)=extTextureDescriptor;
 // extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 // wet.at(0,0)=extTexture;
-WGpuOrigin3D xyz={};
-xyz.x=0;
-xyz.y=0;
-xyz.z=0;
+
 WGpuImageCopyTexture videoTextureCopy;
 videoTextureCopy.texture=wt.at(2,2);
 videoTextureCopy.mipLevel=0;
