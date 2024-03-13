@@ -781,6 +781,7 @@ WGPU_Output_Buffer.rowsPerImage=sze.at(0,0);
 WGPU_Mapped_Buffer.buffer=WGPU_Buffers.at(2,0,2);
 WGPU_Mapped_Buffer.bytesPerRow=(floor((sze.at(0,0)*4)/256)+1)*256;
 WGPU_Mapped_Buffer.rowsPerImage=sze.at(0,0);
+  /*
 resizeSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 resizeSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 resizeSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
@@ -792,6 +793,7 @@ resizeSamplerDescriptor.lodMaxClamp=32;
 // resizeSamplerDescriptor.compare;  // default = WGPU_COMPARE_FUNCTION_INVALID (not used)
 resizeSamplerDescriptor.maxAnisotropy=1;
 wsd.at(1,1)=resizeSamplerDescriptor;
+  */
 resizeSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(1,1));
 wgpu_sampler.at(3,3)=resizeSampler;
 raN=rNd4(256);
