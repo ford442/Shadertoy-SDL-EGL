@@ -651,6 +651,13 @@ render();
 }
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
+workgroupSize=1;
+OutputBufferUnits=33000000;
+OutputBufferBytes=33000000*4;
+InputBufferUnits=4665600;
+InputBufferBytes=4665600*4;
+float * WGPU_Result_Array=new float[OutputBufferBytes];
+float * WGPU_Input_Array=new float[InputBufferBytes];
 wd.at(0,0)=result;
 js_data_pointer.at(0,0)=0;
 fjs_data_pointer.at(0,0)=0;
