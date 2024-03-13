@@ -871,7 +871,7 @@ bindGroupEntry[6].binding=6;
 bindGroupEntry[6].resource=wtv.at(2,2);
 */
 WGPU_BindGroupEntries.at(0,0,0)=bindGroupEntry;
-WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),6);
+WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),5);
 WGPU_ComputePassDescriptor.at(0,0,0)=computePassDescriptor;
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(wd.at(0,0));
   
