@@ -569,6 +569,9 @@ return EM_TRUE;
 // }
 };
 
+void raf(){
+render();
+}
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 wd.at(0,0)=result;
