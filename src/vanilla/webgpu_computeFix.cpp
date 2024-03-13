@@ -99,7 +99,7 @@ WGpuImageCopyExternalImage videoFrm={};
 WGPUImageCopyBuffer videoFrmBfrSrc={};
 // const WGPUImageCopyBuffer videoFrmBfrDst={};
 double szh,szw;
-int szhI,szwI;
+int szhI,szwI,szhIv,szwIv;
 
 struct WGpuUniform{
 uint64_t iTime;
@@ -116,7 +116,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 WGpuUniform wTime;
 uint64_t tme;
 
-i_tensor on=i_tensor{2,2};
+i_tensor on=i_tensor{3,3};
 wetd_tensor wetd=wetd_tensor{2,2};
 wet_tensor wet=wet_tensor{2,2};
 i_tensor texid=i_tensor{2,2};
@@ -639,16 +639,6 @@ render();
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 wd.at(0,0)=result;
 
-  
-  /*      ENRAGES AND FAILS  -->
-workgroupSize=1;
-OutputBufferUnits=33000000;
-OutputBufferBytes=33000000*4;   //  Too large of array fails..!
-InputBufferUnits=4665600;
-InputBufferBytes=4665600*4;
-float * WGPU_Result_Array=new float[OutputBufferBytes];
-float * WGPU_Input_Array=new float[InputBufferBytes];
-  */
 
   
 js_data_pointer.at(0,0)=0;
@@ -673,17 +663,28 @@ config.viewFormats=&canvasViewFormat[0];
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
+emscripten_get_canvas_element_size("mvi",&szwIv,&szhIv);
 emscripten_get_element_css_size("canvas",&szw,&szh);
 u64_siz.at(0,0)=szhI;
 sze.at(0,0)=int(szhI);
-sze.at(1,1)=720;
+sze.at(1,1)=int(szhIv);
 szef.at(0,0)=floor(float(szh));
 // sze.at(0,1)=szh;
 WGpuOrigin3D xyz={};
 xyz.x=0;
 xyz.y=0;
 xyz.z=0;
-  
+    
+  /*      ENRAGES AND FAILS  -->
+workgroupSize=1;
+OutputBufferUnits=sze.at(0,0)*sze.at(0,0); // 33000000;
+OutputBufferBytes=sze.at(0,0)*sze.at(0,0)*4;   //  Too large of array fails..!
+InputBufferUnits=4665600;
+InputBufferBytes=4665600*4;
+float * WGPU_Result_Array=new float[OutputBufferBytes];
+float * WGPU_Input_Array=new float[InputBufferBytes];
+  */
+
   /*
   WGPU_UserData.at(0,0,0)=userData;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
@@ -1109,6 +1110,7 @@ emscripten_set_main_loop((void(*)())raf,0,0);
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
 wa.at(0,0)=result;
+on.at(2,2)=0;
 deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
 // deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8;
 WGPU_FEATURES_BITFIELD ftr=wgpu_adapter_or_device_get_features(wa.at(0,0));
@@ -1131,6 +1133,7 @@ EM_BOOL framm(int h,int w){
 // sze.at(1,0)=h;
 // sze.at(0,1)=w;
 sze.at(1,1)=h;
+  on.at(2,2)=1;
 return EM_TRUE;
 }
 
