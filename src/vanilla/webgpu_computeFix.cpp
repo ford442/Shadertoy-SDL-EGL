@@ -127,6 +127,130 @@ wsd_tensor wsd=wsd_tensor{2,2};
 ws_tensor wsmp=ws_tensor{2,2};
 v_tensor imgData=v_tensor{2,2};
 
+
+wq_tensor WGPU_Queue=wq_tensor{1,1,2};
+wcb_tensor WGPU_CommandBuffer=wcb_tensor{1,1,3};
+wb_tensor WGPU_Buffers=wb_tensor{3,3,3};
+wce_tensor WGPU_CommandEncoder=wce_tensor{1,1,4};
+wcpe_tensor WGPU_ComputePassCommandEncoder=wcpe_tensor{1,1,3};
+wcpd_tensor WGPU_ComputePassDescriptor=wcpd_tensor{1,1,3};
+wcp_tensor WGPU_ComputePipeline=wcp_tensor{1,1,1};
+wpl_tensor WGPU_ComputePipelineLayout=wpl_tensor{1,1,1};
+wsm_tensor WGPU_ComputeModule=wsm_tensor{1,1,1};
+wbg_tensor WGPU_BindGroup=wbg_tensor{1,1,2};
+wbgl_tensor WGPU_BindGroupLayout=wbgl_tensor{1,1,2};
+wbgle_tensor WGPU_BindGroupLayoutEntries=wbgle_tensor{1,1,2};
+wbge_tensor WGPU_BindGroupEntries=wbge_tensor{1,1,2};
+wbmc_tensor WGPU_MapCallback=wbmc_tensor{1,1,3};
+wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,3};
+wbbl_tensor WGPU_BufferBindingLayout=wbbl_tensor{1,1,4};
+wbd_tensor WGPU_BufferDescriptor=wbd_tensor{1,1,4};
+wsmd_tensor WGPU_ShaderModuleDescriptor=wsmd_tensor{1,1,3};
+di_tensor WGPU_BufferMappedRange=di_tensor{1,1,1};
+void_tensor WGPU_UserData=void_tensor{1,1,2};
+fptr_tensor WGPU_ResultBuffer=fptr_tensor{1,1,1};
+fptr_tensor WGPU_InputBuffer=fptr_tensor{1,1,1};
+i53_tensor WGPU_BufferRange=i53_tensor{1,1,2};
+i53_tensor WGPU_BufferSize=i53_tensor{1,1,1};
+wt_tensor WGPU_Texture=wt_tensor{3,3,3};
+wtd_tensor WGPU_TextureDescriptor=wtd_tensor{3,3,3};
+wstbl_tensor WGPU_StorageTextureBindingLayout=wstbl_tensor{1,1,1};
+wtvd_tensor WGPU_TextureViewDescriptor=wtvd_tensor{3,3,3};
+wtv_tensor WGPU_TextureView=wtv_tensor{3,3,3};
+uiptr_tensor WGPU_ColorBuffer=uiptr_tensor{1,1,1};
+wced_tensor WGPU_CommandEncoderDescriptor=wced_tensor{1,1,1};
+wbms_tensor WGPU_BufferStatus=wbms_tensor{1,1,1};
+uint32_t workgroupSize;
+uint32_t OutputBufferUnits;
+uint32_t OutputBufferBytes;
+uint32_t InputBufferUnits;
+uint32_t InputBufferBytes;
+uint64_t WGPU_InputRangeSize;
+
+const char * Entry="computeStuff";
+// uint32_t invocationCount=BufferMapSize/sizeof(int);
+// uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
+WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
+void * userDataA;
+void * userDataB;
+WGpuTexture textureA;
+// WGpuAdapter adapter=0;
+// WGpuDevice device=0;
+// WGpuQueue queue=0;
+WGpuBindGroupLayout bindGroupLayout=0;
+WGpuBindGroupLayout bindGroupLayoutB=0;
+WGpuComputePipeline computePipeline=0;
+WGpuBuffer inputBuffer=0;
+WGpuBuffer outputBuffer=0;
+WGpuBuffer mapBuffer=0;
+WGpuBuffer uniBuffer=0;
+WGpuShaderModule cs=0;
+WGpuCommandBuffer commandBuffer=0;
+WGpuCommandEncoder encoder=0;
+WGpuComputePassEncoder computePass=0;
+WGpuBindGroup bindGroup=0;
+WGpuPipelineLayout pipelineLayout=0;
+WGpuQuerySet querySet=0;
+WGpuComputePassDescriptor computePassDescriptor={};
+WGpuCommandBufferDescriptor commandBufferDescriptor={};
+WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
+WGpuDeviceDescriptor deviceDescriptor={};
+WGpuBindGroupLayoutEntry bindGroupLayoutEntries[8]={};
+WGpuBindGroupEntry bindGroupEntry[8]={};
+WGpuBufferBindingLayout bufferBindingLayout1={3};
+WGpuBufferBindingLayout bufferBindingLayout2={2};
+WGpuBufferBindingLayout bufferBindingLayout3={2};
+WGpuBufferBindingLayout bufferBindingLayout4={2};
+WGpuStorageTextureBindingLayout storageTextureBindingLayout1={1,18,2};
+WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
+
+WGpuBufferDescriptor bufferDescriptorI={};
+WGpuBufferDescriptor bufferDescriptorO={};
+WGpuBufferDescriptor bufferDescriptorM={};
+WGpuBufferDescriptor bufferDescriptorC={};
+WGpuTextureDescriptor textureDescriptorA={};
+WGpuTextureDescriptor textureDescriptorB={};
+WGpuTextureViewDescriptor textureViewDescriptorA={};
+char * cmp_bdy=wgl_cmp_src;
+WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
+int randomNumber=0,entropySeed=0;
+std::random_device randomizer;
+int raN=0;
+int raND=0;
+
+WGpuImageCopyTexture WGPU_Input_Image={};
+WGpuImageCopyTexture WGPU_Output_Image={};
+WGpuImageCopyBuffer WGPU_Input_Buffer={};
+WGpuImageCopyBuffer WGPU_Output_Buffer={};
+WGpuImageCopyBuffer WGPU_Mapped_Buffer={};
+uint32_t outP;
+double_int53_t WGPU_Range_PointerB;
+double_int53_t WGPU_Range_PointerC;
+
+struct Vertex{
+GLfloat position[4];
+};
+
+Vertex vertices[]={
+{-1.0,-1.0,1.0,1.0},
+{1.0,-1.0,1.0,1.0},
+{1.0,1.0,1.0,1.0},
+{-1.0,1.0,1.0,1.0},
+{-1.0,-1.0,-1.0,1.0},
+{1.0,-1.0,-1.0,1.0},
+{1.0,1.0,-1.0,1.0},
+{-1.0,1.0,1.0,1.0}
+};
+
+uint32_t indices[35]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
+
+inline int rNd4(int randomMax){
+entropySeed=(randomMax)*randomizer();
+std::srand(entropySeed);
+randomNumber=std::rand()%randomMax;
+return randomNumber;
+}
+
 const char * vertexShader=
 "struct VertexOutput{\n"
 "@builtin(position) Position : vec4<f32>,\n"
