@@ -565,17 +565,15 @@ WGPU_Input_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
 WGPU_Output_Image.texture=WGPU_Texture.at(0,0,1);
 WGPU_Output_Image.origin=oxyz.at(0,0);
 WGPU_Output_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
-wict.at(2,2)=WGPU_Input_Image;
-wict.at(0,0)=WGPU_Output_Image;
-// wict.at(2,2)=WGPU_Input_Image;  Attempting to set tensor type fails for unknown
-// wict.at(0,0)=WGPU_Output_Image;
-/*
+wict.at(1,1)=WGPU_Input_Image;
+wict.at(2,2)=WGPU_Output_Image;
+
 INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
 OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureViewDescriptor.at(0,0,1));
 wtv.at(3,3)=INTextureView;
 wtv.at(4,4)=OUTTextureView;
-
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+/*
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(1,1),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 WGPU_InputBuffer.at(0,0,0)[0]=sze.at(1,1);
 WGPU_InputBuffer.at(0,0,0)[1]=sze.at(0,0);
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&WGPU_InputBuffer.at(0,0,0),64*sizeof(float));
@@ -593,7 +591,7 @@ wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 
-  // wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+  // wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(2,2),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 
 
  // wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
@@ -619,7 +617,7 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
   
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,&fram,sze.at(0,0)*sze.at(0,0));
 
-// wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),&wicb.at(1,1),wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
+// wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),&wicb.at(1,1),wict.at(2,2),sze.at(0,0),sze.at(0,0),1);
 
 wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 
