@@ -475,20 +475,20 @@ WGpuBufferMapCallback mapCallbackRun2=[](WGpuBuffer buffer,void * userData,WGPU_
 return;
 };
 
+EM_JS(void,emm,(float * a,float * b),{
+document.querySelector('#outText1').innerHTML='Output0:'+a;
+document.querySelector('#outText2').innerHTML='Output1:'+b;
+});
+
+
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-  EM_ASM({
-document.querySelector('#outText1').innerHTML='Output[0]: ERROR MAPPING BUFFER';
-document.querySelector('#outText2').innerHTML='Output[1]: ERROR MAPPING BUFFER';
-});
+
 if(WGPU_BufferStatus.at(0,0,0)==3){
 WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
-EM_ASM({
-document.querySelector('#outText1').innerHTML='Output[0]: '+$0;
-document.querySelector('#outText2').innerHTML='Output[1]: '+$1;
-},WGPU_ResultBuffer.at(0,0,0)[0],WGPU_ResultBuffer.at(0,0,0)[1]);
+emm(WGPU_ResultBuffer.at(0,0,0)[0],WGPU_ResultBuffer.at(0,0,0)[1]);
 }
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)!=3){
