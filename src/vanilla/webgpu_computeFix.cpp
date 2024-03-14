@@ -473,6 +473,10 @@ return;
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
+  EM_ASM({
+document.querySelector('#outText1').innerHTML='Output[0]: ERROR MAPPING BUFFER';
+document.querySelector('#outText2').innerHTML='Output[1]: ERROR MAPPING BUFFER';
+});
 if(WGPU_BufferStatus.at(0,0,0)==3){
 WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,64*sizeof(float));
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
