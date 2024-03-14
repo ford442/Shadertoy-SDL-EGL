@@ -475,7 +475,7 @@ WGpuBufferMapCallback mapCallbackRun2=[](WGpuBuffer buffer,void * userData,WGPU_
 return;
 };
 
-EM_JS(void,emm,(float * a,float * b),{
+EM_JS(void,emm,(float a,float b),{
 document.querySelector('#outText1').innerHTML='Output0:'+a;
 document.querySelector('#outText2').innerHTML='Output1:'+b;
 });
