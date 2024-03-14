@@ -674,10 +674,13 @@ sze.at(0,0)=int(szhI);
 sze.at(1,1)=720; // int(szhDv);
 szef.at(0,0)=floor(float(szh));
 // sze.at(0,1)=szh;
-WGpuOrigin3D xyz={};
-xyz.x=0;
-xyz.y=0;
-xyz.z=0;
+WGpuOrigin3D OriginXYZ={};
+OriginXYZ.x=0;
+OriginXYZ.y=0;
+OriginXYZ.z=0;
+WGpuOrigin2D OriginXY={};
+OriginXY.x=0;
+OriginXY.y=0;
     
 workgroupSize=1;
 OutputBufferUnits=64; // sze.at(0,0)*sze.at(0,0); // 33000000;
@@ -722,10 +725,10 @@ WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescri
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
 
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
-WGPU_Input_Image.origin=xyz;
+WGPU_Input_Image.origin=OriginXY;
 WGPU_Input_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
 WGPU_Output_Image.texture=WGPU_Texture.at(0,0,1);
-WGPU_Output_Image.origin=xyz;
+WGPU_Output_Image.origin=OriginXY;
 WGPU_Output_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(2,2)=WGPU_Input_Image;
 wict.at(0,0)=WGPU_Output_Image;
@@ -930,7 +933,7 @@ WGPUImageCopyBuffer videoFrmBfrDst={};
 wicb.at(1,1)=videoFrmBfrDst;
 
 // videoFrm.source; // must point to a WGpuImageBitmap (could also point to a HTMLVideoElement, HTMLCanvasElement or OffscreenCanvas, but those are currently unimplemented)
-videoFrm.origin=xyz;
+videoFrm.origin=OriginXY;
 videoFrm.flipY=EM_FALSE;
 videoSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_REPEAT;
 videoSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_REPEAT;
@@ -980,7 +983,7 @@ wetd.at(0,0)=extTextureDescriptor;
 WGpuImageCopyTexture videoTextureCopy;
 videoTextureCopy.texture=wt.at(2,2);
 videoTextureCopy.mipLevel=0;
-videoTextureCopy.origin=xyz;
+videoTextureCopy.origin=OriginXY;
 videoTextureCopy.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(0,0)=videoTextureCopy;
 bufferDescriptorUni={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
