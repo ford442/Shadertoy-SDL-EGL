@@ -930,7 +930,7 @@ WGPUImageCopyBuffer videoFrmBfrDst={};
 wicb.at(1,1)=videoFrmBfrDst;
 
 // videoFrm.source; // must point to a WGpuImageBitmap (could also point to a HTMLVideoElement, HTMLCanvasElement or OffscreenCanvas, but those are currently unimplemented)
-videoFrm.origin=xy;
+videoFrm.origin=xyz;
 videoFrm.flipY=EM_FALSE;
 videoSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_REPEAT;
 videoSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_REPEAT;
