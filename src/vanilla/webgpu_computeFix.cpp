@@ -475,7 +475,7 @@ WGpuBufferMapCallback mapCallbackRun2=[](WGpuBuffer buffer,void * userData,WGPU_
 return;
 };
 
-void emm(floata,floatb){
+void emm(float a,float b){
 EM_ASM({
 document.querySelector('#outText1').innerHTML='Output0:'+$0;
 document.querySelector('#outText2').innerHTML='Output1:'+$1;
