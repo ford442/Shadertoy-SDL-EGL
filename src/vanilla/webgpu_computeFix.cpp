@@ -241,7 +241,7 @@ WGpuCommandBufferDescriptor commandBufferDescriptor={};
 WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDescriptor={};
 WGpuBindGroupLayoutEntry Compute_Bindgroup_Layout_Entries[8]={};
-WGpuCompute_Bindgroup_Entries Compute_Bindgroup_Entries[8]={};
+WGpuBindGroupEntry Compute_Bindgroup_Entries[8]={};
 WGpuBufferBindingLayout bufferBindingLayoutIn={3};
 
 WGpuBufferBindingLayout bufferBindingLayoutOut={2};
