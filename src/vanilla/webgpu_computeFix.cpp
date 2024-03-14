@@ -725,10 +725,10 @@ WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescri
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
 
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
-WGPU_Input_Image.origin=OriginXY;
+WGPU_Input_Image.origin=OriginXYZ;
 WGPU_Input_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
 WGPU_Output_Image.texture=WGPU_Texture.at(0,0,1);
-WGPU_Output_Image.origin=OriginXY;
+WGPU_Output_Image.origin=OriginXYZ;
 WGPU_Output_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(2,2)=WGPU_Input_Image;
 wict.at(0,0)=WGPU_Output_Image;
@@ -983,7 +983,7 @@ wetd.at(0,0)=extTextureDescriptor;
 WGpuImageCopyTexture videoTextureCopy;
 videoTextureCopy.texture=wt.at(2,2);
 videoTextureCopy.mipLevel=0;
-videoTextureCopy.origin=OriginXY;
+videoTextureCopy.origin=OriginXYZ;
 videoTextureCopy.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(0,0)=videoTextureCopy;
 bufferDescriptorUni={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
