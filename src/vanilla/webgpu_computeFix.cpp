@@ -210,9 +210,10 @@ wbms_tensor WGPU_BufferStatus=wbms_tensor{1,1,1};
 
 c_tensor wgsl=c_tensor{2,2};
 
-uint32_t workgroupSize;
-uint32_t OutputBufferBytes;
-uint32_t InputBufferBytes;
+uint32_t workgroupSize=64;
+uint32_t OutputBufferBytes=64*4;
+uint32_t InputBufferBytes=64*4;
+uint64_t WGPU_InputRangeSize=OutputBufferBytes;
 
 const char * Entry="computeStuff";
 // uint32_t invocationCount=BufferMapSize/sizeof(int);
@@ -272,6 +273,9 @@ WGpuImageCopyBuffer WGPU_Mapped_Buffer={};
 uint32_t outP;
 double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
+
+float * WGPU_Result_Array=new float[OutputBufferBytes];
+float * WGPU_Input_Array=new float[InputBufferBytes];
 
 struct Vertex{
 GLfloat position[4];
@@ -478,9 +482,9 @@ document.querySelector('#outText1').innerHTML='Output[0]: ERROR MAPPING BUFFER';
 document.querySelector('#outText2').innerHTML='Output[1]: ERROR MAPPING BUFFER';
 });
 if(WGPU_BufferStatus.at(0,0,0)==3){
-WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,64*sizeof(float));
+WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),64*sizeof(float));
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 EM_ASM({
 document.querySelector('#outText1').innerHTML='Output[0]: '+$0;
 document.querySelector('#outText2').innerHTML='Output[1]: '+$1;
@@ -490,9 +494,9 @@ WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)!=3){
 if(on.at(1,1)!=1){
 on.at(1,1)=1;
-wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,64*sizeof(float));  
-  }
-// wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,64*sizeof(float));
+wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
+// wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,OutputBufferBytes);
+}
 }
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 return;
@@ -579,7 +583,7 @@ wtv.at(4,4)=OUTTextureView;
 wgpu_queue_write_texture(wq.at(0,0),&wict.at(1,1),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 WGPU_InputBuffer.at(0,0,0)[0]=sze.at(1,1);
 WGPU_InputBuffer.at(0,0,0)[1]=sze.at(0,0);
-wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&WGPU_InputBuffer.at(0,0,0),64*sizeof(float));
+wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
 
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
@@ -592,7 +596,7 @@ wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_Bind
       
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),1,1,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
-wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,64*sizeof(float));
+wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 
   // wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(2,2),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 
@@ -680,10 +684,7 @@ OriginXY.x=0;
 OriginXY.y=0;
 oxy.at(0,0)=OriginXY;
 workgroupSize=1;
-OutputBufferBytes=64*sizeof(float);   //  Too large of array fails..!
-InputBufferBytes=64*sizeof(float);
-float * WGPU_Result_Array=new float[OutputBufferBytes];
-float * WGPU_Input_Array=new float[InputBufferBytes];
+
 
 
 
@@ -820,8 +821,6 @@ INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewD
 OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureViewDescriptor.at(0,0,1));
 wtv.at(3,3)=INTextureView;
 wtv.at(4,4)=OUTTextureView;
-
-
 Compute_Bindgroup_Layout_Entries[0].binding=0;
 Compute_Bindgroup_Layout_Entries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[0].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
