@@ -80,7 +80,7 @@ WGpuBufferDescriptor bufferDescriptor_iTimeDelta={};
 // WGpuPipelineLayout pipeline_layout=0;
 WGpuBindGroupLayout bindgroup_layout=0;
 WGpuBindGroupLayoutEntry render_bindgroup_layout_entries[4]={};
-WGpuCompute_Bindgroup_Entries render_bindgroup_entries[4]={};
+WGpuBindGroupEntry render_bindgroup_entries[4]={};
 WGpuBindGroup bindgroup=0;
 // WGpuRenderPipelineDescriptor renderPipelineDesc;
 WGpuRenderBundleEncoder renderBundleEncoder;
