@@ -613,7 +613,7 @@ WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
   
   //  non-callback unmapping
-if(WGPU_BufferStatus.at(0,0,0)!=1&&WGPU_BufferStatus.at(0,0,0)!=0){
+if(WGPU_BufferStatus.at(0,0,0)!=1){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 on.at(1,1)=5;
 }
