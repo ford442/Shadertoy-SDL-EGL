@@ -581,6 +581,7 @@ wtv.at(3,3)=INTextureView;
 wtv.at(4,4)=OUTTextureView;
 
 wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(1,1),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+  
 WGPU_InputBuffer.at(0,0,0)[0]=sze.at(1,1);
 WGPU_InputBuffer.at(0,0,0)[1]=sze.at(0,0);
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
@@ -1178,6 +1179,8 @@ FS.mkdir('/video');
 const g=new GPUX();
 let $H=Module.HEAPU8.buffer;
 let $$1;
+
+let running=0;
   
 function nearestPowerOf2(n){
 if(n&(n-1)){
@@ -1240,7 +1243,14 @@ let SiZ=window.innerHeight;
 let tstSiZ=h$;
 // document.querySelector("#mvi").height=h$;
 // document.querySelector("#mvi").width=w$;
+if(running==0){
 Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+setTimeout(function(){
+Module.ccall("startWebGPU");
+console.log('Starting..');
+running=1;
+},500);
+}
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
@@ -1374,7 +1384,6 @@ document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
 videoFrames();
-Module.ccall("startWebGPU");
 },1500);
 document.querySelector('#status').style.backgroundColor="green";
 }
