@@ -1263,39 +1263,8 @@ pixelData=new Uint8ClampedArray(imageData);
 // frrm.set(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
-/*
+}
 
-var pth="./test.png";
-const ff=new XMLHttpRequest();
-ff.open('GET',pth,true);
-ff.responseType='arraybuffer';
-document.querySelector('#stat').innerHTML='Downloading Image';
-document.querySelector('#stat').style.backgroundColor='yellow';
-ff.addEventListener("load",function(){
-let sarrayBuffer=ff.response;
-if(sarrayBuffer){
-let sfil=new Uint8ClampedArray(sarrayBuffer);
-//  console.log(sfil[12]);
-//  console.log(sfil[42]);
-//  console.log(sfil[52]);
-FS.writeFile('/video/frame.gl',sfil);
-document.querySelector('#stat').innerHTML='Downloaded Image';
-document.querySelector('#stat').style.backgroundColor='blue';
-}
-});
-ff.send(null);
-const gpu = navigator.gpu;
-const format = gpu.getPreferredCanvasFormat();
-const adapter = await gpu.requestAdapter();
-const device = await adapter.requestDevice();
-setInterval(function(){
-const externalTexture=device.importExternalTexture({source:vvi});
-var mm=wgpuStore(externalTexture);
-// console.log(mm);
-Module.ccall("frm",null,[Number],[mm]);
-},16.666);
-*/  
-}
   /*
 async function GvideoFrames(){
 let SiZ=window.innerHeight;
@@ -1331,7 +1300,7 @@ let image=gl2.getImageData(0,0,SiZ,SiZ);
 let imageData=image.data;
 Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
 let pixelData=new Uint8Array(imageData);
-*/
+
   
 setInterval(function(){
 gl2.drawImage(vv,0,0);
@@ -1354,7 +1323,7 @@ FS.writeFile('/video/frame.gl',pixelData);
 },16.666);
 
 }
-
+*/
 function normalResStart(){
 setTimeout(function(){
 document.querySelector('#shut').innerHTML=2;
