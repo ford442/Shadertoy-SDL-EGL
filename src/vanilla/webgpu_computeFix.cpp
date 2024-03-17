@@ -614,10 +614,12 @@ wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Bu
 
 
     //  non-callback mapping
-
+if(on.at(1,1)==5){
 EM_ASM({
 document.querySelector('#outText').innerHTML='Buffer at [0]:'+$0;
 },WGPU_ResultBuffer.at(0,0,0)[0]);
+on.at(1,1)=6;
+}
 if(on.at(1,1)==3){
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)==3){
@@ -640,7 +642,7 @@ if(WGPU_BufferStatus.at(0,0,0)==3){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
 if(WGPU_BufferStatus.at(0,0,0)==1){
-on.at(1,1)=0;
+on.at(1,1)=5;
 }
 }
 
