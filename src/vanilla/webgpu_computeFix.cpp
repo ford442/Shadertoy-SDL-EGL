@@ -488,12 +488,12 @@ if(WGPU_BufferStatus.at(0,0,0)!=3&&on.at(1,1)==0){
 on.at(1,1)=1;
 wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
 // wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),WGPU_MapCallback.at(0,0,0),&WGPU_UserData.at(0,0,0),mode1,0,OutputBufferBytes);
-}
+
 EM_ASM({
 document.querySelector('#outText1').innerHTML='Output0:'+$0;
 },WGPU_ResultBuffer.at(0,0,0)[0]);
 }
-}
+
 // WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 return;
 };
