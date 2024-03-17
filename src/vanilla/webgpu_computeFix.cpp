@@ -596,7 +596,7 @@ document.querySelector('#outText').innerHTML='Buffer at [0]:'+$0.toFixed(2);
 },WGPU_ResultBuffer.at(0,0,0)[0]);
 
 if(on.at(1,1)==3){
-WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
+WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2)));
 if(wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2)==3){
 WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
