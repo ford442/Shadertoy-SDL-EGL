@@ -575,7 +575,7 @@ wetd.at(0,0).source=texid.at(0,0);
        // Compute Pass
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
-WGPU_Texture.at(0,0,2)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,3));
+WGPU_Texture.at(0,0,2)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,2));
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
 WGPU_Input_Image.origin=oxyz.at(0,0);
 WGPU_Input_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
