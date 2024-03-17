@@ -15,11 +15,13 @@ inline char wgl_cmp_src[2000]=
 "var sizeINu:u32=u32(sizeINf);\n"
 "var sizeOUTf=inputBuffer[1];\n"
 "var sizeOUTu:u32=u32(sizeOUTf);\n"
+"outputBuffer[0]=f32(3.33f);\n"
+"outputBuffer[1]=4.44f;\n"
 "for(var y:u32=0u;y<loopx;y=y+1u){\n"
 "for(var x:u32=0u;x<loopx;x=x+1u){\n"
 "var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(x,y)*(sizeINu/sizeOUTu));\n"
 // "var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
-"var colorTest:vec4<f32>=vec4<f32>(0.77,0.11,0.88,1.0);\n"
+"var colorTest:vec4<f32>=vec4<f32>(0.77f,0.11f,0.88f,1.0f);\n"
 "textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),colorTest);\n"
 // "outputBuffer[x*y*4]=inputBuffer[INtexCoord.x*INtexCoord.y*4];\n"
 // "outputBuffer[(x*y*4)+1]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+1];\n"
@@ -27,8 +29,6 @@ inline char wgl_cmp_src[2000]=
 // "outputBuffer[(x*y*4)+3]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+3];\n"
 "}"
 "}"
-"outputBuffer[0]=f32(3.33f);\n"
-"outputBuffer[1]=4.44f;\n"
 "}";
 
 WGpuExternalTexture extTexture;
