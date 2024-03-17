@@ -1,6 +1,6 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
 
-inline char wgl_cmp_srcAA[2000]=
+inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
@@ -18,8 +18,8 @@ inline char wgl_cmp_srcAA[2000]=
 "for(var y:u32=0u;y<loopx;y=y+1u){\n"
 "for(var x:u32=0u;x<loopx;x=x+1u){\n"
 "var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(x,y)*(sizeINu/sizeOUTu));\n"
-"var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
-// "var colorTest:vec4<f32>=vec4<f32>(0.77,0.11,0.88,1.0);\n"
+// "var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
+"var colorTest:vec4<f32>=vec4<f32>(0.77,0.11,0.88,1.0);\n"
 "textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),colorTest);\n"
 // "outputBuffer[x*y*4]=inputBuffer[INtexCoord.x*INtexCoord.y*4];\n"
 // "outputBuffer[(x*y*4)+1]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+1];\n"
@@ -31,7 +31,7 @@ inline char wgl_cmp_srcAA[2000]=
 "outputBuffer[1]=4.44f;\n"
 "}";
 
-inline char wgl_cmp_src[2000]=
+inline char wgl_cmp_srcAA[2000]=
 "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
