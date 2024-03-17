@@ -613,9 +613,7 @@ WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,Output
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 EM_ASM({
-document.querySelector('#outText').innerHTML='Buffer at [0]:'+$0;
-document.querySelector('#outText1').innerHTML='Buffer at [1]:'+$1.toFixed();
-document.querySelector('#outText2').innerHTML='Buffer at [1]:'+$1.toFixed(2);
+document.querySelector('#outText').innerHTML='Buffer at [0]:'+$0.toFixed(2);
 },WGPU_ResultBuffer.at(0,0,0)[0],WGPU_ResultBuffer.at(0,0,0)[1]);
 }
 if(WGPU_BufferStatus.at(0,0,0)==1){
