@@ -837,8 +837,10 @@ wbbl.at(0,0)=bufferBindingLayoutR;
 // wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 // }
 WGPU_Output_Buffer.buffer=WGPU_Buffers.at(0,0,0);
-WGPU_Output_Buffer.bytesPerRow=(floor((sze.at(0,0)*4)/256)+1)*256;
-WGPU_Output_Buffer.rowsPerImage=sze.at(0,0);
+WGPU_Output_Buffer.bytesPerRow=512;
+// WGPU_Output_Buffer.bytesPerRow=(floor((sze.at(0,0)*4)/256)+1)*256;
+WGPU_Output_Buffer.rowsPerImage=64;
+// WGPU_Output_Buffer.rowsPerImage=sze.at(0,0);
 // wicb.at(2,2)=WGPU_Output_Buffer;
 WGPU_Mapped_Buffer.buffer=WGPU_Buffers.at(2,0,2);
 WGPU_Mapped_Buffer.bytesPerRow=512;
