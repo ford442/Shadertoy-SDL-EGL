@@ -482,6 +482,7 @@ WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU
 EM_ASM({
 document.querySelector('#outText').innerHTML='Buffer at [0]:'+$0.toFixed(2);
 },WGPU_ResultBuffer.at(0,0,0)[0]);
+wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 return;
 };
 
@@ -637,12 +638,13 @@ wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);
 WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 
   //  non-callback unmapping
+  /*
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)!=1){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 on.at(1,1)=0;
 }
-  
+  */
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 
