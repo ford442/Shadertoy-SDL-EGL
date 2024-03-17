@@ -577,8 +577,8 @@ wtv.at(4,4)=OUTTextureView;
 
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(1,1),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
   
-WGPU_InputBuffer.at(0,0,0)[0]=sze.at(1,1);
-WGPU_InputBuffer.at(0,0,0)[1]=sze.at(0,0);
+WGPU_InputBuffer.at(0,0,0)[0]=420.0; // sze.at(1,1);
+WGPU_InputBuffer.at(0,0,0)[1]=777.0; // sze.at(0,0);
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
 
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
