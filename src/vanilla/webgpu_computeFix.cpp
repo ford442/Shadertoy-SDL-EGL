@@ -27,8 +27,8 @@ inline char wgl_cmp_src[2000]=
 // "outputBuffer[(x*y*4)+3]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+3];\n"
 "}"
 "}"
-"outputBuffer[0]=inputBuffer[0];\n"
-"outputBuffer[1]=inputBuffer[1];\n"
+"outputBuffer[0]=112.112;\n"
+"outputBuffer[1]=0.0001;\n"
 "}";
 
 WGpuExternalTexture extTexture;
@@ -489,17 +489,11 @@ on.at(1,1)=1;
 wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
 // wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),WGPU_MapCallback.at(0,0,0),&WGPU_UserData.at(0,0,0),mode1,0,OutputBufferBytes);
 }
-if(on.at(1,1)!=1){
 EM_ASM({
 document.querySelector('#outText1').innerHTML='Output0:'+$0;
 },WGPU_ResultBuffer.at(0,0,0)[0]);
-}else{
-EM_ASM({
-document.querySelector('#outText1').innerHTML='Buffer Mapping Not Complete.';
-});
-}
+}}
 // WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-
 return;
 };
 
