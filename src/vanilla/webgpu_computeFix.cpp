@@ -457,10 +457,20 @@ return nullptr;
 
 void * fram;
 // uint8_t * fram;
+
 void getCode(const char * Fnm){
 // const char * frag_body=(char *)rd_fl(Fnm);
 wgsl.at(0,0)=frag_body;
 return;
+}
+
+EM_BOOL framm(int h,int w){
+// texid.at(0,0)=em;
+// sze.at(1,0)=h;
+// sze.at(0,1)=w;
+sze.at(1,1)=h;
+  on.at(2,2)=1;
+return EM_TRUE;
 }
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
@@ -1151,15 +1161,6 @@ options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
 options.forceFallbackAdapter=EM_FALSE;
 wao.at(0,0)=options;
 navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
-}
-
-EM_BOOL framm(int h,int w){
-// texid.at(0,0)=em;
-// sze.at(1,0)=h;
-// sze.at(0,1)=w;
-sze.at(1,1)=h;
-  on.at(2,2)=1;
-return EM_TRUE;
 }
 
 extern "C"{
