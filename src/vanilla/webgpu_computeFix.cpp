@@ -749,8 +749,8 @@ WGPU_Output_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
 WGPU_Mapped_Image.texture=WGPU_Texture.at(0,0,2);
 WGPU_Mapped_Image.origin=oxyz.at(0,0);
 WGPU_Mapped_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
-wict.at(2,2)=WGPU_Input_Image;
-wict.at(0,0)=WGPU_Output_Image;
+wict.at(1,1)=WGPU_Input_Image;
+wict.at(2,2)=WGPU_Output_Image;
 wict.at(3,3)=WGPU_Mapped_Image;
 
 textureBindingLayoutFloat.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
