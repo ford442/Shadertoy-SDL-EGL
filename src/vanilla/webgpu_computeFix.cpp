@@ -21,7 +21,7 @@ inline char wgl_cmp_src[2000]=
 "outputBuffer[1]=0.0;\n"
 "var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(x,y)*(sizeINu/sizeOUTu));\n"
 "var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
-// "var colorTest:vec4<f32>=inputBuffer[INtexCoord.x*INtexCoord.y*4];\n"
+// "var colorTest:vec4<f32>=vec4<f32>(0.77,0.11,0.88,1.0);\n"
 "textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),colorTest);\n"
 // "outputBuffer[x*y*4]=inputBuffer[INtexCoord.x*INtexCoord.y*4];\n"
 // "outputBuffer[(x*y*4)+1]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+1];\n"
