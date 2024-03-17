@@ -669,6 +669,10 @@ void raf(){
 render();
 }
 
+void sz(int hh){
+sze.at(1,1)=hh;
+}
+
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 wd.at(0,0)=result;
 on.at(1,1)=0;
@@ -1150,7 +1154,7 @@ options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
 options.forceFallbackAdapter=EM_FALSE;
 wao.at(0,0)=options;
-  sze.at(1,1)=hh;
+sz(hh);
 navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 }
 
