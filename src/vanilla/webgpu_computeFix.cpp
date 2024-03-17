@@ -175,7 +175,6 @@ wsd_tensor wsd=wsd_tensor{2,2};
 ws_tensor wsmp=ws_tensor{4,4};
 v_tensor imgData=v_tensor{2,2};
 
-
 wq_tensor WGPU_Queue=wq_tensor{1,1,2};
 wcb_tensor WGPU_CommandBuffer=wcb_tensor{1,1,3};
 wb_tensor WGPU_Buffers=wb_tensor{3,3,3};
@@ -462,15 +461,6 @@ void getCode(const char * Fnm){
 // const char * frag_body=(char *)rd_fl(Fnm);
 wgsl.at(0,0)=frag_body;
 return;
-}
-
-EM_BOOL framm(int h,int w){
-// texid.at(0,0)=em;
-// sze.at(1,0)=h;
-// sze.at(0,1)=w;
-sze.at(1,1)=h;
-  on.at(2,2)=1;
-return EM_TRUE;
 }
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
@@ -1154,22 +1144,14 @@ wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
 
-void WGPU_Start(){
+void WGPU_Start(int hh){
 WGpuRequestAdapterOptions options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
 options.forceFallbackAdapter=EM_FALSE;
 wao.at(0,0)=options;
+  sze.at(1,1)=hh;
 navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
-}
-
-extern "C"{
-
-void frm(int h,int w){
-framm(h,w);
-return;
-}
-
 }
 
 EM_JS(void,js_main,(),{
@@ -1245,9 +1227,9 @@ let tstSiZ=h$;
 // document.querySelector("#mvi").height=h$;
 // document.querySelector("#mvi").width=w$;
 if(running==0){
-Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+// Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 setTimeout(function(){
-Module.ccall("startWebGPU");
+Module.ccall("startWebGPU",null,"Number",h$);
 console.log('Starting..');
 running=1;
 },500);
@@ -1458,8 +1440,8 @@ document.querySelector('#di').click();
 
 extern"C"{
 
-void startWebGPU(){
-WGPU_Start();
+void startWebGPU(int hh){
+WGPU_Start(hh);
 }
 
 }
