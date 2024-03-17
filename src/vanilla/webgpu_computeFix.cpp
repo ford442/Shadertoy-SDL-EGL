@@ -1192,7 +1192,7 @@ for (let c = 0; c < 4; c++) {
 }
 return imageData;
 }
-  
+  /*
 async function videoFramesG(){
 let SiZ=window.innerHeight;
 let w$=parseInt(document.querySelector("#mvi").videoWidth);
@@ -1217,7 +1217,7 @@ frrm.set($$1,0);
 FS.writeFile('/video/frame.gl',frrm);
 },16.6);
 }
-  
+  */
 async function videoFrames(){
 // document.querySelector("#mvi").height=SiZ;
 let w$=parseInt(document.querySelector("#mvi").videoWidth);
@@ -1250,7 +1250,7 @@ let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 let imageData=image.data;
 let pixelData=new Uint8ClampedArray(imageData);
 //  let frrm=new Uint8ClampedArray($H,0,imageData.length);
-Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+// Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 // frrm.set(pixelData);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
@@ -1296,7 +1296,7 @@ Module.ccall("frm",null,[Number],[mm]);
 },16.666);
 */  
 }
-  
+  /*
 async function GvideoFrames(){
 let SiZ=window.innerHeight;
 document.querySelector("#mvi").height=SiZ;
@@ -1331,7 +1331,8 @@ let image=gl2.getImageData(0,0,SiZ,SiZ);
 let imageData=image.data;
 Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
 let pixelData=new Uint8Array(imageData);
-
+*/
+  
 setInterval(function(){
 gl2.drawImage(vv,0,0);
 image=gl2.getImageData(0,0,SiZ,SiZ);
