@@ -288,8 +288,8 @@ uint32_t outP;
 double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
 
-float * WGPU_Result_Array=new float[OutputBufferUnits];
-float * WGPU_Input_Array=new float[InputBufferUnits];
+float * WGPU_Result_Array=new float[OutputBufferBytes];
+float * WGPU_Input_Array=new float[InputBufferBytes];
 
 struct Vertex{
 GLfloat position[4];
