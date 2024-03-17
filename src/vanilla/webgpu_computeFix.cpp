@@ -480,7 +480,7 @@ return;
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 EM_ASM({
-document.querySelector('#outText').innerHTML='Buffer at [0]:'+$0.toFixed(2);
+document.querySelector('#outText').innerHTML='Buffer at [0]:'+$0;
 },WGPU_ResultBuffer.at(0,0,0)[0]);
 on.at(1,1)=0;
 return;
