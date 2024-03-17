@@ -40,11 +40,9 @@ WGpuTextureView videoTextureView;
 WGpuTextureView bufferTextureView;
 WGpuTextureView INTextureView;
 WGpuTextureView OUTTextureView;
-WGpuTextureView bufferTextureView;
 WGpuTextureViewDescriptor depthTextureViewDescriptor={};
 WGpuTextureViewDescriptor colorTextureViewDescriptor={};
 WGpuTextureViewDescriptor videoTextureViewDescriptor={};
-WGpuTextureViewDescriptor bufferTextureViewDescriptor={};
 WGpuTextureViewDescriptor INTextureViewDescriptor={};
 WGpuTextureViewDescriptor OUTTextureViewDescriptor={};
 WGpuTextureViewDescriptor bufferTextureViewDescriptor={};
@@ -216,7 +214,8 @@ wbms_tensor WGPU_BufferStatus=wbms_tensor{1,1,1};
 c_tensor wgsl=c_tensor{2,2};
 
 uint32_t workgroupSize=64;
-
+int OutputBufferUnits=64;
+int InputBufferUnits=64;
 uint32_t OutputBufferBytesI=64*4;
 uint32_t InputBufferBytesI=64*4;
 uint64_t WGPU_InputRangeSize=OutputBufferBytesI;
@@ -584,13 +583,13 @@ WGPU_Output_Image.texture=WGPU_Texture.at(0,0,1);
 WGPU_Output_Image.origin=oxyz.at(0,0);
 WGPU_Output_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
 
-  WGPU_Buffer_Image.texture=WGPU_Texture.at(0,0,2);
-WGPU_Buffer_Image.origin=oxyz.at(0,0);
-WGPU_Buffer_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
+  WGPU_Mapped_Image.texture=WGPU_Texture.at(0,0,2);
+WGPU_Mapped_Image.origin=oxyz.at(0,0);
+WGPU_Mapped_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
   
 wict.at(1,1)=WGPU_Input_Image;
 wict.at(2,2)=WGPU_Output_Image;
-wict.at(3,3)=WGPU_Buffer_Image;
+wict.at(3,3)=WGPU_Mapped_Image;
 
 INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
 OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureViewDescriptor.at(0,0,1));
@@ -621,8 +620,8 @@ wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 // wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(2,2),&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,64);
   
- wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Buffer_Image,64,1,1);
-  wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Buffer_Image,&WGPU_Mapped_Buffer,64,1,1);
+ wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Mapped_Image,64,1,1);
+  wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Mapped_Image,&WGPU_Mapped_Buffer,64,1,1);
 
 // wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
   // wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
@@ -777,12 +776,12 @@ WGPU_Input_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
 WGPU_Output_Image.texture=WGPU_Texture.at(0,0,1);
 WGPU_Output_Image.origin=oxyz.at(0,0);
 WGPU_Output_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
-WGPU_Buffer_Image.texture=WGPU_Texture.at(0,0,2);
-WGPU_Buffer_Image.origin=oxyz.at(0,0);
-WGPU_Buffer_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
+WGPU_Mapped_Image.texture=WGPU_Texture.at(0,0,2);
+WGPU_Mapped_Image.origin=oxyz.at(0,0);
+WGPU_Mapped_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(2,2)=WGPU_Input_Image;
 wict.at(0,0)=WGPU_Output_Image;
-wict.at(3,3)=WGPU_Buffer_Image;
+wict.at(3,3)=WGPU_Mapped_Image;
 
 textureBindingLayoutFloat.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
 textureBindingLayoutFloat.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
