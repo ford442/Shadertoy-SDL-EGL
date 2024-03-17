@@ -1,6 +1,6 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
 
-inline char wgl_cmp_src[2000]=
+inline char wgl_cmp_srcAA[2000]=
 "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
@@ -27,6 +27,19 @@ inline char wgl_cmp_src[2000]=
 // "outputBuffer[(x*y*4)+3]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+3];\n"
 "}"
 "}"
+"outputBuffer[0]=3.33f;\n"
+"outputBuffer[1]=4.44f;\n"
+"}";
+
+inline char wgl_cmp_src[2000]=
+"@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
+"@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
+"@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
+"@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
+"@group(0)@binding(4)var resizeSampler: sampler;\n"
+"@group(0)@binding(5)var <uniform> iResolution: u32;\n"
+"@compute@workgroup_size(1,1,1)\n"
+"fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "outputBuffer[0]=3.33f;\n"
 "outputBuffer[1]=4.44f;\n"
 "}";
