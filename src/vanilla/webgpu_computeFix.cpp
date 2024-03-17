@@ -210,9 +210,12 @@ wbms_tensor WGPU_BufferStatus=wbms_tensor{1,1,1};
 c_tensor wgsl=c_tensor{2,2};
 
 uint32_t workgroupSize=64;
-uint32_t OutputBufferBytes=64*4;
-uint32_t InputBufferBytes=64*4;
-uint64_t WGPU_InputRangeSize=OutputBufferBytes;
+
+uint32_t OutputBufferBytesI=64*4;
+uint32_t InputBufferBytesI=64*4;
+uint64_t WGPU_InputRangeSize=OutputBufferBytesI;
+double_int53_t OutputBufferBytes=OutputBufferBytesI;
+double_int53_t InputBufferBytes=InputBufferBytesI;
 
 const char * Entry="computeStuff";
 // uint32_t invocationCount=BufferMapSize/sizeof(int);
