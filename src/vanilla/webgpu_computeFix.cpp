@@ -595,6 +595,7 @@ wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),1,1,64);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
+  
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,256);
 // wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Mapped_Image,64,1,1);
 // wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Mapped_Image,&WGPU_Mapped_Buffer,64,1,1);
@@ -604,18 +605,18 @@ wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Bu
 // wgpu_queue_write_texture(wq.at(0,0),&wict.at(1,1),&WGPU_ResultBuffer.at(0,0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 
     //  non-callback mapping
-EM_ASM({
-document.querySelector('#outText').innerHTML='Buffer at [0]:'+$0;
-document.querySelector('#outText1').innerHTML='Buffer at [1]:'+$0.toFixed();
-document.querySelector('#outText2').innerHTML='Buffer at [2]:'+$0.toFixed(2);
-},WGPU_ResultBuffer.at(0,0,0)[0],WGPU_ResultBuffer.at(0,0,0)[1]);
 
 if(on.at(1,1)==3){
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)==3){
 WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,&WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
+EM_ASM({
+document.querySelector('#outText').innerHTML='Buffer at [0]:'+$0;
+document.querySelector('#outText1').innerHTML='Buffer at [1]:'+$0.toFixed();
+document.querySelector('#outText2').innerHTML='Buffer at [2]:'+$0.toFixed(2);
+},WGPU_ResultBuffer.at(0,0,0)[0],WGPU_ResultBuffer.at(0,0,0)[1]);
 }
 if(WGPU_BufferStatus.at(0,0,0)==1){
 wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
