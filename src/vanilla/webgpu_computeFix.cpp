@@ -10,10 +10,10 @@ inline char wgl_cmp_src[2000]=
 // "@group(0)@binding(6)var videoTexture: texture_2d <f32>;\n"
 "@compute@workgroup_size(1,1,1)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
-"var sizeINf=inputBuffer[0];\n"
+"var sizeINf:f32=f32(inputBuffer[0]);\n"
 "var loopx:u32=u32(sizeINf);\n"
 "var sizeINu:u32=u32(sizeINf);\n"
-"var sizeOUTf=inputBuffer[1];\n"
+"var sizeOUTf:f32=f32(inputBuffer[1]);\n"
 "var sizeOUTu:u32=u32(sizeOUTf);\n"
 "for(var y:u32=0u;y<loopx;y=y+1u){\n"
 "for(var x:u32=0u;x<loopx;x=x+1u){\n"
@@ -27,8 +27,8 @@ inline char wgl_cmp_src[2000]=
 // "outputBuffer[(x*y*4)+3]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+3];\n"
 "}"
 "}"
-"outputBuffer[0]=inputBuffer[0];\n"
-"outputBuffer[1]=inputBuffer[1];\n"
+"outputBuffer[0]=sizeINf;\n"
+"outputBuffer[1]=sizeOUTf;\n"
 "}";
 
 WGpuExternalTexture extTexture;
