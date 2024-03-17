@@ -668,8 +668,6 @@ render();
 
 void sz(int hh){
 sze.at(1,1)=hh;
-textureDescriptorIn.width=hh;
-textureDescriptorIn.height=hh; // default = 1;
 }
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
