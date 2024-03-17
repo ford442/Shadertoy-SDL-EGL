@@ -671,6 +671,8 @@ render();
 
 void sz(int hh){
 sze.at(1,1)=hh;
+textureDescriptorIn.width=hh;
+textureDescriptorIn.height=hh; // default = 1;
 }
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
@@ -722,8 +724,8 @@ WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
 textureDescriptorIn.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorIn.format=wtf.at(0,0);
 textureDescriptorIn.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST;
-textureDescriptorIn.width=sze.at(1,1);
-textureDescriptorIn.height=sze.at(1,1); // default = 1;
+// textureDescriptorIn.width=sze.at(1,1);
+// textureDescriptorIn.height=sze.at(1,1); // default = 1;
 textureDescriptorIn.depthOrArrayLayers=1;
 textureDescriptorIn.mipLevelCount=1;
 textureDescriptorIn.sampleCount=1;
