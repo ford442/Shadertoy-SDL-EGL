@@ -28,7 +28,7 @@ inline char wgl_cmp_src[2000]=
 "}"
 "}"
 "outputBuffer[0]=111.0f;\n" // inputBuffer[0];\n"
-"outputBuffer[1]=420.0f;\n"inputBuffer[1];\n"
+"outputBuffer[1]=420.0f;\n" //inputBuffer[1];\n"
 "}";
 
 WGpuExternalTexture extTexture;
