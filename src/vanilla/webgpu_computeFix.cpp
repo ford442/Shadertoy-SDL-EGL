@@ -17,7 +17,7 @@ inline char wgl_cmp_src[2000]=
 "var sizeOUTu:u32=u32(sizeOUTf);\n"
 "for(var y:u32=0u;y<loopx;y=y+1u){\n"
 "for(var x:u32=0u;x<loopx;x=x+1u){\n"
-"outputBuffer[0]=8.0808f;\n"
+"outputBuffer[0]=0.0808f;\n"
 "outputBuffer[1]=0.0001;\n"
 "var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(x,y)*(sizeINu/sizeOUTu));\n"
 "var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
@@ -487,7 +487,7 @@ return;
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
-if(on.at(1,1)==3){
+if(on.at(1,1)==4){
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)==3){
 WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
@@ -497,8 +497,6 @@ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),
 // WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)!=3){
 wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
-
-on.at(1,1)=0;
 // wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),WGPU_MapCallback.at(0,0,0),&WGPU_UserData.at(0,0,0),mode1,0,OutputBufferBytes);
 }
   EM_ASM({
@@ -627,23 +625,24 @@ WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,Output
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 }
-
 if(WGPU_BufferStatus.at(0,0,0)!=3){
 wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
 // wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),WGPU_MapCallback.at(0,0,0),&WGPU_UserData.at(0,0,0),mode1,0,OutputBufferBytes);
 }
 }
-  
-WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
-if(on.at(1,1)==3){
-  //  non-callback unmapping
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-if(WGPU_BufferStatus.at(0,0,0)!=1){
-on.at(1,1)=0;
+
+WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
+  
+  //  non-callback unmapping
+if(on.at(1,1)==3){
+if(WGPU_BufferStatus.at(0,0,0)==3){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 }
+if(WGPU_BufferStatus.at(0,0,0)==1){
+on.at(1,1)=0;
 }
-  
+}
 
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
