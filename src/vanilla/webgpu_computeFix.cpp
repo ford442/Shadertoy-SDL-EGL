@@ -1232,14 +1232,7 @@ let SiZ=window.innerHeight;
 let tstSiZ=h$;
 // document.querySelector("#mvi").height=h$;
 // document.querySelector("#mvi").width=w$;
-if(running==0){
-// Module.ccall("frm",null,['Number'],['Number'],h$,h$);
-setTimeout(function(){
-Module.ccall("startWebGPU",null,"Number",h$);
-console.log('Starting..');
-running=1;
-},500);
-}
+
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
@@ -1259,7 +1252,16 @@ let pixelData=new Uint8ClampedArray(imageData);
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 // frrm.set(pixelData);
 FS.writeFile('/video/frame.gl',pixelData);
+  
 setInterval(function(){
+  if(running==0&&h$!=0){
+// Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+setTimeout(function(){
+Module.ccall("startWebGPU",null,"Number",h$);
+console.log('Starting..');
+running=1;
+},500);
+}
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // mageData=flipImageData(image);
