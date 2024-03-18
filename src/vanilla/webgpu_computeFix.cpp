@@ -572,12 +572,12 @@ frame_tensor.at(0,0)=data;
 wetd.at(0,0).source=texid.at(0,0);
 // extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 // wet.at(0,0)=extTexture;
-
+/*
 EM_ASM({
 document.querySelector('#outText1').innerHTML='Empty Buffer at [3]:'+$0.toFixed(2);
 },WGPU_ResultBuffer.at(0,0,0)[3]);
 // },WGPU_Result_Array[3]);
-
+*/
        // Compute Pass
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
