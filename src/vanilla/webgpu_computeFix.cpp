@@ -1,7 +1,7 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
 
 inline char wgl_cmp_src[2000]=
-R"@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
+R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
@@ -16,7 +16,7 @@ R"@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
 "outputBuffer[3]=f32(.33f);\n"
 "outputBuffer[4]=2.66;\n"
 "outputBuffer[5]=1.33333;\n"
-"}";
+"}))";
 
 inline char wgl_cmp_srcAA[2000]=
 "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
