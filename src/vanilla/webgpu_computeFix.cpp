@@ -496,18 +496,21 @@ return;
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 EM_ASM({
 document.querySelector('#outText').innerHTML='Buffer at [2]:'+$0.toFixed(2);
-},WGPU_ResultBuffer.at(0,0,0)[2]);
-// },WGPU_Result_Array[0]);
+document.querySelector('#outText').innerHTML='Buffer at [3]:'+$1.toFixed(2);
+document.querySelector('#outText').innerHTML='Buffer at [4]:'+$2.toFixed(2);
+},WGPU_ResultBuffer.at(0,0,0)[2],WGPU_ResultBuffer.at(0,0,0)[3],WGPU_ResultBuffer.at(0,0,0)[4]);
 on.at(2,2)=1;
 return;
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
+  /*
 EM_ASM({
 document.querySelector('#outText').innerHTML='Buffer at [2]:'+$0.toFixed(2);
 document.querySelector('#outText').innerHTML='Buffer at [3]:'+$1.toFixed(2);
 document.querySelector('#outText').innerHTML='Buffer at [4]:'+$2.toFixed(2);
 },WGPU_ResultBuffer.at(0,0,0)[2],WGPU_ResultBuffer.at(0,0,0)[3],WGPU_ResultBuffer.at(0,0,0)[4]);
+*/
 return;
 };
 
@@ -641,14 +644,14 @@ wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 on.at(1,1)=5;
 }
 }
-
+/*
 EM_ASM({
 document.querySelector('#outText').innerHTML='After Mapping Buffer at [2]:'+$0.toFixed(2);
 document.querySelector('#outText1').innerHTML='After Mapping Buffer at [3]:'+$1.toFixed(2);
 document.querySelector('#outText2').innerHTML='After Mapping Buffer at [4]:'+$2.toFixed(2);
 },WGPU_ResultBuffer.at(0,0,0)[2],WGPU_ResultBuffer.at(0,0,0)[3],WGPU_ResultBuffer.at(0,0,0)[4]);
 // },WGPU_Result_Array[2]);
-
+*/
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
  
