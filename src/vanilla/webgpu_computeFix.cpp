@@ -505,7 +505,7 @@ WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *user
 EM_ASM({
 document.querySelector('#outText').innerHTML='Buffer at [0]:'+$0.toFixed(2);
 // },WGPU_ResultBuffer.at(0,0,0)[0]);
-},WGPU_Result_Array[0]);
+},&WGPU_Result_Array[0]);
 return;
 };
 
@@ -567,7 +567,12 @@ frame_tensor.at(0,0)=data;
 wetd.at(0,0).source=texid.at(0,0);
 // extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 // wet.at(0,0)=extTexture;
-
+  
+EM_ASM({
+document.querySelector('#outText1').innerHTML='Empty Buffer at [3]:'+$0;
+},WGPU_ResultBuffer.at(0,0,0)[3]);
+// },WGPU_Result_Array[3]);
+  
        // Compute Pass
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
@@ -610,7 +615,6 @@ wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict
 // wgpu_queue_write_texture(wq.at(0,0),&wict.at(1,1),&WGPU_ResultBuffer.at(0,0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 
     //  non-callback mapping
-
 if(on.at(1,1)==3){
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2)==3)){
@@ -633,7 +637,12 @@ if(WGPU_BufferStatus.at(0,0,0)!=1){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 on.at(1,1)=5;
 }
-
+  
+EM_ASM({
+document.querySelector('#outText1').innerHTML='After Mapping Buffer at [0]:'+$0;
+// },WGPU_ResultBuffer.at(0,0,0)[0]);
+},WGPU_Result_Array[0]);
+  
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
  
