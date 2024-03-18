@@ -751,7 +751,7 @@ videoTextureDescriptor.viewFormats=nullptr; // &textureBviewFormats[0];
 textureDescriptorBuffer.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorBuffer.format=wtf.at(0,0);
 textureDescriptorBuffer.usage=WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST;
-textureDescriptorBuffer.width=256;
+textureDescriptorBuffer.width=64;
 textureDescriptorBuffer.height=1; // default = 1;
 textureDescriptorBuffer.depthOrArrayLayers=1;
 textureDescriptorBuffer.mipLevelCount=1;
