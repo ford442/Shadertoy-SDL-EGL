@@ -1269,7 +1269,7 @@ let tstSiZ=h$;
 // document.querySelector("#mvi").height=h$;
 // document.querySelector("#mvi").width=w$;
 if(running==0){
-Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+// Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 setTimeout(function(){
 Module.ccall("startWebGPU",null,"Number",h$);
 console.log('Starting..');
@@ -1292,7 +1292,7 @@ let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 let imageData=image.data;
 let pixelData=new Uint8ClampedArray(imageData);
 //  let frrm=new Uint8ClampedArray($H,0,imageData.length);
-Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+// Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 // frrm.set(pixelData);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
