@@ -10,9 +10,9 @@ R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 // @group(0)@binding(6)var videoTexture: texture_2d <f32>;
 @compute@workgroup_size(4)
 fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){
-outputBuffer[0]=3.33f;
-outputBuffer[1]=2.22f;
-outputBuffer[2]=f32(4.44f);
+outputBuffer[2]=2.222f;
+outputBuffer[3]=3.333f;
+outputBuffer[4]=f32(4.444f);
 })delimiter";
 
 inline char wgl_cmp_srcAA[2000]=
@@ -504,9 +504,9 @@ return;
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 EM_ASM({
-document.querySelector('#outText').innerHTML='Buffer at [0]:'+$0.toFixed(2);
-// },WGPU_ResultBuffer.at(0,0,0)[0]);
-},WGPU_Result_Array[0]);
+document.querySelector('#outText').innerHTML='Buffer at [2]:'+$0.toFixed(2);
+},WGPU_ResultBuffer.at(0,0,0)[2]);
+// },WGPU_Result_Array[2]);
 return;
 };
 
@@ -570,8 +570,8 @@ wetd.at(0,0).source=texid.at(0,0);
 // wet.at(0,0)=extTexture;
   
 EM_ASM({
-document.querySelector('#outText1').innerHTML='Empty Buffer at [1]:'+$0.toFixed(2);
-},WGPU_ResultBuffer.at(0,0,0)[1]);
+document.querySelector('#outText1').innerHTML='Empty Buffer at [3]:'+$0.toFixed(2);
+},WGPU_ResultBuffer.at(0,0,0)[3]);
 // },WGPU_Result_Array[3]);
   
        // Compute Pass
@@ -642,9 +642,9 @@ on.at(1,1)=5;
 }
   
 EM_ASM({
-document.querySelector('#outText2').innerHTML='After Mapping Buffer at [2]:'+$0.toFixed(2);
-// },WGPU_ResultBuffer.at(0,0,0)[0]);
-},WGPU_Result_Array[2]);
+document.querySelector('#outText2').innerHTML='After Mapping Buffer at [4]:'+$0.toFixed(2);
+},WGPU_ResultBuffer.at(0,0,0)[4]);
+// },WGPU_Result_Array[2]);
   
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
