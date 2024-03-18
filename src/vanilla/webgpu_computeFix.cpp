@@ -10,9 +10,9 @@ R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 // @group(0)@binding(6)var videoTexture: texture_2d <f32>;
 @compute@workgroup_size(4,4)
 fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){
-outputBuffer[2]=1.222f;
-outputBuffer[3]=1.333f;
-outputBuffer[4]=f32(1.444f);
+outputBuffer[2]=2.222f;
+outputBuffer[3]=3.333f;
+outputBuffer[4]=f32(4.444f);
 })delimiter";
 
 inline char wgl_cmp_srcAA[2000]=
@@ -504,9 +504,9 @@ return;
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 EM_ASM({
-document.querySelector('#outText').innerHTML='Buffer at [2]:'+$0.toFixed();
-document.querySelector('#outText1').innerHTML='Buffer at [3]:'+$1.toFixed();
-document.querySelector('#outText2').innerHTML='Buffer at [4]:'+$2.toFixed(2);
+document.querySelector('#outText').innerHTML='Buffer at [2]:'+$0.toFixed(3);
+document.querySelector('#outText1').innerHTML='Buffer at [3]:'+$1.toFixed(3);
+document.querySelector('#outText2').innerHTML='Buffer at [4]:'+$2.toFixed(3);
 },WGPU_ResultBuffer.at(0,0,0)[2],WGPU_ResultBuffer.at(0,0,0)[3],WGPU_ResultBuffer.at(0,0,0)[4]);
 return;
 };
@@ -622,7 +622,7 @@ WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2)==3)){
 WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
-wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_Range_PointerB,0,WGPU_ResultBuffer.at(0,0,0),256);
+wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_Range_PointerB,0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 // wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 }
 if(WGPU_BufferStatus.at(0,0,0)==1){
