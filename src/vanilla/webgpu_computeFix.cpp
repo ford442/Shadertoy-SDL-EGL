@@ -10,9 +10,7 @@ inline char wgl_cmp_src[2000]=
 // "@group(0)@binding(6)var videoTexture: texture_2d <f32>;\n"
 "@compute@workgroup_size(1,1,64)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
-"outputBuffer[0]=f32(3.33f);\n"
-"outputBuffer[1]=4.44f;\n"
-
+// "outputBuffer[0]=f32(3.33f);\n"
 "}";
 
 inline char wgl_cmp_srcAA[2000]=
