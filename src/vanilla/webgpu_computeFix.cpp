@@ -505,7 +505,9 @@ return;
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 EM_ASM({
 document.querySelector('#outText').innerHTML='Buffer at [2]:'+$0.toFixed(2);
-},WGPU_ResultBuffer.at(0,0,0)[2]);
+document.querySelector('#outText').innerHTML='Buffer at [3]:'+$1.toFixed(2);
+document.querySelector('#outText').innerHTML='Buffer at [4]:'+$2.toFixed(2);
+},WGPU_ResultBuffer.at(0,0,0)[2],WGPU_ResultBuffer.at(0,0,0)[3],WGPU_ResultBuffer.at(0,0,0)[4]);
 return;
 };
 
