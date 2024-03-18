@@ -14,6 +14,8 @@ inline char wgl_cmp_src[2000]=
 "outputBuffer[1]=3.33;\n"
 "outputBuffer[2]=f32(3.33);\n"
 "outputBuffer[3]=f32(.33f);\n"
+"outputBuffer[4]=2.66;\n"
+"outputBuffer[5]=1.33333;\n"
 "}";
 
 inline char wgl_cmp_srcAA[2000]=
