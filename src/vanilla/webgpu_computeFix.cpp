@@ -1,21 +1,18 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
 
 inline char wgl_cmp_src[2000]=
-R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
-"@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
-"@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
-"@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
-"@group(0)@binding(4)var resizeSampler: sampler;\n"
-"@group(0)@binding(5)var <uniform> iResolution: u32;\n"
-// "@group(0)@binding(6)var videoTexture: texture_2d <f32>;\n"
-"@compute@workgroup_size(1)\n"
-"fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
-"outputBuffer[0]=3.33f;\n"
-"outputBuffer[1]=3.33;\n"
-"outputBuffer[2]=f32(3.33);\n"
-"outputBuffer[3]=f32(.33f);\n"
-"outputBuffer[4]=2.66;\n"
-"outputBuffer[5]=1.33333;\n"
+R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;"
+"@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;"
+"@group(0)@binding(2)var textureIN: texture_2d <f32>;"
+"@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;"
+"@group(0)@binding(4)var resizeSampler: sampler;"
+"@group(0)@binding(5)var <uniform> iResolution: u32;"
+// "@group(0)@binding(6)var videoTexture: texture_2d <f32>;"
+"@compute@workgroup_size(1)"
+"fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
+"outputBuffer[0]=3.33f;"
+"outputBuffer[1]=2.22;"
+"outputBuffer[2]=f32(4.44);"
 "})delimiter";
 
 inline char wgl_cmp_srcAA[2000]=
@@ -498,8 +495,8 @@ return;
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 EM_ASM({
-document.querySelector('#outText').innerHTML='Buffer at [3]:'+$0.toFixed(2);
-},WGPU_ResultBuffer.at(0,0,0)[3]);
+document.querySelector('#outText').innerHTML='Buffer at [0]:'+$0.toFixed(2);
+},WGPU_ResultBuffer.at(0,0,0)[0]);
 // },WGPU_Result_Array[0]);
 on.at(2,2)=1;
 return;
@@ -507,9 +504,9 @@ return;
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 EM_ASM({
-document.querySelector('#outText').innerHTML='Buffer at [4]:'+$0.toFixed(2);
+document.querySelector('#outText').innerHTML='Buffer at [1]:'+$0.toFixed(2);
 // },WGPU_ResultBuffer.at(0,0,0)[0]);
-},WGPU_Result_Array[4]);
+},WGPU_Result_Array[1]);
 return;
 };
 
@@ -573,8 +570,8 @@ wetd.at(0,0).source=texid.at(0,0);
 // wet.at(0,0)=extTexture;
   
 EM_ASM({
-document.querySelector('#outText1').innerHTML='Empty Buffer at [4]:'+$0.toFixed(2);
-},WGPU_ResultBuffer.at(0,0,0)[4]);
+document.querySelector('#outText1').innerHTML='Empty Buffer at [2]:'+$0.toFixed(2);
+},WGPU_ResultBuffer.at(0,0,0)[2]);
 // },WGPU_Result_Array[3]);
   
        // Compute Pass
