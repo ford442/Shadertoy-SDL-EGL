@@ -1270,11 +1270,11 @@ let tstSiZ=h$;
 // document.querySelector("#mvi").width=w$;
 if(running==0){
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
-setTimeout(function(){
+/// setTimeout(function(){
 Module.ccall("startWebGPU",null,"Number",h$);
 console.log('Starting..');
 running=1;
-},500);
+// },500);
 }
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
@@ -1379,7 +1379,7 @@ document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
 videoFrames();
-},1500);
+},500);
 document.querySelector('#status').style.backgroundColor="green";
 }
 document.querySelector('#status').height=20;
