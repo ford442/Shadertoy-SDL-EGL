@@ -16,7 +16,7 @@ R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n
 "outputBuffer[3]=f32(.33f);\n"
 "outputBuffer[4]=2.66;\n"
 "outputBuffer[5]=1.33333;\n"
-"}))";
+"})delimiter";
 
 inline char wgl_cmp_srcAA[2000]=
 "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
