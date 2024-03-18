@@ -641,8 +641,10 @@ on.at(1,1)=5;
 }
 
 EM_ASM({
-document.querySelector('#outText2').innerHTML='After Mapping Buffer at [4]:'+$0.toFixed(2);
-},WGPU_ResultBuffer.at(0,0,0)[4]);
+document.querySelector('#outText').innerHTML='After Mapping Buffer at [2]:'+$0.toFixed(2);
+document.querySelector('#outText1').innerHTML='After Mapping Buffer at [3]:'+$1.toFixed(2);
+document.querySelector('#outText2').innerHTML='After Mapping Buffer at [4]:'+$2.toFixed(2);
+},WGPU_ResultBuffer.at(0,0,0)[2],WGPU_ResultBuffer.at(0,0,0)[3],WGPU_ResultBuffer.at(0,0,0)[4]);
 // },WGPU_Result_Array[2]);
 
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
