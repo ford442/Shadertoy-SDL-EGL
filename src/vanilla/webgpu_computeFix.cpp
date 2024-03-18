@@ -9,9 +9,11 @@ R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 @group(0)@binding(5)var <uniform> iResolution: u32;
 @compute@workgroup_size(1)
 fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){
-outputBuffer[2]=2.222f;
+let texCoord = vec2<i32>(global_id.x, global_id.y);
 outputBuffer[3]=3.333f;
+textureStore(textureOUT, texCoord, vec4<f32>(1.0, 0.0, 0.30, 1.0)); 
 outputBuffer[4]=f32(4.444f);
+textureStore(textureOUT, texCoord + vec2<i32>(1, 0), vec4<f32>(0.0, 1.0, 0.0, 0.5));  
 })delimiter";
 
 inline char wgl_cmp_srcAA[2000]=
@@ -683,7 +685,7 @@ sze.at(1,1)=hh;
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 wd.at(0,0)=result;
-on.at(1,1)=3;
+on.at(1,1)=0;
 js_data_pointer.at(0,0)=0;
 fjs_data_pointer.at(0,0)=0;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
