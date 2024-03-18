@@ -569,7 +569,7 @@ wetd.at(0,0).source=texid.at(0,0);
 // wet.at(0,0)=extTexture;
   
 EM_ASM({
-document.querySelector('#outText1').innerHTML='Empty Buffer at [3]:'+$0;
+document.querySelector('#outText1').innerHTML='Empty Buffer at [3]:'+$0.toFixed(2);
 },WGPU_ResultBuffer.at(0,0,0)[3]);
 // },WGPU_Result_Array[3]);
   
@@ -639,7 +639,7 @@ on.at(1,1)=5;
 }
   
 EM_ASM({
-document.querySelector('#outText1').innerHTML='After Mapping Buffer at [0]:'+$0;
+document.querySelector('#outText2').innerHTML='After Mapping Buffer at [0]:'+$0.toFixed(2);
 // },WGPU_ResultBuffer.at(0,0,0)[0]);
 },WGPU_Result_Array[0]);
   
@@ -937,7 +937,6 @@ WGPU_BindGroupEntries.at(0,0,0)=Compute_Bindgroup_Entries;
 WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),6);
 WGPU_ComputePassDescriptor.at(0,0,0)=computePassDescriptor;
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(wd.at(0,0));
-
   
 multiSamp={};
 multiSamp.count=0;
