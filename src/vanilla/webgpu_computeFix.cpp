@@ -856,12 +856,12 @@ wbbl.at(0,0)=bufferBindingLayoutR;
 // wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 // }
 WGPU_Output_Buffer.buffer=WGPU_Buffers.at(0,0,0);
-WGPU_Output_Buffer.bytesPerRow=256; // (floor((sze.at(0,0)*4)/256)+1)*256;
-WGPU_Output_Buffer.rowsPerImage=4;
+WGPU_Output_Buffer.bytesPerRow=512; // (floor((sze.at(0,0)*4)/256)+1)*256;
+WGPU_Output_Buffer.rowsPerImage=64;
 // wicb.at(2,2)=WGPU_Output_Buffer;
 WGPU_Mapped_Buffer.buffer=WGPU_Buffers.at(2,0,2);
-WGPU_Mapped_Buffer.bytesPerRow=256;
-WGPU_Mapped_Buffer.rowsPerImage=4;
+WGPU_Mapped_Buffer.bytesPerRow=512;
+WGPU_Mapped_Buffer.rowsPerImage=64;
 resizeSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_REPEAT;
 resizeSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_REPEAT;
 resizeSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_REPEAT;
