@@ -68,7 +68,7 @@ void wgpu_destroy_all_objects(void);
 #ifdef __EMSCRIPTEN__
 WGpuCanvasContext wgpu_canvas_get_webgpu_context(const char *canvasSelector NOTNULL);
 #elif defined (_WIN32)
-WGpuCanvasContext wgpu_canvas_get_webgpu_context(HWND hwnd);
+WGpuCanvasContext wgpu_canvas_get_webgpu_context(void *hwnd);
 #else
 #error Targeting currently unsupported platform! (no declaration for wgpu_canvas_get_webgpu_context())
 #endif
@@ -364,7 +364,7 @@ interface GPUAdapter {
     readonly attribute boolean isFallbackAdapter;
 
     Promise<GPUDevice> requestDevice(optional GPUDeviceDescriptor descriptor = {});
-    Promise<GPUAdapterInfo> requestAdapterInfo(optional sequence<DOMString> unmaskHints = []);
+    Promise<GPUAdapterInfo> requestAdapterInfo();
 };
 */
 typedef WGpuObjectBase WGpuAdapter;
@@ -399,9 +399,8 @@ WGpuDevice wgpu_adapter_request_device_sync_simple(WGpuAdapter adapter);
 // type WGpuAdapterInfo. Do not hold on to this struct pointer after the duration of this call (but make a copy of the contents if desirable)
 typedef void (*WGpuRequestAdapterInfoCallback)(WGpuAdapter adapter, const WGpuAdapterInfo *adapterInfo NOTNULL, void *userData);
 
-// Begins a process to asynchronously request GPUAdapter information. 'unmaskHints' should be a null-terminated array of null-terminated strings
-// of which information to retrieve, e.g. { "vendor", "architecture", "device", "description", 0 }.
-void wgpu_adapter_request_adapter_info_async(WGpuAdapter adapter, const char **unmaskHints, WGpuRequestAdapterInfoCallback callback, void *userData);
+// Begins a process to asynchronously request GPUAdapter information.
+void wgpu_adapter_request_adapter_info_async(WGpuAdapter adapter, WGpuRequestAdapterInfoCallback callback, void *userData);
 // TODO: Create asyncified wgpu_adapter_request_adapter_info_sync() function.
 
 /*
@@ -526,8 +525,8 @@ typedef void (*WGpuCreatePipelineCallback)(WGpuDevice device, WGpuPipelineError 
 
 // N.b. not currently using signature WGpuComputePipeline wgpu_device_create_compute_pipeline(WGpuDevice device, const WGpuComputePipelineDescriptor *computePipelineDesc);
 // since WGpuComputePipelineDescriptor is a such a light struct. (if it is expanded in the future, switch to using that signature)
-WGpuComputePipeline wgpu_device_create_compute_pipeline(WGpuDevice device, WGpuShaderModule computeModule, const char *entryPoint NOTNULL, WGpuPipelineLayout layout, const WGpuPipelineConstant *constants, int numConstants);
-void wgpu_device_create_compute_pipeline_async(WGpuDevice device, WGpuShaderModule computeModule, const char *entryPoint NOTNULL, WGpuPipelineLayout layout, const WGpuPipelineConstant *constants, int numConstants, WGpuCreatePipelineCallback callback, void *userData);
+WGpuComputePipeline wgpu_device_create_compute_pipeline(WGpuDevice device, WGpuShaderModule computeModule, const char *entryPoint, WGpuPipelineLayout layout, const WGpuPipelineConstant *constants, int numConstants);
+void wgpu_device_create_compute_pipeline_async(WGpuDevice device, WGpuShaderModule computeModule, const char *entryPoint, WGpuPipelineLayout layout, const WGpuPipelineConstant *constants, int numConstants, WGpuCreatePipelineCallback callback, void *userData);
 
 WGpuRenderPipeline wgpu_device_create_render_pipeline(WGpuDevice device, const WGpuRenderPipelineDescriptor *renderPipelineDesc NOTNULL);
 void wgpu_device_create_render_pipeline_async(WGpuDevice device, const WGpuRenderPipelineDescriptor *renderPipelineDesc NOTNULL, WGpuCreatePipelineCallback callback, void *userData);
@@ -1305,11 +1304,15 @@ extern const WGpuTextureBindingLayout WGPU_TEXTURE_BINDING_LAYOUT_DEFAULT_INITIA
 /*
 enum GPUStorageTextureAccess {
     "write-only",
+    "read-only",
+    "read-write",
 };
 */
 typedef int WGPU_STORAGE_TEXTURE_ACCESS;
 #define WGPU_STORAGE_TEXTURE_ACCESS_INVALID 0
 #define WGPU_STORAGE_TEXTURE_ACCESS_WRITE_ONLY 1
+#define WGPU_STORAGE_TEXTURE_ACCESS_READ_ONLY 2
+#define WGPU_STORAGE_TEXTURE_ACCESS_READ_WRITE 3
 
 /*
 dictionary GPUStorageTextureBindingLayout {
@@ -1418,12 +1421,13 @@ void wgpu_shader_module_get_compilation_info_async(WGpuShaderModule shaderModule
 
 /*
 dictionary GPUShaderModuleCompilationHint {
+    required USVString entryPoint;
     (GPUPipelineLayout or GPUAutoLayoutMode) layout;
 };
 */
 typedef struct WGpuShaderModuleCompilationHint
 {
-  const char *entryPointName;
+  const char *entryPoint;
   // WGPU_AUTO_LAYOUT_MODE
   WGpuPipelineLayout layout;  // Assign the special value WGPU_AUTO_LAYOUT_MODE_AUTO (default) to hint an automatically created pipeline object.
 } WGpuShaderModuleCompilationHint;
@@ -1433,7 +1437,7 @@ extern const WGpuShaderModuleCompilationHint WGPU_SHADER_MODULE_COMPILATION_HINT
 dictionary GPUShaderModuleDescriptor : GPUObjectDescriptorBase {
     required USVString code;
     object sourceMap;
-    record<USVString, GPUShaderModuleCompilationHint> hints;
+    sequence<GPUShaderModuleCompilationHint> compilationHints = [];
 };
 */
 typedef struct WGpuShaderModuleDescriptor
@@ -1546,7 +1550,7 @@ WGpuBindGroupLayout wgpu_pipeline_get_bind_group_layout(WGpuObjectBase pipelineB
 /*
 dictionary GPUProgrammableStage {
     required GPUShaderModule module;
-    required USVString entryPoint;
+    USVString entryPoint;
     record<USVString, GPUPipelineConstantValue> constants;
 };
 typedef double GPUPipelineConstantValue; // May represent WGSL’s bool, f32, i32, u32, and f16 if enabled.
@@ -1797,8 +1801,8 @@ typedef int WGPU_BLEND_OPERATION;
 dictionary GPUDepthStencilState {
     required GPUTextureFormat format;
 
-    required boolean depthWriteEnabled;
-    required GPUCompareFunction depthCompare;
+    boolean depthWriteEnabled;
+    GPUCompareFunction depthCompare;
 
     GPUStencilFaceState stencilFront = {};
     GPUStencilFaceState stencilBack = {};
@@ -1894,44 +1898,46 @@ enum GPUVertexFormat {
     "sint32",
     "sint32x2",
     "sint32x3",
-    "sint32x4"
+    "sint32x4",
+    "unorm10-10-10-2"
 };
 */
 // The numbering on these types continues at the end of WGPU_TEXTURE_FORMAT
 // for optimization reasons.
 typedef int WGPU_VERTEX_FORMAT;
-#define WGPU_VERTEX_FORMAT_INVALID       0
-#define WGPU_VERTEX_FORMAT_FIRST_VALUE  96
-#define WGPU_VERTEX_FORMAT_UINT8X2      96
-#define WGPU_VERTEX_FORMAT_UINT8X4      97
-#define WGPU_VERTEX_FORMAT_SINT8X2      98
-#define WGPU_VERTEX_FORMAT_SINT8X4      99
-#define WGPU_VERTEX_FORMAT_UNORM8X2    100
-#define WGPU_VERTEX_FORMAT_UNORM8X4    101
-#define WGPU_VERTEX_FORMAT_SNORM8X2    102
-#define WGPU_VERTEX_FORMAT_SNORM8X4    103
-#define WGPU_VERTEX_FORMAT_UINT16X2    104
-#define WGPU_VERTEX_FORMAT_UINT16X4    105
-#define WGPU_VERTEX_FORMAT_SINT16X2    106
-#define WGPU_VERTEX_FORMAT_SINT16X4    107
-#define WGPU_VERTEX_FORMAT_UNORM16X2   108
-#define WGPU_VERTEX_FORMAT_UNORM16X4   109
-#define WGPU_VERTEX_FORMAT_SNORM16X2   110
-#define WGPU_VERTEX_FORMAT_SNORM16X4   111
-#define WGPU_VERTEX_FORMAT_FLOAT16X2   112
-#define WGPU_VERTEX_FORMAT_FLOAT16X4   113
-#define WGPU_VERTEX_FORMAT_FLOAT32     114
-#define WGPU_VERTEX_FORMAT_FLOAT32X2   115
-#define WGPU_VERTEX_FORMAT_FLOAT32X3   116
-#define WGPU_VERTEX_FORMAT_FLOAT32X4   117
-#define WGPU_VERTEX_FORMAT_UINT32      118
-#define WGPU_VERTEX_FORMAT_UINT32X2    119
-#define WGPU_VERTEX_FORMAT_UINT32X3    120
-#define WGPU_VERTEX_FORMAT_UINT32X4    121
-#define WGPU_VERTEX_FORMAT_SINT32      122
-#define WGPU_VERTEX_FORMAT_SINT32X2    123
-#define WGPU_VERTEX_FORMAT_SINT32X3    124
-#define WGPU_VERTEX_FORMAT_SINT32X4    125
+#define WGPU_VERTEX_FORMAT_INVALID           0
+#define WGPU_VERTEX_FORMAT_FIRST_VALUE      96
+#define WGPU_VERTEX_FORMAT_UINT8X2          96
+#define WGPU_VERTEX_FORMAT_UINT8X4          97
+#define WGPU_VERTEX_FORMAT_SINT8X2          98
+#define WGPU_VERTEX_FORMAT_SINT8X4          99
+#define WGPU_VERTEX_FORMAT_UNORM8X2        100
+#define WGPU_VERTEX_FORMAT_UNORM8X4        101
+#define WGPU_VERTEX_FORMAT_SNORM8X2        102
+#define WGPU_VERTEX_FORMAT_SNORM8X4        103
+#define WGPU_VERTEX_FORMAT_UINT16X2        104
+#define WGPU_VERTEX_FORMAT_UINT16X4        105
+#define WGPU_VERTEX_FORMAT_SINT16X2        106
+#define WGPU_VERTEX_FORMAT_SINT16X4        107
+#define WGPU_VERTEX_FORMAT_UNORM16X2       108
+#define WGPU_VERTEX_FORMAT_UNORM16X4       109
+#define WGPU_VERTEX_FORMAT_SNORM16X2       110
+#define WGPU_VERTEX_FORMAT_SNORM16X4       111
+#define WGPU_VERTEX_FORMAT_FLOAT16X2       112
+#define WGPU_VERTEX_FORMAT_FLOAT16X4       113
+#define WGPU_VERTEX_FORMAT_FLOAT32         114
+#define WGPU_VERTEX_FORMAT_FLOAT32X2       115
+#define WGPU_VERTEX_FORMAT_FLOAT32X3       116
+#define WGPU_VERTEX_FORMAT_FLOAT32X4       117
+#define WGPU_VERTEX_FORMAT_UINT32          118
+#define WGPU_VERTEX_FORMAT_UINT32X2        119
+#define WGPU_VERTEX_FORMAT_UINT32X3        120
+#define WGPU_VERTEX_FORMAT_UINT32X4        121
+#define WGPU_VERTEX_FORMAT_SINT32          122
+#define WGPU_VERTEX_FORMAT_SINT32X2        123
+#define WGPU_VERTEX_FORMAT_SINT32X3        124
+#define WGPU_VERTEX_FORMAT_SINT32X4        125
+#define WGPU_VERTEX_FORMAT_UNORM10_10_10_2 126
 
 #if _cplusplus >= 201103L
 static_assert(WGPU_VERTEX_FORMAT_FIRST_VALUE == WGPU_TEXTURE_FORMAT_LAST_VALUE + 1, "WGPU_VERTEX_FORMAT enums must have values after WGPU_TEXTURE_FORMAT values!");
@@ -2060,8 +2066,6 @@ interface GPUCommandEncoder {
         optional GPUSize64 offset = 0,
         optional GPUSize64 size);
 
-    undefined writeTimestamp(GPUQuerySet querySet, GPUSize32 queryIndex);
-
     undefined resolveQuerySet(
         GPUQuerySet querySet,
         GPUSize32 firstQuery,
@@ -2088,7 +2092,6 @@ void wgpu_command_encoder_copy_buffer_to_texture(WGpuCommandEncoder commandEncod
 void wgpu_command_encoder_copy_texture_to_buffer(WGpuCommandEncoder commandEncoder, const WGpuImageCopyTexture *source NOTNULL, const WGpuImageCopyBuffer *destination NOTNULL, uint32_t copyWidth, uint32_t copyHeight _WGPU_DEFAULT_VALUE(1), uint32_t copyDepthOrArrayLayers _WGPU_DEFAULT_VALUE(1));
 void wgpu_command_encoder_copy_texture_to_texture(WGpuCommandEncoder commandEncoder, const WGpuImageCopyTexture *source NOTNULL, const WGpuImageCopyTexture *destination NOTNULL, uint32_t copyWidth, uint32_t copyHeight _WGPU_DEFAULT_VALUE(1), uint32_t copyDepthOrArrayLayers _WGPU_DEFAULT_VALUE(1));
 void wgpu_command_encoder_clear_buffer(WGpuCommandEncoder commandEncoder, WGpuBuffer buffer, double_int53_t offset _WGPU_DEFAULT_VALUE(0), double_int53_t size _WGPU_DEFAULT_VALUE(WGPU_INFINITY));
-void wgpu_command_encoder_write_timestamp(WGpuCommandEncoder commandEncoder, WGpuQuerySet querySet, uint32_t queryIndex);
 void wgpu_command_encoder_resolve_query_set(WGpuCommandEncoder commandEncoder, WGpuQuerySet querySet, uint32_t firstQuery, uint32_t queryCount, WGpuBuffer destination, double_int53_t destinationOffset);
 
 // GPUCommandEncoder and GPURenderBundleEncoder share the same finish() command.
@@ -2331,6 +2334,7 @@ void wgpu_render_pass_encoder_execute_bundles(WGpuRenderPassEncoder encoder, con
 /*
 dictionary GPURenderPassColorAttachment {
     required GPUTextureView view;
+    GPUIntegerCoordinate depthSlice;
     GPUTextureView resolveTarget;
 
     GPUColor clearValue;
@@ -2859,10 +2863,12 @@ extern const WGpuRenderPassDescriptor WGPU_RENDER_PASS_DESCRIPTOR_DEFAULT_INITIA
 typedef struct WGpuRenderPassColorAttachment
 {
   WGpuTextureView view;
+  int depthSlice;
   WGpuTextureView resolveTarget;
 
   WGPU_STORE_OP storeOp; // Required, be sure to set to WGPU_STORE_OP_STORE (default) or WGPU_STORE_OP_DISCARD
   WGPU_LOAD_OP loadOp; // Either WGPU_LOAD_OP_LOAD (== default, 0) or WGPU_LOAD_OP_CLEAR.
+  int dummyDoublePadding; // unused, added to pad the doubles in clearValue to 8-byte multiples.
   WGpuColor clearValue; // Used if loadOp == WGPU_LOAD_OP_CLEAR. Default value = { r = 0.0, g = 0.0, b = 0.0, a = 1.0 }
 } WGpuRenderPassColorAttachment;
 extern const WGpuRenderPassColorAttachment WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER;
