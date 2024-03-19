@@ -9,7 +9,7 @@ R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 @group(0)@binding(5)var <uniform> iResolution: u32;
 @compute@workgroup_size(1)
 fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){
-let texCoord = vec2<i32>(global_id.x, global_id.y);
+let texCoord = vec2<i32>(i32(global_id.x), i32(global_id.y));
 outputBuffer[3]=3.333f;
 textureStore(textureOUT, texCoord, vec4<f32>(1.0, 0.0, 0.30, 1.0)); 
 outputBuffer[4]=f32(4.444f);
