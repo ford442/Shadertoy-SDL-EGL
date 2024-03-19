@@ -516,8 +516,8 @@ document.querySelector('#outText2').innerHTML='Buffer at [4]:'+$2.toFixed(2);
 return;
 };
 
-// void raf(){
-boost::function<EM_BOOL()>render=[](){
+void raf(){
+// boost::function<EM_BOOL()>render=[](){
 u64_uni.at(3,3)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -663,15 +663,15 @@ wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(2,2),&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
-// return;
-return EM_TRUE;
-// }
-};
-
+return;
+// return EM_TRUE;
+}
+// };
+/*
 void raf(){
 render();
 }
-
+*/
 void sz(int hh){
 sze.at(1,1)=hh;
 }
