@@ -1,6 +1,6 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
 
-inline char wgl_cmp_srcAA[2000]=
+inline char wgl_cmp_src[2000]=
 R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 @group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
 @group(0)@binding(2)var textureIN: texture_2d <f32>;
@@ -16,7 +16,7 @@ outputBuffer[4]=f32(4.444f);
 textureStore(textureOUT, texCoord + vec2<i32>(1, 0), vec4<f32>(0.0, 1.0, 0.0, 0.5));  
 })delimiter";
 
-inline char wgl_cmp_src[2000]=
+inline char wgl_cmp_srcAA[2000]=
 "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
@@ -678,7 +678,8 @@ sze.at(1,1)=hh;
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 wd.at(0,0)=result;
-on.at(1,1)=0;
+on.at(1,1)=3;
+on.at(2,2)=0;
 js_data_pointer.at(0,0)=0;
 fjs_data_pointer.at(0,0)=0;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
@@ -940,7 +941,6 @@ WGPU_BindGroupEntries.at(0,0,0)=Compute_Bindgroup_Entries;
 WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),6);
 WGPU_ComputePassDescriptor.at(0,0,0)=computePassDescriptor;
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(wd.at(0,0));
-
 multiSamp={};
 multiSamp.count=0;
 multiSamp.mask=-1;
@@ -988,7 +988,6 @@ wb.at(4,4)=dstBuffer;
 WGPUImageCopyBuffer videoFrmBfrDst={};
 // videoFrmBfrDst.buffer=dstBuffer;
 wicb.at(1,1)=videoFrmBfrDst;
-
 // videoFrm.source; // must point to a WGpuImageBitmap (could also point to a HTMLVideoElement, HTMLCanvasElement or OffscreenCanvas, but those are currently unimplemented)
 videoFrm.origin=oxy.at(0,0);
 videoFrm.flipY=EM_FALSE;
@@ -1036,7 +1035,6 @@ extTextureDescriptor.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 wetd.at(0,0)=extTextureDescriptor;
 // extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 // wet.at(0,0)=extTexture;
-
 WGpuImageCopyTexture videoTextureCopy;
 videoTextureCopy.texture=wt.at(2,2);
 videoTextureCopy.mipLevel=0;
