@@ -1,5 +1,29 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
 
+
+inline char wgl_cmp_src[2000]=
+R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
+@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
+@group(0)@binding(2)var textureIN: texture_2d <f32>;
+@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;
+@group(0)@binding(4)var resizeSampler: sampler;
+@group(0)@binding(5)var <uniform> iResolution: u32;
+@compute@workgroup_size(1,1,64)\n" // Adjust workgroup size if needed
+fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
+    // ... (retrieve texture size information from inputBuffer) ...
+    for(var y:u32=0u;y<loopx;y=y+1u){
+        for(var x:u32=0u;x<loopx;x=x+1u){
+            var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(x,y)*(sizeINu/sizeOUTu));
+            var colorFromInput: vec4<f32> = textureLoad(textureIN, INtexCoord, 0);
+            // Modify colorFromInput as needed
+            // For example, inverting colors:
+            // colorFromInput = vec4<f32>(1.0 - colorFromInput.rgb, colorFromInput.a); 
+            textureStore(textureOUT, INtexCoord, colorFromInput); 
+        }
+    }
+})delimiter";
+
+
 inline char wgl_cmp_srcAA[2000]=
 R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 @group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
@@ -16,7 +40,7 @@ outputBuffer[4]=f32(4.444f);
 textureStore(textureOUT, texCoord + vec2<i32>(1, 0), vec4<f32>(0.0, 1.0, 0.0, 0.5));  
 })delimiter";
 
-inline char wgl_cmp_src[2000]=
+inline char wgl_cmp_srcBB[2000]=
 "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
