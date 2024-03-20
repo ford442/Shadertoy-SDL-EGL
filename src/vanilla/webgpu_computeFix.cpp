@@ -633,7 +633,7 @@ document.querySelector('#outText1').innerHTML='Empty Buffer at [3]:'+$0.toFixed(
 // },WGPU_Result_Array[3]);
 */
    //  write JS frame data to texture
-  wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(1,1),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(1,1),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
        // Compute Pass
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
@@ -750,7 +750,7 @@ config.format=wtf.at(0,0);
 config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 // config.numViewFormats=1;
 config.viewFormats=&canvasViewFormat[0];
-// config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
+config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 // config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
@@ -830,7 +830,7 @@ WGPU_Mapped_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(1,1)=WGPU_Input_Image;
 wict.at(2,2)=WGPU_Output_Image;
 wict.at(3,3)=WGPU_Mapped_Image;
-textureBindingLayoutFloat.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UNFILTERABLE_FLOAT;
+textureBindingLayoutFloat.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
 textureBindingLayoutFloat.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureBindingLayoutFloat.multisampled=0;
 wtbl.at(1,1)=textureBindingLayoutFloat;
@@ -908,7 +908,7 @@ resizeSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_REPEAT;
 resizeSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_REPEAT;
 resizeSamplerDescriptor.magFilter=WGPU_FILTER_MODE_NEAREST;
 resizeSamplerDescriptor.minFilter=WGPU_FILTER_MODE_NEAREST;
-// resizeSamplerDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_LINEAR;
+// resizeSamplerDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_NEAREST;
 resizeSamplerDescriptor.lodMinClamp=0;
 resizeSamplerDescriptor.lodMaxClamp=32;
 // resizeSamplerDescriptor.compare;  // default = WGPU_COMPARE_FUNCTION_INVALID (not used)
@@ -1093,7 +1093,7 @@ bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayout1.hasDynamicOffset=0,
 bufferBindingLayout1.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayout1;
-textureBindingLayoutFloat.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UNFILTERABLE_FLOAT;
+textureBindingLayoutFloat.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
 // textureBindingLayoutFloat.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UNFILTERABLE_FLOAT;
 // textureBindingLayoutFloat.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_UINT;
 textureBindingLayoutFloat.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
