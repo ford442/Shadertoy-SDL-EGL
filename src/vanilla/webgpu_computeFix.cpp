@@ -535,6 +535,7 @@ colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
 wtv.at(1,1)=colorTextureView;
 // colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 colorAttachment.view=wtv.at(1,1);
+// colorAttachment.depthSlice=;
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
 colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
 // colorAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
