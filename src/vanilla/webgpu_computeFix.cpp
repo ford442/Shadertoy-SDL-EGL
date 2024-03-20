@@ -252,7 +252,6 @@ wict_tensor wict=wict_tensor{4,4};
 wsd_tensor wsd=wsd_tensor{2,2};
 ws_tensor wsmp=ws_tensor{4,4};
 v_tensor imgData=v_tensor{2,2};
-
 wq_tensor WGPU_Queue=wq_tensor{1,1,2};
 wcb_tensor WGPU_CommandBuffer=wcb_tensor{1,1,3};
 wb_tensor WGPU_Buffers=wb_tensor{3,3,3};
@@ -284,9 +283,7 @@ wtvd_tensor WGPU_TextureViewDescriptor=wtvd_tensor{3,3,3};
 uiptr_tensor WGPU_ColorBuffer=uiptr_tensor{1,1,1};
 wced_tensor WGPU_CommandEncoderDescriptor=wced_tensor{1,1,1};
 wbms_tensor WGPU_BufferStatus=wbms_tensor{1,1,1};
-
 c_tensor wgsl=c_tensor{2,2};
-
 uint32_t workgroupSize=64;
 int OutputBufferUnits=64;
 int InputBufferUnits=64;
@@ -297,7 +294,6 @@ uint64_t WGPU_InputRangeSize=OutputBufferBytes;
 // double_int53_t InputBufferBytes=InputBufferBytesI;
 uint32_t InputBufferBytesU=64*4;
 uint32_t OutputBufferBytesU=64*4;
-
 const char * Entry="computeStuff";
 // uint32_t invocationCount=BufferMapSize/sizeof(int);
 // uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
@@ -353,16 +349,13 @@ int raN=0;
 int raND=0;
 WGpuImageCopyTexture WGPU_Input_Image={};
 WGpuImageCopyBuffer WGPU_Input_Buffer={};
-
 WGpuImageCopyTexture WGPU_Output_Image={};
 WGpuImageCopyBuffer WGPU_Output_Buffer={};
-
 WGpuImageCopyTexture WGPU_Mapped_Image={};
 WGpuImageCopyBuffer WGPU_Mapped_Buffer={};
 uint32_t outP;
 double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
-
 float * WGPU_Result_Array=new float[OutputBufferBytes];
 float * WGPU_Input_Array=new float[InputBufferBytes];
 
