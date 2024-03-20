@@ -184,8 +184,8 @@ b3_compute_test_b:
 	 em++ -lEGL  $(LDFLAGS) -O0 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-test2.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=1 --js-library lib/lib_webgpu.js \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 -sENVIRONMENT="web,node" \
-	 -sINITIAL_MEMORY=1400mb -lmath.js -lhtml5.js -lint53.js -jsDWEBGPU_NO_BW_COMPAT=1 \
-	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=1 -sDISABLE_EXCEPTION_THROWING=0 \
+	 -sINITIAL_MEMORY=1400mb -lmath.js -lhtml5.js -lint53.js -jsDWEBGPU_NO_BW_COMPAT=1 -sSTRICT_JS=1 \
+	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS='["startWebGPU","_startWebGPUb"]' -sTEXTDECODER=1 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js \
