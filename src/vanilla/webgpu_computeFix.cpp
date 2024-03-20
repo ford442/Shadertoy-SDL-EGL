@@ -1,6 +1,5 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
 
-
 inline char wgl_cmp_src[2000]=
 R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 @group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
@@ -8,15 +7,26 @@ R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 @group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;
 @group(0)@binding(4)var resizeSampler: sampler;
 @group(0)@binding(5)var <uniform> iResolution: u32;
-@compute@workgroup_size(4,1,64)
+@compute@workgroup_size(8,8)
 fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){
-var sizeINf=inputBuffer[0];
+outputBuffer[2]=f32(3.33f);
+outputBuffer[3]=4.44f;
+var coords=vec2<i32>(global_id.xy);
+textureStore(textureOUT,coords,vec4<f32>(0.77f,0.11f,0.88f,1.0f));
+})delimiter";
+
+inline char wgl_cmp_srcLOOP[2000]=
+R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
+@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
+@group(0)@binding(2)var textureIN: texture_2d <f32>;
+@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;
+@group(0)@binding(4)var resizeSampler: sampler;
+@group(0)@binding(5)var <uniform> iResolution: u32;
+@compute@workgroup_size(8,8)
+fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){
 var loopx:i32=300;
 var loopi:i32=0;
 var loopi2:i32=0;
-var sizeINu:u32=u32(sizeINf);
-var sizeOUTf=inputBuffer[1];
-var sizeOUTu:u32=u32(sizeOUTf);
 outputBuffer[0]=f32(3.33f);
 outputBuffer[1]=4.44f;
 loop{if loopi>=loopx{break;}
@@ -655,13 +665,14 @@ wtv.at(4,4)=OUTTextureView;
 wtv.at(5,5)=bufferTextureView;
 WGPU_InputBuffer.at(0,0,0)[0]=sze.at(1,1);
 WGPU_InputBuffer.at(0,0,0)[1]=sze.at(0,0);
+    
      //  write compute buffer data
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
-wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),1,1,1);
+wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),sze.at(0,0)/8,sze.at(0,0)/8,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
     // get compute buffer data
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
