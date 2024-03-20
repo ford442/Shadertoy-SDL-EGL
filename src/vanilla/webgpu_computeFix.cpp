@@ -1,7 +1,6 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
 
-
-inline char wgl_cmp_src[2000]=
+inline char wgl_cmp_srcGEM[2000]=
 R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 @group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
 @group(0)@binding(2)var textureIN: texture_2d <f32>;
@@ -23,7 +22,6 @@ fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
     }
 })delimiter";
 
-
 inline char wgl_cmp_srcAA[2000]=
 R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 @group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
@@ -40,36 +38,32 @@ outputBuffer[4]=f32(4.444f);
 textureStore(textureOUT, texCoord + vec2<i32>(1, 0), vec4<f32>(0.0, 1.0, 0.0, 0.5));  
 })delimiter";
 
-inline char wgl_cmp_srcBB[2000]=
-"@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
-"@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
-"@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
-"@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
-"@group(0)@binding(4)var resizeSampler: sampler;\n"
-"@group(0)@binding(5)var <uniform> iResolution: u32;\n"
-// "@group(0)@binding(6)var videoTexture: texture_2d <f32>;\n"
-"@compute@workgroup_size(1,1,64)\n"
-"fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
-"var sizeINf=inputBuffer[0];\n"
-"var loopx:u32=u32(sizeINf);\n"
-"var sizeINu:u32=u32(sizeINf);\n"
-"var sizeOUTf=inputBuffer[1];\n"
-"var sizeOUTu:u32=u32(sizeOUTf);\n"
-"outputBuffer[0]=f32(3.33f);\n"
-"outputBuffer[1]=4.44f;\n"
-"for(var y:u32=0u;y<loopx;y=y+1u){\n"
-"for(var x:u32=0u;x<loopx;x=x+1u){\n"
-"var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(x,y)*(sizeINu/sizeOUTu));\n"
+inline char wgl_cmp_src[2000]=
+R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
+@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
+@group(0)@binding(2)var textureIN: texture_2d <f32>;
+@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;
+@group(0)@binding(4)var resizeSampler: sampler;
+@group(0)@binding(5)var <uniform> iResolution: u32;
+@compute@workgroup_size(4,1,64)
+fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){
+var sizeINf=inputBuffer[0];
+var loopx:u32=u32(300);
+var sizeINu:u32=u32(sizeINf);
+var sizeOUTf=inputBuffer[1];
+var sizeOUTu:u32=u32(sizeOUTf);
+outputBuffer[0]=f32(3.33f);
+outputBuffer[1]=4.44f;
+for(var y:u32=0u;y<loopx;y=y+1u){
+for(var x:u32=0u;x<loopx;x=x+1u){
+var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(x,y)*(sizeINu/sizeOUTu));
+var colorTest:vec4<f32>=vec4<f32>(0.77f,0.11f,0.88f,1.0f);
+textureStore(textureOUT,INtexCoord,colorTest);
+}
+}
+})delimiter";
+
 // "var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
-"var colorTest:vec4<f32>=vec4<f32>(0.77f,0.11f,0.88f,1.0f);\n"
-"textureStore(textureOUT,INtexCoord,colorTest);\n"
-// "outputBuffer[x*y*4]=inputBuffer[INtexCoord.x*INtexCoord.y*4];\n"
-// "outputBuffer[(x*y*4)+1]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+1];\n"
-// "outputBuffer[(x*y*4)+2]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+2];\n"
-// "outputBuffer[(x*y*4)+3]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+3];\n"
-"}"
-"}"
-"}";
 
 WGpuExternalTexture extTexture;
 WGpuExternalTextureBindingLayout extTextureBindingLayout={};
