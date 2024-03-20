@@ -1,6 +1,6 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
 
-inline char wgl_cmp_src[2000]=
+inline char wgl_cmp_srcAA[2000]=
 R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 @group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
 @group(0)@binding(2)var textureIN: texture_2d <f32>;
@@ -11,12 +11,12 @@ R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){
 let texCoord = vec2<i32>(i32(global_id.x), i32(global_id.y));
 outputBuffer[3]=3.333f;
-textureStore(textureOUT, texCoord, vec4<f32>(1.0, 0.0, 0.30, 1.0)); 
+textureStore(textureOUT, texCoord, vec4<f32>(1.0f, 0.0f, 0.30f, 1.0f)); 
 outputBuffer[4]=f32(4.444f);
 textureStore(textureOUT, texCoord + vec2<i32>(1, 0), vec4<f32>(0.0, 1.0, 0.0, 0.5));  
 })delimiter";
 
-inline char wgl_cmp_srcAA[2000]=
+inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
@@ -31,14 +31,14 @@ inline char wgl_cmp_srcAA[2000]=
 "var sizeINu:u32=u32(sizeINf);\n"
 "var sizeOUTf=inputBuffer[1];\n"
 "var sizeOUTu:u32=u32(sizeOUTf);\n"
-// "outputBuffer[0]=f32(3.33f);\n"
-// "outputBuffer[1]=4.44f;\n"
+"outputBuffer[0]=f32(3.33f);\n"
+"outputBuffer[1]=4.44f;\n"
 "for(var y:u32=0u;y<loopx;y=y+1u){\n"
 "for(var x:u32=0u;x<loopx;x=x+1u){\n"
 "var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(x,y)*(sizeINu/sizeOUTu));\n"
 // "var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
 "var colorTest:vec4<f32>=vec4<f32>(0.77f,0.11f,0.88f,1.0f);\n"
-"textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),colorTest);\n"
+"textureStore(textureOUT,INtexCoord,colorTest);\n"
 // "outputBuffer[x*y*4]=inputBuffer[INtexCoord.x*INtexCoord.y*4];\n"
 // "outputBuffer[(x*y*4)+1]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+1];\n"
 // "outputBuffer[(x*y*4)+2]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+2];\n"
