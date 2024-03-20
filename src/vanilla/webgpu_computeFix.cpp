@@ -1,6 +1,6 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
 
-inline char wgl_cmp_src[2000]=
+char wgl_cmp_src[2000]=
 R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 @group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
 @group(0)@binding(2)var textureIN: texture_2d <f32>;
