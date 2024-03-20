@@ -1,21 +1,6 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
 
-char wgl_cmp_src[2000]=
-R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
-@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
-@group(0)@binding(2)var textureIN: texture_2d <f32>;
-@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;
-@group(0)@binding(4)var resizeSampler: sampler;
-@group(0)@binding(5)var <uniform> iResolution: u32;
-@compute@workgroup_size(1,1)
-fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){
-outputBuffer[2]=f32(3.33f);
-outputBuffer[3]=4.44f;
-var coords=vec2<i32>(global_id.xy);
-textureStore(textureOUT,coords,vec4<f32>(0.77f,0.11f,0.88f,1.0f));
-})delimiter";
-
-inline char wgl_cmp_srcLOOP[2000]=
+char wgl_cmp_srcWG[2000]=
 R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 @group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
 @group(0)@binding(2)var textureIN: texture_2d <f32>;
@@ -23,6 +8,21 @@ R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 @group(0)@binding(4)var resizeSampler: sampler;
 @group(0)@binding(5)var <uniform> iResolution: u32;
 @compute@workgroup_size(8,8)
+fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){
+outputBuffer[2]=f32(3.33f);
+outputBuffer[3]=4.44f;
+var coords=vec2<i32>(global_id.xy);
+textureStore(textureOUT,coords,vec4<f32>(0.77f,0.11f,0.88f,1.0f));
+})delimiter";
+
+inline char wgl_cmp_src[2000]=
+R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
+@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
+@group(0)@binding(2)var textureIN: texture_2d <f32>;
+@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;
+@group(0)@binding(4)var resizeSampler: sampler;
+@group(0)@binding(5)var <uniform> iResolution: u32;
+@compute@workgroup_size(1)
 fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){
 var loopx:i32=300;
 var loopi:i32=0;
@@ -665,7 +665,7 @@ WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
-wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),sze.at(0,0)/8,sze.at(0,0)/8,1);
+wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),1,1,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
     // get compute buffer data
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
@@ -731,7 +731,7 @@ sze.at(1,1)=hh;
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 wd.at(0,0)=result;
-on.at(1,1)=0;
+on.at(1,1)=3;
 on.at(2,2)=0;
 js_data_pointer.at(0,0)=0;
 fjs_data_pointer.at(0,0)=0;
