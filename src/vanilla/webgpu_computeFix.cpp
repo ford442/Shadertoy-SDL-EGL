@@ -1,5 +1,34 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
 
+
+inline char wgl_cmp_src[2000]=
+R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
+@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
+@group(0)@binding(2)var textureIN: texture_2d <f32>;
+@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;
+@group(0)@binding(4)var resizeSampler: sampler;
+@group(0)@binding(5)var <uniform> iResolution: u32;
+@compute@workgroup_size(4,1,64)
+fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){
+var sizeINf=inputBuffer[0];
+var loopx:i32=300;
+var loopi:i32=0;
+var loopi2:i32=0;
+var sizeINu:u32=u32(sizeINf);
+var sizeOUTf=inputBuffer[1];
+var sizeOUTu:u32=u32(sizeOUTf);
+outputBuffer[0]=f32(3.33f);
+outputBuffer[1]=4.44f;
+loop{if loopi>=loopx{break;}
+loop{if loopi2>=loopx{break;}
+textureStore(textureOUT,vec2<u32>(x,y),vec4<f32>(0.77f,0.11f,0.88f,1.0f));
+loopi2++;
+}
+loopi++;
+}
+})delimiter";
+
+
 inline char wgl_cmp_srcGEM[2000]=
 R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 @group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
@@ -38,7 +67,7 @@ outputBuffer[4]=f32(4.444f);
 textureStore(textureOUT, texCoord + vec2<i32>(1, 0), vec4<f32>(0.0, 1.0, 0.0, 0.5));  
 })delimiter";
 
-inline char wgl_cmp_src[2000]=
+inline char wgl_cmp_srcOLD[2000]=
 R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 @group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
 @group(0)@binding(2)var textureIN: texture_2d <f32>;
@@ -58,7 +87,7 @@ for(var y:u32=0u;y<loopx;y=y+1u){
 for(var x:u32=0u;x<loopx;x=x+1u){
 var INtexCoord:vec2<u32>=vec2<u32>(x,y);
 var colorTest:vec4<f32>=vec4<f32>(0.77f,0.11f,0.88f,1.0f);
-textureStore(textureOUT,INtexCoord,colorTest);
+textureStore(textureOUT,vec2<u32>(x,y),vec4<f32>(0.77f,0.11f,0.88f,1.0f));
 }
 }
 })delimiter";
