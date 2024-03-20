@@ -21,7 +21,7 @@ outputBuffer[0]=f32(3.33f);
 outputBuffer[1]=4.44f;
 loop{if loopi>=loopx{break;}
 loop{if loopi2>=loopx{break;}
-textureStore(textureOUT,vec2<u32>(loopi,loopi2),vec4<f32>(0.77f,0.11f,0.88f,1.0f));
+textureStore(textureOUT,vec2<i32>(loopi,loopi2),vec4<f32>(0.77f,0.11f,0.88f,1.0f));
 loopi2++;
 }
 loopi++;
