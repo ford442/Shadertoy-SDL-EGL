@@ -1263,14 +1263,14 @@ let SiZ=window.innerHeight;
 let tstSiZ=h$;
 // document.querySelector("#mvi").height=h$;
 // document.querySelector("#mvi").width=w$;
-if(running==0){
+// if(running==0){
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
-/// setTimeout(function(){
+setTimeout(function(){
 Module.ccall("startWebGPU",null,"Number",h$);
 console.log('Starting..');
 running=1;
-// },500);
-}
+},500);
+// }
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
