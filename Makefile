@@ -181,7 +181,7 @@ b3_compute_test_v:
 b3_compute_test_b:
 	 em++ src/vanilla/webgpu_computeFix.cpp -fchar8_t -std=c++14 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -lEGL  $(LDFLAGS) -O0 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-test2.js \
+	 em++ -lEGL  $(LDFLAGS) -O0 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-test2.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=1 \
 	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 -sENVIRONMENT="web" \
 	 -sINITIAL_MEMORY=1400mb -lmath.js -lhtml5.js -lint53.js \
