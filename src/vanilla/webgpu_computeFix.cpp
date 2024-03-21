@@ -687,7 +687,7 @@ wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),
 }
 if(WGPU_BufferStatus.at(0,0,0)==1){
 if(on.at(1,1)==3){
-wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),WGPU_MAP_MODE_READ,0,OutputBufferBytes);  
+wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
 // wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),WGPU_MapCallback.at(0,0,0),&WGPU_UserData.at(0,0,0),mode1,0,OutputBufferBytes);
 }
 on.at(2,2)=1;
