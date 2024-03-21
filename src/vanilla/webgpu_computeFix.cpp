@@ -1,5 +1,21 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
 
+char wgl_cmp_src[2000]=
+"@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
+"@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
+"@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
+"@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
+"@group(0)@binding(4)var resizeSampler: sampler;\n"
+"@group(0)@binding(5)var <uniform> iResolution: u32;\n"
+"@compute@workgroup_size(64,64)\n"
+"fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
+"let texCoord = vec2<i32>(i32(global_id.x), i32(global_id.y));\n"
+"outputBuffer[3]=3.333f;\n"
+"textureStore(textureOUT, texCoord, vec4<f32>(1.0f, 0.0f, 0.30f, 1.0f));\n"
+"outputBuffer[4]=f32(4.444f);\n"
+"textureStore(textureOUT, texCoord + vec2<i32>(1, 0), vec4<f32>(0.0, 1.0, 0.0, 0.5));\n"
+}";
+
 char wgl_cmp_srcWG[2000]=
 R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 @group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
@@ -15,7 +31,7 @@ var coords=vec2<i32>(global_id.xy);
 textureStore(textureOUT,coords,vec4<f32>(0.77f,0.11f,0.88f,1.0f));
 })delimiter";
 
-inline char wgl_cmp_src[2000]=
+inline char wgl_cmp_srcLOOP[2000]=
 R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
 @group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
 @group(0)@binding(2)var textureIN: texture_2d <f32>;
