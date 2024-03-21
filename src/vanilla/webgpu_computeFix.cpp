@@ -1249,10 +1249,6 @@ EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
 FS.mkdir('/video');
 
-// const g=new GPUX();
-// let $H=Module.HEAPU8.buffer;
-let $$1;
-
 let running=0;
   
 function nearestPowerOf2(n){
@@ -1282,32 +1278,6 @@ for (let c = 0; c < 4; c++) {
 }
 return imageData;
 }
-  /*
-async function videoFramesG(){
-let SiZ=window.innerHeight;
-let w$=parseInt(document.querySelector("#mvi").videoWidth);
-let h$=parseInt(document.querySelector("#mvi").videoHeight);
-Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
-console.log("vid size: ",h$,", ",w$);
-let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-let blank$=Math.max((((w$-h$))/2.0),0);
-let nblank$=Math.max((((h$-w$)*1)/1),0);
-let t=g.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x+this.constants.blank$];
-return (P[0],P[1],P[2],P[3]);
-}).setTactic("precision").setGraphical(false).setDynamicOutput(true).setOutput([SiZ,SiZ]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
-t.setConstants({nblnk:nblank$,blnk:blank$});
-let frrm=new Uint8ClampedArray($H,0,la);
-$$1=t(vv);
-frrm.set($$1,0);
-FS.writeFile('/video/frame.gl',frrm);
-setInterval(function(){
-$$1=t(vv);
-frrm.set($$1,0);
-FS.writeFile('/video/frame.gl',frrm);
-},16.6);
-}
-  */
   
 async function videoFrames(){
 // document.querySelector("#mvi").height=SiZ;
@@ -1356,65 +1326,6 @@ FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
 }
 
-  /*
-async function GvideoFrames(){
-let SiZ=window.innerHeight;
-document.querySelector("#mvi").height=SiZ;
-let w$=parseInt(document.querySelector("#mvi").videoWidth);
-let h$=parseInt(document.querySelector("#mvi").videoHeight);
-document.querySelector("#mvi").height=h$;
-document.querySelector("#mvi").width=w$;
-
-let vv=document.querySelector('#mvi');
-let cnv=document.querySelector('#bcanvas');
-let cnvb=document.querySelector('#canvas');
-const context = cnvb.getContext("webgpu");
-const gpu = navigator.gpu;
-const format = gpu.getPreferredCanvasFormat();
-const adapter = await gpu.requestAdapter();
-const device = await adapter.requestDevice();
-context.configure({ device, format, alphaMode: "opaque" });
-let texture = device.createTexture({
-format: "rgba8unorm",
-size: [SiZ, SiZ, 2],
-usage:GPUTextureUsage.COPY_DST|GPUTextureUsage.RENDER_ATTACHMENT|GPUTextureUsage.TEXTURE_BINDING,
-}); 
-// const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
-const gl2=cnv.getContext('2d');
-cnvb.height=SiZ;
-cnvb.width=SiZ;
-cnv.height=SiZ;
-cnv.width=SiZ;
-let offS=Math.floor((w$-h$)/2.0);
-gl2.drawImage(vvi,offS,0,h$,h$,0,0,SiZ,SiZ);
-let image=gl2.getImageData(0,0,SiZ,SiZ);
-let imageData=image.data;
-Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
-let pixelData=new Uint8Array(imageData);
-
-  
-setInterval(function(){
-gl2.drawImage(vv,0,0);
-image=gl2.getImageData(0,0,SiZ,SiZ);
-imageData=image.data;
-pixelData=new Uint8Array(imageData);
-device.queue.writeTexture({texture}, pixelData.buffer, {},{SiZ,SiZ});
-// device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[SiZ,SiZ, 2]);
-// device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[texture.size[0], texture.size[1], 2]);
-const imageDataW = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
-device.queue.readTexture({texture},imageDataW.buffer, {},{SiZ,SiZ});
-// device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageDataW.buffer, imageDataW.byteOffset, [SiZ,SiZ, 2]);
-// device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageDataW.buffer, imageDataW.byteOffset, [texture.size[0],texture.size[1], 2]);
-const externalTexture=device.importExternalTexture({source:vv});
-device.queue.readTexture({externalTexture},imageDataW.buffer,{},{SiZ,SiZ});
-// device.queue.readTexture({externalTexture,bytesPerRow:4*vv.videoWidth,rowsPerImage:vv.videoHeight,
-// },imageDataW.buffer,imageDataW.byteOffset);
-FS.writeFile('/video/frame.gl',pixelData);
-
-},16.666);
-
-}
-*/
 function normalResStart(){
 setTimeout(function(){
 document.querySelector('#shut').innerHTML=2;
