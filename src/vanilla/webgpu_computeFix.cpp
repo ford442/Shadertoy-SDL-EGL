@@ -14,7 +14,7 @@ char wgl_cmp_src[2000]=
 "textureStore(textureOUT, texCoord, vec4<f32>(1.0f, 0.0f, 0.30f, 1.0f));\n"
 "outputBuffer[4]=f32(4.444f);\n"
 "textureStore(textureOUT, texCoord + vec2<i32>(1, 0), vec4<f32>(0.0, 1.0, 0.0, 0.5));\n"
-}";
+"}";
 
 char wgl_cmp_srcWG[2000]=
 R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
