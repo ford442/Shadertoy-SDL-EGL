@@ -1,124 +1,35 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
 
-char wgl_cmp_src[2000]=
+inline char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@group(0)@binding(4)var resizeSampler: sampler;\n"
 "@group(0)@binding(5)var <uniform> iResolution: u32;\n"
-"@compute@workgroup_size(1,16,16)\n"
+// "@group(0)@binding(6)var videoTexture: texture_2d <f32>;\n"
+"@compute@workgroup_size(1,1,64)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
-"let texCoord = vec2<i32>(i32(global_id.x), i32(global_id.y));\n"
-"outputBuffer[3]=3.333f;\n"
-"textureStore(textureOUT, texCoord, vec4<f32>(1.0f, 0.0f, 0.30f, 1.0f));\n"
-"outputBuffer[4]=f32(4.444f);\n"
+"var sizeINf=inputBuffer[0];\n"
+"var loopx:u32=u32(sizeINf);\n"
+"var sizeINu:u32=u32(sizeINf);\n"
+"var sizeOUTf=inputBuffer[1];\n"
+"var sizeOUTu:u32=u32(sizeOUTf);\n"
+"for(var y:u32=0u;y<loopx;y=y+1u){\n"
+"for(var x:u32=0u;x<loopx;x=x+1u){\n"
+"var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(x,y)*(sizeINu/sizeOUTu));\n"
+"var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
+// "var colorTest:vec4<f32>=vec4<f32>(0.77,0.11,0.88,1.0);\n"
+"textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),colorTest);\n"
+// "outputBuffer[x*y*4]=inputBuffer[INtexCoord.x*INtexCoord.y*4];\n"
+// "outputBuffer[(x*y*4)+1]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+1];\n"
+// "outputBuffer[(x*y*4)+2]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+2];\n"
+// "outputBuffer[(x*y*4)+3]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+3];\n"
+"}"
+"}"
+"outputBuffer[0]=3.33f;\n"
+"outputBuffer[1]=4.44f;\n"
 "}";
-
-char wgl_cmp_srcWrGr[2000]=
-R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
-@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
-@group(0)@binding(2)var textureIN: texture_2d <f32>;
-@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;
-@group(0)@binding(4)var resizeSampler: sampler;
-@group(0)@binding(5)var <uniform> iResolution: u32;
-@compute@workgroup_size(8,8)
-fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){
-outputBuffer[2]=f32(3.33f);
-outputBuffer[3]=4.44f;
-var coords=vec2<i32>(global_id.xy);
-textureStore(textureOUT,coords,vec4<f32>(0.77f,0.11f,0.88f,1.0f));
-})delimiter";
-
-inline char wgl_cmp_srcLOOP[2000]=
-R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
-@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
-@group(0)@binding(2)var textureIN: texture_2d <f32>;
-@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;
-@group(0)@binding(4)var resizeSampler: sampler;
-@group(0)@binding(5)var <uniform> iResolution: u32;
-@compute@workgroup_size(1)
-fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){
-var loopx:i32=300;
-var loopi:i32=0;
-var loopi2:i32=0;
-outputBuffer[0]=f32(3.33f);
-outputBuffer[1]=4.44f;
-loop{if loopi>=loopx{break;}
-loop{if loopi2>=loopx{break;}
-textureStore(textureOUT,vec2<i32>(loopi,loopi2),vec4<f32>(0.77f,0.11f,0.88f,1.0f));
-loopi2++;
-}
-loopi++;
-}
-})delimiter";
-
-
-inline char wgl_cmp_srcGEM[2000]=
-R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
-@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
-@group(0)@binding(2)var textureIN: texture_2d <f32>;
-@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;
-@group(0)@binding(4)var resizeSampler: sampler;
-@group(0)@binding(5)var <uniform> iResolution: u32;
-@compute@workgroup_size(1,1,64)\n" // Adjust workgroup size if needed
-fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
-    // ... (retrieve texture size information from inputBuffer) ...
-    for(var y:u32=0u;y<loopx;y=y+1u){
-        for(var x:u32=0u;x<loopx;x=x+1u){
-            var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(x,y)*(sizeINu/sizeOUTu));
-            var colorFromInput: vec4<f32> = textureLoad(textureIN, INtexCoord, 0);
-            // Modify colorFromInput as needed
-            // For example, inverting colors:
-            // colorFromInput = vec4<f32>(1.0 - colorFromInput.rgb, colorFromInput.a); 
-            textureStore(textureOUT, INtexCoord, colorFromInput); 
-        }
-    }
-})delimiter";
-
-inline char wgl_cmp_srcAA[2000]=
-R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
-@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
-@group(0)@binding(2)var textureIN: texture_2d <f32>;
-@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;
-@group(0)@binding(4)var resizeSampler: sampler;
-@group(0)@binding(5)var <uniform> iResolution: u32;
-@compute@workgroup_size(1)
-fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){
-let texCoord = vec2<i32>(i32(global_id.x), i32(global_id.y));
-outputBuffer[3]=3.333f;
-textureStore(textureOUT, texCoord, vec4<f32>(1.0f, 0.0f, 0.30f, 1.0f)); 
-outputBuffer[4]=f32(4.444f);
-textureStore(textureOUT, texCoord + vec2<i32>(1, 0), vec4<f32>(0.0, 1.0, 0.0, 0.5));  
-})delimiter";
-
-inline char wgl_cmp_srcOLD[2000]=
-R"delimiter(@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;
-@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;
-@group(0)@binding(2)var textureIN: texture_2d <f32>;
-@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;
-@group(0)@binding(4)var resizeSampler: sampler;
-@group(0)@binding(5)var <uniform> iResolution: u32;
-@compute@workgroup_size(4,1,64)
-fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){
-var sizeINf=inputBuffer[0];
-var loopx:u32=u32(300);
-var sizeINu:u32=u32(sizeINf);
-var sizeOUTf=inputBuffer[1];
-var sizeOUTu:u32=u32(sizeOUTf);
-outputBuffer[0]=f32(3.33f);
-outputBuffer[1]=4.44f;
-for(var y:u32=0u;y<loopx;y=y+1u){
-for(var x:u32=0u;x<loopx;x=x+1u){
-var INtexCoord:vec2<u32>=vec2<u32>(x,y);
-var colorTest:vec4<f32>=vec4<f32>(0.77f,0.11f,0.88f,1.0f);
-textureStore(textureOUT,vec2<u32>(x,y),vec4<f32>(0.77f,0.11f,0.88f,1.0f));
-}
-}
-})delimiter";
-
-  // var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(x,y)*(sizeINu/sizeOUTu));
-// "var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
 
 WGpuExternalTexture extTexture;
 WGpuExternalTextureBindingLayout extTextureBindingLayout={};
@@ -267,6 +178,7 @@ wict_tensor wict=wict_tensor{4,4};
 wsd_tensor wsd=wsd_tensor{2,2};
 ws_tensor wsmp=ws_tensor{4,4};
 v_tensor imgData=v_tensor{2,2};
+
 wq_tensor WGPU_Queue=wq_tensor{1,1,2};
 wcb_tensor WGPU_CommandBuffer=wcb_tensor{1,1,3};
 wb_tensor WGPU_Buffers=wb_tensor{3,3,3};
@@ -298,17 +210,20 @@ wtvd_tensor WGPU_TextureViewDescriptor=wtvd_tensor{3,3,3};
 uiptr_tensor WGPU_ColorBuffer=uiptr_tensor{1,1,1};
 wced_tensor WGPU_CommandEncoderDescriptor=wced_tensor{1,1,1};
 wbms_tensor WGPU_BufferStatus=wbms_tensor{1,1,1};
+
 c_tensor wgsl=c_tensor{2,2};
+
 uint32_t workgroupSize=64;
 int OutputBufferUnits=64;
 int InputBufferUnits=64;
-uint32_t OutputBufferBytes=64*4;
-uint32_t InputBufferBytes=64*4;
-uint64_t WGPU_InputRangeSize=OutputBufferBytes;
-// double_int53_t OutputBufferBytes=OutputBufferBytesI;
-// double_int53_t InputBufferBytes=InputBufferBytesI;
+uint32_t OutputBufferBytesI=64*4;
+uint32_t InputBufferBytesI=64*4;
+uint64_t WGPU_InputRangeSize=OutputBufferBytesI;
+double_int53_t OutputBufferBytes=OutputBufferBytesI;
+double_int53_t InputBufferBytes=InputBufferBytesI;
 uint32_t InputBufferBytesU=64*4;
 uint32_t OutputBufferBytesU=64*4;
+
 const char * Entry="computeStuff";
 // uint32_t invocationCount=BufferMapSize/sizeof(int);
 // uint32_t workgroupCount=(invocationCount+workgroupSize-1)/workgroupSize;
@@ -341,10 +256,9 @@ WGpuBindGroupLayoutEntry Compute_Bindgroup_Layout_Entries[8]={};
 WGpuBindGroupEntry Compute_Bindgroup_Entries[8]={};
 WGpuBufferBindingLayout bufferBindingLayoutIn={3};
 WGpuBufferBindingLayout bufferBindingLayoutOut={2};
-WGpuBufferBindingLayout bufferBindingLayoutMap={2};
 WGpuBufferBindingLayout bufferBindingLayout3={2};
 WGpuBufferBindingLayout bufferBindingLayout4={2};
-WGpuStorageTextureBindingLayout storagetextureBindingLayoutFloat={WGPU_STORAGE_TEXTURE_ACCESS_WRITE_ONLY,WGPU_TEXTURE_FORMAT_RGBA8UNORM,WGPU_TEXTURE_VIEW_DIMENSION_2D};
+WGpuStorageTextureBindingLayout storagetextureBindingLayoutFloat={1,18,2};
 WGpuRequestAdapterOptions options={WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE,false};
 WGpuBufferDescriptor bufferDescriptorI={};
 WGpuBufferDescriptor bufferDescriptorO={};
@@ -364,15 +278,18 @@ int raN=0;
 int raND=0;
 WGpuImageCopyTexture WGPU_Input_Image={};
 WGpuImageCopyBuffer WGPU_Input_Buffer={};
+
 WGpuImageCopyTexture WGPU_Output_Image={};
 WGpuImageCopyBuffer WGPU_Output_Buffer={};
+
 WGpuImageCopyTexture WGPU_Mapped_Image={};
 WGpuImageCopyBuffer WGPU_Mapped_Buffer={};
 uint32_t outP;
 double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
-float * WGPU_Result_Array=new float[OutputBufferBytes];
-float * WGPU_Input_Array=new float[InputBufferBytes];
+
+float * WGPU_Result_Array=new float[OutputBufferUnits];
+float * WGPU_Input_Array=new float[InputBufferUnits];
 
 struct Vertex{
 GLfloat position[4];
@@ -562,19 +479,14 @@ return;
 }
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-on.at(2,2)=1;
+EM_ASM({
+document.querySelector('#outText').innerHTML='Buffer at [0]:'+$0;
+},WGPU_ResultBuffer.at(0,0,0)[0]);
+on.at(1,1)=0;
 return;
 };
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
-if(on.at(1,1)==3){
-EM_ASM({
-document.querySelector('#outText').innerHTML='Buffer at [2]:'+$0.toFixed(2);
-document.querySelector('#outText1').innerHTML='Buffer at [3]:'+$1.toFixed(2);
-document.querySelector('#outText2').innerHTML='Buffer at [4]:'+$2.toFixed(2);
-},WGPU_ResultBuffer.at(0,0,0)[2],WGPU_ResultBuffer.at(0,0,0)[3],WGPU_ResultBuffer.at(0,0,0)[4]);
-}
-on.at(2,2)=1;
 return;
 };
 
@@ -597,7 +509,6 @@ colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
 wtv.at(1,1)=colorTextureView;
 // colorAttachment.view=wgpu_texture_create_view(wgpu_canvas_context_get_current_texture(wcc.at(0,0)),0);
 colorAttachment.view=wtv.at(1,1);
-// colorAttachment.depthSlice=;
 colorAttachment.storeOp=WGPU_STORE_OP_STORE;
 colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
 // colorAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
@@ -626,33 +537,18 @@ passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
-    // fram=static_cast<uint8_t *>(rd_frm(Fnm2));
-// fram=(void *)rd_frmf(Fnm2);
+  
   //  frame data
+// fram=static_cast<uint8_t *>(rd_frm(Fnm2));
+// fram=(void *)rd_frmf(Fnm2);
 std::ifstream fram(Fnm2,std::ios::binary);
+// std::vector<char> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 frame_tensor.at(0,0)=data;
 wetd.at(0,0).source=texid.at(0,0);
 // extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 // wet.at(0,0)=extTexture;
 
-if(on.at(2,2)==3){
-EM_ASM({
-document.querySelector('#outText').innerHTML='Test (3,3)=3';
-},WGPU_ResultBuffer.at(0,0,0)[3]);
-}  
-if(on.at(2,2)!=3){
-EM_ASM({
-document.querySelector('#outText').innerHTML='Test (3,3)!=3';
-},WGPU_ResultBuffer.at(0,0,0)[3]);
-}  
-if(on.at(1,1)==5){
-EM_ASM({
-document.querySelector('#outText1').innerHTML='Buffer at [3]:'+$0.toFixed(2);
-},WGPU_ResultBuffer.at(0,0,0)[3]);
-}
-   //  write JS frame data to texture
-wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(1,1),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
        // Compute Pass
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
@@ -675,58 +571,68 @@ bufferTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,2),&WGPU_TextureV
 wtv.at(3,3)=INTextureView;
 wtv.at(4,4)=OUTTextureView;
 wtv.at(5,5)=bufferTextureView;
+
+// wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(1,1),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 WGPU_InputBuffer.at(0,0,0)[0]=sze.at(1,1);
 WGPU_InputBuffer.at(0,0,0)[1]=sze.at(0,0);
-     //  write compute buffer data
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
-wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),1,1,1);
+wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),1,1,64);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
-    // get compute buffer data
-wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
-// wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Mapped_Image,256,1,1);
-// wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Mapped_Image,&WGPU_Mapped_Buffer,256,1,1);
+// wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
+wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Mapped_Image,64,1,1);
+wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Mapped_Image,&WGPU_Mapped_Buffer,64,1,1);
+  // wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+  // wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
+  // wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(0,0),&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+// wgpu_queue_write_texture(wq.at(0,0),&wict.at(1,1),&WGPU_ResultBuffer.at(0,0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+
     //  non-callback mapping
-if(on.at(2,2)==1){
+EM_ASM({
+document.querySelector('#outText').innerHTML='Buffer at [0]:'+$0;
+},WGPU_ResultBuffer.at(0,0,0)[0]);
+
+if(on.at(1,1)==3){
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-if(wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2)==3)){
+if(WGPU_BufferStatus.at(0,0,0)==3){
 WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 }
-}
 if(WGPU_BufferStatus.at(0,0,0)==1){
-if(on.at(1,1)==3){
 wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
 // wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),WGPU_MapCallback.at(0,0,0),&WGPU_UserData.at(0,0,0),mode1,0,OutputBufferBytes);
 }
-on.at(2,2)=1;
-}
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
-    //  non-callback unmapping
-if(WGPU_BufferStatus.at(0,0,0)!=1){
-if(on.at(2,2)==1){
+}
+
+WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
+  
+  //  non-callback unmapping
+if(WGPU_BufferStatus.at(0,0,0)!=1&&WGPU_BufferStatus.at(0,0,0)!=0){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 on.at(1,1)=5;
 }
-}
-  
-WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
+
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
+ 
+wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(2,2),&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
+
   // Render Pass
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
+// wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,&fram,sze.at(0,0)*sze.at(0,0));
+// wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),&wicb.at(1,1),wict.at(2,2),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(1,1),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
-     //  copy compute shader image data to render - must be after end of render pass
-wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(2,2),&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
 // return;
@@ -745,7 +651,6 @@ sze.at(1,1)=hh;
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 wd.at(0,0)=result;
 on.at(1,1)=3;
-on.at(2,2)=0;
 js_data_pointer.at(0,0)=0;
 fjs_data_pointer.at(0,0)=0;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
@@ -763,7 +668,7 @@ config.format=wtf.at(0,0);
 config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 // config.numViewFormats=1;
 config.viewFormats=&canvasViewFormat[0];
-config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
+// config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
 // config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
@@ -785,12 +690,13 @@ OriginXY.x=0;
 OriginXY.y=0;
 oxy.at(0,0)=OriginXY;
 workgroupSize=1;
+
 WGPU_UserData.at(0,0,0)=userData;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
 textureDescriptorIn.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorIn.format=wtf.at(0,0);
-textureDescriptorIn.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
+textureDescriptorIn.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST;
 textureDescriptorIn.width=sze.at(1,1);
 textureDescriptorIn.height=sze.at(1,1); // default = 1;
 textureDescriptorIn.depthOrArrayLayers=1;
@@ -802,7 +708,7 @@ textureDescriptorIn.numViewFormats=0; // &textureAviewFormats[0];
 textureDescriptorIn.viewFormats=nullptr; // &textureAviewFormats[0];
 textureDescriptorOut.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorOut.format=wtf.at(0,0);
-textureDescriptorOut.usage=WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC;
+textureDescriptorOut.usage=WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST;
 textureDescriptorOut.width=sze.at(0,0);
 textureDescriptorOut.height=sze.at(0,0); // default = 1;
 textureDescriptorOut.depthOrArrayLayers=1;
@@ -812,10 +718,11 @@ textureDescriptorOut.dimension=WGPU_TEXTURE_DIMENSION_2D;
 WGPU_TEXTURE_FORMAT textureBviewFormats[1]={wtf.at(0,0)};
 videoTextureDescriptor.numViewFormats=0; // &textureBviewFormats[0];
 videoTextureDescriptor.viewFormats=nullptr; // &textureBviewFormats[0];
+
 textureDescriptorBuffer.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorBuffer.format=wtf.at(0,0);
-textureDescriptorBuffer.usage=WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
-textureDescriptorBuffer.width=64;
+textureDescriptorBuffer.usage=WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST;
+textureDescriptorBuffer.width=256;
 textureDescriptorBuffer.height=1; // default = 1;
 textureDescriptorBuffer.depthOrArrayLayers=1;
 textureDescriptorBuffer.mipLevelCount=1;
@@ -824,6 +731,7 @@ textureDescriptorBuffer.dimension=WGPU_TEXTURE_DIMENSION_2D;
 // WGPU_TEXTURE_FORMAT textureBFviewFormats[1]={wtf.at(0,0)};
 videoTextureDescriptor.numViewFormats=0; // &textureBviewFormats[0];
 videoTextureDescriptor.viewFormats=nullptr; // &textureBviewFormats[0];
+  
 WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorIn;
 WGPU_TextureDescriptor.at(0,0,1)=textureDescriptorOut;
 WGPU_TextureDescriptor.at(0,0,2)=textureDescriptorBuffer;
@@ -831,6 +739,7 @@ WGPU_CommandEncoderDescriptor.at(0,0,0)=commandEncoderDescriptor;
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
 WGPU_Texture.at(0,0,2)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,2));
+
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
 WGPU_Input_Image.origin=oxyz.at(0,0);
 WGPU_Input_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
@@ -840,9 +749,10 @@ WGPU_Output_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
 WGPU_Mapped_Image.texture=WGPU_Texture.at(0,0,2);
 WGPU_Mapped_Image.origin=oxyz.at(0,0);
 WGPU_Mapped_Image.aspect=WGPU_TEXTURE_ASPECT_ALL;
-wict.at(1,1)=WGPU_Input_Image;
-wict.at(2,2)=WGPU_Output_Image;
+wict.at(2,2)=WGPU_Input_Image;
+wict.at(0,0)=WGPU_Output_Image;
 wict.at(3,3)=WGPU_Mapped_Image;
+
 textureBindingLayoutFloat.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
 textureBindingLayoutFloat.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureBindingLayoutFloat.multisampled=0;
@@ -851,6 +761,7 @@ textureBindingLayoutDepth.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_DEPTH;
 textureBindingLayoutDepth.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureBindingLayoutDepth.multisampled=0;
 wtbl.at(2,2)=textureBindingLayoutDepth;
+
 textureViewDescriptorIn.format=wtf.at(0,0);
 textureViewDescriptorIn.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureViewDescriptorIn.aspect=WGPU_TEXTURE_ASPECT_ALL;
@@ -858,6 +769,7 @@ textureViewDescriptorIn.baseMipLevel=0; // default = 0
 textureViewDescriptorIn.mipLevelCount=1;
 textureViewDescriptorIn.baseArrayLayer=0; // default = 0
 textureViewDescriptorIn.arrayLayerCount=1;
+
 textureViewDescriptorOut.format=wtf.at(0,0);
 textureViewDescriptorOut.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureViewDescriptorOut.aspect=WGPU_TEXTURE_ASPECT_ALL;
@@ -865,6 +777,7 @@ textureViewDescriptorOut.baseMipLevel=0; // default = 0
 textureViewDescriptorOut.mipLevelCount=1;
 textureViewDescriptorOut.baseArrayLayer=0; // default = 0
 textureViewDescriptorOut.arrayLayerCount=1;
+  
 textureViewDescriptorBuffer.format=wtf.at(0,0);
 textureViewDescriptorBuffer.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureViewDescriptorBuffer.aspect=WGPU_TEXTURE_ASPECT_ALL;
@@ -872,13 +785,14 @@ textureViewDescriptorBuffer.baseMipLevel=0; // default = 0
 textureViewDescriptorBuffer.mipLevelCount=1;
 textureViewDescriptorBuffer.baseArrayLayer=0; // default = 0
 textureViewDescriptorBuffer.arrayLayerCount=1;
+  
 WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorIn;
 WGPU_TextureViewDescriptor.at(0,0,1)=textureViewDescriptorOut;
 WGPU_TextureViewDescriptor.at(0,0,2)=textureViewDescriptorBuffer;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Array;
 WGPU_InputBuffer.at(0,0,0)=WGPU_Input_Array;
-bufferDescriptorI={InputBufferBytesU,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC|WGPU_BUFFER_USAGE_COPY_DST,false};
-bufferDescriptorO={OutputBufferBytesU,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC|WGPU_BUFFER_USAGE_COPY_DST,false};
+bufferDescriptorI={InputBufferBytesU,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
+bufferDescriptorO={OutputBufferBytesU,WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 bufferDescriptorM={OutputBufferBytesU,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 bufferDescriptorC={OutputBufferBytesU,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGPU_BufferDescriptor.at(0,0,0)=bufferDescriptorI;
@@ -910,8 +824,8 @@ wbbl.at(0,0)=bufferBindingLayoutR;
 // wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 // }
 WGPU_Output_Buffer.buffer=WGPU_Buffers.at(0,0,0);
-WGPU_Output_Buffer.bytesPerRow=512; // (floor((sze.at(0,0)*4)/256)+1)*256;
-WGPU_Output_Buffer.rowsPerImage=64;
+WGPU_Output_Buffer.bytesPerRow=(floor((sze.at(0,0)*4)/256)+1)*256;
+WGPU_Output_Buffer.rowsPerImage=sze.at(0,0);
 // wicb.at(2,2)=WGPU_Output_Buffer;
 WGPU_Mapped_Buffer.buffer=WGPU_Buffers.at(2,0,2);
 WGPU_Mapped_Buffer.bytesPerRow=512;
@@ -921,7 +835,7 @@ resizeSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_REPEAT;
 resizeSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_REPEAT;
 resizeSamplerDescriptor.magFilter=WGPU_FILTER_MODE_LINEAR;
 resizeSamplerDescriptor.minFilter=WGPU_FILTER_MODE_LINEAR;
-// resizeSamplerDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_NEAREST;
+// resizeSamplerDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_LINEAR;
 resizeSamplerDescriptor.lodMinClamp=0;
 resizeSamplerDescriptor.lodMaxClamp=32;
 // resizeSamplerDescriptor.compare;  // default = WGPU_COMPARE_FUNCTION_INVALID (not used)
@@ -935,7 +849,6 @@ WGPU_BufferBindingLayout.at(0,0,1)=bufferBindingLayoutIn;
 WGPU_BufferBindingLayout.at(0,0,2)=bufferBindingLayoutOut;
 WGPU_BufferBindingLayout.at(0,0,3)=bufferBindingLayout3;
 WGPU_BufferBindingLayout.at(0,0,4)=bufferBindingLayout4;
-WGPU_BufferBindingLayout.at(0,0,5)=bufferBindingLayoutMap;
 WGPU_StorageTextureBindingLayout.at(0,0,0)=storagetextureBindingLayoutFloat;
 INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
 OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureViewDescriptor.at(0,0,1));
@@ -998,6 +911,8 @@ WGPU_BindGroupEntries.at(0,0,0)=Compute_Bindgroup_Entries;
 WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),6);
 WGPU_ComputePassDescriptor.at(0,0,0)=computePassDescriptor;
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(wd.at(0,0));
+
+  
 multiSamp={};
 multiSamp.count=0;
 multiSamp.mask=-1;
@@ -1033,7 +948,7 @@ fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&colorTarget;
-u64_bfrSze.at(0,0)=256;
+u64_bfrSze.at(0,0)=sze.at(0,0)*sze.at(0,0)*4;
 WGpuBufferDescriptor bufferDescriptorIn={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
 WGpuBufferDescriptor bufferDescriptorOut={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,false};
 wbd.at(3,3)=bufferDescriptorIn;
@@ -1045,6 +960,7 @@ wb.at(4,4)=dstBuffer;
 WGPUImageCopyBuffer videoFrmBfrDst={};
 // videoFrmBfrDst.buffer=dstBuffer;
 wicb.at(1,1)=videoFrmBfrDst;
+
 // videoFrm.source; // must point to a WGpuImageBitmap (could also point to a HTMLVideoElement, HTMLCanvasElement or OffscreenCanvas, but those are currently unimplemented)
 videoFrm.origin=oxy.at(0,0);
 videoFrm.flipY=EM_FALSE;
@@ -1092,6 +1008,7 @@ extTextureDescriptor.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 wetd.at(0,0)=extTextureDescriptor;
 // extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 // wet.at(0,0)=extTexture;
+
 WGpuImageCopyTexture videoTextureCopy;
 videoTextureCopy.texture=wt.at(2,2);
 videoTextureCopy.mipLevel=0;
@@ -1252,6 +1169,10 @@ EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
 FS.mkdir('/video');
 
+const g=new GPUX();
+let $H=Module.HEAPU8.buffer;
+let $$1;
+
 let running=0;
   
 function nearestPowerOf2(n){
@@ -1281,7 +1202,32 @@ for (let c = 0; c < 4; c++) {
 }
 return imageData;
 }
-  
+  /*
+async function videoFramesG(){
+let SiZ=window.innerHeight;
+let w$=parseInt(document.querySelector("#mvi").videoWidth);
+let h$=parseInt(document.querySelector("#mvi").videoHeight);
+Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
+console.log("vid size: ",h$,", ",w$);
+let la=nearestPowerOf2(((w$*h$*4)/4)*4);
+let blank$=Math.max((((w$-h$))/2.0),0);
+let nblank$=Math.max((((h$-w$)*1)/1),0);
+let t=g.createKernel(function(v){
+var P=v[this.thread.y][this.thread.x+this.constants.blank$];
+return (P[0],P[1],P[2],P[3]);
+}).setTactic("precision").setGraphical(false).setDynamicOutput(true).setOutput([SiZ,SiZ]).setStrictIntegers(false).setFixIntegerDivisionAccuracy(false);
+t.setConstants({nblnk:nblank$,blnk:blank$});
+let frrm=new Uint8ClampedArray($H,0,la);
+$$1=t(vv);
+frrm.set($$1,0);
+FS.writeFile('/video/frame.gl',frrm);
+setInterval(function(){
+$$1=t(vv);
+frrm.set($$1,0);
+FS.writeFile('/video/frame.gl',frrm);
+},16.6);
+}
+  */
 async function videoFrames(){
 // document.querySelector("#mvi").height=SiZ;
 let w$=parseInt(document.querySelector("#mvi").videoWidth);
@@ -1290,14 +1236,14 @@ let SiZ=window.innerHeight;
 let tstSiZ=h$;
 // document.querySelector("#mvi").height=h$;
 // document.querySelector("#mvi").width=w$;
-// if(running==0){
+if(running==0){
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 setTimeout(function(){
 Module.ccall("startWebGPU",null,"Number",h$);
 console.log('Starting..');
 running=1;
 },500);
-// }
+}
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
@@ -1329,6 +1275,65 @@ FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
 }
 
+  /*
+async function GvideoFrames(){
+let SiZ=window.innerHeight;
+document.querySelector("#mvi").height=SiZ;
+let w$=parseInt(document.querySelector("#mvi").videoWidth);
+let h$=parseInt(document.querySelector("#mvi").videoHeight);
+document.querySelector("#mvi").height=h$;
+document.querySelector("#mvi").width=w$;
+
+let vv=document.querySelector('#mvi');
+let cnv=document.querySelector('#bcanvas');
+let cnvb=document.querySelector('#canvas');
+const context = cnvb.getContext("webgpu");
+const gpu = navigator.gpu;
+const format = gpu.getPreferredCanvasFormat();
+const adapter = await gpu.requestAdapter();
+const device = await adapter.requestDevice();
+context.configure({ device, format, alphaMode: "opaque" });
+let texture = device.createTexture({
+format: "rgba8unorm",
+size: [SiZ, SiZ, 2],
+usage:GPUTextureUsage.COPY_DST|GPUTextureUsage.RENDER_ATTACHMENT|GPUTextureUsage.TEXTURE_BINDING,
+}); 
+// const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
+const gl2=cnv.getContext('2d');
+cnvb.height=SiZ;
+cnvb.width=SiZ;
+cnv.height=SiZ;
+cnv.width=SiZ;
+let offS=Math.floor((w$-h$)/2.0);
+gl2.drawImage(vvi,offS,0,h$,h$,0,0,SiZ,SiZ);
+let image=gl2.getImageData(0,0,SiZ,SiZ);
+let imageData=image.data;
+Module.ccall("frm",null,['Number'],['Number'],SiZ,SiZ);
+let pixelData=new Uint8Array(imageData);
+
+  
+setInterval(function(){
+gl2.drawImage(vv,0,0);
+image=gl2.getImageData(0,0,SiZ,SiZ);
+imageData=image.data;
+pixelData=new Uint8Array(imageData);
+device.queue.writeTexture({texture}, pixelData.buffer, {},{SiZ,SiZ});
+// device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[SiZ,SiZ, 2]);
+// device.queue.writeTexture({texture,bytesPerRow: 4 * cnv.height,rowsPerImage: cnv.height,}, pixelData.buffer, pixelData.byteOffset,[texture.size[0], texture.size[1], 2]);
+const imageDataW = new Uint8Array(cnv.height * cnv.height * 4); // Assuming RGBA format
+device.queue.readTexture({texture},imageDataW.buffer, {},{SiZ,SiZ});
+// device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageDataW.buffer, imageDataW.byteOffset, [SiZ,SiZ, 2]);
+// device.queue.readTexture({texture,bytesPerRow: 4 * cnv.width,rowsPerImage: cnv.height,}, imageDataW.buffer, imageDataW.byteOffset, [texture.size[0],texture.size[1], 2]);
+const externalTexture=device.importExternalTexture({source:vv});
+device.queue.readTexture({externalTexture},imageDataW.buffer,{},{SiZ,SiZ});
+// device.queue.readTexture({externalTexture,bytesPerRow:4*vv.videoWidth,rowsPerImage:vv.videoHeight,
+// },imageDataW.buffer,imageDataW.byteOffset);
+FS.writeFile('/video/frame.gl',pixelData);
+
+},16.666);
+
+}
+*/
 function normalResStart(){
 setTimeout(function(){
 document.querySelector('#shut').innerHTML=2;
