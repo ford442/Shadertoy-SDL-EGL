@@ -635,6 +635,17 @@ frame_tensor.at(0,0)=data;
 wetd.at(0,0).source=texid.at(0,0);
 // extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
 // wet.at(0,0)=extTexture;
+
+if(on.at(2,2)==3){
+EM_ASM({
+document.querySelector('#outText').innerHTML='Test (3,3)=3';
+},WGPU_ResultBuffer.at(0,0,0)[3]);
+}  
+if(on.at(2,2)!=3){
+EM_ASM({
+document.querySelector('#outText').innerHTML='Test (3,3)!=3';
+},WGPU_ResultBuffer.at(0,0,0)[3]);
+}  
 if(on.at(1,1)==5){
 EM_ASM({
 document.querySelector('#outText1').innerHTML='Buffer at [3]:'+$0.toFixed(2);
@@ -791,7 +802,7 @@ textureDescriptorIn.numViewFormats=0; // &textureAviewFormats[0];
 textureDescriptorIn.viewFormats=nullptr; // &textureAviewFormats[0];
 textureDescriptorOut.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorOut.format=wtf.at(0,0);
-textureDescriptorOut.usage=WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST;
+textureDescriptorOut.usage=WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC;
 textureDescriptorOut.width=sze.at(0,0);
 textureDescriptorOut.height=sze.at(0,0); // default = 1;
 textureDescriptorOut.depthOrArrayLayers=1;
@@ -803,7 +814,7 @@ videoTextureDescriptor.numViewFormats=0; // &textureBviewFormats[0];
 videoTextureDescriptor.viewFormats=nullptr; // &textureBviewFormats[0];
 textureDescriptorBuffer.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorBuffer.format=wtf.at(0,0);
-textureDescriptorBuffer.usage=WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST;
+textureDescriptorBuffer.usage=WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
 textureDescriptorBuffer.width=64;
 textureDescriptorBuffer.height=1; // default = 1;
 textureDescriptorBuffer.depthOrArrayLayers=1;
