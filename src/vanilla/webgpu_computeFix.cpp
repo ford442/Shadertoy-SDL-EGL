@@ -7,7 +7,7 @@ char wgl_cmp_src[2000]=
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@group(0)@binding(4)var resizeSampler: sampler;\n"
 "@group(0)@binding(5)var <uniform> iResolution: u32;\n"
-"@compute@workgroup_size(64,64)\n"
+"@compute@workgroup_size(64,1,64)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "let texCoord = vec2<i32>(i32(global_id.x), i32(global_id.y));\n"
 "outputBuffer[3]=3.333f;\n"
