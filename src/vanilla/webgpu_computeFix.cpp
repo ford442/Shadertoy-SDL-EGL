@@ -27,8 +27,8 @@ inline char wgl_cmp_src[2000]=
 // "outputBuffer[(x*y*4)+3]=inputBuffer[(INtexCoord.x*INtexCoord.y*4)+3];\n"
 "}"
 "}"
-"outputBuffer[0]=3.33f;\n"
-"outputBuffer[1]=4.44f;\n"
+"outputBuffer[0]=3.33;\n"
+"outputBuffer[1]=4.44;\n"
 "}";
 
 WGpuExternalTexture extTexture;
