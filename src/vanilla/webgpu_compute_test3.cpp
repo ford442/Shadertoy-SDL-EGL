@@ -180,11 +180,14 @@ INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewD
 OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureViewDescriptor.at(0,0,1));
 wtv.at(3,3)=INTextureView;
 wtv.at(4,4)=OUTTextureView;
+        Output_Image_Buffer.buffer=WGPU_Buffers.at(0,0,0);
+
         //  frame data
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 frame_tensor.at(0,0)=data;
 wetd.at(0,0).source=texid.at(0,0);
+wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
        // Compute Pass
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 WGPU_InputBuffer.at(0,0,0)[2]=sze.at(1,1);
@@ -198,7 +201,8 @@ wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
-// wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(1,1),&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
+wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&Output_Image_Buffer,&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
+wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(1,1),&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 if(WGPU_BufferStatus.at(0,0,0)!=3&&on.at(1,1)==0){
 on.at(1,1)=1;
 wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
@@ -223,8 +227,7 @@ on.at(1,1)=0;
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
   // Render Pass
-wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
-wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(1,1),&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
+// wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(1,1),&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
@@ -387,10 +390,10 @@ wb.at(3,3)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 wb.at(4,4)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
 // videoFrmBfrSrc.bytesPerRow=(floor((sze.at(1,1)*4)/256)+1)*256;  // not used by webgpu.h
 // videoFrmBfrSrc.rowsPerImage=sze.at(1,1);  // not used by webgpu.h
-videoFrmBfrSrc.buffer=wb.at(3,3);
+// videoFrmBfrSrc.buffer=wb.at(3,3);  // fails to set buffer
 // videoFrmBfrDst.bytesPerRow=(floor((sze.at(0,0)*4)/256)+1)*256;  // not used by webgpu.h
 // videoFrmBfrDst.rowsPerImage=sze.at(0,0);  // not used by webgpu.h
-videoFrmBfrDst.buffer=wb.at(4,4);
+// videoFrmBfrDst.buffer=wb.at(4,4);  // fails to set buffer
 // wicb.at(4,4)=videoFrmBfrDst;
 // wicb.at(5,5)=videoFrmBfrSrc;
 resizeSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
