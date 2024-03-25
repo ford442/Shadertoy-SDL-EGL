@@ -13,7 +13,7 @@ char wgl_cmp_src[2000]=
 "outputBuffer[2]=8.08f;\n"
 "outputBuffer[3]=7.07f;\n"
 "var clr:vec4<f32>=vec4<f32>(1.0f,0.0f,0.0f,1.0f);\n"
-"for(var x:u32=0u;y<300;y=y+1u){\n"
+"for(var x:u32=0u;x<300;x=x+1u){\n"
 "for(var y:u32=0u;y<300;y=y+1u){\n"
 "textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),clr);\n"
 "}"
