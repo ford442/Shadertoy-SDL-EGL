@@ -31,7 +31,7 @@ for (let c = 0; c < 4; c++) {
 return imageData;
 }
 
-async function videoFrames(){
+function videoFrames(){
 let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
 let SiZ=window.innerHeight;
