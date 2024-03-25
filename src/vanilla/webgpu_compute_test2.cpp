@@ -1,5 +1,4 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
-#include "../../src/vanilla/webgpu_compute_vars.cpp"
 
 char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
@@ -14,6 +13,8 @@ char wgl_cmp_src[2000]=
 "outputBuffer[2]=8.08f;\n"
 "outputBuffer[3]=7.07f;\n"
 "}";
+
+#include "../../src/vanilla/webgpu_compute_vars.cpp"
 
 inline int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
