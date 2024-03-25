@@ -42,23 +42,20 @@ if(max<ptr[i]){max=ptr[i];}
 if(min>ptr[i]&&ptr[i]>0.0f){min=ptr[i];}
 }
 aptr[Fnum]=sum/leng;
-aptr[Fnum+100]=min;
-aptr[Fnum+200]=max;
+aptr[Fnum+100.0f]=min;
+aptr[Fnum+200.0f]=max;
 for(int i=33;i<65;i++){
 avgSum+=aptr[i];
 }
-aptr[0]=avgSum/32;
+aptr[0]=avgSum/32.0f;
 for(int i=33;i<65;i++){
-minSum+=aptr[i+100];
+minSum+=aptr[i+100.0f];
 }
-aptr[100]=minSum/32;
+aptr[100]=minSum/32.0f;
 for(int i=33;i<65;i++){
-maxSum+=aptr[i+200];
+maxSum+=aptr[i+200.0f];
 }
-aptr[200]=maxSum/32;
- EM_ASM({
-document.querySelector('#dbg_fmax').innerHTML=$0;
-},aptr[0]);
+aptr[200]=maxSum/32.0f;
 return;
 }
 
@@ -69,8 +66,6 @@ avgFrm(Fnum,leng,ptr,aptr);
 }
 
 }
-
-extern "C" {
 
 EM_JS(void,ma,(),{
 "use strict";
@@ -568,8 +563,6 @@ T=true;
 };
 }
 })
-
-}
 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 static const char8_t *read_file(const char *filename);
