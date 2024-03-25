@@ -15,7 +15,7 @@ char wgl_cmp_src[2000]=
 "for(var y:u32=0u;y<300;y=y+1u){\n"
 "var colorTest:vec4<f32>=textureLoad(textureIN,vec2<u32>(u32(x),u32(y)),0);\n"
 "textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),clr);\n"
-"outputBuffer[x]=colorTest.x;\n"
+"outputBuffer[3]=inputBuffer[0];\n"
 "}"
 "}"
 "}";
@@ -163,7 +163,6 @@ std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambu
 frame_tensor.at(0,0)=data;
 wetd.at(0,0).source=texid.at(0,0);
        // Compute Pass
-        /*
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
 Input_Image_Texture.texture=WGPU_Texture.at(0,0,0);
@@ -174,10 +173,6 @@ Output_Image_Texture.origin=oxyz.at(0,0);
 Output_Image_Texture.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(1,1)=Input_Image_Texture;
 wict.at(2,2)=Output_Image_Texture;
-        */
-        Input_Image_Texture.texture=WGPU_Texture.at(0,0,0);
-Output_Image_Texture.texture=WGPU_Texture.at(0,0,1);
-
 INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
 OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureViewDescriptor.at(0,0,1));
 wtv.at(3,3)=INTextureView;
@@ -191,7 +186,7 @@ WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
-wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),1,1,1);
+wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),1,1,64);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&Output_Image_Buffer,&wict.at(2,2),64,1,1);
