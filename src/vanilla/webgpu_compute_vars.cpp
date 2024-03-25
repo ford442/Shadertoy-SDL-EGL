@@ -1,3 +1,5 @@
+WGPUImageCopyBuffer videoFrmBfrSrc={};
+WGPUImageCopyBuffer videoFrmBfrDst={};
 WGpuImageCopyTexture videoTextureCopy;
 WGpuExternalTexture extTexture;
 WGpuExternalTextureBindingLayout extTextureBindingLayout={};
