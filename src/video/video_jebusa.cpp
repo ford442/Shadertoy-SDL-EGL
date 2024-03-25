@@ -39,55 +39,26 @@ float maxSum=0.0f;
 for (int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
-if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
+if(min>ptr[i]&&ptr[i]>0.0f){min=ptr[i];}
 }
-sum=sum/leng;
-aptr[Fnum]=sum;
+aptr[Fnum]=sum/leng;
 aptr[Fnum+100]=min;
 aptr[Fnum+200]=max;
 for(int i=33;i<65;i++){
 avgSum+=aptr[i];
 }
-aptr[0]=avgSum/32.0f;
+aptr[0]=avgSum/32;
 for(int i=33;i<65;i++){
 minSum+=aptr[i+100];
 }
-aptr[100]=minSum/32.0f;
+aptr[100]=minSum/32;
 for(int i=33;i<65;i++){
 maxSum+=aptr[i+200];
 }
-aptr[200]=maxSum/32.0f;
-return;
-}
-
-void avgFrmD(int Fnum,int leng,double *ptr,double *aptr){
-double max=0.0;
-double min=1.0;
-double sum=0.0;
-double avgSum=0.0;
-double minSum=0.0;
-double maxSum=0.0;
-for (int i=0;i<leng;i++){
-sum+=ptr[i];
-if(max<ptr[i]){max=ptr[i];}
-if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
-}
-sum=sum/leng;
-aptr[Fnum]=sum;
-aptr[Fnum+100]=min;
-aptr[Fnum+200]=max;
-for(int i=33;i<65;i++){
-avgSum+=aptr[i];
-}
-aptr[0]=avgSum/32.0;
-for(int i=33;i<65;i++){
-minSum+=aptr[i+100];
-}
-aptr[100]=minSum/32.0;
-for(int i=33;i<65;i++){
-maxSum+=aptr[i+200];
-}
-aptr[200]=maxSum/32.0;
+aptr[200]=maxSum/32;
+ EM_ASM({
+document.querySelector('#dbg_fmax').innerHTML=$0;
+},aptr[0]);
 return;
 }
 
@@ -95,10 +66,6 @@ extern "C" {
 
 void nano(int Fnum,int leng,float * ptr,float * aptr){
 avgFrm(Fnum,leng,ptr,aptr);
-}
-
-void nanoD(int Fnum,int leng,double * ptr,double * aptr){
-avgFrmD(Fnum,leng,ptr,aptr);
 }
 
 }
@@ -581,7 +548,7 @@ var $bb=R(vv);
 $B.set($bb,0,sz);
 pointb=66.0*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-dbg_fmax=agav[$F+200];
+// dbg_fmax=agav[$F+200];
 dbg_fmin=agav[$F+100];
 dbg_avag=agav[0];
 dbg_favg=agav[$F];
