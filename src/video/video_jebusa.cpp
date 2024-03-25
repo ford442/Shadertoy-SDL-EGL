@@ -57,7 +57,7 @@ maxSum+=aptr[i+200];
 }
 aptr[200]=maxSum/32;
  EM_ASM({
-document.querySelector('#dbg_fmax').innerHTML='test';
+document.querySelector('#dbg_fmax').innerHTML=$0;
 },aptr[0]);
 return;
 }
