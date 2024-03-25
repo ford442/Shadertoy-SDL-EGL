@@ -11,11 +11,11 @@ char wgl_cmp_src[2000]=
 "@compute@workgroup_size(1,1,1)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "var clr:vec4<f32>=vec4<f32>(1.0f,0.3f,0.3f,1.0f);\n"
-"outputBuffer[3]=clr.z;\n"
 "for(var x:u32=0u;x<300;x=x+1u){\n"
 "for(var y:u32=0u;y<300;y=y+1u){\n"
 "var colorTest:vec4<f32>=textureLoad(textureIN,vec2<u32>(u32(x),u32(y)),0);\n"
 "textureStore(textureOUT,vec2<u32>(x,y),clr);\n"
+"outputBuffer[3]=colorTest.z;\n"
 "}"
 "}"
 "}";
