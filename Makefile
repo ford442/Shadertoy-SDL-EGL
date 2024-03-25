@@ -207,7 +207,7 @@ b3_compute_test_b_clean:
 	 webgpu_computeFixClean.o 
 
 b3_compute_test_2:
-	 em++ src/vanilla/webgpu_compute_test2.cpp -fchar8_t -std=c++14 $(wGL_FLAGS) \
+	 em++ src/vanilla/webgpu_compute_test3.cpp -fchar8_t -std=c++14 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -lEGL  $(LDFLAGS) -O0 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-test2.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=1 \
@@ -218,7 +218,7 @@ b3_compute_test_2:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 webgpu_compute_test2.o 
+	 webgpu_compute_test3.o 
 
 b3_nostatic:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/nostatic.cpp -fchar8_t -std=c++14 -ffp-contract=off -mbulk-memory -matomics \
