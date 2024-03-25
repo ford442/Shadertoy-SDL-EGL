@@ -175,14 +175,14 @@ return n;
 }
 
 let la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
-let pointa=77.0*la;
-let agav=new Float32Array($H,pointa,300);
+var pointa=77.0*la;
+var agav=new Float32Array($H,pointa,300);
 let sz=(h$*h$)/8;
 let blank$=Math.max((w$-h$)/4,0);
 let nblank$=Math.max((h$-w$)/2,0);
-let avag=0.750;
-let min=1.0;
-let max=0.0;
+var avag=0.750;
+var min=1.0;
+var max=0.0;
 // agav.fill(avag,0,33);
 // agav.fill(min,100,33);
 // agav.fill(max,200,33);
