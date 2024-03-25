@@ -163,6 +163,7 @@ std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambu
 frame_tensor.at(0,0)=data;
 wetd.at(0,0).source=texid.at(0,0);
        // Compute Pass
+        /*
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
 Input_Image_Texture.texture=WGPU_Texture.at(0,0,0);
@@ -173,6 +174,7 @@ Output_Image_Texture.origin=oxyz.at(0,0);
 Output_Image_Texture.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(1,1)=Input_Image_Texture;
 wict.at(2,2)=Output_Image_Texture;
+        */
 INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
 OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureViewDescriptor.at(0,0,1));
 wtv.at(3,3)=INTextureView;
