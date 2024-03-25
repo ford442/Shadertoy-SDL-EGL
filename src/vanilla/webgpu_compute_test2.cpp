@@ -1,5 +1,5 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
-#include "../../src/webgpu_compute_vars.cpp"
+#include "../../src/vanilla/webgpu_compute_vars.cpp"
 
 char wgl_cmp_src[2000]=
 "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
@@ -673,7 +673,7 @@ sz(hh);
 navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 }
 
-#include "../../src/webgpu_compute_js.cpp"
+#include "../../src/vanilla/webgpu_compute_js.cpp"
 
 extern"C"{
 
