@@ -186,7 +186,7 @@ std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambu
 frame_tensor.at(0,0)=data;
 wetd.at(0,0).source=texid.at(0,0);
        // Compute Pass
-wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+// wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 WGPU_InputBuffer.at(0,0,0)[2]=sze.at(1,1);
 WGPU_InputBuffer.at(0,0,0)[3]=sze.at(0,0);
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
