@@ -180,7 +180,8 @@ INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewD
 OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureViewDescriptor.at(0,0,1));
 wtv.at(3,3)=INTextureView;
 wtv.at(4,4)=OUTTextureView;
-        Output_Image_Buffer.buffer=WGPU_Buffers.at(0,0,0);
+Output_Image_Buffer.buffer=WGPU_Buffers.at(0,0,0);
+Output_Image_Buffer.bytesPerRow=(floor((sze.at(1,1)*4)/256)+1)*256;
 
         //  frame data
 std::ifstream fram(Fnm2,std::ios::binary);
