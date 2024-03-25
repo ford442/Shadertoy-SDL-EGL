@@ -68,8 +68,6 @@ WGpuTextureBindingLayout textureBindingLayoutFloat={};
 WGpuTextureBindingLayout textureBindingLayoutDepth={};
 WGpuSamplerBindingLayout samplerBindingLayout={};
 WGpuImageCopyExternalImage videoFrm={};
-WGPUImageCopyBuffer videoFrmBfrSrc={};
-WGPUImageCopyBuffer videoFrmBfrDst={};
 double szh,szw;
 int szhI,szwI;
 double szhDv,szwDv;
