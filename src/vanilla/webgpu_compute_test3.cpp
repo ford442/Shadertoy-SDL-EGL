@@ -12,7 +12,6 @@ char wgl_cmp_src[2000]=
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "outputBuffer[2]=8.08f;\n"
 "outputBuffer[3]=7.07f;\n"
-"outputBuffer[64]=1.0f;\n"
 "outputBuffer[63]=1.0f;\n"
 "outputBuffer[62]=1.0f;\n"
 "outputBuffer[61]=1.0f;\n"
@@ -20,6 +19,7 @@ char wgl_cmp_src[2000]=
 "outputBuffer[59]=1.0f;\n"
 "outputBuffer[58]=1.0f;\n"
 "outputBuffer[57]=1.0f;\n"
+"outputBuffer[56]=1.0f;\n"
 "}";
 
 #include "../../src/vanilla/webgpu_compute_vars.cpp"
