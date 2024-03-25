@@ -18,6 +18,8 @@ WGpuRenderPassDepthStencilAttachment depthAttachment;
 WGpuTexture depthTexture;
 WGpuTexture colorTexture;
 WGpuTexture videoTexture;
+WGpuTexture textureIn;
+WGpuTexture textureOut;
 WGpuSampler videoSampler={};
 WGpuSampler resizeSampler={};
 WGpuTexture __128bit_Texture__;
