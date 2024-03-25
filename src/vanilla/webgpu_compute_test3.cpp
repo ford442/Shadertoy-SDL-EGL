@@ -514,6 +514,9 @@ srcBuffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 dstBuffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
 wb.at(3,3)=srcBuffer;
 wb.at(4,4)=dstBuffer;
+
+WGPUImageCopyBuffer videoFrmBfrSrc={};
+WGPUImageCopyBuffer videoFrmBfrDst={};
 // videoFrmBfrSrc.bytesPerRow=(floor((sze.at(1,1)*4)/256)+1)*256;
 // videoFrmBfrSrc.rowsPerImage=sze.at(1,1);
 videoFrmBfrSrc.buffer=wb.at(3,3);
