@@ -12,6 +12,14 @@ char wgl_cmp_src[2000]=
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "outputBuffer[2]=8.08f;\n"
 "outputBuffer[3]=7.07f;\n"
+"outputBuffer[64]=1.0f;\n"
+"outputBuffer[63]=1.0f;\n"
+"outputBuffer[62]=1.0f;\n"
+"outputBuffer[61]=1.0f;\n"
+"outputBuffer[60]=1.0f;\n"
+"outputBuffer[59]=1.0f;\n"
+"outputBuffer[58]=1.0f;\n"
+"outputBuffer[57]=1.0f;\n"
 "}";
 
 #include "../../src/vanilla/webgpu_compute_vars.cpp"
@@ -199,6 +207,9 @@ document.querySelector('#outText').innerHTML='Buffer at [2]:'+$0.toFixed(2);
 document.querySelector('#outText').innerHTML+='Buffer at [3]:'+$1.toFixed(2);
 },WGPU_ResultBuffer.at(0,0,0)[2],WGPU_ResultBuffer.at(0,0,0)[3]);
 }
+
+wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(2,2),&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
+
 WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 if(WGPU_BufferStatus.at(0,0,0)!=1){
@@ -211,7 +222,6 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
