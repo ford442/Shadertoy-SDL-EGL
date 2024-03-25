@@ -17,7 +17,7 @@ char wgl_cmp_src[2000]=
 "textureStore(textureOUT,vec2<u32>(x,y),clr);\n"
 "}"
 "}"
-"outputBuffer[3]=17.777f\n"
+"outputBuffer[3]=17.777f;\n"
 "}";
 
 #include "../../src/vanilla/webgpu_compute_vars.cpp"
