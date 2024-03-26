@@ -10,7 +10,7 @@ char wgl_cmp_src[2000]=
 // "@group(0)@binding(6)var videoTexture: texture_2d <f32>;\n"
 "@compute@workgroup_size(1,1,64)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
-"var clr:vec4<f32>=vec4<f32>(1.0f,1.0f,1.0f,1.0f);\n"
+"const clr:vec4<f32>=vec4<f32>(1.0f,1.0f,1.0f,1.0f);\n"
 "for(var x:u32=0u;x<300;x=x+1u){\n"
 "for(var y:u32=0u;y<300;y=y+1u){\n"
 "var colorTest:vec4<f32>=textureLoad(textureIN,vec2<u32>(x,y),0);\n"
@@ -235,7 +235,7 @@ on.at(1,1)=0;
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
   // Render Pass
-wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(1,1),&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
+wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&Output_Image_Texture,&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
