@@ -21,8 +21,8 @@ char wgl_cmp_src[2000]=
 "textureStore(textureOUT,vec2<u32>(400,402),clr);\n"
 "textureStore(textureOUT,vec2<u32>(400,403),clr);\n"
 "textureStore(textureOUT,vec2<u32>(400,404),clr);\n"
-"outputBuffer[3]=f32(textureDimensions(textureOUT).x);\n"
-"outputBuffer[2]=f32(textureDimensions(textureOUT).y);\n"
+"outputBuffer[3]=f32(textureDimensions(textureIN).x);\n"
+"outputBuffer[2]=f32(textureDimensions(textureOUT).x);\n"
 "}";
 
 #include "../../src/vanilla/webgpu_compute_vars.cpp"
