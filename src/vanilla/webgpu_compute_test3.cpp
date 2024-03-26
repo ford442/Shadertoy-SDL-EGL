@@ -14,9 +14,11 @@ char wgl_cmp_src[2000]=
 "for(var x:u32=0u;x<300;x=x+1u){\n"
 "for(var y:u32=0u;y<300;y=y+1u){\n"
 "var colorTest:vec4<f32>=textureLoad(textureIN,vec2<u32>(x,y),0);\n"
-"textureStore(textureOUT,vec2<u32>(x,y),clr);\n"
 "}"
 "}"
+"textureStore(textureOUT,vec2<u32>(400,400),clr);\n"
+"textureStore(textureOUT,vec2<u32>(401,401),clr);\n"
+"textureStore(textureOUT,vec2<u32>(402,402),clr);\n"
 "outputBuffer[3]=17.777666555444f;\n"
 "}";
 
