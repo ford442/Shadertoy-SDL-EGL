@@ -64,7 +64,7 @@ Module.ccall('emjs',null,["Number"],[viewH[0]]);
 });
 document.querySelector('#btn2').addEventListener('click',function(){
 let bufferC=new ArrayBuffer(8);
-let viewC=new Float32Array(buffer);
+let viewC=new Float32Array(bufferC);
 viewC[0]=42.42;
 console.log('Handing C to EM_JS: ',viewC[0]);
 Module.ccall('cfunc',null,["Number"],[viewC[0]]);
