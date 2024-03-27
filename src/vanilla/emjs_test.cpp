@@ -29,7 +29,7 @@ void c_(float val){
 flt.at(0,0)=val;
 fltp.at(0,0)=C_Array;
 fltp.at(0,0)[0]=flt.at(0,0);
-emjs_(fltp.at(0,0));
+emjs_(C_Array);
 }
 
 extern "C"{
