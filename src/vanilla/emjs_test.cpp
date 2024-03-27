@@ -25,9 +25,9 @@ console.log('C got FLOAT: ',fPointer);
 });
 
 EM_BOOL cf_(float val){
-EM_ASM({
-console.log('C++ Function handing to EM_JS: ',$0);
-},val);
+  // EM_ASM({
+  // console.log('C++ Function handing to EM_JS: ',$0);
+  // },val);
 // flt.at(0,0)=val;
 // fltp.at(0,0)=C_Array;
 // fltp.at(0,0)[0]=flt.at(0,0);
