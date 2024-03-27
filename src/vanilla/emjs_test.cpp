@@ -53,23 +53,20 @@ document.querySelector('#btn1').addEventListener('click',function(){
 let buffer=new ArrayBuffer(8);
 let view=new Float32Array(buffer);
 view[0]=42.42;
-  console.log('Handing JS ArrayBuffer->TypedArray: ',view[0]);
+console.log('Handing JS ArrayBuffer->TypedArray: ',view[0]);
 Module.ccall('emjs',null,["Number"],[view[0]]);
-
 //  JS to C passing HEAP array
 // let H1=Module.HEAPF32.buffer;
 // let viewH=new Float32Array(H1);
 // viewH[0]=42.42;
 // Module.ccall('emjs',null,["Number"],[H1]);
-
 });
 document.querySelector('#btn2').addEventListener('click',function(){
 //  C to JS passing array
-console.log('Handing JS Float->C: ',42.42);
+console.log('Handing JS Float->C: 42.42');
 Module.ccall('cfunc',null,["Number"],[42.42]);
 //  C to JS passing HEAP array
 });
-  
 });
 
 int main(){
