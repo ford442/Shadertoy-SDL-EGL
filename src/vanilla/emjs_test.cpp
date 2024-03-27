@@ -26,6 +26,9 @@ console.log(fPointer[0]);
 
 
 void c_(float val){
+EM_ASM({
+console.log('C++ Function handing to EM_JS: ',$0);
+},val);
 flt.at(0,0)=val;
 fltp.at(0,0)=C_Array;
 fltp.at(0,0)[0]=flt.at(0,0);
@@ -50,6 +53,7 @@ document.querySelector('#btn1').addEventListener('click',function(){
 let buffer=new ArrayBuffer(8);
 let view=new Float32Array(buffer);
 view[0]=42.42;
+  console.log('Handing JS ArrayBuffer->TypedArray: ',view[0]);
 Module.ccall('emjs',null,["Number"],[view]);
 
 //  JS to C passing HEAP array
