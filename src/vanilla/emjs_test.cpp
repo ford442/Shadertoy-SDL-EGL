@@ -22,14 +22,14 @@ EM_JS(void,emjs_,(float fPointer),{
 console.log('C got FLOAT: ',fPointer);
 });
 
-EM_BOOL cf_(float val){
+EM_BOOL cf_(){
 EM_ASM({
-console.log('C++ Function handing to EM_JS: ',$0);
-},val);
+console.log('C++ Function handing to EM_JS: TEST');
+});
 // flt.at(0,0)=val;
 // fltp.at(0,0)=C_Array;
 // fltp.at(0,0)[0]=flt.at(0,0);
-emjs_(val);
+// emjs_(val);
 return EM_TRUE;
 }
 
@@ -40,8 +40,8 @@ emjs_(f);
 return;
 }
 
-void cfunc(float a){
-cf_(a);
+void cfunc(){
+cf_();
 return;
 }
 
@@ -65,7 +65,7 @@ document.querySelector('#btn2').addEventListener('click',function(){
 //  C to JS passing array
 console.log('Handing JS Float->C: 42.42');
 let m=42.42;
-Module.ccall('cfunc',null,["Number"],[m]);
+Module.ccall('cfunc');
 //  C to JS passing HEAP array
 });
 });
