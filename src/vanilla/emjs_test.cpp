@@ -50,8 +50,8 @@ return;
 EM_JS(void,setup_js,(),{
 document.querySelector('#btn1').addEventListener('click',function(){
 //  JS to C passing array
-let buffer=new ArrayBuffer(8);
-let view=new Float32Array(buffer);
+let bufferJ=new ArrayBuffer(8);
+let view=new Float32Array(bufferJ);
 view[0]=42.42;
 console.log('Handing JS ArrayBuffer->TypedArray: ',view[0]);
 Module.ccall('emjs',null,["Number"],[view[0]]);
