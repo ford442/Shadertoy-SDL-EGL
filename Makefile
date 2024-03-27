@@ -54,6 +54,12 @@ vanilla_test_gpujs:
 	 -sEXPORTED_RUNTIME_METHODS='["ccall"]' -sEXPORTED_FUNCTIONS=["_main","_gpu_js"] \
 	 --pre-js js/gpujsx.js --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js
 
+vanilla_test_emjs:
+	 em++ src/vanilla/emjs_test.cpp -o $(WGL_BIN_NAME)-emjs.js \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=3221225472 \
+	 -sEXPORTED_RUNTIME_METHODS='["ccall"]' -sEXPORTED_FUNCTIONS=["_main","_emjs"] \
+	 --pre-js js/gpujsx.js --pre-js js/rSlider.js --pre-js js/slideOut.js
+
 b3_onnx:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_onnx.cpp -fchar8_t -std=c++20 -mbulk-memory -matomics \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O2 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
