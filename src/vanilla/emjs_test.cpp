@@ -71,7 +71,7 @@ Module.ccall('cfunc',null,["Number"],[42.42]);
 //  C to JS passing HEAP array
 });
   
-})
+});
 
 int main(){
 setup_js();
