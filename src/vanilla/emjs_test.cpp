@@ -36,12 +36,12 @@ return;
 extern "C"{
 
 void emjs(float * f){
-emjs_(f);
+emjs_(&f);
 return;
 }
 
 void cfunc(float * a){
-cf_(a);
+cf_(&a);
 return;
 }
 
@@ -62,7 +62,7 @@ let bufferC=new ArrayBuffer(8);
 let viewC=new Float32Array(bufferC);
 viewC[0]=42.42;
 console.log('Handing C to EM_JS: ',viewC[0]);
-Module.ccall('cfunc',null,["Number"],[bufferC]);
+Module.ccall('cfunc',null,["Number"],[viewC]);
 });
 });
 
