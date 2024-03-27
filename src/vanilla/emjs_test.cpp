@@ -19,7 +19,7 @@ static fp_tensor fltp=fp_tensor{5,5};
 float * C_Array=new float[16];
 
 EM_JS(void,emjs_,(float * fPointer),{
-console.log('C got FLOAT: ',fPointer[0]);
+console.log('EMJS got FLOAT: ',fPointer[0]);
 });
 
 void cf_(float * val){
@@ -49,25 +49,20 @@ return;
 
 EM_JS(void,setup_js,(),{
 document.querySelector('#btn1').addEventListener('click',function(){
-//  JS to C passing array
-let bufferJ=new ArrayBuffer(8);
-let view=new Float32Array(bufferJ);
-view[0]=42.42;
-console.log('Handing JS ArrayBuffer->TypedArray: ',view[0]);
-Module.ccall('emjs',null,["Number"],[view]);
 //  JS to C passing HEAP array
 let H1=Module.HEAPF32.buffer;
 let viewH=new Float32Array(H1);
 viewH[0]=42.42;
 console.log('Handing JS-HEAPF32 ArrayBuffer->TypedArray: ',viewH[0]);
-Module.ccall('emjs',null,["Number"],[viewH]);
+Module.ccall('emjs',null,["Number"],viewH);
+Module.ccall('emjs',null,["Number"],H1);
 });
 document.querySelector('#btn2').addEventListener('click',function(){
 let bufferC=new ArrayBuffer(8);
 let viewC=new Float32Array(bufferC);
 viewC[0]=42.42;
 console.log('Handing C to EM_JS: ',viewC[0]);
-Module.ccall('cfunc',null,["Number"],[viewC]);
+Module.ccall('cfunc',null,["Number"],[bufferC]);
 });
 });
 
