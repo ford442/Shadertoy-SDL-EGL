@@ -28,8 +28,8 @@ console.log(fPointer[0]);
 void c_(float val){
 flt.at(0,0)=val;
 fltp.at(0,0)=C_Array;
-fltp.at(0,0)[0]=flt.at(0,0);
-emjs_(C_Array);
+// fltp.at(0,0)[0]=flt.at(0,0);
+// emjs_(C_Array);
 }
 
 extern "C"{
@@ -50,15 +50,15 @@ document.querySelector('#btn1').addEventListener('click',function(){
 let buffer=new ArrayBuffer(16);
 let view=new Float32Array(buffer,0,16);
 var rr=new Array(1);
-rr[0]=42.42;
-view.set(rr,0,1);
-Module.ccall('emjs',null,["Number"],[view]);
+// rr[0]=42.42;
+// view.set(rr,0,1);
+// Module.ccall('emjs',null,["Number"],[view]);
 
 //  JS to C passing HEAP array
 let H1=Module.HEAPF32.buffer;
 let viewH=new Float32Array(H1,0,16);
-rr[0]=42.42;
-viewH.set(rr,0,1);
+// rr[0]=42.42;
+// viewH.set(rr,0,1);
 // Module.ccall('emjs',null,["Number"],[H1]);
 
 });
