@@ -21,15 +21,15 @@ static fp_tensor fltp=fp_tensor{5,5};
 float * C_Array=new float[16];
 
 EM_JS(void,emjs_,(float * fPointer),{
-console.log(fPointer[8]);
+console.log(fPointer[0]);
 })
 
 
 void c_(float val){
 flt.at(0,0)=val;
 fltp.at(0,0)=C_Array;
-fltp.at(0,0)[8]=flt.at(0,0);
-emjs_(fltp.at(0,0));
+fltp.at(0,0)[0]=flt.at(0,0);
+emjs_(C_Array);
 }
 
 extern "C"{
@@ -49,12 +49,14 @@ document.querySelector('#btn1').addEventListener('click',function(){
 //  JS to C passing array
 let buffer=new ArrayBuffer(8);
 let view=new Float32Array(buffer);
-view[8]=42.42;
-Module.ccall('emjs',null,["Number"],[buffer]);
+view[0]=42.42;
+Module.ccall('emjs',null,["Number"],[view]);
 
 //  JS to C passing HEAP array
 let H1=Module.HEAPF32.buffer;
 let viewH=new Float32Array(H1);
+viewH[0]=42.42;
+// Module.ccall('emjs',null,["Number"],[H1]);
 
 });
 document.querySelector('#btn2').addEventListener('click',function(){
