@@ -10,8 +10,6 @@
 #include <boost/numeric/ublas/vector.hpp>
 #include <boost/tuple/tuple.hpp>
 
-#include <vector>
-
 using f_tensor=boost::numeric::ublas::tensor<float>;
 using fp_tensor=boost::numeric::ublas::tensor<float *>;
 
