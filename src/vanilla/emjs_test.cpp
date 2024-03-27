@@ -38,7 +38,7 @@ void emjs(float * f){
 emjs_(f);
 }
 
-void c(float a){
+void cfunc(float a){
 c_(a);
 }
 
