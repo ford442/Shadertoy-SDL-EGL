@@ -56,14 +56,14 @@ Module.ccall('emjs',null,["Number"],[view]);
 let H1=Module.HEAPF32.buffer;
 let viewH=new Float32Array(H1);
 
-}
+});
 document.querySelector('#btn2').addEventListener('click',function(){
 //  C to JS passing array
 Module.ccall('c',null,["Number"],[42.42]);
 
 //  C to JS passing HEAP array
 
-}
+});
 })
 
 int main(){
