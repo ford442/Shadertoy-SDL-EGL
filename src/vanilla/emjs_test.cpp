@@ -25,7 +25,7 @@ console.log(fPointer[0]);
 })
 
 
-void c_(float val){
+EM_BOOL c_(float val){
 EM_ASM({
 console.log('C++ Function handing to EM_JS: ',$0);
 },val);
@@ -33,6 +33,7 @@ flt.at(0,0)=val;
 fltp.at(0,0)=C_Array;
 fltp.at(0,0)[0]=flt.at(0,0);
 emjs_(C_Array);
+return EM_TRUE;
 }
 
 extern "C"{
@@ -57,19 +58,19 @@ view[0]=42.42;
 Module.ccall('emjs',null,["Number"],[view]);
 
 //  JS to C passing HEAP array
-let H1=Module.HEAPF32.buffer;
-let viewH=new Float32Array(H1);
-viewH[0]=42.42;
+// let H1=Module.HEAPF32.buffer;
+// let viewH=new Float32Array(H1);
+// viewH[0]=42.42;
 // Module.ccall('emjs',null,["Number"],[H1]);
 
 });
 document.querySelector('#btn2').addEventListener('click',function(){
 //  C to JS passing array
+console.log('Handing JS Float->C: ',42.42);
 Module.ccall('cfunc',null,["Number"],[42.42]);
-
 //  C to JS passing HEAP array
-
 });
+  
 })
 
 int main(){
