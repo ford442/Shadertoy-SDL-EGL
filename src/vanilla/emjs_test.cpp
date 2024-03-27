@@ -25,7 +25,7 @@ console.log(fPointer[8]);
 })
 
 
-void c(float val){
+void c_(float val){
 flt.at(0,0)=val;
 fltp.at(0,0)=C_Array;
 fltp.at(0,0)[8]=flt.at(0,0);
