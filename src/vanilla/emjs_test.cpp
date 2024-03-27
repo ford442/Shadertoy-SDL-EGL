@@ -19,7 +19,7 @@ static fp_tensor fltp=fp_tensor{5,5};
 float * C_Array=new float[16];
 
 EM_JS(void,emjs_,(float fPointer),{
-console.log('C got FLOAT: ',fPointer);
+console.log('C got FLOAT:   ',fPointer);
 });
 
 EM_BOOL cf_(){
