@@ -23,9 +23,9 @@ console.log('C got FLOAT: ',fPointer);
 });
 
 EM_BOOL cf_(float val){
-  // EM_ASM({
-  // console.log('C++ Function handing to EM_JS: ',$0);
-  // },val);
+EM_ASM({
+console.log('C++ Function handing to EM_JS: ',$0);
+},val);
 // flt.at(0,0)=val;
 // fltp.at(0,0)=C_Array;
 // fltp.at(0,0)[0]=flt.at(0,0);
@@ -37,10 +37,12 @@ extern "C"{
 
 void emjs(float f){
 emjs_(f);
+return;
 }
 
 void cfunc(float a){
 cf_(a);
+return;
 }
 
 }
@@ -62,7 +64,7 @@ Module.ccall('emjs',null,["Number"],[view[0]]);
 document.querySelector('#btn2').addEventListener('click',function(){
 //  C to JS passing array
 console.log('Handing JS Float->C: 42.42');
-  let m=42.42;
+let m=42.42;
 Module.ccall('cfunc',null,["Number"],[m]);
 //  C to JS passing HEAP array
 });
