@@ -57,8 +57,7 @@ vanilla_test_gpujs:
 vanilla_test_emjs:
 	 em++ src/vanilla/emjs_test.cpp -o $(WGL_BIN_NAME)-emjs.js \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=3221225472 \
-	 -sEXPORTED_RUNTIME_METHODS='["ccall"]' -sEXPORTED_FUNCTIONS=["_main","_emjs","_cfunc"] \
-	 --pre-js js/rSlider.js --pre-js js/slideOut.js
+	 -sEXPORTED_RUNTIME_METHODS='["ccall"]' -sEXPORTED_FUNCTIONS=["_main","_emjs","_cfunc"]
 
 b3_onnx:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_onnx.cpp -fchar8_t -std=c++20 -mbulk-memory -matomics \
