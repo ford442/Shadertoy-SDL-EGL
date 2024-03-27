@@ -24,7 +24,7 @@ EM_JS(void,emjs_,(float fPointer),{
 console.log('C got FLOAT: ',fPointer);
 });
 
-EM_BOOL c_(float val){
+EM_BOOL cf_(float val){
 EM_ASM({
 console.log('C++ Function handing to EM_JS: ',$0);
 },val);
@@ -42,7 +42,7 @@ emjs_(f);
 }
 
 void cfunc(float a){
-c_(a);
+cf_(a);
 }
 
 }
