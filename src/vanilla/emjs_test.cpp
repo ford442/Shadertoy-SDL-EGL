@@ -64,7 +64,7 @@ let H1=Module.HEAPF32.buffer;
 });
 document.querySelector('#btn2').addEventListener('click',function(){
 //  C to JS passing array
-Module.ccall('cfunc',null,["Number"],[42.42]);
+// Module.ccall('cfunc',null,["Number"],[42.42]);
 
 //  C to JS passing HEAP array
 
