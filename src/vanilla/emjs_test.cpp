@@ -50,7 +50,7 @@ document.querySelector('#btn1').addEventListener('click',function(){
 let buffer=new ArrayBuffer(8);
 let view=new Float32Array(buffer);
 view[8]=42.42;
-Module.ccall('emjs',null,["Number"],[buffer]);
+Module.ccall('emjs',null,["Number"],[view.buffer]);
 
 //  JS to C passing HEAP array
 let H1=Module.HEAPF32.buffer;
