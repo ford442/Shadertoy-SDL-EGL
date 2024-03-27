@@ -64,7 +64,8 @@ Module.ccall('emjs',null,["Number"],[view[0]]);
 document.querySelector('#btn2').addEventListener('click',function(){
 //  C to JS passing array
 console.log('Handing JS Float->C: 42.42');
-Module.ccall('cfunc',null,["Number"],[42.42]);
+  let m=42.42;
+Module.ccall('cfunc',null,["Number"],[m]);
 //  C to JS passing HEAP array
 });
 });
