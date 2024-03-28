@@ -22,3 +22,4 @@ EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
 
 static const char8_t *read_file(const char *filename);
+static const char8_t *read_file_c(const char *filename);
