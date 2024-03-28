@@ -65,7 +65,7 @@ let H1c=Module.HEAPF32.buffer;
 let viewHc=new Float32Array(H1c,0,16);
 viewHc[0]=42.42;
 console.log('Handing C to EM_JS: ',viewHc[0]);
-Module.ccall('cfunc',null,["Number"],viewHc);
+Module.ccall('cfunc',null,["Number"],[viewHc]);
 });
 });
 
