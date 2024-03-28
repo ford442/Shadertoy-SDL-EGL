@@ -727,7 +727,7 @@ iFrame++;
 return;
 }
 
-static const char *read_file(const char *filename){
+static const char *read_file_c(const char *filename){
 char *result=NULL;
 long length=0;
 FILE *file=fopen(filename,"r");
