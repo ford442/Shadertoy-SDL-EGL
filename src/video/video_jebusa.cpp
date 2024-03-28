@@ -85,13 +85,6 @@ const pnnl=document.body;
 let vv=document.querySelector("#mv");
 let intervalBackward;
  
-let dbg_avag=document.querySelector('#dbg_avag').innerHTML;
-let dbg_amin=document.querySelector('#dbg_amin').innerHTML;
-let dbg_amax=document.querySelector('#dbg_amax').innerHTML;
-let dbg_favg=document.querySelector('#dbg_favg').innerHTML;
-let dbg_fmin=document.querySelector('#dbg_fmin').innerHTML;
-let dbg_fmax=document.querySelector('#dbg_fmax').innerHTML;
- 
 function back(){
 intervalBackward=setInterval(function(){
 if(vv.currentTime==0){
@@ -431,16 +424,18 @@ contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // contx.blendColor(0.0,0.0,0.0,1.0);
 // contx.blendColor(0.0,0.0,0.0,0.0);
  // contx.blendColor(0.0,0.0,0.0,0.5);
-contx.blendColor(1.0,1.0,1.0,1.0);
-contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-contx.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+  //  contx.blendColor(1.0,1.0,1.0,1.0);
+  //  contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+  //  contx.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
   // contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 // contx.blendEquationSeparate(gl.FUNC_ADD,gl.MAX);
-contx.disable(gl.DITHER);
+   //  contx.disable(gl.DITHER);
 // contx.drawingBufferColorMetadata={mode:'extended'};
 // contx.drawingBufferColorSpace='display-p3';
+
 const g=new GPUX({canvas:bcanvas,context:contx});
 const g2=new GPUX();
+
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0);}`;
 const glslGoldR=`float GoldR(float a){return((a+0.831+0.831+0.831+((a+0.831)/2.0))/5.0);}`;
@@ -553,12 +548,6 @@ var $bb=R(vv);
 $B.set($bb,0,sz);
 var pointb=66.0*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-// dbg_fmax=agav[$F+200];
-dbg_fmin=agav[$F+100];
-dbg_avag=agav[0];
-dbg_favg=agav[$F];
-dbg_amin=agav[100];
-dbg_amax=agav[200];
 setTimeout(function(){
 M();
 },16.66);
