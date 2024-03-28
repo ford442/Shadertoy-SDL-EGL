@@ -1156,7 +1156,7 @@ return;
 extern "C" {
 
 void str(){
-strt();
+// strt();
 return;
 }
 
