@@ -474,11 +474,11 @@ return[P[0],P[1],P[2],av$];
 
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
-var $fmax=this.constants.fmax;
-var $fmin=this.constants.fmin;
+// var $fmax=this.constants.fmax;
+// var $fmin=this.constants.fmin;
 var $amax=this.constants.amax;
 var $amin=this.constants.amin;
-var $favg=this.constants.favg;
+// var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
 // var alph=AlpheV1($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
 var alph=AlpheV2($amax,$amin,$aavg,p[3]);
@@ -507,7 +507,8 @@ var pointb=77.0*la;
 var $B=new Float32Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
-r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+// r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+r.setConstants({nblnk:nblank$,blnk:blank$$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$$});
 var $$1=t(vv);
 for (i=0;i<65;i++){
@@ -531,12 +532,14 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 var pointb=66.0*la;
 $B=new Float32Array($H,pointb,sz);
-r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+// r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+r.setConstants({nblnk:nblank$,blnk:blank$$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$$});
 var T=false;
 function M(){
 vv=document.querySelector("#mv");
-r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+// r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+r.setConstants({nblnk:nblank$,blnk:blank$$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$$});
 if(T){return;}
 for(i=64;i>0;i--){
