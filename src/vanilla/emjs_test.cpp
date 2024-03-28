@@ -22,7 +22,7 @@ EM_JS(void,hp,(),{
 let H1=Module.HEAPF32.buffer;
 let viewH=new Float32Array(H1,0,16);
 console.log('EM_JS got FLOAT: ',viewH[0]);
-console.log('EM_JS got FLOAT: ',viewH[1]);
+console.log('EM_JS got FLOAT2: ',viewH[1]);
 });
 
 // EM_JS(void,emjs_,(float * fPointer),{
