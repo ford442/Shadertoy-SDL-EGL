@@ -63,7 +63,10 @@ let viewH=new Float32Array(H1,0,300);
 viewH[0]=$0;
 viewH[100]=$1;
 viewH[200]=$2;
-},aptr[0],aptr[100],aptr[200]);
+ viewH[$5]=$6;
+viewH[100+$5]=$3;
+viewH[200+$5]=$4;
+},aptr[0],aptr[100],aptr[200],min,max,fnum,aptr[Fnum]);
 //  //  //
 return;
 }
