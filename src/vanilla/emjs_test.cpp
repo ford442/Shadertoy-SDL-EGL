@@ -22,7 +22,7 @@ float * C_Array=new float[16];
 void emjs_(float * fPointer){
 EM_ASM({
 console.log('EMJS got FLOAT: ',$0);
-},&fPointer[0]);
+},fPointer[0]);
 }
 // });
 
@@ -59,10 +59,9 @@ let viewH=new Float32Array(H1);
 viewH[0]=42.42;
 console.log('Handing JS-HEAPF32 ArrayBuffer->TypedArray: ',viewH[0]);
 Module.ccall('emjs',null,["Number"],viewH);
-Module.ccall('emjs',null,["Number"],H1);
 });
 document.querySelector('#btn2').addEventListener('click',function(){
-let bufferC=new ArrayBuffer(8);
+let bufferC=new ArrayBuffer(16);
 let viewC=new Float32Array(bufferC);
 viewC[0]=42.42;
 console.log('Handing C to EM_JS: ',viewC[0]);
