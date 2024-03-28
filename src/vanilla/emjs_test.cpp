@@ -58,14 +58,14 @@ let H1=Module.HEAPF32.buffer;
 let viewH=new Float32Array(H1);
 viewH[0]=42.42;
 console.log('Handing JS-HEAPF32 ArrayBuffer->TypedArray: ',viewH[0]);
-Module.ccall('emjs',null,["Number"],viewH);
+Module.ccall('emjs',null,["Number"],[viewH]);
 });
 document.querySelector('#btn2').addEventListener('click',function(){
 let H1c=Module.HEAPF32.buffer;
 let viewHc=new Float32Array(H1c);
 viewHc[0]=42.42;
 console.log('Handing C to EM_JS: ',viewHc[0]);
-Module.ccall('cfunc',null,["Number"],[viewHc]);
+Module.ccall('cfunc',null,["Number"],viewHc);
 });
 });
 
