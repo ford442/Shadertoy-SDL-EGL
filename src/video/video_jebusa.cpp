@@ -56,6 +56,15 @@ for(int i=33;i<65;i++){
 maxSum+=aptr[i+200];
 }
 aptr[200]=maxSum/32.0f;
+//  //  //
+EM_ASM({
+let H1=Module.HEAPF32.buffer;
+let viewH=new Float32Array(H1,0,300);
+viewH[0]=$0;
+viewH[100]=$1;
+viewH[200]=$2;
+},aptr[0],aptr[100],aptr[200]);
+//  //  //
 return;
 }
 
@@ -183,9 +192,9 @@ let nblank$=Math.max((h$-w$)/2,0);
 var avag=0.750;
 var min=1.0;
 var max=0.0;
-// agav.fill(avag,0,33);
-// agav.fill(min,100,33);
-// agav.fill(max,200,33);
+agav.fill(avag,0,33);
+agav.fill(min,100,33);
+agav.fill(max,200,33);
 const bcanvas=document.querySelector("#bcanvas");
 const contx=bcanvas.getContext("webgl2",{colorType:'float32',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 /*  new ext list
@@ -412,7 +421,6 @@ gl.getExtension('EGL_EXT_gl_colorspace_display_p3');
 gl.getExtension('EGL_EXT_gl_colorspace_display_p3_linear');
 gl.getExtension('EGL_EXT_gl_colorspace_bt2020_linear');
 gl.getExtension('GL_ARB_multisample');
-
 contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
 contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // contx.blendColor(1.0,1.0,1.0,1.0);
@@ -428,7 +436,6 @@ contx.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
 contx.disable(gl.DITHER);
 // contx.drawingBufferColorMetadata={mode:'extended'};
 // contx.drawingBufferColorSpace='display-p3';
-
 const g=new GPUX({canvas:bcanvas,context:contx});
 const g2=new GPUX();
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
