@@ -33,7 +33,7 @@ console.log('C++ Function handing to EM_JS: ',$0);
 flt.at(0,0)=val[0];
 fltp.at(0,0)=C_Array;
 fltp.at(0,0)[0]=flt.at(0,0);
-emjs_(fltp.at(0,0)[0]);
+emjs_(fltp.at(0,0));
 return;
 }
 
