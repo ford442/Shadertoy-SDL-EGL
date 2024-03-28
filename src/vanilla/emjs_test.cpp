@@ -19,7 +19,9 @@ static fp_tensor fltp=fp_tensor{5,5};
 float * C_Array=new float[16];
 
 EM_JS(void,emjs_,(float * fPointer),{
-console.log('EMJS got FLOAT: ',fPointer[0]);
+EM_ASM({
+console.log('EMJS got FLOAT: ',$0);
+},&fPointer[0]);
 });
 
 void cf_(float * val){
@@ -36,12 +38,12 @@ return;
 extern "C"{
 
 void emjs(float * f){
-emjs_(&f);
+emjs_(f);
 return;
 }
 
 void cfunc(float * a){
-cf_(&a);
+cf_(a);
 return;
 }
 
