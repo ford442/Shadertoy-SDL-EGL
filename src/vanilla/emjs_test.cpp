@@ -18,11 +18,22 @@ static fp_tensor fltp=fp_tensor{5,5};
 
 float * C_Array=new float[16];
 
+EM_JS(void,hp,(),{
+let H1=Module.HEAPF32.buffer;
+let viewH=new Float32Array(H1,0,16);
+console.log('EM_JS got FLOAT: ',viewH[0]);
+console.log('EM_JS got FLOAT: ',viewH[1]);
+});
+
 // EM_JS(void,emjs_,(float * fPointer),{
 void emjs_(float * fPointer){
 EM_ASM({
-console.log('EMJS got FLOAT: ',$0);
+console.log('void got FLOAT: ',$0);
+let H1=Module.HEAPF32.buffer;
+let viewH=new Float32Array(H1,0,16);
+viewH[1]=24.24;
 },fPointer[0]);
+fp();
 }
 // });
 
