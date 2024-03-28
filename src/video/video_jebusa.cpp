@@ -709,7 +709,7 @@ GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,
 void renderFrame(){
 EMSCRIPTEN_RESULT ret;
 t2=steady_clock::now();
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
@@ -720,15 +720,15 @@ mouseX=x/S;
 mouseY=(S-y)/S;
 uni(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
-glFlush();
+// glFlush();
 // nanosleep(&req,&rem);
 iFrame++;
-glFinish();
+// glFinish();
 return;
 }
 
-static const char8_t *read_file(const char *filename){
-char8_t *result=NULL;
+static const char *read_file(const char *filename){
+char *result=NULL;
 long length=0;
 FILE *file=fopen(filename,"r");
 if(file){
@@ -743,9 +743,9 @@ if(status!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char8_t*>(malloc((length+1)*sizeof(char8_t)));
+result=static_cast<char*>(malloc((length+1)*sizeof(char)));
 if(result){
-size_t actual_length=fread(result,sizeof(char8_t),length,file);
+size_t actual_length=fread(result,sizeof(char),length,file);
 result[actual_length++]={'\0'};
 } 
 fclose(file);
@@ -779,30 +779,10 @@ Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,g
 
 const char common_shader_header_gles3[]=
 "#version 300 es\n"
-"#pragma STDGL(precision highp double)\n"
-"#pragma STDGL(precision highp uint)\n"
-"#pragma STDGL(precision highp atomic_uint)\n"
-// "#pragma STDGL(precise none)\n"
-// "#pragma STDGL(strict off)\n"
-"#pragma STDGL(invariant all)\n"
-"#pragma STDGL(centroid all)\n"
-"#pragma STDGL(sample all)\n"
-"#pragma STDGL(fastmath on)\n"
-"#pragma STDGL(fastprecision off)\n"
-"#pragma STDGL(unroll all)\n"
-// "#pragma STDGL(ifcvt none)\n"
-"#pragma STDGL(inline none)\n"
-"#undef HW_PERFORMANCE\n"
-"#define HW_PERFORMANCE 1\n"
 "precision highp int;\n"
 "precision highp float;\n"
-"precision highp sampler3D;precision highp sampler2D;"
-"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
-"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
-"precision highp sampler2DArrayShadow;\n";
-  
+"precision lowp sampler3D;precision highp sampler2D;";
+
 const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
   
@@ -812,7 +792,9 @@ const char fragment_shader_header_gles3[]=
 "out vec4 fragColor;\n";
   
 const char fragment_shader_footer_gles3[]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
+"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
+ 
+ /*
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
 "int _N=3;void mainImage(out dvec4 O,dvec2 U){"
 "dvec4 o;O=dvec4(0);"
@@ -820,7 +802,8 @@ const char fragment_shader_footer_gles3[]=
 "O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038f/1.0f,2.184228f/1.0f,2.449715f/1.0f,1.0f));}"
 // "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.077038f/1.0,1.184228f/1.0,1.449715f/1.0,1.0));}"
 "void mainImage0\n\0";
-  
+*/
+ 
 const char* common_shader_header=common_shader_header_gles3;
 const char* vertex_shader_body=vertex_shader_body_gles3;
 const char* fragment_shader_header=fragment_shader_header_gles3;
@@ -874,8 +857,8 @@ EGL_ALPHA_SIZE,16,
 EGL_DEPTH_SIZE,32,
 EGL_STENCIL_SIZE,16,
 EGL_BUFFER_SIZE,64,
-EGL_SAMPLE_BUFFERS,4,
-EGL_SAMPLES,4,
+// EGL_SAMPLE_BUFFERS,4,
+// EGL_SAMPLES,4,
 EGL_NONE
 };
   
@@ -887,7 +870,6 @@ attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_TRUE;
 attr.enableExtensionsByDefault=EM_TRUE;
-attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
@@ -1096,10 +1078,10 @@ emscripten_webgl_make_context_current(ctx);
 // nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 // nanosleep(&req,&rem);
 static const char* default_fragment_shader=(char*)read_file(fileloc);
 // nanosleep(&req,&rem);
@@ -1153,18 +1135,17 @@ glEnable(GL_DEPTH_TEST);
 // glDisable(GL_SCISSOR_TEST);
 // glDepthFunc(GL_LESS);
 // glFrontFace(GL_CW);
- 
 //glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  
-glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
-glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
+  // glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
+  // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
  
-glEnable(GL_BLEND);
+  // glEnable(GL_BLEND);
 // glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendColor(F0,F0,F0,0.5);
  
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glDisable(GL_DITHER);
+  // glDisable(GL_DITHER);
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
@@ -1191,10 +1172,10 @@ return;
 
 }
 
-int main(void){
+int main(){
 EM_ASM({
 FS.mkdir("/snd");
 FS.mkdir("/shader");
 });
-return 1;
+return 0;
 }
