@@ -66,7 +66,7 @@ viewH[200]=$2;
  viewH[$5]=$6;
 viewH[100+$5]=$3;
 viewH[200+$5]=$4;
-},aptr[0],aptr[100],aptr[200],min,max,fnum,aptr[Fnum]);
+},aptr[0],aptr[100],aptr[200],min,max,Fnum,aptr[Fnum]);
 //  //  //
 return;
 }
