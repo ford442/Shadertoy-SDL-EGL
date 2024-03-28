@@ -55,14 +55,14 @@ EM_JS(void,setup_js,(),{
 document.querySelector('#btn1').addEventListener('click',function(){
 //  JS to C passing HEAP array
 let H1=Module.HEAPF32.buffer;
-let viewH=new Float32Array(H1);
+let viewH=new Float32Array(H1,0,16);
 viewH[0]=42.42;
 console.log('Handing JS-HEAPF32 ArrayBuffer->TypedArray: ',viewH[0]);
 Module.ccall('emjs',null,["Number"],[viewH]);
 });
 document.querySelector('#btn2').addEventListener('click',function(){
 let H1c=Module.HEAPF32.buffer;
-let viewHc=new Float32Array(H1c);
+let viewHc=new Float32Array(H1c,0,16);
 viewHc[0]=42.42;
 console.log('Handing C to EM_JS: ',viewHc[0]);
 Module.ccall('cfunc',null,["Number"],viewHc);
