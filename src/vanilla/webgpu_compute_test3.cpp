@@ -10,7 +10,6 @@ char wgl_cmp_src[2000]=
 // "@group(0)@binding(6)var videoTexture: texture_2d <f32>;\n"
 "@compute@workgroup_size(4,1,64)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
-
 "var colorTest:vec4<f32>=textureLoad(textureIN,vec2<u32>(global_id.x*16,global_id.z*16),0);\n"
 "var colorTest2:vec4<f32>=vec4<f32>(0.7f,0.0f,0.7f,1.0f);\n"
 "textureStore(textureOUT,vec2<u32>(global_id.x*16,global_id.z*16),colorTest2);\n"
@@ -153,10 +152,10 @@ passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
-          /*
+
 videoTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(2,2));
 wt.at(2,2)=videoTexture; 
-        */
+
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;    
         /*
