@@ -124,7 +124,8 @@ slt=tem.innerHTML;
 },8);
 },16);
 });
-  
+}
+
 document.querySelector('#startBtn').addEventListener('click',function(){
 // var pth="https://glsl.1ink.us/wgsl/galaxy.wgsl";
 var pth=document.querySelector('#path').innerHTML;
