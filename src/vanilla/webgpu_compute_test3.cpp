@@ -125,6 +125,7 @@ wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
 colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
 colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
 wt.at(1,1)=colorTexture;
+        /*
 colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
 wtv.at(1,1)=colorTextureView;
 colorAttachment.view=wtv.at(1,1);
@@ -179,7 +180,7 @@ wtv.at(4,4)=OUTTextureView;
 Output_Image_Buffer.buffer=WGPU_Buffers.at(0,0,0);
 Output_Image_Buffer.bytesPerRow=(floor((sze.at(0,0)*4)/256)+1)*256;
 Output_Image_Buffer.rowsPerImage=sze.at(0,0);
-
+*/
         
         //  frame data
 std::ifstream fram(Fnm2,std::ios::binary);
