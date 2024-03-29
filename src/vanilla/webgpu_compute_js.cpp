@@ -32,18 +32,14 @@ return imageData;
 }
 
 async function videoFrames(){
+// document.querySelector("#mvi").height=SiZ;
 let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
 let SiZ=window.innerHeight;
 let tstSiZ=h$;
-if(running==0){
-// Module.ccall("frm",null,['Number'],['Number'],h$,h$);
-setTimeout(function(){
-Module.ccall("startWebGPU",null,"Number",h$);
-console.log('Starting..');
-running=1;
-},500);
-}
+// document.querySelector("#mvi").height=h$;
+// document.querySelector("#mvi").width=w$;
+Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
@@ -59,15 +55,20 @@ let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // let mageData=flipImageData(image);
 let imageData=image.data;
 let pixelData=new Uint8ClampedArray(imageData);
+//  let frrm=new Uint8ClampedArray($H,0,imageData.length);
+Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+// frrm.set(pixelData);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
 gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
+// mageData=flipImageData(image);
 imageData=image.data;
 pixelData=new Uint8ClampedArray(imageData);
+//  frrm=new Uint8ClampedArray($H,0,imageData.length);
+// frrm.set(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
-}
 
 function normalResStart(){
 setTimeout(function(){
