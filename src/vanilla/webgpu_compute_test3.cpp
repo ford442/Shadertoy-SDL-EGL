@@ -185,15 +185,7 @@ Output_Image_Buffer.buffer=WGPU_Buffers.at(0,0,0);
 Output_Image_Buffer.bytesPerRow=(floor((sze.at(0,0)*4)/256)+1)*256;
 Output_Image_Buffer.rowsPerImage=sze.at(0,0);
 */
-        //  frame data
-std::ifstream fram(Fnm2,std::ios::binary);
-std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-frame_tensor.at(0,0)=data;
-wetd.at(0,0).source=texid.at(0,0);
-// wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
-// wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(1,1),&frame_tensor.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
-wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
-       // Compute Pass
+     // Compute Pass
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 WGPU_InputBuffer.at(0,0,0)[2]=sze.at(1,1);
 WGPU_InputBuffer.at(0,0,0)[3]=sze.at(0,0);
@@ -231,7 +223,15 @@ on.at(1,1)=0;
 }
 wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
-  // Render Pass
+        //  Frame Data
+std::ifstream fram(Fnm2,std::ios::binary);
+std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+frame_tensor.at(0,0)=data;
+wetd.at(0,0).source=texid.at(0,0);
+// wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+// wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(1,1),&frame_tensor.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+    // Render Pass
 //  wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&Output_Image_Texture,&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
