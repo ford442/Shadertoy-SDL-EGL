@@ -10,8 +10,10 @@ char wgl_cmp_src[2000]=
 // "@group(0)@binding(6)var videoTexture: texture_2d <f32>;\n"
 "@compute@workgroup_size(4,1,64)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
+
 "var colorTest:vec4<f32>=textureLoad(textureIN,vec2<u32>(global_id.x*16,global_id.z*16),0);\n"
-"textureStore(textureOUT,vec2<u32>(global_id.x*16,global_id.z*16),colorTest);\n"
+"var colorTest2:vec4<f32>=vec4<f32>(0.7f,0.0f,0.7f,1.0f);\n"
+"textureStore(textureOUT,vec2<u32>(global_id.x*16,global_id.z*16),colorTest2);\n"
 "outputBuffer[2]=f32(textureDimensions(textureIN).x);\n"
 "outputBuffer[3]=f32(textureDimensions(textureOUT).x);\n"
 "}";
