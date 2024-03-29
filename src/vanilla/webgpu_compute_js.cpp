@@ -69,7 +69,8 @@ pixelData=new Uint8ClampedArray(imageData);
 // frrm.set(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
-
+}
+  
 function normalResStart(){
 setTimeout(function(){
 document.querySelector('#shut').innerHTML=2;
@@ -124,7 +125,6 @@ slt=tem.innerHTML;
 },8);
 },16);
 });
-}
 
 document.querySelector('#startBtn').addEventListener('click',function(){
 // var pth="https://glsl.1ink.us/wgsl/galaxy.wgsl";
