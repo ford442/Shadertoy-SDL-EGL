@@ -58,7 +58,6 @@ const char * frag_body=
 "@group(0) @binding(0) var <uniform> iTime : u32;\n"
 "@group(0) @binding(1) var mySampler : sampler;\n"
 "@group(0) @binding(2) var myTexture : texture_2d <f32>;\n"
-"@group(0) @binding(3) var textureOUT : texture_storage_2d <rgba8unorm,write>;\n"
 // "@group(0) @binding(3) var extTexture : texture_external;\n"
 "@fragment\n"
 "fn main(@location(0) fragUV : vec2<f32>) ->\n"
@@ -601,15 +600,8 @@ Render_Bindgroup_Layout_Entries[2].binding=2;
 Render_Bindgroup_Layout_Entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Render_Bindgroup_Layout_Entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
 Render_Bindgroup_Layout_Entries[2].layout.texture=wtbl.at(1,1);
-   // attempt bind textureOUT to render pipeline
-Render_Bindgroup_Layout_Entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
-Render_Bindgroup_Layout_Entries[3].binding=3;
-Render_Bindgroup_Layout_Entries[3].visibility=WGPU_SHADER_STAGE_FRAGMENT;
-Render_Bindgroup_Layout_Entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
-Render_Bindgroup_Layout_Entries[3].layout.texture=wtbl.at(1,1);
-
-          wbgle.at(0,0)=Render_Bindgroup_Layout_Entries;
-bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),4);
+wbgle.at(0,0)=Render_Bindgroup_Layout_Entries;
+bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3);
 wbgl.at(0,0)=bindgroup_layout;
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
 wrpl.at(0,0)=pipeline_layout;
@@ -633,11 +625,6 @@ Render_Bindgroup_Entries[1].resource=wsmp.at(0,0);
 Render_Bindgroup_Entries[2]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Entries[2].binding=2;
 Render_Bindgroup_Entries[2].resource=wtv.at(2,2);
-             // attempt bind textureOUT to render pipeline
-Render_Bindgroup_Entries[3]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
-Render_Bindgroup_Entries[3].binding=3;
-Render_Bindgroup_Entries[3].resource=wtv.at(1,1);
-          
 wbge.at(0,0)=Render_Bindgroup_Entries;
 depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS;
 depthTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
@@ -680,7 +667,7 @@ colorTextureDescriptor.sampleCount=1;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 wtd.at(1,1)=colorTextureDescriptor;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
-bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),4);
+bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),3);
 wbg.at(0,0)=bindgroup;
 u64_uni.at(0,0)=0;
 u64_uni.at(3,3)=0;
