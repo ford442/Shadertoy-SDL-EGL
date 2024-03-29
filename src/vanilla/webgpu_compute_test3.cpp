@@ -151,11 +151,13 @@ passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
-        /*
+          /*
 videoTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(2,2));
-wt.at(2,2)=videoTexture;
+wt.at(2,2)=videoTexture; 
+        */
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
-wtv.at(2,2)=videoTextureView;
+wtv.at(2,2)=videoTextureView;    
+        /*
 videoTextureCopy.texture=wt.at(2,2);
 videoTextureCopy.mipLevel=0;
 videoTextureCopy.origin=oxyz.at(0,0);
