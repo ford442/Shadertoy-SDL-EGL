@@ -587,9 +587,9 @@ Render_Bindgroup_Layout_Entries[2].binding=2;
 
 Render_Bindgroup_Layout_Entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 
-Render_Bindgroup_Layout_Entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
+Render_Bindgroup_Layout_Entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_STORAGE_TEXTURE;
 
-Render_Bindgroup_Layout_Entries[2].layout.texture=WGPU_StorageTextureBindingLayout.at(0,0,0);
+Render_Bindgroup_Layout_Entries[2].layout.storageTexture=WGPU_StorageTextureBindingLayout.at(0,0,0);
 
 wbgle.at(0,0)=Render_Bindgroup_Layout_Entries;
 
