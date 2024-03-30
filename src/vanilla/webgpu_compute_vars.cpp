@@ -179,7 +179,7 @@ uint32_t workgroupSize=64;
 uint32_t OutputBufferBytes=64*4;
 uint32_t InputBufferBytes=64*4;
 uint64_t WGPU_InputRangeSize=OutputBufferBytes;
-const char * Entry="mainImage";
+const char * Entry="main_image";
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
 void * userDataA;
 void * userDataB;
