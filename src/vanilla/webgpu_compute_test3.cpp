@@ -205,6 +205,10 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 return EM_TRUE;
 };
 
+void raf(){
+render();
+}
+
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 wd.at(0,0)=result;
 js_data_pointer.at(0,0)=0;
@@ -553,7 +557,6 @@ videoSamplerDescriptor.maxAnisotropy=1;
 wsd.at(0,0)=videoSamplerDescriptor;
 videoSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(0,0));
 wsmp.at(0,0)=videoSampler;
-
 texid.at(0,0)=77;
 extTextureDescriptor.source=texid.at(0,0);
 extTextureDescriptor.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
