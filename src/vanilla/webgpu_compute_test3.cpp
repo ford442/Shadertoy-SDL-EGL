@@ -9,7 +9,7 @@ char wgl_cmp_src[2000]=
 "@group(0)@binding(5)var <uniform> iTime: u32;\n"
 "@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@compute@workgroup_size(8,1,8)\n"
-"fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
+"fn mainImage(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "var outSizeU:u32=textureDimensions(textureOUT).x;\n"
 "var inSizeU:u32=textureDimensions(textureIN).x;\n"
 "var sizeRatio:f32=f32(inSizeU)/f32(outSizeU);\n"
@@ -26,33 +26,6 @@ char wgl_cmp_src[2000]=
 "outputBuffer[2]=f32(textureDimensions(textureIN).x);\n"
 "outputBuffer[3]=f32(textureDimensions(textureOUT).x);\n"
 "}";
-
-char wgl_cmp_srcLOOP[2000]=
-"@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
-"@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
-"@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
-"@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
-"@group(0)@binding(4)var resizeSampler: sampler;\n"
-"@group(0)@binding(5)var <uniform> iResolution: u32;\n"
-"@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba8unorm,write>;\n"
-"@compute@workgroup_size(256,1,1)\n"
-"fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
-"var outSizeU:u32=textureDimensions(textureOUT).x;\n"
-"var inSizeU:u32=textureDimensions(textureIN).x;\n"
-"var sizeRatio:u32=inSizeU/outSizeU;\n"
-"for(var x:u32=0u;x<outSizeU;x=x+1u){\n"
-"for(var y:u32=0u;y<outSizeU;y=y+1u){\n"
-"var INtexCoord:vec2<u32>=vec2<u32>(x*sizeRatio,y*sizeRatio);\n"
-"var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
-// "var colorTest2:vec4<f32>=vec4<f32>(0.7f,0.0f,0.7f,1.0f);\n"
-"textureStore(textureOUT,vec2<u32>(x,y),colorTest);\n"
-"}\n"
-"}\n"
-"outputBuffer[2]=f32(textureDimensions(textureIN).x);\n"
-"outputBuffer[3]=f32(textureDimensions(textureOUT).x);\n"
-"}";
-
-
 
 #include "../../src/vanilla/webgpu_compute_vars.cpp"
 
@@ -404,9 +377,9 @@ wb.at(4,4)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
 resizeSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 resizeSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 resizeSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
-resizeSamplerDescriptor.magFilter=WGPU_FILTER_MODE_LINEAR;
-resizeSamplerDescriptor.minFilter=WGPU_FILTER_MODE_LINEAR;
-resizeSamplerDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_LINEAR;
+resizeSamplerDescriptor.magFilter=WGPU_FILTER_MODE_NEAREST;
+resizeSamplerDescriptor.minFilter=WGPU_FILTER_MODE_NEAREST;
+resizeSamplerDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_NEAREST;
 resizeSamplerDescriptor.lodMinClamp=0;
 resizeSamplerDescriptor.lodMaxClamp=32;
 // resizeSamplerDescriptor.compare;  // default = WGPU_COMPARE_FUNCTION_INVALID (not used)
@@ -414,10 +387,9 @@ resizeSamplerDescriptor.maxAnisotropy=1;
 wsd.at(1,1)=resizeSamplerDescriptor;
 resizeSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(1,1));
 wsmp.at(3,3)=resizeSampler;
-       
-       shaderModuleDescriptor.code=comp_body;
-       shaderModuleDescriptor.numHints=0;
-       shaderModuleDescriptor.hints=NULL;
+shaderModuleDescriptor.code=comp_body;
+shaderModuleDescriptor.numHints=0;
+shaderModuleDescriptor.hints=NULL;
 WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
 WGPU_ComputeModule.at(0,0,0)=wgpu_device_create_shader_module(wd.at(0,0),&WGPU_ShaderModuleDescriptor.at(0,0,0));
 WGPU_BufferBindingLayout.at(0,0,1)=bufferBindingLayoutIn;
@@ -589,8 +561,8 @@ videoFrm.flipY=EM_FALSE;
 videoSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 videoSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 videoSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
-videoSamplerDescriptor.magFilter=WGPU_FILTER_MODE_LINEAR;
-videoSamplerDescriptor.minFilter=WGPU_FILTER_MODE_LINEAR;
+videoSamplerDescriptor.magFilter=WGPU_FILTER_MODE_NEAREST;
+videoSamplerDescriptor.minFilter=WGPU_FILTER_MODE_NEAREST;
   // videoSamplerDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_LINEAR;
 videoSamplerDescriptor.lodMinClamp=0;
 videoSamplerDescriptor.lodMaxClamp=32;
