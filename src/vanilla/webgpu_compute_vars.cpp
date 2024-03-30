@@ -68,6 +68,7 @@ WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT
 WGpuBufferBindingLayout bufferBindingLayoutR={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 WGpuTextureBindingLayout textureBindingLayoutFloat={};
 WGpuTextureBindingLayout textureBindingLayoutDepth={};
+WGpuTextureBindingLayout textureBindingLayout1={}; // for video.cpp
 WGpuSamplerBindingLayout samplerBindingLayout={};
 WGpuImageCopyExternalImage videoFrm={};
 double szh,szw;
@@ -140,6 +141,7 @@ u64_tensor u64_bfrSze=u64_tensor{4,4};
 wict_tensor wict=wict_tensor{4,4};
 wsd_tensor wsd=wsd_tensor{2,2};
 ws_tensor wsmp=ws_tensor{4,4};
+ws_tensor ws=ws_tensor{4,4};  // for video.cpp
 v_tensor imgData=v_tensor{2,2};
 wq_tensor WGPU_Queue=wq_tensor{1,1,2};
 wcb_tensor WGPU_CommandBuffer=wcb_tensor{1,1,3};
@@ -201,6 +203,9 @@ WGpuCommandBufferDescriptor commandBufferDescriptor={};
 WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDescriptor={};
 WGpuBindGroupLayoutEntry Compute_Bindgroup_Layout_Entries[8]={};
+
+WGpuBindGroupLayoutEntry bindgroup_layout_entries[8]={};
+
 WGpuBindGroupEntry Compute_Bindgroup_Entries[8]={};
 WGpuBufferBindingLayout bufferBindingLayoutIn={3};
 WGpuBufferBindingLayout bufferBindingLayoutOut={2};
