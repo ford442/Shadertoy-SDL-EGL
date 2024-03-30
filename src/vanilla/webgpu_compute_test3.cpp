@@ -8,7 +8,7 @@ char wgl_cmp_src[2000]=
 "@group(0)@binding(4)var resizeSampler: sampler;\n"
 "@group(0)@binding(5)var <uniform> iResolution: u32;\n"
 "@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba8unorm,write>;\n"
-"@compute@workgroup_size(32,1,32)\n"
+"@compute@workgroup_size(8,1,32)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "var colorTest:vec4<f32>=textureLoad(textureIN,vec2<u32>(global_id.x*16,global_id.z*16),0);\n"
 "var colorTest2:vec4<f32>=vec4<f32>(0.7f,0.0f,0.7f,1.0f);\n"
