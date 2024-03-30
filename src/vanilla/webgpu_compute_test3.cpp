@@ -202,8 +202,8 @@ on.at(1,1)=0;
 }
 // wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
-return;
-}
+return EM_TRUE;
+};
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 wd.at(0,0)=result;
@@ -235,7 +235,6 @@ sze.at(0,0)=int(szhI);
 sze.at(1,1)=720;
 szef.at(0,0)=floor(float(szh));
 // sze.at(0,1)=szh;
-  
 u64_bfrSze.at(0,0)=(floor((sze.at(0,0)*sze.at(0,0)*4)/256)+1)*256;
 u64_bfrSze.at(1,1)=(floor((sze.at(1,1)*sze.at(1,1)*4)/256)+1)*256;
 WGpuOrigin3D OriginXYZ={};
