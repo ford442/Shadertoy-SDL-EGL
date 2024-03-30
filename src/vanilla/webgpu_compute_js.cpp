@@ -51,7 +51,7 @@ cnv.height=h$;
 cnvb.height=SiZ;
 cnv.width=w$;
 cnvb.width=SiZ;
-let offS=Math.floor((w$-h$)/2.0);
+let offS=Math.floor((w$-h$));
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
 gl2.drawImage(vvi,0,0,h$,h$,0,0,tstSiZ,tstSiZ);
