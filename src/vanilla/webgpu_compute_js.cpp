@@ -126,8 +126,8 @@ slt=tem.innerHTML;
 });
   
 document.querySelector('#startBtn').addEventListener('click',function(){
-var pth="https://glsl.1ink.us/wgsl/plasma.wgslc";
-// var pth=document.querySelector('#path').innerHTML;
+// var pth="https://glsl.1ink.us/wgsl/plasma.wgslc";
+var pth=document.querySelector('#path').innerHTML;
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
