@@ -282,7 +282,7 @@ videoSamplerDescriptor.lodMaxClamp=32;
 videoSamplerDescriptor.maxAnisotropy=1;
 wsd.at(0,0)=videoSamplerDescriptor;
 videoSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(0,0));
-ws.at(0,0)=videoSampler;
+wsmp.at(0,0)=videoSampler;
 videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 videoTextureDescriptor.format=wtf.at(2,2);
 videoTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
@@ -382,7 +382,7 @@ bindgroup_entries[0].bufferBindOffset=0;
 bindgroup_entries[0].bufferBindSize=sizeof(uint64_t);
 bindgroup_entries[1]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_entries[1].binding=1;
-bindgroup_entries[1].resource=ws.at(0,0);
+bindgroup_entries[1].resource=wsmp.at(0,0);
 bindgroup_entries[2]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 bindgroup_entries[2].binding=2;
 bindgroup_entries[2].resource=wtv.at(2,2);
@@ -476,8 +476,8 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 
 extern"C"{
 
-void startWebGPU(int hh){
-WGPU_Start(hh);
+void startWebGPU(){
+WGPU_Start();
 }
 
 }
