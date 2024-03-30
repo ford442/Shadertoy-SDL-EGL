@@ -39,7 +39,7 @@ let tstSiZ=h$;
 if(running==0){
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 setTimeout(function(){
-Module.ccall("startWebGPU",null,"Number",h$);
+Module.ccall("startWebGPU");
 console.log('Starting..');
 running=1;
 },500);
@@ -54,14 +54,14 @@ cnvb.width=SiZ;
 let offS=Math.floor((w$-h$)/2.0);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl2=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
-gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
+gl2.drawImage(vvi,0-offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // let mageData=flipImageData(image);
 let imageData=image.data;
 let pixelData=new Uint8ClampedArray(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
-gl2.drawImage(vvi,offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
+gl2.drawImage(vvi,0-offS,0,h$,h$,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 imageData=image.data;
 pixelData=new Uint8ClampedArray(imageData);
