@@ -8,11 +8,11 @@ char wgl_cmp_src[2000]=
 "@group(0)@binding(4)var resizeSampler: sampler;\n"
 "@group(0)@binding(5)var <uniform> iResolution: u32;\n"
 "@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba8unorm,write>;\n"
-"@compute@workgroup_size(1,1,1)\n"
+"@compute@workgroup_size(32,1,32)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "var colorTest:vec4<f32>=textureLoad(textureIN,vec2<u32>(global_id.x*16,global_id.z*16),0);\n"
 "var colorTest2:vec4<f32>=vec4<f32>(0.7f,0.0f,0.7f,1.0f);\n"
-"textureStore(textureOUT,vec2<u32>(global_id.x*16,global_id.z*16),colorTest2);\n"
+"textureStore(videoOUT,vec2<u32>(global_id.x*16,global_id.z*16),colorTest2);\n"
 "outputBuffer[2]=f32(textureDimensions(textureIN).x);\n"
 "outputBuffer[3]=f32(textureDimensions(textureOUT).x);\n"
 "}";
@@ -113,9 +113,7 @@ WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *user
 return;
 };
 
-void raf(){
-       
-// boost::function<EM_BOOL()>render=[](){
+boost::function<EM_BOOL()>render=[](){
 u64_uni.at(3,3)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
@@ -154,29 +152,6 @@ passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
-
-/*       
-videoTextureCopy.texture=wt.at(2,2);
-videoTextureCopy.mipLevel=0;
-videoTextureCopy.origin=oxyz.at(0,0);
-videoTextureCopy.aspect=WGPU_TEXTURE_ASPECT_ALL;
-wict.at(0,0)=videoTextureCopy;
-textureIn=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
-WGPU_Texture.at(0,0,0)=textureIn;
-textureOut=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
-WGPU_Texture.at(0,0,1)=textureOut;
-Input_Image_Texture.texture=WGPU_Texture.at(0,0,0);
-Input_Image_Texture.origin=oxyz.at(0,0);
-Input_Image_Texture.aspect=WGPU_TEXTURE_ASPECT_ALL;
-Output_Image_Texture.texture=WGPU_Texture.at(0,0,1);
-Output_Image_Texture.origin=oxyz.at(0,0);
-Output_Image_Texture.aspect=WGPU_TEXTURE_ASPECT_ALL;
-wict.at(2,2)=Input_Image_Texture;
-wict.at(1,1)=Output_Image_Texture;
-Output_Image_Buffer.buffer=WGPU_Buffers.at(0,0,0);
-Output_Image_Buffer.bytesPerRow=(floor((sze.at(0,0)*4)/256)+1)*256;
-Output_Image_Buffer.rowsPerImage=sze.at(0,0);
-*/
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
        //  Frame Data
@@ -189,16 +164,13 @@ wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(0,0
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+// wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
     // Compute Pass
-// WGPU_InputBuffer.at(0,0,0)[2]=sze.at(1,1);
-// WGPU_InputBuffer.at(0,0,0)[3]=sze.at(0,0);
-// WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
