@@ -13,7 +13,7 @@ char wgl_cmp_src[2000]=
 "var loopx:u32=textureDimensions(textureOUT).x;\n"
 "for(var x:u32=0u;x<loopx;x=x+1u){\n"
 "for(var y:u32=0u;y<loopx;y=y+1u){\n"
-"var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(x,y)*(loopx/loopy));\n"
+"var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(x,y)*(textureDimensions(textureIN).x/loopx));\n"
 "var colorTest:vec4<f32>=textureLoad(textureIN,loopy,0);\n"
 // "var colorTest2:vec4<f32>=vec4<f32>(0.7f,0.0f,0.7f,1.0f);\n"
 "textureStore(textureOUT,vec2<u32>(u32(x),u32(y)),colorTest);\n"
