@@ -7,8 +7,7 @@ char wgl_cmp_src[2000]=
 "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@group(0)@binding(4)var resizeSampler: sampler;\n"
 "@group(0)@binding(5)var <uniform> iResolution: u32;\n"
-// "@group(0)@binding(6)var videoTexture: texture_2d <f32>;\n"
-"@group(0)@binding(7)var videoOUT: texture_storage_2d <rgba8unorm,write>;\n"
+"@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@compute@workgroup_size(1,1,1)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "var colorTest:vec4<f32>=textureLoad(textureIN,vec2<u32>(global_id.x*16,global_id.z*16),0);\n"
@@ -477,7 +476,7 @@ Compute_Bindgroup_Layout_Entries[5].binding=5;
 Compute_Bindgroup_Layout_Entries[5].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[5].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 Compute_Bindgroup_Layout_Entries[5].layout.buffer=wbbl.at(0,0);
-Compute_Bindgroup_Layout_Entries[6].binding=7;
+Compute_Bindgroup_Layout_Entries[6].binding=6;
 Compute_Bindgroup_Layout_Entries[6].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[6].type=WGPU_BIND_GROUP_LAYOUT_TYPE_STORAGE_TEXTURE;
 Compute_Bindgroup_Layout_Entries[6].layout.storageTexture=WGPU_StorageTextureBindingLayout.at(0,0,0);
@@ -509,7 +508,7 @@ Compute_Bindgroup_Entries[5].resource=wb.at(2,2);
 Compute_Bindgroup_Entries[5].bufferBindOffset=0;
 Compute_Bindgroup_Entries[5].bufferBindSize=sizeof(uint64_t);
 Compute_Bindgroup_Entries[6]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
-Compute_Bindgroup_Entries[6].binding=7;
+Compute_Bindgroup_Entries[6].binding=6;
 Compute_Bindgroup_Entries[6].resource=wtv.at(2,2); 
 WGPU_BindGroupEntries.at(0,0,0)=Compute_Bindgroup_Entries;
 WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),7);
