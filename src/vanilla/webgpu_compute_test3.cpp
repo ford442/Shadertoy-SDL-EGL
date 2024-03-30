@@ -187,7 +187,16 @@ frame_tensor.at(0,0)=data;
   // wetd.at(0,0).source=texid.at(0,0);
   // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
-
+         //  Render Pass
+wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
+wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
+wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
+wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
+wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
+wgpu_render_pass_encoder_end(wrpe.at(0,0));
+wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
+wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
     // Compute Pass
 // WGPU_InputBuffer.at(0,0,0)[2]=sze.at(1,1);
 // WGPU_InputBuffer.at(0,0,0)[3]=sze.at(0,0);
@@ -198,7 +207,6 @@ wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),1,1,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
-       /*
 // wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 if(WGPU_BufferStatus.at(0,0,0)!=3&&on.at(1,1)==0){
@@ -222,27 +230,8 @@ if(WGPU_BufferStatus.at(0,0,0)!=1){
 wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 on.at(1,1)=0;
 }
-*/
 // wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
-
-         //  Render Pass
-wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
-wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
-wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
-// wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
-  
-// wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,&fram,sze.at(0,0)*sze.at(0,0));
-
-// wgpu_command_encoder_copy_buffer_to_texture(wrpe.at(0,0),&wicb.at(1,1),wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
-
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
-
-wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
-wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
-wgpu_render_pass_encoder_end(wrpe.at(0,0));
-wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
-wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
 return;
 }
 
