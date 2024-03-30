@@ -89,7 +89,7 @@ video_resurection_webgpua_safe:
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 --post-js js/pagec_webgpua.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --closure 0
 
-video_resurection_webgpua_safe:
+video_resurection_webgpub_safe:
 	 em++ lib/lib_webgpu_cpp20.cpp $(STDS) $(STATIC_LINK_FLAGS) -static
 	 em++ lib/lib_webgpu.cpp $(STDS) $(STATIC_LINK_FLAGS) -static
 	 emcc src/video/video_jebusb.cpp -I/content/RAMDRIVE2/b3/include/vanilla/ -o video_jebusa.o -c $(STDS) $(BOOST_FLAGS) $(SIMD_FLAGS)
