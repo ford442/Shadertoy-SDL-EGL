@@ -205,7 +205,7 @@ WGpuDeviceDescriptor deviceDescriptor={};
 WGpuBindGroupLayoutEntry Compute_Bindgroup_Layout_Entries[8]={};
 
 WGpuBindGroupLayoutEntry bindgroup_layout_entries[8]={};
-
+WGpuShaderModuleCompilationHint shaderModuleCompilationHint={};
 WGpuBindGroupEntry Compute_Bindgroup_Entries[8]={};
 WGpuBufferBindingLayout bufferBindingLayoutIn={3};
 WGpuBufferBindingLayout bufferBindingLayoutOut={2};
@@ -222,7 +222,7 @@ WGpuTextureDescriptor textureDescriptorOut={};
 WGpuTextureViewDescriptor textureViewDescriptorIn={};
 WGpuTextureViewDescriptor textureViewDescriptorOut={};
 char * cmp_bdy=wgl_cmp_src;
-WGpuShaderModuleDescriptor shaderModuleDescriptor={cmp_bdy,0,NULL};
+WGpuShaderModuleDescriptor shaderModuleDescriptor={};
 int randomNumber=0,entropySeed=0;
 std::random_device randomizer;
 int raN=0;
