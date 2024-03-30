@@ -141,7 +141,6 @@ u64_tensor u64_bfrSze=u64_tensor{4,4};
 wict_tensor wict=wict_tensor{4,4};
 wsd_tensor wsd=wsd_tensor{2,2};
 ws_tensor wsmp=ws_tensor{4,4};
-ws_tensor ws=ws_tensor{4,4};  // for video.cpp
 v_tensor imgData=v_tensor{2,2};
 wq_tensor WGPU_Queue=wq_tensor{1,1,2};
 wcb_tensor WGPU_CommandBuffer=wcb_tensor{1,1,3};
