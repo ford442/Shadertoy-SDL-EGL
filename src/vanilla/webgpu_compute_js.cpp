@@ -126,8 +126,8 @@ slt=tem.innerHTML;
 });
   
 document.querySelector('#startBtn').addEventListener('click',function(){
-// var pth="https://glsl.1ink.us/wgsl/galaxy.wgsl";
-var pth=document.querySelector('#path').innerHTML;
+var pth="https://glsl.1ink.us/wgsl/caustics.wgsl";
+// var pth=document.querySelector('#path').innerHTML;
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
@@ -137,7 +137,7 @@ ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
-FS.writeFile('/shader/shader.glsl',sfil);
+FS.writeFile('/shader/shader.wgsl',sfil);
 document.querySelector('#stat').innerHTML='Downloaded Shader';
 document.querySelector('#stat').style.backgroundColor='blue';
 normalResStart();
