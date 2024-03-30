@@ -382,6 +382,31 @@ INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewD
 OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureViewDescriptor.at(0,0,1));
 wtv.at(3,3)=INTextureView;
 wtv.at(4,4)=OUTTextureView;
+videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
+videoTextureDescriptor.format=wtf.at(2,2);
+videoTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_STORAGE_BINDING;
+videoTextureDescriptor.width=sze.at(0,0);
+videoTextureDescriptor.height=sze.at(0,0); // default = 1;
+videoTextureDescriptor.depthOrArrayLayers=1;
+videoTextureDescriptor.mipLevelCount=1;
+videoTextureDescriptor.sampleCount=1;
+videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
+WGPU_TEXTURE_FORMAT videoViewFormats[1]={wtf.at(0,0)};
+videoTextureDescriptor.numViewFormats=0; // &videoViewFormats[0];
+videoTextureDescriptor.viewFormats=nullptr; // &videoViewFormats[0];
+wtd.at(2,2)=videoTextureDescriptor;
+videoTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(2,2));
+wt.at(2,2)=videoTexture;
+videoTextureViewDescriptor.format=wtf.at(2,2);
+videoTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+videoTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
+videoTextureViewDescriptor.baseMipLevel=0; // default = 0
+videoTextureViewDescriptor.mipLevelCount=1;
+videoTextureViewDescriptor.baseArrayLayer=0; // default = 0
+videoTextureViewDescriptor.arrayLayerCount=1;
+wtvd.at(2,2)=videoTextureViewDescriptor;
+videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
+wtv.at(2,2)=videoTextureView;
 Compute_Bindgroup_Layout_Entries[0].binding=0;
 Compute_Bindgroup_Layout_Entries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[0].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
@@ -512,31 +537,7 @@ videoSamplerDescriptor.maxAnisotropy=1;
 wsd.at(0,0)=videoSamplerDescriptor;
 videoSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(0,0));
 wsmp.at(0,0)=videoSampler;
-videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-videoTextureDescriptor.format=wtf.at(2,2);
-videoTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_STORAGE_BINDING;
-videoTextureDescriptor.width=sze.at(0,0);
-videoTextureDescriptor.height=sze.at(0,0); // default = 1;
-videoTextureDescriptor.depthOrArrayLayers=1;
-videoTextureDescriptor.mipLevelCount=1;
-videoTextureDescriptor.sampleCount=1;
-videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-WGPU_TEXTURE_FORMAT videoViewFormats[1]={wtf.at(0,0)};
-videoTextureDescriptor.numViewFormats=0; // &videoViewFormats[0];
-videoTextureDescriptor.viewFormats=nullptr; // &videoViewFormats[0];
-wtd.at(2,2)=videoTextureDescriptor;
-videoTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(2,2));
-wt.at(2,2)=videoTexture;
-videoTextureViewDescriptor.format=wtf.at(2,2);
-videoTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
-videoTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
-videoTextureViewDescriptor.baseMipLevel=0; // default = 0
-videoTextureViewDescriptor.mipLevelCount=1;
-videoTextureViewDescriptor.baseArrayLayer=0; // default = 0
-videoTextureViewDescriptor.arrayLayerCount=1;
-wtvd.at(2,2)=videoTextureViewDescriptor;
-videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
-wtv.at(2,2)=videoTextureView;
+
 texid.at(0,0)=77;
 extTextureDescriptor.source=texid.at(0,0);
 extTextureDescriptor.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
