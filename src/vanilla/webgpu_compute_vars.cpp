@@ -244,7 +244,7 @@ uint8_t * results2=NULL;
 float * resultsf=NULL;
 long int length2=0;
 void * fram;
-const char * Fnm=reinterpret_cast<const char *>("/shader/shader.glsl");
+const char * Fnm=reinterpret_cast<const char *>("/shader/shader.wgsl");
 static char * result=NULL;
 static char * results=NULL;
 static long int length=0;
