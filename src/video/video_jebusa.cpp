@@ -383,8 +383,8 @@ contx.getExtension('EGL_EXT_create_surface_from_window');
 contx.getExtension('EGL_EXT_surface_attachment');
 contx.getExtension('EXT_texture_storage');
 
-contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+// contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+// contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
 // contx.blendColor(1.0,1.0,1.0,1.0);
 // contx.blendColor(1.0,1.0,1.0,0.0);
 // contx.blendColor(0.0,0.0,0.0,1.0);
