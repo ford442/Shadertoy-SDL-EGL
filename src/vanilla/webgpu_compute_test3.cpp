@@ -155,8 +155,7 @@ passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
-videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
-wtv.at(2,2)=videoTextureView;
+
 /*       
 videoTextureCopy.texture=wt.at(2,2);
 videoTextureCopy.mipLevel=0;
@@ -222,6 +221,9 @@ on.at(1,1)=0;
 }
 // wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
+
+videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
+wtv.at(2,2)=videoTextureView;
 
          //  Render Pass
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
