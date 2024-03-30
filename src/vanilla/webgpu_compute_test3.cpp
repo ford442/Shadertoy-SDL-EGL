@@ -172,11 +172,11 @@ Output_Image_Texture.origin=oxyz.at(0,0);
 Output_Image_Texture.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(2,2)=Input_Image_Texture;
 wict.at(1,1)=Output_Image_Texture;
-*/
-
 Output_Image_Buffer.buffer=WGPU_Buffers.at(0,0,0);
 Output_Image_Buffer.bytesPerRow=(floor((sze.at(0,0)*4)/256)+1)*256;
 Output_Image_Buffer.rowsPerImage=sze.at(0,0);
+*/
+
 
 // INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
 // wtv.at(3,3)=INTextureView;
@@ -186,7 +186,7 @@ std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambu
 frame_tensor.at(0,0)=data;
 wetd.at(0,0).source=texid.at(0,0);
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(1,1),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
-// wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
      // Compute Pass
 WGPU_InputBuffer.at(0,0,0)[2]=sze.at(1,1);
 WGPU_InputBuffer.at(0,0,0)[3]=sze.at(0,0);
@@ -195,13 +195,13 @@ WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
-wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
+// wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(0,0)*4,sze.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),1,1,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
 // OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureViewDescriptor.at(0,0,1));
 // wtv.at(4,4)=OUTTextureView;
-wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(1,1),&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
+// wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(1,1),&wict.at(0,0),sze.at(0,0),sze.at(0,0),1);
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 // wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&Output_Image_Buffer,&wict.at(1,1),sze.at(0,0),sze.at(0,0),1);
 if(WGPU_BufferStatus.at(0,0,0)!=3&&on.at(1,1)==0){
@@ -234,7 +234,7 @@ wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 
-wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+// wgpu_queue_write_texture(wq.at(0,0),&wict.at(0,0),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
@@ -429,10 +429,10 @@ WGPU_Texture.at(0,0,0)=textureIn;
 textureOut=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
 WGPU_Texture.at(0,0,1)=textureOut;
 Input_Image_Texture.texture=WGPU_Texture.at(0,0,0);
-Input_Image_Texture.origin=oxyz.at(0,0);
+Input_Image_Texture.origin=OriginXYZ;
 Input_Image_Texture.aspect=WGPU_TEXTURE_ASPECT_ALL;
 Output_Image_Texture.texture=WGPU_Texture.at(0,0,1);
-Output_Image_Texture.origin=oxyz.at(0,0);
+Output_Image_Texture.origin=OriginXYZ;
 Output_Image_Texture.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(2,2)=Input_Image_Texture;
 wict.at(1,1)=Output_Image_Texture;
@@ -530,7 +530,7 @@ fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&colorTarget;
 
-videoFrm.origin=oxy.at(0,0);
+videoFrm.origin=OriginXY;
 videoFrm.flipY=EM_FALSE;
 videoSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_REPEAT;
 videoSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_REPEAT;
@@ -576,7 +576,7 @@ extTextureDescriptor.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 wetd.at(0,0)=extTextureDescriptor;
 videoTextureCopy.texture=wt.at(2,2);
 videoTextureCopy.mipLevel=0;
-videoTextureCopy.origin=oxyz.at(0,0);
+videoTextureCopy.origin=OriginXYZ;
 videoTextureCopy.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(0,0)=videoTextureCopy;
 bufferDescriptorUni={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
