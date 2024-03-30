@@ -11,7 +11,7 @@ char wgl_cmp_src[2000]=
 "@compute@workgroup_size(256,1,1)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "var loopx:u32=textureDimensions(textureOUT).x;\n"
-"for(var x:u32=0u;y<loopx;x=x+1u){\n"
+"for(var x:u32=0u;x<loopx;x=x+1u){\n"
 "for(var y:u32=0u;y<loopx;y=y+1u){\n"
 "var INtexCoord:vec2<u32>=vec2<u32>(vec2<u32>(x,y)*(loopx/loopy));\n"
 "var colorTest:vec4<f32>=textureLoad(textureIN,loopy,0);\n"
