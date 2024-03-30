@@ -507,7 +507,7 @@ videoSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(0,0));
 wsmp.at(0,0)=videoSampler;
 videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 videoTextureDescriptor.format=wtf.at(2,2);
-videoTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_STORAGE_BINDING;
+videoTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
 videoTextureDescriptor.width=sze.at(0,0);
 videoTextureDescriptor.height=sze.at(0,0); // default = 1;
 videoTextureDescriptor.depthOrArrayLayers=1;
