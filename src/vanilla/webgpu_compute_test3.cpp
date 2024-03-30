@@ -8,6 +8,7 @@ char wgl_cmp_src[2000]=
 "@group(0)@binding(4)var resizeSampler: sampler;\n"
 "@group(0)@binding(5)var <uniform> iResolution: u32;\n"
 // "@group(0)@binding(6)var videoTexture: texture_2d <f32>;\n"
+// "@group(0)@binding(7)var videoOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@compute@workgroup_size(4,1,64)\n"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "var colorTest:vec4<f32>=textureLoad(textureIN,vec2<u32>(global_id.x*16,global_id.z*16),0);\n"
@@ -58,7 +59,7 @@ const char * vertexShader=
 const char * frag_body=
 "@group(0) @binding(0) var <uniform> iTime : u32;\n"
 "@group(0) @binding(1) var mySampler : sampler;\n"
-"@group(0) @binding(2) var myTexture :  texture_storage_2d <rgba8unorm,write>;\n"
+"@group(0) @binding(2) var myTexture : texture_2d <f32>;\n"
 // "@group(0) @binding(3) var extTexture : texture_external;\n"
 "@fragment\n"
 "fn main(@location(0) fragUV : vec2<f32>) ->\n"
@@ -587,10 +588,10 @@ Render_Bindgroup_Layout_Entries[2].binding=2;
 
 Render_Bindgroup_Layout_Entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 
-Render_Bindgroup_Layout_Entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_STORAGE_TEXTURE;
+Render_Bindgroup_Layout_Entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
 
-Render_Bindgroup_Layout_Entries[2].layout.storageTexture=WGPU_StorageTextureBindingLayout.at(0,0,0);
-
+Render_Bindgroup_Layout_Entries[2].layout.texture=wtbl.at(1,1);
+  
 wbgle.at(0,0)=Render_Bindgroup_Layout_Entries;
 
 bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),3);
