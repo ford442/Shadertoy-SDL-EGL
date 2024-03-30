@@ -51,6 +51,7 @@ WGpuBufferDescriptor bufferDescriptor_iTimeDelta={};
 WGpuBindGroupLayout bindgroup_layout=0;
 WGpuBindGroupLayoutEntry Render_Bindgroup_Layout_Entries[4]={};
 WGpuBindGroupEntry Render_Bindgroup_Entries[4]={};
+WGpuBindGroupEntry bindgroup_entries[4]={};  //  for video.cpp
 WGpuBindGroup bindgroup=0;
 WGpuRenderBundleEncoder renderBundleEncoder;
 WGpuRenderBundleEncoderDescriptor renderBundleEncoderDescriptor={};
