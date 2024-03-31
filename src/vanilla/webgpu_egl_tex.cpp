@@ -9,7 +9,7 @@ char wgl_cmp_src[2000]=
 "@group(0)@binding(5)var <uniform> iTime: u32;\n"
 "@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@compute@workgroup_size(8,1,8)\n"
-"fn mainImage(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
+"fn main_image(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "var outSizeU:u32=textureDimensions(textureOUT).x;\n"
 "var inSizeU:u32=textureDimensions(textureIN).x;\n"
 "var sizeRatio:f32=f32(inSizeU)/f32(outSizeU);\n"
@@ -169,7 +169,7 @@ std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 frame_tensor.at(0,0)=data;
   // wetd.at(0,0).source=texid.at(0,0);
-wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+// wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
          //  Render Pass
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
