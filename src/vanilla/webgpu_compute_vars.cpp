@@ -43,6 +43,7 @@ WGpuDepthStencilState depthState;
 WGpuVertexState vertState;
 WGpuPrimitiveState priState;
 WGpuFragmentState fragState;
+WGpuFragmentState fragState2;
 WGpuBufferDescriptor bufferDescriptorUni={};
 WGpuBufferDescriptor bufferDescriptor_iTime={};
 WGpuBufferDescriptor bufferDescriptor_iResolution={};
