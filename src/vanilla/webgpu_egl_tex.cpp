@@ -763,6 +763,10 @@ void startWebGPU(){
 WGPU_Start();
 }
 
+void startWebGPUb(){
+WGPU_Start();
+}
+
 }
 
 int main(){
