@@ -730,8 +730,10 @@ u_time.t3=boost::chrono::high_resolution_clock::now();
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 // emscripten_set_main_loop_timing(2,1);
+if(on.at(0,0)==1){emscripten_cancel_main_loop();}
 emscripten_set_main_loop((void(*)())raf,0,0);
 // emscripten_request_animation_frame_loop(raf,0);
+on.at(0,0)=1;
 }
 
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
@@ -753,11 +755,6 @@ wao.at(0,0)=options;
 navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 }
 
-void WGPU_StartB(){
-emscripten_cancel_main_loop();
-WGPU_Start();
-}
-
 #include "../../src/vanilla/webgpu_compute_js_tex.cpp"
 
 extern"C"{
@@ -766,13 +763,10 @@ void startWebGPU(){
 WGPU_Start();
 }
 
-void startWebGPUb(){
-WGPU_StartB();
-}
-
 }
 
 int main(){
+on.at(0,0)=0;
 js_main();
 return 0;
 }
