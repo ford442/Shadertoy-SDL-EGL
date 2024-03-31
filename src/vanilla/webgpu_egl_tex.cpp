@@ -753,6 +753,10 @@ wao.at(0,0)=options;
 navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 }
 
+void WGPU_StartB(){
+emscripten_cancal_main_loop();
+WGPU_Start();
+}
 
 #include "../../src/vanilla/webgpu_compute_js_tex.cpp"
 
@@ -760,6 +764,10 @@ extern"C"{
 
 void startWebGPU(){
 WGPU_Start();
+}
+
+void startWebGPUb(){
+WGPU_StartB();
 }
 
 }
