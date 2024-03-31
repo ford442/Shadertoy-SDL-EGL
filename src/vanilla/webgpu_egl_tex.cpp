@@ -182,16 +182,7 @@ wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
-    //  Render Pass 2 (Sampler)
-wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
-wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
-wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
-wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
-wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
-wgpu_render_pass_encoder_end(wrpe.at(1,1));
-wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
-wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
-    // Compute Pass
+  // Compute Pass
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
@@ -548,11 +539,6 @@ fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&colorTarget;
-fragState2={};
-fragState2.module=fs;
-fragState2.entryPoint="main2";
-fragState2.numTargets=1;
-fragState2.targets=&colorTarget;
 u64_bfrSze.at(0,0)=sze.at(0,0)*sze.at(0,0)*4;
 /*   different from video.cpp
 WGpuBufferDescriptor bufferDescriptorIn={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
@@ -665,16 +651,6 @@ renderPipelineDesc.layout=wrpl.at(0,0);
 // renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
 renderPipelineDesc.multisample=multiSamp;
 wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
-  WGpuRenderPipelineDescriptor renderPipelineDesc2={WGPU_RENDER_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER};
-renderPipelineDesc2.vertex.module=vs;
-renderPipelineDesc2.vertex.entryPoint="main";
-renderPipelineDesc2.primitive=priState;
-renderPipelineDesc2.fragment=fragState2;
-renderPipelineDesc2.depthStencil=depthState;
-renderPipelineDesc2.layout=wrpl.at(0,0);
-// renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
-renderPipelineDesc.multisample=multiSamp;
-wrp.at(1,1)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc2);
 Render_Bindgroup_Entries[0]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Entries[0].binding=0;
 Render_Bindgroup_Entries[0].resource=wb.at(0,0);
