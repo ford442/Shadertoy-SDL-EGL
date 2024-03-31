@@ -754,7 +754,7 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 }
 
 void WGPU_StartB(){
-emscripten_cancal_main_loop();
+emscripten_cancel_main_loop();
 WGPU_Start();
 }
 
