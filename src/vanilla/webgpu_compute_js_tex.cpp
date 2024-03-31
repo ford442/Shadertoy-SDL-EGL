@@ -69,6 +69,27 @@ pixelData=new Float32Array(imageData,0,imageData.size);
 FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
 }
+  
+let codeMessage=new BroadcastChannel('codeMessage');
+codeMessage.addEventListener('message',event=>{
+document.querySelector('#status').style.backgroundColor="blue";
+let flDat=event.data.data;
+var buffer = new ArrayBuffer(flDat.length*2);
+var bufferView = new Uint16Array(buffer);
+for (var i = 0; i < flDat.length; i++) {
+    bufferView[i] = flDat.charCodeAt(i);
+}
+// console.log(bufferView);
+FS.writeFile('/shader/shader.wgsl',bufferView);
+// document.querySelector('#startBtn').click();
+setTimeout(function(){
+document.querySelector('#circle').width=window.innerWidth;
+document.querySelector('#circle').height=window.innerHeight;
+document.querySelector('#di').click();
+document.querySelector('#status').style.backgroundColor="green";
+Module.ccall("startWebGPU");
+},1000);
+});
 
 function normalResStart(){
 setTimeout(function(){
