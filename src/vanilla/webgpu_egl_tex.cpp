@@ -1,12 +1,12 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
 
 char wgl_cmp_src[2000]=
-"@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
+// "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
-"@group(0)@binding(3)var textureOUT: texture_storage_2d <bgra8unorm,write>;\n"
-"@group(0)@binding(4)var resizeSampler: sampler;\n"
-"@group(0)@binding(5)var <uniform> iTime: u32;\n"
+// "@group(0)@binding(3)var textureOUT: texture_storage_2d <bgra8unorm,write>;\n"
+// "@group(0)@binding(4)var resizeSampler: sampler;\n"
+// "@group(0)@binding(5)var <uniform> iTime: u32;\n"
 "@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba32float,write>;\n"
 "@compute@workgroup_size(1,1,1)\n"
 "fn main_image(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
