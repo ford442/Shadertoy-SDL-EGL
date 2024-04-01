@@ -4,7 +4,7 @@ char wgl_cmp_src[2000]=
 // "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
 "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
-"@group(0)@binding(3)var textureOUT: texture_storage_2d <bgra8unorm,write>;\n"
+"@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
 // "@group(0)@binding(4)var resizeSampler: sampler;\n"
 // "@group(0)@binding(5)var <uniform> iTime: u32;\n"
 "@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba32float,write>;\n"
@@ -428,13 +428,13 @@ OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureView
 wtv.at(3,3)=INTextureView;
 wtv.at(4,4)=OUTTextureView;
 videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-videoTextureDescriptor.format=wtf.at(0,0);
+videoTextureDescriptor.format=wtf.at(2,2);
 videoTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
 videoTextureDescriptor.width=sze.at(0,0);
 videoTextureDescriptor.height=sze.at(0,0); // default = 1;
 videoTextureDescriptor.depthOrArrayLayers=1;
 videoTextureDescriptor.mipLevelCount=1;
-videoTextureDescriptor.sampleCount=4;
+videoTextureDescriptor.sampleCount=1;
 videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 WGPU_TEXTURE_FORMAT videoViewFormats[1]={wtf.at(0,0)};
 videoTextureDescriptor.numViewFormats=0; // &videoViewFormats[0];
@@ -633,7 +633,7 @@ Render_Bindgroup_Layout_Entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INI
 Render_Bindgroup_Layout_Entries[3].binding=6;
 Render_Bindgroup_Layout_Entries[3].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Render_Bindgroup_Layout_Entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
-Render_Bindgroup_Layout_Entries[3].layout.texture=wtbl.at(3,3);
+Render_Bindgroup_Layout_Entries[3].layout.texture=wtbl.at(1,1);
 Render_Bindgroup_Layout_Entries[4]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Layout_Entries[4].binding=2;
 Render_Bindgroup_Layout_Entries[4].visibility=WGPU_SHADER_STAGE_FRAGMENT;
