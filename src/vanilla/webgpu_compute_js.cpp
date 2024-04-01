@@ -37,8 +37,7 @@ let SiZ=window.innerHeight;
 vvi.height=SiZ;
 let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
-  
-let tstSiZ=h$;
+let tstSiZ=720;
 if(running==0){
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 setTimeout(function(){
@@ -50,23 +49,23 @@ running=1;
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
-cnv.height=SiZ;
+cnv.height=tstSiZ;
 cnvb.height=SiZ;
-cnv.width=SiZ;
+cnv.width=tstSiZ;
 cnvb.width=SiZ;
 var ratio=SiZ/h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
-gl2.drawImage(vvi,offS,0,SiZ,SiZ,0,0,SiZ,SiZ);
-let image=gl2.getImageData(0,0,SiZ,SiZ);
+gl2.drawImage(vvi,offS,0,tstSiZ,tstSiZ,0,0,tstSiZ,tstSiZ);
+let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // let mageData=flipImageData(image);
 let imageData=image.data;
 let pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
-gl2.drawImage(vvi,offS,0,SiZ,SiZ,0,0,SiZ,SiZ);
-image=gl2.getImageData(0,0,SiZ,SiZ);
+gl2.drawImage(vvi,offS,0,tstSiZ,tstSiZ,0,0,tstSiZ,tstSiZ);
+image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 imageData=image.data;
 // pixelData=new Uint8ClampedArray(imageData,0,imageData.size);
 pixelData=new Float32Array(imageData,0,imageData.size);
