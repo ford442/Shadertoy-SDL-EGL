@@ -56,7 +56,7 @@ cnvb.width=SiZ;
 var ratio=SiZ/h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
+const gl2=cnv.getContext('2d',{colorType:'float64',willReadFrequently:false,alpha:true}); // 
 gl2.drawImage(vvi,offS,0,tstSiZ,tstSiZ,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // let mageData=flipImageData(image);
@@ -68,7 +68,7 @@ gl2.drawImage(vvi,offS,0,tstSiZ,tstSiZ,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 imageData=image.data;
 // pixelData=new Uint8ClampedArray(imageData,0,imageData.size);
-pixelData=new Float32Array(imageData,0,imageData.size);
+pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
 }
