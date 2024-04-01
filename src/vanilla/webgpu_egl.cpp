@@ -179,7 +179,7 @@ inline char wgl_cmp_src[2000]=
 "@group(0)@binding(1)var<storage,read_write>outputBuffer:array<f32,64>;"
 "@group(0)@binding(2)var textureA:texture_storage_2d<r32float,write>;"
 // "@group(0)@binding(3)var<storage,read_write>vertexBuffer:array<u32,64>;"
-"@compute@workgroup_size(4,1,64)"
+"@compute@workgroup_size(1,1,1)"
 "fn computeStuff(@builtin(global_invocation_id)global_id:vec3<u32>){"
 "let index : u32=global_id.x;"
 "let arrayLength: u32=64;"
@@ -527,7 +527,7 @@ wrpd.at(0,0)=passDesc;
 passDesc2.numColorAttachments=0;
 passDesc2.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(1,1)=passDesc2;
-      // Compute Pass
+  /*      // Compute Pass
 WGPU_Texture.at(0,0,0)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,1)=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Input_Image.texture=WGPU_Texture.at(0,0,0);
@@ -564,7 +564,8 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 // wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
 //wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),mapCallbackStart,&WGPU_UserData.at(0,0,0),mode1,0,OutputBufferBytes);
 // }
-  // Render pass A (color)
+
+*/  // Render pass A (color)
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
@@ -582,7 +583,7 @@ wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
 wceA={};
-  // Render pass B (depth)
+/*  // Render pass B (depth)
 wceB=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(1,1)=wceB;
 wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
@@ -597,6 +598,7 @@ wgpu_render_pass_encoder_end(wrpe.at(1,1));
 wcb.at(1,1)=wgpu_command_encoder_finish(wce.at(1,1));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(1,1));
 wceB={};
+*/
 return EM_TRUE;
 };
 
