@@ -60,7 +60,7 @@ vanilla_test_emjs:
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","cwrap"]' -sEXPORTED_FUNCTIONS=["_main","_emjs","_cfunc"]
 
 b3_compute_egl_tex:
-	 em++ src/vanilla/webgpu_egl_tex.cpp -mextended-const -mbulk-memory -matomics -openmp-simd -pthread -O1 -fchar8_t -std=c++14 $(wGL_FLAGS) \
+	 em++ src/vanilla/webgpu_egl_tex.cpp -mextended-const -mbulk-memory -matomics -pthread -O1 -fchar8_t -std=c++14 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O1 -mextended-const -mbulk-memory -matomics -openmp-simd -pthread --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-egl-tex.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=1 \
