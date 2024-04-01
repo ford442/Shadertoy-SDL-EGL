@@ -64,7 +64,7 @@ b3_compute_egl_tex:
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O1 -mextended-const -mbulk-memory -matomics -openmp-simd -pthread --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-egl-tex.js \
 	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=1 \
-	 -fwhole-program-vtables -polly \
+	 -fwhole-program-vtables -polly -march=native -mtune=wasm32 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb -lmath.js -lhtml5.js -lint53.js \
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS='["startWebGPU","_startWebGPUb"]' -sTEXTDECODER=0 \
