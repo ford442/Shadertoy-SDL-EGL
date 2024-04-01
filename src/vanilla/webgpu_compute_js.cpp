@@ -1,4 +1,3 @@
-
 EM_JS(void,js_main,(),{
 
 FS.mkdir('/shader');
@@ -49,7 +48,7 @@ let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
 cnv.height=h$;
 cnvb.height=SiZ;
-cnv.width=h$;
+cnv.width=w$;
 cnvb.width=SiZ;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
