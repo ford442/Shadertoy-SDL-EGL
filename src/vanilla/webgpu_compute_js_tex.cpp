@@ -87,7 +87,7 @@ document.querySelector('#circle').width=window.innerWidth;
 document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#di').click();
 document.querySelector('#status').style.backgroundColor="green";
-Module.ccall("startWebGPU");
+Module.ccall("startWebGPUb");
 },1000);
 });
 
@@ -104,7 +104,7 @@ document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
 // videoFrames();
-Module.ccall("startWebGPUb");
+Module.ccall("startWebGPU");
 },1500);
 document.querySelector('#status').style.backgroundColor="green";
 }
