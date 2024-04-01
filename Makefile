@@ -226,9 +226,9 @@ b3_compute_test_2:
 	 webgpu_compute_test3.o 
 
 b3_compute_egl_tex:
-	 em++ src/vanilla/webgpu_egl_tex.cpp -O0 -mbulk-memory -matomics -fchar8_t -std=c++14 $(wGL_FLAGS) \
+	 em++ src/vanilla/webgpu_egl_tex.cpp -O0 -fchar8_t -std=c++14 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -O0 -dead_strip -mbulk-memory -matomics -openmp-simd -pthread --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-egl-tex.js \
+	 em++ -O0 -dead_strip -openmp-simd --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-egl-tex.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(GL_FLAGS) -sASSERTIONS=1 \
 	 -fwhole-program-vtables -polly \
 	 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=1400mb -lmath.js -lhtml5.js -lint53.js \
