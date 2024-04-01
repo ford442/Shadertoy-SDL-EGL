@@ -314,7 +314,7 @@ textureViewDescriptorIn.baseMipLevel=0; // default = 0
 textureViewDescriptorIn.mipLevelCount=1;
 textureViewDescriptorIn.baseArrayLayer=0; // default = 0
 textureViewDescriptorIn.arrayLayerCount=1;
-textureViewDescriptorOut.format=wtf.at(0,0);
+textureViewDescriptorOut.format=wtf.at(2,2);
 textureViewDescriptorOut.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureViewDescriptorOut.aspect=WGPU_TEXTURE_ASPECT_ALL;
 textureViewDescriptorOut.baseMipLevel=0; // default = 0
