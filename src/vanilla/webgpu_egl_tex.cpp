@@ -243,7 +243,7 @@ config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 // config.numViewFormats=1;
 config.viewFormats=&canvasViewFormat[0];
 config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
-config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
+// config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 wccf.at(0,0)=config;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
