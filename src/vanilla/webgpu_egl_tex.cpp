@@ -292,7 +292,7 @@ WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
 textureDescriptorIn.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorIn.format=wtf.at(2,2);
-textureDescriptorIn.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST;
+textureDescriptorIn.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC|WGPU_TEXTURE_USAGE_COPY_DST;
 textureDescriptorIn.width=sze.at(1,1);
 textureDescriptorIn.height=sze.at(1,1); // default = 1;
 textureDescriptorIn.depthOrArrayLayers=1;
