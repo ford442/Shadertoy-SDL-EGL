@@ -9,7 +9,7 @@ char wgl_cmp_src[2000]=
 "@group(0)@binding(5)var <uniform> iTime: u32;\n"
 "@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@compute@workgroup_size(8,1,8)\n"
-"fn mainImage(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
+"fn main_image(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "var outSizeU:u32=textureDimensions(textureOUT).x;\n"
 "var inSizeU:u32=textureDimensions(textureIN).x;\n"
 "var sizeRatio:f32=f32(inSizeU)/f32(outSizeU);\n"
