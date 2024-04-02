@@ -173,7 +173,7 @@ passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0); // ,&wrpca.at(1,1);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 passDesc.occlusionQuerySet=0;
-passDesc.maxDrawCount=1000;
+passDesc.maxDrawCount=100;
 wrpd.at(0,0)=passDesc;
 /*       //  Frame Data
 std::ifstream fram(Fnm2,std::ios::binary);
