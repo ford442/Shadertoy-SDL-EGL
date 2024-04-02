@@ -28,7 +28,7 @@ char wgl_cmp_src[2000]=
 
 #include "../../src/vanilla/webgpu_compute_vars.cpp"
 
-inline int rNd4(int randomMax){
+int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;
@@ -75,7 +75,7 @@ const char * frag_body=
 "return textureSample(myTexture,mySampler,fragUV);"
 "}\n";
 
-const inline char * rd_fl(const char * Fnm){
+const char * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result,results,file);
 if(file){
