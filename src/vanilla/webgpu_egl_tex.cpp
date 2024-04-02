@@ -8,6 +8,7 @@ char wgl_cmp_src[2000]=
 // "@group(0)@binding(4)var resizeSampler: sampler;\n"
 // "@group(0)@binding(5)var <uniform> iTime: u32;\n"
 "@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba32float,write>;\n"
+"@group(0)@binding(6)var colorOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@compute@workgroup_size(1,1,1)\n"
 "fn main_image(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "var outSizeU:u32=textureDimensions(videoOUT).x;\n"
@@ -179,6 +180,8 @@ passDesc={};
 passDesc.numColorAttachments=2;
 passDesc.colorAttachments=&wrpca.at(0,0),&wrpca.at(1,1);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
+// passDesc.occlusionQuerySet=
+// passDesc.maxDrawCount=
 wrpd.at(0,0)=passDesc;
 
 /*       //  Frame Data
@@ -527,8 +530,14 @@ Compute_Bindgroup_Entries[5].bufferBindSize=sizeof(uint64_t);
 Compute_Bindgroup_Entries[6]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Compute_Bindgroup_Entries[6].binding=6;
 Compute_Bindgroup_Entries[6].resource=wtv.at(2,2); 
+  Compute_Bindgroup_Entries[7]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
+Compute_Bindgroup_Entries[7].binding=7;
+Compute_Bindgroup_Entries[7].resource=wtv.at(1,1); 
 WGPU_BindGroupEntries.at(0,0,0)=Compute_Bindgroup_Entries;
 WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),7);
+WGpuComputePassTimestampWrites computePassTimestampWrites={};
+computePassTimestampWrites.querySet=0;
+computePassDescriptor.timestampWrites=computePassTimestampWrites;
 WGPU_ComputePassDescriptor.at(0,0,0)=computePassDescriptor;
 WGPU_Queue.at(0,0,0)=wgpu_device_get_queue(wd.at(0,0));
 multiSamp={};
@@ -732,7 +741,7 @@ depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
 wt.at(0,0)=depthTexture;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 colorTextureDescriptor.format=wtf.at(0,0);
-colorTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
+colorTextureDescriptor.usage=WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 colorTextureDescriptor.width=sze.at(0,0);
 colorTextureDescriptor.height=sze.at(0,0); // default = 1;
 colorTextureDescriptor.depthOrArrayLayers=1;
