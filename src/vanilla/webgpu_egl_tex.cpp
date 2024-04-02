@@ -133,6 +133,7 @@ u64_uni.at(1,1)=u_time.time_spanb.count()*1000;
 // u64_uni.at(2,2)=u_time.time_spanb.count()/1.0f;
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
 colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
+videoAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
 colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
 wt.at(1,1)=colorTexture;
 colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
@@ -146,6 +147,20 @@ colorAttachment.clearValue.g=1.0f;
 colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
 wrpca.at(0,0)=colorAttachment;
+
+videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
+wtv.at(2,2)=videoTextureView;
+
+videoAttachment.view=wtv.at(2,2);
+videoAttachment.storeOp=WGPU_STORE_OP_STORE;
+// videoAttachment.loadOp=WGPU_LOAD_OP_LOAD;
+videoAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
+videoAttachment.clearValue.r=1.0f;
+videoAttachment.clearValue.g=1.0f;
+videoAttachment.clearValue.b=1.0f;
+videoAttachment.clearValue.a=1.0f;
+wrpca.at(1,1)=videoAttachment;
+  
 depthAttachment={};
 depthTextureView=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
 wtv.at(0,0)=depthTextureView;
@@ -162,12 +177,11 @@ depthAttachment.stencilLoadOp=WGPU_LOAD_OP_CLEAR;
 depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE;
 wrpdsa.at(0,0)=depthAttachment;
 passDesc={};
-passDesc.numColorAttachments=1;
-passDesc.colorAttachments=&wrpca.at(0,0);
+passDesc.numColorAttachments=2;
+passDesc.colorAttachments={&wrpca.at(0,0),&wrpca.at(1,1)};
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
-videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
-wtv.at(2,2)=videoTextureView;
+
 /*       //  Frame Data
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
