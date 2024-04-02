@@ -320,11 +320,15 @@ uint32_t outP;
 double_int53_t WGPU_Range_PointerB;
 double_int53_t WGPU_Range_PointerC;
 
-struct Vertex{
+struct VertexF{
 // GLfloat position[4];
 float position[4];
 };
 
+struct VertexU{
+uint32_t position[4];
+};
+/*
 Vertex nvertices[]={
 {1.0f,1.0f,0.0f,1.0f},
 {-1.0f,1.0f,0.0f,1.0f},
@@ -344,8 +348,8 @@ Vertex lvertices[]={
 {1.0f,1.0f,-1.0f,1.0f},
 {-1.0f,1.0f,1.0f,1.0f}
 };
-
-Vertex vertices[]={
+*/
+VertexF Fvertices[]={
 {-1.0,-1.0,1.0,1.0},
 {1.0,-1.0,1.0,1.0},
 {1.0,1.0,1.0,1.0},
@@ -354,6 +358,17 @@ Vertex vertices[]={
 {1.0,-1.0,-1.0,1.0},
 {1.0,1.0,-1.0,1.0},
 {-1.0,1.0,1.0,1.0}
+};
+
+VertexU Uvertices[]={
+{-1,-1,1,1},
+{1,-1,1,1},
+{1,1,1,1},
+{-1,1,1,1},
+{-1,-1,-1,1},
+{1,-1,-1,1},
+{1,1,-1,1},
+{-1,1,1,1}
 };
 
 uint32_t indices[35]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
@@ -545,13 +560,13 @@ wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
  // wgpu_buffer_unmap(WGPU_Buffers.at(1,0,1));
 //  WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,3));
 // wgpu_object_destroy(WGPU_Buffers.at(2,0,2));
-// wgpu_command_encoder_copy_buffer_to_buffer(WGPU_ComputePassCommandEncoder.at(0,0,0),wb.at(3,3),0,WGPU_Buffers.at(1,1,1),0,sizeof(vertices));
+// wgpu_command_encoder_copy_buffer_to_buffer(WGPU_ComputePassCommandEncoder.at(0,0,0),wb.at(3,3),0,WGPU_Buffers.at(1,1,1),0,sizeof(Uvertices));
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Output_Image,64,1,1);
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image,&WGPU_Mapped_Buffer,64,1,1);
 // wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image,&wb.at(3,3),1,64,1);
-// wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),wb.at(3,3),0,WGPU_ResultBuffer.at(0,0,0),sizeof(vertices));
+// wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),wb.at(3,3),0,WGPU_ResultBuffer.at(0,0,0),sizeof(Uvertices));
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
 WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 if(WGPU_BufferStatus.at(0,0,0)!=1){
@@ -575,7 +590,7 @@ wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(1,1),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_uni.at(2,2),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
-wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(3,3),0,sizeof(vertices));
+wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(3,3),0,sizeof(Uvertices));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0f,0.0f,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_set_scissor_rect(wrpe.at(0,0),0.0f,0.0f,sze.at(0,0),sze.at(0,0));
 wgpu_render_pass_encoder_draw_indexed(wrpe.at(0,0),36,1,0,0,0);
@@ -590,7 +605,7 @@ wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
 wgpu_render_pass_encoder_set_index_buffer(wrpe.at(1,1),wb.at(4,4),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
-wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(1,1),0,wb.at(3,3),0,sizeof(vertices));
+wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(1,1),0,wb.at(3,3),0,sizeof(Uvertices));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0f,0.0f,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_set_scissor_rect(wrpe.at(1,1),0.0f,0.0f,sze.at(0,0),sze.at(0,0));
 wgpu_render_pass_encoder_draw_indexed(wrpe.at(1,1),36,1,0,0,0);
@@ -779,7 +794,7 @@ vs=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(0,0));
 wsm.at(0,0)=vs;
 fs=wgpu_device_create_shader_module(wd.at(0,0),&wsmd.at(1,1));
 wsm.at(1,1)=fs;
-bufferDescriptor_vertex.size=sizeof(vertices);
+bufferDescriptor_vertex.size=sizeof(Uvertices);
 bufferDescriptor_vertex.usage=WGPU_BUFFER_USAGE_VERTEX|WGPU_BUFFER_USAGE_COPY_DST;
 bufferDescriptor_vertex.mappedAtCreation=EM_FALSE;
 wbd.at(3,3)=bufferDescriptor_vertex;
@@ -795,7 +810,7 @@ vertBufLayout.stepMode=WGPU_VERTEX_STEP_MODE_VERTEX;
 wvbl.at(0,0)=vertBufLayout;
 bufferBindingLayoutV.type=WGPU_BUFFER_BINDING_TYPE_STORAGE;
 bufferBindingLayoutV.hasDynamicOffset=0,
-bufferBindingLayoutV.minBindingSize=sizeof(vertices);
+bufferBindingLayoutV.minBindingSize=sizeof(Uvertices);
 wbbl.at(1,1)=bufferBindingLayoutV;
 vertex_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 wb.at(3,3)=vertex_Buffer;
@@ -1054,8 +1069,8 @@ wbge.at(0,0)=bindgroup_entries;
 // renderBundleEncoder=wgpu_device_create_render_bundle_encoder(wd.at(0,0),&wrbed.at(0,0));
 // wrbe.at(0,0)=renderBundleEncoder;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,vertices,sizeof(vertices));
-wgpu_queue_write_buffer(wq.at(0,0),WGPU_Buffers.at(1,1,1),0,vertices,sizeof(vertices));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(3,3),0,Uvertices,sizeof(Uvertices));
+wgpu_queue_write_buffer(wq.at(0,0),WGPU_Buffers.at(1,1,1),0,Uvertices,sizeof(Uvertices));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(4,4),0,indices,36*sizeof(uint32_t));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
