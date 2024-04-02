@@ -18,7 +18,7 @@ char wgl_cmp_src[2000]=
 "var xPos:u32=u32(round(f32(x)*sizeRatio));\n"
 "for(var y:u32=0u;y<=outSizeU;y=y+1u){\n"
 "var yPos:u32=u32(round(f32(y)*sizeRatio));\n"
-"var INtexCoord:vec2<u32>=vec2<u32>(xPos,yPos);\n"
+"var INtexCoord:vec2<u32>=vec2<u32>(x,y);\n"
 "var color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
 "textureStore(videoOUT,vec2<u32>(x,y),color);\n"
 "}\n"
