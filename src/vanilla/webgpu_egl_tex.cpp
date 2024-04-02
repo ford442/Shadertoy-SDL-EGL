@@ -821,8 +821,8 @@ void startWebGPU(int sz){
 WGPU_Start(sz);
 }
 
-void startWebGPUb(){
-WGPU_Start();
+void startWebGPUb(int sz){
+WGPU_Start(sz);
 }
 
 }
