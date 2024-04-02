@@ -452,32 +452,40 @@ WGPU_Compute_Bindgroup_Layout_Entries.at(0,0,0)=Compute_Bindgroup_Layout_Entries
 WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(wd.at(0,0),WGPU_Compute_Bindgroup_Layout_Entries.at(0,0,0),7);
 WGPU_ComputePipelineLayout.at(0,0,0)=wgpu_device_create_pipeline_layout(wd.at(0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
 WGPU_ComputePipeline.at(0,0,0)=wgpu_device_create_compute_pipeline(wd.at(0,0),WGPU_ComputeModule.at(0,0,0),Entry,WGPU_ComputePipelineLayout.at(0,0,0),NULL,0);
+      //  Input Buffer
 Compute_Bindgroup_Entries[0]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Compute_Bindgroup_Entries[0].binding=0;
 Compute_Bindgroup_Entries[0].resource=WGPU_Buffers.at(1,1,1);
 Compute_Bindgroup_Entries[0].bufferBindOffset=0;
 Compute_Bindgroup_Entries[0].bufferBindSize=InputBufferBytes;
+        //  Output Buffer
 Compute_Bindgroup_Entries[1]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Compute_Bindgroup_Entries[1].binding=1;
 Compute_Bindgroup_Entries[1].resource=WGPU_Buffers.at(0,0,0);
 Compute_Bindgroup_Entries[1].bufferBindOffset=0;
 Compute_Bindgroup_Entries[1].bufferBindSize=OutputBufferBytes;
+          //  Input Texture
 Compute_Bindgroup_Entries[2]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Compute_Bindgroup_Entries[2].binding=2;
 Compute_Bindgroup_Entries[2].resource=wtv.at(3,3);
+          //  Output Texture
 Compute_Bindgroup_Entries[3]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Compute_Bindgroup_Entries[3].binding=3;
 Compute_Bindgroup_Entries[3].resource=wtv.at(4,4);
+            //  Compute Sampler
 Compute_Bindgroup_Entries[4]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Compute_Bindgroup_Entries[4].binding=4;
 Compute_Bindgroup_Entries[4].resource=wsmp.at(3,3);
+            //  Time Uniform
 Compute_Bindgroup_Entries[5].binding=5;
 Compute_Bindgroup_Entries[5].resource=wb.at(0,0);
 Compute_Bindgroup_Entries[5].bufferBindOffset=0;
 Compute_Bindgroup_Entries[5].bufferBindSize=sizeof(uint64_t);
+            //  Video Texture
 Compute_Bindgroup_Entries[6]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Compute_Bindgroup_Entries[6].binding=6;
 Compute_Bindgroup_Entries[6].resource=wtv.at(2,2); 
+            //  Color Attachment Texture
 // Compute_Bindgroup_Entries[7]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 // Compute_Bindgroup_Entries[7].binding=7;
 // Compute_Bindgroup_Entries[7].resource=wtv.at(1,1); 
