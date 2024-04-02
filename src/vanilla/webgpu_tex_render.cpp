@@ -4,8 +4,10 @@ char wgl_cmp_src[2000]=
 // "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
 // "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
-// "@group(0)@binding(5)var <uniform> iTime: u32;\n"
-"@group(0)@binding(3)var videoOUT: texture_storage_2d <rgba32float,write>;\n"
+// "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba32float,write>;\n"
+// /"@group(0)@binding(4)var resizeSampler: sampler;\n"
+"@group(0)@binding(5)var <uniform> iTime: u32;\n"
+"@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba32float,write>;\n"
 // "@group(0)@binding(7)var colorOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@compute@workgroup_size(1,1,1)\n"
 "fn main_image(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
@@ -416,34 +418,42 @@ videoTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(2,2)=videoTextureViewDescriptor;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
+      //  Input Buffer
 Compute_Bindgroup_Layout_Entries[0].binding=0;
 Compute_Bindgroup_Layout_Entries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[0].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 Compute_Bindgroup_Layout_Entries[0].layout.buffer=WGPU_BufferBindingLayout.at(0,0,1);
+        //  Output Buffer
 Compute_Bindgroup_Layout_Entries[1].binding=1;
 Compute_Bindgroup_Layout_Entries[1].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[1].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 Compute_Bindgroup_Layout_Entries[1].layout.buffer=WGPU_BufferBindingLayout.at(0,0,2);
+          //  Input Texture
 Compute_Bindgroup_Layout_Entries[2].binding=2;
 Compute_Bindgroup_Layout_Entries[2].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
 Compute_Bindgroup_Layout_Entries[2].layout.texture=wtbl.at(1,1);
+          //  Output Texture
 Compute_Bindgroup_Layout_Entries[3].binding=3;
 Compute_Bindgroup_Layout_Entries[3].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_STORAGE_TEXTURE;
 Compute_Bindgroup_Layout_Entries[3].layout.storageTexture=WGPU_StorageTextureBindingLayout.at(1,1,1);
+            //  Compute Sampler
 Compute_Bindgroup_Layout_Entries[4].binding=4;
 Compute_Bindgroup_Layout_Entries[4].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[4].type=WGPU_BIND_GROUP_LAYOUT_TYPE_SAMPLER;
 Compute_Bindgroup_Layout_Entries[4].layout.sampler=wsbl.at(0,0);
+            //  Time Uniform
 Compute_Bindgroup_Layout_Entries[5].binding=5;
 Compute_Bindgroup_Layout_Entries[5].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[5].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 Compute_Bindgroup_Layout_Entries[5].layout.buffer=wbbl.at(0,0);
+            //  Video Texture
 Compute_Bindgroup_Layout_Entries[6].binding=6;
 Compute_Bindgroup_Layout_Entries[6].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[6].type=WGPU_BIND_GROUP_LAYOUT_TYPE_STORAGE_TEXTURE;
 Compute_Bindgroup_Layout_Entries[6].layout.storageTexture=WGPU_StorageTextureBindingLayout.at(1,1,1);
+            //  Color Attachment Texture
 // Compute_Bindgroup_Layout_Entries[7].binding=7;
 // Compute_Bindgroup_Layout_Entries[7].visibility=WGPU_SHADER_STAGE_COMPUTE;
 // Compute_Bindgroup_Layout_Entries[7].type=WGPU_BIND_GROUP_LAYOUT_TYPE_STORAGE_TEXTURE;
