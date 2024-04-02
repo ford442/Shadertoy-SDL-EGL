@@ -180,7 +180,7 @@ passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0); // ,&wrpca.at(1,1);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
-// passDesc.occlusionQuerySet=0;
+passDesc.occlusionQuerySet=0;
 passDesc.maxDrawCount=10;
 wrpd.at(0,0)=passDesc;
 /*       //  Frame Data
