@@ -60,7 +60,7 @@ vanilla_test_emjs:
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","cwrap"]' -sEXPORTED_FUNCTIONS=["_main","_emjs","_cfunc"]
 
 b3_compute_egl_tex:
-	 em++ src/vanilla/webgpu_tex_render.cpp -mextended-const -mbulk-memory -matomics -pthread -O1 -fchar8_t -std=c++14 $(wGL_FLAGS) \
+	 em++ src/vanilla/webgpu_egl_tex.cpp -mextended-const -mbulk-memory -matomics -pthread -O1 -fchar8_t -std=c++14 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O1 -mextended-const -mbulk-memory -matomics -openmp-simd -pthread --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-egl-tex.js \
 	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=1 \
@@ -71,7 +71,7 @@ b3_compute_egl_tex:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 webgpu_tex_render.o 
+	 webgpu_egl_tex.o 
 
 b3_onnx:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_onnx.cpp -fchar8_t -std=c++20 -mbulk-memory -matomics \
