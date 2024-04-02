@@ -269,7 +269,7 @@ emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
 emscripten_get_element_css_size("canvas",&szw,&szh);
 u64_siz.at(3,3)=szhI;
 sze.at(0,0)=int(szhI);
-sze.at(1,1)=int(szhI);
+// sze.at(1,1)=int(szhI);
 szef.at(0,0)=floor(float(szh));
 // sze.at(0,1)=szh;
 u64_bfrSze.at(0,0)=(floor((sze.at(0,0)*4)/256)+1)*256;
@@ -803,7 +803,8 @@ wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
 
-void WGPU_Start(){
+void WGPU_Start(int sz){
+sze.at(1,1)=sz;
 WGpuRequestAdapterOptions options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
@@ -816,8 +817,8 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 
 extern"C"{
 
-void startWebGPU(){
-WGPU_Start();
+void startWebGPU(int sz){
+WGPU_Start(sz);
 }
 
 void startWebGPUb(){
