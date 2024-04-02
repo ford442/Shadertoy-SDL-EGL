@@ -545,7 +545,7 @@ WGpuColorTargetState colorTarget={};
 colorTarget.format=wtf.at(0,0);
 colorTarget.writeMask=15;
 depthState={};
-depthState.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS;
+depthState.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT;
 depthState.depthWriteEnabled=0;
 depthState.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
 vertState={};
@@ -701,7 +701,7 @@ Render_Bindgroup_Entries[5].resource=wb.at(0,0);
 Render_Bindgroup_Entries[5].bufferBindOffset=0;
 Render_Bindgroup_Entries[5].bufferBindSize=sizeof(uint64_t);
 wbge.at(0,0)=Render_Bindgroup_Entries;
-depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH24PLUS;
+depthTextureViewDescriptor.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT;
 depthTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 depthTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 depthTextureViewDescriptor.baseMipLevel=0; // default = 0
