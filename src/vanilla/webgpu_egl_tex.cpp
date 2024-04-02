@@ -177,7 +177,7 @@ depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE;
 wrpdsa.at(0,0)=depthAttachment;
 passDesc={};
 passDesc.numColorAttachments=2;
-passDesc.colorAttachments={&wrpca.at(0,0),&wrpca.at(1,1)};
+passDesc.colorAttachments=&wrpca.at(0,0),&wrpca.at(1,1);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 wrpd.at(0,0)=passDesc;
 
