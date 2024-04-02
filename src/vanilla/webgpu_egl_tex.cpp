@@ -141,7 +141,7 @@ colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
 wtv.at(1,1)=colorTextureView;
 INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
 wtv.at(3,3)=INTextureView;
-colorAttachment.view=wtv.at(3,3); // wtv.at(1,1);
+colorAttachment.view=wtv.at(1,1);
 colorAttachment.storeOp=WGPU_STORE_OP_STORE; // WGPU_STORE_OP_DISCARD; 
 // colorAttachment.loadOp=WGPU_LOAD_OP_LOAD;
 colorAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
@@ -150,11 +150,9 @@ colorAttachment.clearValue.g=1.0f;
 colorAttachment.clearValue.b=1.0f;
 colorAttachment.clearValue.a=1.0f;
 wrpca.at(0,0)=colorAttachment;
-
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
-
-videoAttachment.view=wtv.at(2,2);
+videoAttachment.view=wtv.at(3,3);
 videoAttachment.storeOp=WGPU_STORE_OP_STORE;
 // videoAttachment.loadOp=WGPU_LOAD_OP_LOAD;
 videoAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
@@ -179,13 +177,12 @@ depthAttachment.stencilLoadOp=WGPU_LOAD_OP_LOAD;
 depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE;
 wrpdsa.at(0,0)=depthAttachment;
 passDesc={};
-passDesc.numColorAttachments=1;
-passDesc.colorAttachments=&wrpca.at(0,0); // ,&wrpca.at(1,1);
+passDesc.numColorAttachments=2;
+passDesc.colorAttachments=&wrpca.at(0,0),&wrpca.at(1,1);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 // passDesc.occlusionQuerySet=0;
 // passDesc.maxDrawCount=
 wrpd.at(0,0)=passDesc;
-
 /*       //  Frame Data
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
@@ -292,7 +289,7 @@ WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
 textureDescriptorIn.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorIn.format=wtf.at(2,2);
-textureDescriptorIn.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT; // |WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
+textureDescriptorIn.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_STORAGE_BINDING;
 textureDescriptorIn.width=sze.at(1,1);
 textureDescriptorIn.height=sze.at(1,1); // default = 1;
 textureDescriptorIn.depthOrArrayLayers=1;
@@ -579,7 +576,7 @@ fragState={};
 fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=1;
-fragState.targets=&colorTarget32;
+fragState.targets=&colorTarget;
 u64_bfrSze.at(0,0)=sze.at(0,0)*sze.at(0,0)*4;
 /*   different from video.cpp
 WGpuBufferDescriptor bufferDescriptorIn={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
