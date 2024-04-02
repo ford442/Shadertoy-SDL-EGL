@@ -817,11 +817,11 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 
 extern"C"{
 
-void startWebGPU(int sz){
+void startWebGPUi(int sz){
 WGPU_Start(sz);
 }
 
-void startWebGPUb(int sz){
+void startWebGPUbi(int sz){
 WGPU_Start(sz);
 }
 
