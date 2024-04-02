@@ -364,7 +364,7 @@ VertexI Ivertices[]={
 
 uint32_t indices[35]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 
-inline int rNd4(int randomMax){
+int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;
@@ -405,7 +405,7 @@ wgpu_buffer_unmap(WGPU_Buffers.at(2,0,2));
 return;
 };
 
-const inline char * rd_fl(const char * Fnm){
+const char * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result,results,file);
 if(file){
@@ -432,7 +432,7 @@ return results;
 return nullptr;
 }
 
-const inline char8_t * rd_fl_32(const char * Fnm){
+const char8_t * rd_fl_32(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result32,results32,file);
 if(file){
@@ -465,7 +465,7 @@ wgsl.at(0,0)=frag_body;
 return;
 }
 
-inline boost::function<EM_BOOL()>render=[](){
+boost::function<EM_BOOL()>render=[](){
 // void raf(){
 /*
 if(ms_l==true){
