@@ -7,7 +7,7 @@ char wgl_cmp_src[2000]=
 // "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba32float,write>;\n"
 // "@group(0)@binding(4)var resizeSampler: sampler;\n"
 // "@group(0)@binding(5)var <uniform> iTime: u32;\n"
-"@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba32float,write>;\n"
+"@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba16float,write>;\n"
 // "@group(0)@binding(7)var colorOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@compute@workgroup_size(1,1,1)\n"
 "fn main_image(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
@@ -108,14 +108,6 @@ return;
 }
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-return;
-};
-
-WGpuBufferMapCallback mapCallbackRun=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
-return;
-};
-
-WGpuBufferMapCallback mapCallbackRun2=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 return;
 };
 
@@ -248,7 +240,8 @@ fjs_data_pointer.at(0,0)=0;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 const char * frag_body=(char*)rd_fl(Fnm);
 WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
-wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
+// wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
+wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_BGRA8UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
