@@ -745,8 +745,9 @@ renderPipelineDesc.depthStencil=depthState;
 renderPipelineDesc.layout=wrpl.at(0,0);
 // renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
 renderPipelineDesc.multisample=multiSamp;
-
-  renderPipelineDesc2.vertex.module=vs;
+  
+WGpuRenderPipelineDescriptor renderPipelineDesc2={WGPU_RENDER_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER};
+renderPipelineDesc2.vertex.module=vs;
 renderPipelineDesc2.vertex.entryPoint="main";
 renderPipelineDesc2.primitive=priState;
 renderPipelineDesc2.fragment=fragState;
