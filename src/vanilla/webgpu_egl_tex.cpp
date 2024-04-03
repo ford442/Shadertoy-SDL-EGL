@@ -36,6 +36,19 @@ randomNumber=std::rand()%randomMax;
 return randomNumber;
 }
 
+const char * fragBody2 = R"delimiter(
+  //   //
+@group(0) @binding(0) var mySampler : sampler;
+@group(0) @binding(2) var myTexture : texture_2d <f32>;
+@fragment
+fn main(@location(0) fragUV : vec2<f32>) ->
+// fn main(@location(0) fragUV : vec2<i32>) ->
+@location(0) vec4<f32> {
+return textureSample(myTexture,mySampler,fragUV);
+}
+  //   //
+)delimiter";
+
 const char * vertexShader=
 "struct VertexOutput{\n"
 "@builtin(position) Position : vec4<f32>,\n"
@@ -125,6 +138,7 @@ u64_uni.at(0,0)=u_time.time_spana.count()*1000;
 u64_uni.at(1,1)=u_time.time_spanb.count()*1000;
 // u64_uni.at(2,2)=u_time.time_spanb.count()/1.0f;
 wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
+wce.at(1,1)=wgpu_device_create_command_encoder(wd.at(0,0),0);
 colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
 videoAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
 colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
@@ -173,8 +187,15 @@ passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(0,0); // ,&wrpca.at(1,1);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 passDesc.occlusionQuerySet=0;
-passDesc.maxDrawCount=100;
+// passDesc.maxDrawCount=100;
 wrpd.at(0,0)=passDesc;
+passDesc2={};
+passDesc2.numColorAttachments=1;
+passDesc2.colorAttachments=&wrpca.at(0,0); // ,&wrpca.at(1,1);
+passDesc2.depthStencilAttachment=wrpdsa.at(0,0);
+passDesc2.occlusionQuerySet=0;
+// passDesc2.maxDrawCount=100;
+wrpd.at(1,1)=passDesc2;
 /*       //  Frame Data
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
@@ -193,6 +214,15 @@ wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
+      //  Render Pass 2  (sampler)
+wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
+wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
+wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
+wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
+wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
+wgpu_render_pass_encoder_end(wrpe.at(1,1));
+wcb.at(1,1)=wgpu_command_encoder_finish(wce.at(1,1));
+wgpu_queue_submit_one_and_destroy(wq.at(1,1),wcb.at(1,1));
   // Compute Pass
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
@@ -563,11 +593,14 @@ multiSamp.count=1;
 multiSamp.mask=-1;
 shaderModuleDescV={};
 shaderModuleDescF={};
+shaderModuleDescF2={};
 shaderModuleDescV.code=vertexShader;
 vs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescV);
 shaderModuleDescF.code=frag_body;
+shaderModuleDescF2.code=frag_body2;
 // shaderModuleDescF.code=fragmentShader;
 fs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescF);
+fs2=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescF);
 WGpuColorTargetState colorTarget32={};
 colorTarget32.format=wtf.at(2,2); // wtf.at(0,0);
 colorTarget32.writeMask=15;
@@ -596,6 +629,13 @@ fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&colorTarget;
+
+fragState2={};
+fragState2.module=fs2;
+fragState2.entryPoint="main";
+fragState2.numTargets=1;
+fragState2.targets=&colorTarget;
+  
 // u64_bfrSze.at(0,0)=sze.at(0,0)*sze.at(0,0)*4;
 /*   different from video.cpp
 WGpuBufferDescriptor bufferDescriptorIn={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,false};
@@ -716,6 +756,7 @@ renderPipelineDesc2.layout=wrpl.at(0,0);
 renderPipelineDesc2.multisample=multiSamp;
   
 wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
+wrp.at(1,1)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc2);
 Render_Bindgroup_Entries[0]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Entries[0].binding=0;
 Render_Bindgroup_Entries[0].resource=wsmp.at(0,0);
@@ -781,6 +822,7 @@ colorTextureDescriptor.sampleCount=1;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 wtd.at(1,1)=colorTextureDescriptor;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
+wq.at(1,1)=wgpu_device_get_queue(wd.at(0,0));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),6);
