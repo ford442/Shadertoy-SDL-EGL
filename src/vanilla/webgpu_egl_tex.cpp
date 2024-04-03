@@ -40,6 +40,9 @@ const char * frag_body2 = R"delimiter(
   //   //
 @group(0) @binding(0) var mySampler : sampler;
 @group(0) @binding(2) var myTexture : texture_2d <f32>;
+var<private> gl_FragCoord : vec4<f32>;
+var<private> iPosition : vec4<f32>;
+var<private> fragColor_1 : vec4<f32>;
 struct main_out {
 @location(0)
 fragColor_1_1 : vec4<f32>,
@@ -53,8 +56,9 @@ fn main(@builtin(position) gl_FragCoord_param : vec4<f32>) -> main_out {
 // @location(0) vec4<f32> {
 // return textureSample(myTexture,mySampler,fragUV);
 var tstclr:vec4<f32>=(0.0,0.33,0.23,1.0);
-// return textureSample(myTexture,mySampler,fragUV);
-return tstclr;
+// fragColor_1=textureSample(myTexture,mySampler,fragUV);
+// return main_out(fragColor_1, iPosition);
+return main_out(tstclr, iPosition);
 }
   //   //
 )delimiter";
