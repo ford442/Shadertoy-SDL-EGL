@@ -44,7 +44,10 @@ const char * frag_body2 = R"delimiter(
 fn main(@location(0) fragUV : vec2<f32>) ->
 // fn main(@location(0) fragUV : vec2<i32>) ->
 @location(0) vec4<f32> {
-return textureSample(myTexture,mySampler,fragUV);
+// return textureSample(myTexture,mySampler,fragUV);
+var tstclr:vec4<f32>=(0.0,0.33,0.23,1.0);
+// return textureSample(myTexture,mySampler,fragUV);
+return tstclr;
 }
   //   //
 )delimiter";
