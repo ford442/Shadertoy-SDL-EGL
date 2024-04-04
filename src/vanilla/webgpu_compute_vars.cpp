@@ -19,6 +19,7 @@ WGpuTextureViewDescriptor OUTTextureViewDescriptor={};
 WGpuRenderPassColorAttachment colorAttachment;
 WGpuRenderPassColorAttachment videoAttachment;
 WGpuRenderPassDepthStencilAttachment depthAttachment;
+WGpuRenderPassDepthStencilAttachment depthAttachment2;
 WGpuTexture depthTexture;
 WGpuTexture colorTexture;
 WGpuTexture videoTexture;
