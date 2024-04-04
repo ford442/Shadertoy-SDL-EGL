@@ -493,10 +493,8 @@ bufferDescriptor_iResolution={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BU
 wbd.at(2,2)=bufferDescriptor_iResolution;
 uni_iResolution_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iResolution);
 wb.at(2,2)=uni_iResolution_Buffer;
-
-uni_iResolution_Buffer_2=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iResolution);
+uni_iResolution_Buffer_2=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iResolution_2);
 wb.at(5,5)=uni_iResolution_Buffer_2;
-  
 bufferBindingLayoutR.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayoutR.hasDynamicOffset=0,
 bufferBindingLayoutR.minBindingSize=sizeof(uint64_t);
