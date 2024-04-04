@@ -39,12 +39,12 @@ return randomNumber;
 
 const char * frag_body2 = R"delimiter(
   //   //
-@group(1)@binding(0)var videoSampler: sampler;
+@group(0)@binding(0)var videoSampler: sampler;
 // @group(0)@binding(1)var textureIN: texture_storage_2d <rgba32float,write>;
-@group(1)@binding(2)var videoOUT: texture_2d <f32>;
-@group(1)@binding(5)var<uniform> iResolution : u32;
-@group(1)@binding(6)var<uniform> iFrame : u32;
-@group(1)@binding(7)var<uniform> iTime : u32;
+@group(0)@binding(2)var videoOUT: texture_2d <f32>;
+@group(0)@binding(5)var<uniform> iResolution : u32;
+@group(0)@binding(6)var<uniform> iFrame : u32;
+@group(0)@binding(7)var<uniform> iTime : u32;
 var<private> fragColor_1 : vec4<f32>;
 var<private> gl_FragCoord : vec4<f32>;
 var<private> iMouse : vec4<f32>;
@@ -269,7 +269,7 @@ wceB=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(1,1)=wceB;
 wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
-wgpu_encoder_set_bind_group(wrpe.at(1,1),1,wbg.at(1,1),0,0);
+wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(1,1),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(5,5),0,&u64_siz.at(2,2),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0f,0.0f,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_set_scissor_rect(wrpe.at(1,1),0.0f,0.0f,sze.at(0,0),sze.at(0,0));
