@@ -990,7 +990,7 @@ lmts.maxBufferSize=1*1024*1024;
 lmts.maxColorAttachmentBytesPerSample=64;
 wgpu_adapter_or_device_get_limits(wa.at(0,0),&lmts);
   */
-// deviceDesc.requiredFeatures=ftr;
+deviceDesc.requiredFeatures=ftr;
 // deviceDesc.requiredLimits=lmts;
   
 wdd.at(0,0)=deviceDesc;
