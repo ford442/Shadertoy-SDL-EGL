@@ -65,6 +65,7 @@ b3_compute_egl_tex:
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O1 -mextended-const -mbulk-memory -matomics -openmp-simd -pthread --js-library lib/lib_webgpu.js \
 	 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-egl-tex.js \
+	 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sABORTING_MALLOC=0 -sMALLOC=emmalloc \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
 	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=1 \
 	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -march=native -mtune=wasm32 \
