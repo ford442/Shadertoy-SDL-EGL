@@ -256,7 +256,7 @@ depthAttachment.stencilLoadOp=WGPU_LOAD_OP_LOAD;
 // depthAttachment.stencilLoadOp=WGPU_LOAD_OP_CLEAR;
 depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE;
 wrpdsa.at(0,0)=depthAttachment;
-  /*
+
 depthTextureView2=wgpu_texture_create_view(wt.at(5,5),&wtvd.at(3,3));
 wtv.at(5,5)=depthTextureView2;
 depthAttachment2.view=wtv.at(5,5);
@@ -271,11 +271,11 @@ depthAttachment2.stencilLoadOp=WGPU_LOAD_OP_LOAD;
 // depthAttachment2.stencilLoadOp=WGPU_LOAD_OP_CLEAR;
 depthAttachment2.stencilStoreOp=WGPU_STORE_OP_STORE;
 wrpdsa.at(1,1)=depthAttachment2;
-*/
+
 passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(1,1); // &wrpca.at(0,0); // 
-passDesc.depthStencilAttachment=wrpdsa.at(0,0); // wrpdsa.at(1,1);
+passDesc.depthStencilAttachment=wrpdsa.at(1,1);  //  wrpdsa.at(0,0); //
 passDesc.occlusionQuerySet=0;
 // passDesc.maxDrawCount=100;
 wrpd.at(0,0)=passDesc;
@@ -884,7 +884,7 @@ depthTextureDescriptor.viewFormats=&depthViewFormats[0];
 wtd.at(0,0)=depthTextureDescriptor;
 depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
 wt.at(0,0)=depthTexture;
-  /*
+
 depthTextureDescriptor2.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTextureDescriptor2.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 depthTextureDescriptor2.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
@@ -907,7 +907,7 @@ depthTextureViewDescriptor2.mipLevelCount=1;
 depthTextureViewDescriptor2.baseArrayLayer=0; // default = 0
 depthTextureViewDescriptor2.arrayLayerCount=1;
 wtvd.at(3,3)=depthTextureViewDescriptor2;
-*/
+
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 colorTextureDescriptor.format=wtf.at(0,0);
 colorTextureDescriptor.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
