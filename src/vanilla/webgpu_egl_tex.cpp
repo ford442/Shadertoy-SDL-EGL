@@ -242,22 +242,7 @@ std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambu
 frame_tensor.at(0,0)=data;
   // wetd.at(0,0).source=texid.at(0,0);
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
-*/ 
-  
-      //  Render Pass 2  (sampler)
-wceA={};
-wceB=wgpu_device_create_command_encoder(wd.at(0,0),0);
-wce.at(1,1)=wceB;
-wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
-wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
-wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
-wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
-wgpu_render_pass_encoder_set_scissor_rect(wrpe.at(1,1),0.0f,0.0f,sze.at(0,0),sze.at(0,0));
-wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
-wgpu_render_pass_encoder_end(wrpe.at(1,1));
-wcb.at(1,1)=wgpu_command_encoder_finish(wce.at(1,1));
-wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(1,1));
-  //  Render Pass
+*/     //  Render Pass
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
@@ -272,6 +257,19 @@ wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
+      //  Render Pass 2  (sampler)
+wceA={};
+wceB=wgpu_device_create_command_encoder(wd.at(0,0),0);
+wce.at(1,1)=wceB;
+wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
+wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
+wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
+wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
+wgpu_render_pass_encoder_set_scissor_rect(wrpe.at(1,1),0.0f,0.0f,sze.at(0,0),sze.at(0,0));
+wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
+wgpu_render_pass_encoder_end(wrpe.at(1,1));
+wcb.at(1,1)=wgpu_command_encoder_finish(wce.at(1,1));
+wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(1,1));
   // Compute Pass
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
@@ -681,12 +679,12 @@ priState.frontFace=WGPU_FRONT_FACE_CCW; // Defaults to WGPU_FRONT_FACE_CCW ('ccw
 priState.cullMode=WGPU_CULL_MODE_FRONT; // Defaults to WGPU_CULL_MODE_NONE ('none')
 priState.unclippedDepth=EM_FALSE; // defaults to EM_FALSE.
 fragState={};
-fragState.module=fs2;
+fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=1;
 fragState.targets=&colorTarget;
 fragState2={};
-fragState2.module=fs;
+fragState2.module=fs2;
 fragState2.entryPoint="main";
 fragState2.numTargets=1;
 fragState2.targets=&colorTarget;
@@ -804,11 +802,11 @@ WGpuRenderPipelineDescriptor renderPipelineDesc2={WGPU_RENDER_PIPELINE_DESCRIPTO
 renderPipelineDesc2.vertex.module=vs;
 renderPipelineDesc2.vertex.entryPoint="main";
 renderPipelineDesc2.primitive=priState;
-renderPipelineDesc2.fragment=fragState2;
-renderPipelineDesc2.depthStencil=depthState2;
+renderPipelineDesc2.fragment=fragState;
+renderPipelineDesc2.depthStencil=depthState;
 renderPipelineDesc2.layout=wrpl.at(0,0);
 // renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
-renderPipelineDesc2.multisample=multiSamp2;
+renderPipelineDesc2.multisample=multiSamp;
   
 wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
 wrp.at(1,1)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc2);
