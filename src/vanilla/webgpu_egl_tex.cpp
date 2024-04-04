@@ -105,7 +105,7 @@ fn main_1() {
   param_1 = vec2<f32>(x_36.x, x_36.y);
   mainImage_vf4_vf2_(&(param), &(param_1));
   let x_39 : vec4<f32> = param;
-  let tstcr:vec4<f32>=(0.3,0.0,0.44,1.0);
+  let tstcr:vec4<f32>=vec4<f32>(0.3,0.0,0.44,1.0);
 fragColor_1=tstcr;
 return;
 }
