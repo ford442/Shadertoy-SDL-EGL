@@ -242,6 +242,7 @@ videoAttachment.clearValue.a=1.0f;
 wrpca.at(1,1)=videoAttachment;
 depthAttachment={};
 depthAttachment2={};
+  
 depthTextureView=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
 wtv.at(0,0)=depthTextureView;
 depthAttachment.view=wtv.at(0,0);
@@ -268,6 +269,7 @@ depthAttachment2.stencilReadOnly=EM_FALSE;
 depthAttachment2.stencilLoadOp=WGPU_LOAD_OP_LOAD;
 // depthAttachment2.stencilLoadOp=WGPU_LOAD_OP_CLEAR;
 depthAttachment2.stencilStoreOp=WGPU_STORE_OP_STORE;
+wrpdsa.at(0,0)=depthAttachment;
 wrpdsa.at(1,1)=depthAttachment2;
 passDesc={};
 passDesc.numColorAttachments=1;
