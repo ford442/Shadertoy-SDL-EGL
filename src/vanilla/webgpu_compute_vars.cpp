@@ -109,7 +109,7 @@ uint64_t tme;
 
 xyz_tensor oxyz=xyz_tensor{2,2};
 xy_tensor oxy=xy_tensor{2,2};
-wtbl_tensor wtbl=wtbl_tensor{2,2};
+wtbl_tensor wtbl=wtbl_tensor{4,4};
 i_tensor on=i_tensor{3,3};
 wetd_tensor wetd=wetd_tensor{2,2};
 wet_tensor wet=wet_tensor{2,2};
