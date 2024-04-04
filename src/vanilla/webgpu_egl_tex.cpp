@@ -38,8 +38,9 @@ return randomNumber;
 
 const char * frag_body2 = R"delimiter(
   //   //
-@group(0) @binding(0) var mySampler : sampler;
-@group(0) @binding(2) var myTexture : texture_2d <f32>;
+@group(0) @binding(0) var videoSampler : sampler;
+@group(0) @binding(2) var videoOUT : texture_2d <f32>;
+@group(0)@binding(5)var <uniform> iResolution : u32;
 var<private> gl_FragCoord : vec4<f32>;
 var<private> iPosition : vec4<f32>;
 var<private> fragColor_1 : vec4<f32>;
@@ -55,10 +56,10 @@ fn main(@builtin(position) gl_FragCoord_param : vec4<f32>) -> main_out {
 // fn main(@location(0) fragUV : vec2<i32>) ->
 // @location(0) vec4<f32> {
 // return textureSample(myTexture,mySampler,fragUV);
-var tstclr:vec4<f32>=(0.0,0.33,0.23,1.0);
-// fragColor_1=textureSample(myTexture,mySampler,fragUV);
+fragColor_1=(0.0,0.33,0.23,1.0);
+// fragColor_1 =  vec4<f32>(textureSample(videoOUT,videoSampler,gl_FragCoord.xy/vec2<f32>(vec2<u32>(iResolution,iResolution))));
 // return main_out(fragColor_1, iPosition);
-return main_out(tstclr, iPosition);
+return main_out(fragColor_1, iPosition);
 }
   //   //
 )delimiter";
@@ -151,7 +152,7 @@ u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono:
 u64_uni.at(0,0)=u_time.time_spana.count()*1000;
 u64_uni.at(1,1)=u_time.time_spanb.count()*1000;
 // u64_uni.at(2,2)=u_time.time_spanb.count()/1.0f;
-wce.at(0,0)=wgpu_device_create_command_encoder(wd.at(0,0),0);
+
 colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
 videoAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
 colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
@@ -216,6 +217,8 @@ frame_tensor.at(0,0)=data;
   // wetd.at(0,0).source=texid.at(0,0);
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
 */        //  Render Pass
+  wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
+wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
@@ -228,8 +231,9 @@ wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
       //  Render Pass 2  (sampler)
-wce.at(1,1)=wgpu_device_create_command_encoder(wd.at(0,0),0);
-wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
+wceA={};
+wceB=wgpu_device_create_command_encoder(wd.at(0,0),0);
+wce.at(1,1)=wceB;wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
 wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
