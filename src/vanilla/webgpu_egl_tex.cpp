@@ -35,8 +35,29 @@ std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;
 return randomNumber;
 }
+const char * frag_body2 =
+"@group(0) @binding(0) var videoSampler : sampler;\n"
+"@group(0) @binding(2) var videoOUT : texture_2d <f32>;\n"
+"@group(0)@binding(5)var <uniform> iResolution : u32;\n"
+"var<private> gl_FragCoord : vec4<f32>;\n"
+"var<private> iPosition : vec4<f32>;\n"
+"var<private> fragColor_1 : vec4<f32>;\n"
+"struct main_out {\n"
+"@location(0)\n"
+"fragColor_1_1 : vec4<f32>,\n"
+"@location(1)\n"
+"iPosition_1 : vec4<f32>,\n"
+"}\n"
+"@fragment\n"
+"fn main(@builtin(position) gl_FragCoord_param : vec4<f32>) -> main_out {\n"
+// "fn main(@location(0) fragUV : vec2<f32>) ->\n"
+// "@location(0) vec4<f32> {\n"
+"fragColor_1=vec4<f32>(0.0,0.33,0.23,1.0);\n"
+// "fragColor_1 =  vec4<f32>(textureSample(videoOUT,videoSampler,gl_FragCoord.xy/vec2<f32>(vec2<u32>(iResolution,iResolution))));\n"
+"return main_out(fragColor_1, iPosition);\n"
+"}";
 
-const char * frag_body2 = R"delimiter(
+const char * frag_body23 = R"delimiter(
   //   //
 @group(0) @binding(0) var videoSampler : sampler;
 @group(0) @binding(2) var videoOUT : texture_2d <f32>;
