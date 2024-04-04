@@ -302,7 +302,7 @@ wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_siz.at(3,3),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(3,3),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(1,1),szef.at(1,1),0.0f,1.0f);
-wgpu_render_pass_encoder_set_scissor_rect(wrpe.at(0,0),0.0f,0.0f,sze.at(1,1),sze.at(1,1));
+// wgpu_render_pass_encoder_set_scissor_rect(wrpe.at(0,0),0.0f,0.0f,sze.at(1,1),sze.at(1,1));
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
@@ -316,7 +316,7 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_siz.at(2,2),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
-wgpu_render_pass_encoder_set_scissor_rect(wrpe.at(1,1),0.0f,0.0f,sze.at(0,0),sze.at(0,0));
+// wgpu_render_pass_encoder_set_scissor_rect(wrpe.at(1,1),0.0f,0.0f,sze.at(0,0),sze.at(0,0));
 wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(1,1));
 wcb.at(1,1)=wgpu_command_encoder_finish(wce.at(1,1));
@@ -494,6 +494,10 @@ bufferDescriptor_iResolution={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BU
 wbd.at(2,2)=bufferDescriptor_iResolution;
 uni_iResolution_Buffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iResolution);
 wb.at(2,2)=uni_iResolution_Buffer;
+
+uni_iResolution_Buffer_2=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptor_iResolution);
+wb.at(5,5)=uni_iResolution_Buffer_2;
+  
 bufferBindingLayoutR.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayoutR.hasDynamicOffset=0,
 bufferBindingLayoutR.minBindingSize=sizeof(uint64_t);
@@ -777,31 +781,37 @@ bufferBindingLayout1.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayout1;
 samplerBindingLayout.type=WGPU_SAMPLER_BINDING_TYPE_FILTERING;
 wsbl.at(1,1)=samplerBindingLayout;
+  //  Render Sampler
 Render_Bindgroup_Layout_Entries[0]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Layout_Entries[0].binding=0;
 Render_Bindgroup_Layout_Entries[0].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Render_Bindgroup_Layout_Entries[0].type=WGPU_BIND_GROUP_LAYOUT_TYPE_SAMPLER;
 Render_Bindgroup_Layout_Entries[0].layout.sampler=wsbl.at(1,1);
+  //  Render iTime Buffer
 Render_Bindgroup_Layout_Entries[1]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Layout_Entries[1].binding=7;
 Render_Bindgroup_Layout_Entries[1].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Render_Bindgroup_Layout_Entries[1].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 Render_Bindgroup_Layout_Entries[1].layout.buffer=wbbl.at(0,0);
+  //  Render TextureIN
 Render_Bindgroup_Layout_Entries[2]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Layout_Entries[2].binding=2;
 Render_Bindgroup_Layout_Entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Render_Bindgroup_Layout_Entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
 Render_Bindgroup_Layout_Entries[2].layout.texture=wtbl.at(1,1);
+  //  Render iResolution Buffer
 Render_Bindgroup_Layout_Entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Layout_Entries[3].binding=5;
 Render_Bindgroup_Layout_Entries[3].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Render_Bindgroup_Layout_Entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 Render_Bindgroup_Layout_Entries[3].layout.buffer=wbbl.at(0,0);
+  //  Render iFrame Buffer
 Render_Bindgroup_Layout_Entries[4]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Layout_Entries[4].binding=6;
 Render_Bindgroup_Layout_Entries[4].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Render_Bindgroup_Layout_Entries[4].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 Render_Bindgroup_Layout_Entries[4].layout.buffer=wbbl.at(0,0);
+  //  Render TextureOUT
 Render_Bindgroup_Layout_Entries[5]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Layout_Entries[5].binding=1;
 Render_Bindgroup_Layout_Entries[5].visibility=WGPU_SHADER_STAGE_FRAGMENT;
