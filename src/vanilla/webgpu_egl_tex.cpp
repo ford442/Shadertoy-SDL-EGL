@@ -658,7 +658,7 @@ fragState.targets=&colorTarget32;
 fragState2={};
 fragState2.module=fs2;
 fragState2.entryPoint="main";
-fragState2.numTargets=0;
+fragState2.numTargets=1;
 fragState2.targets=&colorTarget;
 // u64_bfrSze.at(0,0)=sze.at(0,0)*sze.at(0,0)*4;
 /*   different from video.cpp
