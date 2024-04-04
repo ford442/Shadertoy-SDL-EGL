@@ -106,7 +106,7 @@ fn main_1() {
   mainImage_vf4_vf2_(&(param), &(param_1));
   let x_39 : vec4<f32> = param;
   let tstcr:vec4<f32>=vec4<f32>(0.3,0.0,0.44,1.0);
- fragColor_1 = vec4<f32>(textureSample(videoOUT,videoSampler,gl_FragCoord.xy/vec2<f32>(vec2<u32>(iResolution,iResolution))));
+ fragColor_1 = tstcr; // vec4<f32>(textureSample(videoOUT,videoSampler,gl_FragCoord.xy/vec2<f32>(vec2<u32>(iResolution,iResolution))));
 return;
 }
 struct main_out {
@@ -314,6 +314,7 @@ wce.at(1,1)=wceB;
 wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(0,0),0,0);
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_siz.at(2,2),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_set_scissor_rect(wrpe.at(1,1),0.0f,0.0f,sze.at(0,0),sze.at(0,0));
 wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
@@ -388,6 +389,7 @@ wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
 emscripten_get_element_css_size("canvas",&szw,&szh);
 u64_siz.at(3,3)=sze.at(1,1);
+u64_siz.at(2,2)=sze.at(0,0);
 sze.at(0,0)=int(szhI);
 // sze.at(1,1)=int(szhI);
 szef.at(0,0)=floor(float(szh));
