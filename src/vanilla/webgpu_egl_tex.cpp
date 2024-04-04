@@ -35,7 +35,22 @@ std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;
 return randomNumber;
 }
-const char * frag_body2 =
+
+const char * frag_body2=
+"@group(0)@binding(7)var <uniform> iTime : u32;\n"
+"@group(0)@binding(6)var <uniform> iFrame : u32;\n"
+"@group(0)@binding(5)var <uniform> iResolution : u32;\n"
+"@group(0)@binding(0)var videoSampler: sampler;\n"
+"@group(0)@binding(1)var textureIN: texture_storage_2d <rgba32float,write>;\n"
+"@group(0)@binding(2)var videoOUT: texture_2d <f32>;\n"
+// "@group(0) @binding(3) var extTexture : texture_external;\n"
+"@fragment\n"
+"fn main(@location(0) fragUV : vec2<f32>) ->\n"
+"@location(0) vec4<f32> {\n"
+"return textureSample(videoOUT,videoSampler,fragUV);"
+"}\n";
+
+const char * frag_body24 =
 "@group(0)@binding(7)var <uniform> iTime : u32;\n"
 "@group(0)@binding(6)var <uniform> iFrame : u32;\n"
 "@group(0)@binding(5)var <uniform> iResolution : u32;\n"
