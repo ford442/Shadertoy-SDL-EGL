@@ -47,7 +47,9 @@ const char * frag_body2=
 "@fragment\n"
 "fn main(@location(0) fragUV : vec2<f32>) ->\n"
 "@location(0) vec4<f32> {\n"
-"return textureSample(videoOUT,videoSampler,fragUV);"
+"var tstclr:vec4<f32>=vec4<f32>(0.444,0.0,0.444,1.0);\n"
+"return tstclr;\n"
+"return textureSample(videoOUT,videoSampler,fragUV);\n"
 "}\n";
 
 const char * frag_body24 =
