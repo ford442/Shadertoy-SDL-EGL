@@ -59,6 +59,7 @@ WGpuFragmentState fragState2;
 WGpuBufferDescriptor bufferDescriptorUni={};
 WGpuBufferDescriptor bufferDescriptor_iTime={};
 WGpuBufferDescriptor bufferDescriptor_iResolution={};
+WGpuBufferDescriptor bufferDescriptor_iResolution_2={};
 WGpuBufferDescriptor bufferDescriptor_iFrame={};
 WGpuBufferDescriptor bufferDescriptor_iTimeDelta={};
 WGpuBindGroupLayout bindgroup_layout=0;
