@@ -219,7 +219,6 @@ WGpuCommandBufferDescriptor commandBufferDescriptor={};
 WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDescriptor={};
 WGpuBindGroupLayoutEntry Compute_Bindgroup_Layout_Entries[8]={};
-
 WGpuBindGroupLayoutEntry bindgroup_layout_entries[8]={};
 WGpuShaderModuleCompilationHint shaderModuleCompilationHint={};
 WGpuBindGroupEntry Compute_Bindgroup_Entries[8]={};
@@ -267,7 +266,8 @@ static char * results=NULL;
 static long int length=0;
 
 struct Vertex{
-GLfloat position[4];
+// GLfloat position[4];
+float position[4];
 };
 
 Vertex vertices[]={
