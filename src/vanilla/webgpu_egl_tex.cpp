@@ -36,12 +36,16 @@ randomNumber=std::rand()%randomMax;
 return randomNumber;
 }
 const char * frag_body2 =
-"@group(0) @binding(0) var videoSampler : sampler;\n"
-"@group(0) @binding(2) var videoOUT : texture_2d <f32>;\n"
+"@group(0)@binding(7)var <uniform> iTime : u32;\n"
+"@group(0)@binding(6)var <uniform> iFrame : u32;\n"
 "@group(0)@binding(5)var <uniform> iResolution : u32;\n"
-"var<private> gl_FragCoord : vec4<f32>;\n"
-"var<private> iPosition : vec4<f32>;\n"
+"@group(0)@binding(0)var videoSampler: sampler;\n"
+"@group(0)@binding(1)var textureIN: texture_storage_2d <rgba32float,write>;\n"
+"@group(0)@binding(2)var videoOUT: texture_2d <f32>;\n"
 "var<private> fragColor_1 : vec4<f32>;\n"
+"var<private> gl_FragCoord : vec4<f32>;\n"
+"var<private> iMouse : vec4<f32>;\n"
+"var<private> iPosition : vec4<f32>;\n"
 "struct main_out {\n"
 "@location(0)\n"
 "fragColor_1_1 : vec4<f32>,\n"
