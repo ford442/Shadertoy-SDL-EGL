@@ -600,7 +600,6 @@ Compute_Bindgroup_Entries[6].resource=wtv.at(2,2);
 // Compute_Bindgroup_Entries[7]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 // Compute_Bindgroup_Entries[7].binding=7;
 // Compute_Bindgroup_Entries[7].resource=wtv.at(1,1); 
-
 WGPU_BindGroupEntries.at(0,0,0)=Compute_Bindgroup_Entries;
 WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),7);
 WGpuComputePassTimestampWrites computePassTimestampWrites={};
@@ -655,7 +654,7 @@ fragState={};
 fragState.module=fs;
 fragState.entryPoint="main";
 fragState.numTargets=0;
-fragState.targets=nullptr; // &colorTarget;
+fragState.targets=&colorTarget32;
 fragState2={};
 fragState2.module=fs2;
 fragState2.entryPoint="main";
