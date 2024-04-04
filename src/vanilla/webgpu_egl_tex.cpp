@@ -6,7 +6,7 @@ char wgl_cmp_src[2000]=
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
 // "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba32float,write>;\n"
 // "@group(0)@binding(4)var resizeSampler: sampler;\n"
-// "@group(0)@binding(5)var <uniform> iTime: u32;\n"
+"@group(0)@binding(5)var <uniform> iTime: u32;\n"
 "@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba32float,write>;\n"
 // "@group(0)@binding(7)var colorOUT: texture_storage_2d <rgba8unorm,write>;\n"
 "@compute@workgroup_size(1,1,1)\n"
@@ -21,7 +21,7 @@ char wgl_cmp_src[2000]=
 "var INtexCoord:vec2<u32>=vec2<u32>(xPos,yPos);\n"
 "var color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
 "color.r-=0.000000000001f;\n"
-"color.g-=0.000000000001f;\n"
+"color.g-=0.000000000001f+cos(iTime);\n"
 "color.b-=0.000000000001f;\n"
 "textureStore(videoOUT,vec2<u32>(x,y),color);\n"
 "}\n"
@@ -611,7 +611,7 @@ Compute_Bindgroup_Entries[3].resource=wtv.at(4,4);
 Compute_Bindgroup_Entries[4]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Compute_Bindgroup_Entries[4].binding=4;
 Compute_Bindgroup_Entries[4].resource=wsmp.at(3,3);
-            //  Time Uniform
+            // Compute iTime Uniform
 Compute_Bindgroup_Entries[5].binding=5;
 Compute_Bindgroup_Entries[5].resource=wb.at(0,0);
 Compute_Bindgroup_Entries[5].bufferBindOffset=0;
