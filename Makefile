@@ -33,14 +33,15 @@ GL_FLAGS = -sGL_ENABLE_GET_PROC_ADDRESS -sFULL_ES3=1 -sFULL_ES2=0 -lGL -lEGL -sL
 
 wGL_FLAGS = -sUSE_GLFW=0 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2
 
-LINK_FLAGS = $(LDFLAGS) -sDEFAULT_TO_CXX=1 -sALLOW_TABLE_GROWTH=1 -sEMULATE_FUNCTION_POINTER_CASTS=0 \
+LINK_FLAGS = $(LDFLAGS) -sDEFAULT_TO_CXX=1 -sALLOW_TABLE_GROWTH=1 \
+	 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sABORTING_MALLOC=0 -sMALLOC=emmalloc \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
-	 -sASSERTIONS=1 -jsDWEBGPU_DEBUG=1 -sABORTING_MALLOC=0 -sTEXTDECODER=2 \
+	 -sASSERTIONS=1 -jsDWEBGPU_DEBUG=1 -sTEXTDECODER=2 \
 	 --use-preload-plugins --closure 0 --closureFriendly \
 	 -march=haswell -sWASM=1 -sTOTAL_STACK=65536 \
 	 -sGLOBAL_BASE=352321536 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=3221225472 --output_eol linux -mllvm -mtune=wasm32 \
-	 -sMALLOC=emmalloc -rtlib=compiler-rt-mt -sAUTO_ARCHIVE_INDEXES=0 -wasm-enable-eh
+	 -rtlib=compiler-rt-mt -sAUTO_ARCHIVE_INDEXES=0 -wasm-enable-eh
 
 WEBGPU_FLAGS = -sASYNCIFY=0 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
 	 -lmath.js -lhtml5.js -lint53.js
@@ -62,9 +63,11 @@ vanilla_test_emjs:
 b3_compute_egl_tex:
 	 em++ src/vanilla/webgpu_egl_tex.cpp -mextended-const -mbulk-memory -matomics -pthread -O1 -fchar8_t -std=c++14 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -O1 -mextended-const -mbulk-memory -matomics -openmp-simd -pthread --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-egl-tex.js \
+	 em++ -O1 -mextended-const -mbulk-memory -matomics -openmp-simd -pthread --js-library lib/lib_webgpu.js \
+	 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-egl-tex.js \
+	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
 	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=1 \
-	 -fwhole-program-vtables -polly -march=native -mtune=wasm32 \
+	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -march=native -mtune=wasm32 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=768mb -lmath.js -lhtml5.js -lint53.js \
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS='["startWebGPUi","_startWebGPUbi"]' -sTEXTDECODER=0 \
