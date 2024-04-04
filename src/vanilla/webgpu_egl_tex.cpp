@@ -925,7 +925,7 @@ depthTextureDescriptor2.width=sze.at(1,1);
 depthTextureDescriptor2.height=sze.at(1,1); // default = 1;
 depthTextureDescriptor2.depthOrArrayLayers=1;
 depthTextureDescriptor2.mipLevelCount=1;
-depthTextureDescriptor2.sampleCount=1;
+depthTextureDescriptor2.sampleCount=4;
 depthTextureDescriptor2.dimension=WGPU_TEXTURE_DIMENSION_2D;
 WGPU_TEXTURE_FORMAT depthViewFormats2[1]={WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8};
 depthTextureDescriptor2.viewFormats=&depthViewFormats2[0];
