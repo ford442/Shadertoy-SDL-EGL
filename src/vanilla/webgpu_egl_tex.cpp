@@ -379,7 +379,7 @@ textureDescriptorIn.width=sze.at(1,1);
 textureDescriptorIn.height=sze.at(1,1); // default = 1;
 textureDescriptorIn.depthOrArrayLayers=1;
 textureDescriptorIn.mipLevelCount=1;
-textureDescriptorIn.sampleCount=1;
+textureDescriptorIn.sampleCount=4;
 textureDescriptorIn.dimension=WGPU_TEXTURE_DIMENSION_2D;
 WGPU_TEXTURE_FORMAT textureAviewFormats[1]={wtf.at(2,2)};
 textureDescriptorIn.numViewFormats=0; // &textureAviewFormats[0];
