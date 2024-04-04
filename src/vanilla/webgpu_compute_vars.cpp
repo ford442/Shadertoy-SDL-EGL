@@ -46,6 +46,7 @@ WGpuShaderModule vs;
 WGpuShaderModule fs;
 WGpuShaderModule fs2;
 WGpuDepthStencilState depthState;
+WGpuDepthStencilState depthState2;
 WGpuVertexState vertState;
 WGpuPrimitiveState priState;
 WGpuFragmentState fragState;
