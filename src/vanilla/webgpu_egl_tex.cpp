@@ -291,7 +291,7 @@ wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
- /*   //  Render Pass 2  (sampler)
+  //  Render Pass 2  (sampler)
 wceA={};
 wceB=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(1,1)=wceB;
