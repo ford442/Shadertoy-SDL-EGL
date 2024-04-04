@@ -1198,7 +1198,7 @@ deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
 // deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8|WGPU_FEATURE_FLOAT32_FILTERABLE|WGPU_FEATURE_RG11B10UFLOAT_RENDERABLE;
 // deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8;
 WGPU_FEATURES_BITFIELD ftr=wgpu_adapter_or_device_get_features(wa.at(0,0));
-WGpuSupportedLimits * lmts;
+WGpuSupportedLimits lmts;
 wgpu_adapter_or_device_get_limits(wa.at(0,0),&lmts);
 deviceDesc.requiredFeatures=ftr;
 deviceDesc.requiredLimits=*lmts;
