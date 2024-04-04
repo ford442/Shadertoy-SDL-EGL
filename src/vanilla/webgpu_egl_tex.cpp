@@ -15,12 +15,12 @@ char wgl_cmp_src[2000]=
 "var inSizeU:u32=textureDimensions(textureIN).x;\n"
 "var sizeRatio:f32=f32(inSizeU)/f32(outSizeU);\n"
 "for(var x:u32=0u;x<=outSizeU;x=x+1u){\n"
-"var xPos:u32=u32(round(f32(x)*sizeRatio));\n"
+"var xPos:u32=u32(round((f32(x)+0.5f)*sizeRatio));\n"
 "for(var y:u32=0u;y<=outSizeU;y=y+1u){\n"
-"var yPos:u32=u32(round(f32(y)*sizeRatio));\n"
+"var yPos:u32=u32(round((f32(y)+0.5f)*sizeRatio));\n"
 "var INtexCoord:vec2<u32>=vec2<u32>(xPos,yPos);\n"
 "var color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
-// "var color2:vec4<f32>=vec4<f32>(textureLoad(textureIN,INtexCoord,0).rg,1.0,1.0);\n"
+"color.b=color.b+(color.b*0.000000001f);\n"
 "textureStore(videoOUT,vec2<u32>(x,y),color);\n"
 "}\n"
 "}\n"
@@ -65,7 +65,8 @@ mainImage_vf4_vf2_(&(param), &(param_1));
 let x_39 : vec4<f32> = param;
 let tstcr:vec4<f32>=vec4<f32>(0.3,0.0,0.44,1.0);
 let ress:u32=u32(textureDimensions(videoOUT).x);
-fragColor_1=vec4<f32>(textureSample(videoOUT,videoSampler,gl_FragCoord.xy/vec2<f32>(vec2<u32>(ress,ress))));
+// fragColor_1=vec4<f32>(textureSample(videoOUT,videoSampler,gl_FragCoord.xy/vec2<f32>(vec2<u32>(ress,ress))));
+fragColor_1=vec4<f32>(textureSampleBaseClampToEdge(videoOUT,videoSampler,gl_FragCoord.xy/vec2<f32>(vec2<u32>(iResolution,iResolution))));
 return;
 }
 struct main_out {
