@@ -893,14 +893,7 @@ Render_Bindgroup_Entries_2[5]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Entries_2[5].binding=1;
 Render_Bindgroup_Entries_2[5].resource=wtv.at(3,3);
 wbge.at(1,1)=Render_Bindgroup_Entries_2;
-depthTextureViewDescriptor.format=wtf.at(5,5);
-depthTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
-depthTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
-depthTextureViewDescriptor.baseMipLevel=0; // default = 0
-depthTextureViewDescriptor.mipLevelCount=1;
-depthTextureViewDescriptor.baseArrayLayer=0; // default = 0
-depthTextureViewDescriptor.arrayLayerCount=1;
-wtvd.at(0,0)=depthTextureViewDescriptor;
+
 colorTextureViewDescriptor.format=wtf.at(0,0);
 colorTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 colorTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
@@ -909,6 +902,15 @@ colorTextureViewDescriptor.mipLevelCount=1;
 colorTextureViewDescriptor.baseArrayLayer=0; // default = 0
 colorTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(1,1)=colorTextureViewDescriptor;
+  /*
+depthTextureViewDescriptor.format=wtf.at(5,5);
+depthTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+depthTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
+depthTextureViewDescriptor.baseMipLevel=0; // default = 0
+depthTextureViewDescriptor.mipLevelCount=1;
+depthTextureViewDescriptor.baseArrayLayer=0; // default = 0
+depthTextureViewDescriptor.arrayLayerCount=1;
+wtvd.at(0,0)=depthTextureViewDescriptor;
 depthTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 depthTextureDescriptor.format=wtf.at(5,5);
 depthTextureDescriptor.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
@@ -945,6 +947,7 @@ depthTextureViewDescriptor2.mipLevelCount=1;
 depthTextureViewDescriptor2.baseArrayLayer=0; // default = 0
 depthTextureViewDescriptor2.arrayLayerCount=1;
 wtvd.at(3,3)=depthTextureViewDescriptor2;
+  */
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 colorTextureDescriptor.format=wtf.at(0,0);
 colorTextureDescriptor.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
@@ -985,8 +988,8 @@ lmts.maxStorageBufferBindingSize=1*1024*1024;
 lmts.maxBufferSize=1*1024*1024;
 lmts.maxColorAttachmentBytesPerSample=64;
 wgpu_adapter_or_device_get_limits(wa.at(0,0),&lmts);
-deviceDesc.requiredFeatures=ftr;
-deviceDesc.requiredLimits=lmts;
+// deviceDesc.requiredFeatures=ftr;
+// deviceDesc.requiredLimits=lmts;
 wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
