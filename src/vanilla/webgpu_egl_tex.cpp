@@ -256,10 +256,26 @@ depthAttachment.stencilLoadOp=WGPU_LOAD_OP_LOAD;
 // depthAttachment.stencilLoadOp=WGPU_LOAD_OP_CLEAR;
 depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE;
 wrpdsa.at(0,0)=depthAttachment;
+  /*
+depthTextureView2=wgpu_texture_create_view(wt.at(5,5),&wtvd.at(3,3));
+wtv.at(5,5)=depthTextureView2;
+depthAttachment2.view=wtv.at(5,5);
+depthAttachment2.depthClearValue=1.0f;
+depthAttachment2.depthReadOnly=EM_FALSE;
+depthAttachment2.depthLoadOp=WGPU_LOAD_OP_LOAD;
+depthAttachment2.depthLoadOp=WGPU_LOAD_OP_CLEAR;
+depthAttachment2.depthStoreOp=WGPU_STORE_OP_STORE;
+depthAttachment2.stencilClearValue=0;
+depthAttachment2.stencilReadOnly=EM_FALSE;
+depthAttachment2.stencilLoadOp=WGPU_LOAD_OP_LOAD;
+// depthAttachment2.stencilLoadOp=WGPU_LOAD_OP_CLEAR;
+depthAttachment2.stencilStoreOp=WGPU_STORE_OP_STORE;
+wrpdsa.at(1,1)=depthAttachment2;
+*/
 passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(1,1); // &wrpca.at(0,0); // 
-passDesc.depthStencilAttachment=wrpdsa.at(0,0);
+passDesc.depthStencilAttachment=wrpdsa.at(0,0); // wrpdsa.at(1,1);
 passDesc.occlusionQuerySet=0;
 // passDesc.maxDrawCount=100;
 wrpd.at(0,0)=passDesc;
@@ -285,8 +301,8 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_siz.at(3,3),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(3,3),sizeof(uint64_t));
-wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
-wgpu_render_pass_encoder_set_scissor_rect(wrpe.at(0,0),0.0f,0.0f,sze.at(0,0),sze.at(0,0));
+wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0,0.0,szef.at(1,1),szef.at(1,1),0.0f,1.0f);
+wgpu_render_pass_encoder_set_scissor_rect(wrpe.at(0,0),0.0f,0.0f,sze.at(1,1),sze.at(1,1));
 wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
@@ -868,6 +884,30 @@ depthTextureDescriptor.viewFormats=&depthViewFormats[0];
 wtd.at(0,0)=depthTextureDescriptor;
 depthTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(0,0));
 wt.at(0,0)=depthTexture;
+  /*
+depthTextureDescriptor2.dimension=WGPU_TEXTURE_DIMENSION_2D;
+depthTextureDescriptor2.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
+depthTextureDescriptor2.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
+depthTextureDescriptor2.width=sze.at(1,1);
+depthTextureDescriptor2.height=sze.at(1,1); // default = 1;
+depthTextureDescriptor2.depthOrArrayLayers=1;
+depthTextureDescriptor2.mipLevelCount=1;
+depthTextureDescriptor2.sampleCount=1;
+depthTextureDescriptor2.dimension=WGPU_TEXTURE_DIMENSION_2D;
+WGPU_TEXTURE_FORMAT depthViewFormats2[1]={WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8};
+depthTextureDescriptor2.viewFormats=&depthViewFormats2[0];
+wtd.at(3,3)=depthTextureDescriptor2;
+depthTexture2=wgpu_device_create_texture(wd.at(0,0),&wtd.at(3,3));
+wt.at(5,5)=depthTexture2;
+depthTextureViewDescriptor2.format=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
+depthTextureViewDescriptor2.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+depthTextureViewDescriptor2.aspect=WGPU_TEXTURE_ASPECT_ALL;
+depthTextureViewDescriptor2.baseMipLevel=0; // default = 0
+depthTextureViewDescriptor2.mipLevelCount=1;
+depthTextureViewDescriptor2.baseArrayLayer=0; // default = 0
+depthTextureViewDescriptor2.arrayLayerCount=1;
+wtvd.at(3,3)=depthTextureViewDescriptor2;
+*/
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 colorTextureDescriptor.format=wtf.at(0,0);
 colorTextureDescriptor.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
