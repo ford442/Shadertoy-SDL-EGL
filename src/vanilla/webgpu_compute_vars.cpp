@@ -1,3 +1,5 @@
+WGpuCommandEncoder wceA={};
+WGpuCommandEncoder wceB={};
 WGPUImageCopyBuffer videoFrmBfrSrc={};
 WGPUImageCopyBuffer videoFrmBfrDst={};
 WGpuImageCopyTexture videoTextureCopy;
