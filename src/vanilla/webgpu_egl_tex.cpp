@@ -56,7 +56,7 @@ fn main(@builtin(position) gl_FragCoord_param : vec4<f32>) -> main_out {
 // fn main(@location(0) fragUV : vec2<i32>) ->
 // @location(0) vec4<f32> {
 // return textureSample(myTexture,mySampler,fragUV);
-fragColor_1=(0.0,0.33,0.23,1.0);
+fragColor_1=vec4<f32>(0.0,0.33,0.23,1.0);
 // fragColor_1 =  vec4<f32>(textureSample(videoOUT,videoSampler,gl_FragCoord.xy/vec2<f32>(vec2<u32>(iResolution,iResolution))));
 // return main_out(fragColor_1, iPosition);
 return main_out(fragColor_1, iPosition);
@@ -197,8 +197,8 @@ depthAttachment.stencilLoadOp=WGPU_LOAD_OP_LOAD;
 depthAttachment.stencilStoreOp=WGPU_STORE_OP_STORE;
 wrpdsa.at(0,0)=depthAttachment;
 passDesc={};
-passDesc.numColorAttachments=1;
-passDesc.colorAttachments=&wrpca.at(0,0); // ,&wrpca.at(1,1);
+passDesc.numColorAttachments=0;
+passDesc.colorAttachments=nullptr; // &wrpca.at(0,0); // ,&wrpca.at(1,1);
 passDesc.depthStencilAttachment=wrpdsa.at(0,0);
 passDesc.occlusionQuerySet=0;
 // passDesc.maxDrawCount=100;
