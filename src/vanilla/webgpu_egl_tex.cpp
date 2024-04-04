@@ -96,7 +96,7 @@ var col : vec3<f32>;
 col = vec3<f32>(0.40000000596046447754f, 0.0f, 0.5f);
 let x_24 : vec3<f32> = col;
   *(fragColor) = vec4<f32>(x_24.x, x_24.y, x_24.z, 1.0f);
-  // let b3_col : vec4<f32> = *(fragColor);textureStore(textureIN,vec2<u32>(gl_FragCoord.xy),vec4<f32>(b3_col.rgb,1.0f));
+//  let b3_col : vec4<f32> = *(fragColor);textureStore(textureIN,vec2<u32>(gl_FragCoord.xy),vec4<f32>(b3_col.rgb,1.0f));
   return;}
 fn main_1() {
   var param : vec4<f32>;
@@ -106,7 +106,7 @@ fn main_1() {
   mainImage_vf4_vf2_(&(param), &(param_1));
   let x_39 : vec4<f32> = param;
   let tstcr:vec4<f32>=vec4<f32>(0.3,0.0,0.44,1.0);
-fragColor_1=tstcr;
+ fragColor_1 = vec4<f32>(textureSample(videoOUT,videoSampler,gl_FragCoord.xy/vec2<f32>(vec2<u32>(iResolution,iResolution))));
 return;
 }
 struct main_out {
