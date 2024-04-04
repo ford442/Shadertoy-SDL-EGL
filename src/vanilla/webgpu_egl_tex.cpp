@@ -21,7 +21,7 @@ char wgl_cmp_src[2000]=
 "var INtexCoord:vec2<u32>=vec2<u32>(xPos,yPos);\n"
 "var color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
 "color.r-=0.000000000001f;\n"
-"color.g-=0.000000000001f+cos(iTime);\n"
+"color.g-=0.000000000001f+cos(f32(iTime));\n"
 "color.b-=0.000000000001f;\n"
 "textureStore(videoOUT,vec2<u32>(x,y),color);\n"
 "}\n"
