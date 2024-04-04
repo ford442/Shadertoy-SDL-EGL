@@ -9,7 +9,7 @@ char wgl_cmp_src[2000]=
 "@group(0)@binding(5)var <uniform> iTime: u32;\n"
 "@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba32float,write>;\n"
 // "@group(0)@binding(7)var colorOUT: texture_storage_2d <rgba8unorm,write>;\n"
-"@compute@workgroup_size(8,8,1)\n"
+"@compute@workgroup_size(1,1,1)\n"
 "fn main_image(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
 "var outSizeU:u32=textureDimensions(videoOUT).x;\n"
 "var inSizeU:u32=textureDimensions(textureIN).x;\n"
@@ -990,8 +990,9 @@ lmts.maxBufferSize=1*1024*1024;
 lmts.maxColorAttachmentBytesPerSample=64;
 wgpu_adapter_or_device_get_limits(wa.at(0,0),&lmts);
   */
-deviceDesc.requiredFeatures=ftr;
+// deviceDesc.requiredFeatures=ftr;
 // deviceDesc.requiredLimits=lmts;
+  
 wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
