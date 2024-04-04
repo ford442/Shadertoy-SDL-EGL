@@ -52,6 +52,7 @@ const char * frag_body2 =
 "fn main(@builtin(position) gl_FragCoord_param : vec4<f32>) -> main_out {\n"
 // "fn main(@location(0) fragUV : vec2<f32>) ->\n"
 // "@location(0) vec4<f32> {\n"
+"gl_FragCoord = gl_FragCoord_param;\n"
 "fragColor_1=vec4<f32>(0.0,0.33,0.23,1.0);\n"
 // "fragColor_1 =  vec4<f32>(textureSample(videoOUT,videoSampler,gl_FragCoord.xy/vec2<f32>(vec2<u32>(iResolution,iResolution))));\n"
 "return main_out(fragColor_1, iPosition);\n"
