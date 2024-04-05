@@ -52,9 +52,10 @@ char wgl_cmp_src[2000]=
 "var loopSizeF:f32=f32(textureDimensions(videoOUT).x)/4.0f;\n"
 "var inSizeU:u32=textureDimensions(textureIN).x;\n"
 "var sizeRatio:f32=f32(inSizeU)/f32(outSizeU);\n"
+
 "for(var x:u32=0u;x<=outSizeU;x=x+1u){\n"
 "var xPos:u32=u32(round(f32(x)*sizeRatio));\n"
-"var outX:u32=x+(loopSizeU*threadU);\n"
+"var outX:u32=x;\n"
 "for(var y:u32=0u;y<=loopSizeU;y=y+1u){\n"
 "var yPos:u32=u32(round((f32(y)+(loopSizeF*threadF))*sizeRatio));\n"
 "yPos+=u32(loopSizeF*sizeRatio)*threadU;\n"
