@@ -148,10 +148,28 @@ slt=tem.innerHTML;
 },8);
 },16);
 });
-  
+
+function getShader(pth,fname){
+const ff=new XMLHttpRequest();
+ff.open('GET',pth,true);
+ff.responseType='arraybuffer';
+document.querySelector('#stat').innerHTML='Downloading Shader';
+document.querySelector('#stat').style.backgroundColor='yellow';
+ff.addEventListener("load",function(){
+let sarrayBuffer=ff.response;
+if(sarrayBuffer){
+let sfil=new Uint8ClampedArray(sarrayBuffer);
+FS.writeFile('/shader/'+fname,sfil);
+document.querySelector('#stat').innerHTML='Downloaded Shader';
+document.querySelector('#stat').style.backgroundColor='blue';
+}
+
+
 document.querySelector('#startBtn').addEventListener('click',function(){
-// var pth="https://glsl.1ink.us/wgsl/plasma.wgslc";
 var pth=document.querySelector('#path').innerHTML;
+getShader(pth,'shader.wgsl');
+ /*
+// var pth="https://glsl.1ink.us/wgsl/plasma.wgslc";
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
@@ -164,6 +182,7 @@ let sfil=new Uint8ClampedArray(sarrayBuffer);
 FS.writeFile('/shader/shader.wgsl',sfil);
 document.querySelector('#stat').innerHTML='Downloaded Shader';
 document.querySelector('#stat').style.backgroundColor='blue';
+  */
 normalResStart();
 }
 });
