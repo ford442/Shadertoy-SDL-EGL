@@ -58,7 +58,7 @@ char wgl_cmp_src[2000]=
 "var outX:u32=x;\n"
 "for(var y:u32=0u;y<=loopSizeU;y=y+1u){\n"
 "var yPos:u32=u32(round((f32(y)+(loopSizeF*threadF))*sizeRatio));\n"
-"yPos+=u32(loopSizeF*sizeRatio)*threadU;\n"
+// "yPos+=u32(loopSizeF*sizeRatio)*threadU;\n"
 "var outY:u32=y+(loopSizeU*threadU);\n"
 "var INtexCoord:vec2<u32>=vec2<u32>(xPos,yPos);\n"
 "var color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
