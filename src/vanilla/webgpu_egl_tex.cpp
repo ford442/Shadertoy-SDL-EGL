@@ -15,7 +15,7 @@ char wgl_cmp_src[2000]=
 "var inSizeU:u32=textureDimensions(textureIN).x;\n"
 "var sizeRatio:f32=f32(inSizeU)/f32(outSizeU);\n"
 "var loopX:f32=(f32(outSizeU)/8.0);\n"
-"for(thread_id.x<8.0f){\n"
+"for(var m:f32=thread_id.x;m<8.0f;m=m+1.0f){\n"
 "var loopY:f32=loopX*thread_id.x;\n"
 "for(var x:u32=0u;x<=loopX;x=x+1u){\n"
   "var INxPos:u32=u32(round((f32(x)+loopY)*sizeRatio));\n"
