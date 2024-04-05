@@ -18,11 +18,11 @@ char wgl_cmp_src[2000]=
 "for(var x:u32=0u;x<=loopSizeU;x=x+1u){\n"
 "var xPos:u32=u32(round((f32(x))*sizeRatio));\n"
 "xPos+=loopSizeU*thread_id.x;\n"
-"var outX:u32=x+(x*thread_id.x);\n"
+"var outX:u32=x+(loopSizeU*thread_id.x);\n"
 "for(var y:u32=0u;y<=loopSizeU;y=y+1u){\n"
 "var yPos:u32=u32(round((f32(y))*sizeRatio));\n"
 "yPos+=loopSizeU*thread_id.x;\n"
-"var outY:u32=y+(y*thread_id.x);\n"
+"var outY:u32=y+(loopSizeU*thread_id.x);\n"
 "var INtexCoord:vec2<u32>=vec2<u32>(xPos,yPos);\n"
 "var color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
 /*
