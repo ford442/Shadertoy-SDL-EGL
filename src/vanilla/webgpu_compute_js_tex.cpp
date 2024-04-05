@@ -163,7 +163,9 @@ FS.writeFile('/shader/'+fname,sfil);
 document.querySelector('#stat').innerHTML='Downloaded Shader';
 document.querySelector('#stat').style.backgroundColor='blue';
 }
-
+});
+ff.send(null);
+}
 
 document.querySelector('#startBtn').addEventListener('click',function(){
 var pth=document.querySelector('#path').innerHTML;
@@ -184,10 +186,8 @@ document.querySelector('#stat').innerHTML='Downloaded Shader';
 document.querySelector('#stat').style.backgroundColor='blue';
   */
 normalResStart();
-}
 });
-ff.send(null);
-});
+
   
 setTimeout(function(){
 document.querySelector('#circle').width=window.innerWidth;
