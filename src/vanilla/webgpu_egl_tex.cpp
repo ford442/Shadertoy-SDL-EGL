@@ -12,7 +12,7 @@ char wgl_cmp_src[2000]=
 "@compute@workgroup_size(2,1,1)\n"
 "fn main_image(@builtin(workgroup_id)thread_id:vec3<u32>){\n"
 "var outSizeU:u32=textureDimensions(videoOUT).x;\n"
-"var loopSizeU:u32=textureDimensions(videoOUT).x/2.0f;\n"
+"var loopSizeU:u32=textureDimensions(videoOUT).x/2;\n"
 "var inSizeU:u32=textureDimensions(textureIN).x;\n"
 "var sizeRatio:f32=f32(inSizeU)/f32(outSizeU);\n"
 "for(var x:u32=0u;x<=loopSizeU;x=x+1u){\n"
