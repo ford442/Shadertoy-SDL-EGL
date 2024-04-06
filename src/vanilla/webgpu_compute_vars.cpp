@@ -1,3 +1,169 @@
+
+//  single threaded
+char wgl_cmp_srcA[2000]=
+// "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
+// "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
+"@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
+// "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba32float,write>;\n"
+// "@group(0)@binding(4)var resizeSampler: sampler;\n"
+"@group(0)@binding(5)var <uniform> iTime: u32;\n"
+"@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba32float,write>;\n"
+// "@group(0)@binding(7)var colorOUT: texture_storage_2d <rgba8unorm,write>;\n"
+"@compute@workgroup_size(1,1,1)\n"
+"fn main_image(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
+"var outSizeU:u32=textureDimensions(videoOUT).x;\n"
+"var inSizeU:u32=textureDimensions(textureIN).x;\n"
+"var sizeRatio:f32=f32(inSizeU)/f32(outSizeU);\n"
+"for(var x:u32=0u;x<=outSizeU;x=x+1u){\n"
+"var xPos:u32=u32(round((f32(x))*sizeRatio));\n"
+"for(var y:u32=0u;y<=outSizeU;y=y+1u){\n"
+"var yPos:u32=u32(round((f32(y))*sizeRatio));\n"
+"var INtexCoord:vec2<u32>=vec2<u32>(xPos,yPos);\n"
+"var color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
+"color.r-=0.000005f;\n"
+"color.r+=0.00001f;\n"
+"color.g-=0.000005f;\n"
+"color.g+=0.00001f;\n"
+"color.b-=0.000005f;\n"
+"color.b+=0.00001f;\n"
+"textureStore(videoOUT,vec2<u32>(x,y),color);\n"
+"}\n"
+"}\n"
+// "outputBuffer[2]=f32(textureDimensions(textureIN).x);\n"
+// "outputBuffer[3]=f32(textureDimensions(textureOUT).x);\n"
+"}";
+
+char wgl_cmp_src[2000]=
+// "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
+// "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
+"@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
+// "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba32float,write>;\n"
+// "@group(0)@binding(4)var resizeSampler: sampler;\n"
+"@group(0)@binding(5)var <uniform> iTime: u32;\n"
+"@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba32float,write>;\n"
+// "@group(0)@binding(7)var colorOUT: texture_storage_2d <rgba8unorm,write>;\n"
+"@compute@workgroup_size(96,1,1)\n"
+"fn main_image(@builtin(local_invocation_id)thread_id:vec3<u32>){\n"
+"var threadU:u32=thread_id.x;\n"
+"var threadF:f32=f32(thread_id.x);\n"
+"var outSizeU:u32=textureDimensions(videoOUT).x;\n"
+"var loopSizeU:u32=u32(ceil(f32(textureDimensions(videoOUT).x)/96.0f));\n"
+"var loopSizeF:f32=f32(ceil(f32(textureDimensions(videoOUT).x)/96.0f));\n"
+"var inSizeU:u32=textureDimensions(textureIN).x;\n"
+"var sizeRatio:f32=f32(inSizeU)/f32(outSizeU);\n"
+"for(var x:u32=0u;x<=outSizeU;x=x+1u){\n"
+"var xPos:u32=u32(round(f32(x)*sizeRatio));\n"
+"var outX:u32=x;\n"
+"for(var y:u32=0u;y<=loopSizeU;y=y+1u){\n"
+"var yPos:u32=u32(round((f32(y)+(loopSizeF*threadF))*sizeRatio));\n"
+// "yPos+=u32(loopSizeF*sizeRatio)*threadU;\n"
+"var outY:u32=y+(loopSizeU*threadU);\n"
+"var INtexCoord:vec2<u32>=vec2<u32>(xPos,yPos);\n"
+"var color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
+/*
+"color.r-=0.000005f;\n"
+"color.r+=0.00001f;\n"
+"color.g-=0.000005f;\n"
+"color.g+=0.00001f;\n"
+"color.b-=0.000005f;\n"
+"color.b+=0.00001f;\n"
+*/
+"textureStore(videoOUT,vec2<u32>(outX,outY),color);\n"
+"}\n"
+"}\n"
+// "outputBuffer[2]=f32(textureDimensions(textureIN).x);\n"
+// "outputBuffer[3]=f32(textureDimensions(textureOUT).x);\n"
+"}";
+
+
+const char * frag_body2 = R"delimiter(
+  //   //
+@group(0)@binding(0)var videoSampler: sampler;
+// @group(0)@binding(1)var textureIN: texture_storage_2d <rgba32float,write>;
+@group(0)@binding(2)var videoOUT: texture_2d <f32>;
+@group(0)@binding(5)var<uniform> iResolution : u32;
+@group(0)@binding(6)var<uniform> iFrame : u32;
+@group(0)@binding(7)var<uniform> iTime : u32;
+var<private> fragColor_1 : vec4<f32>;
+var<private> gl_FragCoord : vec4<f32>;
+var<private> iMouse : vec4<f32>;
+var<private> iPosition : vec4<f32>;
+fn mainImage_vf4_vf2_(fragColor: ptr<function, vec4<f32>>,fragCoord: ptr<function, vec2<f32>>) {
+var col : vec3<f32>;
+col = vec3<f32>(0.40000000596046447754f, 0.0f, 0.5f);
+let x_24 : vec3<f32> = col;
+*(fragColor) = vec4<f32>(x_24.x, x_24.y, x_24.z, 1.0f);
+//  let b3_col : vec4<f32> = *(fragColor);textureStore(textureIN,vec2<u32>(gl_FragCoord.xy),vec4<f32>(b3_col.rgb,1.0f));
+return;}
+fn main_1() {
+var param : vec4<f32>;
+var param_1 : vec2<f32>;
+let x_36 : vec4<f32> = gl_FragCoord;
+param_1 = vec2<f32>(x_36.x, x_36.y);
+mainImage_vf4_vf2_(&(param), &(param_1));
+let x_39 : vec4<f32> = param;
+let tstcr:vec4<f32>=vec4<f32>(0.3,0.0,0.44,1.0);
+let ress:u32=u32(textureDimensions(videoOUT).x);
+// fragColor_1=vec4<f32>(textureSample(videoOUT,videoSampler,gl_FragCoord.xy/vec2<f32>(vec2<u32>(ress,ress))));
+fragColor_1=vec4<f32>(textureSampleBaseClampToEdge(videoOUT,videoSampler,gl_FragCoord.xy/vec2<f32>(vec2<u32>(iResolution,iResolution))));
+return;
+}
+struct main_out {
+@location(0)
+fragColor_1_1 : vec4<f32>,
+@location(1)
+iPosition_1 : vec4<f32>,
+}
+@fragment
+fn main(@builtin(position) gl_FragCoord_param : vec4<f32>) -> main_out {
+gl_FragCoord = gl_FragCoord_param;
+main_1();
+return main_out(fragColor_1, iPosition);
+}
+  //   //
+)delimiter";
+
+const char * vertexShader=
+"struct VertexOutput{\n"
+"@builtin(position) Position : vec4<f32>,\n"
+"@location(0) fragUV : vec2<f32>\n"
+"};\n"
+"@vertex\n"
+"fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
+"var pos=array<vec2<f32>,6>(\n"
+"vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(1.0f,-1.0f),\n"
+"vec2<f32>(-1.0f,-1.0f),\n"
+"vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(-1.0f,-1.0f),\n"
+"vec2<f32>(-1.0f,1.0f)\n"
+");\n"
+"var uv=array<vec2<f32>,6>(\n"
+"vec2<f32>(1.0f,0.0f),\n"
+"vec2<f32>(1.0f,1.0f),\n"
+"vec2<f32>(0.0f,1.0f),\n"
+"vec2<f32>(1.0f,0.0f),\n"
+"vec2<f32>(0.0f,1.0f),\n"
+"vec2<f32>(0.0f,0.0f)\n"
+");\n"
+"var output : VertexOutput;\n"
+"output.Position=vec4(pos[VertexIndex],0.0f,1.0f);\n"
+"output.fragUV=uv[VertexIndex];\n"
+"return output;\n"
+"}\n";
+
+const char * frag_body=
+"@group(0) @binding(0) var <uniform> iTime : u32;\n"
+"@group(0) @binding(1) var mySampler : sampler;\n"
+"@group(0) @binding(2) var myTexture : texture_2d <f32>;\n"
+// "@group(0) @binding(3) var extTexture : texture_external;\n"
+"@fragment\n"
+"fn main(@location(0) fragUV : vec2<f32>) ->\n"
+"@location(0) vec4<f32> {\n"
+"return textureSample(myTexture,mySampler,fragUV);"
+"}\n";
+
+
 WGpuColor clearColor={};
 WGpuCommandEncoder wceA={};
 WGpuCommandEncoder wceB={};
@@ -292,167 +458,3 @@ Vertex vertices[]={
 
 uint32_t indices[35]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 
-
-//  single threaded
-char wgl_cmp_srcA[2000]=
-// "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
-// "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
-"@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
-// "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba32float,write>;\n"
-// "@group(0)@binding(4)var resizeSampler: sampler;\n"
-"@group(0)@binding(5)var <uniform> iTime: u32;\n"
-"@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba32float,write>;\n"
-// "@group(0)@binding(7)var colorOUT: texture_storage_2d <rgba8unorm,write>;\n"
-"@compute@workgroup_size(1,1,1)\n"
-"fn main_image(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
-"var outSizeU:u32=textureDimensions(videoOUT).x;\n"
-"var inSizeU:u32=textureDimensions(textureIN).x;\n"
-"var sizeRatio:f32=f32(inSizeU)/f32(outSizeU);\n"
-"for(var x:u32=0u;x<=outSizeU;x=x+1u){\n"
-"var xPos:u32=u32(round((f32(x))*sizeRatio));\n"
-"for(var y:u32=0u;y<=outSizeU;y=y+1u){\n"
-"var yPos:u32=u32(round((f32(y))*sizeRatio));\n"
-"var INtexCoord:vec2<u32>=vec2<u32>(xPos,yPos);\n"
-"var color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
-"color.r-=0.000005f;\n"
-"color.r+=0.00001f;\n"
-"color.g-=0.000005f;\n"
-"color.g+=0.00001f;\n"
-"color.b-=0.000005f;\n"
-"color.b+=0.00001f;\n"
-"textureStore(videoOUT,vec2<u32>(x,y),color);\n"
-"}\n"
-"}\n"
-// "outputBuffer[2]=f32(textureDimensions(textureIN).x);\n"
-// "outputBuffer[3]=f32(textureDimensions(textureOUT).x);\n"
-"}";
-
-char wgl_cmp_src[2000]=
-// "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
-// "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
-"@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
-// "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba32float,write>;\n"
-// "@group(0)@binding(4)var resizeSampler: sampler;\n"
-"@group(0)@binding(5)var <uniform> iTime: u32;\n"
-"@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba32float,write>;\n"
-// "@group(0)@binding(7)var colorOUT: texture_storage_2d <rgba8unorm,write>;\n"
-"@compute@workgroup_size(96,1,1)\n"
-"fn main_image(@builtin(local_invocation_id)thread_id:vec3<u32>){\n"
-"var threadU:u32=thread_id.x;\n"
-"var threadF:f32=f32(thread_id.x);\n"
-"var outSizeU:u32=textureDimensions(videoOUT).x;\n"
-"var loopSizeU:u32=u32(ceil(f32(textureDimensions(videoOUT).x)/96.0f));\n"
-"var loopSizeF:f32=f32(ceil(f32(textureDimensions(videoOUT).x)/96.0f));\n"
-"var inSizeU:u32=textureDimensions(textureIN).x;\n"
-"var sizeRatio:f32=f32(inSizeU)/f32(outSizeU);\n"
-"for(var x:u32=0u;x<=outSizeU;x=x+1u){\n"
-"var xPos:u32=u32(round(f32(x)*sizeRatio));\n"
-"var outX:u32=x;\n"
-"for(var y:u32=0u;y<=loopSizeU;y=y+1u){\n"
-"var yPos:u32=u32(round((f32(y)+(loopSizeF*threadF))*sizeRatio));\n"
-// "yPos+=u32(loopSizeF*sizeRatio)*threadU;\n"
-"var outY:u32=y+(loopSizeU*threadU);\n"
-"var INtexCoord:vec2<u32>=vec2<u32>(xPos,yPos);\n"
-"var color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
-/*
-"color.r-=0.000005f;\n"
-"color.r+=0.00001f;\n"
-"color.g-=0.000005f;\n"
-"color.g+=0.00001f;\n"
-"color.b-=0.000005f;\n"
-"color.b+=0.00001f;\n"
-*/
-"textureStore(videoOUT,vec2<u32>(outX,outY),color);\n"
-"}\n"
-"}\n"
-// "outputBuffer[2]=f32(textureDimensions(textureIN).x);\n"
-// "outputBuffer[3]=f32(textureDimensions(textureOUT).x);\n"
-"}";
-
-
-const char * frag_body2 = R"delimiter(
-  //   //
-@group(0)@binding(0)var videoSampler: sampler;
-// @group(0)@binding(1)var textureIN: texture_storage_2d <rgba32float,write>;
-@group(0)@binding(2)var videoOUT: texture_2d <f32>;
-@group(0)@binding(5)var<uniform> iResolution : u32;
-@group(0)@binding(6)var<uniform> iFrame : u32;
-@group(0)@binding(7)var<uniform> iTime : u32;
-var<private> fragColor_1 : vec4<f32>;
-var<private> gl_FragCoord : vec4<f32>;
-var<private> iMouse : vec4<f32>;
-var<private> iPosition : vec4<f32>;
-fn mainImage_vf4_vf2_(fragColor: ptr<function, vec4<f32>>,fragCoord: ptr<function, vec2<f32>>) {
-var col : vec3<f32>;
-col = vec3<f32>(0.40000000596046447754f, 0.0f, 0.5f);
-let x_24 : vec3<f32> = col;
-*(fragColor) = vec4<f32>(x_24.x, x_24.y, x_24.z, 1.0f);
-//  let b3_col : vec4<f32> = *(fragColor);textureStore(textureIN,vec2<u32>(gl_FragCoord.xy),vec4<f32>(b3_col.rgb,1.0f));
-return;}
-fn main_1() {
-var param : vec4<f32>;
-var param_1 : vec2<f32>;
-let x_36 : vec4<f32> = gl_FragCoord;
-param_1 = vec2<f32>(x_36.x, x_36.y);
-mainImage_vf4_vf2_(&(param), &(param_1));
-let x_39 : vec4<f32> = param;
-let tstcr:vec4<f32>=vec4<f32>(0.3,0.0,0.44,1.0);
-let ress:u32=u32(textureDimensions(videoOUT).x);
-// fragColor_1=vec4<f32>(textureSample(videoOUT,videoSampler,gl_FragCoord.xy/vec2<f32>(vec2<u32>(ress,ress))));
-fragColor_1=vec4<f32>(textureSampleBaseClampToEdge(videoOUT,videoSampler,gl_FragCoord.xy/vec2<f32>(vec2<u32>(iResolution,iResolution))));
-return;
-}
-struct main_out {
-@location(0)
-fragColor_1_1 : vec4<f32>,
-@location(1)
-iPosition_1 : vec4<f32>,
-}
-@fragment
-fn main(@builtin(position) gl_FragCoord_param : vec4<f32>) -> main_out {
-gl_FragCoord = gl_FragCoord_param;
-main_1();
-return main_out(fragColor_1, iPosition);
-}
-  //   //
-)delimiter";
-
-const char * vertexShader=
-"struct VertexOutput{\n"
-"@builtin(position) Position : vec4<f32>,\n"
-"@location(0) fragUV : vec2<f32>\n"
-"};\n"
-"@vertex\n"
-"fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
-"var pos=array<vec2<f32>,6>(\n"
-"vec2<f32>(1.0f,1.0f),\n"
-"vec2<f32>(1.0f,-1.0f),\n"
-"vec2<f32>(-1.0f,-1.0f),\n"
-"vec2<f32>(1.0f,1.0f),\n"
-"vec2<f32>(-1.0f,-1.0f),\n"
-"vec2<f32>(-1.0f,1.0f)\n"
-");\n"
-"var uv=array<vec2<f32>,6>(\n"
-"vec2<f32>(1.0f,0.0f),\n"
-"vec2<f32>(1.0f,1.0f),\n"
-"vec2<f32>(0.0f,1.0f),\n"
-"vec2<f32>(1.0f,0.0f),\n"
-"vec2<f32>(0.0f,1.0f),\n"
-"vec2<f32>(0.0f,0.0f)\n"
-");\n"
-"var output : VertexOutput;\n"
-"output.Position=vec4(pos[VertexIndex],0.0f,1.0f);\n"
-"output.fragUV=uv[VertexIndex];\n"
-"return output;\n"
-"}\n";
-
-const char * frag_body=
-"@group(0) @binding(0) var <uniform> iTime : u32;\n"
-"@group(0) @binding(1) var mySampler : sampler;\n"
-"@group(0) @binding(2) var myTexture : texture_2d <f32>;\n"
-// "@group(0) @binding(3) var extTexture : texture_external;\n"
-"@fragment\n"
-"fn main(@location(0) fragUV : vec2<f32>) ->\n"
-"@location(0) vec4<f32> {\n"
-"return textureSample(myTexture,mySampler,fragUV);"
-"}\n";
