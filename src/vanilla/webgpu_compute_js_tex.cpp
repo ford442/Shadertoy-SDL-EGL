@@ -71,14 +71,35 @@ FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
 }
   
+function getShader(pth,fname){
+const ff=new XMLHttpRequest();
+ff.open('GET',pth,true);
+ff.responseType='arraybuffer';
+document.querySelector('#stat').innerHTML='Downloading Shader';
+document.querySelector('#stat').style.backgroundColor='yellow';
+ff.addEventListener("load",function(){
+let sarrayBuffer=ff.response;
+if(sarrayBuffer){
+let sfil=new Uint8ClampedArray(sarrayBuffer);
+FS.writeFile('/shader/'+fname,sfil);
+document.querySelector('#stat').innerHTML='Downloaded Shader';
+document.querySelector('#stat').style.backgroundColor='blue';
+}
+});
+ff.send(null);
+}
+  
 let codeMessage=new BroadcastChannel('codeMessage');
+
 codeMessage.addEventListener('message',event=>{
+var pth2=document.querySelector('#computePath').innerHTML;
+getShader(pth2,'compute.wgsl');
 document.querySelector('#status').style.backgroundColor="blue";
 let flDat=event.data.data;
 var buffer = new ArrayBuffer(flDat.length*2);
 var bufferView = new Uint16Array(buffer);
 for (var i = 0; i < flDat.length; i++) {
-    bufferView[i] = flDat.charCodeAt(i);
+bufferView[i] = flDat.charCodeAt(i);
 }
 // console.log(bufferView);
 FS.writeFile('/shader/shader.wgsl',bufferView);
@@ -149,23 +170,7 @@ slt=tem.innerHTML;
 },16);
 });
 
-function getShader(pth,fname){
-const ff=new XMLHttpRequest();
-ff.open('GET',pth,true);
-ff.responseType='arraybuffer';
-document.querySelector('#stat').innerHTML='Downloading Shader';
-document.querySelector('#stat').style.backgroundColor='yellow';
-ff.addEventListener("load",function(){
-let sarrayBuffer=ff.response;
-if(sarrayBuffer){
-let sfil=new Uint8ClampedArray(sarrayBuffer);
-FS.writeFile('/shader/'+fname,sfil);
-document.querySelector('#stat').innerHTML='Downloaded Shader';
-document.querySelector('#stat').style.backgroundColor='blue';
-}
-});
-ff.send(null);
-}
+
 
 document.querySelector('#startBtn').addEventListener('click',function(){
 var pth=document.querySelector('#path').innerHTML;
