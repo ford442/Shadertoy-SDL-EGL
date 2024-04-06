@@ -180,7 +180,7 @@ const char * frag_body_empty=
 "@fragment\n"
 "fn main(@location(0) fragUV : vec2<f32>) ->\n"
 "@location(0) vec4<f32> {\n"
-"return vec4<f32>(0.0,0.44,0.0,1.0));"
+"return vec4<f32>(0.0,0.44,0.0,1.0);"
 "}\n";
 
 const char * rd_fl(const char * Fnm){
