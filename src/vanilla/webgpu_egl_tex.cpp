@@ -1,7 +1,7 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
 
 //  single threaded
-char wgl_cmp_srcA[2000]=  
+char wgl_cmp_srcA[2000]=
 // "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
 // "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
 "@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
@@ -375,6 +375,8 @@ js_data_pointer.at(0,0)=0;
 fjs_data_pointer.at(0,0)=0;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 const char * frag_body=(char*)rd_fl(Fnm);
+const char * comp_body=(char*)rd_fl(FnmC);
+  
 WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
 wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
 wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
@@ -536,7 +538,7 @@ resizeSamplerDescriptor.maxAnisotropy=1;
 wsd.at(1,1)=resizeSamplerDescriptor;
 resizeSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(1,1));
 wsmp.at(3,3)=resizeSampler;
-shaderModuleDescriptor.code=wgl_cmp_src;
+shaderModuleDescriptor.code=comp_body; // wgl_cmp_src;
 shaderModuleDescriptor.numHints=0;
 shaderModuleDescriptor.hints=NULL;
 WGPU_ShaderModuleDescriptor.at(0,0,0)=shaderModuleDescriptor;
