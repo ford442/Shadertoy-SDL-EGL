@@ -208,7 +208,6 @@ fjs_data_pointer.at(0,0)=0;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 const char * frag_body=(char*)rd_fl(Fnm);
 const char * comp_body=(char*)rd_fl(FnmC);
-  
 WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
 wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
@@ -879,7 +878,7 @@ wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
 
-EM_BOOL WGPU_Start(int sz){
+void WGPU_Start(int sz){
 sze.at(1,1)=sz;
 WGpuRequestAdapterOptions options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
@@ -887,7 +886,7 @@ options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
 options.forceFallbackAdapter=EM_FALSE;
 wao.at(0,0)=options;
 navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
-return EM_TRUE;
+return;
 }
 
 #include "../../src/vanilla/webgpu_compute_js_tex.cpp"
@@ -896,10 +895,12 @@ extern"C"{
 
 void startWebGPUi(int sz){
 WGPU_Start(sz);
+return;
 }
 
 void startWebGPUbi(int sz){
 WGPU_Start(sz);
+return;
 }
 
 }
