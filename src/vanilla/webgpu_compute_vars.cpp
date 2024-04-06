@@ -1,3 +1,4 @@
+WGpuColor clearColor={};
 WGpuCommandEncoder wceA={};
 WGpuCommandEncoder wceB={};
 WGPUImageCopyBuffer videoFrmBfrSrc={};
