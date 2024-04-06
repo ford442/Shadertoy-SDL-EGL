@@ -198,9 +198,9 @@ return result;
 return nullptr;
 }
 
-void getCode(const char * Fnm){
+EM_BOOL getCode(const char * Fnm){
 wgsl.at(0,0)=frag_body;
-return;
+return EM_TRUE;
 }
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
@@ -359,8 +359,9 @@ wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0
 return EM_TRUE;
 };
 
-void raf(){
+EM_BOOL raf(){
 render();
+return EM_TRUE;
 }
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
@@ -1041,7 +1042,7 @@ wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
 
-void WGPU_Start(int sz){
+EM_BOOL WGPU_Start(int sz){
 sze.at(1,1)=sz;
 WGpuRequestAdapterOptions options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
@@ -1049,6 +1050,7 @@ options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
 options.forceFallbackAdapter=EM_FALSE;
 wao.at(0,0)=options;
 navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
+return EM_TRUE;
 }
 
 #include "../../src/vanilla/webgpu_compute_js_tex.cpp"
