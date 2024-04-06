@@ -39,7 +39,7 @@ if(running==0){
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPU",null,"Number",[vsiz]);
+Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 console.log('Starting..');
 running=1;
 },500);
@@ -125,8 +125,8 @@ document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
 videoFrames();
-let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz]);
+// let vsiz=document.querySelector('#vsiz').innerHTML;
+// Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 },1500);
 document.querySelector('#status').style.backgroundColor="green";
 }
