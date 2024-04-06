@@ -1,3 +1,4 @@
+boost::function<EM_BOOL()>render;
 
 //  single threaded
 char wgl_cmp_srcA[2000]=
