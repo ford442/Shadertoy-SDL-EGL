@@ -115,7 +115,7 @@ WGpuOnSubmittedWorkDoneCallback onComputeDoneStart;
 // const char * rd_fl(const char *);
 EM_BOOL getCode(const char *);
 
-boost::function<EM_BOOL()>render=[]();
+boost::function<EM_BOOL()>render;
 void raf();
 
 // static void WGPU_Start();
