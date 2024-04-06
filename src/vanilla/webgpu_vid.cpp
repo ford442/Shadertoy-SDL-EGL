@@ -172,6 +172,17 @@ const char * frag_body=
 "return textureSample(myTexture,mySampler,fragUV);"
 "}\n";
 
+const char * frag_body_empty=
+"@group(0) @binding(0) var <uniform> iTime : u32;\n"
+"@group(0) @binding(1) var mySampler : sampler;\n"
+"@group(0) @binding(2) var myTexture : texture_2d <f32>;\n"
+// "@group(0) @binding(3) var extTexture : texture_external;\n"
+"@fragment\n"
+"fn main(@location(0) fragUV : vec2<f32>) ->\n"
+"@location(0) vec4<f32> {\n"
+"return vec4<f32>(0.0,0.44,0.0,1.0));"
+"}\n";
+
 const char * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
 ::boost::tuples::tie(result,results,file);
@@ -342,7 +353,7 @@ if(on.at(0,0)==0){wd.at(0,0)=result;}
 js_data_pointer.at(0,0)=0;
 fjs_data_pointer.at(0,0)=0;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
-const char * frag_body=(char*)rd_fl(Fnm);
+const char * frag_body=frag_body_empty; // (char*)rd_fl(Fnm);
 const char * comp_body=(char*)rd_fl(FnmC);
   
 WGPU_TEXTURE_FORMAT canvasFormat=navigator_gpu_get_preferred_canvas_format();
