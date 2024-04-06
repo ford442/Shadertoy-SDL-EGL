@@ -105,18 +105,13 @@ typedef ResultType result_type;
 
 inline int rNd4(int);
 // static void WGPU_Run();
-
 // static void ObtainedWebGpuDeviceStart(WGpuDevice,void *);
 static void ObtainedWebGpuAdapterStart(WGpuAdapter,void *);
-
 void ObtainedWebGpuDeviceStart(WGpuDevice,void *);
 // const char * rd_fl(const char *);
 EM_BOOL getCode(const char *);
-
 void raf();
-
 // static void WGPU_Start();
-
 // int cltest();
 
 extern"C"{
@@ -128,18 +123,79 @@ void runWebGPU();
 
 }
 
+WGpuImageCopyTexture videoTextureCopy;
+WGpuExternalTexture extTexture;
+WGpuTextureView depthTextureView;
+WGpuTextureView depthTextureView2;
+WGpuTextureView colorTextureView;
+WGpuTextureView videoTextureView;
+WGpuTextureView INTextureView;
+WGpuTextureView OUTTextureView;
+WGpuTexture depthTexture;
+WGpuTexture depthTexture2;
+WGpuTexture colorTexture;
+WGpuTexture videoTexture;
+WGpuTexture textureIn;
+WGpuTexture textureOut;
+WGpuTexture __128bit_Texture__;
+WGpuShaderModule vs;
+WGpuShaderModule fs;
+WGpuShaderModule fs2;
+WGpuBindGroup bindgroup;
+WGpuBindGroup bindgroup_2;
+WGpuRenderBundleEncoder renderBundleEncoder;
+WGpuBuffer uniBuffer;
+WGpuBuffer srcBuffer;
+WGpuBuffer dstBuffer;
+WGpuBuffer vidBuffer;
+WGpuBuffer uni_iTime_Buffer;
+WGpuBuffer uni_iTimeDelta_Buffer;
+WGpuBuffer uni_iResolution_Buffer;
+WGpuBuffer uni_iResolution_Buffer_2;
+WGpuBuffer uni_iFrame_Buffer;
+
+double szh,szw;
+int szhI,szwI;
+double szhDv,szwDv;
+float szhFv,szwFv;
+uint64_t tme;
+void * userDataA;
+void * userDataB;
+WGpuTexture textureA;
+WGpuBindGroupLayout bindGroupLayout;
+WGpuBindGroupLayout bindGroupLayoutB;
+WGpuComputePipeline computePipeline;
+WGpuBuffer inputBuffer;
+WGpuBuffer outputBuffer;
+WGpuBuffer mapBuffer;
+// WGpuBuffer uniBuffer;
+WGpuShaderModule cs;
+WGpuCommandBuffer commandBuffer;
+WGpuCommandEncoder encoder;
+WGpuComputePassEncoder computePass;
+WGpuBindGroup bindGroup;
+WGpuPipelineLayout pipelineLayout;
+WGpuQuerySet querySet;
+int randomNumber,entropySeed;
+int raN;
+int raND;
+uint32_t outP;
+double_int53_t WGPU_Range_PointerB;
+double_int53_t WGPU_Range_PointerC;
+long int length2;
+void * fram;
+static long int length;
+
+using namespace boost::chrono;
+
 using dv_tensor=boost::numeric::ublas::tensor<SDL_AudioDeviceID>;
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
 using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
 using ub_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
 using lu_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned long>>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
-
-using namespace boost::chrono;
-
 using fjs_tensor=boost::numeric::ublas::tensor<float *>;
 using wcolor_tensor=boost::numeric::ublas::tensor<WGpuColor>;
-
 using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
 using wced_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoderDescriptor>;
 using wbmc_tensor=boost::numeric::ublas::tensor<WGpuBufferMapCallback>;
