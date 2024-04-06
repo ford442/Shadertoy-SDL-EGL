@@ -110,8 +110,6 @@ inline int rNd4(int);
 static void ObtainedWebGpuAdapterStart(WGpuAdapter,void *);
 
 void ObtainedWebGpuDeviceStart(WGpuDevice,void *);
-WGpuBufferMapCallback mapCallbackStart;
-WGpuOnSubmittedWorkDoneCallback onComputeDoneStart;
 // const char * rd_fl(const char *);
 EM_BOOL getCode(const char *);
 
