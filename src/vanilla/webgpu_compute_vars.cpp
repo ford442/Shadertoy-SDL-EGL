@@ -163,6 +163,17 @@ const char * frag_body=
 "return textureSample(myTexture,mySampler,fragUV);"
 "}\n";
 
+colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
+videoAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
+WGPU_TEXTURE_FORMAT canvasFormat;
+WGPU_TEXTURE_FORMAT canvasViewFormat[1];
+config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
+WGpuOrigin3D OriginXYZ={};
+WGpuOrigin2D OriginXY={};
+WGPU_TEXTURE_FORMAT textureBviewFormats[1];
+WGPU_TEXTURE_FORMAT videoViewFormats[1];
+
+
 
 WGpuColor clearColor={};
 WGpuCommandEncoder wceA={};
@@ -187,8 +198,8 @@ WGpuTextureViewDescriptor INTextureViewDescriptor={};
 WGpuTextureViewDescriptor OUTTextureViewDescriptor={};
 WGpuRenderPassColorAttachment colorAttachment;
 WGpuRenderPassColorAttachment videoAttachment;
-WGpuRenderPassDepthStencilAttachment depthAttachment;
-WGpuRenderPassDepthStencilAttachment depthAttachment2;
+WGpuRenderPassDepthStencilAttachment depthAttachment={};
+WGpuRenderPassDepthStencilAttachment depthAttachment2={};
 WGpuTexture depthTexture;
 WGpuTexture depthTexture2;
 WGpuTexture colorTexture;
@@ -241,8 +252,8 @@ WGpuBindGroup bindgroup_2=0;
 WGpuRenderBundleEncoder renderBundleEncoder;
 WGpuRenderBundleEncoderDescriptor renderBundleEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDesc={};
-WGpuMultisampleState multiSamp;
-WGpuMultisampleState multiSamp2;
+WGpuMultisampleState multiSamp={};
+WGpuMultisampleState multiSamp2={};
 WGpuBuffer uniBuffer;
 WGpuBuffer srcBuffer;
 WGpuBuffer dstBuffer;
