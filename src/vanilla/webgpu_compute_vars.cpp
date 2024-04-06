@@ -163,7 +163,7 @@ const char * frag_body=
 "return textureSample(myTexture,mySampler,fragUV);"
 "}\n";
 
-
+WGpuRenderPassTimestampWrites renderTimestampWrites={};
 WGPU_TEXTURE_FORMAT canvasFormat;
 WGPU_TEXTURE_FORMAT canvasViewFormat[1];
 WGpuCanvasConfiguration config={WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER};
