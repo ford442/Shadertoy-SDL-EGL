@@ -114,6 +114,7 @@ boost::chrono::high_resolution_clock::time_point t3;
 WGpuUniform wTime;
 uint64_t tme;
 
+wcolor_tensor clearC=wcolor_tensor{2,2};
 xyz_tensor oxyz=xyz_tensor{2,2};
 xy_tensor oxy=xy_tensor{2,2};
 wtbl_tensor wtbl=wtbl_tensor{4,4};
