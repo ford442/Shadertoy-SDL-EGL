@@ -2,11 +2,11 @@
 
 #include "../../src/vanilla/webgpu_compute_vars.cpp"
 
-WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
+mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 return;
 };
 
-WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
+onComputeDoneStart=[](WGpuQueue queue,void *userData){
 return;
 };
 
