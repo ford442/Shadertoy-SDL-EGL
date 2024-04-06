@@ -163,8 +163,7 @@ const char * frag_body=
 "return textureSample(myTexture,mySampler,fragUV);"
 "}\n";
 
-colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
-videoAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
+
 WGPU_TEXTURE_FORMAT canvasFormat;
 WGPU_TEXTURE_FORMAT canvasViewFormat[1];
 config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
@@ -196,8 +195,8 @@ WGpuTextureViewDescriptor colorTextureViewDescriptor={};
 WGpuTextureViewDescriptor videoTextureViewDescriptor={};
 WGpuTextureViewDescriptor INTextureViewDescriptor={};
 WGpuTextureViewDescriptor OUTTextureViewDescriptor={};
-WGpuRenderPassColorAttachment colorAttachment;
-WGpuRenderPassColorAttachment videoAttachment;
+WGpuRenderPassColorAttachment colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
+WGpuRenderPassColorAttachment videoAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
 WGpuRenderPassDepthStencilAttachment depthAttachment={};
 WGpuRenderPassDepthStencilAttachment depthAttachment2={};
 WGpuTexture depthTexture;
