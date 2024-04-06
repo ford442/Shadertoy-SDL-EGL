@@ -248,38 +248,6 @@ videoAttachment.clearValue.a=1.0f;
 wrpca.at(1,1)=videoAttachment;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
-  /*
-depthAttachment={};
-depthAttachment2={};
-depthTextureView=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
-wtv.at(0,0)=depthTextureView;
-depthAttachment.view=wtv.at(0,0);
-depthAttachment.depthClearValue=1.0f;
-depthAttachment.depthReadOnly=EM_TRUE;
-depthAttachment.depthLoadOp=WGPU_LOAD_OP_LOAD;
-// depthAttachment.depthLoadOp=WGPU_LOAD_OP_CLEAR;
-depthAttachment.depthStoreOp=WGPU_STORE_OP_DISCARD; // WGPU_STORE_OP_UNDEFINED;
-depthAttachment.stencilClearValue=0;
-depthAttachment.stencilReadOnly=EM_TRUE;
-depthAttachment.stencilLoadOp=WGPU_LOAD_OP_LOAD;
-// depthAttachment.stencilLoadOp=WGPU_LOAD_OP_CLEAR;
-depthAttachment.stencilStoreOp=WGPU_STORE_OP_UNDEFINED;
-wrpdsa.at(0,0)=depthAttachment;
-depthTextureView2=wgpu_texture_create_view(wt.at(5,5),&wtvd.at(3,3));
-wtv.at(5,5)=depthTextureView2;
-depthAttachment2.view=wtv.at(5,5);
-depthAttachment2.depthClearValue=1.0f;
-depthAttachment2.depthReadOnly=EM_TRUE;
-depthAttachment2.depthLoadOp=WGPU_LOAD_OP_LOAD;
-// depthAttachment2.depthLoadOp=WGPU_LOAD_OP_CLEAR;
-depthAttachment2.depthStoreOp=WGPU_STORE_OP_DISCARD; // WGPU_STORE_OP_UNDEFINED;
-depthAttachment2.stencilClearValue=0;
-depthAttachment2.stencilReadOnly=EM_TRUE;
-// depthAttachment2.stencilLoadOp=WGPU_LOAD_OP_LOAD;
-depthAttachment2.stencilLoadOp=WGPU_LOAD_OP_CLEAR;
-depthAttachment2.stencilStoreOp=WGPU_STORE_OP_UNDEFINED;
-wrpdsa.at(1,1)=depthAttachment2;
-  */
 passDesc={};
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(1,1); // &wrpca.at(0,0); // 
@@ -294,13 +262,13 @@ passDesc2.colorAttachments=&wrpca.at(0,0); // &wrpca.at(1,1); //
 passDesc2.occlusionQuerySet=0;
 // passDesc2.maxDrawCount=100;
 wrpd.at(1,1)=passDesc2;
-/*       //  Frame Data
+      //  Frame Data
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 frame_tensor.at(0,0)=data;
   // wetd.at(0,0).source=texid.at(0,0);
-// wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
-*/   //  Render Pass
+wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+/*  //  Render Pass
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
@@ -315,7 +283,7 @@ wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
-  //  Render Pass 2  (sampler)
+*/  //  Render Pass 2  (sampler)
 wceA={};
 wceB=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(1,1)=wceB;
