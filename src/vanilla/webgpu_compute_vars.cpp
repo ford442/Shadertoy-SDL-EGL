@@ -260,6 +260,7 @@ double_int53_t WGPU_Range_PointerC;
 float * WGPU_Result_Array=new float[OutputBufferBytes];
 float * WGPU_Input_Array=new float[InputBufferBytes];
 const char * Fnm2=reinterpret_cast<const char *>("/video/frame.gl");
+const char * FnmC=reinterpret_cast<const char *>("/shader/compute.wgsl");
 uint8_t * result2=NULL;
 float * resultf=NULL;
 uint8_t * results2=NULL;
