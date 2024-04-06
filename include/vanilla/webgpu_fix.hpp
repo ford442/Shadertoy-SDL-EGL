@@ -132,6 +132,7 @@ using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 using namespace boost::chrono;
 
 using fjs_tensor=boost::numeric::ublas::tensor<float *>;
+using wcolor_tensor=boost::numeric::ublas::tensor<WGpuColor>;
 
 using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
 using wced_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoderDescriptor>;
