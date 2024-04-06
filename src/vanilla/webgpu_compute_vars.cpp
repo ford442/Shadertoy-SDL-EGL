@@ -166,7 +166,7 @@ const char * frag_body=
 
 WGPU_TEXTURE_FORMAT canvasFormat;
 WGPU_TEXTURE_FORMAT canvasViewFormat[1];
-config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
+WGpuCanvasConfiguration config=WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER;
 WGpuOrigin3D OriginXYZ={};
 WGpuOrigin2D OriginXY={};
 WGPU_TEXTURE_FORMAT textureBviewFormats[1];
@@ -220,7 +220,6 @@ WGpuTextureDescriptor colorTextureDescriptor={};
 WGpuTextureDescriptor videoTextureDescriptor={};
 WGpuRenderPassDescriptor passDesc={};
 WGpuRenderPassDescriptor passDesc2={};
-WGpuCanvasConfiguration config;
 WGpuShaderModuleDescriptor shaderModuleDescV={};
 WGpuShaderModuleDescriptor shaderModuleDescF={};
 WGpuShaderModuleDescriptor shaderModuleDescF2={};
