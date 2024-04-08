@@ -207,7 +207,7 @@ wrpd.at(0,0)=passDesc;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
        //  Frame Data
-std::ifstream fram(Fnm2,std::ios::binary);
+std::ifstreambuf fram(Fnm2,std::ios::binary);
 // fram.seekg(sze.at(0,0)-sze.at(1,1));
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 frame_tensor.at(0,0)=data;
