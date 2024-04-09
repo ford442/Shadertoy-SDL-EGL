@@ -64,14 +64,14 @@ t.setConstants({blnk:offS});
 // var hp=new Float32Array($H,0,la);
 // hp.set($$1);
 // FS.writeFile('/video/frame.gl',hp);
-setInterval(function(){
+// setInterval(function(){
 var $$1=t(vvii);
 var fr=new Uint8ClampedArray($$1);
 // hp.set(fr);
 console.log(fr[12]);
-console.log(hp[12]);
+// console.log(hp[12]);
 FS.writeFile('/video/frame.gl',fr);
-},16.6);
+// },16.6);
 }
   
 function videoFrames(){
