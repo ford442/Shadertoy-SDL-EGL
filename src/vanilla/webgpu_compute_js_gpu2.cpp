@@ -79,7 +79,7 @@ let SiZ=window.innerHeight;
 vvii.height=SiZ;
 let w$=parseInt(vvii.width);
 let h$=parseInt(vvii.height);
-let tstSiZ=vvii.height;
+let tstSiZ=438;
 if(running==0){
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 setTimeout(function(){
