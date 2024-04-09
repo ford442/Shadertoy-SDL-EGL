@@ -1,5 +1,5 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
-
+#include <iterator>
 #include "../../src/vanilla/webgpu_compute_vars.cpp"
 
 inline int rNd4(int randomMax){
