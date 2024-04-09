@@ -29,10 +29,10 @@ return imageData;
 }
 
 function videoFramesGpu(){
-const bcanvas=document.getElementById("bcanvas");
-const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
+// const bcanvas=document.getElementById("bcanvas");
+// const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 //   let $H=Module.HEAPU8.buffer;
-let G=new GPUX({mode:'gpu',canvas:bcanvas,context:contx});
+let G=new GPUX({mode:'gpu'});
 let SiZ=window.innerHeight;
 vvii.height=SiZ;
 let w$=parseInt(vvii.width);
