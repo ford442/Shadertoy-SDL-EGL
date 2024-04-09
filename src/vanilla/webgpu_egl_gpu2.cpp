@@ -852,7 +852,7 @@ wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceSt
 }
 
 EM_BOOL WGPU_Start(int sz){
-sze.at(1,1)=sz;
+sze.at(1,1)=438;
 options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
 options.forceFallbackAdapter=EM_FALSE;
@@ -865,12 +865,12 @@ return EM_TRUE;
 
 extern"C"{
 
-void startWebGPUi(int sz){
-WGPU_Start(sz);
+void startWebGPU(){
+WGPU_Start();
 return;
 }
 
-void startWebGPUbi(int sz){
+void startWebGPUb(){
 WGPU_Start(sz);
 return;
 }
