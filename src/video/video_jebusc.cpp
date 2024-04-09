@@ -170,7 +170,6 @@ pnnl.addEventListener('keydown',doKey);
 pnnl.addEventListener('keydown',doKeyUp);
 let w$=parseInt(document.querySelector("#wid").innerHTML,10);
 let h$=parseInt(document.querySelector("#hig").innerHTML,10);
-let blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
 let ch$=parseInt(window.innerHeight,10);
 vv=document.querySelector("#mv");
 let $H=Module.HEAPF32.buffer;
@@ -183,12 +182,12 @@ return n;
 }
 }
 
-let la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
+let blank$=Math.max((w$-h$)/4,0);
+let nblank$=Math.max((h$-w$)/2,0);
+let la=nearestPowerOf2((((h$+(blank$*2))*h$*4)/4)*4);
 var pointa=77.0*la;
 var agav=new Float32Array($H,pointa,300);
 let sz=(h$*h$)/8;
-let blank$=Math.max((w$-h$)/4,0);
-let nblank$=Math.max((h$-w$)/2,0);
 var avag=0.750;
 var min=1.0;
 var max=0.0;
@@ -456,11 +455,10 @@ this.color(p[0],p[1],p[2],aveg);
 
 w$=parseInt(document.querySelector("#wid").innerHTML,10);
 h$=parseInt(document.querySelector("#hig").innerHTML,10);
-blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
 vv=document.querySelector("#mv");
 blank$=Math.max((w$-h$)/4,0);
 nblank$=Math.max((h$-w$)/2,0);
-la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
+la=nearestPowerOf2((((h$+(blank$*2))*h$*4)/4)*4);
 sz=(h$*h$)/8;
 var pointa=77.0*la;
 // agav=new Float32Array($H,pointa,300);
@@ -473,9 +471,9 @@ var pointb=77.0*la;
 var $B=new Float32Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
-// r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
-r.setConstants({nblnk:nblank$,blnk:blank$$,amin:agav[100],amax:agav[200],aavg:agav[0]});
-t.setConstants({nblnk:nblank$,blnk:blank$$});
+// r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
+t.setConstants({nblnk:nblank$,blnk:blank$});
 var $$1=t(vv);
 for (i=0;i<65;i++){
 var j=i+1;
@@ -484,10 +482,9 @@ eval("$"+j+".set($$1);");
 var d=S();if(d)d();d=S();function S(){
 w$=parseInt(document.querySelector("#wid").innerHTML,10);
 h$=parseInt(document.querySelector("#hig").innerHTML,10);
-blank$$=parseInt(document.querySelector("#blnnk").innerHTML,10);
 blank$=Math.max((w$-h$)/4,0);
 nblank$=Math.max((h$-w$)/2,0);
-la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
+la=nearestPowerOf2((((h$+(blank$*2))*h$*4)/4)*4);
 sz=(h$*h$)/8;
 var pointa=77.0*la;
 // var agav=new Float32Array($H,pointa,300);
@@ -498,15 +495,15 @@ eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
 var pointb=66.0*la;
 $B=new Float32Array($H,pointb,sz);
-// r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
-r.setConstants({nblnk:nblank$,blnk:blank$$,amin:agav[100],amax:agav[200],aavg:agav[0]});
-t.setConstants({nblnk:nblank$,blnk:blank$$});
+// r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
+t.setConstants({nblnk:nblank$,blnk:blank$});
 var T=false;
 function M(){
 vv=document.querySelector("#mv");
-// r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
-r.setConstants({nblnk:nblank$,blnk:blank$$,amin:agav[100],amax:agav[200],aavg:agav[0]});
-t.setConstants({nblnk:nblank$,blnk:blank$$});
+// r.setConstants({nblnk:nblank$,blnk:blank$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+r.setConstants({nblnk:nblank$,blnk:blank$,amin:agav[100],amax:agav[200],aavg:agav[0]});
+t.setConstants({nblnk:nblank$,blnk:blank$});
 if(T){return;}
 for(i=64;i>0;i--){
 var loca=$F+1;if(loca>64){loca=1;}
