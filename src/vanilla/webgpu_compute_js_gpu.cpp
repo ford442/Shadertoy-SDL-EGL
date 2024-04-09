@@ -60,7 +60,7 @@ let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let t=G.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk];
 return[P[0],P[1],P[2],P[3]];
-}).setGraphical(false).setTactic("precision").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([720,720]);
+}).setGraphical(false).setTactic("precision").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([720.0,720.0]);
 
 t.setConstants({blnk:offS});
 // var $$1=t(vv);
@@ -69,10 +69,10 @@ t.setConstants({blnk:offS});
 // FS.writeFile('/video/frame.gl',hp);
 setInterval(function(){
 var $$1=t(vv);
-// var fr=new Float32Array($$1);
+var fr=new Float32Array($$1,0,la);
  //   hp.set($$1);
-// console.log(fr[12]);
-FS.writeFile('/video/frame.gl',$$1);
+console.log(fr[12]);
+FS.writeFile('/video/frame.gl',fr);
 },16.6);
 }
   
