@@ -37,7 +37,7 @@ let SiZ=window.innerHeight;
 vvii.height=SiZ;
 let w$=parseInt(vvii.width);
 let h$=parseInt(vvii.height);
-let tstSiZ=720;
+let tstSiZ=438;
 if(running==0){
 setTimeout(function(){
 Module.ccall("startWebGPU");
