@@ -169,7 +169,7 @@ document.querySelector('#bcanvas').height=parseInt(window.innerHeight,10);
 document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
-videoFrames();
+videoFramesGpu();
 // let vsiz=document.querySelector('#vsiz').innerHTML;
 // Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 },1500);
