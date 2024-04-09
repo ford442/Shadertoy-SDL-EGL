@@ -32,17 +32,16 @@ function videoFramesGpu(){
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 //   let $H=Module.HEAPU8.buffer;
-  let G=new GPUX({mode:'gpu',canvas:bcanvas,context:contx});
- // let vv=document.querySelector("#mvi");
+let G=new GPUX({mode:'gpu',canvas:bcanvas,context:contx});
 let SiZ=window.innerHeight;
-vvi.height=SiZ;
+vvii.height=SiZ;
 let w$=parseInt(vvii.width);
 let h$=parseInt(vvii.height);
 let tstSiZ=720;
 if(running==0){
 setTimeout(function(){
 Module.ccall("startWebGPU");
-  console.log('Starting..');
+console.log('Starting..');
 running=1;
 },500);
 }
