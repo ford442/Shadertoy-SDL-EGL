@@ -5,6 +5,7 @@ FS.mkdir('/video');
 let running=0;
 let vv=document.querySelector('#mv');
 let vvi=document.querySelector('#mvi');
+let vvii=document.querySelector('#crp');
 
 function nearestPowerOf2(n){
 if(n&(n-1)){
@@ -32,11 +33,11 @@ const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 //   let $H=Module.HEAPU8.buffer;
   let G=new GPUX({mode:'gpu',canvas:bcanvas,context:contx});
-  let vv=document.querySelector("#mvi");
+ // let vv=document.querySelector("#mvi");
 let SiZ=window.innerHeight;
 vvi.height=SiZ;
-let w$=parseInt(vv.videoWidth);
-let h$=parseInt(vv.videoHeight);
+let w$=parseInt(vvii.width);
+let h$=parseInt(vvii.height);
 let tstSiZ=720;
 if(running==0){
 setTimeout(function(){
@@ -65,7 +66,7 @@ t.setConstants({blnk:offS});
 // hp.set($$1);
 // FS.writeFile('/video/frame.gl',hp);
 setInterval(function(){
-var $$1=t(vv);
+var $$1=t(vvii);
 var fr=new Uint8ClampedArray($$1);
 // hp.set(fr);
 console.log(fr[12]);
@@ -76,9 +77,9 @@ FS.writeFile('/video/frame.gl',fr);
   
 function videoFrames(){
 let SiZ=window.innerHeight;
-vvi.height=SiZ;
-let w$=parseInt(document.querySelector("#mvi").width);
-let h$=parseInt(document.querySelector("#mvi").height);
+vvii.height=SiZ;
+let w$=parseInt(vvii.width);
+let h$=parseInt(vvii.height);
 let tstSiZ=438;
 if(running==0){
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
@@ -99,7 +100,7 @@ var ratio=SiZ/h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl2=cnv.getContext('2d',{alpha:true}); // 
-gl2.drawImage(vvi,offS,0,tstSiZ,tstSiZ,0,0,tstSiZ,tstSiZ);
+gl2.drawImage(vvii,offS,0,tstSiZ,tstSiZ,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // let mageData=flipImageData(image);
 let imageData=image.data;
@@ -170,7 +171,7 @@ document.querySelector('#bcanvas').height=parseInt(window.innerHeight,10);
 document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
-videoFrames();
+videoFramesGpu();
 // let vsiz=document.querySelector('#vsiz').innerHTML;
 // Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 },1500);
