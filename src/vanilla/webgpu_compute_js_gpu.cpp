@@ -30,7 +30,7 @@ return imageData;
 function videoFramesGpu(){
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
-  let $H=Module.HEAPU8.buffer;
+//   let $H=Module.HEAPU8.buffer;
   let G=new GPUX({mode:'gpu',canvas:bcanvas,context:contx});
   let vv=document.querySelector("#mvi");
 let SiZ=window.innerHeight;
@@ -59,16 +59,16 @@ let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let t=G.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk];
 return[P[0],P[1],P[2],P[3]];
-}).setGraphical(false).setTactic("precision").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([720.0,720.0]);
+}).setGraphical(true).setTactic("precision").setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([720.0,720.0]);
 t.setConstants({blnk:offS});
 // var $$1=t(vv);
-var hp=new Float32Array($H,0,la);
+// var hp=new Float32Array($H,0,la);
 // hp.set($$1);
 // FS.writeFile('/video/frame.gl',hp);
 setInterval(function(){
 var $$1=t(vv);
 var fr=new Uint8ClampedArray($$1);
-hp.set(fr);
+// hp.set(fr);
 console.log(fr[12]);
 console.log(hp[12]);
 FS.writeFile('/video/frame.gl',fr);
