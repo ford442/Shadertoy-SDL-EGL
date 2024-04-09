@@ -29,90 +29,66 @@
 #include <GL/glext.h>
 #include <emscripten/html5_webgl.h>
 
-void avgFrm(int Fnum,int leng,float *ptr,float *aptr){
-float max=0.0f;
-float min=1.0f;
-float sum=0.0f;
-float avgSum=0.0f;
-float minSum=0.0f;
-float maxSum=0.0f;
+float max;
+float min;
+float sum;
+float avgSum;
+float minSum;
+float maxSum;
+
+void avgFrm(int Fnum,int leng,float * ptr,float * aptr){
+max=0.0f;
+min=1.0f;
+sum=0.0f;
+avgSum=0.0f;
+minSum=0.0f;
+maxSum=0.0f;
 for (int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
-if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
+if(min>ptr[i]&&ptr[i]>0.0f){min=ptr[i];}
 }
-sum=sum/leng;
-aptr[Fnum]=sum;
+aptr[Fnum]=sum/leng;
 aptr[Fnum+100]=min;
 aptr[Fnum+200]=max;
 for(int i=33;i<65;i++){
 avgSum+=aptr[i];
 }
-aptr[0]=avgSum/32;
+aptr[0]=avgSum/32.0f;
 for(int i=33;i<65;i++){
 minSum+=aptr[i+100];
 }
-aptr[100]=minSum/32;
+aptr[100]=minSum/32.0f;
 for(int i=33;i<65;i++){
 maxSum+=aptr[i+200];
 }
-aptr[200]=maxSum/32;
- std::cout << maxSum/32 << std::endl;
-
-return;
-}
-
-void avgFrmD(int Fnum,int leng,double *ptr,double *aptr){
-double max=0.0;
-double min=1.0;
-double sum=0.0;
-double avgSum=0.0;
-double minSum=0.0;
-double maxSum=0.0;
-for (int i=0;i<leng;i++){
-sum+=ptr[i];
-if(max<ptr[i]){max=ptr[i];}
-if(min>ptr[i]&&ptr[i]>0){min=ptr[i];}
-}
-sum=sum/leng;
-aptr[Fnum]=sum;
-aptr[Fnum+100]=min;
-aptr[Fnum+200]=max;
-for(int i=33;i<65;i++){
-avgSum+=aptr[i];
-}
-aptr[0]=avgSum/32.0;
-for(int i=33;i<65;i++){
-minSum+=aptr[i+100];
-}
-aptr[100]=minSum/32.0;
-for(int i=33;i<65;i++){
-maxSum+=aptr[i+200];
-}
-aptr[200]=maxSum/32.0;
+aptr[200]=maxSum/32.0f;
+//  //  //
+EM_ASM({
+let H1=Module.HEAPF32.buffer;
+let viewH=new Float32Array(H1,0,300);
+viewH[0]=$0;
+viewH[100]=$1;
+viewH[200]=$2;
+},aptr[0],aptr[100],aptr[200]);
+//  //  //
 return;
 }
 
 extern "C" {
 
-void nano(int Fnum,int leng,float *ptr,float *aptr){
+void nano(int Fnum,int leng,float * ptr,float * aptr){
 avgFrm(Fnum,leng,ptr,aptr);
-return;
-}
-
-void nanoD(int Fnum,int leng,double *ptr,double *aptr){
-avgFrmD(Fnum,leng,ptr,aptr);
-return;
 }
 
 }
 
 EM_JS(void,ma,(),{
- // "use strict";
+"use strict";
 const pnnl=document.body;
 let vv=document.querySelector("#mv");
 let intervalBackward;
-
+ 
 function back(){
 intervalBackward=setInterval(function(){
 if(vv.currentTime==0){
@@ -206,39 +182,26 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }
 }
-let dbg_avag=document.querySelector('#dbg_avag').innerHTML;
-let dbg_amin=document.querySelector('#dbg_amin').innerHTML;
-let dbg_amax=document.querySelector('#dbg_amax').innerHTML;
-let dbg_favg=document.querySelector('#dbg_favg').innerHTML;
-let dbg_fmin=document.querySelector('#dbg_fmin').innerHTML;
-let dbg_fmax=document.querySelector('#dbg_fmax').innerHTML;
+
 let la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
-let pointa=77*la;
-let agav=new Float32Array($H,pointa,300);
+var pointa=77.0*la;
+var agav=new Float32Array($H,pointa,300);
 let sz=(h$*h$)/8;
 let blank$=Math.max((w$-h$)/4,0);
 let nblank$=Math.max((h$-w$)/2,0);
-let avag=0.750;
-let min=1.0;
-let max=0.0;
+var avag=0.750;
+var min=1.0;
+var max=0.0;
 agav.fill(avag,0,33);
 agav.fill(min,100,33);
 agav.fill(max,200,33);
 const bcanvas=document.querySelector("#bcanvas");
-const contx=bcanvas.getContext("webgl2",{colorType:'float32',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:true,premultipliedAlpha:false,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
-contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
-contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
-// contx.blendColor(1.0,1.0,1.0,1.0);
-// contx.blendColor(1.0,1.0,1.0,0.0);
-// contx.blendColor(0.0,0.0,0.0,1.0);
-// contx.blendColor(0.0,0.0,0.0,0.0);
- // contx.blendColor(0.0,0.0,0.0,0.5);
-  // contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-// contx.blendEquationSeparate(gl.FUNC_ADD,gl.MAX);
+const contx=bcanvas.getContext("webgl2",{colorType:'float32',precision:'highp',colorSpace:'display-p3',alpha:true,depth:true,stencil:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:false,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
+
 contx.getExtension('ARB_robust_buffer_access_behavior');
 // contx.getExtension('ARB_ES3_compatibility');
 // contx.getExtension('GL_EXTENSIONS');
-contx.getExtension('GL_ALL_EXTENSIONS');
+// contx.getExtension('GL_ALL_EXTENSIONS');
 // contx.getExtension('KHR_no_error');
 // contx.getExtension('GL_REGAL_enable');
 // contx.getExtension('OES_fragment_precision_high'); // deprecated
@@ -420,12 +383,25 @@ contx.getExtension('EGL_EXT_create_surface_from_window');
 contx.getExtension('EGL_EXT_surface_attachment');
 contx.getExtension('EXT_texture_storage');
 
-contx.disable(gl.DITHER);
+contx.hint(gl.FRAGMENT_SHADER_DERIVATIVE_HINT,gl.NICEST);
+contx.hint(gl.GENERATE_MIPMAP_HINT,gl.NICEST);
+// contx.blendColor(1.0,1.0,1.0,1.0);
+// contx.blendColor(1.0,1.0,1.0,0.0);
+// contx.blendColor(0.0,0.0,0.0,1.0);
+// contx.blendColor(0.0,0.0,0.0,0.0);
+ // contx.blendColor(0.0,0.0,0.0,0.5);
+  //  contx.blendColor(1.0,1.0,1.0,1.0);
+  //  contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+  //  contx.blendEquationSeparate(gl.FUNC_SUBTRACT,gl.MAX);
+  // contx.blendFuncSeparate(gl.DST_COLOR,gl.SRC_COLOR,gl.ONE_MINUS_SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+// contx.blendEquationSeparate(gl.FUNC_ADD,gl.MAX);
+   //  contx.disable(gl.DITHER);
 // contx.drawingBufferColorMetadata={mode:'extended'};
 // contx.drawingBufferColorSpace='display-p3';
 
-const g=new GPUX({canvas:bcanvas,context:contx});
+const g=new GPUX({canvas:bcanvas,webGl:contx});
 const g2=new GPUX();
+
 const glslAve=`float Ave(float a,float b,float c){return(a+b+c)/3.0;}`;
 const glslSilver=`float Silver(float a){return((a+0.75+0.75+((a+0.75)/2.0))/4.0);}`;
 const glslGoldR=`float GoldR(float a){return((a+0.831+0.831+0.831+((a+0.831)/2.0))/5.0);}`;
@@ -436,7 +412,7 @@ const glslAlphe1=`float AlpheV1(float a,float b,float c,float d,float e,float f,
 // const glslAlphe1=`float AlpheV1(float a,float b,float c,float d,float e,float f,float g){return((0.7+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-e)*((1.0-g)*0.1))))))/3.0);}`;
 // const glslAlphe1=`float AlpheV1(float a,float b,float c,float d,float e,float f,float g){return((g+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/4.0);}`;
 // const glslAlphe1=`float AlpheV1(float a,float b,float c,float d,float e,float f,float g){return((g+(3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
-  
+
 const glslAlphe2=`float AlpheV2(float a,float b,float f,float g){return(((3.0*((1.0-b)-(((((1.0-f)-(a)+b)*1.5)/2.0)+((f-0.5)*((1.0-f)*0.25))-((0.5-f)*(f*0.25))-((g-f)*((1.0-g)*0.1))))))/3.0);}`;
 const glslAveg=`float Aveg(float a,float b){return(1.0-(((a)-(b))*((a)*(1.0/(1.0-b)))));}`;
 
@@ -460,18 +436,18 @@ let t=g.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk];
 var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],av$];
-}).setImmutable(true).setTactic("precision").setPipeline(true).setPrecision('single').setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]);
+}).setImmutable(true).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]);
 
 let r=g.createKernel(function(f){
 var p=f[this.thread.y][this.thread.x];
-var $fmax=this.constants.fmax;
-var $fmin=this.constants.fmin;
+// var $fmax=this.constants.fmax;
+// var $fmin=this.constants.fmin;
 var $amax=this.constants.amax;
 var $amin=this.constants.amin;
-var $favg=this.constants.favg;
+// var $favg=this.constants.favg;
 var $aavg=this.constants.aavg;
-var alph=AlpheV1($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
-// var alph=AlpheV2($amax,$amin,$aavg,p[3]);
+// var alph=AlpheV1($amax,$amin,$fmax,$fmin,$favg,$aavg,p[3]);
+var alph=AlpheV2($amax,$amin,$aavg,p[3]);
 var Min=4.0*(($amax-($aavg-$amin))/2.0);
 var ouT=Math.max(Min,alph);
 var aveg=Aveg(p[3],ouT);
@@ -486,18 +462,19 @@ blank$=Math.max((w$-h$)/4,0);
 nblank$=Math.max((h$-w$)/2,0);
 la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
 sz=(h$*h$)/8;
-pointa=77*la;
+var pointa=77.0*la;
 // agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
-var pointb=66*la;
+var pointb=77.0*la;
 var $B=new Float32Array($H,pointb,sz);
 var $F=1;
 var $Bu=33;
-r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+// r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+r.setConstants({nblnk:nblank$,blnk:blank$$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$$});
 var $$1=t(vv);
 for (i=0;i<65;i++){
@@ -512,23 +489,25 @@ blank$=Math.max((w$-h$)/4,0);
 nblank$=Math.max((h$-w$)/2,0);
 la=nearestPowerOf2((((h$+(blank$$*2))*h$*4)/4)*4);
 sz=(h$*h$)/8;
-pointa=77*la;
+var pointa=77.0*la;
 // var agav=new Float32Array($H,pointa,300);
 R.setOutput([sz]);
 for(i=0;i<65;i++){
 var j=i+1;
 eval("var point"+j+"="+i+"*la;var $"+j+"=new Float32Array($H,point"+j+",la);");
 }
-pointb=66*la;
-var $B=new Float32Array($H,pointb,sz);
-r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+var pointb=66.0*la;
+$B=new Float32Array($H,pointb,sz);
+// r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+r.setConstants({nblnk:nblank$,blnk:blank$$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$$});
 var T=false;
 function M(){
 vv=document.querySelector("#mv");
-r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+// r.setConstants({nblnk:nblank$,blnk:blank$$,favg:agav[$F],fmin:agav[$F+100],fmax:agav[$F+200],amin:agav[100],amax:agav[200],aavg:agav[0]});
+r.setConstants({nblnk:nblank$,blnk:blank$$,amin:agav[100],amax:agav[200],aavg:agav[0]});
 t.setConstants({nblnk:nblank$,blnk:blank$$});
-  if(T){return;}
+if(T){return;}
 for(i=64;i>0;i--){
 var loca=$F+1;if(loca>64){loca=1;}
 var locb=$Bu+1;if(locb>64){locb=1;}
@@ -536,15 +515,8 @@ eval("if ($F==="+i+"){var $r"+i+"=t($"+i+");r($r"+i+");var $$"+$Bu+"=t(vv);$"+$B
 }
 var $bb=R(vv);
 $B.set($bb,0,sz);
-pointb=66*la;
+var pointb=66.0*la;
 Module.ccall("nano",null,["Number","Number","Number","Number"],[$F,sz,pointb,pointa]);
-dbg_fmax=agav[$F+200];
-dbg_fmin=agav[$F+100];
-dbg_avag=agav[0];
-dbg_favg=agav[$F];
-dbg_amin=agav[100];
-dbg_amax=agav[200];
- 
 setTimeout(function(){
 M();
 },16.66);
@@ -561,8 +533,10 @@ T=true;
 })
 
 EM_BOOL mouse_call(int eventType,const EmscriptenMouseEvent *e,void *userData);
-static const char8_t *read_file(const char *filename);
+static const char *read_file_c(const char *filename);
   
+extern "C" {
+
 SDL_AudioDeviceID dev;
 struct{Uint8* snd;int pos;Uint32 slen;SDL_AudioSpec spec;}wave;
 
@@ -622,6 +596,9 @@ wave.spec.callback=bfr;
 opn_aud();
 return;
 }
+
+}
+
 
 GLfloat x;
 GLfloat y;
@@ -698,7 +675,7 @@ GLubyte indc[]={gu3,gu0,gu1,gu1,gu2,gu3,gu4,gu0,gu3,gu3,gu7,gu4,gu1,gu5,gu6,gu6,
 void renderFrame(){
 EMSCRIPTEN_RESULT ret;
 t2=steady_clock::now();
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT);
 duration<double>time_spana=duration_cast<duration<double>>(t2-t1);
 Ttime=time_spana.count();
 ret=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,1,mouse_call);
@@ -709,15 +686,15 @@ mouseX=x/S;
 mouseY=(S-y)/S;
 uni(mouseX,mouseY,Ttime,iFrame);
 glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_BYTE,indc);
-glFlush();
+// glFlush();
 // nanosleep(&req,&rem);
 iFrame++;
-glFinish();
+// glFinish();
 return;
 }
 
-static const char8_t *read_file(const char *filename){
-char8_t *result=NULL;
+static const char *read_file_c(const char *filename){
+char *result=NULL;
 long length=0;
 FILE *file=fopen(filename,"r");
 if(file){
@@ -732,9 +709,9 @@ if(status!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char8_t*>(malloc((length+1)*sizeof(char8_t)));
+result=static_cast<char*>(malloc((length+1)*sizeof(char)));
 if(result){
-size_t actual_length=fread(result,sizeof(char8_t),length,file);
+size_t actual_length=fread(result,sizeof(char),length,file);
 result[actual_length++]={'\0'};
 } 
 fclose(file);
@@ -768,30 +745,10 @@ Vertex vertices[]={{gFm1,gFm1,gF,gF},{gF,gFm1,gF,gF},{gF,gF,gF,gF},{gFm1,gF,gF,g
 
 const char common_shader_header_gles3[]=
 "#version 300 es\n"
-"#pragma STDGL(precision highp double)\n"
-"#pragma STDGL(precision highp uint)\n"
-"#pragma STDGL(precision highp atomic_uint)\n"
-// "#pragma STDGL(precise none)\n"
-// "#pragma STDGL(strict off)\n"
-"#pragma STDGL(invariant all)\n"
-"#pragma STDGL(centroid all)\n"
-"#pragma STDGL(sample all)\n"
-"#pragma STDGL(fastmath on)\n"
-"#pragma STDGL(fastprecision off)\n"
-"#pragma STDGL(unroll all)\n"
-// "#pragma STDGL(ifcvt none)\n"
-"#pragma STDGL(inline none)\n"
-"#undef HW_PERFORMANCE\n"
-"#define HW_PERFORMANCE 1\n"
 "precision highp int;\n"
 "precision highp float;\n"
-"precision highp sampler3D;precision highp sampler2D;"
-"precision highp samplerCube;precision highp sampler2DArray;precision highp sampler2DShadow;"
-"precision highp isampler2D;precision highp isampler3D;precision highp isamplerCube;"
-"precision highp isampler2DArray;precision highp usampler2D;precision highp usampler3D;"
-"precision highp usamplerCube;precision highp usampler2DArray;precision highp samplerCubeShadow;"
-"precision highp sampler2DArrayShadow;\n";
-  
+"precision lowp sampler3D;precision highp sampler2D;";
+
 const char vertex_shader_body_gles3[]=
 "\n layout(location=0)in vec4 iPosition;void main(){gl_Position=iPosition;}\n";
   
@@ -801,7 +758,9 @@ const char fragment_shader_header_gles3[]=
 "out vec4 fragColor;\n";
   
 const char fragment_shader_footer_gles3[]=
-"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n"
+"void main(){mainImage(fragColor,gl_FragCoord.xy);}\n";
+ 
+ /*
 "#define mainImage mainImage0(out dvec4 O,dvec2 U);"
 "int _N=3;void mainImage(out dvec4 O,dvec2 U){"
 "dvec4 o;O=dvec4(0);"
@@ -809,7 +768,8 @@ const char fragment_shader_footer_gles3[]=
 "O += o;}O /= double(_N*_N);O=pow(O,dvec4(2.077038f/1.0f,2.184228f/1.0f,2.449715f/1.0f,1.0f));}"
 // "O += o;}O /= double(_N*_N);O=pow(O,dvec4(1.077038f/1.0,1.184228f/1.0,1.449715f/1.0,1.0));}"
 "void mainImage0\n\0";
-  
+*/
+ 
 const char* common_shader_header=common_shader_header_gles3;
 const char* vertex_shader_body=vertex_shader_body_gles3;
 const char* fragment_shader_header=fragment_shader_header_gles3;
@@ -863,8 +823,8 @@ EGL_ALPHA_SIZE,16,
 EGL_DEPTH_SIZE,32,
 EGL_STENCIL_SIZE,16,
 EGL_BUFFER_SIZE,64,
-EGL_SAMPLE_BUFFERS,4,
-EGL_SAMPLES,4,
+// EGL_SAMPLE_BUFFERS,4,
+// EGL_SAMPLES,4,
 EGL_NONE
 };
   
@@ -876,7 +836,6 @@ attr.antialias=EM_TRUE;
 attr.premultipliedAlpha=EM_FALSE;
 attr.preserveDrawingBuffer=EM_TRUE;
 attr.enableExtensionsByDefault=EM_TRUE;
-attr.renderViaOffscreenBackBuffer=EM_FALSE;
 attr.powerPreference=EM_WEBGL_POWER_PREFERENCE_HIGH_PERFORMANCE;
 attr.failIfMajorPerformanceCaveat=EM_FALSE;
 attr.majorVersion=2;
@@ -1085,12 +1044,12 @@ emscripten_webgl_make_context_current(ctx);
 // nanosleep(&req,&rem);
 glGenBuffers(1,&VBO);
 glBindBuffer(GL_ARRAY_BUFFER,VBO);
-glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_DYNAMIC_DRAW);
+glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STREAM_DRAW);
 glGenBuffers(1,&EBO);
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(indc),indc,GL_STREAM_DRAW);
 // nanosleep(&req,&rem);
-static const char* default_fragment_shader=(char*)read_file(fileloc);
+static const char* default_fragment_shader=(char*)read_file_c(fileloc);
 // nanosleep(&req,&rem);
 // nanosleep(&req,&rem);
 sources[0]=common_shader_header;
@@ -1142,12 +1101,17 @@ glEnable(GL_DEPTH_TEST);
 // glDisable(GL_SCISSOR_TEST);
 // glDepthFunc(GL_LESS);
 // glFrontFace(GL_CW);
-glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-// glEnable(GL_BLEND);
+//glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+ 
+  // glBlendFuncSeparate(GL_SRC_COLOR,GL_ONE_MINUS_DST_COLOR,GL_DST_COLOR,GL_SRC_ALPHA);
+  // glBlendEquationSeparate(GL_FUNC_SUBTRACT,GL_MIN);
+ 
+  // glEnable(GL_BLEND);
 // glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-glBlendColor(F0,F0,F0,0.5);
+// glBlendColor(F0,F0,F0,0.5);
+ 
 // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-glDisable(GL_DITHER);
+  // glDisable(GL_DITHER);
 t1=steady_clock::now();
 glViewport(0,0,GLint(Size),GLint(Size));
 emscripten_set_main_loop((void(*)())renderFrame,0,0);
@@ -1158,7 +1122,7 @@ return;
 extern "C" {
 
 void str(){
-strt();
+// strt();
 return;
 }
 
@@ -1174,10 +1138,10 @@ return;
 
 }
 
-int main(void){
+int main(){
 EM_ASM({
 FS.mkdir("/snd");
 FS.mkdir("/shader");
 });
-return 1;
+return 0;
 }
