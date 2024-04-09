@@ -74,7 +74,7 @@ FS.writeFile('/video/frame.gl',fr);
 }
   
 function videoFrames(){
-let SiZ=window.innerHeight;
+let SiZ=438;
 let w$=parseInt(vvii.width);
 let h$=parseInt(vvii.height);
 let tstSiZ=438;
