@@ -79,7 +79,7 @@ let SiZ=window.innerHeight;
 vvi.height=SiZ;
 let w$=parseInt(document.querySelector("#mvi").width);
 let h$=parseInt(document.querySelector("#mvi").height);
-let tstSiZ=720;
+let tstSiZ=438;
 if(running==0){
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 setTimeout(function(){
