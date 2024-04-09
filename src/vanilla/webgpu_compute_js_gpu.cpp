@@ -95,23 +95,23 @@ cnvb.width=SiZ;
 var ratio=SiZ/h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-  
+
 let t=G.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk];
 return[P[0],P[1],P[2],P[3]];
 }).setGraphical(false).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([720,720]);
-  
+
 t.setConstants({blnk:offS});
 // var $$1=t(vv);
 // var hp=new Float32Array($H,0,la);
 // hp.set($$1);
 // FS.writeFile('/video/frame.gl',hp);
 setInterval(function(){
-    var $$1=t(vv);
-  var fr=new Float32Array($$1);
-
+var $$1=t(vv);
+var fr=new Float32Array($$1);
  //   hp.set($$1);
-    FS.writeFile('/video/frame.gl',fr);
+  console.log(fr[12]);
+FS.writeFile('/video/frame.gl',fr);
 },16.6);
 }
     
