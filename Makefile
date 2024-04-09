@@ -94,7 +94,7 @@ b3_compute_tex_gpu:
 	 webgpu_egl_gpu.o 
 
 b3_compute_tex_gpu2:
-	 em++ src/vanilla/webgpu_egl_gpu.cpp -fchar8_t -std=c++14 $(wGL_FLAGS) \
+	 em++ src/vanilla/webgpu_egl_gpu2.cpp -fchar8_t -std=c++14 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -lEGL  $(LDFLAGS) -O0 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-tex-gpu2.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=1 \
