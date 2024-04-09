@@ -71,7 +71,7 @@ FS.writeFile('/video/frame.gl',pixelData);
 
 function videoFramesGpu(){
 //  let $H=Module.HEAPF32.buffer;
-  let G=new GPUX(mode:'gpu');
+  let G=new GPUX({mode:'gpu'});
   let vv=document.querySelector("#mvi");
 let SiZ=window.innerHeight;
 vvi.height=SiZ;
