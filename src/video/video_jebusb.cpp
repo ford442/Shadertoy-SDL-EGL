@@ -29,20 +29,13 @@
 #include <GL/glext.h>
 #include <emscripten/html5_webgl.h>
 
+void avgFrm(int Fnum,int leng,float * ptr,float * aptr){
 float max=0.0f;
 float min=1.0f;
 float sum=0.0f;
 float avgSum=0.0f;
 float minSum=0.0f;
 float maxSum=0.0f;
-
-void avgFrm(int Fnum,int leng,float * ptr,float * aptr){
-max=0.0f;
-min=1.0f;
-sum=0.0f;
-avgSum=0.0f;
-minSum=0.0f;
-maxSum=0.0f;
 for (int i=0;i<leng;i++){
 sum+=ptr[i];
 if(max<ptr[i]){max=ptr[i];}
