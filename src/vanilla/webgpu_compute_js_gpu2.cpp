@@ -34,7 +34,6 @@ function videoFramesGpu(){
 //   let $H=Module.HEAPU8.buffer;
 let G=new GPUX({mode:'gpu'});
 let SiZ=window.innerHeight;
-vvii.height=SiZ;
 let w$=parseInt(vvii.width);
 let h$=parseInt(vvii.height);
 let tstSiZ=438;
