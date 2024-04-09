@@ -69,15 +69,16 @@ colorAttachment.clearValue=clearC.at(0,0);
 wrpca.at(0,0)=colorAttachment;
 INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
 wtv.at(3,3)=INTextureView;
+  videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
+wtv.at(2,2)=videoTextureView;
+
+  /*
 videoAttachment.view=wtv.at(3,3);
 videoAttachment.storeOp=WGPU_STORE_OP_STORE;
 // videoAttachment.loadOp=WGPU_LOAD_OP_LOAD;
 videoAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
 videoAttachment.clearValue=clearC.at(0,0);
 wrpca.at(1,1)=videoAttachment;
-videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
-wtv.at(2,2)=videoTextureView;
-  /*
 depthTextureView=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
 wtv.at(0,0)=depthTextureView;
 depthAttachment.view=wtv.at(0,0);
@@ -106,7 +107,7 @@ depthAttachment2.stencilReadOnly=EM_TRUE;
 depthAttachment2.stencilLoadOp=WGPU_LOAD_OP_CLEAR;
 depthAttachment2.stencilStoreOp=WGPU_STORE_OP_UNDEFINED;
 wrpdsa.at(1,1)=depthAttachment2;
-  */
+
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(1,1); // &wrpca.at(0,0); // 
 // passDesc.depthStencilAttachment=wrpdsa.at(1,1);  //  wrpdsa.at(0,0); //
@@ -117,6 +118,7 @@ renderTimestampWrites.beginningOfPassWriteIndex=-1;
 renderTimestampWrites.endOfPassWriteIndex=-1;
 passDesc.timestampWrites=renderTimestampWrites;
 wrpd.at(0,0)=passDesc;
+    */
 passDesc2.numColorAttachments=1;
 passDesc2.colorAttachments=&wrpca.at(0,0); // &wrpca.at(1,1); //
 // passDesc2.depthStencilAttachment=wrpdsa.at(0,0);
@@ -130,7 +132,7 @@ std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambu
 frame_tensor.at(0,0)=data;
   // wetd.at(0,0).source=texid.at(0,0);
 wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
-   //  Render Pass
+/*   //  Render Pass
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
@@ -145,7 +147,7 @@ wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
-  //  Render Pass 2  (sampler)
+*/  //  Render Pass 2  (sampler)
 wceA={};
 wceB=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(1,1)=wceB;
@@ -250,7 +252,7 @@ WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
 textureDescriptorIn.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorIn.format=wtf.at(2,2);
 // textureDescriptorIn.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_STORAGE_BINDING;
-textureDescriptorIn.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BINDING;
+textureDescriptorIn.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
 textureDescriptorIn.width=sze.at(1,1);
 textureDescriptorIn.height=sze.at(1,1); // default = 1;
 textureDescriptorIn.depthOrArrayLayers=1;
