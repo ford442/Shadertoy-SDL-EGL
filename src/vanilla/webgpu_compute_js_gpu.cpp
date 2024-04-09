@@ -99,10 +99,12 @@ cnvb.width=SiZ;
 var ratio=SiZ/h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
+  
 let t=G.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk];
 return[P[0],P[1],P[2],P[3]];
-}).setImmutable(true).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([720,720]);
+}).setImmutable(true).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([720.0,720.0]);
+  
 t.setConstants({blnk:offS});
 var $$1=t(vv);
 var hp=new Float32Array($H,0,la);
@@ -113,26 +115,8 @@ setInterval(function(){
     hp.set($$1);
     FS.writeFile('/video/frame.gl',hp);
 },16.6);
-
-    /*
-const gl2=cnv.getContext('2d',{alpha:true}); // 
-gl2.drawImage(vvi,offS,0,tstSiZ,tstSiZ,0,0,tstSiZ,tstSiZ);
-let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
-// let mageData=flipImageData(image);
-let imageData=image.data;
-let pixelData=new Uint8ClampedArray(imageData);
-FS.writeFile('/video/frame.gl',pixelData);
-setInterval(function(){
-gl2.drawImage(vvi,offS,0,tstSiZ,tstSiZ,0,0,tstSiZ,tstSiZ);
-image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
-imageData=image.data;
-pixelData=new Uint8ClampedArray(imageData,0,la);
-FS.writeFile('/video/frame.gl',pixelData);
-},16.6);
-*/
 }
-  
-  
+    
 function getShader(pth,fname){
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
