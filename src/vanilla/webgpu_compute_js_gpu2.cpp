@@ -75,7 +75,6 @@ FS.writeFile('/video/frame.gl',fr);
   
 function videoFrames(){
 let SiZ=window.innerHeight;
-vvii.height=SiZ;
 let w$=parseInt(vvii.width);
 let h$=parseInt(vvii.height);
 let tstSiZ=438;
@@ -94,7 +93,7 @@ cnv.height=tstSiZ;
 cnvb.height=SiZ;
 cnv.width=tstSiZ;
 cnvb.width=SiZ;
-var ratio=SiZ/h$;
+var ratio=w$/h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl2=cnv.getContext('2d',{alpha:true}); // 
