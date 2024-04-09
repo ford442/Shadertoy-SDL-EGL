@@ -132,7 +132,7 @@ video_resurection_webgpuc_safe:
 	 emcc video_jebusc.o $(STDS) -fPIC -DLIB_WEBGPU -DLIB_WEBGPU_CPP20 -o $(BIN_NAME)-resCsafe.js $(STDS) $(GL_FLAGS) $(BOOST_FLAGS) $(LINK_FLAGS_safe) $(LINK_SIMD_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -sFORCE_FILESYSTEM=1 -sUSE_SDL=2 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS=['wgpu_buffer_map_sync','navigator_gpu_request_adapter_sync','wgpu_adapter_request_device_sync'] \
-	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano","_nanoD"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/fluid.js --pre-js js/flui.js --pre-js js/setUp.js --pre-js js/startUp.js -lmath.js -lhtml5.js -lint53.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --js-library lib/lib_webgpu.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 --post-js js/pagec_webgpuc.js --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js --closure 0
