@@ -71,7 +71,7 @@ FS.writeFile('/video/frame.gl',pixelData);
 
 function videoFramesGpu(){
 //  let $H=Module.HEAPF32.buffer;
-  let G=new GPUX();
+  let G=new GPUX(mode:'gpu');
   let vv=document.querySelector("#mvi");
 let SiZ=window.innerHeight;
 vvi.height=SiZ;
@@ -99,7 +99,7 @@ let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let t=G.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk];
 return[P[0],P[1],P[2],P[3]];
-}).setGraphical(false).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([720.0,720.0]);
+}).setGraphical(false).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([720,720]);
   
 t.setConstants({blnk:offS});
 // var $$1=t(vv);
