@@ -106,7 +106,7 @@ t.setConstants({blnk:offS});
 var $$1=t(vv);
 var hp=new Float32Array($H,0,la);
 hp.set($$1);
-FS.writeFile('/video/frame.gl',pixelData);
+FS.writeFile('/video/frame.gl',hp);
   
     /*
 const gl2=cnv.getContext('2d',{alpha:true}); // 
