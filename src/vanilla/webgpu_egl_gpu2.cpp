@@ -124,13 +124,13 @@ passDesc2.occlusionQuerySet=0;
 passDesc2.maxDrawCount=100;
 passDesc2.timestampWrites=renderTimestampWrites;
 wrpd.at(1,1)=passDesc2;
-/*       //  Frame Data
+      //  Frame Data
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 frame_tensor.at(0,0)=data;
   // wetd.at(0,0).source=texid.at(0,0);
-// wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
-*/   //  Render Pass
+wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
+   //  Render Pass
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
