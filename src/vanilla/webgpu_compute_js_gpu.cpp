@@ -38,8 +38,8 @@ let tstSiZ=720;
 if(running==0){
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 setTimeout(function(){
-Module.ccall("startWebGPUi",null,"Number",[tstSiZ]);
-  console.log('Starting..');
+Module.ccall("startWebGPU");
+console.log('Starting..');
 running=1;
 },500);
 }
