@@ -871,7 +871,7 @@ return;
 }
 
 void startWebGPUb(){
-WGPU_Start(sz);
+WGPU_Start();
 return;
 }
 
