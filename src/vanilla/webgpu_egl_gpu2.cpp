@@ -851,7 +851,7 @@ wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
 
-EM_BOOL WGPU_Start(int sz){
+EM_BOOL WGPU_Start(){
 sze.at(1,1)=438;
 options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
