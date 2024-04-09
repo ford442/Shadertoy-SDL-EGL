@@ -108,13 +108,15 @@ let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 let imageData=image.data;
 let pixelData=new Uint8ClampedArray(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
-setInterval(function(){
+/*
+  setInterval(function(){
 gl2.drawImage(vvi,offS,0,tstSiZ,tstSiZ,0,0,tstSiZ,tstSiZ);
 image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 imageData=image.data;
 pixelData=new Uint8ClampedArray(imageData,0,la);
 FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
+  */
 }
     
 function getShader(pth,fname){
@@ -171,7 +173,7 @@ document.querySelector('#bcanvas').height=parseInt(window.innerHeight,10);
 document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
-videoFramesGpu();
+videoFrames();
 // let vsiz=document.querySelector('#vsiz').innerHTML;
 // Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 },1500);
