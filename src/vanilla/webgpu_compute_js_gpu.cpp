@@ -55,7 +55,6 @@ cnvb.width=SiZ;
 var ratio=SiZ/h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-
 let t=G.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk];
 return[P[0],P[1],P[2],P[3]];
@@ -76,12 +75,10 @@ FS.writeFile('/video/frame.gl',fr);
 }
   
 function videoFrames(){
-let vw$=parseInt(document.querySelector("#mvi").videoWidth);
-let vh$=parseInt(document.querySelector("#mvi").videoHeight);
 let SiZ=window.innerHeight;
 vvi.height=SiZ;
-let w$=parseInt(document.querySelector("#mvi").videoWidth);
-let h$=parseInt(document.querySelector("#mvi").videoHeight);
+let w$=parseInt(document.querySelector("#mvi").width);
+let h$=parseInt(document.querySelector("#mvi").height);
 let tstSiZ=720;
 if(running==0){
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
