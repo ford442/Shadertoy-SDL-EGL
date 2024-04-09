@@ -1,74 +1,5 @@
 #include "../../include/vanilla/webgpu_fix.hpp"
 
-char wgl_cmp_src[2000]=
-// "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
-// "@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
-"@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
-// "@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba32float,write>;\n"
-// "@group(0)@binding(4)var resizeSampler: sampler;\n"
-"@group(0)@binding(5)var <uniform> iTime: u32;\n"
-"@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba32float,write>;\n"
-// "@group(0)@binding(7)var colorOUT: texture_storage_2d <rgba8unorm,write>;\n"
-"@compute@workgroup_size(96,1,1)\n"
-"fn main_image(@builtin(local_invocation_id)thread_id:vec3<u32>){\n"
-"var threadU:u32=thread_id.x;\n"
-"var threadF:f32=f32(thread_id.x);\n"
-"var outSizeU:u32=textureDimensions(videoOUT).x;\n"
-"var loopSizeU:u32=u32(ceil(f32(textureDimensions(videoOUT).x)/96.0f));\n"
-"var loopSizeF:f32=f32(ceil(f32(textureDimensions(videoOUT).x)/96.0f));\n"
-"var inSizeU:u32=textureDimensions(textureIN).x;\n"
-"var sizeRatio:f32=f32(inSizeU)/f32(outSizeU);\n"
-"for(var x:u32=0u;x<=outSizeU;x=x+1u){\n"
-"var xPos:u32=u32(round(f32(x)*sizeRatio));\n"
-"var outX:u32=x;\n"
-"for(var y:u32=0u;y<=loopSizeU;y=y+1u){\n"
-"var yPos:u32=u32(round((f32(y)+(loopSizeF*threadF))*sizeRatio));\n"
-// "yPos+=u32(loopSizeF*sizeRatio)*threadU;\n"
-"var outY:u32=y+(loopSizeU*threadU);\n"
-"var INtexCoord:vec2<u32>=vec2<u32>(xPos,yPos);\n"
-"var color:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
-/*
-"color.r-=0.000005f;\n"
-"color.r+=0.00001f;\n"
-"color.g-=0.000005f;\n"
-"color.g+=0.00001f;\n"
-"color.b-=0.000005f;\n"
-"color.b+=0.00001f;\n"
-*/
-"textureStore(videoOUT,vec2<u32>(outX,outY),color);\n"
-"}\n"
-"}\n"
-// "outputBuffer[2]=f32(textureDimensions(textureIN).x);\n"
-// "outputBuffer[3]=f32(textureDimensions(textureOUT).x);\n"
-"}";
-
-char wgl_cmp_srcA[2000]=
-"@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
-"@group(0)@binding(1)var <storage,read_write> outputBuffer: array<f32,64>;\n"
-"@group(0)@binding(2)var textureIN: texture_2d <f32>;\n"
-"@group(0)@binding(3)var textureOUT: texture_storage_2d <rgba8unorm,write>;\n"
-"@group(0)@binding(4)var resizeSampler: sampler;\n"
-"@group(0)@binding(5)var <uniform> iTime: u32;\n"
-"@group(0)@binding(6)var videoOUT: texture_storage_2d <rgba8unorm,write>;\n"
-"@compute@workgroup_size(8,1,8)\n"
-"fn main_image(@builtin(global_invocation_id)global_id:vec3<u32>){\n"
-"var outSizeU:u32=textureDimensions(textureOUT).x;\n"
-"var inSizeU:u32=textureDimensions(textureIN).x;\n"
-"var sizeRatio:f32=f32(inSizeU)/f32(outSizeU);\n"
-"for(var x:u32=0u;x<outSizeU;x=x+1u){\n"
-"var xPos:u32=u32(f32(x)*sizeRatio);\n"
-"for(var y:u32=0u;y<outSizeU;y=y+1u){\n"
-"var yPos:u32=u32(f32(y)*sizeRatio);\n"
-"var INtexCoord:vec2<u32>=vec2<u32>(xPos,yPos);\n"
-"var colorTest:vec4<f32>=textureLoad(textureIN,INtexCoord,0);\n"
-// "var colorTest2:vec4<f32>=vec4<f32>(0.7f,0.0f,0.7f,1.0f);\n"
-"textureStore(videoOUT,vec2<u32>(x,y),colorTest);\n"
-"}\n"
-"}\n"
-"outputBuffer[2]=f32(textureDimensions(textureIN).x);\n"
-"outputBuffer[3]=f32(textureDimensions(textureOUT).x);\n"
-"}";
-
 #include "../../src/vanilla/webgpu_compute_vars.cpp"
 
 inline int rNd4(int randomMax){
@@ -77,46 +8,6 @@ std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;
 return randomNumber;
 }
-
-const char * vertexShader=
-"struct VertexOutput{\n"
-"@builtin(position) Position : vec4<f32>,\n"
-"@location(0) fragUV : vec2<f32>\n"
-"};\n"
-"@vertex\n"
-"fn main(@builtin(vertex_index) VertexIndex : u32) -> VertexOutput {\n"
-"var pos=array<vec2<f32>,6>(\n"
-"vec2<f32>(1.0f,1.0f),\n"
-"vec2<f32>(1.0f,-1.0f),\n"
-"vec2<f32>(-1.0f,-1.0f),\n"
-"vec2<f32>(1.0f,1.0f),\n"
-"vec2<f32>(-1.0f,-1.0f),\n"
-"vec2<f32>(-1.0f,1.0f)\n"
-");\n"
-"var uv=array<vec2<f32>,6>(\n"
-"vec2<f32>(1.0f,0.0f),\n"
-"vec2<f32>(1.0f,1.0f),\n"
-"vec2<f32>(0.0f,1.0f),\n"
-"vec2<f32>(1.0f,0.0f),\n"
-"vec2<f32>(0.0f,1.0f),\n"
-"vec2<f32>(0.0f,0.0f)\n"
-");\n"
-"var output : VertexOutput;\n"
-"output.Position=vec4(pos[VertexIndex],0.0f,1.0f);\n"
-"output.fragUV=uv[VertexIndex];\n"
-"return output;\n"
-"}\n";
-
-const char * frag_body=
-"@group(0) @binding(0) var <uniform> iTime : u32;\n"
-"@group(0) @binding(1) var mySampler : sampler;\n"
-"@group(0) @binding(2) var myTexture : texture_2d <f32>;\n"
-// "@group(0) @binding(3) var extTexture : texture_external;\n"
-"@fragment\n"
-"fn main(@location(0) fragUV : vec2<f32>) ->\n"
-"@location(0) vec4<f32> {\n"
-"return textureSample(myTexture,mySampler,fragUV);"
-"}\n";
 
 const inline char * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
@@ -144,9 +35,9 @@ return result;
 return nullptr;
 }
 
-void getCode(const char * Fnm){
+EM_BOOL getCode(const char * Fnm){
 wgsl.at(0,0)=frag_body;
-return;
+return EM_TRUE;
 }
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
@@ -295,16 +186,8 @@ szef.at(0,0)=floor(float(szh));
 // sze.at(0,1)=szh;
 u64_bfrSze.at(0,0)=(floor((sze.at(0,0)*sze.at(0,0)*4)/256)+1)*256;
 u64_bfrSze.at(1,1)=(floor((sze.at(1,1)*sze.at(1,1)*4)/256)+1)*256;
-WGpuOrigin3D OriginXYZ={};
-OriginXYZ.x=0;
-OriginXYZ.y=0;
-OriginXYZ.z=0;
 oxyz.at(0,0)=OriginXYZ;
-WGpuOrigin2D OriginXY={};
-OriginXY.x=0;
-OriginXY.y=0;
 oxy.at(0,0)=OriginXY;
-workgroupSize=1;
 WGPU_UserData.at(0,0,0)=userData;
 WGPU_ComputeDoneCallback.at(0,0,0)=onComputeDoneStart;
 WGPU_MapCallback.at(0,0,0)=mapCallbackStart;
