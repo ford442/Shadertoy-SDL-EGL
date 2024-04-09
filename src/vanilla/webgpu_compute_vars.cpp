@@ -93,7 +93,8 @@ var col : vec3<f32>;
 col = vec3<f32>(0.40000000596046447754f, 0.0f, 0.5f);
 let x_24 : vec3<f32> = col;
 *(fragColor) = vec4<f32>(x_24.x, x_24.y, x_24.z, 1.0f);
-//  let b3_col : vec4<f32> = *(fragColor);textureStore(textureIN,vec2<u32>(gl_FragCoord.xy),vec4<f32>(b3_col.rgb,1.0f));
+//  let b3_col : vec4<f32> = *(fragColor);
+// textureStore(textureIN,vec2<u32>(gl_FragCoord.xy),vec4<f32>(b3_col.rgb,1.0f));
 return;}
 fn main_1() {
 var param : vec4<f32>;
