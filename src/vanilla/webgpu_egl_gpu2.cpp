@@ -69,9 +69,8 @@ colorAttachment.clearValue=clearC.at(0,0);
 wrpca.at(0,0)=colorAttachment;
 INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
 wtv.at(3,3)=INTextureView;
-  videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
+videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
-
   /*
 videoAttachment.view=wtv.at(3,3);
 videoAttachment.storeOp=WGPU_STORE_OP_STORE;
@@ -107,7 +106,6 @@ depthAttachment2.stencilReadOnly=EM_TRUE;
 depthAttachment2.stencilLoadOp=WGPU_LOAD_OP_CLEAR;
 depthAttachment2.stencilStoreOp=WGPU_STORE_OP_UNDEFINED;
 wrpdsa.at(1,1)=depthAttachment2;
-
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(1,1); // &wrpca.at(0,0); // 
 // passDesc.depthStencilAttachment=wrpdsa.at(1,1);  //  wrpdsa.at(0,0); //
@@ -239,7 +237,7 @@ emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
 emscripten_get_element_css_size("canvas",&szw,&szh);
 u64_siz.at(3,3)=sze.at(1,1);
 sze.at(0,0)=int(szhI);
-sze.at(1,1)=438;
+sze.at(1,1)=int(szhI);
 u64_siz.at(2,2)=int(szhI);
 szef.at(0,0)=floor(float(szh));
 szef.at(1,1)=floor(float(sze.at(1,1)));
