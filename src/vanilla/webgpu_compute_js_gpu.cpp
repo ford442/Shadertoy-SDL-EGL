@@ -69,10 +69,10 @@ t.setConstants({blnk:offS});
 // FS.writeFile('/video/frame.gl',hp);
 setInterval(function(){
 var $$1=t(vv);
-var fr=new Float32Array($$1);
+// var fr=new Float32Array($$1);
  //   hp.set($$1);
-console.log(fr[12]);
-FS.writeFile('/video/frame.gl',fr);
+// console.log(fr[12]);
+FS.writeFile('/video/frame.gl',$$1);
 },16.6);
 }
   
