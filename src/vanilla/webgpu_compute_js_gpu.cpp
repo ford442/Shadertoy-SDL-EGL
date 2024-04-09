@@ -79,11 +79,11 @@ let SiZ=window.innerHeight;
 vvi.height=SiZ;
 let w$=parseInt(vv.videoWidth);
 let h$=parseInt(vv.videoHeight);
-let tstSiZ=h$;
+let tstSiZ=720;
 if(running==0){
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 setTimeout(function(){
-Module.ccall("startWebGPUi",null,"Number",[h$]);
+Module.ccall("startWebGPUi",null,"Number",[tstSiZ]);
   console.log('Starting..');
 running=1;
 },500);
@@ -107,7 +107,12 @@ var $$1=t(vv);
 var hp=new Float32Array($H,0,la);
 hp.set($$1);
 FS.writeFile('/video/frame.gl',hp);
-  
+setInterval(function(){
+    var $$1=t(vv);
+    hp.set($$1);
+    FS.writeFile('/video/frame.gl',hp);
+},16.6);
+
     /*
 const gl2=cnv.getContext('2d',{alpha:true}); // 
 gl2.drawImage(vvi,offS,0,tstSiZ,tstSiZ,0,0,tstSiZ,tstSiZ);
