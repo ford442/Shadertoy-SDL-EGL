@@ -100,7 +100,6 @@ let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let t=G.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk];
-var av$=Ave(P[0],P[1],P[2]);
 return[P[0],P[1],P[2],P[3]];
 }).setImmutable(true).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]);
 t.setConstants({blnk:offS});
