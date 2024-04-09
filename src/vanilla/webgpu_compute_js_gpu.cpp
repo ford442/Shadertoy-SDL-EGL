@@ -79,6 +79,7 @@ let SiZ=window.innerHeight;
 vvi.height=SiZ;
 let w$=parseInt(vv.videoWidth);
 let h$=parseInt(vv.videoHeight);
+let gh$=vv.videoHeight;
 let tstSiZ=720;
 if(running==0){
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
@@ -101,7 +102,7 @@ let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let t=G.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk];
 return[P[0],P[1],P[2],P[3]];
-}).setImmutable(true).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([h$,h$]);
+}).setImmutable(true).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([gh$,gh$]);
 t.setConstants({blnk:offS});
 var $$1=t(vv);
 var hp=new Float32Array($H,0,la);
