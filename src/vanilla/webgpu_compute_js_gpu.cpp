@@ -70,7 +70,7 @@ FS.writeFile('/video/frame.gl',pixelData);
 }
 
 function videoFramesGpu(){
-  let $H=Module.HEAPF32.buffer;
+//  let $H=Module.HEAPF32.buffer;
   let G=new GPUX();
   let vv=document.querySelector("#mvi");
 let SiZ=window.innerHeight;
@@ -102,10 +102,10 @@ return[P[0],P[1],P[2],P[3]];
 }).setGraphical(false).setTactic("precision").setPipeline(true).setArgumentTypes(["HTMLVideo"]).setDynamicOutput(true).setOutput([720.0,720.0]);
   
 t.setConstants({blnk:offS});
-var $$1=t(vv);
-var hp=new Float32Array($H,0,la);
-hp.set($$1);
-FS.writeFile('/video/frame.gl',hp);
+// var $$1=t(vv);
+// var hp=new Float32Array($H,0,la);
+// hp.set($$1);
+// FS.writeFile('/video/frame.gl',hp);
 setInterval(function(){
     var $$1=t(vv);
   var fr=new Float32Array($$1);
