@@ -79,24 +79,20 @@ b3_compute_egl_tex:
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 webgpu_egl_tex.o 
 
-b3_compute_egl_gpu:
-	 em++ src/vanilla/webgpu_egl_gpu.cpp -dead_strip -pipe -ffast-math -ffp-contract=off \
-	 -mextended-const -mbulk-memory -matomics -pthread -O1 -fchar8_t -std=c++14 $(wGL_FLAGS) \
-	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -O1 -mextended-const -dead_strip -mbulk-memory -matomics -openmp-simd -pipe \
-	 -pthread -ffast-math -ffp-contract=off --js-library lib/lib_webgpu.js \
-	 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-egl-gpu.js \
-	 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sABORTING_MALLOC=0 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
-	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
-	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=1 \
-	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -march=native -mtune=wasm32 \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=768mb -lmath.js -lhtml5.js -lint53.js \
+b3_compute_tex_gpu:
+	 em++ src/vanilla/webgpu_egl_gpu.cpp -fchar8_t -std=c++14 $(wGL_FLAGS) \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ -lEGL  $(LDFLAGS) -O0 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-tex-gpu.js \
+	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=1 \
+	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
+	 -sINITIAL_MEMORY=1400mb -lmath.js -lhtml5.js -lint53.js \
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
-	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS='["startWebGPUi","_startWebGPUbi"]' -sTEXTDECODER=0 \
-	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPUi","_startWebGPUbi"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS='["startWebGPU","_startWebGPUb"]' -sTEXTDECODER=1 \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 webgpu_egl_gpu.o 
+
 
 b3_compute_egl_tex_b:
 	 em++ src/vanilla/webgpu_egl_tex.cpp -dead_strip -pipe -ffast-math -ffp-contract=off -stdlib=libc++ \
