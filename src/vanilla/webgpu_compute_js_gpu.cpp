@@ -38,8 +38,7 @@ let tstSiZ=720;
 if(running==0){
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 setTimeout(function(){
-let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz]);
+Module.ccall("startWebGPUi",null,"Number",[vh$]);
   console.log('Starting..');
 running=1;
 },500);
@@ -80,12 +79,11 @@ let SiZ=window.innerHeight;
 vvi.height=SiZ;
 let w$=parseInt(vv.videoWidth);
 let h$=parseInt(vv.videoHeight);
-let tstSiZ=720;
+let tstSiZ=h$;
 if(running==0){
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 setTimeout(function(){
-let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz]);
+Module.ccall("startWebGPUi",null,"Number",[h$]);
   console.log('Starting..');
 running=1;
 },500);
@@ -100,7 +98,6 @@ cnvb.width=SiZ;
 var ratio=SiZ/h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-
 let t=G.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x+this.constants.blnk];
 var av$=Ave(P[0],P[1],P[2]);
@@ -111,7 +108,6 @@ var $$1=t(vv);
 var hp=new Float32Array($H,0,la);
 hp.set($$1);
 FS.writeFile('/video/frame.gl',pixelData);
-
   
     /*
 const gl2=cnv.getContext('2d',{alpha:true}); // 
@@ -186,9 +182,9 @@ document.querySelector('#bcanvas').height=parseInt(window.innerHeight,10);
 document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
-// videoFrames();
-let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz]);
+videoFramesGpu();
+// let vsiz=document.querySelector('#vsiz').innerHTML;
+// Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 },1500);
 document.querySelector('#status').style.backgroundColor="green";
 }
