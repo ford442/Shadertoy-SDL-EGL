@@ -101,7 +101,8 @@ gl2.drawImage(vvii,offS,0,tstSiZ,tstSiZ,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
 // let mageData=flipImageData(image);
 let imageData=image.data;
-let pixelData=new Uint8ClampedArray(imageData);
+// let pixelData=new Uint8ClampedArray(imageData);
+let pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 /*
   setInterval(function(){
