@@ -237,6 +237,7 @@ wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
 emscripten_get_element_css_size("canvas",&szw,&szh);
 u64_siz.at(3,3)=sze.at(0,0);
+sze.at(1,1)=sze.at(0,0);
 sze.at(0,0)=int(szhI);
 u64_siz.at(2,2)=sze.at(1,1);
 szef.at(0,0)=floor(float(szh));
@@ -853,7 +854,7 @@ wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceSt
 }
 
 EM_BOOL WGPU_Start(){
-sze.at(1,1)=438;
+// sze.at(1,1)=438;
 options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
 options.forceFallbackAdapter=EM_FALSE;
