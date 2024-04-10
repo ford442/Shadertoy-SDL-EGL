@@ -237,7 +237,7 @@ emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
 emscripten_get_element_css_size("canvas",&szw,&szh);
 u64_siz.at(3,3)=sze.at(0,0);
 sze.at(0,0)=int(szhI);
-u64_siz.at(2,2)=int(szhI);
+u64_siz.at(2,2)=sze.at(1,1);
 szef.at(0,0)=floor(float(szh));
 szef.at(1,1)=floor(float(sze.at(1,1)));
 u64_bfrSze.at(0,0)=(floor((sze.at(0,0))/256)+1)*256;
