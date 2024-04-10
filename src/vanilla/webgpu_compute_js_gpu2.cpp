@@ -74,12 +74,11 @@ FS.writeFile('/video/frame.gl',fr);
 }
   
 function videoFrames(){
-let SiZ=438;
+let SiZ=window.innerHeight;
+vvii.height=SiZ;
 let w$=parseInt(vvii.width);
 let h$=parseInt(vvii.height);
-let tstSiZ=438;
 if(running==0){
-// Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 setTimeout(function(){
 Module.ccall("startWebGPU");
 console.log('Starting..');
@@ -89,30 +88,21 @@ running=1;
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
-cnv.height=tstSiZ;
+cnv.height=SiZ;
 // cnvb.height=SiZ;
-cnv.width=tstSiZ;
+cnv.width=SiZ;
 // cnvb.width=SiZ;
 var ratio=w$/h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl2=cnv.getContext('2d',{alpha:true}); // 
-gl2.drawImage(vvii,offS,0,tstSiZ,tstSiZ,0,0,tstSiZ,tstSiZ);
-let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
+gl2.drawImage(vvii,offS,0,SiZ,SiZ,0,0,SiZ,SiZ);
+let image=gl2.getImageData(0,0,SiZ,SiZ);
 // let mageData=flipImageData(image);
 let imageData=image.data;
-// let pixelData=new Uint8ClampedArray(imageData);
-let pixelData=new Float32Array(imageData);
+let pixelData=new Uint8ClampedArray(imageData);
+// let pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
-/*
-  setInterval(function(){
-gl2.drawImage(vvi,offS,0,tstSiZ,tstSiZ,0,0,tstSiZ,tstSiZ);
-image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
-imageData=image.data;
-pixelData=new Uint8ClampedArray(imageData,0,la);
-FS.writeFile('/video/frame.gl',pixelData);
-},16.6);
-  */
 }
     
 function getShader(pth,fname){
