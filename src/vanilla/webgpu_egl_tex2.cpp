@@ -179,7 +179,7 @@ wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 // wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
   //  Move resized texture
-  wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(1,1),&wict.at(3,3),4096,4096,1);
+  wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(1,1),&wict.at(3,3),sze.at(3,3),sze.at(3,3),1);
   //  Buffer Data View
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 if(WGPU_BufferStatus.at(0,0,0)!=3&&on.at(1,1)==0){
@@ -250,6 +250,7 @@ emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
 emscripten_get_element_css_size("canvas",&szw,&szh);
 u64_siz.at(3,3)=sze.at(1,1);
 sze.at(0,0)=int(szhI);
+sze.at(3,3)=int(szhI)*1.5;
 u64_siz.at(2,2)=int(szhI);
 szef.at(0,0)=floor(float(szh));
 szef.at(1,1)=floor(float(sze.at(1,1)));
@@ -276,8 +277,8 @@ textureDescriptorIn.viewFormats=nullptr; // &textureAviewFormats[0];
 textureDescriptorOut.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorOut.format=wtf.at(2,2);
 textureDescriptorOut.usage=WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_SRC;
-textureDescriptorOut.width=4096;
-textureDescriptorOut.height=4096; // default = 1;
+textureDescriptorOut.width=sze.at(3,3);
+textureDescriptorOut.height=sze.at(3,3); // default = 1;
 textureDescriptorOut.depthOrArrayLayers=1;
 textureDescriptorOut.mipLevelCount=1;
 textureDescriptorOut.sampleCount=1;
@@ -287,8 +288,8 @@ textureDescriptorOut.viewFormats=nullptr;
 textureDescriptorOut2.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorOut2.format=wtf.at(2,2);
 textureDescriptorOut2.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
-textureDescriptorOut2.width=4096;
-textureDescriptorOut2.height=4096; // default = 1;
+textureDescriptorOut2.width=sze.at(3,3);
+textureDescriptorOut2.height=sze.at(3,3); // default = 1;
 textureDescriptorOut2.depthOrArrayLayers=1;
 textureDescriptorOut2.mipLevelCount=1;
 textureDescriptorOut2.sampleCount=1;
