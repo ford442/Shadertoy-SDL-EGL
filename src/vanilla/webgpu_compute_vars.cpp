@@ -381,6 +381,7 @@ WGpuShaderModuleDescriptor shaderModuleDescriptor={};
 std::random_device randomizer;
 WGpuImageCopyTexture Input_Image_Texture={};
 WGpuImageCopyTexture Output_Image_Texture={};
+WGpuImageCopyTexture Output_Image_Texture2={};
 WGpuImageCopyBuffer Input_Image_Buffer={};
 WGpuImageCopyBuffer Output_Image_Buffer={};
 WGpuImageCopyBuffer Mapped_Image_Buffer={};
