@@ -411,9 +411,6 @@ bufferDescriptor_indice.mappedAtCreation=EM_FALSE;
 wbd.at(7,7)=bufferDescriptor_indice;
 indice_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(7,7));
 wb.at(7,7)=indice_Buffer;
-  wgpu_queue_write_buffer(wq.at(0,0),wb.at(6,6),0,Fvertices,sizeof(Fvertices));
-  wgpu_queue_write_buffer(wq.at(0,0),wb.at(7,7),0,indices,36*sizeof(uint32_t));
-
 resizeSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 resizeSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 resizeSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
@@ -894,6 +891,8 @@ colorTextureDescriptor.sampleCount=1;
 colorTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 wtd.at(1,1)=colorTextureDescriptor;
 wq.at(0,0)=wgpu_device_get_queue(wd.at(0,0));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(6,6),0,Fvertices,sizeof(Fvertices));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(7,7),0,indices,36*sizeof(uint32_t));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
 bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),5);
