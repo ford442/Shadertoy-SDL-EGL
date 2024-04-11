@@ -687,7 +687,7 @@ videoTextureCopy.origin=xyz;
 videoTextureCopy.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(0,0)=videoTextureCopy;
   
-MSTextureCopy.texture=wt.at(2,2);
+MSTextureCopy.texture=wt.at(4,4);
 MSTextureCopy.mipLevel=0;
 MSTextureCopy.origin=xyz;
 MSTextureCopy.aspect=WGPU_TEXTURE_ASPECT_ALL;
