@@ -31,6 +31,24 @@ fn main(@location(0) position: vec4<f32>) -> @builtin(position) vec4<f32> {
 return vec4<f32>(position.xyzw);
 })delimiter";
 
+//  with index/vertex buffers and tex
+const char * vertexShaderTX =
+R"delimiter(
+  //   // 
+struct VertexOutput{
+    @builtin(position) Position : vec4<f32>,
+    @location(0) fragUV : vec2<f32>
+};
+@vertex
+fn main(@location(0) position: vec2<f32>,@location(1) uv: vec2<f32>) -> VertexOutput {
+    var output : VertexOutput;
+    output.Position = vec4<f32>(position, 0.0, 1.0);
+    output.fragUV = uv;
+return output;
+}
+  //   //  
+)delimiter";
+
 //  single threaded
 char wgl_cmp_srcA[2000]=
 // "@group(0)@binding(0)var <storage,read> inputBuffer: array<f32,64>;\n"
@@ -156,6 +174,7 @@ return main_out(fragColor_1, iPosition);
   //   //
 )delimiter";
 
+     // non vertex index / indice index shader
 const char * vertexShader=
 "struct VertexOutput{\n"
 "@builtin(position) Position : vec4<f32>,\n"
