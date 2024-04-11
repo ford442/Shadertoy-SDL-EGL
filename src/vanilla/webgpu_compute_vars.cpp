@@ -294,6 +294,7 @@ boost::chrono::high_resolution_clock::time_point t2;
 boost::chrono::high_resolution_clock::time_point t3;
 }u_time;
 
+wvbl_tensor wvbl=wvbl_tensor{2,2};
 wcolor_tensor clearC=wcolor_tensor{2,2};
 xyz_tensor oxyz=xyz_tensor{2,2};
 xy_tensor oxy=xy_tensor{2,2};
