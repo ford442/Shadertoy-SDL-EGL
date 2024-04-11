@@ -786,7 +786,7 @@ renderPipelineDesc.fragment=fragState;
 renderPipelineDesc.depthStencil=depthState;
 renderPipelineDesc.layout=wrpl.at(0,0);
 // renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
-renderPipelineDesc.multisample=multiSamp2;
+renderPipelineDesc.multisample=multiSamp;
 wrp.at(0,0)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc);
 WGpuPipelineLayout pipeline_layout_2=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(1,1),1);
 wrpl.at(1,1)=pipeline_layout_2;
@@ -798,7 +798,7 @@ renderPipelineDesc2.fragment=fragState2;
 renderPipelineDesc2.depthStencil=depthState;
 renderPipelineDesc2.layout=wrpl.at(1,1);
 // renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
-renderPipelineDesc2.multisample=multiSamp;
+renderPipelineDesc2.multisample=multiSamp2;
 wrp.at(1,1)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc2);
   //  Render Sampler
 Render_Bindgroup_Entries[0]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
