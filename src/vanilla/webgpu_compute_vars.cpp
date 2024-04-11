@@ -377,6 +377,7 @@ WGpuTextureDescriptor textureDescriptorOut={};
 WGpuTextureDescriptor textureDescriptorOut2={};
 WGpuTextureViewDescriptor textureViewDescriptorIn={};
 WGpuTextureViewDescriptor textureViewDescriptorOut={};
+WGpuTextureViewDescriptor textureViewDescriptorOut2={};
 char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={};
 std::random_device randomizer;
