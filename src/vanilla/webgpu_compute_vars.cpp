@@ -433,22 +433,3 @@ float * resultsf=NULL;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.wgsl");
 static char * result=NULL;
 static char * results=NULL;
-
-struct Vertex{
-// GLfloat position[4];
-float position[4];
-};
-
-Vertex vertices[]={
-{-1.0,-1.0,1.0,1.0},
-{1.0,-1.0,1.0,1.0},
-{1.0,1.0,1.0,1.0},
-{-1.0,1.0,1.0,1.0},
-{-1.0,-1.0,-1.0,1.0},
-{1.0,-1.0,-1.0,1.0},
-{1.0,1.0,-1.0,1.0},
-{-1.0,1.0,1.0,1.0}
-};
-
-uint32_t indices[35]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
-
