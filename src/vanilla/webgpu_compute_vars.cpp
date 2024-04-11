@@ -52,16 +52,20 @@ return vec4<f32>(position.xyzw);
 const char * vertexShaderTX =
 R"delimiter(
   //   // 
-struct VertexOutput{
-    @builtin(position) Position : vec4<f32>,
-    @location(0) fragUV : vec2<f32>
+struct VertexInput {
+    @location(0) position : vec4<f32>,
+    @location(1) uv : vec2<f32>,
+};
+struct VertexOutput {
+    @builtin(position) position : vec4<f32>,
+    @location(0) fragUV : vec2<f32>, 
 };
 @vertex
-fn main(@location(0) position: vec2<f32>,@location(1) uv: vec2<f32>) -> VertexOutput {
+fn main(vertexInput : VertexInput) -> VertexOutput {
     var output : VertexOutput;
-    output.Position = vec4<f32>(position, 0.0, 1.0);
-    output.fragUV = uv;
-return output;
+    output.position = vertexInput.position;
+    output.fragUV = vertexInput.uv;
+    return output;
 }
   //   //  
 )delimiter";
