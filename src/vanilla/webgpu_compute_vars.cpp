@@ -288,6 +288,7 @@ WGpuTextureDescriptor depthTextureDescriptor={};
 WGpuTextureDescriptor depthTextureDescriptor2={};
 WGpuTextureDescriptor colorTextureDescriptor={};
 WGpuTextureDescriptor videoTextureDescriptor={};
+WGpuTextureDescriptor MSTextureDescriptor={};
 WGpuRenderPassDescriptor passDesc={};
 WGpuRenderPassDescriptor passDesc2={};
 WGpuShaderModuleDescriptor shaderModuleDescV={};
