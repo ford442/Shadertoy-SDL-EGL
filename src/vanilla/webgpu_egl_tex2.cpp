@@ -327,8 +327,16 @@ textureViewDescriptorOut.baseMipLevel=0; // default = 0
 textureViewDescriptorOut.mipLevelCount=1;
 textureViewDescriptorOut.baseArrayLayer=0; // default = 0
 textureViewDescriptorOut.arrayLayerCount=1;
+  textureViewDescriptorOut2.format=wtf.at(2,2);
+textureViewDescriptorOut2.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureViewDescriptorOut2.aspect=WGPU_TEXTURE_ASPECT_ALL;
+textureViewDescriptorOut2.baseMipLevel=0; // default = 0
+textureViewDescriptorOut2.mipLevelCount=1;
+textureViewDescriptorOut2.baseArrayLayer=0; // default = 0
+textureViewDescriptorOut2.arrayLayerCount=1;
 WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorIn;
 WGPU_TextureViewDescriptor.at(0,0,1)=textureViewDescriptorOut;
+WGPU_TextureViewDescriptor.at(0,0,2)=textureViewDescriptorOut2;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Array;
 WGPU_InputBuffer.at(0,0,0)=WGPU_Input_Array;
 bufferDescriptorI={u64_bfrSze.at(1,1),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
@@ -427,7 +435,7 @@ wict.at(1,1)=Output_Image_Texture;
 wict.at(3,3)=Output_Image_Texture2;
 INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
 OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureViewDescriptor.at(0,0,1));
-OUTTexture2View=wgpu_texture_create_view(WGPU_Texture.at(0,0,2),&WGPU_TextureViewDescriptor.at(0,0,1));
+OUTTexture2View=wgpu_texture_create_view(WGPU_Texture.at(0,0,2),&WGPU_TextureViewDescriptor.at(0,0,2));
 wtv.at(3,3)=INTextureView;
 wtv.at(4,4)=OUTTextureView;
 wtv.at(5,5)=OUTTexture2View;
