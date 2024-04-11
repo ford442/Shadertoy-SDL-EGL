@@ -1,3 +1,35 @@
+struct VertexF{
+// GLfloat position[4];
+float position[4];
+};
+
+VertexF Fvertices[]={
+{-1.0,-1.0,1.0,1.0},
+{1.0,-1.0,1.0,1.0},
+{1.0,1.0,1.0,1.0},
+{-1.0,1.0,1.0,1.0},
+{-1.0,-1.0,-1.0,1.0},
+{1.0,-1.0,-1.0,1.0},
+{1.0,1.0,-1.0,1.0},
+{-1.0,1.0,1.0,1.0}
+};
+
+uint32_t indices[35]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
+
+WGpuBufferDescriptor bufferDescriptor_indice={};
+WGpuBuffer indice_Buffer;
+WGpuVertexAttribute vertAtt={};
+WGpuVertexBufferLayout vertBufLayout={};
+WGpuBufferDescriptor bufferDescriptor_vertex={};
+WGpuBuffer vertex_Buffer;
+WGpuBufferBindingLayout bufferBindingLayoutV={};
+
+//  egl render (no texture uv)
+const char * vertexShaderEG =
+R"delimiter(@vertex
+fn main(@location(0) position: vec4<f32>) -> @builtin(position) vec4<f32> {
+return vec4<f32>(position.xyzw);
+})delimiter";
 
 //  single threaded
 char wgl_cmp_srcA[2000]=
