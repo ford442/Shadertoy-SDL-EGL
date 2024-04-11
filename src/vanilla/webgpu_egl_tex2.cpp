@@ -163,9 +163,12 @@ wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(1,1),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(5,5),0,&u64_siz.at(2,2),sizeof(uint64_t));
+// wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
+// wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(3,3),0,sizeof(Fvertices));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0f,0.0f,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_set_scissor_rect(wrpe.at(1,1),0.0f,0.0f,sze.at(0,0),sze.at(0,0));
 wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
+//  wgpu_render_pass_encoder_draw_indexed(wrpe.at(0,0),36,1,0,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(1,1));
 wcb.at(1,1)=wgpu_command_encoder_finish(wce.at(1,1));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(1,1));
@@ -370,7 +373,6 @@ bufferBindingLayoutR.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayoutR.hasDynamicOffset=0,
 bufferBindingLayoutR.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayoutR;
-  
 Input_Image_Buffer.buffer=WGPU_Buffers.at(1,1,1);
 // wicb.at(2,2)=Input_Image_Buffer;
 Output_Image_Buffer.buffer=WGPU_Buffers.at(0,0,0);
@@ -383,7 +385,35 @@ wbd.at(3,3)=bufferDescriptorIn;
 wbd.at(4,4)=bufferDescriptorOut;
 wb.at(3,3)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 wb.at(4,4)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
-  
+
+    //  vert / indice buffers
+bufferDescriptor_vertex.size=sizeof(Fvertices);
+bufferDescriptor_vertex.usage=WGPU_BUFFER_USAGE_VERTEX|WGPU_BUFFER_USAGE_COPY_DST;
+bufferDescriptor_vertex.mappedAtCreation=EM_FALSE;
+wbd.at(6,6)=bufferDescriptor_vertex;
+vertAtt.offset=0;
+vertAtt.shaderLocation=0;
+vertAtt.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
+vertBufLayout.numAttributes=1;
+vertBufLayout.attributes=&vertAtt;
+vertBufLayout.arrayStride=sizeof(VertexF);
+vertBufLayout.stepMode=WGPU_VERTEX_STEP_MODE_VERTEX;
+wvbl.at(0,0)=vertBufLayout;
+bufferBindingLayoutV.type=WGPU_BUFFER_BINDING_TYPE_STORAGE;
+bufferBindingLayoutV.hasDynamicOffset=0,
+bufferBindingLayoutV.minBindingSize=sizeof(Fvertices);
+wbbl.at(1,1)=bufferBindingLayoutV;
+vertex_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(6,6));
+wb.at(6,6)=vertex_Buffer;
+bufferDescriptor_indice.size=36*sizeof(uint32_t);
+bufferDescriptor_indice.usage=WGPU_BUFFER_USAGE_INDEX|WGPU_BUFFER_USAGE_COPY_DST;
+bufferDescriptor_indice.mappedAtCreation=EM_FALSE;
+wbd.at(7,7)=bufferDescriptor_indice;
+indice_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(7,7));
+wb.at(7,7)=indice_Buffer;
+  wgpu_queue_write_buffer(wq.at(0,0),wb.at(6,6),0,Fvertices,sizeof(Fvertices));
+  wgpu_queue_write_buffer(wq.at(0,0),wb.at(7,7),0,indices,36*sizeof(uint32_t));
+
 resizeSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 resizeSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 resizeSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
@@ -583,8 +613,8 @@ depthState.depthWriteEnabled=0;
 depthState.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
 vertState.module=vs;
 vertState.entryPoint="main";
-vertState.numBuffers=0;
-vertState.buffers=nullptr;
+vertState.numBuffers=1;
+vertState.buffers=&wvbl.at(0,0);
 vertState.numConstants=0;
 vertState.constants=nullptr;
 priState.topology=WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST; // Defaults to WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST ('triangle-list')
