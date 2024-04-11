@@ -155,6 +155,7 @@ wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(1,1),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_siz.at(3,3),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(3,3),sizeof(uint64_t));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(5,5),0,&u64_uni.at(3,3),sizeof(uint64_t));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0f,0.0f,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_set_scissor_rect(wrpe.at(1,1),0.0f,0.0f,sze.at(0,0),sze.at(0,0));
 wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
