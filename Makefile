@@ -61,7 +61,7 @@ vanilla_test_emjs:
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","cwrap"]' -sEXPORTED_FUNCTIONS=["_main","_emjs","_cfunc"]
 
 b3_compute_egl_tex:
-	 em++ src/vanilla/webgpu_egl_tex.cpp -dead_strip -pipe -ffast-math -ffp-contract=off \
+	 em++ src/vanilla/webgpu_egl_tex.cpp -pipe -ffast-math -ffp-contract=off \
 	 -mextended-const -mbulk-memory -matomics -pthread -O1 -fchar8_t -std=c++14 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O1 -mextended-const -dead_strip -mbulk-memory -matomics -openmp-simd -pipe \
@@ -80,7 +80,7 @@ b3_compute_egl_tex:
 	 webgpu_egl_tex.o 
 
 b3_compute_egl_tex2:
-	 em++ src/vanilla/webgpu_egl_tex2.cpp -dead_strip -pipe -ffast-math -ffp-contract=off \
+	 em++ src/vanilla/webgpu_egl_tex2.cpp -pipe -ffast-math -ffp-contract=off \
 	 -mextended-const -mbulk-memory -matomics -pthread -O1 -fchar8_t -std=c++20 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/aubio/src -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O1 -mextended-const -dead_strip -mbulk-memory -matomics -std=c++20 -openmp-simd -pipe \
