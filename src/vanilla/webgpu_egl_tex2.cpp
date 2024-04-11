@@ -497,7 +497,7 @@ videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
 MSTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 MSTextureDescriptor.format=wtf.at(3,3);
-MSTextureDescriptor.usage=WGPU_TEXTURE_USAGE_RENDER_BINDING|WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
+MSTextureDescriptor.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT|WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
 MSTextureDescriptor.width=sze.at(0,0);
 MSTextureDescriptor.height=sze.at(0,0); // default = 1;
 MSTextureDescriptor.depthOrArrayLayers=1;
