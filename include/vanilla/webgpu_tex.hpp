@@ -276,3 +276,4 @@ using wcts_tensor=boost::numeric::ublas::tensor<WGpuColorTargetState>;
 using wvbl_tensor=boost::numeric::ublas::tensor<WGpuVertexBufferLayout>;
 using wetd_tensor=boost::numeric::ublas::tensor<WGpuExternalTextureDescriptor>;
 using wet_tensor=boost::numeric::ublas::tensor<WGpuExternalTexture>;
+using wvbl_tensor=boost::numeric::ublas::tensor<WGpuVertexBufferLayout>;
