@@ -374,6 +374,7 @@ WGpuBufferDescriptor bufferDescriptorM={};
 WGpuBufferDescriptor bufferDescriptorC={};
 WGpuTextureDescriptor textureDescriptorIn={};
 WGpuTextureDescriptor textureDescriptorOut={};
+WGpuTextureDescriptor textureDescriptorOut2={};
 WGpuTextureViewDescriptor textureViewDescriptorIn={};
 WGpuTextureViewDescriptor textureViewDescriptorOut={};
 char * cmp_bdy=wgl_cmp_src;
