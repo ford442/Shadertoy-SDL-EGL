@@ -125,6 +125,7 @@ void runWebGPU();
 }
 
 WGpuImageCopyTexture videoTextureCopy;
+WGpuImageCopyTexture MSTextureCopy;
 WGpuExternalTexture extTexture;
 WGpuTextureView depthTextureView;
 WGpuTextureView depthTextureView2;
