@@ -226,6 +226,7 @@ const char * frag_body=(char*)rd_fl(Fnm);
 const char * comp_body=(char*)rd_fl(FnmC);
 canvasFormat=navigator_gpu_get_preferred_canvas_format();
 wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
+wtf.at(3,3)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
 wtf.at(4,4)=WGPU_TEXTURE_FORMAT_INVALID;
@@ -469,7 +470,6 @@ OUTTexture2View=wgpu_texture_create_view(WGPU_Texture.at(0,0,2),&WGPU_TextureVie
 wtv.at(3,3)=INTextureView;
 wtv.at(4,4)=OUTTextureView;
 wtv.at(5,5)=OUTTexture2View;
-  
 videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
 videoTextureDescriptor.format=wtf.at(2,2);
 videoTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_STORAGE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
@@ -495,9 +495,8 @@ videoTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(2,2)=videoTextureViewDescriptor;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
-
 MSTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-MSTextureDescriptor.format=wtf.at(2,2);
+MSTextureDescriptor.format=wtf.at(3,3);
 MSTextureDescriptor.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
 MSTextureDescriptor.width=sze.at(0,0);
 MSTextureDescriptor.height=sze.at(0,0); // default = 1;
@@ -510,7 +509,7 @@ MSTextureDescriptor.viewFormats=nullptr; // &videoViewFormats[0];
 wtd.at(4,4)=MSTextureDescriptor;
 MSTexture=wgpu_device_create_texture(wd.at(0,0),&wtd.at(4,4));
 wt.at(4,4)=MSTexture;
-MSTextureViewDescriptor.format=wtf.at(2,2);
+MSTextureViewDescriptor.format=wtf.at(3,3);
 MSTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 MSTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
 MSTextureViewDescriptor.baseMipLevel=0; // default = 0
@@ -520,8 +519,6 @@ MSTextureViewDescriptor.arrayLayerCount=1;
 wtvd.at(4,4)=MSTextureViewDescriptor;
 MSTextureView=wgpu_texture_create_view(wt.at(4,4),&wtvd.at(4,4));
 wtv.at(6,6)=MSTextureView;
-
-  
       //  Input Buffer
 Compute_Bindgroup_Layout_Entries[0].binding=0;
 Compute_Bindgroup_Layout_Entries[0].visibility=WGPU_SHADER_STAGE_COMPUTE;
@@ -686,13 +683,11 @@ videoTextureCopy.mipLevel=0;
 videoTextureCopy.origin=xyz;
 videoTextureCopy.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(0,0)=videoTextureCopy;
-  
 MSTextureCopy.texture=wt.at(4,4);
 MSTextureCopy.mipLevel=0;
 MSTextureCopy.origin=xyz;
 MSTextureCopy.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(4,4)=MSTextureCopy;
-
 bufferDescriptorUni={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(0,0)=bufferDescriptorUni;
 uniBuffer=wgpu_device_create_buffer(wd.at(0,0),&bufferDescriptorUni);
