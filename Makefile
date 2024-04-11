@@ -126,6 +126,19 @@ b3_compute_tex_gpu2:
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 webgpu_egl_gpu2.o 
 
+b3_fragpute:
+	 em++ src/vanilla/webgpu_fragpute.cpp -fchar8_t -std=c++20 $(wGL_FLAGS) \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O0 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ -lEGL  $(LDFLAGS) -O0 --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-fragpute.js \
+	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=1 \
+	 -fwhole-program-vtables -polly -sALLOW_MEMORY_GROWTH=1 \
+	 -sINITIAL_MEMORY=1400mb -lmath.js -lhtml5.js -lint53.js \
+	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
+	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS='["wgpu_buffer_map_sync"]' -sTEXTDECODER=1 \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/gpujsx.js \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 webgpu_fragpute.o
 
 b3_compute_egl_tex_b:
 	 em++ src/vanilla/webgpu_egl_tex.cpp -dead_strip -pipe -ffast-math -ffp-contract=off -stdlib=libc++ \
