@@ -1,4 +1,4 @@
-WGL_BIN_NAME = w0-004
+WGL_BIN_NAME = w0-005
 
 LDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lpthread,-lc++abi,-lm,-lrt,-ldl
 oLDFLAGS = -Wl,-lc++,-lm,-lpthread,-lrt,-ldl,-S
