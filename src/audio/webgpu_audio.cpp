@@ -218,18 +218,30 @@ Audio audio;
 extern "C" {
 
 EM_BOOL pl(){
-// audio.plt();
+audio.plt();
 return EM_TRUE;
 }
   
 }
+
 EM_BOOL osc() {
 Oscillator oscillator(440.0f);
 while (true) {
 float sample = oscillator.generate();
-
+float * snnd=sample;
+sound.at(0,1,0)=snnd;
 }
+pl();
 return EM_TRUE;
+}
+
+extern "C" {
+
+void ply(){
+osc();
+return;
+}
+  
 }
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
