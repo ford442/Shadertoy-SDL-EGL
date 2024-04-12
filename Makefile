@@ -99,10 +99,6 @@ b3_compute_egl_tex2:
 	 webgpu_egl_tex2.o 
 
 b3_compute_audio:
-	 em++ src/audio/webgpu_audio.cpp -pipe -ffast-math -ffp-contract=off \
-	 -mextended-const -mbulk-memory -matomics -O2 -fchar8_t -std=c++20 $(wGL_FLAGS) \
-	 -sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
-	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O2 -mextended-const -dead_strip -mbulk-memory -matomics -std=c++20 -pipe \
 	 -pthread -ffast-math -ffp-contract=off --js-library lib/lib_webgpu.js \
 	 -sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 \
@@ -117,7 +113,7 @@ b3_compute_audio:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPUi","_startWebGPUbi","_ply"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 webgpu_audio.o 
+	 webgpu_audio.cpp
 
 b3_compute_tex_gpu:
 	 em++ src/vanilla/webgpu_egl_gpu.cpp -fchar8_t -std=c++14 $(wGL_FLAGS) \
