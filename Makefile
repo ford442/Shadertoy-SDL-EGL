@@ -100,9 +100,9 @@ b3_compute_egl_tex2:
 
 b3_compute_audio:
 	 em++ src/audio/webgpu_audio.cpp -pipe -ffast-math -ffp-contract=off \
-	 -mextended-const -mbulk-memory -matomics -pthread -O1 -fchar8_t -std=c++20 $(wGL_FLAGS) \
+	 -mextended-const -mbulk-memory -matomics -pthread -O2 -fchar8_t -std=c++20 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -O1 -mextended-const -dead_strip -mbulk-memory -matomics -std=c++20 -openmp-simd -pipe \
+	 em++ -O2 -mextended-const -dead_strip -mbulk-memory -matomics -std=c++20 -openmp-simd -pipe \
 	 -pthread -ffast-math -ffp-contract=off --js-library lib/lib_webgpu.js \
 	 -sUSE_SDL=2 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-audio.js \
 	 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sABORTING_MALLOC=0 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
