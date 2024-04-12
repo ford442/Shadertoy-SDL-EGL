@@ -102,7 +102,7 @@ template<class ArgumentType,class ResultType>
 #include <boost/atomic.hpp>
 #include <boost/tuple/tuple.hpp>
 // #include <boost/integer.hpp>
-#include <boost/bind/bind.hpp>
+// #include <boost/bind/bind.hpp>
 #include <boost/function.hpp>
 
 struct unary_function{
