@@ -95,7 +95,6 @@ using namespace std;
 
 template<class ArgumentType,class ResultType>
 
-
 #include <boost/preprocessor.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
@@ -105,7 +104,6 @@ template<class ArgumentType,class ResultType>
 // #include <boost/integer.hpp>
 #include <boost/bind/bind.hpp>
 #include <boost/function.hpp>
-
 
 struct unary_function{
 typedef ArgumentType argument_type;
@@ -121,17 +119,11 @@ typedef ResultType result_type;
 #define BOOST_UBLAS_USE_LONG_DOUBLE
 // #define BOOST_NO_EXCEPTIONS
 
-
-
-
 extern "C"{  
   
 EM_BOOL pl();
   
 }
-
-
-
 
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
 using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
@@ -154,7 +146,6 @@ SDL_AudioDeviceID dev;
 register GLuint slen=0;
 register GLubyte * wptr;
 }wave;
-
 
 class Audio{
 
@@ -213,11 +204,12 @@ request.channels=2;
 request.samples=128;
 SDL_memset(&request,0,sizeof(request));
 snd_pos(0);
-SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
+// SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
-SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
-sound.at(0,1,0)=wave.snd;
-snd_pos_u(wave.slen);
+// SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
+wave.snd=sound.at(0,1,0);
+// sound.at(0,1,0)=wave.snd;
+snd_pos_u(1);
 request.callback=bfr;
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
@@ -247,11 +239,6 @@ private:
 float frequency;
 float phase;
 };
-
-
-
-
-
 
 inline int rNd4(int);
 // static void WGPU_Run();
