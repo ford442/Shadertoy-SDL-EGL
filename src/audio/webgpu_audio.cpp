@@ -228,7 +228,7 @@ EM_BOOL osc() {
 Oscillator oscillator(440.0f);
 while (true) {
 float sample = oscillator.generate();
-unsigned char8_t * snnd=&sample;
+unsigned char * snnd=&sample;
 sound.at(0,1,0)=snnd;
 }
 pl();
