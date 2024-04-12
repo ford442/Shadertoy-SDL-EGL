@@ -113,7 +113,7 @@ b3_compute_audio:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPUi","_startWebGPUbi","_ply"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 webgpu_audio.cpp
+	 src/audio/webgpu_audio.cpp
 
 b3_compute_tex_gpu:
 	 em++ src/vanilla/webgpu_egl_gpu.cpp -fchar8_t -std=c++14 $(wGL_FLAGS) \
