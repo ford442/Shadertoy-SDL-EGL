@@ -195,10 +195,12 @@ return;
 }
 
 boost::function<EM_BOOL()>plt=[this](){
+const int SAMPLE_RATE=44100;
+const int BUFFER_SIZE=512;
 ::boost::tuples::tie(sound,sound_pos,sound_pos_u);
 ::boost::tuples::tie(wave,sse,sse2);
 ::boost::tuples::tie(bfr,request);
-request.freq=44100;
+request.freq=SAMPLE_RATE;
 request.format=AUDIO_S32;
 request.channels=2;
 request.samples=128;
@@ -207,9 +209,13 @@ snd_pos(0);
 // SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
 // SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
-wave.snd=sound.at(0,1,0);
-// sound.at(0,1,0)=wave.snd;
-snd_pos_u(1);
+// wave.snd=sound.at(0,1,0);
+float * buffer=(float *)stm; 
+for(int i=0;i<BUFFER_SIZE/sizeof(float);i++){
+buffer[i]=oscillator.generate();
+}
+sound.at(0,1,0)=buffer;
+snd_pos_u(0);
 request.callback=bfr;
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
