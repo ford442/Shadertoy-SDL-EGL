@@ -239,7 +239,7 @@ float* buffer=(float*)buffer_size;
 for(int i=0;i<BUFFER_SIZE/sizeof(float);i++){
 buffer[i]=oscillator.generate();
 }
-sound.at(0,1,0)=&buffer;
+sound.at(0,1,0)=(unsigned char *)buffer;
 snd_pos_u(0);
 request.callback=bfr;
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
