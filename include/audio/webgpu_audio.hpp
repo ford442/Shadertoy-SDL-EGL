@@ -119,161 +119,6 @@ typedef ResultType result_type;
 #define BOOST_UBLAS_USE_LONG_DOUBLE
 // #define BOOST_NO_EXCEPTIONS
 
-extern "C"{  
-  
-EM_BOOL pl();
-  
-}
-
-using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
-using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
-using ub_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
-using lu_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned long>>;
-using v_tensor=boost::numeric::ublas::tensor<v128_t>;
-
-ub_tensor sound=ub_tensor{1,1,1};
-gi_tensor sound_pos=gi_tensor{1,1};
-gi_tensor sound_lft=gi_tensor{1,1};
-gi_tensor sound_siz=gi_tensor{1,1};
-lu_tensor sound_pos_u=lu_tensor{1,1};
-v_tensor sse=v_tensor{1,2};
-v_tensor sse2=v_tensor{1,1};
-v_tensor sse3=v_tensor{1,1};
-
-#include <math.h>
-
-class Oscillator {
-public:
-Oscillator(float frequency) {
-this->frequency = frequency;
-this->phase = 0.0f;
-}
-
-float generate() {
-  
-    float sample = sin(2.0f * M_PI * this->frequency * this->phase);
-    this->phase += 1.0f / 44100.0f;
-  
-    return sample;
-}
-
-private:
-float frequency;
-float phase;
-};
-
-
-struct{
-register GLubyte * snd;
-register long pos=0;
-SDL_AudioDeviceID dev;
-register GLuint slen=0;
-register GLubyte * wptr;
-}wave;
-
-class Audio{
-
-private:
-
-GLchar flnm[24];
-SDL_AudioSpec request;
-
-public:
-
-// static EM_BOOL snd_pos(boost::atomic<short int> set){
-static EM_BOOL snd_pos(GLint set){
-sse3.at(0,0)=wasm_i64x2_splat(set);
-sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
-return EM_TRUE;
-}
-
-static EM_BOOL snd_lft(long long set){
-sse.at(0,1)=wasm_i64x2_splat(set);
-sound_lft.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,1),0);
-return EM_TRUE;
-}
-
-static EM_BOOL snd_pos_u(unsigned long long set){
-sse2.at(0,0)=wasm_u64x2_splat(set);
-sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
-return EM_TRUE;
-}
-
-static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
-int bytes_to_copy=std::min(len,int(sound_lft.at(0,0))); 
-::boost::tuples::tie(stm,len);
-wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
-snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
-      EM_ASM({console.log('starting audio while loop');});
-while(sound_lft.at(0,0)<=sound_siz.at(0,0)){
-SDL_UnlockAudioDevice(wave.dev);
-          EM_ASM({console.log('memcopy sound');});
-SDL_memcpy(stm,wave.wptr,sound_lft.at(0,0));
-stm+=sound_lft.at(0,0);
-len-=sound_lft.at(0,0);
-wave.wptr += bytes_to_copy; // Advance the pointer
-sound_pos.at(0, 0) += bytes_to_copy; 
-if (sound_pos.at(0, 0) >= sound_siz.at(0, 0)) {
-EM_ASM({console.log('stopping (if (sound_pos...)');}); 
-return;
-
-}
-snd_lft(sound_pos_u.at(0,0));
-SDL_LockAudioDevice(wave.dev);
-}
-EM_ASM({console.log('stopping (end of while loop)');});
-// SDL_memcpy(stm,wave.wptr,len);
-// snd_pos(sound_pos.at(0,0)+len);
-return;
-}
-
-boost::function<EM_BOOL()>plt=[this](){
-const int SAMPLE_RATE=44100;
-const int BUFFER_SIZE=512;
-Oscillator oscillator(440.0f);
-::boost::tuples::tie(sound,sound_pos,sound_pos_u);
-::boost::tuples::tie(wave,sse,sse2);
-::boost::tuples::tie(bfr,request);
-request.freq=SAMPLE_RATE;
-request.format=AUDIO_S32;
-request.channels=2;
-request.samples=128;
-SDL_memset(&request,0,sizeof(request));
-snd_pos(0);
-  
-// SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
-SDL_Init(SDL_INIT_AUDIO);
-// SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
-
-EM_ASM({console.log('buffering samples');});
-  
-int buffer_size=128*request.samples*request.channels*sizeof(float);
-float* buffer=(float*)buffer_size;
-for(int i=0;i<BUFFER_SIZE/sizeof(float);i++){
-buffer[i]=oscillator.generate();
-}
-  EM_ASM({console.log('done buffering samples');});
-sound_siz.at(0,0)=buffer_size;
-wave.slen=buffer_size;
-sound.at(0,1,0)=(unsigned char *)buffer; 
-wave.snd=sound.at(0,1,0);
-
-snd_pos_u(0);
-snd_lft(sound_siz.at(0,0));
-request.callback=bfr;
-    EM_ASM({console.log('setting callback');});
-
-wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
-    EM_ASM({console.log('open device');});
-
-  SDL_QueueAudio(wave.dev, sound.at(0,1,0), sound_siz.at(0,0));
-    EM_ASM({console.log('queue audio');});
-SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
-return EM_TRUE;
-};
-
-};
-
 inline int rNd4(int);
 // static void WGPU_Run();
 // static void ObtainedWebGpuDeviceStart(WGpuDevice,void *);
@@ -450,3 +295,155 @@ using wvbl_tensor=boost::numeric::ublas::tensor<WGpuVertexBufferLayout>;
 using wetd_tensor=boost::numeric::ublas::tensor<WGpuExternalTextureDescriptor>;
 using wet_tensor=boost::numeric::ublas::tensor<WGpuExternalTexture>;
 using wvbl_tensor=boost::numeric::ublas::tensor<WGpuVertexBufferLayout>;
+
+extern "C"{  
+  
+EM_BOOL pl();
+  
+}
+
+gi_tensor on=gi_tensor{1,1};
+ub_tensor sound=ub_tensor{1,1,1};
+gi_tensor sound_pos=gi_tensor{1,1};
+gi_tensor sound_lft=gi_tensor{1,1};
+gi_tensor sound_siz=gi_tensor{1,1};
+lu_tensor sound_pos_u=lu_tensor{1,1};
+v_tensor sse=v_tensor{1,2};
+v_tensor sse2=v_tensor{1,1};
+v_tensor sse3=v_tensor{1,1};
+
+#include <math.h>
+
+class Oscillator {
+public:
+Oscillator(float frequency) {
+this->frequency = frequency;
+this->phase = 0.0f;
+}
+
+float generate() {
+  
+    float sample = sin(2.0f * M_PI * this->frequency * this->phase);
+    this->phase += 1.0f / 44100.0f;
+  
+    return sample;
+}
+
+private:
+float frequency;
+float phase;
+};
+
+
+struct{
+register GLubyte * snd;
+register long pos=0;
+SDL_AudioDeviceID dev;
+register GLuint slen=0;
+register GLubyte * wptr;
+}wave;
+
+class Audio{
+
+private:
+
+GLchar flnm[24];
+SDL_AudioSpec request;
+
+public:
+
+// static EM_BOOL snd_pos(boost::atomic<short int> set){
+static EM_BOOL snd_pos(GLint set){
+sse3.at(0,0)=wasm_i64x2_splat(set);
+sound_pos.at(0,0)=wasm_i64x2_extract_lane(sse3.at(0,0),0);
+return EM_TRUE;
+}
+
+static EM_BOOL snd_lft(long long set){
+sse.at(0,1)=wasm_i64x2_splat(set);
+sound_lft.at(0,0)=wasm_i64x2_extract_lane(sse.at(0,1),0);
+return EM_TRUE;
+}
+
+static EM_BOOL snd_pos_u(unsigned long long set){
+sse2.at(0,0)=wasm_u64x2_splat(set);
+sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
+return EM_TRUE;
+}
+
+static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
+int bytes_to_copy=std::min(len,int(sound_lft.at(0,0))); 
+::boost::tuples::tie(stm,len);
+wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
+snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
+EM_ASM({console.log('starting audio while loop');});
+while(on.at(0,0)==1){
+SDL_UnlockAudioDevice(wave.dev);
+EM_ASM({console.log('memcopy sound');});
+SDL_memcpy(stm,wave.wptr,sound_lft.at(0,0));
+stm+=sound_lft.at(0,0);
+len-=sound_lft.at(0,0);
+wave.wptr += bytes_to_copy; // Advance the pointer
+sound_pos.at(0, 0) += bytes_to_copy; 
+if (sound_pos.at(0, 0) >= sound_siz.at(0, 0)) {
+EM_ASM({console.log('stopping (if (sound_pos...)');}); 
+on.at(0,0)=0;
+SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
+}
+snd_lft(sound_pos_u.at(0,0));
+SDL_LockAudioDevice(wave.dev);
+}
+EM_ASM({console.log('stopping (end of while loop)');});
+SDL_memcpy(stm,wave.wptr,len);
+snd_pos(sound_pos.at(0,0)+len);
+return;
+}
+
+boost::function<EM_BOOL()>plt=[this](){
+  on.at(0,0)=0;
+const int SAMPLE_RATE=44100;
+const int BUFFER_SIZE=512;
+Oscillator oscillator(440.0f);
+::boost::tuples::tie(sound,sound_pos,sound_pos_u);
+::boost::tuples::tie(wave,sse,sse2);
+::boost::tuples::tie(bfr,request);
+request.freq=SAMPLE_RATE;
+request.format=AUDIO_S32;
+request.channels=2;
+request.samples=128;
+SDL_memset(&request,0,sizeof(request));
+snd_pos(0);
+  
+// SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
+SDL_Init(SDL_INIT_AUDIO);
+// SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
+
+EM_ASM({console.log('buffering samples');});
+  
+int buffer_size=128*request.samples*request.channels*sizeof(float);
+float* buffer=(float*)buffer_size;
+for(int i=0;i<BUFFER_SIZE/sizeof(float);i++){
+buffer[i]=oscillator.generate();
+}
+  EM_ASM({console.log('done buffering samples');});
+sound_siz.at(0,0)=buffer_size;
+wave.slen=buffer_size;
+sound.at(0,1,0)=(unsigned char *)buffer; 
+wave.snd=sound.at(0,1,0);
+
+snd_pos_u(0);
+snd_lft(sound_siz.at(0,0));
+request.callback=bfr;
+    EM_ASM({console.log('setting callback');});
+
+wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
+    EM_ASM({console.log('open device');});
+
+  SDL_QueueAudio(wave.dev, sound.at(0,1,0), sound_siz.at(0,0));
+    EM_ASM({console.log('queue audio');});
+SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
+  on.at(0,0)=1;
+return EM_TRUE;
+};
+
+};
