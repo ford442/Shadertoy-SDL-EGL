@@ -373,10 +373,10 @@ return EM_TRUE;
 
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 EM_ASM({console.log('bfr');}); 
-if(audio_on.at(0,0)==1){
+if(audio_on.at(0,0)==5){
 if(sound_pos.at(0,0)>=sound_siz.at(0,0)){
 EM_ASM({console.log('stopping (if (sound_pos...)');}); 
-audio_on.at(0,0)=0;
+audio_on.at(0,0)=10;
 }
 int bytes_to_copy=std::min(len,int(sound_lft.at(0,0))); 
 ::boost::tuples::tie(stm,len);
@@ -430,7 +430,7 @@ EM_ASM({console.log('SDL_OpenAudioDevice');});
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 SDL_QueueAudio(wave.dev,sound.at(0,1,0),sound_siz.at(0,0));
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
-audio_on.at(0,0)=1;
+audio_on.at(0,0)=5;
 return EM_TRUE;
 };
 
