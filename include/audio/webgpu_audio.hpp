@@ -253,6 +253,8 @@ wave.snd=sound.at(0,1,0);
 snd_pos_u(sound_siz.at(0,0));
 request.callback=bfr;
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
+  SDL_QueueAudio(wave.dev, sound.at(0,1,0), sound_siz.at(0,0));
+
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 return EM_TRUE;
 };
