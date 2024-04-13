@@ -215,6 +215,8 @@ wave.wptr += bytes_to_copy; // Advance the pointer
 sound_pos.at(0, 0) += bytes_to_copy; 
 if (sound_pos.at(0, 0) >= sound_siz.at(0, 0)) {
 EM_ASM({console.log('stopping (if (sound_pos...)');}); 
+return;
+
 }
 snd_lft(sound_pos_u.at(0,0));
 SDL_LockAudioDevice(wave.dev);
