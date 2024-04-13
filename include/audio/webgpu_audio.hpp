@@ -404,7 +404,6 @@ return;
 }
 
 boost::function<EM_BOOL()>plt=[this](){
-  
 const int SAMPLE_RATE=44100;
 const int BUFFER_SIZE=512;
 Oscillator oscillator(440.0f);
@@ -420,7 +419,6 @@ snd_pos(0);
 // SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
 // SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
-audio_on.at(0,0)=1;
 int buffer_size=128*request.samples*request.channels*sizeof(float);
 float* buffer=(float*)buffer_size;
 for(int i=0;i<BUFFER_SIZE/sizeof(float);i++){
@@ -434,14 +432,14 @@ wave.snd=sound.at(0,1,0);
 snd_pos_u(0);
 snd_lft(sound_siz.at(0,0));
 request.callback=bfr;
-  EM_ASM({console.log('SDL_OpenAudioDevice');}); 
-
+if(audio_on.at(0,0)!=0){
+EM_ASM({console.log('SDL_OpenAudioDevice');}); 
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
-    EM_ASM({console.log('SDL_QueueAudio');}); 
-
+}
+EM_ASM({console.log('SDL_QueueAudio');}); 
+audio_on.at(0,0)=1;
 SDL_QueueAudio(wave.dev,sound.at(0,1,0),sound_siz.at(0,0));
-      EM_ASM({console.log('SDL_PauseAudioDevice(wave.dev,SDL_FALSE');}); 
-
+EM_ASM({console.log('SDL_PauseAudioDevice(wave.dev,SDL_FALSE');}); 
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 return EM_TRUE;
 };
