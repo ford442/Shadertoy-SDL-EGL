@@ -234,7 +234,7 @@ snd_pos(0);
 SDL_Init(SDL_INIT_AUDIO);
 // SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
 // wave.snd=sound.at(0,1,0);
-int buffer_size=request.samples*request.channels*sizeof(float);
+int buffer_size=128*request.samples*request.channels*sizeof(float);
 float* buffer=(float*)buffer_size;
 for(int i=0;i<BUFFER_SIZE/sizeof(float);i++){
 buffer[i]=oscillator.generate();
