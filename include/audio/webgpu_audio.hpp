@@ -243,6 +243,7 @@ float* buffer=(float*)buffer_size;
 for(int i=0;i<BUFFER_SIZE/sizeof(float);i++){
 buffer[i]=oscillator.generate();
 }
+wave.slen=buffer_size;
 sound.at(0,1,0)=(unsigned char *)buffer;
 snd_pos_u(buffer_size);
 request.callback=bfr;
