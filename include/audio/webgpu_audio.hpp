@@ -234,7 +234,6 @@ snd_pos(0);
 // SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
 // SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
-// wave.snd=sound.at(0,1,0);
 
 EM_ASM({console.log('buffering samples');});
   
@@ -243,8 +242,12 @@ float* buffer=(float*)buffer_size;
 for(int i=0;i<BUFFER_SIZE/sizeof(float);i++){
 buffer[i]=oscillator.generate();
 }
+  EM_ASM({console.log('done buffering samples');});
+
 wave.slen=buffer_size;
-sound.at(0,1,0)=(unsigned char *)buffer;
+sound.at(0,1,0)=(unsigned char *)buffer; 
+wave.snd=sound.at(0,1,0);
+  
 snd_pos_u(buffer_size);
 request.callback=bfr;
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
