@@ -200,7 +200,7 @@ return EM_TRUE;
 }
 
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
-int bytes_to_copy=std::min(len,sound_lft.at(0,0)); 
+int bytes_to_copy=std::min(len,int(sound_lft.at(0,0))); 
 ::boost::tuples::tie(stm,len);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
