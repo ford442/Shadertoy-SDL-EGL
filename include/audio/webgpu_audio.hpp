@@ -372,18 +372,17 @@ return EM_TRUE;
 }
 
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
-      EM_ASM({console.log('bfr');}); 
-
+EM_ASM({console.log('bfr');}); 
 int bytes_to_copy=std::min(len,int(sound_lft.at(0,0))); 
 ::boost::tuples::tie(stm,len);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 EM_ASM({console.log('starting audio while loop');});
-if(audio_on.at(0,0)==1){
+if(audio_on.at(0,0)!=0){
 if(sound_pos.at(0,0)>=sound_siz.at(0,0)){
 EM_ASM({console.log('stopping (if (sound_pos...)');}); 
 audio_on.at(0,0)=0;
-// SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
+SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
 // snd_pos(0);
 }
 SDL_UnlockAudioDevice(wave.dev);
