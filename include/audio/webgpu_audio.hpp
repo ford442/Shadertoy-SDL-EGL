@@ -254,7 +254,7 @@ wave.slen=buffer_size;
 sound.at(0,1,0)=(unsigned char *)buffer; 
 wave.snd=sound.at(0,1,0);
 
-snd_pos_u(sound_siz.at(0,0));
+snd_pos_u(0);
 snd_lft(sound_siz.at(0,0));
 request.callback=bfr;
     EM_ASM({console.log('setting callback');});
