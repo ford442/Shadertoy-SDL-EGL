@@ -14,6 +14,17 @@ VertexF Fvertices[]={
 {-1.0,1.0,1.0,1.0}
 };
 
+VertexF Ffvertices[]={
+{-1.0f,-1.0f,1.0f,1.0f},
+{1.0f,-1.0f,1.0f,1.0f},
+{1.0f,1.0f,1.0f,1.0f},
+{-1.0f,1.0f,1.0f,1.0f},
+{-1.0f,-1.0f,-1.0f,1.0f},
+{1.0f,-1.0f,-1.0f,1.0f},
+{1.0f,1.0f,-1.0f,1.0f},
+{-1.0f,1.0f,1.0f,1.0f}
+};
+
 struct VertexFUV{
 float x, y, z, w; // Position
 float u, v;       // UV texture coordinates
