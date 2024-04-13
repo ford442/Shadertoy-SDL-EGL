@@ -379,7 +379,7 @@ int bytes_to_copy=std::min(len,int(sound_lft.at(0,0)));
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 EM_ASM({console.log('starting audio while loop');});
-while(audio_on.at(0,0)==1){
+if(audio_on.at(0,0)==1){
 if(sound_pos.at(0,0)>=sound_siz.at(0,0)){
 EM_ASM({console.log('stopping (if (sound_pos...)');}); 
 audio_on.at(0,0)=0;
