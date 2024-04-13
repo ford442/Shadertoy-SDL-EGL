@@ -212,8 +212,9 @@ snd_lft(sound_pos_u.at(0,0));
 snd_pos(0);
 SDL_LockAudioDevice(wave.dev);
 }
-SDL_memcpy(stm,wave.wptr,len);
-snd_pos(sound_pos.at(0,0)+len);
+  EM_ASM({console.log('stopping');});
+// SDL_memcpy(stm,wave.wptr,len);
+// snd_pos(sound_pos.at(0,0)+len);
 return;
 }
 
@@ -234,6 +235,9 @@ snd_pos(0);
 SDL_Init(SDL_INIT_AUDIO);
 // SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
 // wave.snd=sound.at(0,1,0);
+
+EM_ASM({console.log('buffering samples');});
+  
 int buffer_size=128*request.samples*request.channels*sizeof(float);
 float* buffer=(float*)buffer_size;
 for(int i=0;i<BUFFER_SIZE/sizeof(float);i++){
