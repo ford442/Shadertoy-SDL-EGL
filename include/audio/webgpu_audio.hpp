@@ -134,6 +134,7 @@ using v_tensor=boost::numeric::ublas::tensor<v128_t>;
 ub_tensor sound=ub_tensor{1,1,1};
 gi_tensor sound_pos=gi_tensor{1,1};
 gi_tensor sound_lft=gi_tensor{1,1};
+gi_tensor sound_siz=gi_tensor{1,1};
 lu_tensor sound_pos_u=lu_tensor{1,1};
 v_tensor sse=v_tensor{1,2};
 v_tensor sse2=v_tensor{1,1};
@@ -202,7 +203,7 @@ static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 ::boost::tuples::tie(stm,len);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
-while(sound_lft.at(0,0)<=len){
+while(sound_lft.at(0,0)<=sound_siz.at(0,0)){
 SDL_UnlockAudioDevice(wave.dev);
 SDL_memcpy(stm,wave.wptr,sound_lft.at(0,0));
 stm+=sound_lft.at(0,0);
@@ -231,6 +232,7 @@ request.channels=2;
 request.samples=128;
 SDL_memset(&request,0,sizeof(request));
 snd_pos(0);
+  
 // SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
 // SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
@@ -243,12 +245,12 @@ for(int i=0;i<BUFFER_SIZE/sizeof(float);i++){
 buffer[i]=oscillator.generate();
 }
   EM_ASM({console.log('done buffering samples');});
-
+sound_siz.at(0,0)=buffer_size;
 wave.slen=buffer_size;
 sound.at(0,1,0)=(unsigned char *)buffer; 
 wave.snd=sound.at(0,1,0);
-  
-snd_pos_u(buffer_size);
+
+snd_pos_u(sound_siz.at(0,0));
 request.callback=bfr;
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
