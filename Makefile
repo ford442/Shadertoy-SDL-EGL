@@ -114,8 +114,8 @@ b3_compute_egl_tex2:
 	 webgpu_egl_tex2.o 
 
 b3_compute_audio:
- 	 em++ src/audio/webgpu_audio.cpp -pipe -ffast-math -ffp-contract=off \
-	 -mextended-const -mbulk-memory -matomics -pthread -O1 -fchar8_t -std=c++20 $(wGL_FLAGS) \
+	 em++ src/audio/webgpu_audio.cpp -pipe -ffast-math -ffp-contract=off \
+	 -mextended-const -mbulk-memory -matomics -pthread -O2 -fchar8_t -std=c++20 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O2 -mextended-const -dead_strip -mbulk-memory -matomics -std=c++20 -pipe \
 	 -pthread -ffast-math -ffp-contract=off --js-library lib/lib_webgpu.js \
