@@ -390,9 +390,8 @@ sound_pos.at(0, 0) += bytes_to_copy;
 if(sound_pos.at(0,0)>=sound_siz.at(0,0)){
 EM_ASM({console.log('stopping (if (sound_pos...)');}); 
 audio_on.at(0,0)=2;
-SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
-snd_pos(0);
-return;
+// SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
+// snd_pos(0);
 }
 snd_lft(sound_pos_u.at(0,0));
 SDL_LockAudioDevice(wave.dev);
