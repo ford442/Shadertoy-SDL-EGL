@@ -139,6 +139,29 @@ v_tensor sse=v_tensor{1,2};
 v_tensor sse2=v_tensor{1,1};
 v_tensor sse3=v_tensor{1,1};
 
+#include <math.h>
+
+class Oscillator {
+public:
+Oscillator(float frequency) {
+this->frequency = frequency;
+this->phase = 0.0f;
+}
+
+float generate() {
+  
+    float sample = sin(2.0f * M_PI * this->frequency * this->phase);
+    this->phase += 1.0f / 44100.0f;
+  
+    return sample;
+}
+
+private:
+float frequency;
+float phase;
+};
+
+
 struct{
 register GLubyte * snd;
 register long pos=0;
@@ -197,6 +220,7 @@ return;
 boost::function<EM_BOOL()>plt=[this](){
 const int SAMPLE_RATE=44100;
 const int BUFFER_SIZE=512;
+Oscillator oscillator(440.0f);
 ::boost::tuples::tie(sound,sound_pos,sound_pos_u);
 ::boost::tuples::tie(wave,sse,sse2);
 ::boost::tuples::tie(bfr,request);
@@ -210,12 +234,12 @@ snd_pos(0);
 SDL_Init(SDL_INIT_AUDIO);
 // SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
 // wave.snd=sound.at(0,1,0);
-    int buffer_size = request.samples * request.channels * sizeof(float);
-    float* buffer = (float*) buffer_size;
+int buffer_size=request.samples*request.channels*sizeof(float);
+float* buffer=(float*)buffer_size;
 for(int i=0;i<BUFFER_SIZE/sizeof(float);i++){
 buffer[i]=oscillator.generate();
 }
-sound.at(0,1,0)=buffer;
+sound.at(0,1,0)=&buffer;
 snd_pos_u(0);
 request.callback=bfr;
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
@@ -223,28 +247,6 @@ SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 return EM_TRUE;
 };
 
-};
-
-#include <math.h>
-
-class Oscillator {
-public:
-Oscillator(float frequency) {
-this->frequency = frequency;
-this->phase = 0.0f;
-}
-
-float generate() {
-  
-    float sample = sin(2.0f * M_PI * this->frequency * this->phase);
-    this->phase += 1.0f / 44100.0f;
-  
-    return sample;
-}
-
-private:
-float frequency;
-float phase;
 };
 
 inline int rNd4(int);
