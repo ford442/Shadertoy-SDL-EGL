@@ -240,7 +240,7 @@ for(int i=0;i<BUFFER_SIZE/sizeof(float);i++){
 buffer[i]=oscillator.generate();
 }
 sound.at(0,1,0)=(unsigned char *)buffer;
-snd_pos_u(0);
+snd_pos_u(buffer_size);
 request.callback=bfr;
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
