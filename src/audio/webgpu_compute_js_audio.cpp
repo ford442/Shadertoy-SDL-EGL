@@ -180,7 +180,8 @@ var pth=document.querySelector('#path').innerHTML;
 getShader(pth,'shader.wgsl');
 var pth2=document.querySelector('#computePath').innerHTML;
 getShader(pth2,'compute.wgsl');
-normalResStart();
+// normalResStart();
+  console.log('starting ply');
 Module.ccall('ply');
 });
 
