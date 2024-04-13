@@ -430,10 +430,8 @@ wave.snd=sound.at(0,1,0);
 snd_pos_u(0);
 snd_lft(sound_siz.at(0,0));
 request.callback=bfr;
-if(audio_on.at(0,0)!=2){
 EM_ASM({console.log('SDL_OpenAudioDevice');}); 
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
-}
 EM_ASM({console.log('SDL_QueueAudio');}); 
 audio_on.at(0,0)=1;
 SDL_QueueAudio(wave.dev,sound.at(0,1,0),sound_siz.at(0,0));
