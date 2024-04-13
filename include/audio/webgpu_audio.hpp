@@ -205,16 +205,25 @@ wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
       EM_ASM({console.log('starting audio while loop');});
 
+  
 while(sound_lft.at(0,0)<=sound_siz.at(0,0)){
+        EM_ASM({console.log('unlocking audio device');});
+
 SDL_UnlockAudioDevice(wave.dev);
+          EM_ASM({console.log('memcopy sound');});
+
 SDL_memcpy(stm,wave.wptr,sound_lft.at(0,0));
 stm+=sound_lft.at(0,0);
 len-=sound_lft.at(0,0);
 wave.wptr=sound.at(0,1,0);
 snd_lft(sound_pos_u.at(0,0));
 snd_pos(0);
+            EM_ASM({console.log('lock audio device');});
+
 SDL_LockAudioDevice(wave.dev);
 }
+
+  
   EM_ASM({console.log('stopping');});
 // SDL_memcpy(stm,wave.wptr,len);
 // snd_pos(sound_pos.at(0,0)+len);
