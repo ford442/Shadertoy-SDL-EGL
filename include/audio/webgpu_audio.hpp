@@ -203,6 +203,8 @@ static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 ::boost::tuples::tie(stm,len);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
+      EM_ASM({console.log('starting audio while loop');});
+
 while(sound_lft.at(0,0)<=sound_siz.at(0,0)){
 SDL_UnlockAudioDevice(wave.dev);
 SDL_memcpy(stm,wave.wptr,sound_lft.at(0,0));
@@ -252,9 +254,13 @@ wave.snd=sound.at(0,1,0);
 
 snd_pos_u(sound_siz.at(0,0));
 request.callback=bfr;
-wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
-  SDL_QueueAudio(wave.dev, sound.at(0,1,0), sound_siz.at(0,0));
+    EM_ASM({console.log('setting callback');});
 
+wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
+    EM_ASM({console.log('open device');});
+
+  SDL_QueueAudio(wave.dev, sound.at(0,1,0), sound_siz.at(0,0));
+    EM_ASM({console.log('queue audio');});
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 return EM_TRUE;
 };
