@@ -387,7 +387,7 @@ wave.wptr += bytes_to_copy; // Advance the pointer
 sound_pos.at(0, 0) += bytes_to_copy; 
 if (sound_pos.at(0, 0) >= sound_siz.at(0, 0)) {
 EM_ASM({console.log('stopping (if (sound_pos...)');}); 
-audio_on.at(0,0)=0;
+audio_on.at(0,0)=2;
 SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
 }
 snd_lft(sound_pos_u.at(0,0));
@@ -400,7 +400,6 @@ return;
 }
 
 boost::function<EM_BOOL()>plt=[this](){
-  audio_on.at(0,0)=0;
 const int SAMPLE_RATE=44100;
 const int BUFFER_SIZE=512;
 Oscillator oscillator(440.0f);
@@ -415,9 +414,11 @@ SDL_memset(&request,0,sizeof(request));
 snd_pos(0);
   
 // SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
+if(audio_on.at(0,0)!=2){
 SDL_Init(SDL_INIT_AUDIO);
 // SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
-
+audio_on.at(0,0)=0;
+}
 EM_ASM({console.log('buffering samples');});
   
 int buffer_size=128*request.samples*request.channels*sizeof(float);
