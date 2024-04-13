@@ -389,9 +389,8 @@ wave.wptr += bytes_to_copy; // Advance the pointer
 sound_pos.at(0, 0) += bytes_to_copy; 
 if(sound_pos.at(0,0)>=sound_siz.at(0,0)){
 EM_ASM({console.log('stopping (if (sound_pos...)');}); 
-audio_on.at(0,0)=0;
+audio_on.at(0,0)=2;
 SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
-SDL_CloseAudioDevice(0);
 snd_pos(0);
 return;
 }
@@ -427,12 +426,11 @@ buffer[i]=oscillator.generate();
 sound_siz.at(0,0)=buffer_size;
 wave.slen=buffer_size;
 sound.at(0,1,0)=(unsigned char *)buffer;
-  
 wave.snd=sound.at(0,1,0);
 snd_pos_u(0);
 snd_lft(sound_siz.at(0,0));
 request.callback=bfr;
-if(audio_on.at(0,0)!=0){
+if(audio_on.at(0,0)!=2){
 EM_ASM({console.log('SDL_OpenAudioDevice');}); 
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 }
