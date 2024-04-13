@@ -377,6 +377,7 @@ if(audio_on.at(0,0)!=0){
 if(sound_pos.at(0,0)>=sound_siz.at(0,0)){
 EM_ASM({console.log('stopping (if (sound_pos...)');}); 
 audio_on.at(0,0)=0;
+sound_pos.at(0,0)=0;
 // SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
 // snd_pos(0);
 }
