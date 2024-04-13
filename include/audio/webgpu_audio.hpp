@@ -442,7 +442,7 @@ wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
   SDL_QueueAudio(wave.dev, sound.at(0,1,0), sound_siz.at(0,0));
     EM_ASM({console.log('queue audio');});
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
-  on.at(0,0)=1;
+  audio_on.at(0,0)=1;
 return EM_TRUE;
 };
 
