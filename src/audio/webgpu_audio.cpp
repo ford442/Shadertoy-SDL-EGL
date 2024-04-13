@@ -225,12 +225,6 @@ return EM_TRUE;
 }
 
 EM_BOOL osc() {
-Oscillator oscillator(440.0f);
-while (true) {
-float sample = oscillator.generate();
-unsigned char * snnd=(unsigned char *)&sample;
-sound.at(0,1,0)=snnd;
-}
 pl();
 return EM_TRUE;
 }
