@@ -398,6 +398,7 @@ return;
 }
 
 boost::function<EM_BOOL()>plt=[this](){
+audio_on.at(0,0)=0;
 const int SAMPLE_RATE=44100;
 const int BUFFER_SIZE=512;
 Oscillator oscillator(440.0f);
@@ -424,12 +425,12 @@ sound.at(0,1,0)=(unsigned char *)buffer;
 wave.snd=sound.at(0,1,0);
 snd_pos_u(0);
 snd_lft(sound_siz.at(0,0));
-audio_on.at(0,0)=1;
 request.callback=bfr;
 EM_ASM({console.log('SDL_OpenAudioDevice');}); 
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 SDL_QueueAudio(wave.dev,sound.at(0,1,0),sound_siz.at(0,0));
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
+audio_on.at(0,0)=1;
 return EM_TRUE;
 };
 
