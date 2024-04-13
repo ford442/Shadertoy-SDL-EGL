@@ -385,15 +385,14 @@ stm+=sound_lft.at(0,0);
 len-=sound_lft.at(0,0);
 wave.wptr += bytes_to_copy; // Advance the pointer
 sound_pos.at(0, 0) += bytes_to_copy; 
-if (sound_pos.at(0, 0) >= sound_siz.at(0, 0)) {
+if(sound_pos.at(0,0)>=sound_siz.at(0,0)){
 EM_ASM({console.log('stopping (if (sound_pos...)');}); 
-audio_on.at(0,0)=2;
+audio_on.at(0,0)=0;
 SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
 }
 snd_lft(sound_pos_u.at(0,0));
 SDL_LockAudioDevice(wave.dev);
 }
-EM_ASM({console.log('stopping (end of while loop)');});
 SDL_memcpy(stm,wave.wptr,len);
 snd_pos(sound_pos.at(0,0)+len);
 return;
@@ -412,38 +411,25 @@ request.channels=2;
 request.samples=128;
 SDL_memset(&request,0,sizeof(request));
 snd_pos(0);
-  
 // SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
-if(audio_on.at(0,0)!=2){
 SDL_Init(SDL_INIT_AUDIO);
 // SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
-audio_on.at(0,0)=0;
-}
-EM_ASM({console.log('buffering samples');});
-  
+audio_on.at(0,0)=1;
 int buffer_size=128*request.samples*request.channels*sizeof(float);
 float* buffer=(float*)buffer_size;
 for(int i=0;i<BUFFER_SIZE/sizeof(float);i++){
 buffer[i]=oscillator.generate();
 }
-  EM_ASM({console.log('done buffering samples');});
 sound_siz.at(0,0)=buffer_size;
 wave.slen=buffer_size;
 sound.at(0,1,0)=(unsigned char *)buffer; 
 wave.snd=sound.at(0,1,0);
-
 snd_pos_u(0);
 snd_lft(sound_siz.at(0,0));
 request.callback=bfr;
-    EM_ASM({console.log('setting callback');});
-
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
-    EM_ASM({console.log('open device');});
-
-  SDL_QueueAudio(wave.dev, sound.at(0,1,0), sound_siz.at(0,0));
-    EM_ASM({console.log('queue audio');});
+SDL_QueueAudio(wave.dev, sound.at(0,1,0), sound_siz.at(0,0));
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
-  audio_on.at(0,0)=1;
 return EM_TRUE;
 };
 
