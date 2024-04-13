@@ -372,6 +372,8 @@ return EM_TRUE;
 }
 
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
+      EM_ASM({console.log('bfr');}); 
+
 int bytes_to_copy=std::min(len,int(sound_lft.at(0,0))); 
 ::boost::tuples::tie(stm,len);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
@@ -401,6 +403,7 @@ return;
 }
 
 boost::function<EM_BOOL()>plt=[this](){
+  
 const int SAMPLE_RATE=44100;
 const int BUFFER_SIZE=512;
 Oscillator oscillator(440.0f);
@@ -432,7 +435,11 @@ request.callback=bfr;
   EM_ASM({console.log('SDL_OpenAudioDevice');}); 
 
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
+    EM_ASM({console.log('SDL_QueueAudio');}); 
+
 SDL_QueueAudio(wave.dev,sound.at(0,1,0),sound_siz.at(0,0));
+      EM_ASM({console.log('SDL_PauseAudioDevice(wave.dev,SDL_FALSE');}); 
+
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 return EM_TRUE;
 };
