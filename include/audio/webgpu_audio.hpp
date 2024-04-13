@@ -302,7 +302,7 @@ EM_BOOL pl();
   
 }
 
-gi_tensor on=gi_tensor{1,1};
+gi_tensor audio_on=gi_tensor{1,1};
 ub_tensor sound=ub_tensor{1,1,1};
 gi_tensor sound_pos=gi_tensor{1,1};
 gi_tensor sound_lft=gi_tensor{1,1};
@@ -377,7 +377,7 @@ int bytes_to_copy=std::min(len,int(sound_lft.at(0,0)));
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 EM_ASM({console.log('starting audio while loop');});
-while(on.at(0,0)==1){
+while(audio_on.at(0,0)==1){
 SDL_UnlockAudioDevice(wave.dev);
 EM_ASM({console.log('memcopy sound');});
 SDL_memcpy(stm,wave.wptr,sound_lft.at(0,0));
@@ -387,7 +387,7 @@ wave.wptr += bytes_to_copy; // Advance the pointer
 sound_pos.at(0, 0) += bytes_to_copy; 
 if (sound_pos.at(0, 0) >= sound_siz.at(0, 0)) {
 EM_ASM({console.log('stopping (if (sound_pos...)');}); 
-on.at(0,0)=0;
+audio_on.at(0,0)=0;
 SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
 }
 snd_lft(sound_pos_u.at(0,0));
@@ -400,7 +400,7 @@ return;
 }
 
 boost::function<EM_BOOL()>plt=[this](){
-  on.at(0,0)=0;
+  audio_on.at(0,0)=0;
 const int SAMPLE_RATE=44100;
 const int BUFFER_SIZE=512;
 Oscillator oscillator(440.0f);
