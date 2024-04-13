@@ -380,6 +380,12 @@ wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 EM_ASM({console.log('starting audio while loop');});
 while(audio_on.at(0,0)==1){
+if(sound_pos.at(0,0)>=sound_siz.at(0,0)){
+EM_ASM({console.log('stopping (if (sound_pos...)');}); 
+audio_on.at(0,0)=0;
+// SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
+// snd_pos(0);
+}
 SDL_UnlockAudioDevice(wave.dev);
 EM_ASM({console.log('memcopy sound');});
 SDL_memcpy(stm,wave.wptr,sound_lft.at(0,0));
@@ -387,12 +393,6 @@ stm+=sound_lft.at(0,0);
 len-=sound_lft.at(0,0);
 wave.wptr += bytes_to_copy; // Advance the pointer
 sound_pos.at(0, 0) += bytes_to_copy; 
-if(sound_pos.at(0,0)>=sound_siz.at(0,0)){
-EM_ASM({console.log('stopping (if (sound_pos...)');}); 
-audio_on.at(0,0)=2;
-// SDL_PauseAudioDevice(wave.dev,SDL_TRUE);
-// snd_pos(0);
-}
 snd_lft(sound_pos_u.at(0,0));
 SDL_LockAudioDevice(wave.dev);
 }
