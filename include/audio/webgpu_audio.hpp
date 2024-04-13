@@ -302,7 +302,7 @@ EM_BOOL pl();
   
 }
 
-gi_tensor audio_on=gi_tensor{1,1};
+static gi_tensor audio_on=gi_tensor{1,1};
 ub_tensor sound=ub_tensor{1,1,1};
 gi_tensor sound_pos=gi_tensor{1,1};
 gi_tensor sound_lft=gi_tensor{1,1};
