@@ -58,15 +58,15 @@ cnvb.width=SiZ;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
-gl2.drawImage(vvi,offS,0,h$,h$,0,0,h$,tstSiZ);
-let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
+gl2.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
+let image=gl2.getImageData(0,0,w$,tstSiZ);
 // let mageData=flipImageData(image);
 let imageData=image.data;
 let pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
-gl2.drawImage(vvi,offS,0,h$,h$,0,0,h$,tstSiZ);
-image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
+gl2.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
+image=gl2.getImageData(0,0,w$,tstSiZ);
 imageData=image.data;
 // pixelData=new Uint8ClampedArray(imageData,0,imageData.size);
 pixelData=new Float32Array(imageData,0,imageData.size);
