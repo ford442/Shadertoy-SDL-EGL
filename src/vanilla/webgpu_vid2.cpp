@@ -930,8 +930,8 @@ wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceSt
 }
 
 EM_BOOL WGPU_Start(int szw,int szh){
-sze.at(1,1)=szh;
-sze.at(2,2)=szw;
+sze.at(1,1)=720; // szh;
+sze.at(2,2)=1280; // szw;
 options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
 options.forceFallbackAdapter=EM_FALSE;
