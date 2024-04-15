@@ -35,18 +35,18 @@ let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
 let SiZ=window.innerHeight;
 let tstSiZ=h$;
-let vsiz=document.querySelector('#vsiz').innerHTML;
+let vsizz=document.querySelector('#vsiz').innerHTML;
 let vsizw=document.querySelector('#mvi').width;
 let vsizh=document.querySelector('#mvi').height;
 if(running==0){
 // Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 setTimeout(function(){
-Module.ccall("startWebGPUi",null,"Number","Number",[vsizw,vsizh,vsiz]);
+Module.ccall("startWebGPUi",null,["Number","Number","Number"],[vsizw,vsizh,vsizz]);
 console.log('Starting..');
 running=1;
 },500);
 }
-console.log("vid size: ",vsizh,", ",vsizw,", ",vsiz);
+console.log("vid size: ",vsizh,", ",vsizw,", ",vsizz);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
 cnv.height=vsizh;
