@@ -263,12 +263,9 @@ WGPU_TEXTURE_FORMAT videoViewFormats[1];
 WGPU_TEXTURE_FORMAT depthViewFormats[1];
 WGPU_TEXTURE_FORMAT depthViewFormats2[1];
 WGPU_TEXTURE_FORMAT textureAviewFormats[1];
-
 WGpuColorTargetState colorTarget32={};
 WGpuColorTargetState colorTarget={};
 WGpuOrigin3D xyz={};
-
-
 WGpuColor clearColor={};
 WGpuCommandEncoder wceA={};
 WGpuCommandEncoder wceB={};
@@ -328,7 +325,6 @@ WGpuRenderBundleEncoderDescriptor renderBundleEncoderDescriptor={};
 WGpuDeviceDescriptor deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
 WGpuMultisampleState multiSamp={};
 WGpuMultisampleState multiSamp2={};
-
 WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 WGpuBufferBindingLayout bufferBindingLayoutR={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
 WGpuTextureBindingLayout textureBindingLayoutFloat={};
