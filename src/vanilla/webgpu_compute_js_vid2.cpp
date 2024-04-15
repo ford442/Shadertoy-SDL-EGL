@@ -41,12 +41,12 @@ setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
 let vsizw=document.querySelector('#mvi').width;
 let vsizh=document.querySelector('#mvi').height;
-Module.ccall("startWebGPUi",null,"Number","Number",[vsizw,vsizh]);
+Module.ccall("startWebGPUi",null,"Number","Number",[vsizw,vsizh,vsiz]);
 console.log('Starting..');
 running=1;
 },500);
 }
-console.log("vid size: ",h$,", ",w$);
+console.log("vid size: ",vsizh,", ",vsizw,", ",vsiz);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
 cnv.height=h$;
