@@ -35,12 +35,12 @@ let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
 let SiZ=window.innerHeight;
 let tstSiZ=h$;
-if(running==0){
-// Module.ccall("frm",null,['Number'],['Number'],h$,h$);
-setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
 let vsizw=document.querySelector('#mvi').width;
 let vsizh=document.querySelector('#mvi').height;
+if(running==0){
+// Module.ccall("frm",null,['Number'],['Number'],h$,h$);
+setTimeout(function(){
 Module.ccall("startWebGPUi",null,"Number","Number",[vsizw,vsizh,vsiz]);
 console.log('Starting..');
 running=1;
@@ -49,9 +49,9 @@ running=1;
 console.log("vid size: ",vsizh,", ",vsizw,", ",vsiz);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
-cnv.height=h$;
+cnv.height=vsizh;
 cnvb.height=SiZ;
-cnv.width=h$;
+cnv.width=vsizw;
 cnvb.width=SiZ;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
