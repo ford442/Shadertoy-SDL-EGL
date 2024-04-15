@@ -1,4 +1,4 @@
-#include "../../include/vanilla/webgpu_tex.hpp"
+#include "../../include/vanilla/webgpu_vid.hpp"
 
 #include "../../src/vanilla/webgpu_compute_vars.cpp"
 
