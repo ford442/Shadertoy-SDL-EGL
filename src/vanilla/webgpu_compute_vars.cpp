@@ -470,6 +470,7 @@ char * cmp_bdy=wgl_cmp_src;
 WGpuShaderModuleDescriptor shaderModuleDescriptor={};
 std::random_device randomizer;
 WGpuImageCopyTexture Input_Image_Texture={};
+WGpuImageCopyTexture Input_Image_TextureV={};
 WGpuImageCopyTexture Output_Image_Texture={};
 WGpuImageCopyTexture Output_Image_Texture2={};
 WGpuImageCopyBuffer Input_Image_Buffer={};
