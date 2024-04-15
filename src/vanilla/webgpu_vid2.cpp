@@ -990,13 +990,13 @@ return EM_TRUE;
 
 extern"C"{
 
-void startWebGPUi(int szw,int szh){
-WGPU_Start(szw,szh);
+void startWebGPUi(int szw,int szh,int szz){
+WGPU_Start(szw,szh,szz);
 return;
 }
 
-void startWebGPUbi(int szw,int szh){
-WGPU_Start(szw,szh);
+void startWebGPUbi(int szw,int szh,int szz){
+WGPU_Start(szw,szh,szz);
 return;
 }
 
