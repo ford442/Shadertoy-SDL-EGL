@@ -279,8 +279,8 @@ textureDescriptorIn.viewFormats=nullptr; // &textureAviewFormats[0];
 textureDescriptorInV.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorInV.format=wtf.at(0,0);
 textureDescriptorInV.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
-textureDescriptorInV.width=sze.at(4,4);
-textureDescriptorInV.height=sze.at(5,5); // default = 1;
+textureDescriptorInV.width=1280; // sze.at(4,4);
+textureDescriptorInV.height=720; // sze.at(5,5); // default = 1;
 textureDescriptorInV.depthOrArrayLayers=1;
 textureDescriptorInV.mipLevelCount=1;
 textureDescriptorInV.sampleCount=1;
@@ -555,7 +555,7 @@ Compute_Bindgroup_Layout_Entries[5].binding=5;
 Compute_Bindgroup_Layout_Entries[5].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[5].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 Compute_Bindgroup_Layout_Entries[5].layout.buffer=wbbl.at(0,0);
-            //  Video Texture
+            //  Screen Texture
 Compute_Bindgroup_Layout_Entries[6].binding=6;
 Compute_Bindgroup_Layout_Entries[6].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[6].type=WGPU_BIND_GROUP_LAYOUT_TYPE_STORAGE_TEXTURE;
@@ -608,7 +608,7 @@ Compute_Bindgroup_Entries[5].binding=5;
 Compute_Bindgroup_Entries[5].resource=wb.at(0,0);
 Compute_Bindgroup_Entries[5].bufferBindOffset=0;
 Compute_Bindgroup_Entries[5].bufferBindSize=sizeof(uint64_t);
-            //  Video Texture
+            //  Screen Texture
 Compute_Bindgroup_Entries[6]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Compute_Bindgroup_Entries[6].binding=6;
 Compute_Bindgroup_Entries[6].resource=wtv.at(2,2); 
