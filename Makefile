@@ -95,7 +95,7 @@ b3_compute_egl_tex:
 	 webgpu_egl_tex.o 
 
 b3_compute_egl_tex2:
-	 em++ src/vanilla/webgpu_egl_tex2.cpp -pthread -sPTHREAD_POOL_SIZE=1 -pipe -ffast-math -ffp-contract=off \
+	 em++ src/vanilla/webgpu_egl_tex2.cpp -pipe -ffast-math -ffp-contract=off \
 	 -mextended-const -mbulk-memory -matomics -pthread -O1 -fchar8_t -std=c++20 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O1 -pthread -sPTHREAD_POOL_SIZE=1 -mextended-const -dead_strip -mbulk-memory -matomics -std=c++20 -openmp-simd -pipe \
