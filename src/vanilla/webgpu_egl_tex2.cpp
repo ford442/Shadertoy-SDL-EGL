@@ -115,7 +115,7 @@ passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(1,1); // &wrpca.at(0,0); // 
 // passDesc.depthStencilAttachment=wrpdsa.at(1,1);  //  wrpdsa.at(0,0); //
 passDesc.occlusionQuerySet=0;
-passDesc.maxDrawCount=6;
+passDesc.maxDrawCount=60;
 renderTimestampWrites.querySet=0;
 renderTimestampWrites.beginningOfPassWriteIndex=-1;
 renderTimestampWrites.endOfPassWriteIndex=-1;
@@ -125,7 +125,7 @@ passDesc2.numColorAttachments=1;
 passDesc2.colorAttachments=&wrpca.at(0,0); // &wrpca.at(1,1); //
 // passDesc2.depthStencilAttachment=wrpdsa.at(0,0);
 passDesc2.occlusionQuerySet=0;
-passDesc2.maxDrawCount=6;
+passDesc2.maxDrawCount=60;
 passDesc2.timestampWrites=renderTimestampWrites;
 wrpd.at(1,1)=passDesc2;
 /*       //  Frame Data
