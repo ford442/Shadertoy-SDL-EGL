@@ -100,7 +100,7 @@ b3_compute_egl_tex2:
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O1 -mextended-const -dead_strip -mbulk-memory -matomics -std=c++20 -openmp-simd -pipe \
 	 -pthread -ffast-math -ffp-contract=off --js-library lib/lib_webgpu.js \
-	 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-egl-tex2-ct.js \
+	 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-egl-tex2.js \
 	 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sABORTING_MALLOC=0 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
 	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=1 \
