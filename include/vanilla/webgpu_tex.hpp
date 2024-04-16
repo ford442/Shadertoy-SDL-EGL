@@ -44,7 +44,7 @@ using namespace std;
 #include "/content/RAMDRIVE2/aubio/src/pitch/pitch.c"
 */
 
-#define __EMCSCRIPTEN__ 1
+// #define __EMCSCRIPTEN__ 1
 
 #include <cstdint>
 
@@ -79,6 +79,7 @@ using namespace std;
 #include <cfloat>
 #include <new>
 #include <emscripten.h>
+#include <emscripten/bind.h>
 #include <emscripten/html5.h>
 #include <emscripten/html5_webgpu.h>
 #include <iostream>
