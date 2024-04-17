@@ -169,7 +169,7 @@ $ll=Math.round($ll);
 $ll=$ll/100;
 $ll=($ll*1000);
 tem.innerHTML=$ll;
-vsiz.innerHTML=$ll/1000*window.innerHeight;
+vsiz.innerHTML=Math.round($ll/1000*window.innerHeight);
 });
 setTimeout(function(){
 slt=tem.innerHTML;
