@@ -152,8 +152,8 @@ grab$lt();
 slt=$lt/1000;
 slt=Math.round(slt);
 sfr.innerHTML='<input type='+'"te'+'xt" id'+'="time'+'slider"/'+'>';
-const tsl=new rSlider({target:'#timeslider',values:{min:0.25,max:30.00},
-step:[0.25],labels:false,tooltip:true,scale:false,});
+const tsl=new rSlider({target:'#timeslider',values:{min:0.10,max:4.20},
+step:[0.10],labels:false,tooltip:true,scale:false,});
 grab$lt();
 slt=($lt/1000);
 slt=slt*100;
