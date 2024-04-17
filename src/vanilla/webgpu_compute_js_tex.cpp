@@ -116,6 +116,8 @@ normalResStart();
 },1000);
 });
 
+let vsiz=document.querySelector('#vsiz').innerHTML;
+
 function normalResStart(){
 setTimeout(function(){
 document.querySelector('#shut').innerHTML=2;
@@ -129,11 +131,11 @@ document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
 // videoFrames();
-let vsiz=document.querySelector('#vsiz').innerHTML;
 Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 },1500);
 document.querySelector('#status').style.backgroundColor="green";
 }
+
 document.querySelector('#status').height=20;
 document.querySelector('#status').width=parseInt(window.innerHeight,10);
 const tem=document.querySelector('#tim');
@@ -163,10 +165,11 @@ tsl.setValues(slt);
 document.querySelector('#menu').addEventListener('click',function(){
 $ll=tsl.getValue();
 $ll=$ll*100;
-  $ll=parseInt($ll);
-// $ll=Math.round($ll);
-$ll=$ll/100;$ll=($ll*1000);
+$ll=Math.round($ll);
+$ll=$ll/100;
+$ll=($ll*1000);
 tem.innerHTML=$ll;
+vsiz=$ll;
 });
 setTimeout(function(){
 slt=tem.innerHTML;
