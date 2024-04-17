@@ -163,7 +163,8 @@ tsl.setValues(slt);
 document.querySelector('#menu').addEventListener('click',function(){
 $ll=tsl.getValue();
 $ll=$ll*100;
-$ll=Math.round($ll);
+  $ll=parseInt($ll);
+// $ll=Math.round($ll);
 $ll=$ll/100;$ll=($ll*1000);
 tem.innerHTML=$ll;
 });
