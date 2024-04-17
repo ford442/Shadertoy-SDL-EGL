@@ -116,7 +116,7 @@ normalResStart();
 },1000);
 });
 
-let vsiz=document.querySelector('#vsiz').innerHTML;
+const vsiz=document.querySelector('#vsiz');
 
 function normalResStart(){
 setTimeout(function(){
@@ -169,7 +169,7 @@ $ll=Math.round($ll);
 $ll=$ll/100;
 $ll=($ll*1000);
 tem.innerHTML=$ll;
-vsiz=$ll;
+vsiz.innerHTML=$ll;
 });
 setTimeout(function(){
 slt=tem.innerHTML;
