@@ -252,7 +252,7 @@ emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
 emscripten_get_element_css_size("canvas",&szw,&szh);
 u64_siz.at(3,3)=sze.at(1,1);
 sze.at(0,0)=int(szhI);
-sze.at(3,3)=int(std::max(sze.at(0,0),sze.at(0,0))*1.25);
+sze.at(3,3)=int(std::max(sze.at(0,0),sze.at(1,1))*1.25);
 u64_siz.at(2,2)=int(szhI);
 szef.at(0,0)=floor(float(szh));
 szef.at(1,1)=floor(float(sze.at(1,1)));
@@ -574,7 +574,7 @@ Compute_Bindgroup_Entries[4].resource=wsmp.at(3,3);
 Compute_Bindgroup_Entries[5].binding=5;
 Compute_Bindgroup_Entries[5].resource=wb.at(0,0);
 Compute_Bindgroup_Entries[5].bufferBindOffset=0;
-Compute_Bindgroup_Entries[5].bufferBindSize=sizeof(uint64_t);
+Compute_Bindgroup_Entries[5].bufferBindSize=sizeof(boost::chrono::duration<boost::compute::double_>);
             //  Video Texture
 Compute_Bindgroup_Entries[6]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Compute_Bindgroup_Entries[6].binding=6;
@@ -773,7 +773,7 @@ Render_Bindgroup_Entries[0].resource=wsmp.at(0,0);
 Render_Bindgroup_Entries[1].binding=7;
 Render_Bindgroup_Entries[1].resource=wb.at(0,0);
 Render_Bindgroup_Entries[1].bufferBindOffset=0;
-Render_Bindgroup_Entries[1].bufferBindSize=sizeof(uint64_t);
+Render_Bindgroup_Entries[1].bufferBindSize=sizeof(boost::chrono::duration<boost::compute::double_>);
   //  Render TextureIN
 Render_Bindgroup_Entries[2]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Entries[2].binding=2;
@@ -803,7 +803,7 @@ Render_Bindgroup_Entries_2[0].resource=wsmp.at(0,0);
 Render_Bindgroup_Entries_2[1].binding=7;
 Render_Bindgroup_Entries_2[1].resource=wb.at(0,0);
 Render_Bindgroup_Entries_2[1].bufferBindOffset=0;
-Render_Bindgroup_Entries_2[1].bufferBindSize=sizeof(uint64_t);
+Render_Bindgroup_Entries_2[1].bufferBindSize=sizeof(boost::chrono::duration<boost::compute::double_>);
   //  Render_2 TextureIN
 Render_Bindgroup_Entries_2[2]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Entries_2[2].binding=2;
