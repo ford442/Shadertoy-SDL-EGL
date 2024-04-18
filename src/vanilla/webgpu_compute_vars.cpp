@@ -343,6 +343,7 @@ boost::chrono::high_resolution_clock::time_point t1;
 boost::chrono::high_resolution_clock::time_point t2;
 boost::chrono::high_resolution_clock::time_point t3;
 }u_time;
+d_tensor d64_uniform=d_tensor{8,8};
 f_tensor f32_uniform=f_tensor{8,8};
 wvbl_tensor wvbl=wvbl_tensor{2,2};
 wcolor_tensor clearC=wcolor_tensor{2,2};
