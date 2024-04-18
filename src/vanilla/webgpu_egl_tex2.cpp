@@ -54,9 +54,10 @@ u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
-u64_uni.at(0,0)=u_time.time_spana.count()*100;
-u64_uni.at(1,1)=u_time.time_spanb.count()*1000;
-// u64_uni.at(2,2)=u_time.time_spanb.count()/1.0f;
+u64_uni.at(0,0)=u_time.time_spana.count()*100u;
+u64_uni.at(1,1)=u_time.time_spanb.count()*1000u;
+f32_uniform.at(0,0)=float(u_time.time_spana.count())*100.0f;
+u64_uni.at(2,2)=u_time.time_spanb.count()/1.0f;
 colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
 wt.at(1,1)=colorTexture;
 colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
@@ -141,7 +142,8 @@ wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
+ // wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&f32_uniform.at(0,0),sizeof(boost::numeric::ublas::tensor<boost::compute::double_));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_siz.at(3,3),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(3,3),sizeof(uint64_t));
 // wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
@@ -350,7 +352,8 @@ WGPU_Buffers.at(1,1,1)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescript
 WGPU_Buffers.at(0,0,0)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,1));
 WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,2));
 WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,3));
-bufferDescriptor_iTime={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+// bufferDescriptor_iTime={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+bufferDescriptor_iTime={sizeof(boost::numeric::ublas::tensor<boost::compute::double_),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(0,0)=bufferDescriptor_iTime;
 uni_iTime_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(0,0));
 wb.at(0,0)=uni_iTime_Buffer;
@@ -370,6 +373,10 @@ bufferBindingLayoutR.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayoutR.hasDynamicOffset=0,
 bufferBindingLayoutR.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayoutR;
+bufferBindingLayoutF.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
+bufferBindingLayoutF.hasDynamicOffset=0,
+bufferBindingLayoutF.minBindingSize=sizeof(boost::numeric::ublas::tensor<boost::compute::double_);
+wbbl.at(2,2)=bufferBindingLayoutF;
 Input_Image_Buffer.buffer=WGPU_Buffers.at(1,1,1);
 // wicb.at(2,2)=Input_Image_Buffer;
 Output_Image_Buffer.buffer=WGPU_Buffers.at(0,0,0);
@@ -519,7 +526,7 @@ Compute_Bindgroup_Layout_Entries[4].layout.sampler=wsbl.at(0,0);
 Compute_Bindgroup_Layout_Entries[5].binding=5;
 Compute_Bindgroup_Layout_Entries[5].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[5].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
-Compute_Bindgroup_Layout_Entries[5].layout.buffer=wbbl.at(0,0);
+Compute_Bindgroup_Layout_Entries[5].layout.buffer=wbbl.at(2,2);
             //  Video Texture
 Compute_Bindgroup_Layout_Entries[6].binding=6;
 Compute_Bindgroup_Layout_Entries[6].visibility=WGPU_SHADER_STAGE_COMPUTE;
@@ -654,10 +661,6 @@ videoTextureCopy.mipLevel=0;
 videoTextureCopy.origin=xyz;
 videoTextureCopy.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(0,0)=videoTextureCopy;
-bufferBindingLayout1.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
-bufferBindingLayout1.hasDynamicOffset=0,
-bufferBindingLayout1.minBindingSize=sizeof(uint64_t);
-wbbl.at(0,0)=bufferBindingLayout1;
 samplerBindingLayout.type=WGPU_SAMPLER_BINDING_TYPE_FILTERING;
 wsbl.at(1,1)=samplerBindingLayout;
   //  Render Sampler
@@ -671,7 +674,7 @@ Render_Bindgroup_Layout_Entries[1]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INI
 Render_Bindgroup_Layout_Entries[1].binding=7;
 Render_Bindgroup_Layout_Entries[1].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Render_Bindgroup_Layout_Entries[1].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
-Render_Bindgroup_Layout_Entries[1].layout.buffer=wbbl.at(0,0);
+Render_Bindgroup_Layout_Entries[1].layout.buffer=wbbl.at(2,2);
   //  Render TextureIN
 Render_Bindgroup_Layout_Entries[2]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Layout_Entries[2].binding=2;
@@ -710,7 +713,7 @@ Render_Bindgroup_Layout_Entries_2[1]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_I
 Render_Bindgroup_Layout_Entries_2[1].binding=7;
 Render_Bindgroup_Layout_Entries_2[1].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Render_Bindgroup_Layout_Entries_2[1].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
-Render_Bindgroup_Layout_Entries_2[1].layout.buffer=wbbl.at(0,0);
+Render_Bindgroup_Layout_Entries_2[1].layout.buffer=wbbl.at(2,2);
   //  Render_2 TextureIN
 Render_Bindgroup_Layout_Entries_2[2]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Layout_Entries_2[2].binding=2;
@@ -897,6 +900,7 @@ bindgroup_2=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(1,1),wbge.at(1,1),5
 wbg.at(1,1)=bindgroup_2;
 u64_uni.at(0,0)=0;
 u64_uni.at(3,3)=0;
+f32_uniform.at(0,0)=0.0f;
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.t3=boost::chrono::high_resolution_clock::now();
