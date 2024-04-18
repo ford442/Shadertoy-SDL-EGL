@@ -201,6 +201,7 @@ using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
 using ub_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned char *>>;
 using lu_tensor=boost::numeric::ublas::tensor<boost::atomic<unsigned long>>;
 using v_tensor=boost::numeric::ublas::tensor<v128_t>;
+using d_tensor=boost::numeric::ublas::tensor<double>;
 using fjs_tensor=boost::numeric::ublas::tensor<float *>;
 using wcolor_tensor=boost::numeric::ublas::tensor<WGpuColor>;
 using uiptr_tensor=boost::numeric::ublas::tensor<uint32_t *>;
