@@ -901,6 +901,7 @@ wbg.at(1,1)=bindgroup_2;
 u64_uni.at(0,0)=0;
 u64_uni.at(3,3)=0;
 f32_uniform.at(0,0)=0.0f;
+d64_uniform.at(0,0)=0.0;
 u_time.t1=boost::chrono::high_resolution_clock::now();
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.t3=boost::chrono::high_resolution_clock::now();
