@@ -166,7 +166,7 @@ const char * frag_body2 = R"delimiter(
 @group(0)@binding(2)var videoOUT: texture_2d <f32>;
 @group(0)@binding(5)var<uniform> iResolution : u32;
 @group(0)@binding(6)var<uniform> iFrame : u32;
-@group(0)@binding(7)var<uniform> iTime : u32;
+@group(0)@binding(7)var<uniform> iTime : f32;
 var<private> fragColor_1 : vec4<f32>;
 var<private> gl_FragCoord : vec4<f32>;
 var<private> iMouse : vec4<f32>;
@@ -238,7 +238,7 @@ const char * vertexShader=
 "}\n";
 
 const char * frag_body=
-"@group(0) @binding(0) var <uniform> iTime : u32;\n"
+"@group(0) @binding(0) var <uniform> iTime : f32;\n"
 "@group(0) @binding(1) var mySampler : sampler;\n"
 "@group(0) @binding(2) var myTexture : texture_2d <f32>;\n"
 // "@group(0) @binding(3) var extTexture : texture_external;\n"
