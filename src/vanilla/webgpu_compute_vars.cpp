@@ -51,6 +51,7 @@ WGpuVertexBufferLayout vertBufLayout={};
 WGpuBufferDescriptor bufferDescriptor_vertex={};
 WGpuBuffer vertex_Buffer;
 WGpuBufferBindingLayout bufferBindingLayoutV={};
+WGpuBufferBindingLayout bufferBindingLayoutF={};
 
 //  egl render (no texture uv)
 const char * vertexShaderEG =
