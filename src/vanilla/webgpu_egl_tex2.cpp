@@ -143,10 +143,15 @@ wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
  // wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&f32_uniform.at(0,0),sizeof(float));
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_siz.at(3,3),sizeof(uint64_t));
+// wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_siz.at(3,3),sizeof(uint64_t));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&f32_uniform.at(2,2),sizeof(float));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(3,3),sizeof(uint64_t));
-// wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
+if(on.at(0,0)!=2){
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&f32_uniform.at(0,0),sizeof(float));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(5,5),0,&f32_uniform.at(1,1).at(2,2),sizeof(float));
+on.at(0,0)=2;
+}
+  // wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
 // wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(3,3),0,sizeof(Ffvertices));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0f,0.0f,szef.at(1,1),szef.at(1,1),0.0f,1.0f);
 wgpu_render_pass_encoder_set_scissor_rect(wrpe.at(0,0),0.0f,0.0f,sze.at(1,1),sze.at(1,1));
@@ -162,7 +167,8 @@ wce.at(1,1)=wceB;
 wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(1,1),0,0);
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(5,5),0,&u64_siz.at(2,2),sizeof(uint64_t));
+// wgpu_queue_write_buffer(wq.at(0,0),wb.at(5,5),0,&u64_siz.at(2,2),sizeof(uint64_t));
+// wgpu_queue_write_buffer(wq.at(0,0),wb.at(5,5),0,&f32_uniform.at(1,1).at(2,2),sizeof(float));
 // wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
 // wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(3,3),0,sizeof(Ffvertices));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0f,0.0f,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
@@ -254,6 +260,8 @@ u64_siz.at(3,3)=sze.at(1,1);
 sze.at(0,0)=int(szhI);
 sze.at(3,3)=int(std::max(sze.at(0,0),sze.at(1,1))*1.25);
 u64_siz.at(2,2)=int(szhI);
+f32_uniform.at(1,1)=szhI;
+f32_uniform.at(2,2)=float(sze.at(1,1));
 szef.at(0,0)=floor(float(szh));
 szef.at(1,1)=floor(float(sze.at(1,1)));
 u64_bfrSze.at(0,0)=256; // (floor((sze.at(0,0))/256)+1)*256;
@@ -361,11 +369,11 @@ bufferDescriptor_iFrame={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_
 wbd.at(1,1)=bufferDescriptor_iFrame;
 uni_iFrame_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(1,1));
 wb.at(1,1)=uni_iFrame_Buffer;
-bufferDescriptor_iResolution={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+bufferDescriptor_iResolution={sizeof(float),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(2,2)=bufferDescriptor_iResolution;
 uni_iResolution_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(2,2));
 wb.at(2,2)=uni_iResolution_Buffer;
-bufferDescriptor_iResolution_2={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+bufferDescriptor_iResolution_2={sizeof(float),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(5,5)=bufferDescriptor_iResolution_2;
 uni_iResolution_Buffer_2=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(5,5));
 wb.at(5,5)=uni_iResolution_Buffer_2;
@@ -686,7 +694,7 @@ Render_Bindgroup_Layout_Entries[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INI
 Render_Bindgroup_Layout_Entries[3].binding=5;
 Render_Bindgroup_Layout_Entries[3].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Render_Bindgroup_Layout_Entries[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
-Render_Bindgroup_Layout_Entries[3].layout.buffer=wbbl.at(0,0);
+Render_Bindgroup_Layout_Entries[3].layout.buffer=wbbl.at(2,2);
   //  Render iFrame Buffer
 Render_Bindgroup_Layout_Entries[4]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Layout_Entries[4].binding=6;
@@ -725,7 +733,7 @@ Render_Bindgroup_Layout_Entries_2[3]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_I
 Render_Bindgroup_Layout_Entries_2[3].binding=5;
 Render_Bindgroup_Layout_Entries_2[3].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Render_Bindgroup_Layout_Entries_2[3].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
-Render_Bindgroup_Layout_Entries_2[3].layout.buffer=wbbl.at(0,0);
+Render_Bindgroup_Layout_Entries_2[3].layout.buffer=wbbl.at(2,2);
   //  Render_2 iFrame Buffer
 Render_Bindgroup_Layout_Entries_2[4]={WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Layout_Entries_2[4].binding=6;
@@ -783,7 +791,7 @@ Render_Bindgroup_Entries[3]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Entries[3].binding=5;
 Render_Bindgroup_Entries[3].resource=wb.at(2,2);
 Render_Bindgroup_Entries[3].bufferBindOffset=0;
-Render_Bindgroup_Entries[3].bufferBindSize=sizeof(uint64_t);
+Render_Bindgroup_Entries[3].bufferBindSize=sizeof(float);
   //  Render iFrame Buffer
 Render_Bindgroup_Entries[4]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Entries[4].binding=6;
@@ -813,7 +821,7 @@ Render_Bindgroup_Entries_2[3]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Entries_2[3].binding=5;
 Render_Bindgroup_Entries_2[3].resource=wb.at(5,5);
 Render_Bindgroup_Entries_2[3].bufferBindOffset=0;
-Render_Bindgroup_Entries_2[3].bufferBindSize=sizeof(uint64_t);
+Render_Bindgroup_Entries_2[3].bufferBindSize=sizeof(float);
   //  Render_2 iFrame Buffer
 Render_Bindgroup_Entries_2[4]={WGPU_BIND_GROUP_ENTRY_DEFAULT_INITIALIZER};
 Render_Bindgroup_Entries_2[4].binding=6;
