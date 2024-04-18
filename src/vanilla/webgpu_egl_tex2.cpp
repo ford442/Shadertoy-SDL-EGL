@@ -143,7 +143,7 @@ wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
  // wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&f32_uniform.at(0,0),sizeof(boost::numeric::ublas::tensor<boost::compute::double_));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&f32_uniform.at(0,0),sizeof(boost::numeric::ublas::tensor<boost::compute::double_>));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_siz.at(3,3),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(3,3),sizeof(uint64_t));
 // wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
@@ -353,7 +353,7 @@ WGPU_Buffers.at(0,0,0)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescript
 WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,2));
 WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,3));
 // bufferDescriptor_iTime={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
-bufferDescriptor_iTime={sizeof(boost::numeric::ublas::tensor<boost::compute::double_),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+bufferDescriptor_iTime={sizeof(boost::numeric::ublas::tensor<boost::compute::double_>),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(0,0)=bufferDescriptor_iTime;
 uni_iTime_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(0,0));
 wb.at(0,0)=uni_iTime_Buffer;
@@ -375,7 +375,7 @@ bufferBindingLayoutR.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayoutR;
 bufferBindingLayoutF.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayoutF.hasDynamicOffset=0,
-bufferBindingLayoutF.minBindingSize=sizeof(boost::numeric::ublas::tensor<boost::compute::double_);
+bufferBindingLayoutF.minBindingSize=sizeof(boost::numeric::ublas::tensor<boost::compute::double_>);
 wbbl.at(2,2)=bufferBindingLayoutF;
 Input_Image_Buffer.buffer=WGPU_Buffers.at(1,1,1);
 // wicb.at(2,2)=Input_Image_Buffer;
