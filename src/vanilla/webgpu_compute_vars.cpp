@@ -189,7 +189,7 @@ let x_39 : vec4<f32> = param;
 let tstcr:vec4<f32>=vec4<f32>(0.3,0.0,0.44,1.0);
 let ress:u32=u32(textureDimensions(videoOUT).x);
 // fragColor_1=vec4<f32>(textureSample(videoOUT,videoSampler,gl_FragCoord.xy/vec2<f32>(vec2<u32>(ress,ress))));
-fragColor_1=vec4<f32>(textureSampleBaseClampToEdge(videoOUT,videoSampler,gl_FragCoord.xy/vec2<f32>(vec2<u32>(iResolution,iResolution))));
+fragColor_1=vec4<f32>(textureSampleBaseClampToEdge(videoOUT,videoSampler,gl_FragCoord.xy/vec2<f32>(vec2<f32>(iResolution,iResolution))));
 return;
 }
 struct main_out {
