@@ -164,7 +164,7 @@ const char * frag_body2 = R"delimiter(
 @group(0)@binding(0)var videoSampler: sampler;
 // @group(0)@binding(1)var textureIN: texture_storage_2d <rgba32float,write>;
 @group(0)@binding(2)var videoOUT: texture_2d <f32>;
-@group(0)@binding(5)var<uniform> iResolution : u32;
+@group(0)@binding(5)var<uniform> iResolution : f32;
 @group(0)@binding(6)var<uniform> iFrame : u32;
 @group(0)@binding(7)var<uniform> iTime : f32;
 var<private> fragColor_1 : vec4<f32>;
