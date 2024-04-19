@@ -195,6 +195,7 @@ void * fram;
 static long int length;
 
 using namespace boost::chrono;
+using d_tensor=boost::numeric::ublas::tensor<double>;
 
 using dv_tensor=boost::numeric::ublas::tensor<SDL_AudioDeviceID>;
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
