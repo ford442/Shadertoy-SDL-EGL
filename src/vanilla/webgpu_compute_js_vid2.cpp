@@ -33,8 +33,8 @@ return imageData;
 function videoFrames(){
 let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
-  document.querySelector("#mvi").height=h$;
-  document.querySelector("#mvi").width=w$;
+document.querySelector("#mvi").height=h$;
+document.querySelector("#mvi").width=w$;
 let SiZ=window.innerHeight;
 let tstSiZ=h$;
 let vsizz=document.querySelector('#vsiz').innerHTML;
