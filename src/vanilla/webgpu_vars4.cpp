@@ -490,6 +490,3 @@ const char * Fnm=reinterpret_cast<const char *>("/shader/shader.wgsl");
 static char * result=NULL;
 static char * results=NULL;
 
-options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
-options.forceFallbackAdapter=EM_FALSE;
-
