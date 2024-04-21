@@ -53,7 +53,6 @@ VertexFUV FUVvertices[]={
 
 uint32_t indices[35]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 
-options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
 WGpuRenderPipelineDescriptor renderPipelineDesc={WGPU_RENDER_PIPELINE_DESCRIPTOR_DEFAULT_INITIALIZER};
 WGpuBufferDescriptor bufferDescriptor_indice={};
 WGpuBuffer indice_Buffer;
@@ -249,7 +248,7 @@ const char * vertexShader=
 "return output;\n"
 "}\n";
 
-const char * frag_body=
+const char * frag_bodyA=
 "@group(0) @binding(0) var <uniform> iTime : f32;\n"
 "@group(0) @binding(1) var mySampler : sampler;\n"
 "@group(0) @binding(2) var myTexture : texture_2d <f32>;\n"
@@ -443,11 +442,13 @@ uiptr_tensor WGPU_ColorBuffer=uiptr_tensor{1,1,1};
 wced_tensor WGPU_CommandEncoderDescriptor=wced_tensor{1,1,1};
 wbms_tensor WGPU_BufferStatus=wbms_tensor{1,1,1};
 c_tensor wgsl=c_tensor{2,2};
+
 uint32_t OutputBufferBytes=64*4;
 uint32_t InputBufferBytes=64*4;
 uint64_t WGPU_InputRangeSize=OutputBufferBytes;
 const char * Entry="main_image";
 WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
+
 
 WGpuComputePassDescriptor computePassDescriptor={};
 WGpuCommandBufferDescriptor commandBufferDescriptor={};
@@ -501,11 +502,8 @@ static char * result=NULL;
 static char * results=NULL;
 
 
-
 //  tensor definitions
 
-const char * frag_body=(char*)rd_fl(Fnm);
-const char * comp_body=(char*)rd_fl(FnmC);
 // canvasFormat=navigator_gpu_get_preferred_canvas_format();
 wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
 // wtf.at(0,0)=navigator_gpu_get_preferred_canvas_format();
