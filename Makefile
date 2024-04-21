@@ -112,13 +112,13 @@ b3_compute_egl_tex2:
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 webgpu_egl_tex2.o 
 
-webgpu_tex3:
+b3_compute_egl_tex3:
 	 em++ src/vanilla/webgpu_tex3.cpp -pipe -fno-fast-math -ffp-contract=off \
 	 -mextended-const -mbulk-memory -matomics -pthread -O2 -fchar8_t -std=c++20 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O2 -mextended-const -dead_strip -mbulk-memory -matomics -std=c++20 -pipe \
-	 -pthread -ffast-math -ffp-contract=off --js-libary lib/lib_webgpu.js \
-	 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-tex3.js \
+	 -pthread -ffast-math -ffp-contract=off --js-library lib/lib_webgpu.js \
+	 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-t3.js \
 	 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sABORTING_MALLOC=0 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
 	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=1 \
@@ -129,7 +129,7 @@ webgpu_tex3:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPUi","_startWebGPUbi"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 webgpu_tex3.o 
+	 webgpu_tex3.o
 
 webgpu_tex4:
 	 em++ lib/lib_webgpu_cpp20.cpp -std=c++20 -static
