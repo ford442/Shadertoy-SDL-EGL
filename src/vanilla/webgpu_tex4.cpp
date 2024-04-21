@@ -211,7 +211,8 @@ return;
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 if(on.at(0,0)==0){wd.at(0,0)=result;}
-
+const char * frag_body=(char*)rd_fl(Fnm);
+const char * comp_body=(char*)rd_fl(FnmC);
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
 canvasViewFormat[0]={wtf.at(0,0)};
 config.device=wd.at(0,0);
