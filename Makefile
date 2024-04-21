@@ -8,8 +8,7 @@ SIMD_FLAGS = -DSIMD=AVX -msimd128 -mavx
 STDS = -std=gnu17 -std=c2x -std=c++11 -std=c++14 -std=c++17 -std=gnu++17 -std=c++20 -std=gnu++20 \
 	 -std=c++23 -std=gnu++23 -std=c++26 -std=gnu++26
 
-LINK_SIMD_FLAGS = -msse -msse2 -msse3 -mssse3 \
-	 -msse4 -msse4.1 -msse4.2 -mavx -msimd128 
+LINK_SIMD_FLAGS = -msse -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -mavx -msimd128 
 
 LINK_SIMD_FLAGSb = -mcx16 -mavxifma -mbmi -mbmi2 -mlzcnt -mavxneconvert -msse -msse2 -msse3 -mssse3 \
 	 -msse4 -msse4.1 -msse4.2 -mavx -mavx2 -mpclmul -msha -mfma -mbmi2 -mpopcnt -maes -enable-fma -mavxvnni -msimd128 
@@ -115,8 +114,8 @@ b3_compute_egl_tex2:
 
 webgpu_tex4:
 	 em++ lib/lib_webgpu_cpp20.cpp -std=c++20 -static
-	 em++ src/vanilla/webgpu_vars4.cpp -std=c++20 -static
-	 em++ src/vanilla/webgpu_js_tex4.cpp -std=c++20 -static
+	 em++ src/vanilla/webgpu_vars4.cpp $(LINK_SIMD_FLAGS) -std=c++20 -static
+	 em++ src/vanilla/webgpu_js_tex4.cpp $(LINK_SIMD_FLAGS) -std=c++20 -static
 	 -mextended-const -mbulk-memory -matomics  -pthread -O2 -fchar8_t -std=c++20 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -o $(WGL_BIN_NAME)-tex4.js -O2 -mextended-const -dead_strip -mbulk-memory -matomics -std=c++20 -pipe \
