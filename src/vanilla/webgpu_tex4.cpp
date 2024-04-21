@@ -2,6 +2,27 @@
 
 // #include "../../src/vanilla/webgpu_compute_vars.cpp"
 
+float * WGPU_Result_Array=new float[OutputBufferBytes];
+float * WGPU_Input_Array=new float[InputBufferBytes];
+const char * Fnm2=reinterpret_cast<const char *>("/video/frame.gl");
+const char * FnmC=reinterpret_cast<const char *>("/shader/compute.wgsl");
+uint8_t * result2=NULL;
+float * resultf=NULL;
+uint8_t * results2=NULL;
+float * resultsf=NULL;
+
+const char * Fnm=reinterpret_cast<const char *>("/shader/shader.wgsl");
+static char * result=NULL;
+static char * results=NULL;
+
+struct{
+boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>time_spana;
+boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>time_spanb;
+boost::chrono::high_resolution_clock::time_point t1;
+boost::chrono::high_resolution_clock::time_point t2;
+boost::chrono::high_resolution_clock::time_point t3;
+}u_time;
+
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 return;
 };
