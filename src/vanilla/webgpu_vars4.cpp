@@ -502,9 +502,6 @@ static char * result=NULL;
 static char * results=NULL;
 
 
-//  tensor definitions
-
-// canvasFormat=navigator_gpu_get_preferred_canvas_format();
 wTexFormat.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
 // wTexFormat.at(0,0)=navigator_gpu_get_preferred_canvas_format();
 wTexFormat.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
