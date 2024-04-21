@@ -15,7 +15,6 @@ return n;
 }
   
 function videoFrames(){
-document.querySelector("#mvi").play();
 let vw$=parseInt(document.querySelector("#mvi").videoWidth);
 let vh$=parseInt(document.querySelector("#mvi").videoHeight);
 let SiZ=window.innerHeight;
@@ -24,11 +23,10 @@ let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
 let tstSiZ=720;
 if(running==0){
-// Module.ccall("frm",null,['Number'],['Number'],h$,h$);
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
 Module.ccall("startWebGPUi",null,"Number",[vsiz]);
-  console.log('Starting..');
+console.log('Starting..');
 running=1;
 },500);
 }
