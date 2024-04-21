@@ -125,6 +125,9 @@ void runWebGPU();
 
 }
 
+WGpuBuffer indice_Buffer;
+WGpuBuffer vertex_Buffer;
+
 WGpuImageCopyTexture videoTextureCopy;
 WGpuImageCopyTexture MSTextureCopy;
 WGpuExternalTexture extTexture;
@@ -133,6 +136,7 @@ WGpuTextureView depthTextureView2;
 WGpuTextureView colorTextureView;
 WGpuTextureView videoTextureView;
 WGpuTextureView INTextureView;
+WGpuTextureView INVTextureView;
 WGpuTextureView OUTTextureView;
 WGpuTextureView OUTTexture2View;
 WGpuTextureView MSTextureView;
