@@ -53,7 +53,7 @@ u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.time_span_mili_a=boost::chrono::duration<boost::compute::double_,boost::chrono::milliseconds::period>(u_time.t2-u_time.t1);
 u_time.time_span_mili_b=boost::chrono::duration<boost::compute::double_,boost::chrono::milliseconds::period>(u_time.t2-u_time.t3);
-if(float(u_time.time_span_mili_b.count())>=17.0f){
+if(u_time.time_span_mili_b.count()>=17){
 u64_uni.at(3,3)++;
 u64_uni.at(0,0)=float(u_time.time_span_mili_a.count());
 u64_uni.at(1,1)=u_time.time_span_mili_b.count();
@@ -137,9 +137,12 @@ wrpd.at(1,1)=passDesc2;
        //  Frame Data
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+// std::vector<float> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 frame_tensor.at(0,0)=data;
+// frame_tensorf.at(0,0)=data;
   // wetd.at(0,0).source=texid.at(0,0);
 wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&frame_tensor.at(0,0),sze.at(6,6)*4,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
+// wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&frame_tensorf.at(0,0),sze.at(6,6)*4,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
   //  Render Pass
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
