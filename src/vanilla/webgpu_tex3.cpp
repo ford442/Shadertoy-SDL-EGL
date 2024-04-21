@@ -55,10 +55,10 @@ u_time.time_span_mili_a=boost::chrono::duration<boost::compute::double_,boost::c
 u_time.time_span_mili_b=boost::chrono::duration<boost::compute::double_,boost::chrono::milliseconds::period>(u_time.t2-u_time.t3);
 if(u_time.time_span_mili_b>=17.0f){
 u64_uni.at(3,3)++;
-u64_uni.at(0,0)=u_time.time_spana.count();
-u64_uni.at(1,1)=u_time.time_spanb.count();
+u64_uni.at(0,0)=u_time.time_span_mili_a.count();
+u64_uni.at(1,1)=u_time.time_span_mili_b.count();
 f32_uniform.at(0,0)=float(u_time.time_spana.count());
-u64_uni.at(2,2)=u_time.time_spanb.count()/1.0f;
+u64_uni.at(2,2)=u_time.time_span_mili_b.count()/1.0f;
 colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
 wt.at(1,1)=colorTexture;
 colorTextureView=wgpu_texture_create_view(wt.at(1,1),&wtvd.at(1,1));
