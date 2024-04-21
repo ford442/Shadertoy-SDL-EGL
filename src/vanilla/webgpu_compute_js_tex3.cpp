@@ -60,7 +60,7 @@ imageData=image.data;
   console.log('getImageData.data: ',imageData[5]);
   console.log('pixelData=new Float32Array: ',pixelData[5]);
 var pixelData2=new Uint8ClampedArray(imageData);
-  console.log('pixelData=new Uint8ClampedArray: ',pixelData2[5]);
+  console.log('pixelData=new Uint8ClampedArray: ',pixelData2.buffer);
 var pixelData4=new Float32Array(imageData2);
     console.log('pixelData3=new Float32Array: ',pixelData4[5]);
 var pixelData5=new Uint8ClampedArray(imageData2);
