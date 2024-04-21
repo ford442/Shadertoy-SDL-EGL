@@ -41,31 +41,18 @@ cnvb.width=SiZ;
 var ratio=SiZ/h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
 const gl3=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
-// const gl2=cnv.getContext('2d',{alpha:true}); // 
-gl2.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
+gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 var image=gl2.getImageData(0,0,w$,h$);
 var imageData=image.data;
-var pixelData=new Float32Array(imageData);
+var pixelData=new Uint8ClampedArray(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
-gl2.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
-image=gl2.getImageData(0,0,w$,h$);
-var image2=gl3.getImageData(0,0,w$,h$);
+gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
+image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
-var imageData2=image2.data;
-pixelData=new Float32Array(imageData);
-imageData=image.data;
-  console.log('getImageData.data: ',imageData.buffer);
-  console.log('pixelData=new Float32Array: ',pixelData.buffer);
-var pixelData2=new Uint8ClampedArray(imageData);
-  console.log('pixelData=new Uint8ClampedArray: ',pixelData2.buffer);
-var pixelData4=new Float32Array(imageData2);
-    console.log('pixelData3=new Float32Array: ',pixelData4.buffer);
-var pixelData5=new Uint8ClampedArray(imageData2);
-  console.log('pixelData3=new Uint8ClampedArray: ',pixelData5.buffer);
-pixelData=new Float32Array(imageData,0,la);
+pixelData=new Uint8ClampedArray(imageData);
+// pixelData=new Uint8ClampedArray(imageData,0,la);
 FS.writeFile('/video/frame.gl',pixelData);
 },500);
 }
