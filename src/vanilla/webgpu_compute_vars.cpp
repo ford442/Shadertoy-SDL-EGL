@@ -1,10 +1,4 @@
-struct{
-boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>time_spana;
-boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>time_spanb;
-boost::chrono::high_resolution_clock::time_point t1;
-boost::chrono::high_resolution_clock::time_point t2;
-boost::chrono::high_resolution_clock::time_point t3;
-}u_time;
+
 
 struct VertexF{
 // GLfloat position[4];
