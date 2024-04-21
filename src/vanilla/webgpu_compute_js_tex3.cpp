@@ -19,6 +19,7 @@ let vw$=parseInt(document.querySelector("#mvi").videoWidth);
 let vh$=parseInt(document.querySelector("#mvi").videoHeight);
 let SiZ=window.innerHeight;
 vvi.height=vh$;
+vvi.width=vw$;
 let w$=parseInt(document.querySelector("#mvi").videoWidth);
 let h$=parseInt(document.querySelector("#mvi").videoHeight);
 let tstSiZ=720;
