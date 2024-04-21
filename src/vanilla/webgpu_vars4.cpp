@@ -253,7 +253,7 @@ const char * frag_body=
 WGpuRenderPassTimestampWrites renderTimestampWrites={};
 WGPU_TEXTURE_FORMAT canvasFormat;
 WGPU_TEXTURE_FORMAT canvasViewFormat[1];
-WGpuCanvasConfiguration config={WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER};
+WGpuCanvasConfiguration config={};
 WGpuOrigin3D OriginXYZ={0,0,0};
 // OriginXYZ.x=0;
 // OriginXYZ.y=0;
@@ -283,8 +283,8 @@ WGpuTextureViewDescriptor videoTextureViewDescriptor={};
 WGpuTextureViewDescriptor INTextureViewDescriptor={};
 WGpuTextureViewDescriptor OUTTextureViewDescriptor={};
 WGpuTextureViewDescriptor MSTextureViewDescriptor={};
-WGpuRenderPassColorAttachment colorAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
-WGpuRenderPassColorAttachment videoAttachment={WGPU_RENDER_PASS_COLOR_ATTACHMENT_DEFAULT_INITIALIZER};
+WGpuRenderPassColorAttachment colorAttachment={};
+WGpuRenderPassColorAttachment videoAttachment={};
 WGpuRenderPassDepthStencilAttachment depthAttachment={};
 WGpuRenderPassDepthStencilAttachment depthAttachment2={};
 WGpuSampler videoSampler={};
@@ -325,11 +325,11 @@ WGpuBindGroupEntry Render_Bindgroup_Entries[8]={};
 WGpuBindGroupEntry Render_Bindgroup_Entries_2[8]={};
 WGpuBindGroupEntry bindgroup_entries[8]={};  //  for video.cpp
 WGpuRenderBundleEncoderDescriptor renderBundleEncoderDescriptor={};
-WGpuDeviceDescriptor deviceDesc={WGPU_DEVICE_DESCRIPTOR_DEFAULT_INITIALIZER};
+WGpuDeviceDescriptor deviceDesc={};
 WGpuMultisampleState multiSamp={};
 WGpuMultisampleState multiSamp2={};
-WGpuBufferBindingLayout bufferBindingLayout1={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
-WGpuBufferBindingLayout bufferBindingLayoutR={WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER};
+WGpuBufferBindingLayout bufferBindingLayout1={};
+WGpuBufferBindingLayout bufferBindingLayoutR={};
 WGpuTextureBindingLayout textureBindingLayoutFloat={};
 WGpuTextureBindingLayout textureBindingLayoutFloatM={};
 WGpuTextureBindingLayout textureBindingLayoutFloat32={};
@@ -453,7 +453,7 @@ WGpuBufferBindingLayout bufferBindingLayout3={2};
 WGpuBufferBindingLayout bufferBindingLayout4={2};
 WGpuStorageTextureBindingLayout storageTextureBindingLayoutFloat={};
 WGpuStorageTextureBindingLayout storageTextureBindingLayoutFloat32={};
-WGpuRequestAdapterOptions options={WGPU_REQUEST_ADAPTER_OPTIONS_DEFAULT_INITIALIZER};
+WGpuRequestAdapterOptions options={};
 WGpuBufferDescriptor bufferDescriptorI={};
 WGpuBufferDescriptor bufferDescriptorO={};
 WGpuBufferDescriptor bufferDescriptorM={};
@@ -489,3 +489,8 @@ float * resultsf=NULL;
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.wgsl");
 static char * result=NULL;
 static char * results=NULL;
+
+options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
+options.forceFallbackAdapter=EM_FALSE;
+
+
