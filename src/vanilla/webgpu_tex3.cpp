@@ -288,7 +288,7 @@ textureAviewFormats[0]={wtf.at(2,2)};
 textureDescriptorIn.numViewFormats=0;
 textureDescriptorIn.viewFormats=nullptr; // &textureAviewFormats[0];
   textureDescriptorInV.dimension=WGPU_TEXTURE_DIMENSION_2D;
-textureDescriptorInV.format=wtf.at(2,2);
+textureDescriptorInV.format=wtf.at(0,0);
 textureDescriptorInV.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
 textureDescriptorInV.width=sze.at(6,6);
 textureDescriptorInV.height=sze.at(7,7); // default = 1;
@@ -344,7 +344,7 @@ textureViewDescriptorIn.baseMipLevel=0; // default = 0
 textureViewDescriptorIn.mipLevelCount=1;
 textureViewDescriptorIn.baseArrayLayer=0; // default = 0
 textureViewDescriptorIn.arrayLayerCount=1;
-  textureViewDescriptorInV.format=wtf.at(2,2);
+  textureViewDescriptorInV.format=wtf.at(0,0);
 textureViewDescriptorInV.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureViewDescriptorInV.aspect=WGPU_TEXTURE_ASPECT_ALL;
 textureViewDescriptorInV.baseMipLevel=0; // default = 0
