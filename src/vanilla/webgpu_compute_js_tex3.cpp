@@ -46,13 +46,13 @@ const gl2=cnv.getContext('2d',{alpha:true}); //
 gl2.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 let image=gl2.getImageData(0,0,w$,h$);
 let imageData=image.data;
-let pixelData=new Float32Array(imageData);
+let pixelData=new Uint8ClampedArray(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
 gl2.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 image=gl2.getImageData(0,0,w$,h$);
 imageData=image.data;
-pixelData=new Float32Array(imageData,0,la);
+pixelData=new Uint8ClampedArray(imageData,0,la);
 FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
 }
