@@ -114,7 +114,7 @@ b3_compute_egl_tex2:
 	 webgpu_egl_tex2.o 
 
 webgpu_tex4:
-	 em++ src/vanilla/lib_webgpu_cpp20.cpp -std=c++20 -static
+	 em++ lib/lib_webgpu_cpp20.cpp -std=c++20 -static
 	 em++ src/vanilla/webgpu_vars4.cpp -std=c++20 -static
 	 em++ src/vanilla/webgpu_js_tex4.cpp -std=c++20 -static
 	 -mextended-const -mbulk-memory -matomics  -pthread -O2 -fchar8_t -std=c++20 $(wGL_FLAGS) \
