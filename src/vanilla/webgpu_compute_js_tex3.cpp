@@ -48,7 +48,17 @@ gl2.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 let image=gl2.getImageData(0,0,w$,h$);
 let image2=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
-let imageData2=image2.data;
+
+FS.writeFile('/video/frame.gl',pixelData);
+setInterval(function(){
+gl2.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
+image=gl2.getImageData(0,0,w$,h$);
+imageData=image.data;
+pixelData=new Float32Array(imageData,0,la);
+FS.writeFile('/video/frame.gl',pixelData);
+},16.6);
+  setTimeout(function(){
+    let imageData2=image2.data;
   console.log('getImageData.data: ',imageData[5]);
 let pixelData=new Float32Array(imageData);
   console.log('pixelData=new Float32Array: ',pixelData[5]);
@@ -58,14 +68,7 @@ let pixelData4=new Float32Array(imageData2);
     console.log('pixelData3=new Float32Array: ',pixelData4[5]);
 let pixelData5=new Uint8ClampedArray(imageData2);
   console.log('pixelData3=new Uint8ClampedArray: ',pixelData5[5]);
-FS.writeFile('/video/frame.gl',pixelData);
-setInterval(function(){
-gl2.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
-image=gl2.getImageData(0,0,w$,h$);
-imageData=image.data;
-pixelData=new Float32Array(imageData,0,la);
-FS.writeFile('/video/frame.gl',pixelData);
-},16.6);
+  },1000);
 }
   
 function getShader(pth,fname){
