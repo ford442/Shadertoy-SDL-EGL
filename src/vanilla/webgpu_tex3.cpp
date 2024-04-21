@@ -131,13 +131,12 @@ passDesc2.occlusionQuerySet=0;
 passDesc2.maxDrawCount=6;
 passDesc2.timestampWrites=renderTimestampWrites;
 wrpd.at(1,1)=passDesc2;
-/*       //  Frame Data
+       //  Frame Data
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 frame_tensor.at(0,0)=data;
   // wetd.at(0,0).source=texid.at(0,0);
-// wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(2,2),&frame_tensor.at(0,0),sze.at(1,1)*4,sze.at(1,1),sze.at(1,1),sze.at(1,1),1);
-*/ 
+wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&frame_tensor.at(0,0),sze.at(6,6)*4,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
   //  Render Pass
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
@@ -491,6 +490,9 @@ WGPU_Texture.at(0,0,2)=textureOut2;
 Input_Image_Texture.texture=WGPU_Texture.at(0,0,0);
 Input_Image_Texture.origin=OriginXYZ;
 Input_Image_Texture.aspect=WGPU_TEXTURE_ASPECT_ALL;
+  Input_Image_TextureV.texture=WGPU_Texture.at(0,0,3);
+Input_Image_TextureV.origin=OriginXYZ;
+  Input_Image_TextureV.aspect=WGPU_TEXTURE_ASPECT_ALL;
 Output_Image_Texture.texture=WGPU_Texture.at(0,0,1);
 Output_Image_Texture.origin=OriginXYZ;
 Output_Image_Texture.aspect=WGPU_TEXTURE_ASPECT_ALL;
@@ -500,6 +502,7 @@ Output_Image_Texture2.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(2,2)=Input_Image_Texture;
 wict.at(1,1)=Output_Image_Texture;
 wict.at(3,3)=Output_Image_Texture2;
+  wict.at(4,4)=Input_Image_TextureV;
 INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
   INVTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,3),&WGPU_TextureViewDescriptor.at(0,0,3));
 OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureViewDescriptor.at(0,0,1));
