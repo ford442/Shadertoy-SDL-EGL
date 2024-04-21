@@ -425,11 +425,7 @@ uiptr_tensor WGPU_ColorBuffer=uiptr_tensor{1,1,1};
 wced_tensor WGPU_CommandEncoderDescriptor=wced_tensor{1,1,1};
 wbms_tensor WGPU_BufferStatus=wbms_tensor{1,1,1};
 c_tensor wgsl=c_tensor{2,2};
-uint32_t OutputBufferBytes=64*4;
-uint32_t InputBufferBytes=64*4;
-uint64_t WGPU_InputRangeSize=OutputBufferBytes;
-const char * Entry="main_image";
-WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
+
 
 WGpuComputePassDescriptor computePassDescriptor={};
 WGpuCommandBufferDescriptor commandBufferDescriptor={};
