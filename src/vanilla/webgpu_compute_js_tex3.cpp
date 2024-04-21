@@ -66,7 +66,7 @@ var pixelData4=new Float32Array(imageData2);
 var pixelData5=new Uint8ClampedArray(imageData2);
   console.log('pixelData3=new Uint8ClampedArray: ',pixelData5.buffer);
 pixelData=new Float32Array(imageData,0,la);
-FS.writeFile('/video/frame.gl',pixelData.buffer);
+FS.writeFile('/video/frame.gl',pixelData);
 },500);
 }
   
