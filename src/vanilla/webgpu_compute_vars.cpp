@@ -49,6 +49,12 @@ VertexFUV FUVvertices[]={
 {-1.0,1.0,1.0,1.0,  0.0,1.0}
 };
 
+uint32_t OutputBufferBytes=64*4;
+uint32_t InputBufferBytes=64*4;
+uint64_t WGPU_InputRangeSize=OutputBufferBytes;
+const char * Entry="main_image";
+WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
+
 uint32_t indices[35]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,0,4,1,1,4,5};
 
 WGpuBufferDescriptor bufferDescriptor_indice={};
