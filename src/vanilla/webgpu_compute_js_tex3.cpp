@@ -1,4 +1,3 @@
-
 EM_JS(void,js_main,(),{
 
 FS.mkdir('/shader');
@@ -15,22 +14,6 @@ return n;
 }
 }
   
-function flipImageData(imageData) {
-const width = imageData.width;
-const height = imageData.height;
-const data = imageData.data;
-for (let y = 0; y < height / 2; y++) {
-for (let x = 0; x < width; x++) {
-const topIndex = (y * width + x) * 4;
-const bottomIndex = ((height - 1 - y) * width + x) * 4;
-for (let c = 0; c < 4; c++) {
-[data[topIndex + c], data[bottomIndex + c]] = [data[bottomIndex + c], data[topIndex + c]];
-}
-}
-}
-return imageData;
-}
-
 function videoFrames(){
 let vw$=parseInt(document.querySelector("#mvi").videoWidth);
 let vh$=parseInt(document.querySelector("#mvi").videoHeight);
@@ -61,7 +44,6 @@ let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl2=cnv.getContext('2d',{alpha:true}); // 
 gl2.drawImage(vvi,offS,0,tstSiZ,tstSiZ,0,0,tstSiZ,tstSiZ);
 let image=gl2.getImageData(0,0,tstSiZ,tstSiZ);
-// let mageData=flipImageData(image);
 let imageData=image.data;
 let pixelData=new Uint8ClampedArray(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
@@ -130,9 +112,9 @@ document.querySelector('#bcanvas').height=parseInt(window.innerHeight,10);
 document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
-// videoFrames();
-let vsz=vsiz.innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsz]);
+videoFrames();
+// let vsz=vsiz.innerHTML;
+// Module.ccall("startWebGPUi",null,"Number",[vsz]);
 },1500);
 document.querySelector('#status').style.backgroundColor="green";
 }
