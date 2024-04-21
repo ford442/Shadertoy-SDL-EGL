@@ -214,6 +214,90 @@ if(on.at(0,0)==0){wd.at(0,0)=result;}
 const char * frag_body=(char*)rd_fl(Fnm);
 const char * comp_body=(char*)rd_fl(FnmC);
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
+  
+wTexFormat.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
+// wTexFormat.at(0,0)=navigator_gpu_get_preferred_canvas_format();
+wTexFormat.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
+// wTexFormat.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
+wTexFormat.at(4,4)=WGPU_TEXTURE_FORMAT_INVALID;
+// wTexFormat.at(5,5)=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
+// wTexFormat.at(5,5)=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
+wTexFormat.at(5,5)=WGPU_TEXTURE_FORMAT_DEPTH16UNORM;
+// wTexFormat.at(0,0)=canvasFormat;
+js_data_pointer.at(0,0)=0;
+fjs_data_pointer.at(0,0)=0;
+
+clearColor.r=0.5;
+clearColor.g=0.5;
+clearColor.b=0.5;
+clearColor.a=1.0;
+clearC.at(0,0)=clearColor;
+
+oxyz.at(0,0)=OriginXYZ;
+oxy.at(0,0)=OriginXY;
+
+textureViewDescriptorIn.format=wTexFormat.at(2,2);
+textureViewDescriptorIn.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureViewDescriptorIn.aspect=WGPU_TEXTURE_ASPECT_ALL;
+textureViewDescriptorIn.baseMipLevel=0; // default = 0
+textureViewDescriptorIn.mipLevelCount=1;
+textureViewDescriptorIn.baseArrayLayer=0; // default = 0
+textureViewDescriptorIn.arrayLayerCount=1;
+textureViewDescriptorOut.format=wTexFormat.at(2,2);
+textureViewDescriptorOut.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureViewDescriptorOut.aspect=WGPU_TEXTURE_ASPECT_ALL;
+textureViewDescriptorOut.baseMipLevel=0; // default = 0
+textureViewDescriptorOut.mipLevelCount=1;
+textureViewDescriptorOut.baseArrayLayer=0; // default = 0
+textureViewDescriptorOut.arrayLayerCount=1;
+textureViewDescriptorOut2.format=wTexFormat.at(2,2);
+textureViewDescriptorOut2.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureViewDescriptorOut2.aspect=WGPU_TEXTURE_ASPECT_ALL;
+textureViewDescriptorOut2.baseMipLevel=0; // default = 0
+textureViewDescriptorOut2.mipLevelCount=1;
+textureViewDescriptorOut2.baseArrayLayer=0; // default = 0
+textureViewDescriptorOut2.arrayLayerCount=1;
+videoTextureViewDescriptor.format=wTexFormat.at(2,2);
+videoTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+videoTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
+videoTextureViewDescriptor.baseMipLevel=0; // default = 0
+videoTextureViewDescriptor.mipLevelCount=1;
+videoTextureViewDescriptor.baseArrayLayer=0; // default = 0
+videoTextureViewDescriptor.arrayLayerCount=1;
+colorTextureViewDescriptor.format=wTexFormat.at(0,0);
+colorTextureViewDescriptor.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+colorTextureViewDescriptor.aspect=WGPU_TEXTURE_ASPECT_ALL;
+colorTextureViewDescriptor.baseMipLevel=0; // default = 0
+colorTextureViewDescriptor.mipLevelCount=1;
+colorTextureViewDescriptor.baseArrayLayer=0; // default = 0
+colorTextureViewDescriptor.arrayLayerCount=1;
+  
+wtvd.at(1,1)=colorTextureViewDescriptor;
+  wtvd.at(2,2)=videoTextureViewDescriptor;
+
+WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorIn;
+WGPU_TextureViewDescriptor.at(0,0,1)=textureViewDescriptorOut;
+WGPU_TextureViewDescriptor.at(0,0,2)=textureViewDescriptorOut2;
+  storageTextureBindingLayoutFloat32.access=WGPU_STORAGE_TEXTURE_ACCESS_WRITE_ONLY;
+storageTextureBindingLayoutFloat32.format=wTexFormat.at(2,2);
+storageTextureBindingLayoutFloat32.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+storageTextureBindingLayoutFloat.access=WGPU_STORAGE_TEXTURE_ACCESS_WRITE_ONLY;
+storageTextureBindingLayoutFloat.format=wTexFormat.at(0,0);
+storageTextureBindingLayoutFloat.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+WGPU_StorageTextureBindingLayout.at(0,0,0)=storageTextureBindingLayoutFloat;
+WGPU_StorageTextureBindingLayout.at(1,1,1)=storageTextureBindingLayoutFloat32;
+
+colorTarget32.format=wTexFormat.at(2,2); // wTexFormat.at(0,0);
+colorTarget32.writeMask=15;
+colorTarget.format=wTexFormat.at(0,0);
+colorTarget.writeMask=15;
+depthState2.format=wTexFormat.at(4,4);
+depthState2.depthWriteEnabled=0;
+depthState2.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
+depthState.format=wTexFormat.at(4,4);
+depthState.depthWriteEnabled=0;
+depthState.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
+  
 canvasViewFormat[0]={wTexFormat.at(0,0)};
 config.device=wd.at(0,0);
 config.format=wTexFormat.at(0,0);
