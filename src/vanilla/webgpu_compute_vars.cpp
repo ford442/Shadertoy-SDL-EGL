@@ -6,8 +6,6 @@ boost::chrono::high_resolution_clock::time_point t2;
 boost::chrono::high_resolution_clock::time_point t3;
 }u_time;
 
-void * fram;
-
 struct VertexF{
 // GLfloat position[4];
 float position[4];
