@@ -53,7 +53,7 @@ u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.time_span_mili_a=boost::chrono::duration<boost::compute::double_,boost::chrono::milliseconds::period>(u_time.t2-u_time.t1);
 u_time.time_span_mili_b=boost::chrono::duration<boost::compute::double_,boost::chrono::milliseconds::period>(u_time.t2-u_time.t3);
-if(float(u_time.time_span_mili_b)>=17.0f){
+if(float(u_time.time_span_mili_b.count())>=17.0f){
 u64_uni.at(3,3)++;
 u64_uni.at(0,0)=float(u_time.time_span_mili_a.count());
 u64_uni.at(1,1)=u_time.time_span_mili_b.count();
