@@ -1,5 +1,4 @@
 
-
 struct VertexF{
 // GLfloat position[4];
 float position[4];
