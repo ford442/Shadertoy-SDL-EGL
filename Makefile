@@ -125,7 +125,7 @@ b3_compute_egl_tex3:
 	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -march=haswell -mtune=wasm32 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=768mb -lmath.js -lhtml5.js -lint53.js \
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=1 -sDISABLE_EXCEPTION_THROWING=0 \
-	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS='["wgpu_buffer_map_sync","wgpu_queue_write_texture"]' -sTEXTDECODER=0 \
+	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS='["wgpu_buffer_map_sync","wgpu_queue_write_texture","wgpu_command_encoder_copy_texture_to_texture"]' -sTEXTDECODER=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPUi","_startWebGPUbi"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
