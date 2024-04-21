@@ -503,18 +503,6 @@ static char * results=NULL;
 
 
 
-u64_bfrSze.at(0,0)=256; // (floor((sze.at(0,0))/256)+1)*256;
-u64_bfrSze.at(1,1)=256; // (floor((sze.at(1,1))/256)+1)*256;
-
-bufferDescriptorI={u64_bfrSze.at(1,1),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
-bufferDescriptorO={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,EM_FALSE};
-bufferDescriptorM={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
-bufferDescriptorC={OutputBufferBytes,WGPU_BUFFER_USAGE_MAP_READ|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
-WGPU_BufferDescriptor.at(0,0,0)=bufferDescriptorI;
-WGPU_BufferDescriptor.at(0,0,1)=bufferDescriptorO;
-WGPU_BufferDescriptor.at(0,0,2)=bufferDescriptorM;
-WGPU_BufferDescriptor.at(0,0,3)=bufferDescriptorC;
-
 WGPU_CommandEncoderDescriptor.at(0,0,0)=commandEncoderDescriptor;
 
 textureBindingLayoutFloat.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
