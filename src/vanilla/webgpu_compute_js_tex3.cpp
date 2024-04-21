@@ -54,10 +54,10 @@ let pixelData=new Float32Array(imageData);
   console.log('pixelData=new Float32Array: ',pixelData[5]);
 let pixelData2=new Uint8ClampedArray(imageData);
   console.log('pixelData=new Uint8ClampedArray: ',pixelData2[5]);
-let pixelData3=new Float32Array(imageData2);
-    console.log('pixelData3=new Float32Array: ',imageData2[5]);
-let pixelData3=new Uint8ClampedArray(imageData2);
-  console.log('pixelData3=new Uint8ClampedArray: ',pixelData3[5]);
+let pixelData4=new Float32Array(imageData2);
+    console.log('pixelData3=new Float32Array: ',imageData4[5]);
+let pixelData5=new Uint8ClampedArray(imageData2);
+  console.log('pixelData3=new Uint8ClampedArray: ',pixelData5[5]);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
 gl2.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
