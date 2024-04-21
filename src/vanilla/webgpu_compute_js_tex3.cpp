@@ -57,16 +57,16 @@ imageData=image.data;
 var imageData2=image2.data;
 pixelData=new Float32Array(imageData);
 imageData=image.data;
-  console.log('getImageData.data: ',imageData[5]);
-  console.log('pixelData=new Float32Array: ',pixelData[5]);
+  console.log('getImageData.data: ',imageData.buffer);
+  console.log('pixelData=new Float32Array: ',pixelData.buffer);
 var pixelData2=new Uint8ClampedArray(imageData);
   console.log('pixelData=new Uint8ClampedArray: ',pixelData2.buffer);
 var pixelData4=new Float32Array(imageData2);
-    console.log('pixelData3=new Float32Array: ',pixelData4[5]);
+    console.log('pixelData3=new Float32Array: ',pixelData4.buffer);
 var pixelData5=new Uint8ClampedArray(imageData2);
-  console.log('pixelData3=new Uint8ClampedArray: ',pixelData5[5]);
+  console.log('pixelData3=new Uint8ClampedArray: ',pixelData5.buffer);
 pixelData=new Float32Array(imageData,0,la);
-FS.writeFile('/video/frame.gl',pixelData);
+FS.writeFile('/video/frame.gl',pixelData.buffer);
 },500);
 }
   
