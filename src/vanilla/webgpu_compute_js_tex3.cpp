@@ -55,7 +55,7 @@ let pixelData=new Float32Array(imageData);
 let pixelData2=new Uint8ClampedArray(imageData);
   console.log('pixelData=new Uint8ClampedArray: ',pixelData2[5]);
 let pixelData4=new Float32Array(imageData2);
-    console.log('pixelData3=new Float32Array: ',imageData4[5]);
+    console.log('pixelData3=new Float32Array: ',pixelData4[5]);
 let pixelData5=new Uint8ClampedArray(imageData2);
   console.log('pixelData3=new Uint8ClampedArray: ',pixelData5[5]);
 FS.writeFile('/video/frame.gl',pixelData);
