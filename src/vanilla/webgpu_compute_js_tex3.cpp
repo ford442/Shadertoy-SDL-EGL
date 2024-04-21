@@ -41,7 +41,8 @@ cnvb.width=SiZ;
 var ratio=SiZ/h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
+// const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
+const gl2=cnv.getContext('2d',{alpha:true}); // 
 gl2.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 let image=gl2.getImageData(0,0,w$,h$);
 let imageData=image.data;
