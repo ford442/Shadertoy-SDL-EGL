@@ -2,6 +2,12 @@
 
 // #include "../../src/vanilla/webgpu_compute_vars.cpp"
 
+uint32_t OutputBufferBytes=64*4;
+uint32_t InputBufferBytes=64*4;
+uint64_t WGPU_InputRangeSize=OutputBufferBytes;
+const char * Entry="main_image";
+WGPU_MAP_MODE_FLAGS mode1=0x1; // READ MODE
+
 float * WGPU_Result_Array=new float[OutputBufferBytes];
 float * WGPU_Input_Array=new float[InputBufferBytes];
 const char * Fnm2=reinterpret_cast<const char *>("/video/frame.gl");
