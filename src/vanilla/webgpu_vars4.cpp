@@ -493,4 +493,19 @@ static char * results=NULL;
 options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
 options.forceFallbackAdapter=EM_FALSE;
 
+videoSamplerDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
+videoSamplerDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
+videoSamplerDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
+videoSamplerDescriptor.magFilter=WGPU_FILTER_MODE_LINEAR;
+videoSamplerDescriptor.minFilter=WGPU_FILTER_MODE_LINEAR;
+videoSamplerDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_LINEAR;
+videoSamplerDescriptor.lodMinClamp=0;
+videoSamplerDescriptor.lodMaxClamp=0;  //  default=32
+// videoSamplerDescriptor.compare;  // default = WGPU_COMPARE_FUNCTION_INVALID (not used)
+videoSamplerDescriptor.maxAnisotropy=32;
 
+priState.topology=WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST; // Defaults to WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST ('triangle-list')
+// priState.stripIndexFormat=WGPU_INDEX_FORMAT_UINT32; // Defaults to undefined, must be explicitly specified if WGPU_PRIMITIVE_TOPOLOGY_LINE_STRIP ('line-strip') or WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP ('triangle-strip') is used.
+priState.frontFace=WGPU_FRONT_FACE_CCW; // Defaults to WGPU_FRONT_FACE_CCW ('ccw')
+priState.cullMode=WGPU_CULL_MODE_FRONT; // Defaults to WGPU_CULL_MODE_NONE ('none')
+priState.unclippedDepth=EM_FALSE; // defaults to EM_FALSE.
