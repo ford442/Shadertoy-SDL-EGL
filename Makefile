@@ -116,7 +116,8 @@ webgpu_tex4:
 	 em++ lib/lib_webgpu_cpp20.cpp -std=c++20 -static
 	 em++ src/vanilla/webgpu_vars4.cpp $(LINK_SIMD_FLAGS) -std=c++20 -static
 	 em++ src/vanilla/webgpu_js_tex4.cpp $(LINK_SIMD_FLAGS) -std=c++20 -static
-	 -mextended-const -mbulk-memory -matomics  -pthread -O2 -fchar8_t -std=c++20 $(wGL_FLAGS) \
+	 em++ src/vanilla/webgpu_tex4.cpp -pipe -fno-fast-math -ffp-contract=off \
+	 -mextended-const -mbulk-memory -matomics -pthread -O2 -fchar8_t -std=c++20 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -o $(WGL_BIN_NAME)-tex4.js -O2 -mextended-const -dead_strip -mbulk-memory -matomics -std=c++20 -pipe \
 	 -pthread -ffast-math -ffp-contract=off --js-library lib/lib_webgpu.js \
