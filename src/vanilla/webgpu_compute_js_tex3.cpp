@@ -41,18 +41,18 @@ cnvb.width=SiZ;
 var ratio=SiZ/h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-// const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
-const gl2=cnv.getContext('2d',{alpha:true}); // 
+const gl2=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
+// const gl2=cnv.getContext('2d',{alpha:true}); // 
 gl2.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 let image=gl2.getImageData(0,0,w$,h$);
 let imageData=image.data;
-let pixelData=new Uint8ClampedArray(imageData);
+let pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
 gl2.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 image=gl2.getImageData(0,0,w$,h$);
 imageData=image.data;
-pixelData=new Uint8ClampedArray(imageData,0,la);
+pixelData=new Float32Array(imageData,0,la);
 FS.writeFile('/video/frame.gl',pixelData);
 },16.6);
 }
