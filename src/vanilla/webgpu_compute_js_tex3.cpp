@@ -20,8 +20,8 @@ let vh$=parseInt(document.querySelector("#mvi").videoHeight);
 let SiZ=window.innerHeight;
 vvi.height=vh$;
 vvi.width=vw$;
-let w$=parseInt(document.querySelector("#mvi").videoWidth);
-let h$=parseInt(document.querySelector("#mvi").videoHeight);
+let w$=parseInt(document.querySelector("#mvi").width);
+let h$=parseInt(document.querySelector("#mvi").height);
 let tstSiZ=720;
 if(running==0){
 setTimeout(function(){
