@@ -43,7 +43,7 @@ let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl3=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
-var image=gl2.getImageData(0,0,w$,h$);
+var image=gl3.getImageData(0,0,w$,h$);
 var imageData=image.data;
 var pixelData=new Uint8ClampedArray(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
