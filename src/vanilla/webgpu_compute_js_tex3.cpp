@@ -15,6 +15,7 @@ return n;
 }
   
 function videoFrames(){
+document.querySelector("#mvi").play();
 let vw$=parseInt(document.querySelector("#mvi").videoWidth);
 let vh$=parseInt(document.querySelector("#mvi").videoHeight);
 let SiZ=window.innerHeight;
