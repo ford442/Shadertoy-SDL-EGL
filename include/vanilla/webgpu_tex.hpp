@@ -146,6 +146,7 @@ WGpuTexture colorTexture;
 WGpuTexture videoTexture;
 WGpuTexture MSTexture;
 WGpuTexture textureIn;
+WGpuTexture textureInV;
 WGpuTexture textureOut;
 WGpuTexture textureOut2;
 WGpuTexture __128bit_Texture__;
