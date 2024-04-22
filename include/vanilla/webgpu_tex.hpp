@@ -272,6 +272,7 @@ using xy_tensor=boost::numeric::ublas::tensor<WGpuOrigin2D>;
 using wicb_tensor=boost::numeric::ublas::tensor<WGPUImageCopyBuffer>;
 using wicei_tensor=boost::numeric::ublas::tensor<WGpuImageCopyExternalImage>;
 using wict_tensor=boost::numeric::ublas::tensor<WGpuImageCopyTexture>;
+using wictt_tensor=boost::numeric::ublas::tensor<WGpuImageCopyTextureTagged>;
 using ws_tensor=boost::numeric::ublas::tensor<WGpuSampler>;
 using wsd_tensor=boost::numeric::ublas::tensor<WGpuSamplerDescriptor>;
 using wms_tensor=boost::numeric::ublas::tensor<WGpuMultisampleState>;
