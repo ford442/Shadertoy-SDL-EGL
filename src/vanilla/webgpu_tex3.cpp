@@ -123,14 +123,14 @@ depthAttachment2.stencilLoadOp=WGPU_LOAD_OP_CLEAR;
 depthAttachment2.stencilStoreOp=WGPU_STORE_OP_UNDEFINED;
 wrpdsa.at(1,1)=depthAttachment2;
   */
+renderTimestampWrites.querySet=0;
+renderTimestampWrites.beginningOfPassWriteIndex=-1;
+renderTimestampWrites.endOfPassWriteIndex=-1;
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(1,1); // &wrpca.at(0,0); // 
 // passDesc.depthStencilAttachment=wrpdsa.at(1,1);  //  wrpdsa.at(0,0); //
 passDesc.occlusionQuerySet=0;
 passDesc.maxDrawCount=6;
-renderTimestampWrites.querySet=0;
-renderTimestampWrites.beginningOfPassWriteIndex=-1;
-renderTimestampWrites.endOfPassWriteIndex=-1;
 passDesc.timestampWrites=renderTimestampWrites;
 wrpd.at(0,0)=passDesc;
 passDesc2.numColorAttachments=1;
