@@ -77,7 +77,7 @@ float uint8_to_half_float(uint8_t val) {
 
 
 // boost::function<EM_BOOL*()>frmData=[](){
-void frmData(void * args){
+void * frmData(void * args){
     
 return &args;
 };
