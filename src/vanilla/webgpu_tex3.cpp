@@ -19,6 +19,8 @@ return;
 };
 
 boost::function<EM_BOOL()>frmData=[](){
+
+    
 return EM_TRUE;
 };
 
@@ -172,7 +174,7 @@ std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf
 std::vector<float>floatData(data.size());
  //std::transform(data.begin(), data.end(), floatData.begin(), 
 [](uint8_t val) { return val / 255.0f; });  // for RGBA32FLOAT
- uint8_to_half_float);  //  for RGBA16FLOAT
+// uint8_to_half_float);  //  for RGBA16FLOAT
 // [](uint8_t val) { return static_cast<float>(val); });  //  for RGBA16FLOAT
 // [](uint8_t val) { return static_cast<float>(val); });  //  for RGBA16FLOAT
 const size_t bytesPerRow=sze.at(6,6) * 4 * sizeof(float);
