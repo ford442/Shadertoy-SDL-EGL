@@ -1005,10 +1005,10 @@ on.at(0,0)=1;
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
 wa.at(0,0)=result;
 // deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8;
-deviceDesc.requiredFeatures=WGPU_FEATURE_FLOAT32_FILTERABLE;
-  /*
+// deviceDesc.requiredFeatures=WGPU_FEATURE_FLOAT32_FILTERABLE;
 WGPU_FEATURES_BITFIELD ftr=wgpu_adapter_or_device_get_features(wa.at(0,0));
-// deviceDesc.requiredFeatures=ftr;
+deviceDesc.requiredFeatures=ftr;
+  /*
 WGpuSupportedLimits lmts;
 lmts.maxUniformBufferBindingSize=sizeof(uint64_t);
 lmts.maxStorageBufferBindingSize=1*1024*1024;
