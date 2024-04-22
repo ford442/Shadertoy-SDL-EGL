@@ -526,24 +526,24 @@ WGPU_Texture.at(0,0,2)=textureOut2;
   wicei.at(0,0)=videoFrm;
   External_Image_Texture.texture=WGPU_Texture.at(0,0,3);
 External_Image_Texture.mipLevel=0;
-External_Image_Texture.origin=originXYZ;
+External_Image_Texture.origin=oxyz.at(0,0);
   External_Image_Texture.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
   */
 Input_Image_Texture.texture=WGPU_Texture.at(0,0,0);
-// Input_Image_Texture.mipLevel=0;
-Input_Image_Texture.origin=originXYZ;
+Input_Image_Texture.mipLevel=0;
+Input_Image_Texture.origin=oxyz.at(0,0);
 Input_Image_Texture.aspect=WGPU_TEXTURE_ASPECT_ALL;
 Input_Image_TextureV.texture=WGPU_Texture.at(0,0,3);
-// Input_Image_TextureV.mipLevel=0;
-Input_Image_TextureV.origin=originXYZ;
+Input_Image_TextureV.mipLevel=0;
+Input_Image_TextureV.origin=oxyz.at(0,0);
 Input_Image_TextureV.aspect=WGPU_TEXTURE_ASPECT_ALL;
 Output_Image_Texture.texture=WGPU_Texture.at(0,0,1);
-Output_Image_Texture.origin=originXYZ;
-// Output_Image_Texture.mipLevel=0;
+Output_Image_Texture.origin=oxyz.at(0,0);
+Output_Image_Texture.mipLevel=0;
 Output_Image_Texture.aspect=WGPU_TEXTURE_ASPECT_ALL;
 Output_Image_Texture2.texture=WGPU_Texture.at(0,0,2);
-// Output_Image_Texture2.mipLevel=0;
-Output_Image_Texture2.origin=originXYZ;
+Output_Image_Texture2.mipLevel=0;
+Output_Image_Texture2.origin=oxyz.at(0,0);
 Output_Image_Texture2.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(2,2)=Input_Image_Texture;
 wict.at(1,1)=Output_Image_Texture;
@@ -742,15 +742,13 @@ videoSamplerDescriptor.maxAnisotropy=32;
 wsd.at(0,0)=videoSamplerDescriptor;
 videoSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(0,0));
 wsmp.at(0,0)=videoSampler;
-
-xyz.x=0;
-xyz.y=0;
-xyz.z=0;
+/*
 videoTextureCopy.texture=wt.at(2,2);
 videoTextureCopy.mipLevel=0;
-videoTextureCopy.origin=xyz;
+videoTextureCopy.origin=oxyz.at(0,0);
 videoTextureCopy.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(0,0)=videoTextureCopy;
+  */
 samplerBindingLayout.type=WGPU_SAMPLER_BINDING_TYPE_FILTERING;
 wsbl.at(1,1)=samplerBindingLayout;
   //  Render Sampler
