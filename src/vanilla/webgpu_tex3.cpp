@@ -173,7 +173,7 @@ wrpd.at(1,1)=passDesc2;
 pthread_t thrd;
     int args=55;
 void * ret;
-pthread_create(&thrd, NULL, frmData,args);
+pthread_create(&thrd, NULL, frmData,&args);
 pthread_join(thrd, &ret);
     
       //  Frame Data 
