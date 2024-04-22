@@ -144,19 +144,17 @@ passDesc2.timestampWrites=renderTimestampWrites;
 wrpd.at(1,1)=passDesc2;
       //  Frame Data
 std::ifstream fram(Fnm2,std::ios::binary);
-std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 // frame_tensor.at(0,0)=data;
-
 std::vector<float>floatData(data.size());
 std::transform(data.begin(), data.end(), floatData.begin(), 
 [](uint8_t val) { return val / 255.0f; });
-
-const size_t bytesPerRow=sze.at(6,6) * 2 * sizeof(float);
+const size_t bytesPerRow=sze.at(6,6) * 4 * sizeof(float);
 // fjs_data_pointer.at(0,0)=floatData.data();
 // frame_tensorGL.at(0,0)=data;
 // wetd.at(0,0).source=texid.at(0,0);
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&frame_tensor.at(0,0),sze.at(6,6)*4,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
-wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),floatData.data(),sze.at(6,6) *2* sizeof(float),sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
+wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),floatData.data(),bytesPerRow,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
   // void wgpu_queue_copy_external_image_to_texture(WGpuQueue queue, const WGpuImageCopyExternalImage *source NOTNULL, const WGpuImageCopyTextureTagged *destination NOTNULL, uint32_t copyWidth, uint32_t copyHeight _WGPU_DEFAULT_VALUE(1), uint32_t copyDepthOrArrayLayers _WGPU_DEFAULT_VALUE(1));
 // wgpu_queue_copy_external_image_to_texture(WGPU_Queue.at(0,0,0), ,&wictt.at(0,0) ,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
  //  Render Pass
