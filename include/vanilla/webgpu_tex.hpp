@@ -73,6 +73,7 @@ using namespace std;
 #include <ctime>
 #include <vector>
 #include <memory>
+#include <streambuf>
 
 #include <cassert>
 #include <random>
