@@ -417,6 +417,7 @@ js_tensor js_data_pointer=js_tensor{2,2};
 fjs_tensor fjs_data_pointer=fjs_tensor{2,2};
 js_data_tensor frame_tensor=js_data_tensor{2,2};
 js_data_tensor64 frame_tensor64=js_data_tensor64{2,2};
+js_data_tensorGL frame_tensorGL=js_data_tensorGL{2,2};
 u64_tensor u64_bfrSze=u64_tensor{4,4};
 wict_tensor wict=wict_tensor{8,8};
 wsd_tensor wsd=wsd_tensor{2,2};
