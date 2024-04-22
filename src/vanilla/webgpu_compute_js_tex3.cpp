@@ -61,7 +61,7 @@ var image=flipImageData(gl3.getImageData(0,0,w$,h$));
 var imageData=image.data;
 // var pixelData=new Uint8ClampedArray(imageData);
 // var pixelData=new Float32Array(imageData);
-var pixelData=new Float64Array(imageData);
+var pixelData=new Float64Array(imageData,0,la);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
