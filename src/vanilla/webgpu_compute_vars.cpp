@@ -366,7 +366,7 @@ WGpuTextureBindingLayout textureBindingLayout1={}; // for video.cpp
 WGpuSamplerBindingLayout samplerBindingLayout={};
 WGpuImageCopyExternalImage videoFrm={};
 
-wib_tensor wib=wib_tensor{8,8};
+wib_tensor wib=wib_tensor{3,3};
 d_tensor d64_uniform=d_tensor{8,8};
 f_tensor f32_uniform=f_tensor{8,8};
 wvbl_tensor wvbl=wvbl_tensor{2,2};
