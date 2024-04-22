@@ -171,13 +171,13 @@ passDesc2.occlusionQuerySet=0;
 passDesc2.maxDrawCount=6;
 passDesc2.timestampWrites=renderTimestampWrites;
 wrpd.at(1,1)=passDesc2;
-    
+    /*
 pthread_t thrd;
 int args=55;
 void * ret;
 pthread_create(&thrd, NULL, frmData,&args);
 pthread_join(thrd, &ret);
-    
+    */
       //  Frame Data 
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
