@@ -290,3 +290,4 @@ using wvbl_tensor=boost::numeric::ublas::tensor<WGpuVertexBufferLayout>;
 using wetd_tensor=boost::numeric::ublas::tensor<WGpuExternalTextureDescriptor>;
 using wet_tensor=boost::numeric::ublas::tensor<WGpuExternalTexture>;
 using wvbl_tensor=boost::numeric::ublas::tensor<WGpuVertexBufferLayout>;
+using wib_tensor=boost::numeric::ublas::tensor<WGpuImageBitmap>;
