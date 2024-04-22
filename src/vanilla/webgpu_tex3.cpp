@@ -6,6 +6,12 @@ WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU
 return;
 };
 
+WGpuLoadImageBitmapCallback imageCallbackStart=[](WGpuImageBitmap bitmap,int width,int height,void *userData){
+bmpImage=bitmap;
+wib.at(0,0)=bmpImage;
+return;
+};
+
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 return;
 };
@@ -139,14 +145,19 @@ std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 // std::vector<GLubyte> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 // frame_tensor.at(0,0)=data;
-std::vector<float> floatData(data.size());
-std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val / 255.0f;});
+std::vector<float>floatData(data.size());
+std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});
 const size_t bytesPerRow=sze.at(6,6)*4*sizeof(float);  
 // fjs_data_pointer.at(0,0)=&floatData;
 // frame_tensorGL.at(0,0)=data;
-  // wetd.at(0,0).source=texid.at(0,0);
+// wetd.at(0,0).source=texid.at(0,0);
+  
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&frame_tensor.at(0,0),sze.at(6,6)*4,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
 wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),floatData.data(),bytesPerRow,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
+
+  // void wgpu_queue_copy_external_image_to_texture(WGpuQueue queue, const WGpuImageCopyExternalImage *source NOTNULL, const WGpuImageCopyTextureTagged *destination NOTNULL, uint32_t copyWidth, uint32_t copyHeight _WGPU_DEFAULT_VALUE(1), uint32_t copyDepthOrArrayLayers _WGPU_DEFAULT_VALUE(1));
+// wgpu_queue_copy_external_image_to_texture(WGPU_Queue.at(0,0,0), ,&wictt.at(0,0) ,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
+  
   //  Render Pass
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
@@ -198,6 +209,9 @@ wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict
   //  Buffer Data View
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
 if(WGPU_BufferStatus.at(0,0,0)!=3&&on.at(1,1)==0){
+    // void wgpu_load_image_bitmap_from_url_async(const char *url NOTNULL, EM_BOOL flipY, WGpuLoadImageBitmapCallback callback, void *userData);
+   // const char url_address="https://test.1ink.us/gpu/  ";
+  // wgpu_load_image_bitmap_from_url_async(url_address,EM_TRUE,imageCallbackStart,WGPU_UserData.at(0,0,0));
 on.at(1,1)=1;
 wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
 // wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),WGPU_MapCallback.at(0,0,0),&WGPU_UserData.at(0,0,0),mode1,0,OutputBufferBytes);
@@ -500,22 +514,41 @@ textureOut=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,
 WGPU_Texture.at(0,0,1)=textureOut;
 textureOut2=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,2));
 WGPU_Texture.at(0,0,2)=textureOut2;
+  texid.at(0,0)=77;
+  extTextureDescriptor.source=texid.at(0,0);
+  extTextureDescriptor.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
+  wetd.at(0,0)=extTextureDescriptor;
+  extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
+  wet.at(0,0)=extTexture;
+  videoFrm.source=wib.at(0,0);
+  videoFrm.origin=oxy.at(0,0);
+  videoFrm.flipY=EM_TRUE;
+  wicei.at(0,0)=videoFrm;
+  External_Image_Texture.texture=WGPU_Texture.at(0,0,3);
+External_Image_Texture.mipLevel=0
+External_Image_Texture.origin=oxyz.at(0,0);
+  External_Image_Texture.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 Input_Image_Texture.texture=WGPU_Texture.at(0,0,0);
+Input_Image_Texture.mipLevel=0;
 Input_Image_Texture.origin=oxyz.at(0,0);
 Input_Image_Texture.aspect=WGPU_TEXTURE_ASPECT_ALL;
-  Input_Image_TextureV.texture=WGPU_Texture.at(0,0,3);
+Input_Image_TextureV.texture=WGPU_Texture.at(0,0,3);
+Input_Image_TextureV.mipLevel=0;
 Input_Image_TextureV.origin=oxyz.at(0,0);
-  Input_Image_TextureV.aspect=WGPU_TEXTURE_ASPECT_ALL;
+Input_Image_TextureV.aspect=WGPU_TEXTURE_ASPECT_ALL;
 Output_Image_Texture.texture=WGPU_Texture.at(0,0,1);
 Output_Image_Texture.origin=oxyz.at(0,0);
+Output_Image_Texture.mipLevel=0;
 Output_Image_Texture.aspect=WGPU_TEXTURE_ASPECT_ALL;
 Output_Image_Texture2.texture=WGPU_Texture.at(0,0,2);
+Output_Image_Texture2.mipLevel=0;
 Output_Image_Texture2.origin=oxyz.at(0,0);
 Output_Image_Texture2.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(2,2)=Input_Image_Texture;
 wict.at(1,1)=Output_Image_Texture;
 wict.at(3,3)=Output_Image_Texture2;
   wict.at(4,4)=Input_Image_TextureV;
+  wictt.at(0,0)=External_Image_Texture;
 INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
   INVTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,3),&WGPU_TextureViewDescriptor.at(0,0,3));
 OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureViewDescriptor.at(0,0,1));
@@ -708,12 +741,7 @@ videoSamplerDescriptor.maxAnisotropy=32;
 wsd.at(0,0)=videoSamplerDescriptor;
 videoSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(0,0));
 wsmp.at(0,0)=videoSampler;
-texid.at(0,0)=77;
-extTextureDescriptor.source=texid.at(0,0);
-extTextureDescriptor.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
-wetd.at(0,0)=extTextureDescriptor;
-// extTexture=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
-// wet.at(0,0)=extTexture;
+
 xyz.x=0;
 xyz.y=0;
 xyz.z=0;
