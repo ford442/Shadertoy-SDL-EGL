@@ -61,6 +61,7 @@ wgsl.at(0,0)=frag_body;
 return EM_TRUE;
 }
 
+/*
 float uint8_to_half_float(uint8_t val) {
     // Normalize to [0, 1] range
     float normalized = val / 255.0f;
@@ -74,6 +75,7 @@ float uint8_to_half_float(uint8_t val) {
 
     return reinterpret_cast<float&>(sign | (exponent << 10) | mantissa); 
 }
+*/
 
 boost::function<EM_BOOL()>render=[](){
 u64_uni.at(3,3)++; 
@@ -161,24 +163,27 @@ passDesc2.occlusionQuerySet=0;
 passDesc2.maxDrawCount=6;
 passDesc2.timestampWrites=renderTimestampWrites;
 wrpd.at(1,1)=passDesc2;
+
+
       //  Frame Data 
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 // frame_tensor.at(0,0)=data;
 std::vector<float>floatData(data.size());
-std::transform(data.begin(), data.end(), floatData.begin(), 
- //[](uint8_t val) { return val / 255.0f; });  // for RGBA32FLOAT
+ //std::transform(data.begin(), data.end(), floatData.begin(), 
+[](uint8_t val) { return val / 255.0f; });  // for RGBA32FLOAT
  uint8_to_half_float);  //  for RGBA16FLOAT
 // [](uint8_t val) { return static_cast<float>(val); });  //  for RGBA16FLOAT
 // [](uint8_t val) { return static_cast<float>(val); });  //  for RGBA16FLOAT
-  
 const size_t bytesPerRow=sze.at(6,6) * 4 * sizeof(float);
 // fjs_data_pointer.at(0,0)=floatData.data();
 // frame_tensorGL.at(0,0)=data;
 // wetd.at(0,0).source=texid.at(0,0);
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&frame_tensor.at(0,0),sze.at(6,6)*4,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
 wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),floatData.data(),bytesPerRow,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
-  // void wgpu_queue_copy_external_image_to_texture(WGpuQueue queue, const WGpuImageCopyExternalImage *source NOTNULL, const WGpuImageCopyTextureTagged *destination NOTNULL, uint32_t copyWidth, uint32_t copyHeight _WGPU_DEFAULT_VALUE(1), uint32_t copyDepthOrArrayLayers _WGPU_DEFAULT_VALUE(1));
+
+
+// void wgpu_queue_copy_external_image_to_texture(WGpuQueue queue, const WGpuImageCopyExternalImage *source NOTNULL, const WGpuImageCopyTextureTagged *destination NOTNULL, uint32_t copyWidth, uint32_t copyHeight _WGPU_DEFAULT_VALUE(1), uint32_t copyDepthOrArrayLayers _WGPU_DEFAULT_VALUE(1));
 // wgpu_queue_copy_external_image_to_texture(WGPU_Queue.at(0,0,0), ,&wictt.at(0,0) ,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
  //  Render Pass
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
@@ -277,7 +282,7 @@ wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
 // wtf.at(0,0)=navigator_gpu_get_preferred_canvas_format();
 wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
   
-  wtf.at(1,1)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
+  wtf.at(1,1)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
   
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
 wtf.at(4,4)=WGPU_TEXTURE_FORMAT_INVALID;
