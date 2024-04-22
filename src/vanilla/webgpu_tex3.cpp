@@ -125,14 +125,14 @@ depthAttachment2.stencilLoadOp=WGPU_LOAD_OP_CLEAR;
 depthAttachment2.stencilStoreOp=WGPU_STORE_OP_UNDEFINED;
 wrpdsa.at(1,1)=depthAttachment2;
   */
-renderTimestampWrites.querySet=0;
-renderTimestampWrites.beginningOfPassWriteIndex=-1;
-renderTimestampWrites.endOfPassWriteIndex=-1;
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(1,1); // &wrpca.at(0,0); // 
 // passDesc.depthStencilAttachment=wrpdsa.at(1,1);  //  wrpdsa.at(0,0); //
 passDesc.occlusionQuerySet=0;
 passDesc.maxDrawCount=6;
+renderTimestampWrites.querySet=0;
+renderTimestampWrites.beginningOfPassWriteIndex=-1;
+renderTimestampWrites.endOfPassWriteIndex=-1;
 passDesc.timestampWrites=renderTimestampWrites;
 wrpd.at(0,0)=passDesc;
 passDesc2.numColorAttachments=1;
@@ -143,7 +143,9 @@ passDesc2.maxDrawCount=6;
 passDesc2.timestampWrites=renderTimestampWrites;
 wrpd.at(1,1)=passDesc2;
       //  Frame Data
+  char buffer[sze.at(6,6)*sze.at(7,7)*4]; 
 std::ifstream fram(Fnm2,std::ios::binary);
+  fram.rdbuf()->pubsetbuf(buffer, sizeof(buffer)); 
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 // std::vector<GLubyte> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 // frame_tensor.at(0,0)=data;
@@ -155,7 +157,7 @@ const size_t bytesPerRow=sze.at(6,6) * 4 * sizeof(float);
 // frame_tensorGL.at(0,0)=data;
 // wetd.at(0,0).source=texid.at(0,0);
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&frame_tensor.at(0,0),sze.at(6,6)*4,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
-// wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),floatData.data(),bytesPerRow,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
+wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),floatData.data(),bytesPerRow,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
   // void wgpu_queue_copy_external_image_to_texture(WGpuQueue queue, const WGpuImageCopyExternalImage *source NOTNULL, const WGpuImageCopyTextureTagged *destination NOTNULL, uint32_t copyWidth, uint32_t copyHeight _WGPU_DEFAULT_VALUE(1), uint32_t copyDepthOrArrayLayers _WGPU_DEFAULT_VALUE(1));
 // wgpu_queue_copy_external_image_to_texture(WGPU_Queue.at(0,0,0), ,&wictt.at(0,0) ,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
  //  Render Pass
