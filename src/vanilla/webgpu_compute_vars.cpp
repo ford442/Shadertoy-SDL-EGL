@@ -303,7 +303,6 @@ WGPUImageCopyBuffer videoFrmBfrSrc={};
 WGPUImageCopyBuffer videoFrmBfrDst={};
 WGpuExternalTextureBindingLayout extTextureBindingLayout={};
 WGpuExternalTextureDescriptor extTextureDescriptor={};
-WGpuExternalTextureDescriptor extTextureDescriptor={};
 WGpuTextureViewDescriptor depthTextureViewDescriptor={};
 WGpuTextureViewDescriptor depthTextureViewDescriptor2={};
 WGpuTextureViewDescriptor colorTextureViewDescriptor={};
