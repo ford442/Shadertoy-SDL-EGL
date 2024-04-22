@@ -1,8 +1,8 @@
 struct{
 boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>time_spana;
 boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>time_spanb;
-boost::chrono::duration<boost::compute::double_,boost::chrono::milliseconds::period>time_span_mili_a;
-boost::chrono::duration<boost::compute::double_,boost::chrono::milliseconds::period>time_span_mili_b;
+// boost::chrono::duration<boost::compute::double_,boost::chrono::milliseconds::period>time_span_mili_a;
+// boost::chrono::duration<boost::compute::double_,boost::chrono::milliseconds::period>time_span_mili_b;
 boost::chrono::high_resolution_clock::time_point t1;
 boost::chrono::high_resolution_clock::time_point t2;
 boost::chrono::high_resolution_clock::time_point t3;
