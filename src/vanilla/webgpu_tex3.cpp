@@ -189,8 +189,8 @@ std::transform(data.begin(), data.end(), floatData.begin(),
 // [](uint8_t val) { return static_cast<float>(val); });  //  for RGBA16FLOAT
 // [](uint8_t val) { return static_cast<float>(val); });  //  for RGBA16FLOAT
 const size_t bytesPerRow=sze.at(6,6) * 4 * sizeof(float);
-fjs_data_pointer.at(0,0)=floatData.data();
-    
+// fjs_data_pointer.at(0,0)=floatData.data();
+fjsv_data_pointer.at(0,0)=floatData.data();  (std::vector<float*>)
 //     frame_tensorf.at(0,0)=floatData;
     
 // frame_tensorGL.at(0,0)=data;
