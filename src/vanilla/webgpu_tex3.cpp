@@ -188,6 +188,7 @@ std::transform(data.begin(), data.end(), floatData.begin(),
 // [](uint8_t val) { return static_cast<float>(val); });  //  for RGBA16FLOAT
 const size_t bytesPerRow=sze.at(6,6) * 4 * sizeof(float);
 // fjs_data_pointer.at(0,0)=floatData.data();
+    frame_tensorf.at(0,0)=floatData.data();
 // frame_tensorGL.at(0,0)=data;
 // wetd.at(0,0).source=texid.at(0,0);
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&frame_tensor.at(0,0),sze.at(6,6)*4,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
