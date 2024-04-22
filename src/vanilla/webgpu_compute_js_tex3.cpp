@@ -57,7 +57,7 @@ cnvb.width=SiZ;
 var ratio=SiZ/h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-const gl3=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
+const gl3=cnv.getContext('2d',{colorType:'float32',willReadFrequently:false,alpha:true}); // 
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 var image=flipImageData(gl3.getImageData(0,0,w$,h$));
 var imageData=image.data;
