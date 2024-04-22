@@ -48,6 +48,8 @@ using namespace std;
 
 #include <cstdint>
 
+#include <pthread.h>
+
 #include <boost/integer.hpp>
 #include <boost/atomic.hpp>
 #include <boost/numeric/ublas/tensor.hpp>
