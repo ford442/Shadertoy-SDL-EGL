@@ -61,6 +61,20 @@ wgsl.at(0,0)=frag_body;
 return EM_TRUE;
 }
 
+float uint8_to_half_float(uint8_t val) {
+    // Normalize to [0, 1] range
+    float normalized = val / 255.0f;
+
+    // Approximate half-float conversion (simplified)
+    uint32_t sign = (normalized >= 0) ? 0 : 0x8000;
+    int32_t exponent = std::max(0, (int32_t)(std::log2(normalized) + 127.0f) - 15);
+    exponent = std::min(exponent, 0x0F);  // Limit to valid exponent range
+    uint32_t mantissa = static_cast<uint32_t>(std::round(normalized * 1024.0)); 
+    mantissa &= 0x3FF; // Keep only the 10 bits of mantissa
+
+    return reinterpret_cast<float&>(sign | (exponent << 10) | mantissa); 
+}
+
 boost::function<EM_BOOL()>render=[](){
 u64_uni.at(3,3)++; 
 u_time.t3=u_time.t2;
@@ -153,8 +167,11 @@ std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf
 // frame_tensor.at(0,0)=data;
 std::vector<float>floatData(data.size());
 std::transform(data.begin(), data.end(), floatData.begin(), 
-[](uint8_t val) { return val / 255.0f; });  // for RGBA32FLOAT
+ //[](uint8_t val) { return val / 255.0f; });  // for RGBA32FLOAT
+ uint8_to_half_float);  //  for RGBA16FLOAT
 // [](uint8_t val) { return static_cast<float>(val); });  //  for RGBA16FLOAT
+// [](uint8_t val) { return static_cast<float>(val); });  //  for RGBA16FLOAT
+  
 const size_t bytesPerRow=sze.at(6,6) * 4 * sizeof(float);
 // fjs_data_pointer.at(0,0)=floatData.data();
 // frame_tensorGL.at(0,0)=data;
@@ -259,7 +276,9 @@ const char * comp_body=(char*)rd_fl(FnmC);
 wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
 // wtf.at(0,0)=navigator_gpu_get_preferred_canvas_format();
 wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
-wtf.at(1,1)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
+  
+  wtf.at(1,1)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
+  
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
 wtf.at(4,4)=WGPU_TEXTURE_FORMAT_INVALID;
 // wtf.at(5,5)=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
