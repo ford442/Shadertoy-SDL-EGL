@@ -18,11 +18,7 @@ WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *user
 return;
 };
 
-boost::function<EM_BOOL()>frmData=[](){
 
-    
-return EM_TRUE;
-};
 
 
 int rNd4(int randomMax){
@@ -78,6 +74,14 @@ float uint8_to_half_float(uint8_t val) {
     return reinterpret_cast<float&>(sign | (exponent << 10) | mantissa); 
 }
 */
+
+
+boost::function<EM_BOOL*()>frmData=[](){
+
+    
+return EM_TRUE;
+};
+
 
 boost::function<EM_BOOL()>render=[](){
 u64_uni.at(3,3)++; 
@@ -165,8 +169,10 @@ passDesc2.occlusionQuerySet=0;
 passDesc2.maxDrawCount=6;
 passDesc2.timestampWrites=renderTimestampWrites;
 wrpd.at(1,1)=passDesc2;
-
- pthread_t thrd=new pthread_t;
+    
+pthread_t thrd;
+pthread_create(&thrd, NULL, frmData,NULL);
+pthread_join(thid, NULL);
     
       //  Frame Data 
 std::ifstream fram(Fnm2,std::ios::binary);
