@@ -84,7 +84,7 @@ void * frmData(void * args){
 return args;
 };
 
-std::vector<float>floatData();
+std::vector<float>floatData;
 
 
 boost::function<EM_BOOL()>render=[](){
