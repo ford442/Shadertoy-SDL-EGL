@@ -77,9 +77,9 @@ float uint8_to_half_float(uint8_t val) {
 
 
 // boost::function<EM_BOOL*()>frmData=[](){
-void frmData(){
+void frmData(void * args){
     
-return;
+return &args;
 };
 
 
@@ -171,8 +171,9 @@ passDesc2.timestampWrites=renderTimestampWrites;
 wrpd.at(1,1)=passDesc2;
     
 pthread_t thrd;
+    int args=55;
 void * ret;
-pthread_create(&thrd, NULL, frmData,NULL);
+pthread_create(&thrd, NULL, frmData,args);
 pthread_join(thrd, &ret);
     
       //  Frame Data 
