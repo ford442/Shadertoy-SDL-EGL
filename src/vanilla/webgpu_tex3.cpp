@@ -139,15 +139,14 @@ std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 // std::vector<GLubyte> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 // frame_tensor.at(0,0)=data;
-  std::vector<float> floatData(data.size());
-std::transform(data.begin(), data.end(), floatData.begin(), 
-               [](uint8_t val) { return val / 255.0f; });
-
+std::vector<float> floatData(data.size());
+std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val / 255.0f;});
+const size_t bytesPerRow=sze.at(6,6)*4*sizeof(float);  
 // fjs_data_pointer.at(0,0)=&floatData;
 // frame_tensorGL.at(0,0)=data;
   // wetd.at(0,0).source=texid.at(0,0);
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&frame_tensor.at(0,0),sze.at(6,6)*4,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
-wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&floatData,sze.at(6,6)*4,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
+wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),floatData.data(),bytesPerRow,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
   //  Render Pass
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
@@ -300,7 +299,8 @@ textureAviewFormats[0]={wtf.at(2,2)};
 textureDescriptorIn.numViewFormats=0;
 textureDescriptorIn.viewFormats=nullptr; // &textureAviewFormats[0];
   textureDescriptorInV.dimension=WGPU_TEXTURE_DIMENSION_2D;
-textureDescriptorInV.format=wtf.at(0,0);
+  textureDescriptorInV.format=wtf.at(2,2);
+  // textureDescriptorInV.format=wtf.at(0,0);
 textureDescriptorInV.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
 textureDescriptorInV.width=sze.at(6,6);
 textureDescriptorInV.height=sze.at(7,7); // default = 1;
@@ -356,7 +356,8 @@ textureViewDescriptorIn.baseMipLevel=0; // default = 0
 textureViewDescriptorIn.mipLevelCount=1;
 textureViewDescriptorIn.baseArrayLayer=0; // default = 0
 textureViewDescriptorIn.arrayLayerCount=1;
-  textureViewDescriptorInV.format=wtf.at(0,0);
+ // textureViewDescriptorInV.format=wtf.at(0,0);
+  textureViewDescriptorInV.format=wtf.at(2,2);
 textureViewDescriptorInV.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureViewDescriptorInV.aspect=WGPU_TEXTURE_ASPECT_ALL;
 textureViewDescriptorInV.baseMipLevel=0; // default = 0
