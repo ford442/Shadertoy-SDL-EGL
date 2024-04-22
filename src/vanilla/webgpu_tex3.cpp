@@ -147,7 +147,7 @@ std::transform(data.begin(), data.end(), floatData.begin(),
 // frame_tensorGL.at(0,0)=data;
   // wetd.at(0,0).source=texid.at(0,0);
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&frame_tensor.at(0,0),sze.at(6,6)*4,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
-wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),floatData,sze.at(6,6)*4,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
+wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&floatData,sze.at(6,6)*4,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
   //  Render Pass
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
