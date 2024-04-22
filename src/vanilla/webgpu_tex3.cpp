@@ -6,11 +6,13 @@ WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU
 return;
 };
 
+/*
 WGpuLoadImageBitmapCallback imageCallbackStart=[](WGpuImageBitmap bitmap,int width,int height,void *userData){
 bmpImage=bitmap;
 wib.at(0,0)=bmpImage;
 return;
 };
+*/
 
 WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *userData){
 return;
