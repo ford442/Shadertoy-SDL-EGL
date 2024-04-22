@@ -6,6 +6,22 @@ let running=0;
 let vv=document.querySelector('#mv');
 let vvi=document.querySelector('#mvi');
 
+function flipImageData(imageData) {
+const width = imageData.width;
+const height = imageData.height;
+const data = imageData.data;
+for (let y = 0; y < height / 2; y++) {
+for (let x = 0; x < width; x++) {
+const topIndex = (y * width + x) * 4;
+const bottomIndex = ((height - 1 - y) * width + x) * 4;
+for (let c = 0; c < 4; c++) {
+[data[topIndex + c], data[bottomIndex + c]] = [data[bottomIndex + c], data[topIndex + c]];
+}
+}
+}
+return imageData;
+}
+
 function nearestPowerOf2(n){
 if(n&(n-1)){
 return Math.pow(2,Math.ceil(Math.log2(n)));
@@ -43,13 +59,13 @@ let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl3=cnv.getContext('2d',{willReadFrequently:false,alpha:true}); // 
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
-var image=gl3.getImageData(0,0,w$,h$);
+var image=flipImageData(gl3.getImageData(0,0,w$,h$));
 var imageData=image.data;
 var pixelData=new Uint8ClampedArray(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
-image=gl3.getImageData(0,0,w$,h$);
+image=flipImageData(gl3.getImageData(0,0,w$,h$));
 imageData=image.data;
 pixelData=new Uint8ClampedArray(imageData);
 // pixelData=new Uint8ClampedArray(imageData,0,la);
