@@ -56,7 +56,7 @@ let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 // const gl3=cnv.getContext('2d',{colorType:'float64',alpha:true}); // 
   
 const gl3=cnv.getContext('2d',{
-colorType:'float32',
+colorType:'float64',
 alpha:true,
 willReadFrequently:false,
 stencil:false,
@@ -73,7 +73,7 @@ gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
 // var pixelData=new Uint8ClampedArray(imageData);
-let pixelData=new Float32Array(imageData);
+let pixelData=new Float64Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
@@ -81,7 +81,7 @@ gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 // image=flipImageData(gl3.getImageData(0,0,w$,h$));
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
-pixelData=new Float32Array(imageData);
+pixelData=new Float64Array(imageData);
  //  const externalTexture = gpuDevice.createTexture({size: [imageWidth, imageHeight, 1],format: 'rgba8unorm',usage: GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST });
 // gpuQueue.writeTexture({ texture }, pixelData, { bytesPerRow }, { width: w$, height: h$ } );
 // pixelData=new Float64Array(imageData,0,la);
