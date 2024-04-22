@@ -149,7 +149,7 @@ std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf
 std::vector<float>floatData(data.size());
 std::transform(data.begin(), data.end(), floatData.begin(), 
 [](uint8_t val) { return val / 255.0f; });
-const size_t bytesPerRow=sze.at(6,6) * 4 * sizeof(float);
+const size_t bytesPerRow=sze.at(6,6) * sizeof(float);
 // fjs_data_pointer.at(0,0)=floatData.data();
 // frame_tensorGL.at(0,0)=data;
 // wetd.at(0,0).source=texid.at(0,0);
@@ -251,10 +251,9 @@ const char * frag_body=(char*)rd_fl(Fnm);
 const char * comp_body=(char*)rd_fl(FnmC);
 // canvasFormat=navigator_gpu_get_preferred_canvas_format();
 wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
-  
 // wtf.at(0,0)=navigator_gpu_get_preferred_canvas_format();
 wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
-wtf.at(1,1)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
+wtf.at(1,1)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
 wtf.at(4,4)=WGPU_TEXTURE_FORMAT_INVALID;
 // wtf.at(5,5)=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
