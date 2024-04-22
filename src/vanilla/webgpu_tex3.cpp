@@ -144,7 +144,7 @@ passDesc2.timestampWrites=renderTimestampWrites;
 wrpd.at(1,1)=passDesc2;
       //  Frame Data
   char buffer[sze.at(6,6)*sze.at(7,7)*4]; 
-std::ifstream fram(Fnm2,std::ios::binary);
+std::ifstream fram(Fnm2,std::ios::binary|std::ios::in);
   fram.rdbuf()->pubsetbuf(buffer, sizeof(buffer)); 
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 // std::vector<GLubyte> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
