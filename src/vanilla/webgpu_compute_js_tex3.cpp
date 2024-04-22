@@ -59,15 +59,15 @@ let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl3=cnv.getContext('2d',{
 colorType:'float64',
 alpha:true,
-willReadFrequently:false,
+willReadFrequently:true,
 stencil:false,
 depth:false,
-// colorSpace:"display-p3",
+colorSpace:"display-p3",
 desynchronized:false,
 antialias:true,
 powerPreference:"high-performance",
 premultipliedAlpha:true,
-// preserveDrawingBuffer:true
+preserveDrawingBuffer:false
 }); // 
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 // var image=flipImageData(gl3.getImageData(0,0,w$,h$));
