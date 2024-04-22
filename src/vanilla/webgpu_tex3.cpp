@@ -137,7 +137,7 @@ wrpd.at(1,1)=passDesc2;
        //  Frame Data
 std::ifstream fram(Fnm2,std::ios::binary);
 // std::vector<uint8_t> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-std::vector<float> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+std::vector<GLubyte> data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 // frame_tensor.at(0,0)=data;
 frame_tensorf.at(0,0)=data;
   // wetd.at(0,0).source=texid.at(0,0);
