@@ -415,6 +415,7 @@ wicb_tensor wicb=wicb_tensor{6,6};
 wicei_tensor wicei=wicei_tensor{2,2};
 js_tensor js_data_pointer=js_tensor{2,2};
 fjs_tensor fjs_data_pointer=fjs_tensor{2,2};
+fjsv_tensor fjsv_data_pointer=fjsv_tensor{2,2};
 js_data_tensor frame_tensor=js_data_tensor{2,2};
 js_data_tensor64 frame_tensor64=js_data_tensor64{2,2};
 js_data_tensorGL frame_tensorGL=js_data_tensorGL{2,2};
