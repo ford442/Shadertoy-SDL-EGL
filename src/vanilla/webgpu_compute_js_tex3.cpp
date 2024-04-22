@@ -6,19 +6,17 @@ let running=0;
 let vv=document.querySelector('#mv');
 let vvi=document.querySelector('#mvi');
 
-function flipImageData(imageData) {
-const width = imageData.width;
-const height = imageData.height;
-const data = imageData.data;
-for (let y = 0; y < height / 2; y++) {
-for (let x = 0; x < width; x++) {
-const topIndex = (y * width + x) * 4;
-const bottomIndex = ((height - 1 - y) * width + x) * 4;
-for (let c = 0; c < 4; c++) {
-[data[topIndex + c], data[bottomIndex + c]] = [data[bottomIndex + c], data[topIndex + c]];
-}
-}
-}
+function flipImageData(imageData){
+const width=imageData.width;
+const height=imageData.height;
+const data=imageData.data;
+for(let y=0;y<height/2;y++){
+for(let x=0;x<width;x++){
+const topIndex=(y*width+x)*4;
+const bottomIndex=((height-1-y)*width+x)*4;
+for(let c=0;c<4;c++){
+[data[topIndex+c],data[bottomIndex+c]]=[data[bottomIndex+c],data[topIndex+c]];
+}}}
 return imageData;
 }
 
@@ -27,8 +25,7 @@ if(n&(n-1)){
 return Math.pow(2,Math.ceil(Math.log2(n)));
 }else{
 return n;
-}
-}
+}}
   
 function videoFrames(){
 let vw$=parseInt(document.querySelector("#mvi").videoWidth);
@@ -59,8 +56,8 @@ let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl3=cnv.getContext('2d',{colorType:'float64',willReadFrequently:false,alpha:true}); // 
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
-// var image=flipImageData(gl3.getImageData(0,0,w$,h$));
-var image=gl3.getImageData(0,0,w$,h$);
+var image=flipImageData(gl3.getImageData(0,0,w$,h$));
+// var image=gl3.getImageData(0,0,w$,h$);
 var imageData=image.data;
 // var pixelData=new Uint8ClampedArray(imageData);
 // var pixelData=new Float32Array(imageData);
@@ -68,13 +65,13 @@ var pixelData=new Float64Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
-// image=flipImageData(gl3.getImageData(0,0,w$,h$));
-image=gl3.getImageData(0,0,w$,h$);
+image=flipImageData(gl3.getImageData(0,0,w$,h$));
+// image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
-pixelData=new Float64Array(imageData);
+// pixelData=new Float64Array(imageData);
  //  const externalTexture = gpuDevice.createTexture({size: [imageWidth, imageHeight, 1],format: 'rgba8unorm',usage: GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST });
 // gpuQueue.writeTexture({ texture }, pixelData, { bytesPerRow }, { width: w$, height: h$ } );
-// pixelData=new Float64Array(imageData,0,la);
+pixelData=new Float64Array(imageData,0,la);
 FS.writeFile('/video/frame.gl',pixelData);
 },500);
 }
