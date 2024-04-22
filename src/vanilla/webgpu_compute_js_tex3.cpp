@@ -61,8 +61,8 @@ var image=flipImageData(gl3.getImageData(0,0,w$,h$));
 var imageData=image.data;
 // var pixelData=new Uint8ClampedArray(imageData);
 // var pixelData=new Float32Array(imageData);
-var pixelData=new Float64Array(imageData,0,la);
-FS.writeFile('/video/frame.gl',pixelData);
+// var pixelData=new Float64Array(imageData,0,la);
+FS.writeFile('/video/frame.gl',new Float32Array(imageData));
 setInterval(function(){
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 image=flipImageData(gl3.getImageData(0,0,w$,h$));
@@ -71,8 +71,8 @@ imageData=image.data;
 // pixelData=new Float64Array(imageData);
  //  const externalTexture = gpuDevice.createTexture({size: [imageWidth, imageHeight, 1],format: 'rgba8unorm',usage: GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST });
 // gpuQueue.writeTexture({ texture }, pixelData, { bytesPerRow }, { width: w$, height: h$ } );
-pixelData=new Float64Array(imageData,0,la);
-FS.writeFile('/video/frame.gl',pixelData);
+// pixelData=new Float64Array(imageData,0,la);
+FS.writeFile('/video/frame.gl',new Float32Array(imageData));
 },500);
 }
   
