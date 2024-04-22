@@ -77,9 +77,9 @@ float uint8_to_half_float(uint8_t val) {
 
 
 // boost::function<EM_BOOL*()>frmData=[](){
-void * frmData(){
+float * frmData(){
     
-return;
+return 42.0f;
 };
 
 
@@ -171,8 +171,9 @@ passDesc2.timestampWrites=renderTimestampWrites;
 wrpd.at(1,1)=passDesc2;
     
 pthread_t thrd;
+float * ret;
 pthread_create(&thrd, NULL, frmData,NULL);
-pthread_join(thid, NULL);
+pthread_join(thid, &ret);
     
       //  Frame Data 
 std::ifstream fram(Fnm2,std::ios::binary);
