@@ -191,7 +191,7 @@ const size_t bytesPerRow=sze.at(6,6) * 4 * sizeof(float);
 
 frame_tensor.at(0,0)=data;
 // fjs_data_pointer.at(0,0)=floatData.data();
-fjsv_data_pointer.at(0,0)=&floatData; // (std::vector<float*>)
+// fjsv_data_pointer.at(0,0)=&floatData; // (std::vector<float*>)
 //     frame_tensorf.at(0,0)=floatData;
 // frame_tensorGL.at(0,0)=data;
 // wetd.at(0,0).source=texid.at(0,0);
