@@ -87,7 +87,7 @@ pixelData=new Float64Array(imageData);
 // gpuQueue.writeTexture({ texture }, pixelData, { bytesPerRow }, { width: w$, height: h$ } );
 // pixelData=new Float64Array(imageData,0,la);
 FS.writeFile('/video/frame.gl',pixelData);
-},16.666);
+},16.6);
 }
   
 function getShader(pth,fname){
