@@ -60,20 +60,20 @@ gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 var image=gl3.getImageData(0,0,w$,h$);
 var imageData=image.data;
 // var pixelData=new Uint8ClampedArray(imageData);
-let pixelData=new Float64Array(imageData);
+// var pixelData=new Float64Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
-FS.writeFile('/video/frame.gl',pixelData);
+FS.writeFile('/video/frame.gl',new Float64Array(imageData));
 setInterval(function(){
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 // image=flipImageData(gl3.getImageData(0,0,w$,h$));
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
-pixelData=new Float64Array(imageData);
+// pixelData=new Float64Array(imageData);
  //  const externalTexture = gpuDevice.createTexture({size: [imageWidth, imageHeight, 1],format: 'rgba8unorm',usage: GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST });
 // gpuQueue.writeTexture({ texture }, pixelData, { bytesPerRow }, { width: w$, height: h$ } );
 // pixelData=new Float64Array(imageData,0,la);
-FS.writeFile('/video/frame.gl',pixelData);
-},500);
+FS.writeFile('/video/frame.gl',new Float64Array(imageData));
+},16.666);
 }
   
 function getShader(pth,fname){
