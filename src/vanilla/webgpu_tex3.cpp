@@ -151,13 +151,10 @@ const size_t bytesPerRow=sze.at(6,6)*4*sizeof(float);
 // fjs_data_pointer.at(0,0)=&floatData;
 // frame_tensorGL.at(0,0)=data;
 // wetd.at(0,0).source=texid.at(0,0);
-  
 // wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&frame_tensor.at(0,0),sze.at(6,6)*4,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
 wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),floatData.data(),bytesPerRow,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
-
   // void wgpu_queue_copy_external_image_to_texture(WGpuQueue queue, const WGpuImageCopyExternalImage *source NOTNULL, const WGpuImageCopyTextureTagged *destination NOTNULL, uint32_t copyWidth, uint32_t copyHeight _WGPU_DEFAULT_VALUE(1), uint32_t copyDepthOrArrayLayers _WGPU_DEFAULT_VALUE(1));
 // wgpu_queue_copy_external_image_to_texture(WGPU_Queue.at(0,0,0), ,&wictt.at(0,0) ,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
-  
   //  Render Pass
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
@@ -514,6 +511,7 @@ textureOut=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,
 WGPU_Texture.at(0,0,1)=textureOut;
 textureOut2=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,2));
 WGPU_Texture.at(0,0,2)=textureOut2;
+  /*
   texid.at(0,0)=77;
   extTextureDescriptor.source=texid.at(0,0);
   extTextureDescriptor.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
@@ -528,6 +526,7 @@ WGPU_Texture.at(0,0,2)=textureOut2;
 External_Image_Texture.mipLevel=0;
 External_Image_Texture.origin=oxyz.at(0,0);
   External_Image_Texture.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
+  */
 Input_Image_Texture.texture=WGPU_Texture.at(0,0,0);
 Input_Image_Texture.mipLevel=0;
 Input_Image_Texture.origin=oxyz.at(0,0);
@@ -548,7 +547,7 @@ wict.at(2,2)=Input_Image_Texture;
 wict.at(1,1)=Output_Image_Texture;
 wict.at(3,3)=Output_Image_Texture2;
   wict.at(4,4)=Input_Image_TextureV;
-  wictt.at(0,0)=External_Image_Texture;
+//  wictt.at(0,0)=External_Image_Texture;
 INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
   INVTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,3),&WGPU_TextureViewDescriptor.at(0,0,3));
 OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureViewDescriptor.at(0,0,1));
