@@ -59,38 +59,6 @@ wgsl.at(0,0)=frag_body;
 return EM_TRUE;
 }
 
-/*
-float uint8_to_half_float(uint8_t val) {
-    // Normalize to [0, 1] range
-    float normalized = val / 255.0f;
-
-    // Approximate half-float conversion (simplified)
-    uint32_t sign = (normalized >= 0) ? 0 : 0x8000;
-    int32_t exponent = std::max(0, (int32_t)(std::log2(normalized) + 127.0f) - 15);
-    exponent = std::min(exponent, 0x0F);  // Limit to valid exponent range
-    uint32_t mantissa = static_cast<uint32_t>(std::round(normalized * 1024.0)); 
-    mantissa &= 0x3FF; // Keep only the 10 bits of mantissa
-
-    return (sign | (exponent << 10) | mantissa); 
-}
-*/
-int counter = 0;
-
-int thread_main(void* arg) {
-    for (int i = 0; i < 5; i++) {
-        counter++; 
-        std::cout << "Worker thread: Counter = " << counter << std::endl;
-    }
-    emscripten_force_exit(0); // Terminate thread
-    return 0; 
-}
-
-// boost::function<EM_BOOL*()>frmData=[](){
-void * frmData(void * args){
-    
-return args;
-};
-
 boost::function<EM_BOOL()>render=[](){
 u64_uni.at(3,3)++; 
 u_time.t3=u_time.t2;
@@ -177,18 +145,6 @@ passDesc2.occlusionQuerySet=0;
 passDesc2.maxDrawCount=6;
 passDesc2.timestampWrites=renderTimestampWrites;
 wrpd.at(1,1)=passDesc2;
- /*
-pthread_t thrd;
-int args=55;
-void * ret;
-pthread_create(&thrd, NULL, frmData,&args);
-pthread_join(thrd, &ret);
-
-        emscripten_thread_t thread;
-    emscripten_pthread_create(&thread, NULL, thread_main, NULL); 
-    emscripten_exit_with_live_runtime(); // Keep runtime alive 
-*/
-// emscripten_run_script("videoFrame();");
 
       //  Frame Data 
 std::ifstream fram(Fnm2,std::ios::binary);
@@ -200,7 +156,6 @@ std::transform(data.begin(),data.end(),floatData.begin(),
 // uint8_to_half_float);  //  for RGBA16FLOAT
 // [](uint8_t val) { return static_cast<float>(val); });  //  for RGBA16FLOAT
 
-// const size_t bytesPerRow=sze.at(6,6) * 4 * sizeof(float);
 const size_t bytesPerRow=sze.at(6,6) * 4 * sizeof(float);
 
 // frame_tensor.at(0,0)=data;
@@ -740,7 +695,7 @@ Compute_Bindgroup_Entries[6].resource=wtv.at(2,2);
 Compute_Bindgroup_Entries[7]={};
 Compute_Bindgroup_Entries[7].binding=7;
 Compute_Bindgroup_Entries[7].resource=wtv.at(5,5);
-              // Compute Resize Texture
+              // Compute Video In Texture
 Compute_Bindgroup_Entries[8]={};
 Compute_Bindgroup_Entries[8].binding=8;
 Compute_Bindgroup_Entries[8].resource=wtv.at(6,6);
