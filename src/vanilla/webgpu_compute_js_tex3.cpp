@@ -77,7 +77,7 @@ let vsiz=document.querySelector('#vsiz').innerHTML;
 Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 console.log('Starting..');
 running=1;
-},500);
+},250);
 }
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
@@ -89,7 +89,6 @@ cnvb.width=SiZ;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 // const gl3=cnv.getContext('2d',{colorType:'float64',alpha:true}); // 
-  
 const gl3=cnv.getContext('2d',{
 colorType:'float32',
 alpha:true,
@@ -123,6 +122,9 @@ pixelData=new Float32Array(imageData);
 // gpuQueue.writeTexture({ texture }, pixelData, { bytesPerRow }, { width: w$, height: h$ } );
 // pixelData=new Float64Array(imageData,0,la);  // causes sub-array data array-reforming (slower)
 FS.writeFile('/video/frame.gl',pixelData);
+setTimeout(function(){
+Module.ccall("frmOn");
+},5);
 },16);
 }
   
