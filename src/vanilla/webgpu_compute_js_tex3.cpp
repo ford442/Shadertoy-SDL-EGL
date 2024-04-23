@@ -26,7 +26,42 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 }else{
 return n;
 }}
-  
+
+let Gvw$=parseInt(document.querySelector("#mvi").videoWidth);
+let Gvh$=parseInt(document.querySelector("#mvi").videoHeight);
+let GSiZ=window.innerHeight;
+
+let cnv4=document.querySelector('#bcanvas');
+
+const gl4=cnv4.getContext('2d',{
+colorType:'float32',
+alpha:true,
+willReadFrequently:false,
+stencil:false,
+depth:false,
+// colorSpace:"display-p3",
+desynchronized:false,
+antialias:true,
+powerPreference:"high-performance",
+premultipliedAlpha:true,
+preserveDrawingBuffer:false
+});
+
+let image4=gl3.getImageData(0,0,w$,h$);
+let imageData4=image4.data;
+let pixelData4=new Float32Array(imageData4);
+
+function videoFrame(){
+gl4.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
+// var image=flipImageData(gl3.getImageData(0,0,w$,h$));
+image4=gl4.getImageData(0,0,w$,h$);
+imageData4=image4.data;
+// let pixelData=new Uint8ClampedArray(imageData);
+pixelData4=new Float32Array(imageData4);
+// var pixelData=new Float64Array(imageData,0,la);
+FS.writeFile('/video/frame.gl',pixelData4);
+}
+
 function videoFrames(){
 let vw$=parseInt(document.querySelector("#mvi").videoWidth);
 let vh$=parseInt(document.querySelector("#mvi").videoHeight);
@@ -76,7 +111,7 @@ let imageData=image.data;
 let pixelData=new Float32Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
 FS.writeFile('/video/frame.gl',pixelData);
-setInterval(function(){
+setTimeout(function(){
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 // image=flipImageData(gl3.getImageData(0,0,w$,h$));
 image=gl3.getImageData(0,0,w$,h$);
