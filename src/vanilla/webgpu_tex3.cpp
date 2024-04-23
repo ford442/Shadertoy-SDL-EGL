@@ -18,9 +18,6 @@ WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *user
 return;
 };
 
-
-
-
 int rNd4(int randomMax){
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
@@ -56,6 +53,11 @@ return nullptr;
 
 EM_BOOL getCode(const char * Fnm){
 wgsl.at(0,0)=frag_body;
+return EM_TRUE;
+}
+
+EM_BOOL texOn(){
+on.at(4,4)=1;
 return EM_TRUE;
 }
 
@@ -145,7 +147,9 @@ passDesc2.occlusionQuerySet=0;
 passDesc2.maxDrawCount=6;
 passDesc2.timestampWrites=renderTimestampWrites;
 wrpd.at(1,1)=passDesc2;
-
+  
+   if(on.at(4,4)==1){
+  
       //  Frame Data 
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
@@ -169,6 +173,10 @@ const size_t bytesPerRow=sze.at(6,6) * 4 * sizeof(float);
 //   wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&frame_tensor.at(0,0),bytesPerRow,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
   wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),floatData.data(),bytesPerRow,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
 
+     on.at(4,4)=0;
+     
+   }   // end if on 4,4
+  
 // void wgpu_queue_copy_external_image_to_texture(WGpuQueue queue, const WGpuImageCopyExternalImage *source NOTNULL, const WGpuImageCopyTextureTagged *destination NOTNULL, uint32_t copyWidth, uint32_t copyHeight _WGPU_DEFAULT_VALUE(1), uint32_t copyDepthOrArrayLayers _WGPU_DEFAULT_VALUE(1));
 // wgpu_queue_copy_external_image_to_texture(WGPU_Queue.at(0,0,0), ,&wictt.at(0,0) ,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
  //  Render Pass
@@ -258,6 +266,7 @@ return;
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 if(on.at(0,0)==0){wd.at(0,0)=result;}
+on.at(4,4)=0;
 js_data_pointer.at(0,0)=0;
 fjs_data_pointer.at(0,0)=0;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
@@ -1054,6 +1063,11 @@ return EM_TRUE;
 #include "../../src/vanilla/webgpu_compute_js_tex3.cpp"
 
 extern"C"{
+
+void frmOn(){
+texOn();
+return;
+}
 
 void startWebGPUi(int sz){
 WGPU_Start(sz);
