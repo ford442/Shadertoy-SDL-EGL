@@ -27,7 +27,7 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }}
 
-function videoFrames(){
+function videoStart(){
 let vw$=parseInt(document.querySelector("#mvi").videoWidth);
 let vh$=parseInt(document.querySelector("#mvi").videoHeight);
 let SiZ=window.innerHeight;
@@ -143,6 +143,8 @@ document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#di').click();
 document.querySelector('#status').style.backgroundColor="green";
 normalResSetup();
+var pth2=document.querySelector('#computePath').innerHTML;
+getShader(pth2,'compute.wgsl');
 regularStart();
 },250);
 });
