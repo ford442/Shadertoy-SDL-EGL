@@ -247,3 +247,8 @@ document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#di').click();
 },500);
 });
+
+
+EMSCRIPTEN_BINDINGS(my_module) {
+    emscripten::function("videoFrame", &videoFrame);
+}
