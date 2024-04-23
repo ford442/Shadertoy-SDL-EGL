@@ -81,6 +81,8 @@ using namespace std;
 #include <cfloat>
 #include <new>
 #include <emscripten.h>
+#include <emscripten/threading.h>
+
 #include <emscripten/bind.h>
 #include <emscripten/html5.h>
 #include <emscripten/html5_webgpu.h>
