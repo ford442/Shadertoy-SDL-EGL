@@ -94,6 +94,10 @@ Module.ccall("frmOn");
 }
 
 function regularStart(){
+let SiZ=window.innerHeight;
+let cnvb=document.querySelector('#canvas');
+cnvb.height=SiZ;
+cnvb.width=SiZ;
 if(running==0){
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
