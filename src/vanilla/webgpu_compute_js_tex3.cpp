@@ -142,7 +142,7 @@ document.querySelector('#circle').width=window.innerWidth;
 document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#di').click();
 document.querySelector('#status').style.backgroundColor="green";
-normalResStart();
+regularStart();
 },1000);
 });
 
