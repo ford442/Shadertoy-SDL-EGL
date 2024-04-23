@@ -74,7 +74,16 @@ float uint8_to_half_float(uint8_t val) {
     return (sign | (exponent << 10) | mantissa); 
 }
 */
+int counter = 0;
 
+int thread_main(void* arg) {
+    for (int i = 0; i < 5; i++) {
+        counter++; 
+        std::cout << "Worker thread: Counter = " << counter << std::endl;
+    }
+    emscripten_force_exit(0); // Terminate thread
+    return 0; 
+}
 
 // boost::function<EM_BOOL*()>frmData=[](){
 void * frmData(void * args){
@@ -168,12 +177,17 @@ passDesc2.occlusionQuerySet=0;
 passDesc2.maxDrawCount=6;
 passDesc2.timestampWrites=renderTimestampWrites;
 wrpd.at(1,1)=passDesc2;
- 
+ /*
 pthread_t thrd;
 int args=55;
 void * ret;
 pthread_create(&thrd, NULL, frmData,&args);
 pthread_join(thrd, &ret);
+*/
+        emscripten_thread_t thread;
+    emscripten_pthread_create(&thread, NULL, thread_main, NULL); 
+    emscripten_exit_with_live_runtime(); // Keep runtime alive 
+
 
       //  Frame Data 
 std::ifstream fram(Fnm2,std::ios::binary);
