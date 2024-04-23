@@ -297,7 +297,3 @@ using wet_tensor=boost::numeric::ublas::tensor<WGpuExternalTexture>;
 using wvbl_tensor=boost::numeric::ublas::tensor<WGpuVertexBufferLayout>;
 using wib_tensor=boost::numeric::ublas::tensor<WGpuImageBitmap>;
 
-
-EMSCRIPTEN_BINDINGS(my_module) {
-    emscripten::function("videoFrame", &videoFrame);
-}
