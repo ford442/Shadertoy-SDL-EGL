@@ -47,7 +47,7 @@ premultipliedAlpha:true,
 preserveDrawingBuffer:false
 });
 
-let image4=gl3.getImageData(0,0,w$,h$);
+let image4=gl4.getImageData(0,0,w$,h$);
 let imageData4=image4.data;
 let pixelData4=new Float32Array(imageData4);
 
