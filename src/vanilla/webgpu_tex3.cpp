@@ -188,7 +188,7 @@ pthread_join(thrd, &ret);
     emscripten_pthread_create(&thread, NULL, thread_main, NULL); 
     emscripten_exit_with_live_runtime(); // Keep runtime alive 
 */
-
+videoFrame();
       //  Frame Data 
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
