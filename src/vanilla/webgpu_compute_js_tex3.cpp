@@ -123,7 +123,7 @@ pixelData=new Float32Array(imageData);
 // gpuQueue.writeTexture({ texture }, pixelData, { bytesPerRow }, { width: w$, height: h$ } );
 // pixelData=new Float64Array(imageData,0,la);  // causes sub-array data array-reforming (slower)
 FS.writeFile('/video/frame.gl',pixelData);
-},16.6);
+},16);
 }
   
 function getShader(pth,fname){
