@@ -142,8 +142,9 @@ document.querySelector('#circle').width=window.innerWidth;
 document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#di').click();
 document.querySelector('#status').style.backgroundColor="green";
+normalResSetup();
 regularStart();
-},1000);
+},250);
 });
 
 const vsiz=document.querySelector('#vsiz');
