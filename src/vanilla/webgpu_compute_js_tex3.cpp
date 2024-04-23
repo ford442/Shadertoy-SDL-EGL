@@ -124,8 +124,8 @@ pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 setTimeout(function(){
 Module.ccall("frmOn");
-},5);
-},16);
+},3);
+},10);
 }
   
 function getShader(pth,fname){
