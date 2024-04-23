@@ -226,7 +226,7 @@ videoStart();
 document.querySelector('#startBtn2').addEventListener('click',function(){
 var pth=document.querySelector('#path').innerHTML;
 getShader(pth,'shader.wgsl');
-var pth2=document.querySelector('#computePath').innerHTML;
+var pth2=document.querySelector('#computePathNovid').innerHTML;
 getShader(pth2,'compute.wgsl');
 normalResSetup();
 regularStart();
