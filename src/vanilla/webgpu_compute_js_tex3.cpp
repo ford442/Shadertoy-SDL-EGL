@@ -249,6 +249,3 @@ document.querySelector('#di').click();
 });
 
 
-EMSCRIPTEN_BINDINGS(my_module) {
-    emscripten::function("videoFrame", &videoFrame);
-}
