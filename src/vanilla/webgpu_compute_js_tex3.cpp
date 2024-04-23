@@ -27,41 +27,6 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }}
 
-let Gvw$=parseInt(document.querySelector("#mvi").videoWidth);
-let Gvh$=parseInt(document.querySelector("#mvi").videoHeight);
-let GSiZ=window.innerHeight;
-
-let cnv4=document.querySelector('#bcanvas');
-
-const gl4=cnv4.getContext('2d',{
-colorType:'float32',
-alpha:true,
-willReadFrequently:false,
-stencil:false,
-depth:false,
-// colorSpace:"display-p3",
-desynchronized:false,
-antialias:true,
-powerPreference:"high-performance",
-premultipliedAlpha:true,
-preserveDrawingBuffer:false
-});
-
-let image4=gl4.getImageData(0,0,Gvw$,Gvh$);
-let imageData4=image4.data;
-let pixelData4=new Float32Array(imageData4);
-
-function videoFrame(){
-gl4.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
-// var image=flipImageData(gl3.getImageData(0,0,w$,h$));
-image4=gl4.getImageData(0,0,w$,h$);
-imageData4=image4.data;
-// let pixelData=new Uint8ClampedArray(imageData);
-pixelData4=new Float32Array(imageData4);
-// var pixelData=new Float64Array(imageData,0,la);
-FS.writeFile('/video/frame.gl',pixelData4);
-}
-
 function videoFrames(){
 let vw$=parseInt(document.querySelector("#mvi").videoWidth);
 let vh$=parseInt(document.querySelector("#mvi").videoHeight);
@@ -127,6 +92,17 @@ Module.ccall("frmOn");
 },3);
 },10);
 }
+
+function regularStart(){
+if(running==0){
+setTimeout(function(){
+let vsiz=document.querySelector('#vsiz').innerHTML;
+Module.ccall("startWebGPUi",null,"Number",[vsiz]);
+console.log('Starting..');
+running=1;
+},250);
+}
+}
   
 function getShader(pth,fname){
 const ff=new XMLHttpRequest();
@@ -172,7 +148,7 @@ normalResStart();
 
 const vsiz=document.querySelector('#vsiz');
 
-function normalResStart(){
+function normalResSetup(){
 setTimeout(function(){
 document.querySelector('#shut').innerHTML=2;
 document.querySelector('#circle').width=window.innerWidth;
@@ -184,10 +160,7 @@ document.querySelector('#bcanvas').height=parseInt(window.innerHeight,10);
 document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
-videoFrames();
-// let vsz=vsiz.innerHTML;
-// Module.ccall("startWebGPUi",null,"Number",[vsz]);
-},1500);
+},500);
 document.querySelector('#status').style.backgroundColor="green";
 }
 
@@ -232,16 +205,23 @@ slt=tem.innerHTML;
 },16);
 });
 
-
-
 document.querySelector('#startBtn').addEventListener('click',function(){
 var pth=document.querySelector('#path').innerHTML;
 getShader(pth,'shader.wgsl');
 var pth2=document.querySelector('#computePath').innerHTML;
 getShader(pth2,'compute.wgsl');
-normalResStart();
+normalResSetup();
+videoStart();
 });
 
+document.querySelector('#startBtn2').addEventListener('click',function(){
+var pth=document.querySelector('#path').innerHTML;
+getShader(pth,'shader.wgsl');
+var pth2=document.querySelector('#computePath').innerHTML;
+getShader(pth2,'compute.wgsl');
+normalResSetup();
+regularStart();
+});
   
 setTimeout(function(){
 document.querySelector('#circle').width=window.innerWidth;
