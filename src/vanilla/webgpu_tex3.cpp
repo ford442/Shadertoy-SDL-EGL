@@ -183,11 +183,11 @@ int args=55;
 void * ret;
 pthread_create(&thrd, NULL, frmData,&args);
 pthread_join(thrd, &ret);
-*/
+
         emscripten_thread_t thread;
     emscripten_pthread_create(&thread, NULL, thread_main, NULL); 
     emscripten_exit_with_live_runtime(); // Keep runtime alive 
-
+*/
 
       //  Frame Data 
 std::ifstream fram(Fnm2,std::ios::binary);
