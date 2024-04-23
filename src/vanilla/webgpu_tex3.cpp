@@ -188,17 +188,18 @@ pthread_join(thrd, &ret);
     emscripten_pthread_create(&thread, NULL, thread_main, NULL); 
     emscripten_exit_with_live_runtime(); // Keep runtime alive 
 */
-emscripten_run_script("videoFrame();");
+// emscripten_run_script("videoFrame();");
 
       //  Frame Data 
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-std::vector<float>floatData(data.size());
+/*
+    std::vector<float>floatData(data.size());
 std::transform(data.begin(), data.end(), floatData.begin(), 
 [](uint8_t val) { return val / 255.0f; });  // for RGBA32FLOAT
 // uint8_to_half_float);  //  for RGBA16FLOAT
 // [](uint8_t val) { return static_cast<float>(val); });  //  for RGBA16FLOAT
-
+*/
 // const size_t bytesPerRow=sze.at(6,6) * 4 * sizeof(float);
 const size_t bytesPerRow=sze.at(6,6) * 4* sizeof(float);
 
