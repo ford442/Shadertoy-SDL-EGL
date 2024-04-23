@@ -153,7 +153,7 @@ document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#di').click();
 document.querySelector('#status').style.backgroundColor="green";
 normalResSetup();
-var pth2=document.querySelector('#computePath').innerHTML;
+var pth2=document.querySelector('#computePathNovid').innerHTML;
 getShader(pth2,'compute.wgsl');
 regularStart();
 },250);
