@@ -199,7 +199,7 @@ std::transform(data.begin(), data.end(), floatData.begin(),
 // [](uint8_t val) { return static_cast<float>(val); });  //  for RGBA16FLOAT
 
 // const size_t bytesPerRow=sze.at(6,6) * 4 * sizeof(float);
-const size_t bytesPerRow=sze.at(6,6) * sizeof(float);
+const size_t bytesPerRow=sze.at(6,6) * 4* sizeof(float);
 
 frame_tensor.at(0,0)=data;
 // fjs_data_pointer.at(0,0)=floatData.data();
@@ -311,7 +311,7 @@ wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
 // wtf.at(0,0)=navigator_gpu_get_preferred_canvas_format();
 wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
   
-  wtf.at(1,1)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
+  wtf.at(1,1)=WGPU_TEXTURE_FORMAT_RGBA32UINT;
   
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
 wtf.at(4,4)=WGPU_TEXTURE_FORMAT_INVALID;
