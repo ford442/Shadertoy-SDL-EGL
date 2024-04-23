@@ -117,11 +117,11 @@ b3_compute_egl_tex3:
 	 -mextended-const -mbulk-memory -matomics -pthread -O2 -fchar8_t -std=c++20 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O2 -pthread -mextended-const -dead_strip -mbulk-memory -matomics -std=c++20 -pipe \
-	 -pthread -ffast-math -ffp-contract=off --js-library lib/lib_webgpu.js -sENVIRONMENT='web' \
+	 -pthread -ffast-math -ffp-contract=off --js-library lib/lib_webgpu.js \
 	 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-t3.js -sTOTAL_STACK=524288 \
 	 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sABORTING_MALLOC=0 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
-	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=1 \
+	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=1 -sUSE_PTHREADS=1 \
 	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -march=haswell -mtune=wasm32 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=768mb -lmath.js -lhtml5.js -lint53.js \
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=1 -sDISABLE_EXCEPTION_THROWING=0 \
