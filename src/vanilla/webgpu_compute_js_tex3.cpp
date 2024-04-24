@@ -27,8 +27,8 @@ return n;
 
 function videoStart(){
 let vvi=document.querySelector('#mvi');
-let vw$=vvi.videoWidth);
-let vh$=vvi.videoHeight);
+let vw$=vvi.videoWidth;
+let vh$=vvi.videoHeight;
 let SiZ=window.innerHeight;
 vvi.height=vh$;
 vvi.width=vw$;
