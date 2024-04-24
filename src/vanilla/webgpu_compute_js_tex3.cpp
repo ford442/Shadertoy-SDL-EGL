@@ -101,6 +101,8 @@ Module.ccall("frmOn");
 
 function canvasStart(){
 let SiZ=window.innerHeight;
+vvi.width=SiZ;
+vvi.height=SiZ;
 let w$=vvi.width;
 let h$=vvi.height;
 if(running==0){
