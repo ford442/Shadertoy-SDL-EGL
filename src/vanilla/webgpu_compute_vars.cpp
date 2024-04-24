@@ -459,8 +459,8 @@ uiptr_tensor WGPU_ColorBuffer=uiptr_tensor{1,1,1};
 wced_tensor WGPU_CommandEncoderDescriptor=wced_tensor{1,1,1};
 wbms_tensor WGPU_BufferStatus=wbms_tensor{1,1,1};
 c_tensor wgsl=c_tensor{2,2};
-clk_tensor time_point=clk_tensor{4,4};
-timespn_tensor time_span=timespn_tensor{4,4};
+clk_tensor time_pnt=clk_tensor{4,4};
+timespn_tensor time_spn=timespn_tensor{4,4};
 
 WGpuComputePassDescriptor computePassDescriptor={};
 WGpuCommandBufferDescriptor commandBufferDescriptor={};
