@@ -65,13 +65,14 @@ boost::function<EM_BOOL()>render=[](){
 u64_uni.at(3,3)++; 
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
-time_spn.at(1,1)=time_spn.at(0,0);
-time_pnt.at(0,0)=time_pnt.at(0,0)+u_time.t2;
-if(floor(time_spn.at(0,0).count()-time_spn.at(1,1).count())==1){
-on.at(1,1)=0;
-}
+
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
+time_spn.at(1,1)=time_spn.at(0,0);
+time_spn.at(0,0)=u_time.t2-time_pnt.at(0,0);
+if(floor(time_spn.at(1,1).count()-time_spn.at(1,1).count())==1){
+on.at(1,1)=0;
+}
 // if(u_time.time_spanb.count()/1000>=17){
 // u64_uni.at(0,0)=u_time.time_spana.count()*100u;
 // u64_uni.at(1,1)=u_time.time_spanb.count()*1000u;
