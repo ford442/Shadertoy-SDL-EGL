@@ -225,7 +225,7 @@ wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
 wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(1,1),&wict.at(3,3),sze.at(3,3),sze.at(3,3),1);
   //  Buffer Data View
 if(WGPU_BufferStatus.at(0,0,0)!=3&&on.at(1,1)==0){
-WGPU_InputBuffer.at(0,0,0)[0]=1;
+WGPU_InputBuffer.at(0,0,0)[5]=1;
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
 wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
     // void wgpu_load_image_bitmap_from_url_async(const char *url NOTNULL, EM_BOOL flipY, WGpuLoadImageBitmapCallback callback, void *userData);
@@ -242,9 +242,9 @@ WGPU_Range_PointerB=wgpu_buffer_get_mapped_range(WGPU_Buffers.at(2,0,2),0,Output
 WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
 EM_ASM({
-document.querySelector('#outText').innerHTML='Buffer at [0]:'+$0.toFixed(2);
-document.querySelector('#outText1').innerHTML='Buffer at [1]:'+$0.toFixed(2);
-},WGPU_ResultBuffer.at(0,0,0)[0],WGPU_ResultBuffer.at(0,0,0)[1]);
+document.querySelector('#outText').innerHTML='Buffer at [5]:'+$0.toFixed(2);
+document.querySelector('#outText1').innerHTML='Buffer at [6]:'+$0.toFixed(2);
+},WGPU_ResultBuffer.at(0,0,0)[5],WGPU_ResultBuffer.at(0,0,0)[6]);
 }
 WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
