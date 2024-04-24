@@ -65,9 +65,9 @@ boost::function<EM_BOOL()>render=[](){
 u64_uni.at(3,3)++; 
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
-time_span.at(1,1)=time_span.at(0,0);
-time_span.at(0,0)=time_point.at(0,0)+u_time.t2;
-if(floor(time_span.at(0,0)-time_span.at(1,1))==1){
+time_spn.at(1,1)=time_spn.at(0,0);
+time_spn.at(0,0)=time_pnt.at(0,0)+u_time.t2;
+if(floor(time_spn.at(0,0).count()-time_spn.at(1,1).count())==1){
 on.at(1,1)=0;
 }
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
@@ -236,7 +236,7 @@ if(WGPU_BufferStatus.at(0,0,0)!=3&&on.at(1,1)==0){
   // wgpu_load_image_bitmap_from_url_async(url_address,EM_TRUE,imageCallbackStart,WGPU_UserData.at(0,0,0));
 on.at(1,1)=1;
   
-  time_point.at(0,0)=boost::chrono::high_resolution_clock::now();
+  time_pnt.at(0,0)=boost::chrono::high_resolution_clock::now();
   
 wgpu_buffer_map_sync(WGPU_Buffers.at(2,0,2),mode1,0,OutputBufferBytes);  
 // wgpu_buffer_map_async(WGPU_Buffers.at(2,0,2),WGPU_MapCallback.at(0,0,0),&WGPU_UserData.at(0,0,0),mode1,0,OutputBufferBytes);
