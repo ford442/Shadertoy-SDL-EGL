@@ -300,10 +300,10 @@ clearC.at(0,0)=clearColor;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
 emscripten_get_element_css_size("canvas",&szw,&szh);
-u64_siz.at(3,3)=sze.at(1,1);
+// u64_siz.at(3,3)=sze.at(1,1);
 sze.at(0,0)=int(szhI);
-sze.at(3,3)=int(std::max(sze.at(0,0),sze.at(1,1))*1.25);
-u64_siz.at(2,2)=int(szhI);
+sze.at(3,3)=int(std::max(sze.at(0,0),sze.at(1,1))*1.15);
+// u64_siz.at(2,2)=int(szhI);
 f32_uniform.at(1,1)=szhI;
 f32_uniform.at(2,2)=float(sze.at(1,1));
 szef.at(0,0)=float(szhI);
@@ -1047,8 +1047,10 @@ wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceSt
 
 EM_BOOL WGPU_Start(int sz){
 sze.at(1,1)=sz;
-  sze.at(6,6)=1280;
-    sze.at(7,7)=720;
+sze.at(6,6)=1280;
+sze.at(7,7)=720;
+f32_uniform.at(2,2)=float(sze.at(1,1));
+szef.at(1,1)=float(sze.at(1,1));
 options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
 options.forceFallbackAdapter=EM_FALSE;
 wao.at(0,0)=options;
