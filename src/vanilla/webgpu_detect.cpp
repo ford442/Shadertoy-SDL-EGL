@@ -66,7 +66,7 @@ u64_uni.at(3,3)++;
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
 time_spn.at(1,1)=time_spn.at(0,0);
-time_spn.at(0,0)=time_pnt.at(0,0)+u_time.t2;
+time_pnt.at(0,0)=time_pnt.at(0,0)+u_time.t2;
 if(floor(time_spn.at(0,0).count()-time_spn.at(1,1).count())==1){
 on.at(1,1)=0;
 }
