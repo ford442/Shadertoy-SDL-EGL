@@ -310,7 +310,9 @@ getShader(pth,'shader.wgsl');
 var pth2=document.querySelector('#computePath').innerHTML;
 getShader(pth2,'compute.wgsl');
 normalResSetup();
+setTimeout(function(){
 canvasStart();
+},3000);
 });
   
 setTimeout(function(){
