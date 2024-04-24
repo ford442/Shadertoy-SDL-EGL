@@ -101,8 +101,8 @@ Module.ccall("frmOn");
 
 function canvasStart(){
 let SiZ=window.innerHeight;
-let w$=vvi.width);
-let h$=vvi.height);
+let w$=vvi.width;
+let h$=vvi.height;
 if(running==0){
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
