@@ -296,4 +296,5 @@ using wetd_tensor=boost::numeric::ublas::tensor<WGpuExternalTextureDescriptor>;
 using wet_tensor=boost::numeric::ublas::tensor<WGpuExternalTexture>;
 using wvbl_tensor=boost::numeric::ublas::tensor<WGpuVertexBufferLayout>;
 using wib_tensor=boost::numeric::ublas::tensor<WGpuImageBitmap>;
+using clk_tensor=boost::numeric::ublas::tensor<boost::chrono::high_resolution_clock::time_point>;
 
