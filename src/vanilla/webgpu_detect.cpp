@@ -70,7 +70,7 @@ u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono:
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 time_spn.at(1,1)=time_spn.at(0,0);
 time_spn.at(0,0)=u_time.t2-time_pnt.at(0,0);
-if(floor(time_spn.at(1,1).count()-time_spn.at(1,1).count())==1){
+if(floor(time_spn.at(1,1).count()-time_spn.at(1,1).count())>1){
 on.at(1,1)=0;
 }
 // if(u_time.time_spanb.count()/1000>=17){
