@@ -3,8 +3,6 @@ EM_JS(void,js_main,(),{
 FS.mkdir('/shader');
 FS.mkdir('/video');
 let running=0;
-let vv=document.querySelector('#mv');
-let vvi=document.querySelector('#mvi');
 
 function flipImageData(imageData){
 const width=imageData.width;
@@ -28,8 +26,9 @@ return n;
 }}
 
 function videoStart(){
-let vw$=parseInt(document.querySelector("#mvi").videoWidth);
-let vh$=parseInt(document.querySelector("#mvi").videoHeight);
+let vvi=document.querySelector('#mvi');
+let vw$=vvi.videoWidth);
+let vh$=vvi.videoHeight);
 let SiZ=window.innerHeight;
 vvi.height=vh$;
 vvi.width=vw$;
@@ -100,7 +99,7 @@ Module.ccall("frmOn");
 }
 
 function canvasStart(){
-let vvic=document.querySelector('#mvcan');
+let vvic=document.querySelector('#mvi');
 let SiZ=window.innerHeight;
 vvic.width=SiZ;
 vvic.height=SiZ;
