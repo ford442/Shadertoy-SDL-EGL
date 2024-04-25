@@ -271,6 +271,7 @@ slt=slt*100;
 slt=Math.round(slt);
 slt=slt/100;
 tsl.setValues(1.0);
+vsiz.innerHTML=Math.round(window.innerHeight);
 document.querySelector('#menu').addEventListener('click',function(){
 $ll=tsl.getValue();
 $ll=$ll*100;
