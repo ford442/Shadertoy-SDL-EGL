@@ -59,7 +59,7 @@ cnvb.width=SiZ;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 // const gl3=cnvb.getContext('2d',{colorType:'float64',alpha:true}); // 
-const gl3=vvi.getContext('2d',{
+const gl3=cnv.getContext('2d',{
 colorType:'float64',
 alpha:true,
 willReadFrequently:false,
@@ -128,7 +128,7 @@ cnv.width=SiZ;
 cnvb.width=h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-let gl3=cnvb.getContext('2d',{
+let gl3=vvic.getContext('2d',{
 colorType:'float64',
 alpha:true,
 willReadFrequently:false,
