@@ -229,9 +229,9 @@ wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict
 if(WGPU_BufferStatus.at(0,0,0)!=3&&on.at(1,1)==0){
 WGPU_InputBuffer.at(0,0,0)[5]=1;
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
-wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&Output_Image_Buffer,&WGPU_Output_Image_Bfr,64,1,1);
+wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&wicb.at(1,1),&WGPU_Output_Image_Bfr,64,1,1);
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
-wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image_Bfr,&Mapped_Image_Buffer,64,1,1);
+wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image_Bfr,&wicb.at(0,0),64,1,1);
   // void wgpu_load_image_bitmap_from_url_async(const char *url NOTNULL, EM_BOOL flipY, WGpuLoadImageBitmapCallback callback, void *userData);
    // const char url_address="https://test.1ink.us/gpu/  ";
   // wgpu_load_image_bitmap_from_url_async(url_address,EM_TRUE,imageCallbackStart,WGPU_UserData.at(0,0,0));
@@ -341,7 +341,9 @@ textureDescriptorIn.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureAviewFormats[0]={wtf.at(2,2)};
 textureDescriptorIn.numViewFormats=0;
 textureDescriptorIn.viewFormats=nullptr; // &textureAviewFormats[0];
+  
 
+  
   textureDescriptorBfr.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorBfr.format=wtf.at(2,2);
 textureDescriptorBfr.usage=WGPU_TEXTURE_USAGE_COPY_DST|WGPU_TEXTURE_USAGE_COPY_SRC;
@@ -497,9 +499,13 @@ wbbl.at(2,2)=bufferBindingLayoutF;
 Input_Image_Buffer.buffer=WGPU_Buffers.at(1,1,1);
 // wicb.at(2,2)=Input_Image_Buffer;
 Output_Image_Buffer.buffer=WGPU_Buffers.at(0,0,0);
-// wicb.at(1,1)=Output_Image_Buffer;
+Output_Image_Buffer.bytesPerRow=1024;
+Output_Image_Buffer.rowsPerImage=64;
+wicb.at(1,1)=Output_Image_Buffer;
 Mapped_Image_Buffer.buffer=WGPU_Buffers.at(2,0,2);
-// wicb.at(0,0)=Mapped_Image_Buffer;
+Mapped_Image_Buffer.bytesPerRow=1024;
+Mapped_Image_Buffer.rowsPerImage=64;
+wicb.at(0,0)=Mapped_Image_Buffer;
 WGpuBufferDescriptor bufferDescriptorIn={u64_bfrSze.at(1,1),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 WGpuBufferDescriptor bufferDescriptorOut={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_SRC,EM_FALSE};
 wbd.at(3,3)=bufferDescriptorIn;
