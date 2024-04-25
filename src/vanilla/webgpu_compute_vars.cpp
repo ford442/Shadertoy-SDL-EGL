@@ -498,6 +498,7 @@ WGpuImageCopyTexture Input_Image_Texture={};
 WGpuImageCopyTexture Input_Image_TextureV={};
 WGpuImageCopyTexture Output_Image_Texture={};
 WGpuImageCopyTexture Output_Image_Texture2={};
+WGpuImageCopyTexture Output_Image_Texture_Bfr={};
 WGpuImageCopyTextureTagged External_Image_Texture={};
 WGpuImageCopyBuffer Input_Image_Buffer={};
 WGpuImageCopyBuffer Output_Image_Buffer={};
