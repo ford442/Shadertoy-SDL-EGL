@@ -47,14 +47,14 @@ console.log('Starting..');
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#canvas');
-cnv.height=h$;
-cnvb.height=SiZ;
-cnv.width=w$;
-cnvb.width=SiZ;
+cnv.height=SiZ;
+cnvb.height=h$;
+cnv.width=SiZ;
+cnvb.width=w$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 // const gl3=cnvb.getContext('2d',{colorType:'float64',alpha:true}); // 
-const gl3=cnv.getContext('2d',{
+const gl3=cnvb.getContext('2d',{
 colorType:'float64',
 alpha:true,
 willReadFrequently:false,
@@ -76,6 +76,20 @@ let pixelData=new Float64Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
 FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
+setInterval(function(){
+gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
+// image=flipImageData(gl3.getImageData(0,0,w$,h$));
+image=gl3.getImageData(0,0,w$,h$);
+imageData=image.data;
+// pixelData=new Uint8ClampedArray(imageData);
+pixelData=new Float64Array(imageData);
+ // pixelData=new Float64Array(imageData);
+ //  const externalTexture = gpuDevice.createTexture({size: [imageWidth, imageHeight, 1],format: 'rgba8unorm',usage: GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST });
+// gpuQueue.writeTexture({ texture }, pixelData, { bytesPerRow }, { width: w$, height: h$ } );
+// pixelData=new Float64Array(imageData,0,la);  // causes sub-array data array-reforming (slower)
+FS.writeFile('/video/frame.gl',pixelData);
+Module.ccall("frmOn");
+},10);
 }
 
 function videoStart(){
@@ -146,9 +160,7 @@ pixelData=new Float64Array(imageData);
 // gpuQueue.writeTexture({ texture }, pixelData, { bytesPerRow }, { width: w$, height: h$ } );
 // pixelData=new Float64Array(imageData,0,la);  // causes sub-array data array-reforming (slower)
 FS.writeFile('/video/frame.gl',pixelData);
-setTimeout(function(){
 Module.ccall("frmOn");
-},3);
 },10);
 }
 
@@ -210,9 +222,7 @@ imageData=image.data;
 pixelData=new Float64Array(imageData);
 // pixelData=new Float64Array(imageData,0,la);  // causes sub-array data array-reforming (slower)
 FS.writeFile('/video/frame.gl',pixelData);
-setTimeout(function(){
 Module.ccall("frmOn");
-},3);
 },10);
 }
 
