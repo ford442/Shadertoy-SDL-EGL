@@ -227,9 +227,9 @@ wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict
 if(WGPU_BufferStatus.at(0,0,0)!=3&&on.at(1,1)==0){
 WGPU_InputBuffer.at(0,0,0)[5]=1;
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
-wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Output_Image_Bfr,64,1,1);
+wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&Output_Image_Buffer,&WGPU_Output_Image_Bfr,64,1,1);
 // wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
-wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image_Bfr,&WGPU_Mapped_Buffer,64,1,1);
+wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image_Bfr,&Mapped_Image_Buffer,64,1,1);
   // void wgpu_load_image_bitmap_from_url_async(const char *url NOTNULL, EM_BOOL flipY, WGpuLoadImageBitmapCallback callback, void *userData);
    // const char url_address="https://test.1ink.us/gpu/  ";
   // wgpu_load_image_bitmap_from_url_async(url_address,EM_TRUE,imageCallbackStart,WGPU_UserData.at(0,0,0));
@@ -605,10 +605,10 @@ Output_Image_Texture2.texture=WGPU_Texture.at(0,0,2);
 Output_Image_Texture2.mipLevel=0;
 Output_Image_Texture2.origin=oxyz.at(0,0);
 Output_Image_Texture2.aspect=WGPU_TEXTURE_ASPECT_ALL;
-  Output_Image_Texture_Bfr.texture=WGPU_Texture.at(0,0,4);
-Output_Image_Texture_Bfr.mipLevel=0;
-Output_Image_Texture_Bfr.origin=oxyz.at(0,0);
-Output_Image_Texture_Bfr.aspect=WGPU_TEXTURE_ASPECT_ALL;
+  WGPU_Output_Image_Bfr.texture=WGPU_Texture.at(0,0,4);
+WGPU_Output_Image_Bfr.mipLevel=0;
+WGPU_Output_Image_Bfr.origin=oxyz.at(0,0);
+WGPU_Output_Image_Bfr.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(2,2)=Input_Image_Texture;
 wict.at(1,1)=Output_Image_Texture;
 wict.at(3,3)=Output_Image_Texture2;
