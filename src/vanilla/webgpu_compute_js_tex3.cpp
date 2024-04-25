@@ -72,7 +72,7 @@ powerPreference:"high-performance",
 premultipliedAlpha:true,
 preserveDrawingBuffer:false
 }); // 
-// gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
+gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 // var image=flipImageData(gl3.getImageData(0,0,w$,h$));
 let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
@@ -81,7 +81,7 @@ let pixelData=new Float64Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
-// gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
+gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 // image=flipImageData(gl3.getImageData(0,0,w$,h$));
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
