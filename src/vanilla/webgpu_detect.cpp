@@ -345,7 +345,7 @@ textureDescriptorIn.viewFormats=nullptr; // &textureAviewFormats[0];
   textureDescriptorBfr.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorBfr.format=wtf.at(2,2);
 textureDescriptorBfr.usage=WGPU_TEXTURE_USAGE_COPY_DST|WGPU_TEXTURE_USAGE_COPY_SRC;
-textureDescriptorBfr.width=256;
+textureDescriptorBfr.width=1024;
 textureDescriptorBfr.height=1; // default = 1;
 textureDescriptorBfr.depthOrArrayLayers=1;
 textureDescriptorBfr.mipLevelCount=1;
