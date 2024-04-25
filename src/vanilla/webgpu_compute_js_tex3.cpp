@@ -121,14 +121,14 @@ console.log('Starting..');
 }
 console.log("canvas size: ",h$,", ",w$);
 let cnv=document.querySelectorAll('canvas');
-let cnvb=document.querySelector('#canvas');
-cnv[0].height=w$;
-cnvb.height=SiZ;
-cnv[0].width=h$;
-cnvb.width=SiZ;
+let cnvb=document.querySelector('#bcanvas');
+cnv[0].height=SiZ;
+cnvb.height=w$;
+cnv[0].width=SiZ;
+cnvb.width=h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-let gl3=cnv[0].getContext('2d',{
+let gl3=cnvb.getContext('2d',{
 colorType:'float64',
 alpha:true,
 willReadFrequently:false,
