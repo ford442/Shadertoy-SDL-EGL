@@ -136,7 +136,7 @@ webgpu_detection:
 	 -mextended-const -mbulk-memory -matomics -pthread -O2 -fchar8_t -std=c++20 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O2 -mextended-const -dead_strip -mbulk-memory -matomics -std=c++20 -pipe \
-	 -ffast-math -ffp-contract=off -sENVIRONMENT='web' \
+	 -ffast-math -ffp-contract=off \
 	 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-detect.js -sTOTAL_STACK=524288 \
 	 -sEMULATE_FUNCTION_POINTER_CASTS=0 -sABORTING_MALLOC=0 -sMALLOC=emmalloc -DEMMALLOC_USE_64BIT_OPS=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
