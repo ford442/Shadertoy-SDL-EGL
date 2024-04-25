@@ -263,14 +263,14 @@ grab$lt();
 slt=$lt/1000;
 slt=Math.round(slt);
 sfr.innerHTML='<input type='+'"te'+'xt" id'+'="time'+'slider"/'+'>';
-const tsl=new rSlider({target:'#timeslider',values:{min:0.05,max:2.50},
+const tsl=new rSlider({target:'#timeslider',values:{min:0.05,max:3.00},
 step:[0.05],labels:false,tooltip:true,scale:false,});
 grab$lt();
 slt=($lt/1000);
 slt=slt*100;
 slt=Math.round(slt);
 slt=slt/100;
-tsl.setValues(slt);
+tsl.setValues(1.0);
 document.querySelector('#menu').addEventListener('click',function(){
 $ll=tsl.getValue();
 $ll=$ll*100;
