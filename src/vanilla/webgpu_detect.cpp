@@ -227,8 +227,10 @@ wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict
 if(WGPU_BufferStatus.at(0,0,0)!=3&&on.at(1,1)==0){
 WGPU_InputBuffer.at(0,0,0)[5]=1;
 wgpu_queue_write_buffer(WGPU_Queue.at(0,0,0),WGPU_Buffers.at(1,1,1),0,&WGPU_InputBuffer.at(0,0,0),InputBufferBytes);
-wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
-    // void wgpu_load_image_bitmap_from_url_async(const char *url NOTNULL, EM_BOOL flipY, WGpuLoadImageBitmapCallback callback, void *userData);
+wgpu_command_encoder_copy_buffer_to_texture(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Buffer,&WGPU_Output_Image_Bfr,64,1,1);
+// wgpu_command_encoder_copy_buffer_to_buffer(WGPU_CommandEncoder.at(0,0,0),WGPU_Buffers.at(0,0,0),0,WGPU_Buffers.at(2,0,2),0,OutputBufferBytes);
+wgpu_command_encoder_copy_texture_to_buffer(WGPU_CommandEncoder.at(0,0,0),&WGPU_Output_Image_Bfr,&WGPU_Mapped_Buffer,64,1,1);
+  // void wgpu_load_image_bitmap_from_url_async(const char *url NOTNULL, EM_BOOL flipY, WGpuLoadImageBitmapCallback callback, void *userData);
    // const char url_address="https://test.1ink.us/gpu/  ";
   // wgpu_load_image_bitmap_from_url_async(url_address,EM_TRUE,imageCallbackStart,WGPU_UserData.at(0,0,0));
 on.at(1,1)=1;
@@ -312,8 +314,8 @@ f32_uniform.at(1,1)=szhI;
 f32_uniform.at(2,2)=float(sze.at(1,1));
 szef.at(0,0)=float(szhI);
 szef.at(1,1)=float(sze.at(1,1));
-u64_bfrSze.at(0,0)=256; // (floor((sze.at(0,0))/256)+1)*256;
-u64_bfrSze.at(1,1)=256; // (floor((sze.at(1,1))/256)+1)*256;
+u64_bfrSze.at(0,0)=128; // (floor((sze.at(0,0))/256)+1)*256;
+u64_bfrSze.at(1,1)=128; // (floor((sze.at(1,1))/256)+1)*256;
 originXYZ.x=0;
 originXYZ.y=0;
 originXYZ.z=0;
@@ -337,6 +339,21 @@ textureDescriptorIn.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureAviewFormats[0]={wtf.at(2,2)};
 textureDescriptorIn.numViewFormats=0;
 textureDescriptorIn.viewFormats=nullptr; // &textureAviewFormats[0];
+
+  textureDescriptorBfr.dimension=WGPU_TEXTURE_DIMENSION_2D;
+textureDescriptorBfr.format=wtf.at(2,2);
+textureDescriptorBfr.usage=WGPU_TEXTURE_USAGE_COPY_DST|WGPU_TEXTURE_USAGE_COPY_SRC;
+textureDescriptorBfr.width=128;
+textureDescriptorBfr.height=1; // default = 1;
+textureDescriptorBfr.depthOrArrayLayers=1;
+textureDescriptorBfr.mipLevelCount=1;
+textureDescriptorBfr.sampleCount=1;
+textureDescriptorBfr.dimension=WGPU_TEXTURE_DIMENSION_2D;
+textureAviewFormats[0]={wtf.at(2,2)};
+textureDescriptorBfr.numViewFormats=0;
+textureDescriptorBfr.viewFormats=nullptr; // &textureAviewFormats[0];
+
+  
   textureDescriptorInV.dimension=WGPU_TEXTURE_DIMENSION_2D;
   textureDescriptorInV.format=wtf.at(1,1);
   // textureDescriptorInV.format=wtf.at(0,0);
@@ -375,6 +392,7 @@ WGPU_TextureDescriptor.at(0,0,0)=textureDescriptorIn;
 WGPU_TextureDescriptor.at(0,0,1)=textureDescriptorOut;
 WGPU_TextureDescriptor.at(0,0,2)=textureDescriptorOut2;
   WGPU_TextureDescriptor.at(0,0,3)=textureDescriptorInV;
+  WGPU_TextureDescriptor.at(0,0,4)=textureDescriptorBfr;
 WGPU_CommandEncoderDescriptor.at(0,0,0)=commandEncoderDescriptor;
 textureBindingLayoutFloat.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_FLOAT;
 textureBindingLayoutFloat.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
@@ -399,6 +417,15 @@ textureViewDescriptorIn.baseMipLevel=0; // default = 0
 textureViewDescriptorIn.mipLevelCount=1;
 textureViewDescriptorIn.baseArrayLayer=0; // default = 0
 textureViewDescriptorIn.arrayLayerCount=1;
+  
+  textureViewDescriptorBfr.format=wtf.at(2,2);
+textureViewDescriptorBfr.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
+textureViewDescriptorBfr.aspect=WGPU_TEXTURE_ASPECT_ALL;
+textureViewDescriptorBfr.baseMipLevel=0; // default = 0
+textureViewDescriptorBfr.mipLevelCount=1;
+textureViewDescriptorBfr.baseArrayLayer=0; // default = 0
+textureViewDescriptorBfr.arrayLayerCount=1;
+  
  // textureViewDescriptorInV.format=wtf.at(0,0);
   textureViewDescriptorInV.format=wtf.at(1,1);
 textureViewDescriptorInV.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
@@ -425,6 +452,7 @@ WGPU_TextureViewDescriptor.at(0,0,0)=textureViewDescriptorIn;
 WGPU_TextureViewDescriptor.at(0,0,1)=textureViewDescriptorOut;
 WGPU_TextureViewDescriptor.at(0,0,2)=textureViewDescriptorOut2;
   WGPU_TextureViewDescriptor.at(0,0,3)=textureViewDescriptorInV;
+  WGPU_TextureViewDescriptor.at(0,0,4)=textureViewDescriptorBfr;
 WGPU_ResultBuffer.at(0,0,0)=WGPU_Result_Array;
 WGPU_InputBuffer.at(0,0,0)=WGPU_Input_Array;
 bufferDescriptorI={u64_bfrSze.at(1,1),WGPU_BUFFER_USAGE_STORAGE|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
@@ -539,6 +567,8 @@ textureIn=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0
 WGPU_Texture.at(0,0,0)=textureIn;
   textureInV=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,3));
   WGPU_Texture.at(0,0,3)=textureInV;
+    textureBfr=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,4));
+  WGPU_Texture.at(0,0,4)=textureBfr;
 textureOut=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,1));
 WGPU_Texture.at(0,0,1)=textureOut;
 textureOut2=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,2));
@@ -575,15 +605,21 @@ Output_Image_Texture2.texture=WGPU_Texture.at(0,0,2);
 Output_Image_Texture2.mipLevel=0;
 Output_Image_Texture2.origin=oxyz.at(0,0);
 Output_Image_Texture2.aspect=WGPU_TEXTURE_ASPECT_ALL;
+  Output_Image_Texture_Bfr.texture=WGPU_Texture.at(0,0,4);
+Output_Image_Texture_Bfr.mipLevel=0;
+Output_Image_Texture_Bfr.origin=oxyz.at(0,0);
+Output_Image_Texture_Bfr.aspect=WGPU_TEXTURE_ASPECT_ALL;
 wict.at(2,2)=Input_Image_Texture;
 wict.at(1,1)=Output_Image_Texture;
 wict.at(3,3)=Output_Image_Texture2;
   wict.at(4,4)=Input_Image_TextureV;
+  wict.at(5,5)=Output_Image_Texture_Bfr;
 //  wictt.at(0,0)=External_Image_Texture;
 INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
-  INVTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,3),&WGPU_TextureViewDescriptor.at(0,0,3));
+INVTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,3),&WGPU_TextureViewDescriptor.at(0,0,3));
 OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureViewDescriptor.at(0,0,1));
 OUTTexture2View=wgpu_texture_create_view(WGPU_Texture.at(0,0,2),&WGPU_TextureViewDescriptor.at(0,0,2));
+BfrTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,4),&WGPU_TextureViewDescriptor.at(0,0,4));
 wtv.at(3,3)=INTextureView;
 wtv.at(4,4)=OUTTextureView;
 wtv.at(5,5)=OUTTexture2View;
