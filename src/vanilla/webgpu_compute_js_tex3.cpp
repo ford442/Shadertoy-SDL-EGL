@@ -120,11 +120,11 @@ console.log('Starting..');
 },250);
 }
 console.log("canvas size: ",h$,", ",w$);
-let cnv=document.querySelectorAll('canvas');
+let cnv=document.querySelector('#canvas');
 let cnvb=document.querySelector('#bcanvas');
-cnv[0].height=SiZ;
+cnv.height=SiZ;
 cnvb.height=w$;
-cnv[0].width=SiZ;
+cnv.width=SiZ;
 cnvb.width=h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
@@ -141,14 +141,14 @@ powerPreference:"high-performance",
 premultipliedAlpha:true,
 preserveDrawingBuffer:false
 });
-// gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
+gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
 let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
 // let pixelData=new Uint8ClampedArray(imageData);
 let pixelData=new Float64Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 setInterval(function(){
-// gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
+gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
 // pixelData=new Uint8ClampedArray(imageData);
