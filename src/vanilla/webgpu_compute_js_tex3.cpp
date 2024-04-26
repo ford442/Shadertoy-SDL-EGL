@@ -165,12 +165,6 @@ Module.ccall("frmOn");
 }
 
 function canvasStart(){
-let vvic=document.querySelector('#mvi');
-let SiZ=window.innerHeight;
-vvic.width=SiZ;
-vvic.height=SiZ;
-let w$=vvic.width;
-let h$=vvic.height;
 if(running==0){
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
@@ -185,6 +179,12 @@ Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
 console.log('Starting..');
 },250);
 }
+let vvic=document.querySelector('#mvi');
+let SiZ=window.innerHeight;
+vvic.width=SiZ;
+vvic.height=SiZ;
+let w$=vvic.width;
+let h$=vvic.height;
 console.log("canvas size: ",h$,", ",w$);
 let cnv=document.querySelector('#canvas');
 let cnvb=document.querySelector('#bcanvas');
@@ -207,7 +207,7 @@ powerPreference:"high-performance",
 premultipliedAlpha:true,
 preserveDrawingBuffer:false
 });
-gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
+// gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
 let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
 // let pixelData=new Uint8ClampedArray(imageData);
@@ -215,7 +215,7 @@ let pixelData=new Float64Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
 setInterval(function(){
-gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
+// gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
 // pixelData=new Uint8ClampedArray(imageData);
