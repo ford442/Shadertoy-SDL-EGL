@@ -179,7 +179,7 @@ Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
 console.log('Starting..');
 },250);
 }
-let vvic=document.querySelector('#mvi');
+let vvic=document.querySelector('#varea');
 let SiZ=window.innerHeight;
 vvic.width=SiZ;
 vvic.height=SiZ;
