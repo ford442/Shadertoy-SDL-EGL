@@ -67,7 +67,7 @@ powerPreference:"high-performance",
 premultipliedAlpha:true,
 preserveDrawingBuffer:false
 }); // 
-cnvb.style.transform='scaley(-1.0)';
+vvi.style.transform='scaley(-1.0)';
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 // let image=flipImageData(gl3.getImageData(0,0,w$,h$));
 let image=gl3.getImageData(0,0,w$,h$);
