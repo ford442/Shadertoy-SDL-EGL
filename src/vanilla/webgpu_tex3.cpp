@@ -160,7 +160,7 @@ wtv.at(6,6)=INVTextureView;
       //  Frame Data 
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-   //  highway way
+/*    //  highway way
      const HWY_FULL(uint8_t) d;
     const size_t N = data.size();  
      std::vector<float> floatData(4 * N); 
@@ -171,10 +171,10 @@ std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf
        const HWY_FULL(float) f = v / Set(d, 255.0f); // Divide as before
         Store(f, d, &floatData[i]); 
     }
-/*  //  regular way
+*/ //  regular way
 std::vector<float>floatData(data.size());
 std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});  // for RGBA32FLOAT
-*/
+
   const size_t bytesPerRow=sze.at(6,6)*4*sizeof(float);
 // frame_tensor.at(0,0)=data;
 // fjs_data_pointer.at(0,0)=floatData.data();
