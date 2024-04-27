@@ -161,7 +161,7 @@ wtv.at(6,6)=INVTextureView;
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
    //  highway way
-     const HWY_FULL(float) d = HWY_SCALABLE;
+     const HWY_FULL(float) d;
     const size_t N = data.size();  
      std::vector<float> floatData(4 * N); 
 
