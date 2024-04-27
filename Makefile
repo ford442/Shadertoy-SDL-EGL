@@ -120,7 +120,7 @@ b3_compute_egl_tex3:
 	 -ffast-math -ffp-contract=off -sENVIRONMENT=web,node \
 	 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-t3.js -sTOTAL_STACK=524288 \
 	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 \
-	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -march=haswell -mtune=wasm32 \
+	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -march=wasm32-avx -mtune=wasm32 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=768mb -lmath.js -lhtml5.js -lint53.js \
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS='["wgpu_buffer_map_sync","videoFrame"]' \
