@@ -162,14 +162,13 @@ std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
    //  highway way
      const HWY_FULL(uint8_t) d;
-     const HWY_FULL(float) f;
     const size_t N = data.size();  
      std::vector<float> floatData(4 * N); 
 
     // SIMD conversion loop
     for (size_t i = 0; i < N; i += 1) {
         const auto v = Load(d, &data[i]); 
-        f = v / Set(d, 255.0f); // Divide as before
+       const HWY_FULL(float) f = v / Set(d, 255.0f); // Divide as before
         Store(f, d, &floatData[i]); 
     }
 /*  //  regular way
