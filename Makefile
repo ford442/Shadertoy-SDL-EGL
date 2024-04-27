@@ -127,7 +127,7 @@ b3_compute_egl_tex3:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPUi","_startWebGPUbi","_frmOn"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js --js-library lib/lib_demo.js \
 	 --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js --js-library lib/lib_webgpu.js \
-	 webgpu_tex3.o --wassert-polyfill
+	 webgpu_tex3.o -DNDEBUG
 
 webgpu_detection:
 	 em++ src/vanilla/webgpu_detect.cpp -pipe -fno-fast-math -ffp-contract=off \
