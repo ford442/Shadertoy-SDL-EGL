@@ -818,14 +818,8 @@ Render_Bindgroup_Layout_Entries[4].binding=6;
 Render_Bindgroup_Layout_Entries[4].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Render_Bindgroup_Layout_Entries[4].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 Render_Bindgroup_Layout_Entries[4].layout.buffer=wbbl.at(0,0);
-  //  Render TextureOUT
-Render_Bindgroup_Layout_Entries[5]={};
-Render_Bindgroup_Layout_Entries[5].binding=1;
-Render_Bindgroup_Layout_Entries[5].visibility=WGPU_SHADER_STAGE_FRAGMENT;
-Render_Bindgroup_Layout_Entries[5].type=WGPU_BIND_GROUP_LAYOUT_TYPE_STORAGE_TEXTURE;
-Render_Bindgroup_Layout_Entries[5].layout.storageTexture=WGPU_StorageTextureBindingLayout.at(1,1,1);
 wbgle.at(0,0)=Render_Bindgroup_Layout_Entries;
-bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),6);
+bindgroup_layout=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(0,0),5);
 wbgl.at(0,0)=bindgroup_layout;
   //  Render_2 Sampler
 Render_Bindgroup_Layout_Entries_2[0]={};
@@ -909,10 +903,6 @@ Render_Bindgroup_Entries[4].binding=6;
 Render_Bindgroup_Entries[4].resource=wb.at(1,1);
 Render_Bindgroup_Entries[4].bufferBindOffset=0;
 Render_Bindgroup_Entries[4].bufferBindSize=sizeof(uint64_t);
-  //  Render TextureOUT
-Render_Bindgroup_Entries[5]={};
-Render_Bindgroup_Entries[5].binding=1;
-Render_Bindgroup_Entries[5].resource=wtv.at(3,3);
 wbge.at(0,0)=Render_Bindgroup_Entries;
     //  Render_2 Sampler
 Render_Bindgroup_Entries_2[0]={};
@@ -1009,7 +999,7 @@ wgpu_queue_write_buffer(wq.at(0,0),wb.at(6,6),0,Ffvertices,sizeof(Ffvertices));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(7,7),0,indices,36*sizeof(uint32_t));
 // tme=get_current_time_in_milliseconds();
 // wTime.iTime=get_current_time_in_milliseconds();
-bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),6);
+bindgroup=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(0,0),wbge.at(0,0),5);
 wbg.at(0,0)=bindgroup;
 bindgroup_2=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(1,1),wbge.at(1,1),5);
 wbg.at(1,1)=bindgroup_2;
