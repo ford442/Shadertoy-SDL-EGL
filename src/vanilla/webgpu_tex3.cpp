@@ -166,12 +166,10 @@ std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf
      std::vector<float> floatData(4 * N); 
 
     // SIMD conversion loop
-    for (size_t i = 0; i < N; i += 4) {
+    for (size_t i = 0; i < N; i += 1) {
         const auto v = Load(d, &data[i]); 
         auto converted = v / Set(d, 255.0f); // Divide as before
-        // Expand into RGBA (hypothetical, adjust as needed)
-        auto rgba = VecFromChannels(d, converted, converted, converted, Set(d, 1.0f)); 
-        Store(rgba, d, &floatData[4 * i]); 
+        Store(converted, d, &floatData[i]); 
     }
 /*  //  regular way
 std::vector<float>floatData(data.size());
