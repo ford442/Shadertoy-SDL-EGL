@@ -28,8 +28,8 @@ return n;
 function imageStart(){
 let vvi=document.querySelector('#ivi');
 let SiZ=window.innerHeight;
-let w$=parseInt(document.querySelector("#mvi").width);
-let h$=parseInt(document.querySelector("#mvi").height);
+let w$=parseInt(document.querySelector("#ivi").width);
+let h$=parseInt(document.querySelector("#ivi").height);
 if(running==0){
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
