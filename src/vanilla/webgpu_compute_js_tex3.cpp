@@ -269,7 +269,9 @@ let codeMessage=new BroadcastChannel('codeMessage');
 
 codeMessage.addEventListener('message',event=>{
 var pth2=document.querySelector('#computePath').innerHTML;
+var pth3=document.querySelector('#fragPath').innerHTML;
 getShader(pth2,'compute.wgsl');
+getShader(pth3,'frag2.wgsl');
 document.querySelector('#status').style.backgroundColor="blue";
 let flDat=event.data.data;
 var buffer = new ArrayBuffer(flDat.length*2);
@@ -286,8 +288,10 @@ document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#di').click();
 document.querySelector('#status').style.backgroundColor="green";
 normalResSetup();
-var pth2=document.querySelector('#computePathNovid').innerHTML;
+var pth2=document.querySelector('#computePath').innerHTML;
+var pth3=document.querySelector('#fragPath').innerHTML;
 getShader(pth2,'compute.wgsl');
+getShader(pth3,'frag2.wgsl');
 regularStart();
 },250);
 });
@@ -356,7 +360,9 @@ document.querySelector('#startBtn').addEventListener('click',function(){
 var pth=document.querySelector('#path').innerHTML;
 getShader(pth,'shader.wgsl');
 var pth2=document.querySelector('#computePath').innerHTML;
+var pth3=document.querySelector('#fragPath').innerHTML;
 getShader(pth2,'compute.wgsl');
+getShader(pth3,'frag2.wgsl');
 normalResSetup();
 videoStart();
 });
@@ -364,8 +370,10 @@ videoStart();
 document.querySelector('#startBtn2').addEventListener('click',function(){
 var pth=document.querySelector('#path').innerHTML;
 getShader(pth,'shader.wgsl');
-var pth2=document.querySelector('#computePathNovid').innerHTML;
+var pth2=document.querySelector('#computePath').innerHTML;
+var pth3=document.querySelector('#fragPath').innerHTML;
 getShader(pth2,'compute.wgsl');
+getShader(pth3,'frag2.wgsl');
 normalResSetup();
 regularStart();
 });
@@ -374,7 +382,9 @@ document.querySelector('#startBtnC').addEventListener('click',function(){
 var pth=document.querySelector('#path').innerHTML;
 getShader(pth,'shader.wgsl');
 var pth2=document.querySelector('#computePath').innerHTML;
+var pth3=document.querySelector('#fragPath').innerHTML;
 getShader(pth2,'compute.wgsl');
+getShader(pth3,'frag2.wgsl');
 normalResSetup();
 setTimeout(function(){
 canvasStart();
@@ -385,7 +395,9 @@ document.querySelector('#startBtnI').addEventListener('click',function(){
 var pth=document.querySelector('#path').innerHTML;
 getShader(pth,'shader.wgsl');
 var pth2=document.querySelector('#computePath').innerHTML;
+var pth3=document.querySelector('#fragPath').innerHTML;
 getShader(pth2,'compute.wgsl');
+getShader(pth3,'frag2.wgsl');
 normalResSetup();
 setTimeout(function(){
 imageStart();
