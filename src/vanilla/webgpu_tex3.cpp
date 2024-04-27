@@ -161,12 +161,12 @@ wtv.at(6,6)=INVTextureView;
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
    //  highway way
-     const HWY_FULL(float) d = HWY_SCALABLE ? ScalableTargets(HWY_WASM) : HWY_WASM;
+     const HWY_FULL(float) d = HWY_SCALABLE;
     const size_t N = data.size();  
      std::vector<float> floatData(4 * N); 
 
     // SIMD conversion loop
-    for (size_t i = 0; i < N; i += d.N()) {
+    for (size_t i = 0; i < N; i += 4) {
         const auto v = Load(d, &data[i]); 
         auto converted = v / Set(d, 255.0f); // Divide as before
         // Expand into RGBA (hypothetical, adjust as needed)
