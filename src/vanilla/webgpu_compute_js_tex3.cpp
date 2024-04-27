@@ -254,7 +254,7 @@ ff.send(null);
 let codeMessage=new BroadcastChannel('codeMessage');
 
 codeMessage.addEventListener('message',event=>{
-var pth2=document.querySelector('#computePath').innerHTML;
+var pth2=document.querySelector('#computePathNovid').innerHTML;
 var pth3=document.querySelector('#fragPath').innerHTML;
 getShader(pth2,'compute.wgsl');
 getShader(pth3,'frag2.wgsl');
