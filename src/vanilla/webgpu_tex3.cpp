@@ -61,7 +61,7 @@ on.at(4,4)=1;
 return EM_TRUE;
 }
 
-EM_BOOL FrameOff(){
+EM_BOOL framesOff(){
 on.at(3,3)=0;
 return EM_TRUE;
 }
