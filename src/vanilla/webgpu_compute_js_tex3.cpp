@@ -26,7 +26,7 @@ return n;
 }}
 
 function imageStart(){
-let vvi=document.querySelector('#mvi');
+let vvi=document.querySelector('#ivi');
 let SiZ=window.innerHeight;
 let w$=parseInt(document.querySelector("#mvi").width);
 let h$=parseInt(document.querySelector("#mvi").height);
