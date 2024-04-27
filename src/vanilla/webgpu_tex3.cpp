@@ -1,5 +1,13 @@
 #include "../../include/vanilla/webgpu_tex.hpp"
 
+#include "../../highway/hwy/for_each_target.h"
+#include "../../highway/hwy/highway.h"
+// Target WASM SIMD
+#include "../../highway/hwy/ops/wasm_128-inl.h"
+// #if HWY_TARGETS & HWY_WASM256
+// #include "../../highway/hwy/ops/wasm_256-inl.h"
+// #endif 
+
 #include "../../src/vanilla/webgpu_compute_vars.cpp"
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
@@ -156,9 +164,24 @@ wtv.at(6,6)=INVTextureView;
       //  Frame Data 
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+   //  highway way
+     const HWY_FULL(float) d = HWY_SCALABLE ? ScalableTargets(HWY_WASM) : HWY_WASM;
+    const size_t N = data.size();  
+     std::vector<float> floatData(4 * N); 
+
+    // SIMD conversion loop
+    for (size_t i = 0; i < N; i += d.N()) {
+        const auto v = Load(d, &data[i]); 
+        auto converted = v / Set(d, 255.0f); // Divide as before
+        // Expand into RGBA (hypothetical, adjust as needed)
+        auto rgba = VecFromChannels(d, converted, converted, converted, Set(d, 1.0f)); 
+        Store(rgba, d, &floatData[4 * i]); 
+    }
+/*  //  regular way
 std::vector<float>floatData(data.size());
 std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});  // for RGBA32FLOAT
-const size_t bytesPerRow=sze.at(6,6)*4*sizeof(float);
+*/
+  const size_t bytesPerRow=sze.at(6,6)*4*sizeof(float);
 // frame_tensor.at(0,0)=data;
 // fjs_data_pointer.at(0,0)=floatData.data();
 // fjsv_data_pointer.at(0,0)=&floatData; // (std::vector<float*>)
