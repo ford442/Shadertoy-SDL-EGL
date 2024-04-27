@@ -168,9 +168,7 @@ std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf
     // SIMD conversion loop
     for (size_t i = 0; i < N; i += 4) {
         const auto v = Load(d, &data[i]); 
-      auto float_v = PromoteTo(d, v, HWY_INT32); // Promote to int32_t SIMD vector
-
-          auto float_f = ConvertTo(d, float_v); // Convert to a float SIMD vector
+          auto float_f = DemoteTo(d, v); // Convert to a float SIMD vector
         auto converted = float_f / Set(d, 255.0f); // Divide as before
         // Expand into RGBA (hypothetical, adjust as needed)
         auto rgba = VecFromChannels(d, converted, converted, converted, Set(d, 1.0f)); 
