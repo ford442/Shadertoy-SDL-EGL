@@ -2,11 +2,7 @@
 
 #include "../../highway/hwy/foreach_target.h"
 #include "../../highway/hwy/highway.h"
-// Target WASM SIMD
-#include "../../highway/hwy/ops/wasm_128-inl.h"
-// #if HWY_TARGETS & HWY_WASM256
-// #include "../../highway/hwy/ops/wasm_256-inl.h"
-// #endif 
+
 
 #include "../../src/vanilla/webgpu_compute_vars.cpp"
 
