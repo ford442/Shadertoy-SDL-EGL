@@ -68,8 +68,8 @@ premultipliedAlpha:true,
 preserveDrawingBuffer:false
 }); // 
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
-// var image=flipImageData(gl3.getImageData(0,0,w$,h$));
-let image=gl3.getImageData(0,0,w$,h$);
+let image=flipImageData(gl3.getImageData(0,0,w$,h$));
+// let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
 // let pixelData=new Uint8ClampedArray(imageData);
 let pixelData=new Float64Array(imageData);
@@ -168,8 +168,6 @@ console.log('Starting..');
 }
 let vvic=document.querySelector('#mvi');
 let SiZ=window.innerHeight;
-vvic.width=SiZ;
-vvic.height=SiZ;
 let w$=vvic.width;
 let h$=vvic.height;
 console.log("canvas size: ",h$,", ",w$);
