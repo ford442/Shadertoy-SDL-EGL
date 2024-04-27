@@ -168,7 +168,7 @@ std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf
     // SIMD conversion loop
     for (size_t i = 0; i < N; i += 1) {
         const auto v = Load(d, &data[i]); 
-        float converted = v / Set(d, 255.0f); // Divide as before
+        float converted = float(v / Set(d, 255.0f)); // Divide as before
         Store(converted, d, &floatData[i]); 
     }
 /*  //  regular way
