@@ -117,7 +117,7 @@ b3_compute_egl_tex3:
 	 -mextended-const -mbulk-memory -matomics -pthread -O2 -fchar8_t -std=c++20 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O2 -mextended-const -dead_strip -mbulk-memory -matomics -std=c++20 -pipe \
-	 -ffast-math -ffp-contract=off -sENVIRONMENT=web,node,shell \
+	 -ffast-math -ffp-contract=off -sENVIRONMENT=web,node,shell  -sVERBOSE \
 	 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-t3.js -sTOTAL_STACK=524288 \
 	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 \
 	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -march=haswell -mtune=wasm32 \
