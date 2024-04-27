@@ -61,6 +61,11 @@ on.at(4,4)=1;
 return EM_TRUE;
 }
 
+EM_BOOL FrameOff(){
+on.at(3,3)=0;
+return EM_TRUE;
+}
+
 boost::function<EM_BOOL()>render=[](){
 u64_uni.at(3,3)++; 
 u_time.t3=u_time.t2;
@@ -172,7 +177,7 @@ const size_t bytesPerRow=sze.at(6,6) * 4 * sizeof(float);
     wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),floatData.data(),bytesPerRow,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
      on.at(4,4)=0;
 }   // end if on 4,4
-
+if(on.at(3,3)==1){
 // void wgpu_queue_copy_external_image_to_texture(WGpuQueue queue, const WGpuImageCopyExternalImage *source NOTNULL, const WGpuImageCopyTextureTagged *destination NOTNULL, uint32_t copyWidth, uint32_t copyHeight _WGPU_DEFAULT_VALUE(1), uint32_t copyDepthOrArrayLayers _WGPU_DEFAULT_VALUE(1));
 // wgpu_queue_copy_external_image_to_texture(WGPU_Queue.at(0,0,0), ,&wictt.at(0,0) ,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
  //  Render Pass
@@ -195,6 +200,7 @@ wgpu_render_pass_encoder_draw(wrpe.at(0,0),6,1,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
+}   // end if on 3,3
   //  Render Pass 2  (sampler)
 wceA={};
 wceB=wgpu_device_create_command_encoder(wd.at(0,0),0);
@@ -214,6 +220,8 @@ wgpu_render_pass_encoder_end(wrpe.at(1,1));
 wcb.at(1,1)=wgpu_command_encoder_finish(wce.at(1,1));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(1,1));
  // Compute Pass
+  if(on.at(3,3)==1){
+
 WGPU_CommandEncoder.at(0,0,0)=wgpu_device_create_command_encoder_simple(wd.at(0,0));
 WGPU_ComputePassCommandEncoder.at(0,0,0)=wgpu_command_encoder_begin_compute_pass(WGPU_CommandEncoder.at(0,0,0),&WGPU_ComputePassDescriptor.at(0,0,0));
 wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),WGPU_ComputePipeline.at(0,0,0));
@@ -252,6 +260,7 @@ on.at(1,1)=3;
 // wgpu_queue_set_on_submitted_work_done_callback(WGPU_Queue.at(0,0,0),WGPU_ComputeDoneCallback.at(0,0,0),0);
 wgpu_queue_submit_one_and_destroy(WGPU_Queue.at(0,0,0),WGPU_CommandBuffer.at(0,0,0));
 // }  // end if 17ms
+}   // end if on 3,3
 return EM_TRUE;
 };
 
@@ -263,6 +272,7 @@ return;
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 if(on.at(0,0)==0){wd.at(0,0)=result;}
 on.at(4,4)=0;
+on.at(3,3)=1;
 js_data_pointer.at(0,0)=0;
 fjs_data_pointer.at(0,0)=0;
 wcc.at(0,0)=wgpu_canvas_get_webgpu_context("canvas");
@@ -1065,6 +1075,11 @@ extern"C"{
 
 void frmOn(){
 texOn();
+return;
+}
+
+void frmsOff(){
+frameOff();
 return;
 }
 
