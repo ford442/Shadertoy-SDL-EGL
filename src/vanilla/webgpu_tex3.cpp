@@ -1,6 +1,6 @@
 #include "../../include/vanilla/webgpu_tex.hpp"
 
-#include "../../highway/hwy/for_each_target.h"
+#include "../../highway/hwy/foreach_target.h"
 #include "../../highway/hwy/highway.h"
 // Target WASM SIMD
 #include "../../highway/hwy/ops/wasm_128-inl.h"
