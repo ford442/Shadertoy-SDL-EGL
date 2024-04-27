@@ -77,7 +77,7 @@ let pixelData=new Float64Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
 FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
-Module.ccall("frmsOff");
+// Module.ccall("frmsOff");
 }
 
 function videoStart(){
