@@ -30,6 +30,7 @@ const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 //   let $H=Module.HEAPU8.buffer;
 let G=new GPUX({mode:'gpu',webGl:contx});
+let G2=new GPUX({mode:'gpu'});
 let SiZ=window.innerHeight;
 let vvii=document.querySelector('#mvi');
 let w$=parseInt(vvii.width);
@@ -52,16 +53,22 @@ cnvb.width=w$;
 var ratio=SiZ/h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-let t=G.createKernel(function(v){
+let r=G.createKernel(function(v){
+var P=v[this.thread.y][this.thread.x];
+return[P[0],1.0,P[2],1.0];
+}).setGraphical(true).setTactic("precision").setDynamicOutput(true).setOutput([w$,h$]);
+let t=G2.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x];
 return[P[0],1.0,P[2],1.0];
 }).setPipeline(true).setTactic("precision").setDynamicOutput(true).setOutput([w$,h$]);
-var $$1=t(vvii);
+r(vvii);
+var $$1=t(bcanvas);
 var hp=new Float64Array($$1);
 FS.writeFile('/video/frame.gl',hp);
 Module.ccall("frmOn");
 setInterval(function(){
-$$1=t(vvii);
+r(vvii);
+$$1=t(bcanvas);
 hp=new Float64Array($$1);
 FS.writeFile('/video/frame.gl',hp);
 Module.ccall("frmOn");
