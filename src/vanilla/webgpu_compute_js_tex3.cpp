@@ -59,10 +59,12 @@ return[P[0],P[1],P[2],P[3]];
 var $$1=t(vvii);
 var hp=new Float64Array($$1);
 FS.writeFile('/video/frame.gl',hp);
+Module.ccall("frmOn");
 setInterval(function(){
 $$1=t(vvii);
 hp=new Float64Array($$1);
 FS.writeFile('/video/frame.gl',hp);
+Module.ccall("frmOn");
 },16.6);
 }
  
