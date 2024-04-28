@@ -25,6 +25,46 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }}
 
+function canvasGpu(){
+const bcanvas=document.getElementById("bcanvas");
+const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
+//   let $H=Module.HEAPU8.buffer;
+let G=new GPUX({mode:'gpu',context:contx});
+let SiZ=window.innerHeight;
+let vvii=document.querySelector('#mvi');
+let w$=parseInt(vvii.width);
+let h$=parseInt(vvii.height);
+if(running==0){
+setTimeout(function(){
+Module.ccall("startWebGPU");
+console.log('Starting..');
+running=1;
+},500);
+}
+console.log("vid size: ",h$,", ",w$);
+let cnv=document.querySelector('#bcanvas');
+let cnvb=document.querySelector('#canvas');
+cnv.height=SiZ;
+cnvb.height=h$;
+cnv.width=SiZ;
+cnvb.width=w$;
+var ratio=SiZ/h$;
+let offS=Math.floor((w$-h$)/2);
+let la=nearestPowerOf2(((w$*h$*4)/4)*4);
+let t=G.createKernel(function(v){
+var P=v[this.thread.y][this.thread.x];
+return[P[0],P[1],P[2],P[3]];
+}).setGraphical(true).setTactic("precision").setArgumentTypes(["HTMLCanvas"]).setDynamicOutput(true).setOutput([w$,h$]);
+var $$1=t(vvii);
+var hp=new Float64Array($$1);
+FS.writeFile('/video/frame.gl',hp);
+setInterval(function(){
+var $$1=t(vvii);
+var fr=new Float64Array($$1);
+FS.writeFile('/video/frame.gl',fr);
+},16.6);
+}
+ 
 function imageStart(){
 let vvi=document.querySelector('#ivi');
 let SiZ=window.innerHeight;
