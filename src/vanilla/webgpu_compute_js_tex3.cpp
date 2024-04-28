@@ -36,8 +36,9 @@ let w$=parseInt(vvii.width);
 let h$=parseInt(vvii.height);
 if(running==0){
 setTimeout(function(){
-Module.ccall("startWebGPU");
-console.log('Starting..');
+let vsiz=document.querySelector('#vsiz').innerHTML;
+Module.ccall("startWebGPUi",null,"Number",[vsiz]);
+ console.log('Starting..');
 running=1;
 },500);
 }
