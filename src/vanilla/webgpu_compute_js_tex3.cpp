@@ -64,6 +64,7 @@ return (P[0],1.0,P[2],1.0);
 r(vvii);
 var $$1=t(bcanvas);
 var hp=new Float64Array($$1);
+ console.log($$1.buffer);
 FS.writeFile('/video/frame.gl',hp);
 Module.ccall("frmOn");
 setInterval(function(){
