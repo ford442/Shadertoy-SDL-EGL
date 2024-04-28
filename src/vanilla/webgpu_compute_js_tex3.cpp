@@ -54,22 +54,15 @@ var ratio=SiZ/h$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let r=G.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x];
-return P[0],P[1],P[2],P[3];
+return v[this.thread.y][this.thread.x];
 }).setGraphical(true).setArgumentTypes(["HTMLCanvas"]).setTactic("precision").setDynamicOutput(true).setOutput([w$,h$]);
-let t=G2.createKernel(function(v){
-var P=v[this.thread.y][this.thread.x];
-return P[0],P[1],P[2],P[3];
-}).setPipeline(true).setArgumentTypes(["HTMLCanvas"]).setTactic("precision").setDynamicOutput(true).setOutput([w$,h$]);
-r(vvii);
-var $$1=t(r(vvii));
+var $$1=r(vvii);
 var hp=new Float64Array($$1);
  console.log($$1.buffer);
 FS.writeFile('/video/frame.gl',hp);
 Module.ccall("frmOn");
 setInterval(function(){
-r(vvii);
-$$1=t(bcanvas);
+$$1=r(vvii);
 hp=new Float64Array($$1);
 FS.writeFile('/video/frame.gl',hp);
 Module.ccall("frmOn");
