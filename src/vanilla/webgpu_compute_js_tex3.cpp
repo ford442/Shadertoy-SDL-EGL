@@ -55,7 +55,7 @@ let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let t=G.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x];
 return[P[0],P[1],P[2],P[3]];
-}).setPipeline(true).setTactic("precision").setDynamicOutput(true).setOutput([w$,h$]);
+}).setTactic("precision").setDynamicOutput(true).setOutput([w$,h$]);
 var $$1=t(vvii);
 var hp=new Float64Array($$1);
 FS.writeFile('/video/frame.gl',hp);
