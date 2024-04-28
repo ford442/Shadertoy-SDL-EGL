@@ -180,7 +180,7 @@ cnv.width=SiZ;
 cnvb.width=w$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-let gl3=cnvb.getContext('2d',{
+let gl3=vvic.getContext('2d',{
 colorType:'float64',
 alpha:true,
 willReadFrequently:false,
@@ -193,7 +193,7 @@ powerPreference:"high-performance",
 premultipliedAlpha:true,
 preserveDrawingBuffer:false
 });
-gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
+// gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
 let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
 // let pixelData=new Uint8ClampedArray(imageData);
@@ -201,7 +201,7 @@ let pixelData=new Float64Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
 setInterval(function(){
-gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
+// gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
 // pixelData=new Uint8ClampedArray(imageData);
