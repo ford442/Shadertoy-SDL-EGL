@@ -27,9 +27,9 @@ return n;
 
 function canvasGpu(){
 const bcanvas=document.getElementById("bcanvas");
-// const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
+const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 //   let $H=Module.HEAPU8.buffer;
-let G=new GPUX({mode:'gpu',canvas:bcanvas});
+let G=new GPUX({mode:'gpu',webGl:contx});
 let SiZ=window.innerHeight;
 let vvii=document.querySelector('#mvi');
 let w$=parseInt(vvii.width);
