@@ -62,7 +62,7 @@ var P=v[this.thread.y][this.thread.x];
 return (P[0],1.0,P[2],1.0);
 }).setPipeline(true).setArgumentTypes(["ImageData"]).setTactic("precision").setDynamicOutput(true).setOutput([w$,h$]);
 r(vvii);
-var $$1=t(bcanvas);
+var $$1=t(r(vvii));
 var hp=new Float64Array($$1);
  console.log($$1.buffer);
 FS.writeFile('/video/frame.gl',hp);
