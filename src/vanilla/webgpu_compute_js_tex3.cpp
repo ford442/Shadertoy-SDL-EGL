@@ -55,7 +55,7 @@ let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let r=G.createKernel(function(v){
 return v[this.thread.y][this.thread.x];
-}).setGraphical(true).setArgumentTypes(["HTMLCanvas"]).setTactic("precision").setDynamicOutput(true).setOutput([w$,h$]);
+}).setGraphical(true).setArgumentTypes(["HTMLVideo"]).setTactic("precision").setDynamicOutput(true).setOutput([w$,h$]);
 var $$1=r(vvii);
 var hp=new Float64Array($$1);
  console.log($$1.buffer);
