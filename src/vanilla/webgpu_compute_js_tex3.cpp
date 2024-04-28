@@ -193,20 +193,7 @@ powerPreference:"high-performance",
 premultipliedAlpha:true,
 preserveDrawingBuffer:false
 });
-let gl4=cnvb.getContext('2d',{
-colorType:'float64',
-alpha:true,
-willReadFrequently:false,
-stencil:false,
-depth:false,
-colorSpace:"display-p3",
-desynchronized:false,
-antialias:true,
-powerPreference:"high-performance",
-premultipliedAlpha:true,
-preserveDrawingBuffer:false
-});
-gl4.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
+// gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
 let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
 // let pixelData=new Uint8ClampedArray(imageData);
@@ -214,7 +201,7 @@ let pixelData=new Float64Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
 setInterval(function(){
-gl4.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
+// gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
 // pixelData=new Uint8ClampedArray(imageData);
