@@ -153,7 +153,6 @@ Module.ccall("frmOn");
 }
 
 function canvasStart(){
- 
 if(running==0){
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
@@ -168,7 +167,7 @@ Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
 console.log('Starting..');
 },250);
 }
-let vvic=document.querySelector('#varea');
+let vvic=document.querySelector('#mvi');
 let SiZ=window.innerHeight;
 let w$=vvic.width;
 let h$=vvic.height;
@@ -181,13 +180,13 @@ cnv.width=SiZ;
 cnvb.width=w$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-let gl3=cnvb.getContext('2d',{
+let gl3=cnvb.getContext('webgl2',{
 colorType:'float64',
 alpha:true,
 willReadFrequently:false,
 stencil:false,
 depth:false,
-// colorSpace:"display-p3",
+colorSpace:"display-p3",
 desynchronized:false,
 antialias:true,
 powerPreference:"high-performance",
