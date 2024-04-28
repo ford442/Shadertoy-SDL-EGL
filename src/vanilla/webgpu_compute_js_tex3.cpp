@@ -55,12 +55,12 @@ let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let r=G.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x];
-return[P[0],1.0,P[2],1.0];
-}).setGraphical(true).setTactic("precision").setDynamicOutput(true).setOutput([w$,h$]);
+return [P[0],1.0,P[2],1.0];
+}).setGraphical(true).setArgumentTypes(["HTMLCanvas"]).setTactic("precision").setDynamicOutput(true).setOutput([w$,h$]);
 let t=G2.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x];
-return[P[0],1.0,P[2],1.0];
-}).setPipeline(true).setTactic("precision").setDynamicOutput(true).setOutput([w$,h$]);
+return [P[0],1.0,P[2],1.0];
+}).setPipeline(true).setArgumentTypes(["ImageData"]).setTactic("precision").setDynamicOutput(true).setOutput([w$,h$]);
 r(vvii);
 var $$1=t(bcanvas);
 var hp=new Float64Array($$1);
