@@ -409,7 +409,7 @@ getShader(pth2,'compute.wgsl');
 getShader(pth3,'frag2.wgsl');
 normalResSetup();
 setTimeout(function(){
-canvasStart();
+canvasGpu();
 },3000);
 });
 
