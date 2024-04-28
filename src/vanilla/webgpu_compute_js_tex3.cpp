@@ -27,9 +27,9 @@ return n;
 
 function canvasGpu(){
 const bcanvas=document.getElementById("bcanvas");
-const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
+// const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
 //   let $H=Module.HEAPU8.buffer;
-let G=new GPUX({mode:'gpu',context:contx});
+let G=new GPUX({mode:'gpu',canvas:bcanvas});
 let SiZ=window.innerHeight;
 let vvii=document.querySelector('#mvi');
 let w$=parseInt(vvii.width);
@@ -55,7 +55,7 @@ let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 let t=G.createKernel(function(v){
 var P=v[this.thread.y][this.thread.x];
 return[P[0],1.0,P[2],1.0];
-}).setGraphical(true).setTactic("precision").setDynamicOutput(true).setOutput([w$,h$]);
+}).setPipeline(true).setTactic("precision").setDynamicOutput(true).setOutput([w$,h$]);
 var $$1=t(vvii);
 var hp=new Float64Array($$1);
 FS.writeFile('/video/frame.gl',hp);
