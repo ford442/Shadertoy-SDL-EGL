@@ -68,6 +68,7 @@ float * resultsf=NULL;
 
 const char * Fnm=reinterpret_cast<const char *>("/shader/shader.wgsl");
 const char * FnmF2=reinterpret_cast<const char *>("/shader/frag2.wgsl");
+const char * FnmV=reinterpret_cast<const char *>("/shader/vert.wgsl");
 static char * result=NULL;
 static char * results=NULL;
 
