@@ -297,7 +297,7 @@ cnv.width=SiZ;
 cnvb.width=w$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-let gl3=cnvb.getContext('webgl2',{
+let gl3=vvic.getContext('webgl2',{
 colorType:'float64',
 alpha:true,
 willReadFrequently:false,
@@ -494,7 +494,7 @@ getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
 normalResSetup();
 setTimeout(function(){
-canvasGpu();
+canvasStart();
 },3000);
 });
 
