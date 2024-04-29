@@ -801,7 +801,7 @@ Render_Bindgroup_Layout_Entries[0].layout.sampler=wsbl.at(1,1);
   //  Render iTime Buffer
 Render_Bindgroup_Layout_Entries[1]={};
 Render_Bindgroup_Layout_Entries[1].binding=7;
-Render_Bindgroup_Layout_Entries[1].visibility=WGPU_SHADER_STAGE_FRAGMENT;
+Render_Bindgroup_Layout_Entries[1].visibility=WGPU_SHADER_STAGE_FRAGMENT|WGPU_SHADER_STAGE_VERTEX;;
 Render_Bindgroup_Layout_Entries[1].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 Render_Bindgroup_Layout_Entries[1].layout.buffer=wbbl.at(2,2);
   //  Render TextureIN
@@ -834,7 +834,7 @@ Render_Bindgroup_Layout_Entries_2[0].layout.sampler=wsbl.at(1,1);
   //  Render_2 iTime Buffer
 Render_Bindgroup_Layout_Entries_2[1]={};
 Render_Bindgroup_Layout_Entries_2[1].binding=7;
-Render_Bindgroup_Layout_Entries_2[1].visibility=WGPU_SHADER_STAGE_FRAGMENT;
+Render_Bindgroup_Layout_Entries_2[1].visibility=WGPU_SHADER_STAGE_FRAGMENT|WGPU_SHADER_STAGE_VERTEX;
 Render_Bindgroup_Layout_Entries_2[1].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 Render_Bindgroup_Layout_Entries_2[1].layout.buffer=wbbl.at(2,2);
   //  Render_2 TextureIN
