@@ -68,7 +68,7 @@ FS.writeFile('/video/frame.gl',hp);
 Module.ccall("frmOn");
 },16.6);
 }
- 
+
 function imageStart(){
 let vvi=document.querySelector('#ivi');
 let SiZ=window.innerHeight;
@@ -120,6 +120,81 @@ let pixelData=new Float64Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
 FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
+}
+
+function imageStartSR(){
+let vvi=document.querySelector('#ivi');
+let SiZ=window.innerHeight;
+let w$=parseInt(document.querySelector("#ivi").width);
+let h$=parseInt(document.querySelector("#ivi").height);
+if(running==0){
+setTimeout(function(){
+let vsiz=document.querySelector('#vsiz').innerHTML;
+Module.ccall("startWebGPUi",null,"Number",[vsiz]);
+console.log('Starting..');
+running=1;
+},250);
+}else{
+setTimeout(function(){
+let vsiz=document.querySelector('#vsiz').innerHTML;
+Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
+console.log('Starting..');
+},250);
+}
+console.log("vid size: ",h$,", ",w$);
+let cnv=document.querySelector('#bcanvas');
+let cnvb=document.querySelector('#canvas');
+cnv.height=SiZ;
+cnvb.height=h$;
+cnv.width=SiZ;
+cnvb.width=w$;
+let offS=Math.floor((w$-h$)/2);
+let la=nearestPowerOf2(((w$*h$*4)/4)*4);
+// const gl3=cnvb.getContext('2d',{colorType:'float64',alpha:true}); // 
+const gl3=cnvb.getContext('2d',{
+colorType:'float64',
+alpha:true,
+willReadFrequently:false,
+stencil:false,
+depth:false,
+// colorSpace:"display-p3",
+desynchronized:false,
+antialias:true,
+powerPreference:"high-performance",
+premultipliedAlpha:true,
+preserveDrawingBuffer:false
+}); // 
+ const gl4=cnv.getContext('2d',{
+colorType:'float64',
+alpha:true,
+willReadFrequently:false,
+stencil:false,
+depth:false,
+// colorSpace:"display-p3",
+desynchronized:false,
+antialias:true,
+powerPreference:"high-performance",
+premultipliedAlpha:true,
+preserveDrawingBuffer:false
+}); // 
+gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
+// let image=flipImageData(gl3.getImageData(0,0,w$,h$));
+let image=gl3.getImageData(0,0,w$,h$);
+let imageData=image.data;
+// let pixelData=new Uint8ClampedArray(imageData);
+let pixelData=new Float64Array(imageData);
+// var pixelData=new Float64Array(imageData,0,la);
+FS.writeFile('/video/frame.gl',pixelData);
+Module.ccall("frmOn");
+setInterval(function(){
+image=gl4.getImageData(0,0,SiZ,SiZ);
+gl3.drawImage(image,0,offS,h$,h$,0,0,h$,h$);
+let image=gl3.getImageData(0,0,w$,h$);
+imageData=image.data;
+pixelData=new Float64Array(imageData);
+FS.writeFile('/video/frame.gl',pixelData);
+Module.ccall("frmOn");
+},16.666);
 }
 
 function videoStart(){
@@ -434,7 +509,7 @@ getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
 normalResSetup();
 setTimeout(function(){
-imageStart();
+imageStartSR();
 },3000);
 });
 
