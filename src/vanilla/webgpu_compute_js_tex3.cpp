@@ -297,7 +297,7 @@ cnv.width=SiZ;
 cnvb.width=w$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-let gl3=vvic.getContext('webgl2',{
+let gl3=vvic.getContext('2d',{
 colorType:'float64',
 alpha:true,
 willReadFrequently:false,
