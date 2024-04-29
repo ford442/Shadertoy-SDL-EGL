@@ -127,9 +127,10 @@ setInterval(function(){
 // imageData=image.data;
 // pixelData=new Uint8ClampedArray(imageData);
 // pixelData=new Float64Array(imageData);
-// FS.writeFile('/video/frame.gl',pixelData);
+FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
-},16.666);}
+},16.666);
+}
 
 function videoStart(){
 let vvi=document.querySelector('#mvi');
@@ -200,7 +201,7 @@ pixelData=new Float64Array(imageData);
 // pixelData=new Float64Array(imageData,0,la);  // causes sub-array data array-reforming (slower)
 FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
-},10);
+},16.666);
 }
 
 function canvasStart(){
@@ -260,7 +261,7 @@ pixelData=new Float64Array(imageData);
 // pixelData=new Float64Array(imageData,0,la);  // causes sub-array data array-reforming (slower)
 FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
-},10);
+},16.666);
 }
 
 function regularStart(){
