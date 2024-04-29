@@ -852,7 +852,7 @@ Render_Bindgroup_Layout_Entries_2[3].layout.buffer=wbbl.at(2,2);
   //  Render_2 iFrame Buffer
 Render_Bindgroup_Layout_Entries_2[4]={};
 Render_Bindgroup_Layout_Entries_2[4].binding=6;
-Render_Bindgroup_Layout_Entries_2[4].visibility=WGPU_SHADER_STAGE_FRAGMENT;
+Render_Bindgroup_Layout_Entries_2[4].visibility=WGPU_SHADER_STAGE_FRAGMENT|WGPU_SHADER_STAGE_VERTEX;
 Render_Bindgroup_Layout_Entries_2[4].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 Render_Bindgroup_Layout_Entries_2[4].layout.buffer=wbbl.at(0,0);
 wbgle.at(1,1)=Render_Bindgroup_Layout_Entries_2;
