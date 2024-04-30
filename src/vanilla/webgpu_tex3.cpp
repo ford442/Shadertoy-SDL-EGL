@@ -287,11 +287,11 @@ const char * vert_body=(char*)rd_fl(FnmV);
 // canvasFormat=navigator_gpu_get_preferred_canvas_format();
 wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
 // wtf.at(0,0)=navigator_gpu_get_preferred_canvas_format();
-wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
+// wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
   
   wtf.at(1,1)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
   
-// wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
+wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
 wtf.at(4,4)=WGPU_TEXTURE_FORMAT_INVALID;
 // wtf.at(5,5)=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 // wtf.at(5,5)=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
