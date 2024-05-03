@@ -297,14 +297,14 @@ var pixelData=new Float32Array(imageData);
 
 if(running==0){
 setTimeout(function(){
-var vsiz=document.querySelector('#vsiz').innerHTML;
+let vsiz=document.querySelector('#vsiz').innerHTML;
 Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
-var vsiz=document.querySelector('#vsiz').innerHTML;
+let vsiz=document.querySelector('#vsiz').innerHTML;
 Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
 console.log('Starting..');
 },250);
