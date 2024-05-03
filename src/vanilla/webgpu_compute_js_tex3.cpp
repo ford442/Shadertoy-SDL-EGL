@@ -302,6 +302,7 @@ gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
 var image=gl3.getImageData(0,0,w$,h$);
 var imageData=image.data;
 var pixelData=new Float64Array(imageData);
+FS.writeFile('/video/frame.gl',pixelData);
 
 if(running==0){
 setTimeout(function(){
@@ -317,7 +318,6 @@ Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
 console.log('Starting..');
 },250);
 }
-// FS.writeFile('/video/frame.gl',pixelData);
 // Module.ccall("frmOn");
  
 setInterval(function(){
@@ -327,7 +327,7 @@ imageData=image.data;
 pixelData=new Float64Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
-},16.666);
+},24);
 }
 
 function regularStart(){
