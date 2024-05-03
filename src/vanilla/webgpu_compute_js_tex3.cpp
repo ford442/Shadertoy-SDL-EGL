@@ -45,7 +45,7 @@ running=1;
 }
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
-let cnvb=document.querySelector('#canvas');
+let cnvb=document.querySelector('#scanvas');
 cnv.height=SiZ;
 cnvb.height=h$;
 cnv.width=SiZ;
@@ -90,7 +90,7 @@ console.log('Starting..');
 }
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
-let cnvb=document.querySelector('#canvas');
+let cnvb=document.querySelector('#scanvas');
 cnv.height=SiZ;
 cnvb.height=h$;
 cnv.width=SiZ;
@@ -143,7 +143,7 @@ console.log('Starting..');
 }
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
-let cnvb=document.querySelector('#canvas');
+let cnvb=document.querySelector('#scanvas');
 cnv.height=SiZ;
 cnvb.height=h$;
 cnv.width=SiZ;
@@ -223,7 +223,7 @@ console.log('Starting..');
 }
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
-let cnvb=document.querySelector('#canvas');
+let cnvb=document.querySelector('#scanvas');
 cnv.height=h$;
 cnvb.height=SiZ;
 cnv.width=w$;
@@ -277,7 +277,7 @@ var w$=parseInt(vvic.width);
 var h$=parseInt(vvic.height);
 // var h$=vvic.height*1.0;
 console.log("canvas size: ",h$,", ",w$);
-var cnv=document.querySelector('#canvas');
+var cnv=document.querySelector('#scanvas');
 var cnvb=document.querySelector('#bcanvas');
 cnv.height=SiZ;
 cnvb.height=h$;
@@ -332,7 +332,7 @@ Module.ccall("frmOn");
 
 function regularStart(){
 let SiZ=window.innerHeight;
-let cnvb=document.querySelector('#canvas');
+let cnvb=document.querySelector('#scanvas');
 cnvb.height=SiZ;
 cnvb.width=SiZ;
 if(running==0){
@@ -407,9 +407,9 @@ document.querySelector('#circle').width=window.innerWidth;
 document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.querySelector('#ihig').innerHTML=parseInt(window.innerHeight,10);
-document.querySelector('#canvas').height=parseInt(window.innerHeight,10);
+document.querySelector('#scanvas').height=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').height=parseInt(window.innerHeight,10);
-document.querySelector('#canvas').width=parseInt(window.innerHeight,10);
+document.querySelector('#scanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
 },500);
