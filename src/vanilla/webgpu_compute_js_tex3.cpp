@@ -270,6 +270,30 @@ Module.ccall("frmOn");
 }
 
 function canvasStart(){
+var vvic=document.querySelector('#mvi');
+var SiZ=window.innerHeight;
+var w$=parseInt(vvic.width);
+// var w$=vvic.width*1.0;
+var h$=parseInt(vvic.height);
+// var h$=vvic.height*1.0;
+console.log("canvas size: ",h$,", ",w$);
+var cnv=document.querySelector('#canvas');
+var cnvb=document.querySelector('#bcanvas');
+cnv.height=SiZ;
+cnvb.height=h$;
+cnv.width=SiZ;
+cnvb.width=w$;
+var offS=Math.floor((w$-h$)/2);
+var la=nearestPowerOf2(((w$*h$*4)/4)*4);
+var gl3=cnvb.getContext('2d',{
+alpha:true,
+colorType:'float32'
+});
+gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
+var image=gl3.getImageData(0,0,w$,h$);
+var imageData=image.data;
+var pixelData=new Float32Array(imageData);
+
 if(running==0){
 setTimeout(function(){
 var vsiz=document.querySelector('#vsiz').innerHTML;
@@ -284,41 +308,17 @@ Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
 console.log('Starting..');
 },250);
 }
-var vvic=document.querySelector('#mvi');
-var SiZ=window.innerHeight;
-var w$=vvic.width;
-var h$=vvic.height;
-console.log("canvas size: ",h$,", ",w$);
-var cnv=document.querySelector('#canvas');
-var cnvb=document.querySelector('#bcanvas');
-cnv.height=SiZ;
-cnvb.height=h$;
-cnv.width=SiZ;
-cnvb.width=w$;
-var offS=Math.floor((w$-h$)/2);
-var la=nearestPowerOf2(((w$*h$*4)/4)*4);
-var gl3=cnvb.getContext('2d',{
-alpha:true,
-colorType:'float32',
-});
-var gl4=cnvb.getContext('2d',{
-alpha:true,
-colorType:'float32',
-});
-gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
-var image=gl4.getImageData(0,0,w$,h$);
-var imageData=image.data;
-var pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
+ 
 setInterval(function(){
 gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
-image=gl4.getImageData(0,0,w$,h$);
+image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
 pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
-},16.66);
+},16.666);
 }
 
 function regularStart(){
