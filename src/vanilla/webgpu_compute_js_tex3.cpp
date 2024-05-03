@@ -287,7 +287,8 @@ var offS=Math.floor((w$-h$)/2);
 var la=nearestPowerOf2(((w$*h$*4)/4)*4);
 var gl3=cnvb.getContext('2d',{
 alpha:true,
-colorType:'float32'
+colorType:'float32',
+willReadFrequently:true
 });
 gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
 var image=gl3.getImageData(0,0,w$,h$);
