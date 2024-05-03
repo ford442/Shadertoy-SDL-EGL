@@ -272,51 +272,48 @@ Module.ccall("frmOn");
 function canvasStart(){
 if(running==0){
 setTimeout(function(){
-let vsiz=document.querySelector('#vsiz').innerHTML;
+var vsiz=document.querySelector('#vsiz').innerHTML;
 Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
-let vsiz=document.querySelector('#vsiz').innerHTML;
+var vsiz=document.querySelector('#vsiz').innerHTML;
 Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
 console.log('Starting..');
 },250);
 }
-let vvic=document.querySelector('#mvi');
-let SiZ=window.innerHeight;
-let w$=vvic.width;
-let h$=vvic.height;
+var vvic=document.querySelector('#mvi');
+var SiZ=window.innerHeight;
+var w$=vvic.width;
+var h$=vvic.height;
 console.log("canvas size: ",h$,", ",w$);
-let cnv=document.querySelector('#canvas');
-let cnvb=document.querySelector('#bcanvas');
+var cnv=document.querySelector('#canvas');
+var cnvb=document.querySelector('#bcanvas');
 cnv.height=SiZ;
 cnvb.height=h$;
 cnv.width=SiZ;
 cnvb.width=w$;
-let offS=Math.floor((w$-h$)/2);
-let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-let gl3=cnvb.getContext('2d',{
+var offS=Math.floor((w$-h$)/2);
+var la=nearestPowerOf2(((w$*h$*4)/4)*4);
+var gl3=cnvb.getContext('2d',{
 alpha:true
 });
 gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
-let image=gl3.getImageData(0,0,w$,h$);
-let imageData=image.data;
-// let pixelData=new Uint8ClampedArray(imageData);
-let pixelData=new Float64Array(imageData);
+var image=gl3.getImageData(0,0,w$,h$);
+var imageData=image.data;
+var pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
 setInterval(function(){
 gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
-// pixelData=new Uint8ClampedArray(imageData);
-pixelData=new Float64Array(imageData);
-// pixelData=new Float64Array(imageData,0,la);  // causes sub-array data array-reforming (slower)
+pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
-},16.666);
+},16.66);
 }
 
 function regularStart(){
