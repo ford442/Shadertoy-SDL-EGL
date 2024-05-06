@@ -93,7 +93,6 @@ colorAttachment.clearValue=clearC.at(0,0);
 wrpca.at(0,0)=colorAttachment;
 INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
 wtv.at(3,3)=INTextureView;
-
 OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureViewDescriptor.at(0,0,1));
 wtv.at(4,4)=OUTTextureView;
 OUTTexture2View=wgpu_texture_create_view(WGPU_Texture.at(0,0,2),&WGPU_TextureViewDescriptor.at(0,0,2));
@@ -287,10 +286,9 @@ const char * vert_body=(char*)rd_fl(FnmV);
 // canvasFormat=navigator_gpu_get_preferred_canvas_format();
 wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
 // wtf.at(0,0)=navigator_gpu_get_preferred_canvas_format();
-// wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
-  
+wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
   wtf.at(1,1)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
-wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RG11B10UFLOAT;
+// wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RG11B10UFLOAT;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 wtf.at(4,4)=WGPU_TEXTURE_FORMAT_INVALID;
 // wtf.at(5,5)=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
@@ -1025,7 +1023,7 @@ void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
 wa.at(0,0)=result;
 // deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8;
 // deviceDesc.requiredFeatures=WGPU_FEATURE_FLOAT32_FILTERABLE;
-deviceDesc.requiredFeatures=WGPU_FEATURE_RG11B10UFLOAT_RENDERABLE;
+// deviceDesc.requiredFeatures=WGPU_FEATURE_RG11B10UFLOAT_RENDERABLE;
 // WGPU_FEATURES_BITFIELD ftr=wgpu_adapter_or_device_get_features(wa.at(0,0));
 // deviceDesc.requiredFeatures=ftr;
   /*
