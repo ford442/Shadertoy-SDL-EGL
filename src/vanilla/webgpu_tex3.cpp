@@ -291,7 +291,7 @@ wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
   
   wtf.at(1,1)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
   
-wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA16FLOAT;
+wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 wtf.at(4,4)=WGPU_TEXTURE_FORMAT_INVALID;
 // wtf.at(5,5)=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 // wtf.at(5,5)=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
@@ -609,7 +609,7 @@ videoTextureDescriptor.depthOrArrayLayers=1;
 videoTextureDescriptor.mipLevelCount=1;
 videoTextureDescriptor.sampleCount=1;
 videoTextureDescriptor.dimension=WGPU_TEXTURE_DIMENSION_2D;
-videoViewFormats[0]={wtf.at(0,0)};
+// videoViewFormats[0]={wtf.at(0,0)};
 videoTextureDescriptor.numViewFormats=0; // &videoViewFormats[0];
 videoTextureDescriptor.viewFormats=nullptr; // &videoViewFormats[0];
 wtd.at(2,2)=videoTextureDescriptor;
