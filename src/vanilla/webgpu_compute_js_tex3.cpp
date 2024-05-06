@@ -298,12 +298,12 @@ powerPreference:"high-performance",
 premultipliedAlpha:true,
 preserveDrawingBuffer:false
 }); // 
+let fileStream=FS.open('/video/frame.gl','w');
 gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
-var image=gl3.getImageData(0,0,w$,h$);
-var imageData=image.data;
-var pixelData=new Float64Array(imageData);
-FS.writeFile('/video/frame.gl',pixelData);
-
+let image=gl3.getImageData(0,0,w$,h$);
+let imageData=image.data;
+let pixelData=new Float64Array(imageData);
+FS.write('/video/frame.gl',pixelData,0,pixelData.length,0);
 if(running==0){
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
@@ -319,15 +319,14 @@ console.log('Starting..');
 },250);
 }
 // Module.ccall("frmOn");
- 
 setInterval(function(){
 gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
 pixelData=new Float64Array(imageData);
-FS.writeFile('/video/frame.gl',pixelData);
+FS.write('/video/frame.gl',pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
-},24);
+},10);
 }
 
 function regularStart(){
