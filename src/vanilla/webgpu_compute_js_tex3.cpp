@@ -286,7 +286,7 @@ cnv.width=SiZ;
 cnvb.width=w$;
 var offS=Math.floor((w$-h$)/2);
 var la=nearestPowerOf2(((w$*h$*4)/4)*4);
-const gl3=cnv.getContext('2d',{
+const gl3=vvic.getContext('2d',{
 colorType:'float32',
 alpha:true,
 willReadFrequently:false,
@@ -299,7 +299,7 @@ powerPreference:"high-performance",
 premultipliedAlpha:true,
 preserveDrawingBuffer:false
 }); // 
-gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
+// gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
 let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
 let pixelData=new Float32Array(imageData);
@@ -321,7 +321,7 @@ console.log('Starting..');
 }
 // Module.ccall("frmOn");
 setInterval(function(){
-gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
+// gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
 pixelData=new Float32Array(imageData);
