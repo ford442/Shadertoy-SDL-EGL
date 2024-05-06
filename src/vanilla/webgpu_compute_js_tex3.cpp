@@ -286,8 +286,8 @@ cnv.width=SiZ;
 cnvb.width=w$;
 var offS=Math.floor((w$-h$)/2);
 var la=nearestPowerOf2(((w$*h$*4)/4)*4);
-const gl3=vvic.getContext('2d',{
-colorType:'float32',
+const gl3=cnvb.getContext('2d',{
+colorType:'float64',
 alpha:true,
 willReadFrequently:false,
 stencil:false,
@@ -298,11 +298,12 @@ antialias:true,
 powerPreference:"high-performance",
 premultipliedAlpha:true,
 preserveDrawingBuffer:false
-}); // 
-// gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
+});
+vvic=document.querySelector('#mvi');
+gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
 let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
-let pixelData=new Float32Array(imageData);
+let pixelData=new Float64Array(imageData);
 let fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 if(running==0){
@@ -321,10 +322,10 @@ console.log('Starting..');
 }
 // Module.ccall("frmOn");
 setInterval(function(){
-// gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
+gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
-pixelData=new Float32Array(imageData);
+pixelData=new Float64Array(imageData);
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
 },10);
