@@ -29,9 +29,9 @@ function canvasStart(){
 var vvic=document.querySelector('#mvi');
 var SiZ=window.innerHeight;
 var w$=vvic.width;
-// var w$=vvic.width*1.0;
+vvic.width=w$;
 var h$=vvic.height;
-// var h$=vvic.height*1.0;
+vvic.height=h$;
 console.log("canvas size: ",h$,", ",w$);
 var cnv=document.querySelector('#scanvas');
 var cnvb=document.querySelector('#bcanvas');
@@ -119,7 +119,6 @@ cnv.width=w$;
 cnvb.width=SiZ;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-// const gl3=cnvb.getContext('2d',{colorType:'float64',alpha:true}); // 
 const gl3=cnv.getContext('2d',{
 colorType:'float32',
 alpha:true,
@@ -132,7 +131,7 @@ antialias:true,
 powerPreference:"high-performance",
 premultipliedAlpha:true,
 preserveDrawingBuffer:false
-}); // 
+});
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 // var image=flipImageData(gl3.getImageData(0,0,w$,h$));
 let image=gl3.getImageData(0,0,w$,h$);
