@@ -290,8 +290,8 @@ wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
   
   wtf.at(1,1)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
-  
-wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
+wtf.at(0,0)WGPU_TEXTURE_FORMAT_RG11B10UFLOAT
+// wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 wtf.at(4,4)=WGPU_TEXTURE_FORMAT_INVALID;
 // wtf.at(5,5)=WGPU_TEXTURE_FORMAT_DEPTH32FLOAT_STENCIL8;
 // wtf.at(5,5)=WGPU_TEXTURE_FORMAT_DEPTH24PLUS_STENCIL8;
@@ -303,8 +303,8 @@ config.format=wtf.at(0,0);
 config.usage=WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT;
 // config.numViewFormats=1;
 config.viewFormats=&canvasViewFormat[0];
-config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
-// config.alphaMode=WGPU_CANVAS_ALPHA_MODE_OPAQUE;
+// config.alphaMode=WGPU_CANVAS_ALPHA_MODE_PREMULTIPLIED;
+config.alphaMode=WGPU_CANVAS_ALPHA_MODE_OPAQUE;
 config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
 // config.colorSpace=HTML_PREDEFINED_COLOR_SPACE_SRGB;
 wccf.at(0,0)=config;
@@ -1025,8 +1025,9 @@ void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
 wa.at(0,0)=result;
 // deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8;
 // deviceDesc.requiredFeatures=WGPU_FEATURE_FLOAT32_FILTERABLE;
-WGPU_FEATURES_BITFIELD ftr=wgpu_adapter_or_device_get_features(wa.at(0,0));
-deviceDesc.requiredFeatures=ftr;
+deviceDesc.requiredFeatures=WGPU_FEATURE_RG11B10UFLOAT_RENDERABLE;
+// WGPU_FEATURES_BITFIELD ftr=wgpu_adapter_or_device_get_features(wa.at(0,0));
+// deviceDesc.requiredFeatures=ftr;
   /*
 WGpuSupportedLimits lmts;
 lmts.maxUniformBufferBindingSize=sizeof(uint64_t);
