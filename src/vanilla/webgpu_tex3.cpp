@@ -505,7 +505,7 @@ vertAtt2.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
   
 wva.at(0,0)=&vertAtt;
 vertBufLayout.numAttributes=1;
-vertBufLayout.attributes=wva.at(0,0);
+vertBufLayout.attributes=&vertAtt;
 vertBufLayout.arrayStride=sizeof(VertexFUV);
 vertBufLayout.stepMode=WGPU_VERTEX_STEP_MODE_VERTEX;
 wvbl.at(0,0)=vertBufLayout;
@@ -755,7 +755,7 @@ depthState.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
 vertState.module=vs;
 vertState.entryPoint="main";
 vertState.numBuffers=1;
-vertState.buffers=wvbl.at(0,0);
+vertState.buffers=&wvbl.at(0,0);
 vertState.numConstants=0;
 vertState.constants=nullptr;
 priState.topology=WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST; // Defaults to WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST ('triangle-list')
