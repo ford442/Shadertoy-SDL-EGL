@@ -488,12 +488,12 @@ wbd.at(6,6)=bufferDescriptor_vertex;
   
   std::vector<WGpuVertexAttribute>vertAtts;
 
-WGPUVertexAttribute& attr1 = vertAtts.emplace_back();
+WGpuVertexAttribute& attr1 = vertAtts.emplace_back();
 attr1.offset=0;
 attr1.shaderLocation=0;
 attr1.format = WGPU_VERTEX_FORMAT_FLOAT32X4;
   
-WGPUVertexAttribute& attr2 = vertAtts.emplace_back();
+WGpuVertexAttribute& attr2 = vertAtts.emplace_back();
 attr2.offset=0;
 attr2.shaderLocation=1;
 attr2.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
