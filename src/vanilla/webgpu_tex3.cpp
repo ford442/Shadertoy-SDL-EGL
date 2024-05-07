@@ -505,7 +505,7 @@ vertAtt2.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
 */
 // wva.at(0,0)=&vertAtt;
 vertBufLayout.numAttributes=2;
-vertBufLayout.attributes=vertAtts;
+vertBufLayout.attributes=vertAtts.data();
 vertBufLayout.arrayStride=sizeof(VertexFUV);
 vertBufLayout.stepMode=WGPU_VERTEX_STEP_MODE_VERTEX;
 wvbl.at(0,0)=vertBufLayout;
