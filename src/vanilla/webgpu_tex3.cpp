@@ -498,7 +498,7 @@ atts[0].format=WGPU_VERTEX_FORMAT_FLOAT32X4;
 atts[1].offset=16;
 atts[1].shaderLocation=1;
 atts[1].format=WGPU_VERTEX_FORMAT_FLOAT32X4;
-  WGpuVertexAttribute * vertAtts={vertAtt,vertAtt2};
+//  WGpuVertexAttribute * vertAtts={vertAtt,vertAtt2};
 
 wva.at(0,0)=atts;
 vertBufLayout.numAttributes=2;
