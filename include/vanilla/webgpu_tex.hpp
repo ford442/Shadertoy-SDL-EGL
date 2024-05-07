@@ -250,6 +250,7 @@ using wpl_tensor=boost::numeric::ublas::tensor<WGpuPipelineLayout>;
 using wbg_tensor=boost::numeric::ublas::tensor<WGpuBindGroup>;
 using wbgl_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayout>;
 using wbgle_tensor=boost::numeric::ublas::tensor<WGpuBindGroupLayoutEntry *>;
+using wva_tensor=boost::numeric::ublas::tensor<WGpuVertexAttribute *>;
 using wbge_tensor=boost::numeric::ublas::tensor<WGpuBindGroupEntry *>;
 using wrpd_tensor=boost::numeric::ublas::tensor<WGpuRenderPassDescriptor>;
 using wcpd_tensor=boost::numeric::ublas::tensor<WGpuComputePassDescriptor>;
