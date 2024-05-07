@@ -495,17 +495,17 @@ WGpuVertexAttribute& attr2 = vertAtts.emplace_back();
 attr2.offset=0;
 attr2.shaderLocation=1;
 attr2.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
-/*
+
 vertAtt.offset=0;
 vertAtt.shaderLocation=0;
 vertAtt.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
 vertAtt2.offset=0;
 vertAtt2.shaderLocation=1;
 vertAtt2.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
-*/
-// wva.at(0,0)=&vertAtt;
-vertBufLayout.numAttributes=2;
-vertBufLayout.attributes=vertAtts.data();
+
+wva.at(0,0)=&vertAtt;
+vertBufLayout.numAttributes=1;
+vertBufLayout.attributes=wva.at(0,0);
 vertBufLayout.arrayStride=sizeof(VertexFUV);
 vertBufLayout.stepMode=WGPU_VERTEX_STEP_MODE_VERTEX;
 wvbl.at(0,0)=vertBufLayout;
