@@ -132,6 +132,7 @@ void runWebGPU();
 
 WGpuBuffer indice_Buffer;
 WGpuBuffer vertex_Buffer;
+WGpuBuffer vertex_Buffer_UV;
 
 WGpuImageBitmap bmpImage;
 
