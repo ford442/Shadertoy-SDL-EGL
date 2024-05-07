@@ -487,27 +487,25 @@ bufferDescriptor_vertex.mappedAtCreation=EM_FALSE;
 wbd.at(6,6)=bufferDescriptor_vertex;
 
 std::vector<WGpuVertexAttribute>vertAtts;
-WGpuVertexAttribute& attr1 = vertAtts.emplace_back();
+WGpuVertexAttribute& attr1=vertAtts.emplace_back();
 attr1.offset=0;
 attr1.shaderLocation=0;
 attr1.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
-  
-WGpuVertexAttribute& attr2 = vertAtts.emplace_back();
+WGpuVertexAttribute& attr2=vertAtts.emplace_back();
 attr2.offset=0;
 attr2.shaderLocation=1;
 attr2.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
 
+vertAtt.offset=0;
+vertAtt.shaderLocation=0;
+vertAtt.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
 vertAtt2.offset=0;
 vertAtt2.shaderLocation=1;
 vertAtt2.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
   
-vertAtt.offset=0;
-vertAtt.shaderLocation=0;
-vertAtt.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
-
 wva.at(0,0)=&vertAtt;
-vertBufLayout.numAttributes=2;
-vertBufLayout.attributes=vertAtts.data();
+vertBufLayout.numAttributes=1;
+vertBufLayout.attributes=wva.at(0,0);
 vertBufLayout.arrayStride=sizeof(VertexFUV);
 vertBufLayout.stepMode=WGPU_VERTEX_STEP_MODE_VERTEX;
 wvbl.at(0,0)=vertBufLayout;
@@ -757,7 +755,7 @@ depthState.depthCompare=WGPU_COMPARE_FUNCTION_LESS_EQUAL;
 vertState.module=vs;
 vertState.entryPoint="main";
 vertState.numBuffers=1;
-vertState.buffers=&wvbl.at(0,0);
+vertState.buffers=wvbl.at(0,0);
 vertState.numConstants=0;
 vertState.constants=nullptr;
 priState.topology=WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST; // Defaults to WGPU_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST ('triangle-list')
