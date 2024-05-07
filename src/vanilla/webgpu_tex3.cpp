@@ -485,19 +485,22 @@ bufferDescriptor_vertex.size=sizeof(FUVvertices);
 bufferDescriptor_vertex.usage=WGPU_BUFFER_USAGE_VERTEX|WGPU_BUFFER_USAGE_COPY_DST;
 bufferDescriptor_vertex.mappedAtCreation=EM_FALSE;
 wbd.at(6,6)=bufferDescriptor_vertex;
+  
 vertAtt.offset=0;
 vertAtt.shaderLocation=0;
 vertAtt.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
 vertAtt2.offset=16;
 vertAtt2.shaderLocation=1;
-vertAtt2.format=WGPU_VERTEX_FORMAT_FLOAT32X2;
+vertAtt2.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
 atts[0].offset=0;
 atts[0].shaderLocation=0;
 atts[0].format=WGPU_VERTEX_FORMAT_FLOAT32X4;
 atts[1].offset=16;
 atts[1].shaderLocation=1;
 atts[1].format=WGPU_VERTEX_FORMAT_FLOAT32X4;
-wva.at(0,0)=atts;
+  WGpuVertexAttribute vertAtts={vertAtt,vertAtt2};
+
+wva.at(0,0)=vertAtts;
 vertBufLayout.numAttributes=2;
 vertBufLayout.attributes=&wva.at(0,0);
 vertBufLayout.arrayStride=sizeof(VertexFUV);
