@@ -77,6 +77,7 @@ uint32_t indices[35]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,
 WGpuBufferDescriptor bufferDescriptor_indice={};
 WGpuVertexAttribute vertAtt={};
 WGpuVertexAttribute vertAtt2={};
+WGpuVertexBufferLayout vertBufLayouts[2];
 WGpuVertexBufferLayout vertBufLayout={};
 WGpuVertexBufferLayout vertBufLayoutUV={};
 WGpuBufferDescriptor bufferDescriptor_vertex={};
