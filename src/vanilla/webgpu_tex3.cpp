@@ -485,25 +485,13 @@ bufferDescriptor_vertex.size=sizeof(vertices);
 bufferDescriptor_vertex.usage=WGPU_BUFFER_USAGE_VERTEX|WGPU_BUFFER_USAGE_COPY_DST;
 bufferDescriptor_vertex.mappedAtCreation=EM_FALSE;
 wbd.at(6,6)=bufferDescriptor_vertex;
-
-std::vector<WGpuVertexAttribute>vertAtts;
-WGpuVertexAttribute& attr1=vertAtts.emplace_back();
-attr1.offset=0;
-attr1.shaderLocation=0;
-attr1.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
-WGpuVertexAttribute& attr2=vertAtts.emplace_back();
-attr2.offset=0;
-attr2.shaderLocation=1;
-attr2.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
-
 vertAtt.offset=0;
 vertAtt.shaderLocation=0;
 vertAtt.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
-vertAtt2.offset=0;
+vertAtt2.offset=16;
 vertAtt2.shaderLocation=1;
-vertAtt2.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
-  
-wva.at(0,0)=&vertAtt;
+vertAtt2.format=WGPU_VERTEX_FORMAT_FLOAT32X2;
+WGpuVertexAttribute vertAttArray[2]={vertAtt,vertAtt2};
 vertBufLayout.numAttributes=1;
 vertBufLayout.attributes=&vertAtt;
 vertBufLayout.arrayStride=sizeof(Vertex);
