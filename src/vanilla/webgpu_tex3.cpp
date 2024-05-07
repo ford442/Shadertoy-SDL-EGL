@@ -3,7 +3,6 @@
 #include "../../highway/hwy/foreach_target.h"
 #include "../../highway/hwy/highway.h"
 
-
 #include "../../src/vanilla/webgpu_compute_vars.cpp"
 
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
@@ -206,7 +205,6 @@ wgpu_render_pass_encoder_draw_indexed(wrpe.at(0,0),36,1,0,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
-
   //  Render Pass 2  (sampler)
 wceA={};
 wceB=wgpu_device_create_command_encoder(wd.at(0,0),0);
@@ -216,8 +214,8 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(1,1),0,0);
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(5,5),0,&u64_siz.at(2,2),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(5,5),0,&f32_uniform.at(1,1),sizeof(float));
-wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(4,4),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
-wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(3,3),0,sizeof(FUVvertices));
+wgpu_render_pass_encoder_set_index_buffer(wrpe.at(1,1),wb.at(4,4),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
+wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(1,1),0,wb.at(3,3),0,sizeof(FUVvertices));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0f,0.0f,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
 wgpu_render_pass_encoder_set_scissor_rect(wrpe.at(1,1),0.0f,0.0f,sze.at(0,0),sze.at(0,0));
 //  wgpu_render_pass_encoder_draw(wrpe.at(1,1),6,1,0,0);
