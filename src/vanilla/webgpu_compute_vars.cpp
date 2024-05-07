@@ -24,7 +24,16 @@ VertexF Fvertices[]={
 {-1.0,1.0,1.0,1.0}
 };
 
-VertexF Ffvertices[]={
+struct VertexFUV{
+float x, y, z, w; // Position
+float u, v;       // UV texture coordinates
+};
+
+struct Vertex{
+float x, y, z, w; // Position
+};
+
+Vertex vertices[]={
 {-1.0f,-1.0f,1.0f,1.0f},
 {1.0f,-1.0f,1.0f,1.0f},
 {1.0f,1.0f,1.0f,1.0f},
@@ -35,9 +44,19 @@ VertexF Ffvertices[]={
 {-1.0f,1.0f,1.0f,1.0f}
 };
 
-struct VertexFUV{
-float x, y, z, w; // Position
+struct VertexUV{
 float u, v;       // UV texture coordinates
+};
+
+VertexUV UVvertices[]={
+{0.0f,0.0f},
+{1.0f,0.0f},
+{1.0f,1.0f},
+{0.0f,1.0f},
+{0.0f,0.0f},
+{1.0f,0.0f},
+{1.0f,1.0f},
+{0.0f,1.0f}
 };
 
 VertexFUV FUVvertices[]={
@@ -77,9 +96,7 @@ uint32_t indices[35]={3,0,1,1,2,3,4,0,3,3,7,4,1,5,6,6,2,1,4,7,6,6,5,4,2,6,6,7,3,
 WGpuBufferDescriptor bufferDescriptor_indice={};
 WGpuVertexAttribute vertAtt={};
 WGpuVertexAttribute vertAtt2={};
-WGpuVertexBufferLayout vertBufLayouts[2];
 WGpuVertexBufferLayout vertBufLayout={};
-WGpuVertexBufferLayout vertBufLayoutUV={};
 WGpuBufferDescriptor bufferDescriptor_vertex={};
 WGpuBufferBindingLayout bufferBindingLayoutV={};
 WGpuBufferBindingLayout bufferBindingLayoutF={};
