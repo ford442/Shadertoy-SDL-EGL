@@ -404,7 +404,6 @@ textureViewDescriptorIn.baseMipLevel=0; // default = 0
 textureViewDescriptorIn.mipLevelCount=1;
 textureViewDescriptorIn.baseArrayLayer=0; // default = 0
 textureViewDescriptorIn.arrayLayerCount=1;
- // textureViewDescriptorInV.format=wtf.at(0,0);
 textureViewDescriptorInV.format=wtf.at(1,1);
 textureViewDescriptorInV.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureViewDescriptorInV.aspect=WGPU_TEXTURE_ASPECT_ALL;
@@ -492,8 +491,15 @@ vertAtt.format=WGPU_VERTEX_FORMAT_FLOAT32X4;
 vertAtt2.offset=16;
 vertAtt2.shaderLocation=1;
 vertAtt2.format=WGPU_VERTEX_FORMAT_FLOAT32X2;
+  WGpuVertexAttribute atts[2];
+  atts[0].offset=0;
+  atts[0].shaderLocation=0;
+  atts[0].format=WGPU_VERTEX_FORMAT_FLOAT32X4;
+  atts[1].offset=16;
+  atts[1].shaderLocation=1;
+  atts[1].format=WGPU_VERTEX_FORMAT_FLOAT32X2;
 vertBufLayout.numAttributes=2;
-vertBufLayout.attributes=[vertAtt,vertAtt2];
+vertBufLayout.attributes=&atts;
 vertBufLayout.arrayStride=sizeof(VertexFUV);
 vertBufLayout.stepMode=WGPU_VERTEX_STEP_MODE_VERTEX;
 wvbl.at(0,0)=vertBufLayout;
