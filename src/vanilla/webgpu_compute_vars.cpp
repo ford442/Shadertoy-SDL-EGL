@@ -78,6 +78,7 @@ WGpuBufferDescriptor bufferDescriptor_indice={};
 WGpuVertexAttribute vertAtt={};
 WGpuVertexAttribute vertAtt2={};
 WGpuVertexBufferLayout vertBufLayout={};
+WGpuVertexBufferLayout vertBufLayoutUV={};
 WGpuBufferDescriptor bufferDescriptor_vertex={};
 WGpuBufferBindingLayout bufferBindingLayoutV={};
 WGpuBufferBindingLayout bufferBindingLayoutF={};
