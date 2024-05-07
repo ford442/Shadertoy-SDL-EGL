@@ -481,7 +481,7 @@ wbd.at(4,4)=bufferDescriptorOut;
 wb.at(3,3)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 wb.at(4,4)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
     //  vert / indice buffers
-bufferDescriptor_vertex.size=sizeof(vertices);
+bufferDescriptor_vertex.size=sizeof(FUVvertices);
 bufferDescriptor_vertex.usage=WGPU_BUFFER_USAGE_VERTEX|WGPU_BUFFER_USAGE_COPY_DST;
 bufferDescriptor_vertex.mappedAtCreation=EM_FALSE;
 wbd.at(6,6)=bufferDescriptor_vertex;
