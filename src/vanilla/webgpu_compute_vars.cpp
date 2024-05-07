@@ -500,6 +500,7 @@ wsm_tensor WGPU_ComputeModule=wsm_tensor{3,3,3};
 wbg_tensor WGPU_BindGroup=wbg_tensor{1,1,2};
 wbgl_tensor WGPU_BindGroupLayout=wbgl_tensor{1,1,2};
 wbgle_tensor WGPU_Compute_Bindgroup_Layout_Entries=wbgle_tensor{1,1,2};
+wva_tensor wva=wva_tensor{2,2};
 wbge_tensor WGPU_BindGroupEntries=wbge_tensor{1,1,2};
 wbmc_tensor WGPU_MapCallback=wbmc_tensor{1,1,3};
 wdc_tensor WGPU_ComputeDoneCallback=wdc_tensor{1,1,3};
