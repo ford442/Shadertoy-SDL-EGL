@@ -59,6 +59,7 @@ using namespace std;
 #include <boost/chrono.hpp>
 #include <boost/compute/core.hpp>
 
+#include <array>
 #include <chrono>
 #include <cmath>
 #include <exception>
