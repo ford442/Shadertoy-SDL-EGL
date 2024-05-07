@@ -500,7 +500,7 @@ atts[1].shaderLocation=1;
 atts[1].format=WGPU_VERTEX_FORMAT_FLOAT32X4;
   WGpuVertexAttribute * vertAtts={vertAtt,vertAtt2};
 
-wva.at(0,0)=vertAtts;
+wva.at(0,0)=atts;
 vertBufLayout.numAttributes=2;
 vertBufLayout.attributes=&wva.at(0,0);
 vertBufLayout.arrayStride=sizeof(VertexFUV);
