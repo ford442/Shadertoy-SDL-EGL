@@ -400,7 +400,7 @@ regularStart();
 });
 
 const vsiz=document.querySelector('#vsiz');
-var menuSz=parseInt(window.innerWidth*.12,10);
+let menuSz=parseInt(window.innerWidth*.12,10);
 
 function normalResSetup(){
 setTimeout(function(){
