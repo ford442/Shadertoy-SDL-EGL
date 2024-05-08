@@ -400,7 +400,7 @@ regularStart();
 });
 
 const vsiz=document.querySelector('#vsiz');
-let menuSz=parseInt(window.innerWidth*.12,10);
+let menuSz=parseInt(window.innerWidth*.5,10);
 
 function normalResSetup(){
 setTimeout(function(){
@@ -501,7 +501,6 @@ var pth4=document.querySelector('#vertPath').innerHTML;
 getShader(pth2,'compute.wgsl');
 getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
- menuSz=parseInt(window.innerWidth*.5,10);
 normalResSetup();
 setTimeout(function(){
 canvasStart();
