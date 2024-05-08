@@ -28,9 +28,9 @@ return n;
 function canvasStart(){
 var vvic=document.querySelector('#mvi');
 var SiZ=window.innerHeight;
-var w$=1280;
+var w$=vvic.width;
 vvic.width=w$;
-var h$=720;
+var h$=vvic.height;
 vvic.height=h$;
 console.log("canvas size: ",h$,", ",w$);
 var cnv=document.querySelector('#scanvas');
