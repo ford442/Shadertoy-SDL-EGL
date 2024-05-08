@@ -26,19 +26,20 @@ return n;
 }}
 
 function canvasStart(){
+let vsiz=document.querySelector('#vsiz').innerHTML;
 var vvic=document.querySelector('#mvi');
 var SiZ=window.innerHeight;
-var w$=SiZ;
+var w$=vsiz;
 vvic.width=w$;
-var h$=SiZ;
+var h$=vsiz;
 vvic.height=h$;
 console.log("canvas size: ",h$,", ",w$);
 var cnv=document.querySelector('#scanvas');
 var cnvb=document.querySelector('#bcanvas');
 cnv.height=SiZ;
-cnvb.height=SiZ;
+cnvb.height=vsiz;
 cnv.width=SiZ;
-cnvb.width=SiZ;
+cnvb.width=vsiz;
 var offS=Math.floor((w$-h$)/2);
 var la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl3=cnvb.getContext('2d',{
@@ -63,7 +64,6 @@ let fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 if(running==0){
 setTimeout(function(){
-let vsiz=document.querySelector('#vsiz').innerHTML;
 Module.ccall("startWebGPUC",null,"Number",[vsiz]);
 console.log('Starting..');
 running=1;
