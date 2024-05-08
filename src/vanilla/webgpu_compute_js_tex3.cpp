@@ -64,7 +64,7 @@ FS.write(fileStream,pixelData,0,pixelData.length,0);
 if(running==0){
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz]);
+Module.ccall("startWebGPUC",null,"Number",[vsiz]);
 console.log('Starting..');
 running=1;
 },250);
