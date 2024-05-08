@@ -30,9 +30,9 @@ let vsiz=document.querySelector('#vsiz').innerHTML;
 var vvic=document.querySelector('#mvi');
 var SiZ=window.innerHeight;
 var w$=vsiz;
-vvic.width=w$;
+vvic.width=SiZ;
 var h$=vsiz;
-vvic.height=h$;
+vvic.height=SiZ;
 console.log("canvas size: ",h$,", ",w$);
 var cnv=document.querySelector('#scanvas');
 var cnvb=document.querySelector('#bcanvas');
@@ -58,7 +58,7 @@ premultipliedAlpha:true,
 preserveDrawingBuffer:false
 });
 vvic=document.querySelector('#mvi');
-gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
+gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
 let pixelData=new Float64Array(imageData);
@@ -79,7 +79,7 @@ console.log('Starting..');
 }
 Module.ccall("frmOn");
 setInterval(function(){
-gl3.drawImage(vvic,0,0,w$,h$,0,0,w$,h$);
+gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
 pixelData=new Float64Array(imageData);
