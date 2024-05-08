@@ -1049,6 +1049,19 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 return EM_TRUE;
 }
 
+EM_BOOL WGPU_StartC(int sz){
+sze.at(1,1)=sz;
+sze.at(6,6)=sz;
+sze.at(7,7)=sz;
+f32_uniform.at(2,2)=float(sze.at(1,1));
+szef.at(1,1)=float(sze.at(1,1));
+options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
+options.forceFallbackAdapter=EM_FALSE;
+wao.at(0,0)=options;
+navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
+return EM_TRUE;
+}
+
 #include "../../src/vanilla/webgpu_compute_js_tex3.cpp"
 
 extern"C"{
@@ -1070,6 +1083,11 @@ return;
 
 void startWebGPUbi(int sz){
 WGPU_Start(sz);
+return;
+}
+
+void startWebGPUC(int sz){
+WGPU_StartC(sz);
 return;
 }
 
