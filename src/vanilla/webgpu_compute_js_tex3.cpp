@@ -71,7 +71,7 @@ running=1;
 }else{
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
+Module.ccall("startWebGPUC",null,"Number",[vsiz]);
 console.log('Starting..');
 },250);
 }
