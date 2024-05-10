@@ -1023,15 +1023,12 @@ deviceDesc.requiredFeatures=WGPU_FEATURE_FLOAT32_FILTERABLE;
 // deviceDesc.requiredFeatures=WGPU_FEATURE_RG11B10UFLOAT_RENDERABLE;
 // WGPU_FEATURES_BITFIELD ftr=wgpu_adapter_or_device_get_features(wa.at(0,0));
 // deviceDesc.requiredFeatures=ftr;
-  /*
+
 WGpuSupportedLimits lmts;
-lmts.maxUniformBufferBindingSize=sizeof(uint64_t);
-lmts.maxStorageBufferBindingSize=1*1024*1024;
+wgpu_adapter_or_device_get_limits(wa.at(0,0),&lmts);
 lmts.maxBufferSize=1*1024*1024;
 lmts.maxColorAttachmentBytesPerSample=64;
-wgpu_adapter_or_device_get_limits(wa.at(0,0),&lmts);
-  */
-// deviceDesc.requiredLimits=lmts;
+deviceDesc.requiredLimits=lmts;
 wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
