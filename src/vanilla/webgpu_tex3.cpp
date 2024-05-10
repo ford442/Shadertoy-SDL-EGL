@@ -1026,8 +1026,8 @@ deviceDesc.requiredFeatures=WGPU_FEATURE_FLOAT32_FILTERABLE;
 
 WGpuSupportedLimits lmts;
 wgpu_adapter_or_device_get_limits(wa.at(0,0),&lmts);
-lmts.maxBufferSize=1*1024*1024;
-lmts.maxColorAttachmentBytesPerSample=64;
+lmts.maxBufferSize=512*1024*1024;
+lmts.maxColorAttachmentBytesPerSample=128;
 deviceDesc.requiredLimits=lmts;
 wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
