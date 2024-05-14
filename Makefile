@@ -135,9 +135,9 @@ b3_compute_egl_tex4:
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O2 -mextended-const -dead_strip -mbulk-memory -matomics -std=c++20 -pipe \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=off -sENVIRONMENT=web,node \
-	 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-t4.js -sTOTAL_STACK=524288 \
-	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 \
-	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm32 \
+	 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-t4.js -sTOTAL_STACK=524288 -sSTRICT_JS=1 \
+	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 -sSUPPORT_ERRNO=0 \
+	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm32 -DNDEBUG=1 \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -march=wasm32-avx -mtune=wasm32 \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=768mb -lmath.js -lhtml5.js -lint53.js \
