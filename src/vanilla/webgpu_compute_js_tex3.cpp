@@ -405,7 +405,8 @@ document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#di').click();
 document.querySelector('#status').style.backgroundColor="green";
 normalResSetup();
-regularStart();
+// regularStart();
+imageStart();
 },50);
 });
 
