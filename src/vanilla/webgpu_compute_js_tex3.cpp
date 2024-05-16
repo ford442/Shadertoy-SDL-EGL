@@ -381,9 +381,37 @@ ff.send(null);
 }
   
 let codeMessage=new BroadcastChannel('codeMessage');
+let codeMessageV=new BroadcastChannel('codeMessage');
 
 codeMessage.addEventListener('message',event=>{
 var pth2=document.querySelector('#computePathNovid').innerHTML;
+var pth3=document.querySelector('#fragPath').innerHTML;
+var pth4=document.querySelector('#vertPath').innerHTML;
+getShader(pth2,'compute.wgsl');
+getShader(pth3,'frag2.wgsl');
+getShader(pth4,'vert.wgsl');
+document.querySelector('#status').style.backgroundColor="blue";
+let flDat=event.data.data;
+var buffer = new ArrayBuffer(flDat.length*2);
+var bufferView = new Uint16Array(buffer);
+for (var i = 0; i < flDat.length; i++) {
+bufferView[i] = flDat.charCodeAt(i);
+}
+// console.log(bufferView);
+FS.writeFile('/shader/shader.wgsl',bufferView);
+// document.querySelector('#startBtn').click();
+setTimeout(function(){
+document.querySelector('#circle').width=window.innerWidth;
+document.querySelector('#circle').height=window.innerHeight;
+document.querySelector('#di').click();
+document.querySelector('#status').style.backgroundColor="green";
+normalResSetup();
+regularStart();
+},50);
+});
+
+codeMessageV.addEventListener('message',event=>{
+var pth2=document.querySelector('#computePath').innerHTML;
 var pth3=document.querySelector('#fragPath').innerHTML;
 var pth4=document.querySelector('#vertPath').innerHTML;
 getShader(pth2,'compute.wgsl');
