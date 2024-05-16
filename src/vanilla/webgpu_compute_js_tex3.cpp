@@ -255,6 +255,11 @@ let pixelData=new Float64Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
 FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
+setInterval(function(){
+ FS.writeFile('/video/frame.gl',pixelData);
+Module.ccall("frmOn");
+},16);
+ 
 }
 
 
