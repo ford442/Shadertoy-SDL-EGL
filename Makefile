@@ -131,9 +131,9 @@ b3_compute_egl_tex3:
 
 b3_compute_egl_tex4:
 	 em++ src/vanilla/webgpu_tex3.cpp -pipe -fno-fast-math -ffp-contract=fast -fexcess-precision=standard \
-	 -mextended-const -mbulk-memory -matomics -pthread -O2 -fchar8_t -std=c++26 $(wGL_FLAGS) \
+	 -mextended-const -mbulk-memory -matomics -pthread -O2 -fchar8_t -std=c++23 $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -O2 -mextended-const -dead_strip -mbulk-memory -matomics -std=c++26 -pipe \
+	 em++ -O2 -mextended-const -dead_strip -mbulk-memory -matomics -std=c++23 -pipe \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -sENVIRONMENT=web,node \
 	 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-t4.js -sTOTAL_STACK=524288 -sSTRICT_JS=1 \
 	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 -sSUPPORT_ERRNO=0 -lpthread \
