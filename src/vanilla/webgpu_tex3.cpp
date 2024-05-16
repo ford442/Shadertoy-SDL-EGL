@@ -1014,11 +1014,9 @@ u_time.t3=boost::chrono::high_resolution_clock::now();
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
 if(on.at(0,0)!=0){emscripten_cancel_main_loop();}
-  
 emscripten_set_main_loop_timing(EM_TIMING_RAF, 0);  // ??
 // emscripten_set_main_loop_timing(EM_TIMING_RAF, 1);  //  60hz
 // emscripten_set_main_loop_timing(EM_TIMING_RAF, 2);  //  30hz
-  
 emscripten_set_main_loop((void(*)())raf,0,0);
 on.at(0,0)=1;
 }
@@ -1030,12 +1028,11 @@ deviceDesc.requiredFeatures=WGPU_FEATURE_FLOAT32_FILTERABLE;
 // deviceDesc.requiredFeatures=WGPU_FEATURE_RG11B10UFLOAT_RENDERABLE;
 // WGPU_FEATURES_BITFIELD ftr=wgpu_adapter_or_device_get_features(wa.at(0,0));
 // deviceDesc.requiredFeatures=ftr;
-
 WGpuSupportedLimits lmts;
 wgpu_adapter_or_device_get_limits(wa.at(0,0),&lmts);
 lmts.maxBufferSize=512*1024*1024;
 lmts.maxColorAttachmentBytesPerSample=128;
-lmts.maxComputeWorkgroupSizeZ=128;
+// lmts.maxComputeWorkgroupSizeZ=128;
 deviceDesc.requiredLimits=lmts;
 wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
