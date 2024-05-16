@@ -253,14 +253,15 @@ let imageData=image.data;
 // let pixelData=new Uint8ClampedArray(imageData);
 let pixelData=new Float64Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
-FS.writeFile('/video/frame.gl',pixelData);
+let fileStream=FS.open('/video/frame.gl','w');
+FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
- /*
+
 setInterval(function(){
- FS.writeFile('/video/frame.gl',pixelData);
+FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
 },16);
- */
+
 }
 
 
