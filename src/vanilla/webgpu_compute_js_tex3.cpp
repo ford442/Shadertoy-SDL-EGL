@@ -318,7 +318,6 @@ Module.ccall("frmOn");
 },16.6);
 }
 
-}
 function imageStartSR(){
 let vvi=document.querySelector('#ivi');
 let SiZ=window.innerHeight;
