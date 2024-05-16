@@ -280,10 +280,10 @@ console.log('Starting..');
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#scanvas');
-cnv.height=SiZ;
-cnvb.height=h$;
-cnv.width=SiZ;
-cnvb.width=w$;
+cnv.height=h$;
+cnvb.height=SiZ;
+cnv.width=w$;
+cnvb.width=SiZ;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl3=cnv.getContext('2d',{
@@ -308,6 +308,7 @@ let pixelData=new Float64Array(imageData);
 let fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
+ /*
 setInterval(function(){
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 image=gl3.getImageData(0,0,w$,h$);
@@ -316,6 +317,7 @@ pixelData=new Float64Array(imageData);
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
 },16.6);
+ */
 }
 
 function imageStartSR(){
