@@ -85,7 +85,7 @@ imageData=image.data;
 pixelData=new Float64Array(imageData);
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
-},16.6);
+},33.3);
 }
  
 function videoStart(){
@@ -156,7 +156,7 @@ pixelData=new Float32Array(imageData);
 // pixelData=new Float64Array(imageData,0,la);  // causes sub-array data array-reforming (slower)
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
-},16.6);
+},33.3);
 }
 
  
@@ -260,7 +260,7 @@ Module.ccall("frmOn");
 setInterval(function(){
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
-},16);
+},33.3);
 
 }
 
