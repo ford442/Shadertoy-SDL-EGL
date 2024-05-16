@@ -286,7 +286,6 @@ cnv.width=SiZ;
 cnvb.width=w$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-// const gl3=cnvb.getContext('2d',{colorType:'float64',alpha:true}); // 
 const gl3=cnv.getContext('2d',{
 colorType:'float64',
 alpha:true,
@@ -299,9 +298,8 @@ antialias:true,
 powerPreference:"high-performance",
 premultipliedAlpha:true,
 preserveDrawingBuffer:false
-}); // 
+});
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
-// let image=flipImageData(gl3.getImageData(0,0,w$,h$));
 let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
 // let pixelData=new Uint8ClampedArray(imageData);
@@ -319,9 +317,8 @@ FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
 },16.6);
 }
- 
-}
 
+}
 function imageStartSR(){
 let vvi=document.querySelector('#ivi');
 let SiZ=window.innerHeight;
