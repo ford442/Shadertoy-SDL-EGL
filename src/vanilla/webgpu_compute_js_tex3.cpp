@@ -233,7 +233,7 @@ cnvb.width=w$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 // const gl3=cnvb.getContext('2d',{colorType:'float64',alpha:true}); // 
-const gl3=cnvb.getContext('2d',{
+const gl3=cnv.getContext('2d',{
 colorType:'float64',
 alpha:true,
 willReadFrequently:false,
@@ -519,9 +519,7 @@ getShader(pth2,'compute.wgsl');
 getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
 normalResSetup();
-setTimeout(function(){
 imageStart();
-},3000);
 });
 
 setTimeout(function(){
