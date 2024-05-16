@@ -239,7 +239,7 @@ alpha:true,
 willReadFrequently:false,
 stencil:false,
 depth:false,
-// colorSpace:"display-p3",
+colorSpace:"display-p3",
 desynchronized:false,
 antialias:true,
 powerPreference:"high-performance",
@@ -520,7 +520,7 @@ getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
 normalResSetup();
 setTimeout(function(){
-imageStartSR();
+imageStart();
 },3000);
 });
 
