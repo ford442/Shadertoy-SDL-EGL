@@ -381,7 +381,7 @@ ff.send(null);
 }
   
 let codeMessage=new BroadcastChannel('codeMessage');
-let codeMessageV=new BroadcastChannel('codeMessage');
+let codeMessageV=new BroadcastChannel('codeMessageV');
 
 codeMessage.addEventListener('message',event=>{
 var pth2=document.querySelector('#computePathNovid').innerHTML;
