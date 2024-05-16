@@ -406,7 +406,8 @@ document.querySelector('#di').click();
 document.querySelector('#status').style.backgroundColor="green";
 normalResSetup();
 // regularStart();
-imageStart();
+// imageStart();
+videoStart();
 },50);
 });
 
