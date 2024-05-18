@@ -27,15 +27,15 @@ return n;
 
 function canvasStart(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-var vvic=document.querySelector('#mvi');
+const vvic=document.querySelector('#mvi');
 var SiZ=window.innerHeight;
 var w$=vsiz;
 vvic.width=SiZ;
 var h$=vsiz;
 vvic.height=SiZ;
 console.log("canvas size: ",h$,", ",w$);
-var cnv=document.querySelector('#scanvas');
-var cnvb=document.querySelector('#bcanvas');
+const cnv=document.querySelector('#scanvas');
+const cnvb=document.querySelector('#bcanvas');
 cnv.height=SiZ;
 cnvb.height=vsiz;
 cnvb.style.height=vsiz+'px';
@@ -85,11 +85,11 @@ imageData=image.data;
 pixelData=new Float64Array(imageData);
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
-},33.3);
+},16.666);
 }
  
 function videoStart(){
-let vvi=document.querySelector('#mvi');
+const vvi=document.querySelector('#mvi');
 let vw$=vvi.videoWidth;
 let vh$=vvi.videoHeight;
 let SiZ=window.innerHeight;
