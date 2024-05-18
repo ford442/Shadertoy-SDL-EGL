@@ -150,7 +150,7 @@ b3_compute_egl_tex4:
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
 	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS='["wgpu_buffer_map_sync"]' \
-	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPUi","_startWebGPUbi","_startWebGPUC","_frmOn","_frmsOff","_wgpu_buffer_map_sync"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPUi","_startWebGPUbi","_startWebGPUC","_frmOn","_frmsOff"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --js-library lib/lib_webgpu.js --pre-js js/rSlider.js --pre-js js/slideOut.js --js-library lib/lib_demo.js \
 	 --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 webgpu_tex3.o --extern-pre-js js/gpujsx.js --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0
