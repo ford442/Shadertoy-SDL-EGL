@@ -132,7 +132,7 @@ b3_compute_egl_tex3:
 	 webgpu_tex3.o --extern-pre-js js/gpujsx.js
 
 b3_compute_egl_tex4:
-	 em++ src/vanilla/webgpu_tex3.cpp -pipe -fno-fast-math -ffp-contract=fast -fexcess-precision=standard \
+	 em++ src/vanilla/webgpu_tex3.cpp -pipe -ffp-contract=fast -fexcess-precision=standard \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math \
 	 -mextended-const -mbulk-memory -matomics -pthread -O3 -fchar8_t $(STDS) $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
