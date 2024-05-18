@@ -156,7 +156,7 @@ pixelData=new Float32Array(imageData);
 // pixelData=new Float64Array(imageData,0,la);  // causes sub-array data array-reforming (slower)
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
-},33.3);
+},16.666);
 }
 
  
@@ -590,7 +590,7 @@ getShader(pth2,'compute.wgsl');
 getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
 normalResSetup();
-videoStart2();
+videoStart();
 });
 
 document.querySelector('#startBtn2').addEventListener('click',function(){
