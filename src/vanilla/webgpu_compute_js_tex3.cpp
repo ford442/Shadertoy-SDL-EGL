@@ -57,7 +57,6 @@ powerPreference:"high-performance",
 premultipliedAlpha:true,
 preserveDrawingBuffer:false
 });
-vvic=document.querySelector('#mvi');
 gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
