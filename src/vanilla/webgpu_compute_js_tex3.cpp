@@ -120,7 +120,7 @@ cnvb.width=SiZ;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl3=cnv.getContext('2d',{
-colorType:'float32',
+colorType:'float64',
 alpha:true,
 willReadFrequently:false,
 stencil:false,
@@ -134,10 +134,10 @@ preserveDrawingBuffer:false
 });
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 // var image=flipImageData(gl3.getImageData(0,0,w$,h$));
-let image=gl3.getImageData(0,0,w$,h$);
-let imageData=image.data;
+var image=gl3.getImageData(0,0,w$,h$);
+var imageData=image.data;
 // let pixelData=new Uint8ClampedArray(imageData);
-let pixelData=new Float32Array(imageData);
+var pixelData=new Float64Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
 let fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
@@ -148,7 +148,7 @@ gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
 // pixelData=new Uint8ClampedArray(imageData);
-pixelData=new Float32Array(imageData);
+pixelData=new Float64Array(imageData);
  // pixelData=new Float64Array(imageData);
  //  const externalTexture = gpuDevice.createTexture({size: [imageWidth, imageHeight, 1],format: 'rgba8unorm',usage: GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST });
 // gpuQueue.writeTexture({ texture }, pixelData, { bytesPerRow }, { width: w$, height: h$ } );
@@ -299,11 +299,13 @@ console.log('Starting..');
 console.log("vid size: ",h$,", ",w$);
 let cnv=document.querySelector('#bcanvas');
 let cnvb=document.querySelector('#scanvas');
+var offsetX=Math.floor((w$-h$)/2);
+var offsetY=Math.floor((h$-w$)/2);
 cnvb.height=SiZ;
-cnv.height=h$;
+cnv.height=h$-offsetY;
 cnvb.width=SiZ;
-cnv.width=w$;
-let offS=Math.floor((w$-h$)/2);
+cnv.width=w$-offsetX;
+
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 // const gl3=cnvb.getContext('2d',{colorType:'float64',alpha:true}); // 
 const gl3=cnv.getContext('2d',{
@@ -319,21 +321,21 @@ powerPreference:"high-performance",
 premultipliedAlpha:true,
 preserveDrawingBuffer:false
 }); // 
-gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
+gl3.drawImage(vvi,0,0,w$-offsetX,h$-offsetY,0,0,w$-offsetX,h$-offsetY);
 // let image=flipImageData(gl3.getImageData(0,0,w$,h$));
-let image=gl3.getImageData(0,0,w$,h$);
-let imageData=image.data;
+var image=gl3.getImageData(0,0,w$-offsetX,h$-offsetY);
+var imageData=image.data;
 // let pixelData=new Uint8ClampedArray(imageData);
-let pixelData=new Float64Array(imageData);
+var pixelData=new Float64Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
-let fileStream=FS.open('/video/frame.gl','w');
+var fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
 
 setInterval(function(){
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
-},33.3);
+},16.666);
 
 }
 
