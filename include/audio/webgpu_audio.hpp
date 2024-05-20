@@ -295,7 +295,14 @@ using wvbl_tensor=boost::numeric::ublas::tensor<WGpuVertexBufferLayout>;
 using wetd_tensor=boost::numeric::ublas::tensor<WGpuExternalTextureDescriptor>;
 using wet_tensor=boost::numeric::ublas::tensor<WGpuExternalTexture>;
 using wvbl_tensor=boost::numeric::ublas::tensor<WGpuVertexBufferLayout>;
-
+using wib_tensor=boost::numeric::ublas::tensor<WGpuImageBitmap>;
+using d_tensor=boost::numeric::ublas::tensor<double>;
+using fjsv_tensor=boost::numeric::ublas::tensor<std::vector<float> *>;
+using wict_tensor=boost::numeric::ublas::tensor<WGpuImageCopyTexture>;
+using wictt_tensor=boost::numeric::ublas::tensor<WGpuImageCopyTextureTagged>;
+using wva_tensor=boost::numeric::ublas::tensor<WGpuVertexAttribute *>;
+using clk_tensor=boost::numeric::ublas::tensor<boost::chrono::high_resolution_clock::time_point>;
+using timespn_tensor=boost::numeric::ublas::tensor<boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>>;
 extern "C"{  
   
 EM_BOOL pl();
