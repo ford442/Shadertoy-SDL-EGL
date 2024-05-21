@@ -67,13 +67,12 @@ using namespace std;
 #include <limits>
 #include <numeric>
 #include <string>
-#include <vector>
 
 #include <algorithm>
 #include <stdarg.h>
 #include <stdio.h>
 #include <ctime>
-#include <vector>
+// #include <vector>
 #include <memory>
 #include <streambuf>
 
@@ -210,6 +209,11 @@ static long int length;
 
 using namespace boost::chrono;
 
+namespace boost::numeric::ublas {
+    // Create a vector type specifically for vec4
+    using vec4 = vector<float, 4>;  
+}
+
 // using dv_tensor=boost::numeric::ublas::tensor<SDL_AudioDeviceID>;
 using void_tensor=boost::numeric::ublas::tensor<boost::atomic<void *>>;
 using gi_tensor=boost::numeric::ublas::tensor<boost::atomic<long>>;
@@ -235,6 +239,8 @@ using mouse_tensor=boost::numeric::ublas::tensor<boost::compute::double_>;
 using c_tensor=boost::numeric::ublas::tensor<const char *>;
 using c32_tensor=boost::numeric::ublas::tensor<const char32_t *>;
 using f_tensor=boost::numeric::ublas::tensor<float>;
+using vec4_tensor = boost::numeric::ublas::tensor<boost::numeric::ublas::vec4>;
+
 using fptr_tensor=boost::numeric::ublas::tensor<float *>;
 using wce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
 using wrpe_tensor=boost::numeric::ublas::tensor<WGpuRenderPassEncoder>;
@@ -303,3 +309,4 @@ using wib_tensor=boost::numeric::ublas::tensor<WGpuImageBitmap>;
 using clk_tensor=boost::numeric::ublas::tensor<boost::chrono::high_resolution_clock::time_point>;
 using timespn_tensor=boost::numeric::ublas::tensor<boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>>;
 
+EM_BOOL ms_l,clk_l;
