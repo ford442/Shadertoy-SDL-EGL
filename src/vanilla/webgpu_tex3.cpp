@@ -1041,8 +1041,8 @@ wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceSt
 
 EM_BOOL WGPU_Start(int sz){
 sze.at(1,1)=sz;
-sze.at(6,6)=1280;
-sze.at(7,7)=720;
+sze.at(6,6)=sz;
+sze.at(7,7)=sz;
 f32_uniform.at(2,2)=static_cast<float>(sze.at(1,1));
 szef.at(1,1)=static_cast<float>(sze.at(1,1));
 options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
