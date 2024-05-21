@@ -42,12 +42,11 @@ GL_FLAGS = -sFULL_ES3=1 -lSDL -lGL -lEGL -sUSE_GLFW=0 -sUSE_REGAL=0 -sUSE_SDL=2 
 	 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sGL_TRACK_ERRORS=0
 
 LINK_FLAGS = $(LDFLAGS) -sDEFAULT_TO_CXX=1 \
-	 -sOFFSCREENCANVAS_SUPPORT=0 \
 	 -sTEXTDECODER=0 -sEMULATE_FUNCTION_POINTER_CASTS=0 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
 	 -sASSERTIONS=0 --typed-function-references --enable-reference-types \
 	 --use-preload-plugins --closure 0 --closureFriendly \
-	 -sWASM=1 -sTOTAL_STACK=65536 -sENVIRONMENT='web' -sSTRICT_JS=1 \
+	 -sWASM=1 -sWASM_BIGINT=1 -sTOTAL_STACK=65536 -sENVIRONMENT='web' -sSTRICT_JS=1 \
 	 -sGLOBAL_BASE=352321536 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2147483648 --output_eol linux -mllvm -mtune=wasm32 -march=wasm32-avx \
 	 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
