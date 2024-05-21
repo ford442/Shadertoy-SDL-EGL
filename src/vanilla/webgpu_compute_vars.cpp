@@ -555,6 +555,14 @@ c_tensor wgsl=c_tensor{2,2};
 clk_tensor time_pnt=clk_tensor{4,4};
 timespn_tensor time_spn=timespn_tensor{4,4};
 
+mouse_tensor mms=mouse_tensor{2,2};
+mouse_tensor mms2=mouse_tensor{2,2};
+vec4_tensor v4f32_uniform=vec4_tensor{2,2};
+
+
+EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
+
+
 WGpuComputePassDescriptor computePassDescriptor={};
 WGpuCommandBufferDescriptor commandBufferDescriptor={};
 WGpuCommandEncoderDescriptor commandEncoderDescriptor={};
