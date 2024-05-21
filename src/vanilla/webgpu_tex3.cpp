@@ -5,6 +5,26 @@
 
 #include "../../src/vanilla/webgpu_compute_vars.cpp"
 
+EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
+if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
+if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
+ms_l=true;
+}
+if(eventType==EMSCRIPTEN_EVENT_MOUSEUP){
+ms_l=false;
+}}
+return EM_TRUE;
+}
+
+EM_BOOL ms_mv(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
+if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
+if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
+mms2.at(0,0)=e->clientX;
+mms2.at(0,1)=e->clientY;
+}}
+return EM_TRUE;
+}
+
 WGpuBufferMapCallback mapCallbackStart=[](WGpuBuffer buffer,void * userData,WGPU_MAP_MODE_FLAGS mode,double_int53_t offset,double_int53_t size){
 return;
 };
@@ -71,6 +91,32 @@ return EM_TRUE;
 
 boost::function<EM_BOOL()>render=[](){
 u64_uni.at(3,3)++; 
+
+if(ms_l==true){
+mms.at(0,1)=round(mms2.at(0,0)*(float)sze.at(0,0));
+mms.at(1,0)=round((mms2.at(0,1))*(float)sze.at(0,0));
+}
+// retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+// retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+if(ms_l==true){
+// retMv=emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_mv);
+// retMu=emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
+if(clk_l==true){
+const long xxx=mms2.at(0,0);
+const long yyy=mms2.at(0,1);
+mms.at(0,1)=float(xxx);
+mms.at(1,0)=float((float)sze.at(0,0)-((yyy-sze.at(0,0))/2));
+clk_l=false;
+}
+mms.at(2,0)=float((float)sze.at(0,0)-mms2.at(0,0));
+mms.at(2,1)=float((float)sze.at(0,0)-mms2.at(0,1));
+v4f32_uniform.at(0,0)={mms.at(2,0),mms.at(2,1),mms.at(0,1),mms.at(1,0)};
+// glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,1),mms.at(1,0));
+}
+else{
+clk_l=true;
+}
+  
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
@@ -198,6 +244,8 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&f32_uniform.at(2,2),sizeof(float));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(3,3),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&f32_uniform.at(0,0),sizeof(float));
+  //  wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&v4f32_uniform.at(0,0),sizeof(float)*4);
+  
 wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(7,7),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(6,6),0,sizeof(vertices));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0f,0.0f,szef.at(1,1),szef.at(1,1),0.0f,1.0f);
@@ -322,6 +370,22 @@ f32_uniform.at(1,1)=szhI;
 f32_uniform.at(2,2)=static_cast<float>(sze.at(1,1));
 szef.at(0,0)=static_cast<float>(szhI);
 szef.at(1,1)=static_cast<float>(sze.at(1,1));
+  
+clk_l=true;
+
+     //  mouse setup
+mms.at(0,0)=0.5*szef.at(0,0);
+mms.at(0,1)=0.5*(mms2.at(0,1)-szef.at(0,0));
+mms.at(1,0)=0.5*szef.at(0,0);
+mms.at(1,1)=0.5*(mms2.at(0,1)-szef.at(0,0));
+mms.at(2,0)=szef.at(0,0)*0.5;
+mms.at(2,1)=(mms2.at(0,1)-szef.at(0,0))*0.5;
+
+emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,EM_FALSE,ms_clk);
+emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,EM_FALSE,ms_clk);
+emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,EM_FALSE,ms_mv);
+emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,EM_FALSE,ms_clk);
+
 u64_bfrSze.at(0,0)=256; // (floor((sze.at(0,0))/256)+1)*256;
 u64_bfrSze.at(1,1)=256; // (floor((sze.at(1,1))/256)+1)*256;
 originXYZ.x=0;
