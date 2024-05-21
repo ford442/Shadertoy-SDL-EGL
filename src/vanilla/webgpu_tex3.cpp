@@ -110,7 +110,7 @@ clk_l=false;
 }
 mms.at(2,0)=float((float)sze.at(0,0)-mms2.at(0,0));
 mms.at(2,1)=float((float)sze.at(0,0)-mms2.at(0,1));
-v4f32_uniform.at(0,0)=vector<float>({static_cast<float>(mms.at(2,0)),static_cast<float>(mms.at(2,1)),static_cast<float>(mms.at(0,1)),static_cast<float>(mms.at(1,0))});
+// v4f32_uniform.at(0,0)=vector<float>({static_cast<float>(mms.at(2,0)),static_cast<float>(mms.at(2,1)),static_cast<float>(mms.at(0,1)),static_cast<float>(mms.at(1,0))});
 // glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,1),mms.at(1,0));
 }
 else{
