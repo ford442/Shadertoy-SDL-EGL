@@ -211,7 +211,7 @@ using namespace boost::chrono;
 
 namespace boost::numeric::ublas {
     // Create a vector type specifically for vec4
-    using vec4 = vector<float, 4>;  
+    using vec4 = vector<float, boost::numeric::ublas::bounded_array<float, 4>>;
 }
 
 // using dv_tensor=boost::numeric::ublas::tensor<SDL_AudioDeviceID>;
