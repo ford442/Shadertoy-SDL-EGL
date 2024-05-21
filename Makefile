@@ -136,7 +136,7 @@ b3_compute_egl_tex4:
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math \
 	 -mextended-const -mbulk-memory -matomics -pthread -O3 -fchar8_t $(STDS) $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -O3 -mextended-const -dead_strip -mbulk-memory -matomics $(STDS) -pipe -DQUAD -DDOUBLE \
+	 em++ -O3 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics $(STDS) -pipe -DQUAD -DDOUBLE \
 	 -sWASM_BIGINT=0 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -sOFFSCREENCANVAS_SUPPORT=1 \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -sENVIRONMENT=web,node \
