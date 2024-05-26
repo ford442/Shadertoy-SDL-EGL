@@ -26,6 +26,12 @@ static constexpr float multisampleRenderf=1.0f;
 static constexpr float framef=1.0f;
 static constexpr float renderf=1.0f;
 
+EGLDisplay display=nullptr;
+EGLSurface surface=nullptr;
+EGLContext ctxegl=nullptr;
+EGLConfig eglconfig=nullptr;
+EGLint config_size,major,minor;
+
 EGLint numSamples;
 EGLint numSamplesNV;
 EGLint numBuffersNV;
