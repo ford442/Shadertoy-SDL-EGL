@@ -29,7 +29,6 @@ static constexpr float renderf=1.0f;
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
 EGLContext ctxegl=nullptr;
-EGLConfig eglconfig=nullptr;
 EGLint config_size,major,minor;
 
 EGLint numSamples;
@@ -48,7 +47,7 @@ EGLint colorFormat;
 GLfloat numAniso;
 GLsizei binarySize;
 
-eglconfig=NULL;
+EGLConfig eglconfig=nullptr;
 
 EmscriptenWebGLContextAttributes attr;
 EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx;
