@@ -467,7 +467,6 @@ surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglBindAPI(EGL_OPENGL_API);
 eglMakeCurrent(display,surface,surface,ctxegl);
 PFNEGLGETCONFIGATTRIBPROC eglGetConfigAttrib=(PFNEGLGETCONFIGATTRIBPROC)eglGetProcAddress("eglGetConfigAttrib");
-surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 // emscripten_webgl_make_context_current(ctx);
 
