@@ -421,7 +421,7 @@ the values of the components are directly proportional to the perceived brightne
 This means that the colors in the image will be misrepresented,
 and the image will not be as accurate as it would be if it were in the original BT.2020 color space.
 */
-EGL_GL_COLORSPACE_KHR,colorSpace,
+// EGL_GL_COLORSPACE_KHR,colorSpace,
 EGL_NONE
 };
 static EGLint att_lst[]={
@@ -465,11 +465,11 @@ EGL_NONE
 
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
-   /*
+
   
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
-// eglBindAPI(EGL_OPENGL_ES_API);
-
+eglBindAPI(EGL_OPENGL_ES_API);
+   /*
 
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 emscripten_webgl_make_context_current(ctx);
