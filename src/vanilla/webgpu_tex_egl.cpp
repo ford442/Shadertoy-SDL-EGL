@@ -292,7 +292,6 @@ wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&f32_uniform.at(2,2),sizeof(floa
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(3,3),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&f32_uniform.at(0,0),sizeof(float));
   //  wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&v4f32_uniform.at(0,0),sizeof(float)*4);
-  
 wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(7,7),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(6,6),0,sizeof(vertices));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(0,0),0.0f,0.0f,szef.at(1,1),szef.at(1,1),0.0f,1.0f);
@@ -508,7 +507,7 @@ glEnable(GL_STENCIL_TEST);
 glFrontFace(GL_CW);
 glCullFace(GL_BACK);
 glDisable(GL_CULL_FACE);
-*/
+
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
@@ -700,7 +699,7 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_request_priority");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_create_surface_from_window");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_surface_attachment");
 emscripten_webgl_enable_extension(ctx,"EXT_texture_storage");
-  /*
+
 eglBindAPI(EGL_OPENGL_ES_API);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glViewport(0,0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
