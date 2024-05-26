@@ -469,7 +469,7 @@ ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
   
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglBindAPI(EGL_OPENGL_ES_API);
-   /*
+
 
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 emscripten_webgl_make_context_current(ctx);
@@ -709,7 +709,7 @@ glViewport(0,0,sze.at(0,0),sze.at(0,0));  //  viewport/scissor after UsePrg runs
 glEnable(GL_SCISSOR_TEST);
 glScissor(0,0,sze.at(0,0),sze.at(0,0));
 glFinish();
-  */
+
    //  end EGL INIT
 
   
