@@ -467,17 +467,12 @@ surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
 eglBindAPI(EGL_OPENGL_API);
 eglMakeCurrent(display,surface,surface,ctxegl);
 PFNEGLGETCONFIGATTRIBPROC eglGetConfigAttrib=(PFNEGLGETCONFIGATTRIBPROC)eglGetProcAddress("eglGetConfigAttrib");
-   
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
-
-
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 // emscripten_webgl_make_context_current(ctx);
 
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
-
-
 glDisable(GL_DITHER);
 
   // glClearColor(0.0f,0.0f,0.0f,1.0f);
@@ -666,15 +661,13 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_request_priority");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_create_surface_from_window");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_surface_attachment");
 emscripten_webgl_enable_extension(ctx,"EXT_texture_storage");
-eglBindAPI(EGL_OPENGL_ES_API);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glViewport(0,0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
 glViewport(0,0,sze.at(0,0),sze.at(0,0));  //  viewport/scissor after UsePrg runs at full resolution
 glEnable(GL_SCISSOR_TEST);
 glScissor(0,0,sze.at(0,0),sze.at(0,0));
 glFinish();
-  */
-   //  end EGL INIT
+
    //  end EGL INIT
 
   
