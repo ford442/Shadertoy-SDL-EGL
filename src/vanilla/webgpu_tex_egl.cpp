@@ -477,7 +477,7 @@ emscripten_webgl_make_context_current(ctx);
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 
-   
+   /*
  // glColorMask(GL_TRUE,GL_TRUE,GL_TRUE,GL_TRUE);
  //    glDepthFunc(GL_GREATER);
 // // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -510,7 +510,7 @@ glEnable(GL_STENCIL_TEST);
 glFrontFace(GL_CW);
 glCullFace(GL_BACK);
 glDisable(GL_CULL_FACE);
-
+*/
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
@@ -702,6 +702,7 @@ emscripten_webgl_enable_extension(ctx,"EGL_EXT_request_priority");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_create_surface_from_window");
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_surface_attachment");
 emscripten_webgl_enable_extension(ctx,"EXT_texture_storage");
+  /*
 eglBindAPI(EGL_OPENGL_ES_API);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 glViewport(0,0,8192,8192);  //  viewport/scissor after UsePrg runs at full resolution
@@ -709,7 +710,7 @@ glViewport(0,0,sze.at(0,0),sze.at(0,0));  //  viewport/scissor after UsePrg runs
 glEnable(GL_SCISSOR_TEST);
 glScissor(0,0,sze.at(0,0),sze.at(0,0));
 glFinish();
-
+*/
    //  end EGL INIT
 
   
