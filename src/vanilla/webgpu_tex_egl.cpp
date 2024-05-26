@@ -462,6 +462,7 @@ EGL_SAMPLE_BUFFERS,numMBuffers,
 EGL_SAMPLES,numSamples,
 EGL_NONE
 };
+  /*
 eglChooseConfig(display,att_lst,&eglconfig,1,&config_size);
 ctxegl=eglCreateContext(display,eglconfig,EGL_NO_CONTEXT,ctx_att);
 surface=eglCreateWindowSurface(display,eglconfig,(NativeWindowType)0,att_lst2);
@@ -502,16 +503,7 @@ glEnable(GL_STENCIL_TEST);
 glFrontFace(GL_CW);
 glCullFace(GL_BACK);
 glDisable(GL_CULL_FACE);
-  /*
-  for (int i = 0; i < 262144 * 3; i += 3) {
-int r = rand() % 256;
-int g = rand() % 256;
-int b = rand() % 256;
-ColorA[i] = r;
-ColorA[i + 1] = g;
-ColorA[i + 2] = b;
-}
-*/
+
 // glBlendFuncSeparate(GL_DST_COLOR,GL_SRC_COLOR,GL_DST_COLOR,GL_ONE_MINUS_SRC_ALPHA);
 // glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
  // glBlendFuncSeparate(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA,GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
@@ -710,6 +702,9 @@ glViewport(0,0,sze.at(0,0),sze.at(0,0));  //  viewport/scissor after UsePrg runs
 glEnable(GL_SCISSOR_TEST);
 glScissor(0,0,sze.at(0,0),sze.at(0,0));
 glFinish();
+  */
+   //  end EGL INIT
+
   
 if(on.at(0,0)==0){wd.at(0,0)=result;}
 on.at(4,4)=0;
