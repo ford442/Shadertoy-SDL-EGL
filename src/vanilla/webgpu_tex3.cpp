@@ -1,4 +1,5 @@
 #include "../../include/vanilla/webgpu_tex.hpp"
+#include "../../include/vanilla/egl.hpp"
 
 #include "../../highway/hwy/foreach_target.h"
 #include "../../highway/hwy/highway.h"
