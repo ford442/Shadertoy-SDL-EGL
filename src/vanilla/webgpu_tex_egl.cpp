@@ -469,7 +469,7 @@ eglMakeCurrent(display,surface,surface,ctxegl);
 PFNEGLGETCONFIGATTRIBPROC eglGetConfigAttrib=(PFNEGLGETCONFIGATTRIBPROC)eglGetProcAddress("eglGetConfigAttrib");
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 // emscripten_webgl_make_context_current(ctx);
-
+/*
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glDisable(GL_DITHER);
@@ -666,7 +666,7 @@ glViewport(0,0,sze.at(0,0),sze.at(0,0));  //  viewport/scissor after UsePrg runs
 glEnable(GL_SCISSOR_TEST);
 glScissor(0,0,sze.at(0,0),sze.at(0,0));
 glFinish();
-
+*/
    //  end EGL INIT
 
   
