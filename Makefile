@@ -193,7 +193,10 @@ b3_compute_wasi:
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web,node \
 	 -fPIC -DCOMPUTE -o $(WGL_BIN_NAME)-egl.js -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
 	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(xGL_FLAGS) -sASSERTIONS=0 \
-	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm32-wasi --sysroot /opt/wasi-sdk -DNDEBUG=1 \
+	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm32-wasi --sysroot=/opt/wasi-sdk \
+         -Wl,--sysroot=/opt/wasi-sdk/share/wasi-sysroot \
+         -Wl,-B/opt/wasi-sdk/lib/wasm32-wasi \
+         -lc -lclang_rt.builtins-wasm32 -DNDEBUG=1 \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -march=wasm32-avx -mtune=wasm32-wasi \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1984mb -lmath.js -lhtml5.js -lint53.js \
@@ -961,7 +964,7 @@ dbl: dbl.cpp Makefile
 	-sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2400mb \
 	 -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
 	-sUSE_SDL=2 -sFULL_ES3=1 \
-	 -DNDEBUG=1=1 -sSUPPORT_ERRNO=0 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 \
+	 -DNDEBUG=1 -sSUPPORT_ERRNO=0 -sGL_DEBUG=0 -sGL_TRACK_ERRORS=0 \
 	 -sGL_POOL_TEMP_BUFFERS=0 -sMEMORY64=0 -sLEGALIZE_JS_FFI=1 -sWASM_BIGINT=0 \
 	 --closure 1 -g2 -std=c++2b -flto \
 	 -sEXPORTED_FUNCTIONS='["_main","_str","_pl","_b3","_nano"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
