@@ -21,10 +21,6 @@
 
 // static constexpr float numSamplesf=float(numSamples);
 static float numSamplesf;
-static constexpr float multisampleFramef=1.0f;
-static constexpr float multisampleRenderf=1.0f;
-static constexpr float framef=1.0f;
-static constexpr float renderf=1.0f;
 
 EGLDisplay display=nullptr;
 EGLSurface surface=nullptr;
@@ -45,7 +41,6 @@ EGLint numMBuffers;
 EGLint colorSpace;
 EGLint colorFormat;
 GLfloat numAniso;
-GLsizei binarySize;
 
 EGLConfig eglconfig=nullptr;
 
@@ -402,7 +397,7 @@ eglGetConfigAttrib(display,eglconfig,EGL_COVERAGE_BUFFERS_NV,&numBuffersNV);
 eglGetConfigAttrib(display,eglconfig,EGL_GL_COLORSPACE,&colorSpace);
 eglGetConfigAttrib(display,eglconfig,EGL_COLOR_FORMAT_HI,&colorFormat);
 static EGLint ctx_att[]={
-EGL_CONTEXT_CLIENT_TYPE,EGL_OPENGL_ES_API,
+EGL_CONTEXT_CLIENT_TYPE,EGL_OPENGL_API,
 EGL_CONTEXT_CLIENT_VERSION,3,
 EGL_CONTEXT_MAJOR_VERSION_KHR,3,
 EGL_CONTEXT_MINOR_VERSION_KHR,0,
@@ -420,14 +415,15 @@ the values of the components are directly proportional to the perceived brightne
 This means that the colors in the image will be misrepresented,
 and the image will not be as accurate as it would be if it were in the original BT.2020 color space.
 */
-// EGL_GL_COLORSPACE_KHR,colorSpace,
+EGL_GL_COLORSPACE_KHR,colorSpace,
 EGL_NONE
 };
 static EGLint att_lst[]={
+EGL_PIXEL_FORMAT_EXT, EGL_PIXEL_FORMAT_RGBA_FLOAT_EXT, 
 EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FLOAT_EXT,
 // EGL_COLOR_COMPONENT_TYPE_EXT,EGL_COLOR_COMPONENT_TYPE_FIXED_EXT,
 // EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
-EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
+// EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR,EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT_KHR,
 EGL_RENDERABLE_TYPE,EGL_OPENGL_ES3_BIT,
 // EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,  // EGL 1.5 needed  (WASM cannot Window surface)
 // EGL_RENDERABLE_TYPE,EGL_NONE,
