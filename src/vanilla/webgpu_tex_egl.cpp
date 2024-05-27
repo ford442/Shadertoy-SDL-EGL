@@ -470,6 +470,8 @@ PFNEGLGETCONFIGATTRIBPROC eglGetConfigAttrib=(PFNEGLGETCONFIGATTRIBPROC)eglGetPr
 ctx=emscripten_webgl_create_context("#scanvas",&attr);
 // emscripten_webgl_make_context_current(ctx);
 
+
+  /*
 glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,GL_NICEST);
 glHint(GL_GENERATE_MIPMAP_HINT,GL_NICEST);
 glDisable(GL_DITHER);
@@ -482,7 +484,7 @@ emscripten_webgl_enable_extension(ctx,"GL_EXTENSIONS");
 emscripten_webgl_enable_extension(ctx,"GL_ALL_EXTENSIONS");
 emscripten_webgl_enable_extension(ctx,"KHR_no_error");
 // emscripten_webgl_enable_extension(ctx,"GL_REGAL_enable");
-/*
+
 
 // emscripten_webgl_enable_extension(ctx,"OES_fragment_precision_high"); // deprecated
 emscripten_webgl_enable_extension(ctx,"EGL_EXT_client_extensions");
@@ -668,8 +670,8 @@ glViewport(0,0,sze.at(0,0),sze.at(0,0));  //  viewport/scissor after UsePrg runs
 glEnable(GL_SCISSOR_TEST);
 glScissor(0,0,sze.at(0,0),sze.at(0,0));
 glFinish();
-*/
-   //  end EGL INIT
+
+*/   //  end EGL INIT
 
   
 if(on.at(0,0)==0){wd.at(0,0)=result;}
