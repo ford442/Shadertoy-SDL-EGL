@@ -1,8 +1,8 @@
 WGL_BIN_NAME = w0-006
 
 LDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lc++abi,-lm,-ldl
-wLDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lc++abi,-lm,-ldl,-lclang_rt.builtins-wasm32
-
+wLDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lc++abi,-lm,-ldl,-B/opt/wasi-sdk/lib/wasm32-wasi
+ 
 oldLDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lpthread,-lc++abi,-lm,-lrt,-ldl
 SIMD_FLAGS = -DSIMD=AVX -msimd128 -mavx
 
@@ -187,7 +187,7 @@ b3_compute_wasi:
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math \
 	 -mextended-const -mbulk-memory -matomics -pthread -O3 -fchar8_t $(STDS) $(xGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -O3 $(wLDFLAGS) -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics $(STDS) -pipe -DQUAD -DDOUBLE \
+	 em++ -O3 $(wLDFLAGS) -lclang_rt.builtins-wasm32 -lc++ -lc++abi -lm -lc -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics $(STDS) -pipe -DQUAD -DDOUBLE \
 	 -sWASM_BIGINT=0 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -sOFFSCREENCANVAS_SUPPORT=1 -stdlib=libc++ \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web,node \
