@@ -180,6 +180,31 @@ b3_compute_eglx:
 	 --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 webgpu_tex_egl.o --extern-pre-js js/gpujsx.js --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0
 
+
+b3_compute_wasi:
+	 em++ src/vanilla/webgpu_tex_egl.cpp -pipe -ffp-contract=fast -fexcess-precision=fast \
+	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math \
+	 -mextended-const -mbulk-memory -matomics -pthread -O3 -fchar8_t $(STDS) $(xGL_FLAGS) \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ -O3 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics $(STDS) -pipe -DQUAD -DDOUBLE \
+	 -sWASM_BIGINT=0 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -sOFFSCREENCANVAS_SUPPORT=1 -stdlib=libc++ \
+	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types \
+	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web,node \
+	 -fPIC -DCOMPUTE -o $(WGL_BIN_NAME)-egl.js -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
+	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(xGL_FLAGS) -sASSERTIONS=0 \
+	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm32-wasi --sysroot /opt/wasi-sdk/ -DNDEBUG=1 \
+	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
+	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -march=wasm32-avx -mtune=wasm32-wasi \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1984mb -lmath.js -lhtml5.js -lint53.js \
+	 -sSUPPORT_LONGJMP=emscripten -sABORT_ON_WASM_EXCEPTIONS=0 -sEMULATE_FUNCTION_POINTER_CASTS=0 \
+	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
+	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
+	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS='["wgpu_buffer_map_sync"]' \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPUi","_startWebGPUbi","_startWebGPUC","_frmOn","_frmsOff"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --js-library lib/lib_webgpu.js --pre-js js/rSlider.js --pre-js js/slideOut.js --js-library lib/lib_demo.js \
+	 --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 webgpu_tex_egl.o --extern-pre-js js/gpujsx.js --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0
+
 webgpu_detection:
 	 em++ src/vanilla/webgpu_detect.cpp -pipe -fno-fast-math -ffp-contract=off \
 	 -mextended-const -mbulk-memory -matomics -pthread -O2 -fchar8_t -std=c++20 $(wGL_FLAGS) \
