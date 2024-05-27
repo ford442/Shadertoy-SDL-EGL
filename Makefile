@@ -136,13 +136,13 @@ b3_compute_egl_tex3:
 b3_compute_egl_tex4:
 	 em++ src/vanilla/webgpu_tex3.cpp -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math \
-	 -mextended-const -mbulk-memory -matomics -pthread -O3 -fchar8_t $(STDS) $(wGL_FLAGS) \
+	 -mextended-const -mbulk-memory -matomics -O3 -fchar8_t $(STDS) $(wGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -O3 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics $(STDS) -pipe -DQUAD -DDOUBLE \
+	 em++ -O3 $(wLDFLAGS) -lc++ -lc++abi -lm -lc -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics $(STDS) -pipe -DQUAD -DDOUBLE \
 	 -sWASM_BIGINT=0 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -sOFFSCREENCANVAS_SUPPORT=1 -stdlib=libc++ \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web,node \
-	 -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-t5.js -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
+	 -fPIC -DCOMPUTE -o $(WGL_BIN_NAME)-t5.js -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
 	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(wGL_FLAGS) -sASSERTIONS=0 \
 	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm32 -DNDEBUG=1 \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
