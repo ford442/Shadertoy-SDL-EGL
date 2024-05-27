@@ -159,7 +159,7 @@ b3_compute_egl_tex4:
 
 b3_compute_eglx:
 	 em++ src/vanilla/webgpu_tex_egl.cpp -pipe -ffp-contract=fast -fexcess-precision=fast \
-	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fPIC \
+	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math \
 	 -mextended-const -mbulk-memory -matomics -O3 -fchar8_t $(STDS) $(xGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O3 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics $(STDS) -pipe -DQUAD -DDOUBLE \
