@@ -195,8 +195,7 @@ b3_compute_wasi:
 	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(xGL_FLAGS) -sASSERTIONS=0 \
 	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm32-wasi --sysroot=/opt/wasi-sdk \
          -Wl,--sysroot=/opt/wasi-sdk/share/wasi-sysroot \
-         -Wl,-B/opt/wasi-sdk/lib/wasm32-wasi \
-         -lc -lclang_rt.builtins-wasm32 -DNDEBUG=1 \
+         -lc -DNDEBUG=1 \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -march=wasm32-avx -mtune=wasm32-wasi \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1984mb -lmath.js -lhtml5.js -lint53.js \
