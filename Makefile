@@ -185,7 +185,7 @@ b3_compute_eglx:
 b3_compute_wasi:
 	 em++ src/vanilla/webgpu_tex_egl.cpp -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math \
-	 -mextended-const -mbulk-memory -matomics -pthread -O3 -fchar8_t $(STDS) $(xGL_FLAGS) \
+	 -mextended-const -mbulk-memory -matomics -O3 -fchar8_t $(STDS) $(xGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O3 $(wLDFLAGS) -lc++ -lc++abi -lm -lc -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics $(STDS) -pipe -DQUAD -DDOUBLE \
 	 -sWASM_BIGINT=0 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -sOFFSCREENCANVAS_SUPPORT=1 -stdlib=libc++ \
@@ -193,9 +193,7 @@ b3_compute_wasi:
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web,node \
 	 -fPIC -DCOMPUTE -o $(WGL_BIN_NAME)-egl.js -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
 	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(xGL_FLAGS) -sASSERTIONS=0 \
-	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm32-wasi --sysroot=/opt/wasi-sdk \
-         -Wl,--sysroot=/opt/wasi-sdk/share/wasi-sysroot \
-         -lc -DNDEBUG=1 \
+	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm32-wasi --sysroot=/opt/wasi-sdk -DNDEBUG=1 \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -march=wasm32-avx -mtune=wasm32-wasi \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1984mb -lmath.js -lhtml5.js -lint53.js \
