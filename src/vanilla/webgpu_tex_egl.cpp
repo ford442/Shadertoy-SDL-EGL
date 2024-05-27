@@ -415,7 +415,7 @@ the values of the components are directly proportional to the perceived brightne
 This means that the colors in the image will be misrepresented,
 and the image will not be as accurate as it would be if it were in the original BT.2020 color space.
 */
-EGL_GL_COLORSPACE_KHR,colorSpace,
+EGL_GL_COLORSPACE_KHR,EGL_GL_COLORSPACE_DISPLAY_P3_EXT,
 EGL_NONE
 };
 static EGLint att_lst[]={
@@ -444,13 +444,13 @@ EGL_COLOR_FORMAT_HI,colorFormat, //  available in OpenGL
 // EGL_NATIVE_RENDERABLE,EGL_TRUE,
 EGL_COLOR_BUFFER_TYPE,EGL_RGB_BUFFER,
 EGL_LUMINANCE_SIZE,0, // available in OpenGL
-EGL_RED_SIZE,numRed,
-EGL_GREEN_SIZE,numGreen,
-EGL_BLUE_SIZE,numBlue,
-EGL_ALPHA_SIZE,numAlpha,
+EGL_RED_SIZE,32,
+EGL_GREEN_SIZE,32,
+EGL_BLUE_SIZE,32,
+EGL_ALPHA_SIZE,32,
 EGL_DEPTH_SIZE,numDepth,
 EGL_STENCIL_SIZE,numStencil,
-EGL_BUFFER_SIZE,numBuffer,
+EGL_BUFFER_SIZE,64,
 EGL_COVERAGE_BUFFERS_NV,numBuffersNV, // available in GLES 3.1
 EGL_COVERAGE_SAMPLES_NV,numSamplesNV,
 EGL_SAMPLE_BUFFERS,numMBuffers,
