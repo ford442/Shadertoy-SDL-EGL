@@ -122,12 +122,20 @@ return EM_TRUE;
 }
 
 EM_BOOL texOn(){
+if(on.at(5,5)==0){
 on.at(4,4)=1;
+}
 return EM_TRUE;
 }
 
 EM_BOOL framesOff(){
+on.at(5,5)=1;
 on.at(4,4)=0;
+return EM_TRUE;
+}
+
+EM_BOOL framesOn(){
+on.at(5,5)=0;
 return EM_TRUE;
 }
 
@@ -1495,6 +1503,11 @@ return;
 
 void frmsOff(){
 framesOff();
+return;
+}
+
+void frmsOn(){
+framesOn();
 return;
 }
 
