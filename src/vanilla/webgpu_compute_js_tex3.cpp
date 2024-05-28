@@ -638,7 +638,7 @@ imageStart();
 document.querySelector('#moveFwd').addEventListener('click',function(){
 Module.ccall("frmsOff");
 setTimeout(function(){
-Module.ccall("frmOn");
+Module.ccall("frmsOn");
 },2000);
 });
 
