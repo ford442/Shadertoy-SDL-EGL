@@ -25,6 +25,8 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }}
 
+let pause=0;
+
 function canvasStart(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
 const vvic=document.querySelector('#mvi');
@@ -79,7 +81,9 @@ console.log('Starting..');
 }
 Module.ccall("frmOn");
 setInterval(function(){
+if(!pause){
 gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
+}
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
 pixelData=new Float64Array(imageData);
@@ -637,7 +641,9 @@ imageStart();
 
 document.querySelector('#moveFwd').addEventListener('click',function(){
 Module.ccall("frmsOff");
+pause=1;
 setTimeout(function(){
+pause=0;
 Module.ccall("frmsOn");
 },2000);
 });
