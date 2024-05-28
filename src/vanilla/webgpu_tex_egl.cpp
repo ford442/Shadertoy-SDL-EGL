@@ -261,8 +261,13 @@ std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf
     }
 */ //  regular way
 std::vector<float>floatData(data.size());
-std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});  // for RGBA32FLOAT
-const size_t bytesPerRow=sze.at(6,6)*4*sizeof(float);
+// std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});  // for RGBA32FLOAT
+std::for_each(data.begin(), data.end(), 
+    [it = floatData.begin()](uint8_t val) mutable { 
+        *it++ = val / 255.0f; 
+    }
+);
+  const size_t bytesPerRow=sze.at(6,6)*4*sizeof(float);
 // frame_tensor.at(0,0)=data;
 // fjs_data_pointer.at(0,0)=floatData.data();
 // fjsv_data_pointer.at(0,0)=&floatData; // (std::vector<float*>)
