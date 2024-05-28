@@ -159,7 +159,10 @@ b3_compute_egl_tex4:
 
 b3_compute_eglx:
 	 em++ src/vanilla/webgpu_tex_egl.cpp -pipe -ffp-contract=fast -fexcess-precision=fast \
-	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math \
+	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
+	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
+	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -mtune=wasm32 \
+
 	 -mextended-const -mbulk-memory -matomics -O3 -fchar8_t $(STDS) $(xGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O3 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics $(STDS) -pipe -DQUAD -DDOUBLE \
@@ -171,7 +174,7 @@ b3_compute_eglx:
 	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm32 -DNDEBUG=1 \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -mtune=wasm32 \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1984mb -lmath.js -lhtml5.js -lint53.js \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb -lmath.js -lhtml5.js -lint53.js \
 	 -sSUPPORT_LONGJMP=emscripten -sABORT_ON_WASM_EXCEPTIONS=0 -sEMULATE_FUNCTION_POINTER_CASTS=0 \
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
