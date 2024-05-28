@@ -105,13 +105,13 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
+result8=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
 if(result){
-size_t actual_length=fread(result,sizeof(char8_t),length,file);
-result[actual_length++]={'\0'};
+size_t actual_length=fread(result8,sizeof(char8_t),length,file);
+result8[actual_length++]={'\0'};
 }
 fclose(file);
-return result;
+return result8;
 }
 return nullptr;
 }
