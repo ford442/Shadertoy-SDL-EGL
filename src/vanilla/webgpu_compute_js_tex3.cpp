@@ -52,11 +52,12 @@ stencil:false,
 depth:false,
 colorSpace:"display-p3",
 desynchronized:false,
-antialias:true,
+antialias:false,
 powerPreference:"high-performance",
 premultipliedAlpha:true,
 preserveDrawingBuffer:false
 });
+gl3.imageSmoothingEnabled=false;
 gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
