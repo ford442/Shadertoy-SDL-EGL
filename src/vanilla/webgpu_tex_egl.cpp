@@ -90,7 +90,7 @@ randomNumber=std::rand()%randomMax;
 return randomNumber;
 }
 
-const char * rd_fl(const char * Fnm){
+const char8_t * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"rb");
 ::boost::tuples::tie(result,results,file);
 if(file){
