@@ -161,7 +161,7 @@ b3_compute_eglx:
 	 em++ src/vanilla/webgpu_tex_egl.cpp -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
-	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -mtune=wasm32 \
+	 -mllvm -fwhole-program-vtables -mtune=wasm32 \
 
 	 -mextended-const -mbulk-memory -matomics -O3 -fchar8_t $(STDS) $(xGL_FLAGS) \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
