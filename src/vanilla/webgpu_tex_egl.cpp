@@ -90,7 +90,7 @@ randomNumber=std::rand()%randomMax;
 return randomNumber;
 }
 
-const char8_t * rd_fl(const char * Fnm){
+const char * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"rb");
 ::boost::tuples::tie(result,results,file);
 if(file){
@@ -105,13 +105,13 @@ if(stat!=0){
 fclose(file);
 return nullptr;
 }
-result8=static_cast<char8_t *>(malloc((length+1)*sizeof(char8_t)));
+result=static_cast<char *>(malloc((length+1)*sizeof(char)));
 if(result){
-size_t actual_length=fread(result8,sizeof(char8_t),length,file);
-result8[actual_length++]={'\0'};
+size_t actual_length=fread(result,sizeof(char),length,file);
+result[actual_length++]={'\0'};
 }
 fclose(file);
-return result8;
+return result;
 }
 return nullptr;
 }
