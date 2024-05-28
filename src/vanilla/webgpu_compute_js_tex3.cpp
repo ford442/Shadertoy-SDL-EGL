@@ -25,7 +25,7 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }}
 
-let pause=0;
+let pause=false;
 
 function canvasStart(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
@@ -81,7 +81,7 @@ console.log('Starting..');
 }
 Module.ccall("frmOn");
 setInterval(function(){
-if(pause==0){
+if(!pause){
 gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 }
 image=gl3.getImageData(0,0,w$,h$);
@@ -641,9 +641,9 @@ imageStart();
 
 document.querySelector('#moveFwd').addEventListener('click',function(){
 Module.ccall("frmsOff");
-pause=1;
+  pause =true; // Toggle pause on/off
 setTimeout(function(){
-pause=0;
+  pause =false; // Toggle pause on/off
 Module.ccall("frmsOn");
 },2000);
 });
