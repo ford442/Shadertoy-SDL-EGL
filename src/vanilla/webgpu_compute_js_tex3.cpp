@@ -159,7 +159,6 @@ Module.ccall("frmOn");
 },16.666);
 }
 
- 
 function videoStart2(){
 let vvi=document.querySelector('#mvi');
 let vw$=vvi.videoWidth;
@@ -233,7 +232,6 @@ Module.ccall("frmOn");
 },16.666);
 }
 
- 
 function canvasGpu(){
 const bcanvas=document.getElementById("bcanvas");
 const contx=bcanvas.getContext("webgl2",{logarithmicDepthBuffer:true,colorSpace:'display-p3',alpha:true,depth:true,stencil:true,imageSmoothingEnabled:true,preserveDrawingBuffer:false,premultipliedAlpha:false,desynchronized:false,lowLatency:true,powerPreference:'high-performance',antialias:true,willReadFrequently:false});
@@ -415,7 +413,6 @@ FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
 },16.666);
 }
-
 
 function regularStart(){
 let SiZ=window.innerHeight;
@@ -636,6 +633,13 @@ normalResSetup();
 setTimeout(function(){
 imageStart();
 },1000);
+});
+
+document.querySelector('#moveFwd').addEventListener('click',function(){
+Module.ccall("frmsOff");
+setTimeout(function(){
+Module.ccall("frmOn");
+},2000);
 });
 
 setTimeout(function(){
