@@ -81,7 +81,7 @@ console.log('Starting..');
 }
 Module.ccall("frmOn");
 setInterval(function(){
-if(!pause){
+if(pause==0){
 gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 }
 image=gl3.getImageData(0,0,w$,h$);
