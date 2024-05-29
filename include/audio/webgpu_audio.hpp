@@ -307,6 +307,8 @@ using wictt_tensor=boost::numeric::ublas::tensor<WGpuImageCopyTextureTagged>;
 using wva_tensor=boost::numeric::ublas::tensor<WGpuVertexAttribute *>;
 using clk_tensor=boost::numeric::ublas::tensor<boost::chrono::high_resolution_clock::time_point>;
 using timespn_tensor=boost::numeric::ublas::tensor<boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>>;
+using vec4_tensor = boost::numeric::ublas::tensor<boost::numeric::ublas::vec4>;
+
 extern "C"{  
   
 EM_BOOL pl();
