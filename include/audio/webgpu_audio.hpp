@@ -450,12 +450,15 @@ sound.at(0,1,0)=(unsigned char *)buffer;
 wave.snd=sound.at(0,1,0);
 snd_pos_u(0);
 snd_lft(sound_siz.at(0,0));
-request.callback=bfr;
-EM_ASM({console.log('SDL_OpenAudioDevice');}); 
+// request.callback=bfr;
+    
+// EM_ASM({console.log('SDL_OpenAudioDevice');}); 
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 SDL_QueueAudio(wave.dev,sound.at(0,1,0),sound_siz.at(0,0));
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 audio_on.at(0,0)=5;
+    EM_ASM({console.log('Got audio data.');}); 
+
 return EM_TRUE;
 };
 
