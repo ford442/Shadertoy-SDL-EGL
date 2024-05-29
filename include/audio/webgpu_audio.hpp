@@ -329,7 +329,7 @@ lu_tensor sound_pos_u=lu_tensor{1,1};
 v_tensor sse=v_tensor{1,2};
 v_tensor sse2=v_tensor{1,1};
 v_tensor sse3=v_tensor{1,1};
-
+fptr_tensor WGPU_AudioInputBuffer=fptr_tensor{1,1};
 #include <math.h>
 
 class Oscillator {
@@ -447,6 +447,7 @@ buffer[i + 1] = sample;                       // Right channel
 sound_siz.at(0,0)=buffer_size;
 wave.slen=buffer_size;
 sound.at(0,1,0)=(unsigned char *)buffer;
+WGPU_AudioInputBuffer.at(0,0)=buffer;
 wave.snd=sound.at(0,1,0);
 snd_pos_u(0);
 snd_lft(sound_siz.at(0,0));
