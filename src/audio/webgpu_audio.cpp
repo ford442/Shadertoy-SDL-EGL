@@ -200,12 +200,12 @@ WGPU_BufferRange.at(0,0,1)=WGPU_Range_PointerB;
 wgpu_buffer_read_mapped_range(WGPU_Buffers.at(2,0,2),WGPU_BufferRange.at(0,0,1),0,WGPU_ResultBuffer.at(0,0,0),OutputBufferBytes);
    //  get audio data back from shader
   sound.at(0,1,0)=(unsigned char *)WGPU_ResultBuffer.at(0,0,0);
-
+}
 /*  EM_ASM({
 document.querySelector('#outText').innerHTML='Buffer at [2]:'+$0.toFixed(2);
 document.querySelector('#outText').innerHTML+='Buffer at [3]:'+$1.toFixed(2);
 },WGPU_ResultBuffer.at(0,0,0)[2],WGPU_ResultBuffer.at(0,0,0)[3]);
-}
+
 */
 WGPU_CommandBuffer.at(0,0,0)=wgpu_encoder_finish(WGPU_CommandEncoder.at(0,0,0));
 WGPU_BufferStatus.at(0,0,0)=wgpu_buffer_map_state(WGPU_Buffers.at(2,0,2));
