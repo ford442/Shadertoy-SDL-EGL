@@ -392,7 +392,8 @@ return EM_TRUE;
 
 
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
-wave.snd=(unsigned char *)WGPU_AudioOutputBuffer.at(0,0);
+sound.at(0,1,0)=(unsigned char *)WGPU_AudioOutputBuffer.at(0,0);
+wave.snd=(unsigned char *)sound.at(0,1,0);
 if(audio_on.at(0,0)==5){
 if(sound_pos.at(0,0)>=sound_siz.at(0,0)){
 EM_ASM({console.log('stopping (if (sound_pos...)');}); 
@@ -449,7 +450,7 @@ sound_siz.at(0,0)=buffer_size;
 wave.slen=buffer_size;
 // sound.at(0,1,0)=(unsigned char *)buffer;
 WGPU_AudioInputBuffer.at(0,0)=buffer;
-wave.snd=(unsigned char *)WGPU_AudioOutputBuffer.at(0,0);
+// wave.snd=(unsigned char *)WGPU_AudioOutputBuffer.at(0,0);
 snd_pos_u(0);
 snd_lft(sound_siz.at(0,0));
 request.callback=bfr;
