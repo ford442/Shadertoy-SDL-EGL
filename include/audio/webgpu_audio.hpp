@@ -389,11 +389,16 @@ sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
 return EM_TRUE;
 }
 
+
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 EM_ASM({console.log('bfr');}); 
 if(audio_on.at(0,0)==5){
-
+if(sound_pos.at(0,0)>=sound_siz.at(0,0)){
+EM_ASM({console.log('stopping (if (sound_pos...)');}); 
+audio_on.at(0,0)=10;
+}
 int bytes_to_copy=std::min(len,int(sound_lft.at(0,0))); 
+::boost::tuples::tie(stm,len);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
 SDL_UnlockAudioDevice(wave.dev);
@@ -406,7 +411,7 @@ sound_pos.at(0, 0) += bytes_to_copy;
 snd_lft(sound_pos_u.at(0,0));
 SDL_LockAudioDevice(wave.dev);
 }
-// SDL_memcpy(stm,wave.wptr,len);
+SDL_memcpy(stm,wave.wptr,len);
 snd_pos(sound_pos.at(0,0)+len);
 return;
 }
@@ -433,7 +438,7 @@ int buffer_size=128*request.samples*request.channels*sizeof(float);
 
 float* buffer=(float*)buffer_size;
   
-for(int i=0;i<buffer_size / sizeof(float); i += 2) { // Assuming stereo
+for(int i=0;i<BUFFER_SIZE; i += 2) { // Assuming stereo
 float sample = oscillator.generate();         // Generate new sample
 buffer[i] = sample;                           // Left channel
 buffer[i + 1] = sample;                       // Right channel
