@@ -419,7 +419,7 @@ return;
 boost::function<EM_BOOL()>plt=[this](){
 audio_on.at(0,0)=0;
 const int SAMPLE_RATE=44100;
-const int BUFFER_SIZE=8192;
+// const int BUFFER_SIZE=1024;
 Oscillator oscillator(440.0f);
 ::boost::tuples::tie(sound,sound_pos,sound_pos_u);
 ::boost::tuples::tie(wave,sse,sse2);
@@ -434,11 +434,11 @@ snd_pos(0);
 SDL_Init(SDL_INIT_AUDIO);
 // SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
 
-int buffer_size=1024*request.samples*request.channels*sizeof(float);
+int buffer_size=64*request.samples*request.channels*sizeof(float);
 
 float* buffer=(float*)buffer_size;
   
-for(int i=0;i<BUFFER_SIZE; i += 2) { // Assuming stereo
+for(int i=0;i<buffer_size/8.0; i += 2) { // Assuming stereo
 float sample = oscillator.generate();         // Generate new sample
 buffer[i] = sample;                           // Left channel
 buffer[i + 1] = sample;                       // Right channel
