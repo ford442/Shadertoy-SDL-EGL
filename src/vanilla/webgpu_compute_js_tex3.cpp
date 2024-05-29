@@ -641,9 +641,9 @@ imageStart();
 
 document.querySelector('#moveFwd').addEventListener('click',function(){
 Module.ccall("frmsOff");
-  pause =true; // Toggle pause on/off
+pause=true; // Toggle pause on/off
 setTimeout(function(){
-  pause =false; // Toggle pause on/off
+pause=false; // Toggle pause on/off
 Module.ccall("frmsOn");
 },1500);
 });
