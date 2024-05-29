@@ -426,7 +426,7 @@ int buffer_size=128*request.samples*request.channels*sizeof(float);
 
 float* buffer=(float*)buffer_size;
   
-for(int i=0;i<len / sizeof(float); i += 2) { // Assuming stereo
+for(int i=0;i<buffer_size / sizeof(float); i += 2) { // Assuming stereo
 float sample = oscillator.generate();         // Generate new sample
 buffer[i] = sample;                           // Left channel
 buffer[i + 1] = sample;                       // Right channel
