@@ -110,6 +110,11 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
+namespace boost::numeric::ublas {
+    // Create a vector type specifically for vec4
+    using vec4 = vector<float, boost::numeric::ublas::bounded_array<float, 4>>;
+}
+
 #define register
 
 #define BOOST_CHRONO_HEADER_ONLY 1
