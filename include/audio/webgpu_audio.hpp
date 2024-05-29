@@ -330,6 +330,7 @@ v_tensor sse=v_tensor{1,2};
 v_tensor sse2=v_tensor{1,1};
 v_tensor sse3=v_tensor{1,1};
 fptr_tensor WGPU_AudioInputBuffer=fptr_tensor{1,1};
+ub_tensor WGPU_AudioOutputBuffer=ub_tensor{1,1};
 #include <math.h>
 
 class Oscillator {
@@ -446,20 +447,17 @@ buffer[i + 1] = sample;                       // Right channel
 
 sound_siz.at(0,0)=buffer_size;
 wave.slen=buffer_size;
-sound.at(0,1,0)=(unsigned char *)buffer;
+// sound.at(0,1,0)=(unsigned char *)buffer;
 WGPU_AudioInputBuffer.at(0,0)=buffer;
 wave.snd=sound.at(0,1,0);
 snd_pos_u(0);
 snd_lft(sound_siz.at(0,0));
-// request.callback=bfr;
-    
-// EM_ASM({console.log('SDL_OpenAudioDevice');}); 
+request.callback=bfr;
+EM_ASM({console.log('SDL_OpenAudioDevice');}); 
 wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
 SDL_QueueAudio(wave.dev,sound.at(0,1,0),sound_siz.at(0,0));
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 audio_on.at(0,0)=5;
-    EM_ASM({console.log('Got audio data.');}); 
-
 return EM_TRUE;
 };
 
