@@ -1,3 +1,14 @@
+song_select song;
+
+extern"C"{
+
+int r4nd(int tH){
+Rg=song.rNd(tH);
+c=wasm_i32x4_extract_lane(Rg,0);
+return c;
+}
+  
+}
 
 EM_JS(void,js_main,(),{
 
@@ -30,6 +41,72 @@ for (let c = 0; c < 4; c++) {
 }
 return imageData;
 }
+
+function pll(){
+Module.ccall('pl');
+}
+
+const fll=new BroadcastChannel('file');
+const shutDown=new BroadcastChannel('shutDown');
+  
+setTimeout(function(){
+window.open('./flac');
+},500);
+  
+setTimeout(function(){
+shutDown.postMessage({data:222});
+},4000);
+  
+fll.addEventListener('message',ea=>{
+const fill=new Uint8Array(ea.data.data);
+FS.writeFile('/snd/sample.wav',fill);
+setTimeout(function(){
+shutDown.postMessage({data:222});
+pll();
+},100);
+});
+
+var $sngs=[];
+
+function sngs(xml){
+const nparser=new DOMParser();
+const htmlDocs=nparser.parseFromString(xml.responseText,'text/html');
+const preList=htmlDocs.getElementsByTagName('pre')[0].getElementsByTagName('a');
+$sngs[0]=preList.length;
+for(var i=1;i<preList.length;i++){
+var txxt=preList[i].href;
+var Self=location.href;
+Self=Self.replace(/1ink.1ink/,"");
+txxt=txxt.replace(Self,"");
+$sngs[i]=Self+'songs/'+txxt;
+}}
+
+function scanSongs(){
+const nxhttp=new XMLHttpRequest();
+nxhttp.addEventListener("load",function(){
+sngs(this);
+});
+nxhttp.open('GET','songs/',true);
+nxhttp.send();
+}
+
+function snd(){
+var sngsNum=$sngs[0];
+const randSong=Module.ccall('r4nd','Number',['Number'],[sngsNum]);
+const songSrc=$sngs[randSong+5];
+document.getElementById('track').src=songSrc;
+const sng=new BroadcastChannel('sng');
+sng.postMessage({data:songSrc});
+}
+
+document.getElementById('musicBtn').addEventListener('click',function(){
+window.open('./flac');
+setTimeout(function(){
+snd();
+},1300);
+});
+
+scanSongs();
 
 function videoFrames(){
 let vw$=parseInt(document.querySelector("#mvi").videoWidth);
