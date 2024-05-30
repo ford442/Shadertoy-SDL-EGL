@@ -31,7 +31,8 @@ float u, v;       // UV texture coordinates
 
 struct Vertex{
 // float x, y, z, w; // Position
-emscripten_align2_float x, y, z, w; // Position
+// emscripten_align2_float x, y, z, w; // Position
+emscripten_align1_float x, y, z, w; // Position
 };
 
 Vertex vertices[]={
