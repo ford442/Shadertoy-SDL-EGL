@@ -645,7 +645,7 @@ pause=true; // Toggle pause on/off
 setTimeout(function(){
 pause=false; // Toggle pause on/off
 Module.ccall("frmsOn");
-},1500);
+},1750);
 });
 
 setTimeout(function(){
