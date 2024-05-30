@@ -463,3 +463,32 @@ return EM_TRUE;
 };
 
 };
+
+class song_select{
+
+private:
+
+std::random_device rd;
+v128_t Dr;
+int rD=0;
+
+public:
+
+inline v128_t rNd(int Th){
+tie(Th,rD,Dr);
+std::srand(rd());
+rD=std::rand()%Th;
+Dr=wasm_i32x4_splat(rD);
+return Dr;
+}
+
+};
+
+extern "C"{
+  
+v128_t Rg;
+int c=0;
+
+int r4nd(int);
+
+}
