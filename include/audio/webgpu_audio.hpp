@@ -390,7 +390,7 @@ sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
 return EM_TRUE;
 }
 
-
+/*
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
 // sound.at(0,1,0)=(unsigned char *)WGPU_AudioOutputBuffer.at(0,0);
 // wave.snd=(unsigned char *)sound.at(0,1,0);
@@ -417,6 +417,7 @@ SDL_memcpy(stm,wave.wptr,len);
 snd_pos(sound_pos.at(0,0)+len);
 return;
 }
+*/
 
 boost::function<EM_BOOL()>plt=[this](){
 audio_on.at(0,0)=0;
@@ -432,10 +433,28 @@ request.channels=2;
 request.samples=128;
 SDL_memset(&request,0,sizeof(request));
 snd_pos(0);
-// SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
+SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
 SDL_Init(SDL_INIT_AUDIO);
 // SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
+const char * fln="/snd/sample.wav";
+SDL_RWops *rw=SDL_RWFromFile(fln,"rb");
+Mix_Music * music=NULL;
+music=Mix_LoadMUS_RW(rw,1);
+// soundp.at(0,1,0)=Mix_LoadMUS(flnm);
+snd_pos_u(wave.slen);
+request.callback=nullptr;
+// wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
+// if(Mix_PlayingMusic()==0){
+Mix_VolumeMusic(SDL_MIX_MAXVOLUME);
+wave.dev=Mix_OpenAudio(44100,AUDIO_S32,2,4096);
+//Play the music
+Mix_PlayMusic(music,1);
+// }
+SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
+audio_on.at(0,0)=5;
+return EM_TRUE;
 
+/*  // oscillator
 int buffer_size=128*request.samples*request.channels*sizeof(float);
 
 float* buffer=(float*)buffer_size;
@@ -451,6 +470,8 @@ wave.slen=buffer_size;
 // sound.at(0,1,0)=(unsigned char *)buffer;
 WGPU_AudioInputBuffer.at(0,0)=buffer;
 // wave.snd=(unsigned char *)WGPU_AudioOutputBuffer.at(0,0);
+
+    
 snd_pos_u(0);
 snd_lft(sound_siz.at(0,0));
 request.callback=bfr;
@@ -460,6 +481,7 @@ SDL_QueueAudio(wave.dev,sound.at(0,1,0),sound_siz.at(0,0));
 SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
 audio_on.at(0,0)=5;
 return EM_TRUE;
+   */ 
 };
 
 };
