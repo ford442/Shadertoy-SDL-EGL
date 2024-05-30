@@ -992,6 +992,10 @@ return;
 }
 
 int main(){
+EM_ASM({
+"use strict";
+FS.mkdir('/snd');
+});
 on.at(0,0)=0;
 js_main();
 return 0;
