@@ -313,6 +313,7 @@ using wva_tensor=boost::numeric::ublas::tensor<WGpuVertexAttribute *>;
 using clk_tensor=boost::numeric::ublas::tensor<boost::chrono::high_resolution_clock::time_point>;
 using timespn_tensor=boost::numeric::ublas::tensor<boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>>;
 using vec4_tensor = boost::numeric::ublas::tensor<boost::numeric::ublas::vec4>;
+using dv_tensor=boost::numeric::ublas::tensor<SDL_AudioDeviceID>;
 
 extern "C"{  
   
@@ -329,8 +330,10 @@ lu_tensor sound_pos_u=lu_tensor{1,1};
 v_tensor sse=v_tensor{1,2};
 v_tensor sse2=v_tensor{1,1};
 v_tensor sse3=v_tensor{1,1};
+dv_tensor dv=dv_tensor{1,1};
 fptr_tensor WGPU_AudioInputBuffer=fptr_tensor{1,1};
 ub_tensor WGPU_AudioOutputBuffer=ub_tensor{1,1};
+
 #include <math.h>
 
 class Oscillator {
@@ -390,34 +393,23 @@ sound_pos_u.at(0,0)=wasm_u64x2_extract_lane(sse2.at(0,0),0);
 return EM_TRUE;
 }
 
-/*
+
 static void SDLCALL bfr(void * unused,GLubyte * stm,GLint len){
-// sound.at(0,1,0)=(unsigned char *)WGPU_AudioOutputBuffer.at(0,0);
-// wave.snd=(unsigned char *)sound.at(0,1,0);
-if(audio_on.at(0,0)==5){
-if(sound_pos.at(0,0)>=sound_siz.at(0,0)){
-EM_ASM({console.log('stopping (if (sound_pos...)');}); 
-audio_on.at(0,0)=10;
-}
-int bytes_to_copy=std::min(len,int(sound_lft.at(0,0))); 
-::boost::tuples::tie(stm,len);
 wave.wptr=sound.at(0,1,0)+sound_pos.at(0,0);
 snd_lft(sound_pos_u.at(0,0)-sound_pos.at(0,0));
+while(sound_lft.at(0,0)<=len){
 SDL_UnlockAudioDevice(wave.dev);
-EM_ASM({console.log('memcopy sound');});
 SDL_memcpy(stm,wave.wptr,sound_lft.at(0,0));
 stm+=sound_lft.at(0,0);
 len-=sound_lft.at(0,0);
-wave.wptr += bytes_to_copy; // Advance the pointer
-sound_pos.at(0, 0) += bytes_to_copy; 
+wave.wptr=sound.at(0,1,0);
 snd_lft(sound_pos_u.at(0,0));
-SDL_LockAudioDevice(wave.dev);
+snd_pos(0);
+SDL_LockAudioDevice(dv.at(0,0));
 }
 SDL_memcpy(stm,wave.wptr,len);
 snd_pos(sound_pos.at(0,0)+len);
-return;
 }
-*/
 
 boost::function<EM_BOOL()>plt=[this](){
 audio_on.at(0,0)=0;
