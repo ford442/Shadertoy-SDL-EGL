@@ -434,24 +434,16 @@ request.samples=128;
 SDL_memset(&request,0,sizeof(request));
 snd_pos(0);
 SDL_strlcpy(flnm,"/snd/sample.wav",sizeof(flnm));
+SDL_RWops *rw=SDL_RWFromFile(flnm,"rb");
 SDL_Init(SDL_INIT_AUDIO);
-// SDL_LoadWAV(flnm,&request,&wave.snd,&wave.slen);
-const char * fln="/snd/sample.wav";
-SDL_RWops *rw=SDL_RWFromFile(fln,"rb");
-Mix_Music * music=NULL;
-music=Mix_LoadMUS_RW(rw,1);
-// soundp.at(0,1,0)=Mix_LoadMUS(flnm);
+SDL_LoadWAV_RW(rw,1,&request,&wave.snd,&wave.slen);
+sound.at(0,1,0)=wave.snd;
 snd_pos_u(wave.slen);
-request.callback=nullptr;
-// wave.dev=SDL_OpenAudioDevice(NULL,SDL_FALSE,&request,NULL,0);
-// if(Mix_PlayingMusic()==0){
-Mix_VolumeMusic(SDL_MIX_MAXVOLUME);
-wave.dev=Mix_OpenAudio(44100,AUDIO_S32,2,4096);
-//Play the music
-Mix_PlayMusic(music,1);
-// }
-SDL_PauseAudioDevice(wave.dev,SDL_FALSE);
-audio_on.at(0,0)=5;
+request.callback=bfr;
+const char * devName=SDL_GetAudioDeviceName(0,SDL_FALSE);
+wave.dev=SDL_OpenAudioDevice(devName,SDL_FALSE,&request,NULL,0);
+dv.at(0,0)=wave.dev;
+SDL_PauseAudioDevice(dv.at(0,0),SDL_FALSE);
 return EM_TRUE;
 
 /*  // oscillator
