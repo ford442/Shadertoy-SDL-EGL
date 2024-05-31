@@ -464,9 +464,9 @@ ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
-let fileStream=FS.open('/shader/'+fname,'w');
-FS.write(fileStream,sfil,0,sfil.length,0);
-// FS.writeFile('/shader/'+fname,sfil);
+// let fileStream=FS.open('/shader/'+fname,'w');
+// FS.write(fileStream,sfil,0,sfil.length,0);
+FS.writeFile('/shader/'+fname,sfil);
 document.querySelector('#stat').innerHTML='Downloaded Shader';
 document.querySelector('#stat').style.backgroundColor='blue';
 }
