@@ -28,6 +28,15 @@ return n;
 
 let pause=false;
 
+document.querySelector('#moveFwd').addEventListener('click',function(){
+Module.ccall("frmsOff");
+pause=true; // Toggle pause on/off
+setTimeout(function(){
+pause=false; // Toggle pause on/off
+Module.ccall("frmsOn");
+},1750);
+});
+
 function canvasStart(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
 const vvic=document.querySelector('#mvi');
@@ -67,7 +76,6 @@ let imageData=image.data;
 let pixelData=new Float64Array(imageData);
 let fileStream=FS.open('/video/frame.gl','w');
 // FS.writeFile('/video/frame.gl',pixelData);
-
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 if(running==0){
 setTimeout(function(){
@@ -91,7 +99,6 @@ image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
 pixelData=new Float64Array(imageData);
 FS.write(fileStream,pixelData,0,pixelData.length,0);
-// FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
 },25.0);
 }
@@ -652,15 +659,6 @@ normalResSetup();
 setTimeout(function(){
 imageStart();
 },1000);
-});
-
-document.querySelector('#moveFwd').addEventListener('click',function(){
-Module.ccall("frmsOff");
-pause=true; // Toggle pause on/off
-setTimeout(function(){
-pause=false; // Toggle pause on/off
-Module.ccall("frmsOn");
-},1750);
 });
 
 setTimeout(function(){
