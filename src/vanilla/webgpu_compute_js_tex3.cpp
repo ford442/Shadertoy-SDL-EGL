@@ -64,9 +64,11 @@ gl3.imageSmoothingEnabled=false;
 gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
-let pixelData=new Float32Array(imageData);
-let fileStream=FS.open('/video/frame.gl','w');
-FS.write(fileStream,pixelData,0,pixelData.length,0);
+let pixelData=new Float64Array(imageData);
+// let fileStream=FS.open('/video/frame.gl','w');
+FS.writeFile('/video/frame.gl',pixelData);
+
+// FS.write(fileStream,pixelData,0,pixelData.length,0);
 if(running==0){
 setTimeout(function(){
 Module.ccall("startWebGPUC",null,"Number",[vsiz]);
@@ -87,8 +89,10 @@ gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 }
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
-pixelData=new Float32Array(imageData);
-FS.write(fileStream,pixelData,0,pixelData.length,0);
+pixelData=new Float64Array(imageData);
+// FS.write(fileStream,pixelData,0,pixelData.length,0);
+FS.writeFile('/video/frame.gl',pixelData);
+
 Module.ccall("frmOn");
 },25.0);
 }
@@ -332,12 +336,16 @@ var imageData=image.data;
 // let pixelData=new Uint8ClampedArray(imageData);
 var pixelData=new Float64Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
-var fileStream=FS.open('/video/frame.gl','w');
-FS.write(fileStream,pixelData,0,pixelData.length,0);
+// var fileStream=FS.open('/video/frame.gl','w');
+// FS.write(fileStream,pixelData,0,pixelData.length,0);
+FS.writeFile('/video/frame.gl',pixelData);
+
 Module.ccall("frmOn");
 
 setInterval(function(){
-FS.write(fileStream,pixelData,0,pixelData.length,0);
+// FS.write(fileStream,pixelData,0,pixelData.length,0);
+FS.writeFile('/video/frame.gl',pixelData);
+
 Module.ccall("frmOn");
 },16.666);
 
@@ -477,7 +485,7 @@ bufferView[i] = flDat.charCodeAt(i);
 }
 // console.log(bufferView);
 
-FS.unlink('/shader/shader.wgsl');
+// FS.unlink('/shader/shader.wgsl');
 FS.writeFile('/shader/shader.wgsl',bufferView);
 // document.querySelector('#startBtn').click();
 setTimeout(function(){
