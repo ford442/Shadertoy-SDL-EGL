@@ -42,7 +42,7 @@ WGpuOnSubmittedWorkDoneCallback onComputeDoneStart=[](WGpuQueue queue,void *user
 return;
 };
 
-emscripten_align1_int rNd4(emscripten_align1_int randomMax){
+int rNd4(emscripten_align1_int randomMax){
 entropySeed=(randomMax)*randomizer();
 std::srand(entropySeed);
 randomNumber=std::rand()%randomMax;
@@ -81,12 +81,19 @@ return EM_TRUE;
 }
 
 EM_BOOL texOn(){
+if(on.at(3,3)==1){
 on.at(4,4)=1;
+}
 return EM_TRUE;
 }
 
 EM_BOOL framesOff(){
 on.at(3,3)=0;
+return EM_TRUE;
+}
+
+EM_BOOL framesOn(){
+on.at(3,3)=1;
 return EM_TRUE;
 }
 
@@ -1141,6 +1148,11 @@ return;
 
 void frmsOff(){
 framesOff();
+return;
+}
+
+void frmsOn(){
+framesOn();
 return;
 }
 
