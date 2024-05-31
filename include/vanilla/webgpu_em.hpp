@@ -84,6 +84,7 @@ using namespace std;
 #include <emscripten/threading.h>
 #include <emscripten/em_types.h>
 
+#include <emscripten/wasmfs.h>
 #include <emscripten/bind.h>
 #include <emscripten/html5.h>
 #include <emscripten/html5_webgpu.h>
