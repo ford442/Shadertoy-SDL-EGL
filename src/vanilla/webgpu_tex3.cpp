@@ -90,6 +90,12 @@ on.at(3,3)=0;
 return EM_TRUE;
 }
 
+
+EM_BOOL framesOn(){
+on.at(3,3)=1;
+return EM_TRUE;
+}
+
 boost::function<EM_BOOL()>render=[](){
 u64_uni.at(3,3)++; 
 
