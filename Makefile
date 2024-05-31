@@ -79,7 +79,7 @@ vanilla_test_emjs:
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","cwrap"]' -sEXPORTED_FUNCTIONS=["_main","_emjs","_cfunc"]
 
 b3_compute_eglx:
-	 em++ src/vanilla/webgpu_tex_egl.cpp $(STDS) -Wpadded -pipe -ffp-contract=fast -fexcess-precision=fast \
+	 em++ src/vanilla/webgpu_em.cpp $(STDS) -Wpadded -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O3 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing -march=haswell \
@@ -101,7 +101,7 @@ b3_compute_eglx:
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPUi","_startWebGPUbi","_startWebGPUC","_frmOn","_frmsOff","_frmsOn"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --js-library lib/lib_webgpu.js --pre-js js/rSlider.js --pre-js js/slideOut.js --js-library lib/lib_demo.js \
 	 --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 webgpu_tex_egl.o --extern-pre-js js/gpujsx.js --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0
+	 webgpu_em.o --extern-pre-js js/gpujsx.js --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0
 
 b3_compute_egl_tex:
 	 em++ src/vanilla/webgpu_egl_tex.cpp -pipe -ffast-math -ffp-contract=off \
