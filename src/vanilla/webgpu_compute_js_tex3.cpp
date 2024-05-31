@@ -450,7 +450,11 @@ ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
-FS.writeFile('/shader/'+fname,sfil);
+// FS.writeFile('/shader/'+fname,sfil);
+
+let fileStream=FS.open('/shader/'+fname,'w');
+FS.write(fileStream,sfil,0,sfil.length,0);
+
 document.querySelector('#stat').innerHTML='Downloaded Shader';
 document.querySelector('#stat').style.backgroundColor='blue';
 }
@@ -476,7 +480,11 @@ for (var i = 0; i < flDat.length; i++) {
 bufferView[i] = flDat.charCodeAt(i);
 }
 // console.log(bufferView);
-FS.writeFile('/shader/shader.wgsl',bufferView);
+
+let fileStream=FS.open('/shader/shader.wgsl','w');
+FS.write(fileStream,bufferView,0,bufferView.length,0);
+
+// FS.writeFile('/shader/shader.wgsl',bufferView);
 // document.querySelector('#startBtn').click();
 setTimeout(function(){
 document.querySelector('#circle').width=window.innerWidth;
@@ -503,7 +511,10 @@ for (var i = 0; i < flDat.length; i++) {
 bufferView[i] = flDat.charCodeAt(i);
 }
 // console.log(bufferView);
-FS.writeFile('/shader/shader.wgsl',bufferView);
+// FS.writeFile('/shader/shader.wgsl',bufferView);
+let fileStream=FS.open('/shader/shader.wgsl','w');
+FS.write(fileStream,bufferView,0,bufferView.length,0);
+
 // document.querySelector('#startBtn').click();
 setTimeout(function(){
 document.querySelector('#circle').width=window.innerWidth;
