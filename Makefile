@@ -157,7 +157,7 @@ b3_compute_egl_tex4:
 	 --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 webgpu_tex3.o --extern-pre-js js/gpujsx.js --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0
 
-b3_compute_eglx:
+b3_compute_eglx64:
 	 em++ src/vanilla/webgpu_tex_egl.cpp $(STDS) -Wpadded -sMEMORY64=2 -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
@@ -183,11 +183,11 @@ b3_compute_eglx:
 	 webgpu_tex_egl.o --extern-pre-js js/gpujsx.js --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0
 
 
-b3_compute_eglx32:
+b3_compute_eglx:
 	 em++ src/vanilla/webgpu_tex_egl.cpp $(STDS) -Wpadded -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
-	 -mextended-const -O3 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing \
+	 -mextended-const -O3 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing -march=haswell \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O3 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -sOFFSCREENCANVAS_SUPPORT=1 -stdlib=libc++ \
