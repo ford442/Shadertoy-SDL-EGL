@@ -1,7 +1,10 @@
 EM_JS(void,js_main,(),{
 
 FS.mkdir('/shader');
+  FS.mount(MEMFS, {}, '/shader');
 FS.mkdir('/video');
+  FS.mount(MEMFS, {}, '/video');
+
 let running=0;
 
 function flipImageData(imageData){
