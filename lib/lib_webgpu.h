@@ -1,4 +1,5 @@
 #pragma once
+#pragma pack(push, 1) // Pack to 1-byte boundaries (remove padding)
 
 #ifdef __EMSCRIPTEN__
 #include <emscripten/html5.h>
