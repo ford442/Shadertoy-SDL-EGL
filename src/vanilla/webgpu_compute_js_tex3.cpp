@@ -65,10 +65,10 @@ gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
 let pixelData=new Float64Array(imageData);
-// let fileStream=FS.open('/video/frame.gl','w');
-FS.writeFile('/video/frame.gl',pixelData);
+let fileStream=FS.open('/video/frame.gl','w');
+// FS.writeFile('/video/frame.gl',pixelData);
 
-// FS.write(fileStream,pixelData,0,pixelData.length,0);
+FS.write(fileStream,pixelData,0,pixelData.length,0);
 if(running==0){
 setTimeout(function(){
 Module.ccall("startWebGPUC",null,"Number",[vsiz]);
@@ -90,9 +90,8 @@ gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
 pixelData=new Float64Array(imageData);
-// FS.write(fileStream,pixelData,0,pixelData.length,0);
-FS.writeFile('/video/frame.gl',pixelData);
-
+FS.write(fileStream,pixelData,0,pixelData.length,0);
+// FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
 },25.0);
 }
@@ -458,7 +457,9 @@ ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
-FS.writeFile('/shader/'+fname,sfil);
+let fileStream=FS.open('/shader/'+fname,'w');
+FS.write(sfil,pixelData,0,sfil.length,0);
+// FS.writeFile('/shader/'+fname,sfil);
 document.querySelector('#stat').innerHTML='Downloaded Shader';
 document.querySelector('#stat').style.backgroundColor='blue';
 }
@@ -485,8 +486,9 @@ bufferView[i] = flDat.charCodeAt(i);
 }
 // console.log(bufferView);
 
-// FS.unlink('/shader/shader.wgsl');
-FS.writeFile('/shader/shader.wgsl',bufferView);
+let fileStream=FS.open('/shader/'+fname,'w');
+FS.write(bufferView,pixelData,0,bufferView.length,0);
+// FS.writeFile('/shader/shader.wgsl',bufferView);
 // document.querySelector('#startBtn').click();
 setTimeout(function(){
 document.querySelector('#circle').width=window.innerWidth;
@@ -513,7 +515,9 @@ for (var i = 0; i < flDat.length; i++) {
 bufferView[i] = flDat.charCodeAt(i);
 }
 // console.log(bufferView);
-FS.writeFile('/shader/shader.wgsl',bufferView);
+let fileStream=FS.open('/shader/'+fname,'w');
+FS.write(bufferView,pixelData,0,bufferView.length,0);
+// FS.writeFile('/shader/shader.wgsl',bufferView);
 // document.querySelector('#startBtn').click();
 setTimeout(function(){
 document.querySelector('#circle').width=window.innerWidth;
