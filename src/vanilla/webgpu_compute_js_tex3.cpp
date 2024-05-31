@@ -2,7 +2,6 @@ EM_JS(void,js_main,(),{
 
 FS.mkdir('/shader');
 FS.mkdir('/video');
-
 let running=0;
 
 function flipImageData(imageData){
@@ -27,15 +26,6 @@ return n;
 }}
 
 let pause=false;
-
-document.querySelector('#moveFwd').addEventListener('click',function(){
-Module.ccall("frmsOff");
-pause=true; // Toggle pause on/off
-setTimeout(function(){
-pause=false; // Toggle pause on/off
-Module.ccall("frmsOn");
-},1750);
-});
 
 function canvasStart(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
@@ -73,9 +63,8 @@ gl3.imageSmoothingEnabled=false;
 gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
-let pixelData=new Float64Array(imageData);
+let pixelData=new Float32Array(imageData);
 let fileStream=FS.open('/video/frame.gl','w');
-// FS.writeFile('/video/frame.gl',pixelData);
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 if(running==0){
 setTimeout(function(){
@@ -97,7 +86,7 @@ gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 }
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
-pixelData=new Float64Array(imageData);
+pixelData=new Float32Array(imageData);
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
 },25.0);
@@ -342,16 +331,12 @@ var imageData=image.data;
 // let pixelData=new Uint8ClampedArray(imageData);
 var pixelData=new Float64Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
-// var fileStream=FS.open('/video/frame.gl','w');
-// FS.write(fileStream,pixelData,0,pixelData.length,0);
-FS.writeFile('/video/frame.gl',pixelData);
-
+var fileStream=FS.open('/video/frame.gl','w');
+FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
 
 setInterval(function(){
-// FS.write(fileStream,pixelData,0,pixelData.length,0);
-FS.writeFile('/video/frame.gl',pixelData);
-
+FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
 },16.666);
 
@@ -464,8 +449,6 @@ ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
 if(sarrayBuffer){
 let sfil=new Uint8ClampedArray(sarrayBuffer);
-// let fileStream=FS.open('/shader/'+fname,'w');
-// FS.write(fileStream,sfil,0,sfil.length,0);
 FS.writeFile('/shader/'+fname,sfil);
 document.querySelector('#stat').innerHTML='Downloaded Shader';
 document.querySelector('#stat').style.backgroundColor='blue';
@@ -492,10 +475,7 @@ for (var i = 0; i < flDat.length; i++) {
 bufferView[i] = flDat.charCodeAt(i);
 }
 // console.log(bufferView);
-
-let fileStream=FS.open('/shader/'+fname,'w');
-FS.write(fileStream,bufferView,0,bufferView.length,0);
-// FS.writeFile('/shader/shader.wgsl',bufferView);
+FS.writeFile('/shader/shader.wgsl',bufferView);
 // document.querySelector('#startBtn').click();
 setTimeout(function(){
 document.querySelector('#circle').width=window.innerWidth;
@@ -522,9 +502,7 @@ for (var i = 0; i < flDat.length; i++) {
 bufferView[i] = flDat.charCodeAt(i);
 }
 // console.log(bufferView);
-let fileStream=FS.open('/shader/'+fname,'w');
-FS.write(fileStream,bufferView,0,bufferView.length,0);
-// FS.writeFile('/shader/shader.wgsl',bufferView);
+FS.writeFile('/shader/shader.wgsl',bufferView);
 // document.querySelector('#startBtn').click();
 setTimeout(function(){
 document.querySelector('#circle').width=window.innerWidth;
@@ -659,6 +637,15 @@ normalResSetup();
 setTimeout(function(){
 imageStart();
 },1000);
+});
+
+document.querySelector('#moveFwd').addEventListener('click',function(){
+Module.ccall("frmsOff");
+pause=true; // Toggle pause on/off
+setTimeout(function(){
+pause=false; // Toggle pause on/off
+Module.ccall("frmsOn");
+},1750);
 });
 
 setTimeout(function(){
