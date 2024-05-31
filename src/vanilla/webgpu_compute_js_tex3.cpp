@@ -487,7 +487,7 @@ bufferView[i] = flDat.charCodeAt(i);
 // console.log(bufferView);
 
 let fileStream=FS.open('/shader/'+fname,'w');
-FS.write(bufferView,pixelData,0,bufferView.length,0);
+FS.write(fileStream,bufferView,0,bufferView.length,0);
 // FS.writeFile('/shader/shader.wgsl',bufferView);
 // document.querySelector('#startBtn').click();
 setTimeout(function(){
@@ -516,7 +516,7 @@ bufferView[i] = flDat.charCodeAt(i);
 }
 // console.log(bufferView);
 let fileStream=FS.open('/shader/'+fname,'w');
-FS.write(bufferView,pixelData,0,bufferView.length,0);
+FS.write(fileStream,bufferView,0,bufferView.length,0);
 // FS.writeFile('/shader/shader.wgsl',bufferView);
 // document.querySelector('#startBtn').click();
 setTimeout(function(){
