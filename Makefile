@@ -79,6 +79,56 @@ vanilla_test_emjs:
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=3221225472 \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","cwrap"]' -sEXPORTED_FUNCTIONS=["_main","_emjs","_cfunc"]
 
+
+
+b3_compute_mod:
+	 em++ src/vanilla/webgpu_em.cpp $(STDS) -pipe -ffp-contract=fast -fexcess-precision=fast \
+	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
+	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
+	 -mextended-const -O3 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ src/vanilla/wasm_loader.cpp $(STDS) -pipe -ffp-contract=fast -fexcess-precision=fast \
+	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
+	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
+	 -mextended-const -O3 $(STDS) -fno-strict-aliasing \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ -O3 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
+	 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -sOFFSCREENCANVAS_SUPPORT=1 -stdlib=libc++ \
+	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
+	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web,node \
+	 -DCOMPUTE -o $(WGL_BIN_NAME)-mod.js -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
+	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(xGL_FLAGS) -sASSERTIONS=0 -march=haswell \
+	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm32 -DNDEBUG=1 \
+	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
+	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -mtune=wasm32 \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1984mb -lmath.js -lhtml5.js -lint53.js \
+	 -sSUPPORT_LONGJMP=emscripten -sABORT_ON_WASM_EXCEPTIONS=0 -sEMULATE_FUNCTION_POINTER_CASTS=0 \
+	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
+	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
+	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS='["wgpu_buffer_map_sync"]' \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPUi","_startWebGPUbi","_startWebGPUC","_frmOn","_frmsOff","_frmsOn"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --js-library lib/lib_webgpu.js --pre-js js/rSlider.js --pre-js js/slideOut.js --js-library lib/lib_demo.js \
+	 --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 webgpu_em.o --extern-pre-js js/gpujsx.js --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
+	 -sMODULARIZE -sEXPORT_NAME='lib1ink'
+	 em++ -O3 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
+	 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -stdlib=libc++ \
+	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
+	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web,node \
+	 -DCOMPUTE -o $(MOD_BIN_NAME)-load.js -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
+	 $(LINK_SIMD_FLAGS) -sASSERTIONS=0 -march=haswell \
+	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm32 -DNDEBUG=1 \
+	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
+	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -mtune=wasm32 \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=700mb -lmath.js -lhtml5.js -lint53.js \
+	 -sSUPPORT_LONGJMP=emscripten -sABORT_ON_WASM_EXCEPTIONS=0 -sEMULATE_FUNCTION_POINTER_CASTS=0 \
+	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
+	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
+	 -sASYNCIFY=0 -sEXPORTED_FUNCTIONS='["_main"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
+	 wasm_loader.o --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
+	 -sMODULARIZE -sEXPORT_NAME='libload'
+
 b3_compute_eglx:
 	 em++ src/vanilla/webgpu_em.cpp $(STDS) -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
@@ -207,55 +257,6 @@ b3_compute_eglx64:
 	 --js-library lib/lib_webgpu.js --pre-js js/rSlider.js --pre-js js/slideOut.js --js-library lib/lib_demo.js \
 	 --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 webgpu_tex_egl.o --extern-pre-js js/gpujsx.js --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0
-
-
-b3_compute_mod:
-	 em++ src/vanilla/webgpu_em.cpp $(STDS) -pipe -ffp-contract=fast -fexcess-precision=fast \
-	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
-	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
-	 -mextended-const -O3 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing \
-	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ src/vanilla/wasm_loader.cpp $(STDS) -pipe -ffp-contract=fast -fexcess-precision=fast \
-	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
-	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
-	 -mextended-const -O3 $(STDS) -fno-strict-aliasing \
-	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -O3 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
-	 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -sOFFSCREENCANVAS_SUPPORT=1 -stdlib=libc++ \
-	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
-	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web,node \
-	 -DCOMPUTE -o $(WGL_BIN_NAME)-mod.js -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
-	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(xGL_FLAGS) -sASSERTIONS=0 -march=haswell \
-	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm32 -DNDEBUG=1 \
-	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
-	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -mtune=wasm32 \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1984mb -lmath.js -lhtml5.js -lint53.js \
-	 -sSUPPORT_LONGJMP=emscripten -sABORT_ON_WASM_EXCEPTIONS=0 -sEMULATE_FUNCTION_POINTER_CASTS=0 \
-	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
-	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
-	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS='["wgpu_buffer_map_sync"]' \
-	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPUi","_startWebGPUbi","_startWebGPUC","_frmOn","_frmsOff","_frmsOn"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --js-library lib/lib_webgpu.js --pre-js js/rSlider.js --pre-js js/slideOut.js --js-library lib/lib_demo.js \
-	 --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 webgpu_tex_egl.o --extern-pre-js js/gpujsx.js --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
-	 -sMODULARIZE -sEXPORT_NAME='lib1ink'
-	 em++ -O3 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
-	 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -stdlib=libc++ \
-	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
-	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web,node \
-	 -DCOMPUTE -o $(MOD_BIN_NAME)-load.js -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
-	 $(LINK_SIMD_FLAGS) -sASSERTIONS=0 -march=haswell \
-	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm32 -DNDEBUG=1 \
-	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
-	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -mtune=wasm32 \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=700mb -lmath.js -lhtml5.js -lint53.js \
-	 -sSUPPORT_LONGJMP=emscripten -sABORT_ON_WASM_EXCEPTIONS=0 -sEMULATE_FUNCTION_POINTER_CASTS=0 \
-	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
-	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
-	 -sASYNCIFY=0 -sEXPORTED_FUNCTIONS='["_main"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
-	 wasm_loader.o --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
-	 -sMODULARIZE -sEXPORT_NAME='libload'
 
 
 b3_compute_wasi:
