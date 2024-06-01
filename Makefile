@@ -210,10 +210,15 @@ b3_compute_eglx64:
 
 
 b3_compute_mod:
-	 em++ src/vanilla/webgpu_tex_egl.cpp $(STDS) -pipe -ffp-contract=fast -fexcess-precision=fast \
+	 em++ src/vanilla/webgpu_em.cpp $(STDS) -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O3 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ src/vanilla/wasm_loader.cpp $(STDS) -pipe -ffp-contract=fast -fexcess-precision=fast \
+	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
+	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
+	 -mextended-const -O3 $(STDS) -fno-strict-aliasing \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O3 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -sOFFSCREENCANVAS_SUPPORT=1 -stdlib=libc++ \
@@ -249,7 +254,7 @@ b3_compute_mod:
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
 	 -sASYNCIFY=0 -sEXPORTED_FUNCTIONS='["_main"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
-	 src/vanilla/wasm_loader.cpp --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
+	 wasm_loader.o --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
 	 -sMODULARIZE -sEXPORT_NAME='libload'
 
 
