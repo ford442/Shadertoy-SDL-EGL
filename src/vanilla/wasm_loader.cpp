@@ -1,4 +1,5 @@
 #include <emscripten.h>
+#include <emscripten/bind.h>
 
 int main(){
 EM_ASM({
