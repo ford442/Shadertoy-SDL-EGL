@@ -81,7 +81,7 @@ using namespace std;
 #include <cfloat>
 #include <new>
 #include <emscripten.h>
-#include <emscripten/threading.h>
+// #include <emscripten/threading.h>
 #include <emscripten/em_types.h>
 
 // #include <emscripten/wasmfs.h>
