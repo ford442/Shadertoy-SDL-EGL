@@ -103,10 +103,10 @@ b3_wasm_loader:
 	 -sMODULARIZE -sEXPORT_NAME='libload'
 
 b3_compute_mod:
-	 em++ src/vanilla/wasm_loader.cpp $(STDS) -pipe -ffp-contract=fast -fexcess-precision=fast \
+	 em++ src/vanilla/webgpu_em.cpp $(STDS) -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
-	 -mextended-const -O3 -fno-strict-aliasing \
+	 -mextended-const -O3 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
 	 em++ -O3 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -sOFFSCREENCANVAS_SUPPORT=1 -stdlib=libc++ \
