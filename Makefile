@@ -126,7 +126,7 @@ b3_compute_mod:
 	 --js-library lib/lib_webgpu.js --pre-js js/rSlider.js --pre-js js/slideOut.js --js-library lib/lib_demo.js \
 	 --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 webgpu_em.o --extern-pre-js js/gpujsx.js --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
-	 -sMODULARIZE -sEXPORT_NAME='lib1ink' -sSUPPORT_LONGJMP=wasm -wasm-enable-eh
+	 -sMODULARIZE -sEXPORT_NAME='lib1ink' -sSUPPORT_LONGJMP=emscripten -wasm-enable-eh
 
 b3_compute_eglx:
 	 em++ src/vanilla/webgpu_em.cpp $(STDS) -pipe -ffp-contract=fast -fexcess-precision=fast \
