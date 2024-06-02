@@ -79,7 +79,7 @@ scr.async=true;
 scr.charset='utf-8';
 scr.type='text/javascript';
 scr.defer=true;
-scr.src="https://wasm.noahcohn.com/b3hd/w0-007-mod.1ijs";
+scr.src="https://wasm.noahcohn.com/b3hd/w0-008-mod.1ijs";
 document.body.appendChild(scr);
 setTimeout(function(){
 var Module=lib1ink();
