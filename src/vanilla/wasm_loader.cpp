@@ -2,21 +2,12 @@
 #include <emscripten/bind.h>
 
 int main(){
+
 EM_ASM({
-let scr=document.createElement("script");
-scr.async=true;
-scr.charset='utf-8';
-scr.type='text/javascript';
-scr.defer=true;
-scr.src="https://wasm.noahcohn.com/b3hd/w0-007-mod.1ijs";
-document.body.appendChild(scr);
-setTimeout(function(){
-var Module=lib1ink();
-Module.onRuntimeInitialized=function(){
-Module.callMain();
-};
-},700);
   
+const vsiz=document.querySelector('#vsiz');
+let menuSz=parseInt(window.innerWidth*.5,10);
+
 function normalResSetup(){
 setTimeout(function(){
 document.querySelector('#shut').innerHTML=2;
@@ -32,6 +23,7 @@ document.querySelector('#di').click();
 },500);
 document.querySelector('#status').style.backgroundColor="green";
 }
+
 document.querySelector('#status').height=20;
 document.querySelector('#status').width=parseInt(window.innerHeight,10);
 const tem=document.querySelector('#tim');
@@ -81,6 +73,20 @@ slt=tem.innerHTML;
 });
 
 normalResSetup();
+
+let scr=document.createElement("script");
+scr.async=true;
+scr.charset='utf-8';
+scr.type='text/javascript';
+scr.defer=true;
+scr.src="https://wasm.noahcohn.com/b3hd/w0-007-mod.1ijs";
+document.body.appendChild(scr);
+setTimeout(function(){
+var Module=lib1ink();
+Module.onRuntimeInitialized=function(){
+Module.callMain();
+};
+},700);
 
 });
 
