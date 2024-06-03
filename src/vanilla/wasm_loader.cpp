@@ -105,7 +105,7 @@ Module_libjs.onRuntimeInitialized=function(){
 Module_libjs.callMain();
 };
 },1200);
-});
+  
 codeCall.addEventListener('message',event=>{
 if(event.data=='startWebGPUi'){
 Module_lib1ink.ccall('startWebGPUi');
@@ -125,6 +125,9 @@ Module_lib1ink.ccall('frmsOn');
 if(event.data=='frmsOff'){
 Module_lib1ink.ccall('frmsOff');
 }
+
+});
+  
 });
 
 return 0;
