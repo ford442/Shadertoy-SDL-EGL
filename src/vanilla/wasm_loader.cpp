@@ -78,29 +78,17 @@ normalResSetup();
 
 let Module_lib1ink;
 
-const ff=new XMLHttpRequest();
-ff.open('GET','https://wasm.noahcohn.com/b3hd/w0-008-load.1ijs',true);
-ff.responseType='arraybuffer';
-document.querySelector('#stat').innerHTML='Downloading Module';
-document.querySelector('#stat').style.backgroundColor='yellow';
-ff.addEventListener("load",function(){
-let sarrayBuffer=ff.response;
-if(sarrayBuffer){
-let sfil=new Uint8ClampedArray(sarrayBuffer);
-// FS.writeFile('/shader/'+fname,sfil);
-document.querySelector('#stat').innerHTML='Downloaded Module';
-document.querySelector('#stat').style.backgroundColor='blue';
 var scr=document.createElement("script");
 scr.async=true;
 scr.charset='utf-8';
 scr.type='text/javascript';
 scr.defer=true;
-scr.src=sfil;
+scr.src="https://wasm.noahcohn.com/b3hd/w0-008-mod.1ijs";
 document.body.appendChild(scr);
 setTimeout(function(){
-var Module=lib1ink();
-Module.onRuntimeInitialized=function(){
-Module.callMain();
+Module_lib1ink=lib1ink();
+Module_lib1ink.onRuntimeInitialized=function(){
+Module_lib1ink.callMain();
 };
 },700);
 }
