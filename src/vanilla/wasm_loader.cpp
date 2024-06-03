@@ -75,21 +75,20 @@ slt=tem.innerHTML;
 });
 
 normalResSetup();
+
 let Module_lib1ink;
-  
-var scr=document.createElement("script");
-scr.async=true;
-scr.charset='utf-8';
-scr.type='text/javascript';
-scr.defer=true;
-scr.src="https://wasm.noahcohn.com/b3hd/w0-008-mod.1ijs";
-document.body.appendChild(scr);
-setTimeout(function(){
-Module_lib1ink=lib1ink();
-Module_lib1ink.onRuntimeInitialized=function(){
+
+WebAssembly.instantiateStreaming(
+fetch("https://wasm.noahcohn.com/b3hd/w0-008-mod.1ijs"), 
+).then(result=>{
+Module_lib1ink=result.instance;
+Module_lib1ink.onRuntimeInitialized=()=>{
 Module_lib1ink.callMain();
 };
-},700);
+}).catch(error => {
+    // Handle loading errors appropriately
+    console.error("Error loading WASM module:", error);
+});
   
 });
 
