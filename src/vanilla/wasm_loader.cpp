@@ -78,15 +78,14 @@ normalResSetup();
 
 let Module_lib1ink;
 
-fetch("https://wasm.noahcohn.com/b3hd/w0-008-mod.1ijs")
-.then(response => response.arrayBuffer())
-.then(bytes => {
+let sccr=fetch("https://wasm.noahcohn.com/b3hd/w0-008-mod.1ijs");
+
 var scr=document.createElement("script");
 scr.async=true;
 scr.charset='utf-8';
 scr.type='text/javascript';
 scr.defer=true;
-scr.src=new Uint8Array(bytes);
+scr.src=sccr;
 document.body.appendChild(scr);
 setTimeout(function(){
 var Module=lib1ink();
@@ -94,9 +93,8 @@ Module.onRuntimeInitialized=function(){
 Module.callMain();
 };
 },700);
+
 });
   
-});
-
 return 0;
 }
