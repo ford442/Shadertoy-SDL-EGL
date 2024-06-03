@@ -5,6 +5,8 @@ int main(){
 
 EM_ASM({
   
+let codeCall=new BroadcastChannel('codeCall');
+
 const vsiz=document.querySelector('#vsiz');
 let menuSz=parseInt(window.innerWidth*.5,10);
 
@@ -73,7 +75,9 @@ slt=tem.innerHTML;
 });
 
 normalResSetup();
-
+let Module_lib1ink;
+let Module_libjs;
+  
 var scr=document.createElement("script");
 scr.async=true;
 scr.charset='utf-8';
@@ -82,9 +86,9 @@ scr.defer=true;
 scr.src="https://wasm.noahcohn.com/b3hd/w0-008-mod.1ijs";
 document.body.appendChild(scr);
 setTimeout(function(){
-var Module=lib1ink();
-Module.onRuntimeInitialized=function(){
-Module.callMain();
+Module_lib1ink=lib1ink();
+Module_lib1ink.onRuntimeInitialized=function(){
+Module_lib1ink.callMain();
 };
 },700);
 
@@ -96,11 +100,31 @@ scr.defer=true;
 scr.src="https://wasm.noahcohn.com/b3hd/w0-008-js.1ijs";
 document.body.appendChild(scr);
 setTimeout(function(){
-var Module=libjs();
-Module.onRuntimeInitialized=function(){
-Module.callMain();
+Module_libjs=libjs();
+Module_libjs.onRuntimeInitialized=function(){
+Module_libjs.callMain();
 };
 },1200);
+});
+codeCall.addEventListener('message',event=>{
+if(event.data=='startWebGPUi'){
+Module_lib1ink.ccall('startWebGPUi');
+}
+if(event.data=='startWebGPUbi'){
+Module_lib1ink.ccall('startWebGPUbi');
+}
+if(event.data=='startWebGPUC'){
+Module_lib1ink.ccall('startWebGPUC');
+}
+if(event.data=='frmOn'){
+Module_lib1ink.ccall('frmOn');
+}
+if(event.data=='frmsOn'){
+Module_lib1ink.ccall('frmsOn');
+} 
+if(event.data=='frmsOff'){
+Module_lib1ink.ccall('frmsOff');
+}
 });
 
 return 0;
