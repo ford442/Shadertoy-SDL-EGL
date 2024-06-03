@@ -96,7 +96,7 @@ scr.defer=true;
 scr.src="https://wasm.noahcohn.com/b3hd/w0-008-js.1ijs";
 document.body.appendChild(scr);
 setTimeout(function(){
-var Module=lib1ink();
+var Module=libjs();
 Module.onRuntimeInitialized=function(){
 Module.callMain();
 };
