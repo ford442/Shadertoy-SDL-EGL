@@ -78,14 +78,18 @@ normalResSetup();
 
 let Module_lib1ink;
 
-let sccr=fetch("https://wasm.noahcohn.com/b3hd/w0-008-mod.1ijs");
-
+fetch("https://wasm.noahcohn.com/b3hd/w0-008-load.1ijs")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`); 
+        }
+  
 var scr=document.createElement("script");
 scr.async=true;
 scr.charset='utf-8';
 scr.type='text/javascript';
 scr.defer=true;
-scr.src=sccr;
+scr.src=response.text();
 document.body.appendChild(scr);
 setTimeout(function(){
 var Module=lib1ink();
@@ -93,6 +97,7 @@ Module.onRuntimeInitialized=function(){
 Module.callMain();
 };
 },700);
+});
 
 });
   
