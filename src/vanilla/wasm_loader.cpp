@@ -82,7 +82,7 @@ fetch("https://wasm.noahcohn.com/b3hd/w0-008-mod.1ijs")
 .then(response => response.arrayBuffer())
 .then(bytes => {
 FS.writeFile("/mod.1ijs", new Uint8Array(bytes)); 
-const wasmBytes = FS.readFile("/my_module.wasm");
+const wasmBytes = FS.readFile("/mod.1ijs");
 // return WebAssembly.instantiate(wasmBytes, importObject);
 })
 .then(result => { 
