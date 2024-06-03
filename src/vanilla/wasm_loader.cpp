@@ -100,7 +100,7 @@ var Module=libjs();
 Module.onRuntimeInitialized=function(){
 Module.callMain();
 };
-},700);
+},1200);
 });
 
 return 0;
