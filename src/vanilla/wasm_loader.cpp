@@ -74,7 +74,7 @@ slt=tem.innerHTML;
 
 normalResSetup();
 
-let scr=document.createElement("script");
+var scr=document.createElement("script");
 scr.async=true;
 scr.charset='utf-8';
 scr.type='text/javascript';
@@ -88,6 +88,19 @@ Module.callMain();
 };
 },700);
 
+var scr=document.createElement("script");
+scr.async=true;
+scr.charset='utf-8';
+scr.type='text/javascript';
+scr.defer=true;
+scr.src="https://wasm.noahcohn.com/b3hd/w0-008-js.1ijs";
+document.body.appendChild(scr);
+setTimeout(function(){
+var Module=lib1ink();
+Module.onRuntimeInitialized=function(){
+Module.callMain();
+};
+},700);
 });
 
 return 0;
