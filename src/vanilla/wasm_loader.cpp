@@ -116,7 +116,7 @@ if(event.data=='startWebGPUbi'){
 Module_lib1ink.ccall("startWebGPUbi",null,"Number",[vsiz]);
 }
 if(event.data=='startWebGPUC'){
-Module_lib1ink.("startWebGPUC",null,"Number",[vsiz]);
+Module_lib1ink.ccall("startWebGPUC",null,"Number",[vsiz]);
 }
 if(event.data=='frmOn'){
 Module_lib1ink.ccall('frmOn');
