@@ -5,6 +5,22 @@ int main(){
 
 EM_ASM({
   
+let Module_lib1ink;
+
+var scr=document.createElement("script");
+scr.async=true;
+scr.charset='utf-8';
+scr.type='text/javascript';
+scr.defer=true;
+scr.src="https://wasm.noahcohn.com/b3hd/w0-008-mod.1ijs";
+document.body.appendChild(scr);
+setTimeout(function(){
+Module_lib1ink=lib1ink();
+Module_lib1ink.onRuntimeInitialized=function(){
+Module_lib1ink.callMain();
+};
+},700);
+
 let codeCall=new BroadcastChannel('codeCall');
 
 const vsiz=document.querySelector('#vsiz');
@@ -72,27 +88,10 @@ setTimeout(function(){
 slt=tem.innerHTML;
 },8);
 },16);
-});
 
 normalResSetup();
 
-let Module_lib1ink;
-
-var scr=document.createElement("script");
-scr.async=true;
-scr.charset='utf-8';
-scr.type='text/javascript';
-scr.defer=true;
-scr.src="https://wasm.noahcohn.com/b3hd/w0-008-mod.1ijs";
-document.body.appendChild(scr);
-setTimeout(function(){
-Module_lib1ink=lib1ink();
-Module_lib1ink.onRuntimeInitialized=function(){
-Module_lib1ink.callMain();
-};
-},700);
-
 });
-  
+
 return 0;
 }
