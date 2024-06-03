@@ -88,6 +88,7 @@ setTimeout(function(){
 slt=tem.innerHTML;
 },8);
 },16);
+});
 
 normalResSetup();
 
