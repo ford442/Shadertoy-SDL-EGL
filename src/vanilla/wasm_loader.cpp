@@ -107,6 +107,8 @@ Module_libjs.callMain();
 },1200);
 
 codeCall.addEventListener('message',event=>{
+  console.log('got codeCall postMessage');
+
 let vsize=document.querySelector('#vsiz').innerHTML;
 
 if(event.data=='startWebGPUi'){
