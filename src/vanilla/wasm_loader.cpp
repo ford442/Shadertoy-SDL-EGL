@@ -78,16 +78,30 @@ normalResSetup();
 
 let Module_lib1ink;
 
-WebAssembly.instantiateStreaming(
-fetch("https://wasm.noahcohn.com/b3hd/w0-008-mod.1ijs"), 
-).then(result=>{
-Module_lib1ink=result.instance;
-Module_lib1ink.onRuntimeInitialized=()=>{
-Module_lib1ink.callMain();
+fetch("https://wasm.noahcohn.com/b3hd/w0-008-mod.1ijs")
+.then(response => response.arrayBuffer())
+.then(bytes => {
+FS.writeFile("/mod.1ijs", new Uint8Array(bytes)); 
+const wasmBytes = FS.readFile("/my_module.wasm");
+// return WebAssembly.instantiate(wasmBytes, importObject);
+})
+.then(result => { 
+var scr=document.createElement("script");
+scr.async=true;
+scr.charset='utf-8';
+scr.type='text/javascript';
+scr.defer=true;
+scr.src=wasmBytes;
+document.body.appendChild(scr);
+setTimeout(function(){
+var Module=lib1ink();
+Module.onRuntimeInitialized=function(){
+Module.callMain();
 };
+},700);
+});
 }).catch(error => {
-    // Handle loading errors appropriately
-    console.error("Error loading WASM module:", error);
+console.error("Error loading WASM module:", error);
 });
   
 });
