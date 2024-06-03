@@ -240,6 +240,7 @@ cnvb.height=SiZ;
 cnvb.width=SiZ;
 if(running==0){
 setTimeout(function(){
+var Module=lib1ink();
 let vsiz=document.querySelector('#vsiz').innerHTML;
 Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 console.log('Starting..');
@@ -247,6 +248,7 @@ running=1;
 },50);
 }else{
 setTimeout(function(){
+var Module=lib1ink();
 let vsiz=document.querySelector('#vsiz').innerHTML;
 Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
 console.log('Starting..');
