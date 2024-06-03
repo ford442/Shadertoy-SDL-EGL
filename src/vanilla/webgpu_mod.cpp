@@ -1176,10 +1176,7 @@ return;
 
 }
 
-int main(){
-on.at(0,0)=0;
-// js_main();
-EM_ASM({
+EM_JS(void,js_main,(),{
 let codeCall=new BroadcastChannel('codeCall');
 codeCall.addEventListener('message',event=>{
 console.log('got codeCall postMessage');
@@ -1205,5 +1202,9 @@ Module.ccall('frmsOff');
 }
 });
 });
+
+int main(){
+on.at(0,0)=0;
+js_main();
 return 0;
 }
