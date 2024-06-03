@@ -100,9 +100,6 @@ Module.callMain();
 };
 },700);
 });
-}).catch(error => {
-console.error("Error loading WASM module:", error);
-});
   
 });
 
