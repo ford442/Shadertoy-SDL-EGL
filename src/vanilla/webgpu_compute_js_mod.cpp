@@ -3,6 +3,8 @@
 
 EM_JS(void,js_main,(),{
 
+var Module=lib1ink();
+
 FS.mkdir('/shader');
 FS.mkdir('/video');
 let running=0;
