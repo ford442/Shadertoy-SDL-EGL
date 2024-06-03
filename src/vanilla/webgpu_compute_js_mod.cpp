@@ -73,7 +73,7 @@ let fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 if(running==0){
 setTimeout(function(){
-codeCall.postMessage({data:'startWebGPUC'});
+codeCall.postMessage(startWebGPUC');
 // Module.ccall("startWebGPUC",null,"Number",[vsiz]);
 console.log('Starting..');
 running=1;
@@ -81,7 +81,7 @@ running=1;
 }else{
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-codeCall.postMessage({data:'startWebGPUC'});
+codeCall.postMessage('startWebGPUC');
 // Module.ccall("startWebGPUC",null,"Number",[vsiz]);
 console.log('Starting..');
 },250);
@@ -95,7 +95,7 @@ image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
 pixelData=new Float64Array(imageData);
 FS.write(fileStream,pixelData,0,pixelData.length,0);
-codeCall.postMessage({data:'frmOn'});
+codeCall.postMessage('frmOn');
 // Module.ccall("frmOn");
 },25.0);
 }
@@ -119,7 +119,7 @@ running=1;
 }else{
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-codeCall.postMessage({data:'startWebGPUbi'});
+codeCall.postMessage('startWebGPUbi');
 // Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
 console.log('Starting..');
 },250);
@@ -155,7 +155,7 @@ var pixelData=new Float64Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
 let fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
-codeCall.postMessage({data:'frmOn'});
+codeCall.postMessage('frmOn');
 // Module.ccall("frmOn");
 setInterval(function(){
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
@@ -169,7 +169,7 @@ pixelData=new Float64Array(imageData);
 // gpuQueue.writeTexture({ texture }, pixelData, { bytesPerRow }, { width: w$, height: h$ } );
 // pixelData=new Float64Array(imageData,0,la);  // causes sub-array data array-reforming (slower)
 FS.write(fileStream,pixelData,0,pixelData.length,0);
-codeCall.postMessage({data:'frmOn'});
+codeCall.postMessage('frmOn');
 // Module.ccall("frmOn");
 },16.666);
 }
@@ -182,7 +182,7 @@ let h$=parseInt(document.querySelector("#ivi").height);
 if(running==0){
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-codeCall.postMessage({data:'startWebGPUi'});
+codeCall.postMessage('startWebGPUi');
 // Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 console.log('Starting..');
 running=1;
@@ -190,7 +190,7 @@ running=1;
 }else{
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-codeCall.postMessage({data:'startWebGPUbi'});
+codeCall.postMessage('startWebGPUbi');
 // Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
 console.log('Starting..');
 },250);
@@ -228,11 +228,11 @@ var pixelData=new Float64Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
 var fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
-codeCall.postMessage({data:'frmOn'});
+codeCall.postMessage('frmOn');
 // Module.ccall("frmOn");
 setInterval(function(){
 FS.write(fileStream,pixelData,0,pixelData.length,0);
-codeCall.postMessage({data:'frmOn'});
+codeCall.postMessage('frmOn');
 // Module.ccall("frmOn");
 },16.666);
 
@@ -249,7 +249,7 @@ setTimeout(function(){
 
 let vsiz=document.querySelector('#vsiz').innerHTML;
 console.log('sending startWebGPUi postMessage');
-codeCall.postMessage({data:'startWebGPUi'});
+codeCall.postMessage('startWebGPUi');
 // Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 console.log('Starting..');
 running=1;
@@ -257,7 +257,7 @@ running=1;
 }else{
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-codeCall.postMessage({data:'startWebGPUbi'});
+codeCall.postMessage('startWebGPUbi');
 // Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
 console.log('Starting..');
 },50);
@@ -395,12 +395,12 @@ imageStart();
 });
 
 document.querySelector('#moveFwd').addEventListener('click',function(){
-codeCall.postMessage({data:'frmsOff'});
+codeCall.postMessage('frmsOff');
 Module.ccall("frmsOff");
 pause=true; // Toggle pause on/off
 setTimeout(function(){
 pause=false; // Toggle pause on/off
-codeCall.postMessage({data:'frmsOn'});
+codeCall.postMessage('frmsOn');
 Module.ccall("frmsOn");
 },1900);
 });
