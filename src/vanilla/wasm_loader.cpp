@@ -110,6 +110,7 @@ codeCall.addEventListener('message',event=>{
 let vsize=document.querySelector('#vsiz').innerHTML;
 
 if(event.data=='startWebGPUi'){
+console.log('sending startWebGPUi ccall');
 Module_lib1ink.ccall("startWebGPUi",null,"Number",[vsize]);
 }
 if(event.data=='startWebGPUbi'){
