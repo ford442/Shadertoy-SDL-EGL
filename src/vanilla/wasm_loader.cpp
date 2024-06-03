@@ -91,9 +91,6 @@ Module_lib1ink.onRuntimeInitialized=function(){
 Module_lib1ink.callMain();
 };
 },700);
-}
-});
-ff.send(null);
 
 });
   
