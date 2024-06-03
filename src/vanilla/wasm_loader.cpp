@@ -111,23 +111,23 @@ codeCall.addEventListener('message',event=>{
 
 let vsize=document.querySelector('#vsiz').innerHTML;
 
-if(event.data=='startWebGPUi'){
+if(event.data==='startWebGPUi'){
 console.log('sending startWebGPUi ccall');
 Module_lib1ink.ccall("startWebGPUi",null,"Number",[vsize]);
 }
-if(event.data=='startWebGPUbi'){
+if(event.data==='startWebGPUbi'){
 Module_lib1ink.ccall("startWebGPUbi",null,"Number",[vsize]);
 }
-if(event.data=='startWebGPUC'){
+if(event.data==='startWebGPUC'){
 Module_lib1ink.ccall("startWebGPUC",null,"Number",[vsize]);
 }
-if(event.data=='frmOn'){
+if(event.data==='frmOn'){
 Module_lib1ink.ccall('frmOn');
 }
-if(event.data=='frmsOn'){
+if(event.data==='frmsOn'){
 Module_lib1ink.ccall('frmsOn');
 } 
-if(event.data=='frmsOff'){
+if(event.data==='frmsOff'){
 Module_lib1ink.ccall('frmsOff');
 }
 
