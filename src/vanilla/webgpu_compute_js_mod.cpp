@@ -73,7 +73,7 @@ let fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 if(running==0){
 setTimeout(function(){
-codeCall.postMessage(startWebGPUC');
+codeCall.postMessage('startWebGPUC');
 // Module.ccall("startWebGPUC",null,"Number",[vsiz]);
 console.log('Starting..');
 running=1;
