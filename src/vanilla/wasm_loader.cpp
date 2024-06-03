@@ -76,7 +76,6 @@ slt=tem.innerHTML;
 
 normalResSetup();
 let Module_lib1ink;
-let Module_libjs;
   
 var scr=document.createElement("script");
 scr.async=true;
