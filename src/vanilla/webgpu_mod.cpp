@@ -1179,5 +1179,31 @@ return;
 int main(){
 on.at(0,0)=0;
 // js_main();
+EM_ASM({
+let codeCall=new BroadcastChannel('codeCall');
+codeCall.addEventListener('message',event=>{
+console.log('got codeCall postMessage');
+let vsize=document.querySelector('#vsiz').innerHTML;
+if(event.data==='startWebGPUi'){
+console.log('sending startWebGPUi ccall');
+Module.ccall("startWebGPUi",null,"Number",[vsize]);
+}
+if(event.data==='startWebGPUbi'){
+Module.ccall("startWebGPUbi",null,"Number",[vsize]);
+}
+if(event.data==='startWebGPUC'){
+Module.ccall("startWebGPUC",null,"Number",[vsize]);
+}
+if(event.data==='frmOn'){
+Module.ccall('frmOn');
+}
+if(event.data==='frmsOn'){
+Module.ccall('frmsOn');
+} 
+if(event.data==='frmsOff'){
+Module.ccall('frmsOff');
+}
+});
+});
 return 0;
 }
