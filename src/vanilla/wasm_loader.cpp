@@ -107,16 +107,16 @@ Module_libjs.callMain();
 },1200);
 
 codeCall.addEventListener('message',event=>{
-let vsiz=document.querySelector('#vsiz').innerHTML;
+let vsize=document.querySelector('#vsiz').innerHTML;
 
 if(event.data=='startWebGPUi'){
-Module_lib1ink.ccall("startWebGPUi",null,"Number",[vsiz]);
+Module_lib1ink.ccall("startWebGPUi",null,"Number",[vsize]);
 }
 if(event.data=='startWebGPUbi'){
-Module_lib1ink.ccall("startWebGPUbi",null,"Number",[vsiz]);
+Module_lib1ink.ccall("startWebGPUbi",null,"Number",[vsize]);
 }
 if(event.data=='startWebGPUC'){
-Module_lib1ink.ccall("startWebGPUC",null,"Number",[vsiz]);
+Module_lib1ink.ccall("startWebGPUC",null,"Number",[vsize]);
 }
 if(event.data=='frmOn'){
 Module_lib1ink.ccall('frmOn');
