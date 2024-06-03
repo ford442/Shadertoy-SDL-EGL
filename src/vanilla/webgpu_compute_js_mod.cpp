@@ -80,10 +80,9 @@ running=1;
 },250);
 }else{
 setTimeout(function(){
-
 let vsiz=document.querySelector('#vsiz').innerHTML;
 codeCall.postMessage({data:'startWebGPUC'});
-Module.ccall("startWebGPUC",null,"Number",[vsiz]);
+// Module.ccall("startWebGPUC",null,"Number",[vsiz]);
 console.log('Starting..');
 },250);
 }
@@ -156,7 +155,8 @@ var pixelData=new Float64Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
 let fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
-Module.ccall("frmOn");
+codeCall.postMessage({data:'frmOn'});
+// Module.ccall("frmOn");
 setInterval(function(){
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 // image=flipImageData(gl3.getImageData(0,0,w$,h$));
@@ -248,15 +248,16 @@ if(running==0){
 setTimeout(function(){
 
 let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz]);
+codeCall.postMessage({data:'startWebGPUi'});
+// Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 console.log('Starting..');
 running=1;
 },50);
 }else{
 setTimeout(function(){
-
 let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
+codeCall.postMessage({data:'startWebGPUbi'});
+// Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
 console.log('Starting..');
 },50);
 }
@@ -393,11 +394,12 @@ imageStart();
 });
 
 document.querySelector('#moveFwd').addEventListener('click',function(){
-
+codeCall.postMessage({data:'frmsOff'});
 Module.ccall("frmsOff");
 pause=true; // Toggle pause on/off
 setTimeout(function(){
 pause=false; // Toggle pause on/off
+codeCall.postMessage({data:'frmsOn'});
 Module.ccall("frmsOn");
 },1900);
 });
