@@ -470,7 +470,6 @@ document.querySelector('#di').click();
 });
 
 int main(){
-on.at(0,0)=0;
 js_main();
 return 0;
 }
