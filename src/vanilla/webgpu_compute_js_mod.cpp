@@ -3,7 +3,7 @@
 
 EM_JS(void,js_main,(),{
 
-var Module=lib1ink();
+let codeCall=new BroadcastChannel('codeCall');
 
 FS.mkdir('/shader');
 FS.mkdir('/video');
@@ -73,15 +73,16 @@ let fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 if(running==0){
 setTimeout(function(){
-var Module=lib1ink();
-Module.ccall("startWebGPUC",null,"Number",[vsiz]);
+codeCall.postMessage({data:'startWebGPUC'});
+// Module.ccall("startWebGPUC",null,"Number",[vsiz]);
 console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
-var Module=lib1ink();
+
 let vsiz=document.querySelector('#vsiz').innerHTML;
+codeCall.postMessage({data:'startWebGPUC'});
 Module.ccall("startWebGPUC",null,"Number",[vsiz]);
 console.log('Starting..');
 },250);
@@ -95,7 +96,8 @@ image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
 pixelData=new Float64Array(imageData);
 FS.write(fileStream,pixelData,0,pixelData.length,0);
-Module.ccall("frmOn");
+codeCall.postMessage({data:'frmOn'});
+// Module.ccall("frmOn");
 },25.0);
 }
  
@@ -110,7 +112,6 @@ let w$=parseInt(document.querySelector("#mvi").width);
 let h$=parseInt(document.querySelector("#mvi").height);
 if(running==0){
 setTimeout(function(){
-var Module=lib1ink();
 let vsiz=document.querySelector('#vsiz').innerHTML;
 Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 console.log('Starting..');
@@ -119,7 +120,8 @@ running=1;
 }else{
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
+codeCall.postMessage({data:'startWebGPUbi'});
+// Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
 console.log('Starting..');
 },250);
 }
@@ -167,12 +169,12 @@ pixelData=new Float64Array(imageData);
 // gpuQueue.writeTexture({ texture }, pixelData, { bytesPerRow }, { width: w$, height: h$ } );
 // pixelData=new Float64Array(imageData,0,la);  // causes sub-array data array-reforming (slower)
 FS.write(fileStream,pixelData,0,pixelData.length,0);
-Module.ccall("frmOn");
+codeCall.postMessage({data:'frmOn'});
+// Module.ccall("frmOn");
 },16.666);
 }
 
 function imageStart(){
-var Module=lib1ink();
 let vvi=document.querySelector('#ivi');
 let SiZ=window.innerHeight;
 let w$=parseInt(document.querySelector("#ivi").width);
@@ -180,14 +182,16 @@ let h$=parseInt(document.querySelector("#ivi").height);
 if(running==0){
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz]);
+codeCall.postMessage({data:'startWebGPUi'});
+// Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
+codeCall.postMessage({data:'startWebGPUbi'});
+// Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
 console.log('Starting..');
 },250);
 }
@@ -224,23 +228,25 @@ var pixelData=new Float64Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
 var fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
-Module.ccall("frmOn");
+codeCall.postMessage({data:'frmOn'});
+// Module.ccall("frmOn");
 setInterval(function(){
 FS.write(fileStream,pixelData,0,pixelData.length,0);
-Module.ccall("frmOn");
+codeCall.postMessage({data:'frmOn'});
+// Module.ccall("frmOn");
 },16.666);
 
 }
 
 function regularStart(){
-var Module=lib1ink();
+
 let SiZ=window.innerHeight;
 let cnvb=document.querySelector('#scanvas');
 cnvb.height=SiZ;
 cnvb.width=SiZ;
 if(running==0){
 setTimeout(function(){
-var Module=lib1ink();
+
 let vsiz=document.querySelector('#vsiz').innerHTML;
 Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 console.log('Starting..');
@@ -248,7 +254,7 @@ running=1;
 },50);
 }else{
 setTimeout(function(){
-var Module=lib1ink();
+
 let vsiz=document.querySelector('#vsiz').innerHTML;
 Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
 console.log('Starting..');
@@ -387,7 +393,7 @@ imageStart();
 });
 
 document.querySelector('#moveFwd').addEventListener('click',function(){
-var Module=lib1ink();
+
 Module.ccall("frmsOff");
 pause=true; // Toggle pause on/off
 setTimeout(function(){
