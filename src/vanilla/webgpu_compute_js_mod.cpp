@@ -248,6 +248,7 @@ if(running==0){
 setTimeout(function(){
 
 let vsiz=document.querySelector('#vsiz').innerHTML;
+console.log('sending startWebGPUi postMessage');
 codeCall.postMessage({data:'startWebGPUi'});
 // Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 console.log('Starting..');
