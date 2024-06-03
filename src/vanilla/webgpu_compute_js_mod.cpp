@@ -63,7 +63,7 @@ gl3.imageSmoothingEnabled=false;
 gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
-let pixelData=new Float32Array(imageData);
+let pixelData=new Float64Array(imageData);
 let fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 if(running==0){
@@ -86,7 +86,7 @@ gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 }
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
-pixelData=new Float32Array(imageData);
+pixelData=new Float64Array(imageData);
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
 },25.0);
@@ -191,7 +191,6 @@ cnvb.height=SiZ;
 cnv.height=h$-offsetY;
 cnvb.width=SiZ;
 cnv.width=w$-offsetX;
-
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 // const gl3=cnvb.getContext('2d',{colorType:'float64',alpha:true}); // 
 const gl3=cnv.getContext('2d',{
@@ -351,10 +350,10 @@ getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
 document.querySelector('#status').style.backgroundColor="blue";
 let flDat=event.data.data;
-var buffer = new ArrayBuffer(flDat.length*2);
-var bufferView = new Uint16Array(buffer);
-for (var i = 0; i < flDat.length; i++) {
-bufferView[i] = flDat.charCodeAt(i);
+var buffer=new ArrayBuffer(flDat.length*2);
+var bufferView=new Uint16Array(buffer);
+for(var i=0;i<flDat.length;i++){
+bufferView[i]=flDat.charCodeAt(i);
 }
 // console.log(bufferView);
 FS.writeFile('/shader/shader.wgsl',bufferView);
@@ -377,10 +376,10 @@ getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
 document.querySelector('#status').style.backgroundColor="blue";
 let flDat=event.data.data;
-var buffer = new ArrayBuffer(flDat.length*2);
-var bufferView = new Uint16Array(buffer);
-for (var i = 0; i < flDat.length; i++) {
-bufferView[i] = flDat.charCodeAt(i);
+var buffer=new ArrayBuffer(flDat.length*2);
+var bufferView=new Uint16Array(buffer);
+for(var i=0;i<flDat.length;i++){
+bufferView[i]=flDat.charCodeAt(i);
 }
 // console.log(bufferView);
 FS.writeFile('/shader/shader.wgsl',bufferView);
@@ -408,7 +407,6 @@ var pth4=document.querySelector('#vertPath').innerHTML;
 getShader(pth2,'compute.wgsl');
 getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
- 
 videoStart();
 });
 
@@ -421,7 +419,6 @@ var pth4=document.querySelector('#vertPath').innerHTML;
 getShader(pth2,'compute.wgsl');
 getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
-
 regularStart();
 });
 
@@ -434,7 +431,6 @@ var pth4=document.querySelector('#vertPath').innerHTML;
 getShader(pth2,'compute.wgsl');
 getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
-
 setTimeout(function(){
 canvasStart();
 },3000);
@@ -449,7 +445,6 @@ var pth4=document.querySelector('#vertPath').innerHTML;
 getShader(pth2,'compute.wgsl');
 getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
-
 setTimeout(function(){
 imageStart();
 },1000);
@@ -470,3 +465,9 @@ document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#di').click();
 },500);
 });
+
+int main(){
+on.at(0,0)=0;
+js_main();
+return 0;
+}
