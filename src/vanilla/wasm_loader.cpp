@@ -91,21 +91,6 @@ Module_lib1ink.onRuntimeInitialized=function(){
 Module_lib1ink.callMain();
 };
 },700);
-
-var scr=document.createElement("script");
-scr.async=true;
-scr.charset='utf-8';
-scr.type='text/javascript';
-scr.defer=true;
-scr.src="https://wasm.noahcohn.com/b3hd/w0-008-js.1ijs";
-document.body.appendChild(scr);
-setTimeout(function(){
-Module_libjs=libjs();
-Module_libjs.onRuntimeInitialized=function(){
-Module_libjs.callMain();
-};
-},1200);
-
   
 });
 
