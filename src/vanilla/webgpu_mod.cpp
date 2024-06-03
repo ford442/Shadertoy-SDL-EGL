@@ -1112,6 +1112,9 @@ wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceSt
 }
 
 EM_BOOL WGPU_Start(emscripten_align1_int sz){
+EM_ASM({
+console.log('starting WGPU_Start');
+});
 sze.at(1,1)=sz;
 sze.at(6,6)=sz;
 sze.at(7,7)=sz;
