@@ -1,3 +1,6 @@
+#include <emscripten.h>
+#include <emscripten/bind.h>
+
 EM_JS(void,js_main,(),{
 
 FS.mkdir('/shader');
