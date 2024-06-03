@@ -80,10 +80,6 @@ let Module_lib1ink;
 
 fetch("https://wasm.noahcohn.com/b3hd/w0-008-load.1ijs")
     .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`); 
-        }
-  
 var scr=document.createElement("script");
 scr.async=true;
 scr.charset='utf-8';
@@ -98,7 +94,6 @@ Module.callMain();
 };
 },700);
 });
-
 });
   
 return 0;
