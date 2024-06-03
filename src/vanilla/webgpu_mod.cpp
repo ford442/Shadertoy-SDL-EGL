@@ -1112,9 +1112,6 @@ wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceSt
 }
 
 EM_BOOL WGPU_Start(emscripten_align1_int sz){
-EM_ASM({
-console.log('starting WGPU_Start');
-});
 sze.at(1,1)=sz;
 sze.at(6,6)=sz;
 sze.at(7,7)=sz;
@@ -1140,7 +1137,7 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 return EM_TRUE;
 }
 
-// #include "../../src/vanilla/webgpu_compute_js_mod.cpp"
+#include "../../src/vanilla/webgpu_compute_js_mod.cpp"
 
 extern"C"{
 
@@ -1175,33 +1172,6 @@ return;
 }
 
 }
-
-EM_JS(void,js_main,(),{
-let codeCall=new BroadcastChannel('codeCall');
-codeCall.addEventListener('message',event=>{
-console.log('got codeCall postMessage');
-let vsize=document.querySelector('#vsiz').innerHTML;
-if(event.data==='startWebGPUi'){
-console.log('sending startWebGPUi ccall');
-Module.ccall("startWebGPUi",null,"Number",[vsize]);
-}
-if(event.data==='startWebGPUbi'){
-Module.ccall("startWebGPUbi",null,"Number",[vsize]);
-}
-if(event.data==='startWebGPUC'){
-Module.ccall("startWebGPUC",null,"Number",[vsize]);
-}
-if(event.data==='frmOn'){
-Module.ccall('frmOn');
-}
-if(event.data==='frmsOn'){
-Module.ccall('frmsOn');
-} 
-if(event.data==='frmsOff'){
-Module.ccall('frmsOff');
-}
-});
-});
 
 int main(){
 on.at(0,0)=0;
