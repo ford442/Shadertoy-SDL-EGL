@@ -6,6 +6,12 @@
 #include "../../lib/lib_webgpu_cpp20.cpp"
 // #include <SDL2/SDL.h>
 
+#include "../../include/vanilla/egl.hpp"
+
+#include "../../highway/hwy/foreach_target.h"
+#include "../../highway/hwy/highway.h"
+
+
 using namespace std;
 #include <cstdio> // C++ style
 #include <cstdarg> // C++ style
