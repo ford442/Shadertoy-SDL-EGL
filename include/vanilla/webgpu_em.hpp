@@ -83,6 +83,7 @@ using namespace std;
 #include <emscripten.h>
 // #include <emscripten/threading.h>
 #include <emscripten/em_types.h>
+#include <emscripten/val.h>
 
 // #include <emscripten/wasmfs.h>
 #include <emscripten/bind.h>
