@@ -97,8 +97,8 @@ boost::function<EM_BOOL()>render=[](){
 u64_uni.at(3,3)++; 
 
 if(ms_l==true){
-mms.at(0,1)=round(mms2.at(0,0)*(float)sze.at(0,0));
-mms.at(1,0)=round((mms2.at(0,1))*(float)sze.at(0,0));
+mms.at(0,1)=round(mms2.at(0,0)*(emscripten_align1_float)sze.at(0,0));
+mms.at(1,0)=round((mms2.at(0,1))*(emscripten_align1_float)sze.at(0,0));
 }
 // retCl=emscripten_set_click_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
 // retMd=emscripten_set_mousedown_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW,0,(EM_BOOL)0,ms_clk);
@@ -112,9 +112,9 @@ mms.at(0,1)=float(xxx);
 mms.at(1,0)=float((float)sze.at(0,0)-((yyy-sze.at(0,0))/2));
 clk_l=false;
 }
-mms.at(2,0)=float((float)sze.at(0,0)-mms2.at(0,0));
+mms.at(2,0)=float((emscripten_align1_float)sze.at(0,0)-mms2.at(0,0));
 mms.at(2,1)=float((float)sze.at(0,0)-mms2.at(0,1));
-// v4f32_uniform.at(0,0)=vector<float>({static_cast<float>(mms.at(2,0)),static_cast<float>(mms.at(2,1)),static_cast<float>(mms.at(0,1)),static_cast<float>(mms.at(1,0))});
+// v4f32_uniform.at(0,0)=vector<emscripten_align1_float>({static_cast<emscripten_align1_float>(mms.at(2,0)),static_cast<emscripten_align1_float>(mms.at(2,1)),static_cast<emscripten_align1_float>(mms.at(0,1)),static_cast<emscripten_align1_float>(mms.at(1,0))});
 // glUniform4f(uni_mse,mms.at(2,0),mms.at(2,1),mms.at(0,1),mms.at(1,0));
 }
 else{
@@ -127,8 +127,8 @@ u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono:
 u_time.time_spanb=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t3);
 // u64_uni.at(0,0)=u_time.time_spana.count()*100u;
 // u64_uni.at(1,1)=u_time.time_spanb.count()*1000u;
-// f32_uniform.at(0,0)=static_cast<float>(u_time.time_spana.count())*100000.0f;
-// f32_uniform.at(0,0)=static_cast<float>(u_time.time_spana.count());
+// f32_uniform.at(0,0)=static_cast<emscripten_align1_float>(u_time.time_spana.count())*100000.0f;
+// f32_uniform.at(0,0)=static_cast<emscripten_align1_float>(u_time.time_spana.count());
 f32_uniform.at(0,0)=u_time.time_spana.count();
 // u64_uni.at(2,2)=u_time.time_spanb.count()/1.0f;
 colorTexture=wgpu_canvas_context_get_current_texture(wcc.at(0,0));
@@ -213,7 +213,7 @@ std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf
 /*    //  highway way
      const HWY_FULL(uint8_t) d;
     const size_t N = data.size();  
-     std::vector<float> floatData(4 * N); 
+     std::vector<emscripten_align1_float> floatData(4 * N); 
 
     // SIMD conversion loop
     for (size_t i = 0; i < N; i += 1) {
@@ -222,9 +222,9 @@ std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf
         Store(f, d, &floatData[i]); 
     }
 */ //  regular way
-std::vector<float>floatData(data.size());
+std::vector<emscripten_align1_float>floatData(data.size());
 std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});  // for RGBA32FLOAT
-const size_t bytesPerRow=sze.at(6,6)*4*sizeof(float);
+const size_t bytesPerRow=sze.at(6,6)*4*sizeof(emscripten_align1_float);
 // frame_tensor.at(0,0)=data;
 // fjs_data_pointer.at(0,0)=floatData.data();
 // fjsv_data_pointer.at(0,0)=&floatData; // (std::vector<float*>)
@@ -245,10 +245,10 @@ wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
  // wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_siz.at(3,3),sizeof(uint64_t));
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&f32_uniform.at(2,2),sizeof(float));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&f32_uniform.at(2,2),sizeof(emscripten_align1_float));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(3,3),sizeof(uint64_t));
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&f32_uniform.at(0,0),sizeof(float));
-  //  wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&v4f32_uniform.at(0,0),sizeof(float)*4);
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&f32_uniform.at(0,0),sizeof(emscripten_align1_float));
+  //  wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&v4f32_uniform.at(0,0),sizeof(emscripten_align1_float)*4);
   
 wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(7,7),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(6,6),0,sizeof(vertices));
@@ -267,7 +267,7 @@ wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(1,1),0,0);
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(5,5),0,&u64_siz.at(2,2),sizeof(uint64_t));
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(5,5),0,&f32_uniform.at(1,1),sizeof(float));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(5,5),0,&f32_uniform.at(1,1),sizeof(emscripten_align1_float));
 wgpu_render_pass_encoder_set_index_buffer(wrpe.at(1,1),wb.at(7,7),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(1,1),0,wb.at(6,6),0,sizeof(vertices));
 wgpu_render_pass_encoder_set_viewport(wrpe.at(1,1),0.0f,0.0f,szef.at(0,0),szef.at(0,0),0.0f,1.0f);
@@ -371,9 +371,9 @@ sze.at(0,0)=static_cast<emscripten_align1_int>(szhI);
 sze.at(3,3)=static_cast<emscripten_align1_int>(std::max(sze.at(0,0),sze.at(1,1))*1.10);
 // u64_siz.at(2,2)=static_cast<emscripten_align1_int>(szhI);
 f32_uniform.at(1,1)=szhI;
-f32_uniform.at(2,2)=static_cast<float>(sze.at(1,1));
-szef.at(0,0)=static_cast<float>(szhI);
-szef.at(1,1)=static_cast<float>(sze.at(1,1));
+f32_uniform.at(2,2)=static_cast<emscripten_align1_float>(sze.at(1,1));
+szef.at(0,0)=static_cast<emscripten_align1_float>(szhI);
+szef.at(1,1)=static_cast<emscripten_align1_float>(sze.at(1,1));
   
 clk_l=true;
 
@@ -515,7 +515,7 @@ WGPU_Buffers.at(0,0,0)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescript
 WGPU_Buffers.at(1,0,1)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,2));
 WGPU_Buffers.at(2,0,2)=wgpu_device_create_buffer(wd.at(0,0),&WGPU_BufferDescriptor.at(0,0,3));
 // bufferDescriptor_iTime={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
-bufferDescriptor_iTime={sizeof(float),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+bufferDescriptor_iTime={sizeof(emscripten_align1_float),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(0,0)=bufferDescriptor_iTime;
 uni_iTime_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(0,0));
 wb.at(0,0)=uni_iTime_Buffer;
@@ -523,11 +523,11 @@ bufferDescriptor_iFrame={sizeof(uint64_t),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_
 wbd.at(1,1)=bufferDescriptor_iFrame;
 uni_iFrame_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(1,1));
 wb.at(1,1)=uni_iFrame_Buffer;
-bufferDescriptor_iResolution={sizeof(float),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+bufferDescriptor_iResolution={sizeof(emscripten_align1_float),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(2,2)=bufferDescriptor_iResolution;
 uni_iResolution_Buffer=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(2,2));
 wb.at(2,2)=uni_iResolution_Buffer;
-bufferDescriptor_iResolution_2={sizeof(float),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
+bufferDescriptor_iResolution_2={sizeof(emscripten_align1_float),WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(5,5)=bufferDescriptor_iResolution_2;
 uni_iResolution_Buffer_2=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(5,5));
 wb.at(5,5)=uni_iResolution_Buffer_2;
@@ -537,7 +537,7 @@ bufferBindingLayoutR.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayoutR;
 bufferBindingLayoutF.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayoutF.hasDynamicOffset=0,
-bufferBindingLayoutF.minBindingSize=sizeof(float);
+bufferBindingLayoutF.minBindingSize=sizeof(emscripten_align1_float);
 wbbl.at(2,2)=bufferBindingLayoutF;
 Input_Image_Buffer.buffer=WGPU_Buffers.at(1,1,1);
 // wicb.at(2,2)=Input_Image_Buffer;
@@ -767,7 +767,7 @@ Compute_Bindgroup_Entries[4].resource=wsmp.at(3,3);
 Compute_Bindgroup_Entries[5].binding=5;
 Compute_Bindgroup_Entries[5].resource=wb.at(0,0);
 Compute_Bindgroup_Entries[5].bufferBindOffset=0;
-Compute_Bindgroup_Entries[5].bufferBindSize=sizeof(float);
+Compute_Bindgroup_Entries[5].bufferBindSize=sizeof(emscripten_align1_float);
             // Compute Video Texture
 Compute_Bindgroup_Entries[6]={};
 Compute_Bindgroup_Entries[6].binding=6;
@@ -956,7 +956,7 @@ Render_Bindgroup_Entries[0].resource=wsmp.at(0,0);
 Render_Bindgroup_Entries[1].binding=7;
 Render_Bindgroup_Entries[1].resource=wb.at(0,0);
 Render_Bindgroup_Entries[1].bufferBindOffset=0;
-Render_Bindgroup_Entries[1].bufferBindSize=sizeof(float);
+Render_Bindgroup_Entries[1].bufferBindSize=sizeof(emscripten_align1_float);
   //  Render TextureIN
 Render_Bindgroup_Entries[2]={};
 Render_Bindgroup_Entries[2].binding=2;
@@ -966,7 +966,7 @@ Render_Bindgroup_Entries[3]={};
 Render_Bindgroup_Entries[3].binding=5;
 Render_Bindgroup_Entries[3].resource=wb.at(2,2);
 Render_Bindgroup_Entries[3].bufferBindOffset=0;
-Render_Bindgroup_Entries[3].bufferBindSize=sizeof(float);
+Render_Bindgroup_Entries[3].bufferBindSize=sizeof(emscripten_align1_float);
   //  Render iFrame Buffer
 Render_Bindgroup_Entries[4]={};
 Render_Bindgroup_Entries[4].binding=6;
@@ -982,7 +982,7 @@ Render_Bindgroup_Entries_2[0].resource=wsmp.at(0,0);
 Render_Bindgroup_Entries_2[1].binding=7;
 Render_Bindgroup_Entries_2[1].resource=wb.at(0,0);
 Render_Bindgroup_Entries_2[1].bufferBindOffset=0;
-Render_Bindgroup_Entries_2[1].bufferBindSize=sizeof(float);
+Render_Bindgroup_Entries_2[1].bufferBindSize=sizeof(emscripten_align1_float);
   //  Render_2 TextureIN
 Render_Bindgroup_Entries_2[2]={};
 Render_Bindgroup_Entries_2[2].binding=2;
@@ -992,7 +992,7 @@ Render_Bindgroup_Entries_2[3]={};
 Render_Bindgroup_Entries_2[3].binding=5;
 Render_Bindgroup_Entries_2[3].resource=wb.at(5,5);
 Render_Bindgroup_Entries_2[3].bufferBindOffset=0;
-Render_Bindgroup_Entries_2[3].bufferBindSize=sizeof(float);
+Render_Bindgroup_Entries_2[3].bufferBindSize=sizeof(emscripten_align1_float);
   //  Render_2 iFrame Buffer
 Render_Bindgroup_Entries_2[4]={};
 Render_Bindgroup_Entries_2[4].binding=6;
@@ -1111,8 +1111,8 @@ EM_BOOL WGPU_Start(emscripten_align1_int sz){
 sze.at(1,1)=sz;
 sze.at(6,6)=sz;
 sze.at(7,7)=sz;
-f32_uniform.at(2,2)=static_cast<float>(sze.at(1,1));
-szef.at(1,1)=static_cast<float>(sze.at(1,1));
+f32_uniform.at(2,2)=static_cast<emscripten_align1_float>(sze.at(1,1));
+szef.at(1,1)=static_cast<emscripten_align1_float>(sze.at(1,1));
 options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
 options.forceFallbackAdapter=EM_FALSE;
 wao.at(0,0)=options;
@@ -1124,8 +1124,8 @@ EM_BOOL WGPU_StartC(emscripten_align1_int sz){
 sze.at(1,1)=sz;
 sze.at(6,6)=sz;
 sze.at(7,7)=sz;
-f32_uniform.at(2,2)=static_cast<float>(sze.at(1,1));
-szef.at(1,1)=static_cast<float>(sze.at(1,1));
+f32_uniform.at(2,2)=static_cast<emscripten_align1_float>(sze.at(1,1));
+szef.at(1,1)=static_cast<emscripten_align1_float>(sze.at(1,1));
 options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
 options.forceFallbackAdapter=EM_FALSE;
 wao.at(0,0)=options;
