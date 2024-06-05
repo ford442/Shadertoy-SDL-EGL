@@ -30,7 +30,7 @@ STATIC_LINK_FLAGS = -mno-tail-call -O3 -fmerge-all-constants -ffast-math -ffp-co
 	 -ffunction-sections -fdata-sections -fno-optimize-sibling-calls -fasynchronous-unwind-tables \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer
 
-BOOST_FLAGS = -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1 -DBOOST_HAS_THREADS
+BOOST_FLAGS = -sUSE_BOOST_HEADERS=1 -BOOST_UBLAS_NDEBUG=1
 
 GL_FLAGS = -sFULL_ES3=1 -sFULL_ES2=0 -lGL -lEGL -sLEGACY_GL_EMULATION=0 -sUSE_GLFW=0 -sUSE_REGAL=0 \
 	 -sGL_SUPPORT_AUTOMATIC_ENABLE_EXTENSIONS=1 -sGL_SUPPORT_SIMPLE_ENABLE_EXTENSIONS=1 -sGL_MAX_TEMP_BUFFER_SIZE=33177600 \
