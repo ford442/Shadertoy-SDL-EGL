@@ -7,7 +7,7 @@ wLDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lc++abi,-lm,-ldl
 oldLDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lpthread,-lc++abi,-lm,-lrt,-ldl
 SIMD_FLAGS = -DSIMD=AVX -msimd128 -mavx
 
-STDS = -std=gnu++20
+STDS = -std=gnu2x -std=gnu++2b
 
 oldSTDS = -std=gnu17 -std=c2x -std=c++11 -std=c++14 -std=c++17 -std=gnu++17 -std=c++20 -std=gnu++20 \
 	 -std=c++23 -std=gnu++23 -std=c++26 -std=gnu++26
