@@ -13,20 +13,6 @@ ms_l=false;
 return EM_TRUE;
 }
 
-FileData receiveFrameData(const std::string& channelName){
-EM_JS(FileData,receiveFrameDataJS,(channelName.c_str()),{
-return Asyncify.handleAsync(async () => {
-const channel=new BroadcastChannel(UTF8ToString(channelName));
-return new Promise((resolve) => {
-channel.onmessage=(event) => {
-const fileData=event.data;
-resolve(fileData);
-};
-});
-});
-});
-}
-
 EM_BOOL ms_mv(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEMOVE&&(e->movementX!=0||e->movementY!=0)){
