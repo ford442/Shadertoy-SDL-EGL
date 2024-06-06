@@ -24,7 +24,7 @@ Module_lib1ink.callMain();
 let codeCall=new BroadcastChannel('codeCall');
 
 const vsiz=document.querySelector('#vsiz');
-let menuSz=parseInt(window.innerWidth*.5,10);
+let menuSz=parseInt(window.innerWidth*.75,10);
 
 function normalResSetup(){
 setTimeout(function(){
