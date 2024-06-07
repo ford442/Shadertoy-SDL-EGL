@@ -1,4 +1,4 @@
-WGL_BIN_NAME = w0-008
+WGL_BIN_NAME = w0-009
 MOD_BIN_NAME = m0-001
 
 LDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lc++abi,-lm,-ldl
