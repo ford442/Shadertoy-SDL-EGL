@@ -84,7 +84,7 @@ b3_wasm_loader:
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O3 -fno-strict-aliasing $(SIMD_FLAGS) -sMEMORY64=1 -c
-	 em++ -O3 -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m64 -sMALLOC=mimalloc -sWASMFS=1 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
+	 em++ -O3 -sEVAL_CTORS=1 -sLTO=1 -sEXIT_RUNTIME=0 -m64 -sMALLOC=mimalloc -sWASMFS=1 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -stdlib=libc++ \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
@@ -100,7 +100,7 @@ b3_wasm_loader:
 	 -sASYNCIFY=0 -sEXPORTED_FUNCTIONS='["_main"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 wasm_loader.o --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
-	 -sMODULARIZE -sEXPORT_NAME='libload' -fwasm-exceptions -sSUPPORT_LONGJMP=wasm -wasm-enable-eh
+	 -sMODULARIZE=1 -sEXPORT_NAME='libload' -fwasm-exceptions -sSUPPORT_LONGJMP=wasm -sDISABLE_EXCEPTION_CATCHING=1
 
 b3_compute_js_mod:
 	 em++ src/vanilla/webgpu_compute_js_mod.cpp $(STDS) -pipe -ffast-math -ffp-contract=fast -fexcess-precision=fast \
