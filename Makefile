@@ -467,13 +467,13 @@ b3_compute_vid2:
 b3_onnx:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_onnx.cpp -fchar8_t -std=c++20 -mbulk-memory -matomics \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O2 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -sSUPPORT_ERRNO=0 -D__EMSCRIPTEN__ main_onnx.o libonnxruntime_webassembly.a -lc++ -O2 -std=c++20 -fchar8_t --js-library lib/lib_webgpu.js -fPIC -fPIE -DCOMPUTE -o $(WGL_BIN_NAME)-onnx.js \
-	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(oLDFLAGS) $(wGL_FLAGS) -polly -sALLOW_MEMORY_GROWTH=1 -mbulk-memory -matomics \
+	 em++ -sSUPPORT_ERRNO=0 -D__EMSCRIPTEN__ main_onnx.o libonnxruntime_webassembly.a -lc++ -O2 -std=c++20 -fchar8_t --js-library lib/lib_webgpu.js -DCOMPUTE -o $(WGL_BIN_NAME)-onnx.js \
+	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(oLDFLAGS) $(wGL_FLAGS) -polly -sALLOW_MEMORY_GROWTH=0 -mbulk-memory -matomics \
 	 -sINITIAL_MEMORY=2048mb -lmath.js -lhtml5.js -lint53.js -mllvm -mtune=wasm32 \
-	 -sFORCE_FILESYSTEM=1 -sDISABLE_EXCEPTION_THROWING=0 -sASSERTIONS=1 -sNO_DISABLE_EXCEPTION_CATCHING \
-	 -sASYNCIFY=1 -sASYNCIFY_IMPORTS='["startWebGPU","_startWebGPUb"]' \
+	 -sFORCE_FILESYSTEM=1 -sDISABLE_EXCEPTION_THROWING=0 -sASSERTIONS=0 -sDISABLE_EXCEPTION_CATCHING=1 \
+	 -sASYNCIFY=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb","_resUp","_resDown"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --extern-pre-js js/rSlider.js --extern-pre-js js/slideOut.js \
+	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 
 
