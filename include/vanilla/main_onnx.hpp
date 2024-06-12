@@ -49,6 +49,8 @@ using namespace std;
 #include <new>
 #include <emscripten.h>
 #include <emscripten/console.h>
+#include <emscripten/heap.h>
+
 #include <emscripten/html5.h>
 #include <emscripten/html5_webgpu.h>
 #include <iostream>
