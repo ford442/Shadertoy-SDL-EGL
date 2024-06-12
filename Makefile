@@ -470,7 +470,7 @@ b3_onnx:
 	 em++ -sSUPPORT_ERRNO=1 -D__EMSCRIPTEN__ main_onnx.o libonnxruntime_webassembly.a -lc++ -O2 -std=c++20 -fchar8_t --js-library lib/lib_webgpu.js -DCOMPUTE -o $(WGL_BIN_NAME)-onnx.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(oLDFLAGS) $(wGL_FLAGS) -polly -sALLOW_MEMORY_GROWTH=0 -mbulk-memory -matomics \
 	 -sINITIAL_MEMORY=2048mb -lmath.js -lhtml5.js -lint53.js -mllvm -mtune=wasm32 \
-	 -sFORCE_FILESYSTEM=1 -sDISABLE_EXCEPTION_THROWING=0 -sASSERTIONS=0 -sDISABLE_EXCEPTION_CATCHING=1 \
+	 -sFORCE_FILESYSTEM=1 -sLEGACY_RUNTIME=1 -sDISABLE_EXCEPTION_THROWING=0 -sASSERTIONS=0 -sDISABLE_EXCEPTION_CATCHING=1 \
 	 -sASYNCIFY=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb","_resUp","_resDown"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
