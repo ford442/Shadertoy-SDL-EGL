@@ -467,7 +467,7 @@ b3_compute_vid2:
 b3_onnx:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_onnx.cpp -fchar8_t -std=c++20 -mbulk-memory -matomics \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -O2 -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -sSUPPORT_ERRNO=0 -D__EMSCRIPTEN__ main_onnx.o libonnxruntime_webassembly.a -lc++ -O2 -std=c++20 -fchar8_t --js-library lib/lib_webgpu.js -DCOMPUTE -o $(WGL_BIN_NAME)-onnx.js \
+	 em++ -sSUPPORT_ERRNO=1 -D__EMSCRIPTEN__ main_onnx.o libonnxruntime_webassembly.a -lc++ -O2 -std=c++20 -fchar8_t --js-library lib/lib_webgpu.js -DCOMPUTE -o $(WGL_BIN_NAME)-onnx.js \
 	 $(BOOST_FLAGS) $(SIMD_FLAGS) $(oLDFLAGS) $(wGL_FLAGS) -polly -sALLOW_MEMORY_GROWTH=0 -mbulk-memory -matomics \
 	 -sINITIAL_MEMORY=2048mb -lmath.js -lhtml5.js -lint53.js -mllvm -mtune=wasm32 \
 	 -sFORCE_FILESYSTEM=1 -sDISABLE_EXCEPTION_THROWING=0 -sASSERTIONS=0 -sDISABLE_EXCEPTION_CATCHING=1 \
