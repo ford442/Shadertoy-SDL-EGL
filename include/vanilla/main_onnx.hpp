@@ -1,4 +1,5 @@
 #include <boost/cstdfloat.hpp>  // must be first include
+ #include <cerrno>
 
 #define __EMCSCRIPTEN__ 1
 #include "../../include/vanilla/avx.hpp"
