@@ -103,16 +103,16 @@ b3_wasm_loader:
 	 -sMODULARIZE=1 -sEXPORT_NAME='libload' -sSUPPORT_LONGJMP=wasm -sDISABLE_EXCEPTION_CATCHING=1
 
 b3_wasm_loader_wasm:
-	 em++ src/vanilla/wasm_loader.cpp $(STDS) -m64 -pipe -ffp-contract=fast -fexcess-precision=fast \
+	 em++ src/vanilla/wasm_loader.cpp $(STDS) -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
-	 -mextended-const -O2 -fno-strict-aliasing $(SIMD_FLAGS) -c
+	 -mextended-const -O2 -fno-strict-aliasing $(SIMD_FLAGS) -c -sMEMORY64=0
 	 em++ -O2 -sEVAL_CTORS=1 -sMALLOC=mimalloc -sWASMFS=1 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -stdlib=libc++ \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
 	 -DCOMPUTE -o $(WGL_BIN_NAME)-wload.wasm -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
-	 $(LINK_SIMD_FLAGS) -sASSERTIONS=0 -march=haswell -sMEMORY64=2 \
+	 $(LINK_SIMD_FLAGS) -sASSERTIONS=0 -march=haswell -sMEMORY64=0 \
 	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm64 -DNDEBUG=1 \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -mtune=wasm64 \
