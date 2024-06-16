@@ -97,7 +97,7 @@ normalResSetup();
 return EM_TRUE;
 }
 
-extern "c"{
+extern "C"{
 
 void runEmMain(){
 runmain();
