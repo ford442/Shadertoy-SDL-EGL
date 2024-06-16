@@ -1,7 +1,7 @@
 #include <emscripten.h>
 #include <emscripten/bind.h>
 
-EM_BOOL runmain(){
+void runmain(){
 
 EM_ASM({
   
@@ -94,7 +94,7 @@ normalResSetup();
 
 });
 
-return EM_TRUE;
+return;
 }
 
 extern "C"{
