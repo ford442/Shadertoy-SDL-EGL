@@ -88,7 +88,7 @@ b3_wasm_loader:
 	 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -stdlib=libc++ \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
-	 -DCOMPUTE -o $(WGL_BIN_NAME)-load.js -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
+	 -DCOMPUTE -o $(WGL_BIN_NAME)-wload.js -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
 	 $(LINK_SIMD_FLAGS) -sASSERTIONS=0 -march=haswell -sMEMORY64=2 \
 	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm64 -DNDEBUG=1 \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
