@@ -88,7 +88,7 @@ b3_wasm_loader:
 	 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -stdlib=libc++ \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
-	 -DCOMPUTE -o $(WGL_BIN_NAME)-wload.js -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
+	 -DCOMPUTE -o $(WGL_BIN_NAME)-load.js -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
 	 $(LINK_SIMD_FLAGS) -sASSERTIONS=0 -march=haswell -sMEMORY64=2 \
 	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm64 -DNDEBUG=1 \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
@@ -106,12 +106,12 @@ b3_wasm_loader_wasm:
 	 em++ src/vanilla/wasm_loader.cpp $(STDS) -m64 -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
-	 -mextended-const -O3 -fno-strict-aliasing $(SIMD_FLAGS) -sMEMORY64=1 -c
+	 -mextended-const -O2 -fno-strict-aliasing $(SIMD_FLAGS) -sMEMORY64=1 -c
 	 em++ -O2 -sEVAL_CTORS=1 -m64 -sMALLOC=mimalloc -sWASMFS=1 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -stdlib=libc++ \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
-	 -DCOMPUTE -o $(WGL_BIN_NAME)-load.wasm -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
+	 -DCOMPUTE -o $(WGL_BIN_NAME)-wload.wasm -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
 	 $(LINK_SIMD_FLAGS) -sASSERTIONS=0 -march=haswell -sMEMORY64=2 \
 	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm64 -DNDEBUG=1 \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
