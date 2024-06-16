@@ -102,6 +102,29 @@ b3_wasm_loader:
 	 wasm_loader.o --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
 	 -sMODULARIZE=1 -sEXPORT_NAME='libload' -sSUPPORT_LONGJMP=wasm -sDISABLE_EXCEPTION_CATCHING=1
 
+b3_wasm_loader_wasm:
+	 em++ src/vanilla/wasm_loader.cpp $(STDS) -m64 -pipe -ffp-contract=fast -fexcess-precision=fast \
+	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
+	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
+	 -mextended-const -O3 -fno-strict-aliasing $(SIMD_FLAGS) -sMEMORY64=1 -c
+	 em++ -O3 -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m64 -sMALLOC=mimalloc -sWASMFS=1 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
+	 -sDEFAULT_TO_CXX=1 -sLEGALIZE_JS_FFI=1 -stdlib=libc++ \
+	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
+	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
+	 -DCOMPUTE -o $(WGL_BIN_NAME)-load.wasm -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
+	 $(LINK_SIMD_FLAGS) -sASSERTIONS=0 -march=haswell -sMEMORY64=2 \
+	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm64 -DNDEBUG=1 \
+	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
+	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -mtune=wasm64 \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=384mb -lmath.js -lhtml5.js -lint53.js \
+	 -sABORT_ON_WASM_EXCEPTIONS=0 -sEMULATE_FUNCTION_POINTER_CASTS=1 \
+	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sAUTO_NATIVE_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=1 \
+	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=1 -sIGNORE_MISSING_MAIN=1 \
+	 -sASYNCIFY=0 -sEXPORTED_FUNCTIONS='["_main"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
+	 wasm_loader.o --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
+	 -sMODULARIZE=1 -sEXPORT_NAME='libload' -sSUPPORT_LONGJMP=wasm -sDISABLE_EXCEPTION_CATCHING=1
+
 b3_compute_js_mod:
 	 em++ src/vanilla/webgpu_compute_js_mod.cpp $(STDS) -pipe -ffast-math -ffp-contract=fast -fexcess-precision=fast \
 	 -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
