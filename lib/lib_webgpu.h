@@ -1,5 +1,4 @@
 #pragma once
-// #pragma pack(push, 1) // Pack to 1-byte boundaries (remove padding)
 
 #ifdef __EMSCRIPTEN__
 #include <emscripten/html5.h>
@@ -216,6 +215,7 @@ enum GPUFeatureName {
     "rg11b10ufloat-renderable",
     "bgra8unorm-storage",
     "float32-filterable",
+    "clip-distances",
 };
 */
 typedef int WGPU_FEATURES_BITFIELD;
@@ -230,6 +230,7 @@ typedef int WGPU_FEATURES_BITFIELD;
 #define WGPU_FEATURE_RG11B10UFLOAT_RENDERABLE  0x100
 #define WGPU_FEATURE_BGRA8UNORM_STORAGE        0x200
 #define WGPU_FEATURE_FLOAT32_FILTERABLE        0x400
+#define WGPU_FEATURE_CLIP_DISTANCES            0x800
 
 /*
 // WebGPU reuses the color space enum from the HTML Canvas specification:
@@ -307,10 +308,10 @@ typedef void (*WGpuRequestAdapterCallback)(WGpuAdapter adapter, void *userData);
 // Note: If the current browser is not aware of the WebGPU API, then this function will by design abort execution
 // (fail on assert, and throw a JS exception in release builds). To gracefully detect whether the current browser is new enough to be WebGPU API aware,
 // call the function navigator_gpu_available() to check.
-EM_BOOL navigator_gpu_request_adapter_async(const WGpuRequestAdapterOptions *options, WGpuRequestAdapterCallback adapterCallback, void *userData);
+EM_BOOL navigator_gpu_request_adapter_async(const WGpuRequestAdapterOptions *options NOTNULL, WGpuRequestAdapterCallback adapterCallback, void *userData);
 // Requests a WebGPU adapter synchronously. Requires building with -sASYNCIFY=1 linker flag to work.
 // options: may be null to request an adapter without specific options.
-WGpuAdapter navigator_gpu_request_adapter_sync(const WGpuRequestAdapterOptions *options);
+WGpuAdapter navigator_gpu_request_adapter_sync(const WGpuRequestAdapterOptions *options NOTNULL);
 
 // Like above, but tiny code size without options.
 void navigator_gpu_request_adapter_async_simple(WGpuRequestAdapterCallback adapterCallback);
@@ -362,10 +363,10 @@ typedef int WGPU_POWER_PREFERENCE;
 interface GPUAdapter {
     [SameObject] readonly attribute GPUSupportedFeatures features;
     [SameObject] readonly attribute WGpuSupportedLimits limits;
+    [SameObject] readonly attribute GPUAdapterInfo info;
     readonly attribute boolean isFallbackAdapter;
 
     Promise<GPUDevice> requestDevice(optional GPUDeviceDescriptor descriptor = {});
-    Promise<GPUAdapterInfo> requestAdapterInfo();
 };
 */
 typedef WGpuObjectBase WGpuAdapter;
@@ -384,6 +385,9 @@ EM_BOOL wgpu_adapter_or_device_supports_feature(WGpuAdapter adapter, WGPU_FEATUR
 void wgpu_adapter_or_device_get_limits(WGpuAdapter adapter, WGpuSupportedLimits *limits NOTNULL);
 #define wgpu_adapter_get_limits wgpu_adapter_or_device_get_limits
 
+// Returns the WebGPU adapter 'info' field.
+void wgpu_adapter_get_info(WGpuAdapter adapter, WGpuAdapterInfo *adapterInfo NOTNULL);
+
 EM_BOOL wgpu_adapter_is_fallback_adapter(WGpuAdapter adapter);
 
 typedef void (*WGpuRequestDeviceCallback)(WGpuDevice device, void *userData);
@@ -395,14 +399,6 @@ WGpuDevice wgpu_adapter_request_device_sync(WGpuAdapter adapter, const WGpuDevic
 // Like above, but tiny code size without options.
 void wgpu_adapter_request_device_async_simple(WGpuAdapter adapter, WGpuRequestDeviceCallback deviceCallback);
 WGpuDevice wgpu_adapter_request_device_sync_simple(WGpuAdapter adapter);
-
-// Callback function type that is called when GPUAdapter information has been obtained. The information will be reported in a struct of
-// type WGpuAdapterInfo. Do not hold on to this struct pointer after the duration of this call (but make a copy of the contents if desirable)
-typedef void (*WGpuRequestAdapterInfoCallback)(WGpuAdapter adapter, const WGpuAdapterInfo *adapterInfo NOTNULL, void *userData);
-
-// Begins a process to asynchronously request GPUAdapter information.
-void wgpu_adapter_request_adapter_info_async(WGpuAdapter adapter, WGpuRequestAdapterInfoCallback callback, void *userData);
-// TODO: Create asyncified wgpu_adapter_request_adapter_info_sync() function.
 
 /*
 dictionary GPUQueueDescriptor : GPUObjectDescriptorBase {
