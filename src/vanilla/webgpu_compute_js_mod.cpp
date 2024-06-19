@@ -90,7 +90,7 @@ imageData=image.data;
 pixelData=new Float64Array(imageData);
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
-},33.2);
+},24);
 }
  
 function videoStart(){
