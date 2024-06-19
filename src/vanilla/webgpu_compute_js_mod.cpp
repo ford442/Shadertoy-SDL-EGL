@@ -69,7 +69,6 @@ FS.write(fileStream,pixelData,0,pixelData.length,0);
 if(running==0){
 setTimeout(function(){
 Module.ccall("startWebGPUC",null,"Number",[vsiz]);
-console.log('Starting..');
 running=1;
 },250);
 }else{
@@ -166,66 +165,6 @@ Module.ccall("frmOn");
 }
 
 function imageStart(){
-let vvi=document.querySelector('#ivi');
-let SiZ=window.innerHeight;
-let w$=parseInt(document.querySelector("#ivi").width);
-let h$=parseInt(document.querySelector("#ivi").height);
-if(running==0){
-setTimeout(function(){
-let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz]);
-console.log('Starting..');
-running=1;
-},250);
-}else{
-setTimeout(function(){
-let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
-console.log('Starting..');
-},250);
-}
-console.log("vid size: ",h$,", ",w$);
-let cnv=document.querySelector('#bcanvas');
-let cnvb=document.querySelector('#scanvas');
-var offsetX=Math.floor((w$-h$)/2);
-var offsetY=Math.floor((h$-w$)/2);
-cnvb.height=SiZ;
-cnv.height=h$-offsetY;
-cnvb.width=SiZ;
-cnv.width=w$-offsetX;
-let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-// const gl3=cnvb.getContext('2d',{colorType:'float64',alpha:true}); // 
-const gl3=cnv.getContext('2d',{
-colorType:'float64',
-alpha:true,
-willReadFrequently:false,
-stencil:false,
-depth:false,
-colorSpace:"display-p3",
-desynchronized:false,
-antialias:true,
-powerPreference:"high-performance",
-premultipliedAlpha:true,
-preserveDrawingBuffer:false
-}); // 
-gl3.drawImage(vvi,0,0,w$-offsetX,h$-offsetY,0,0,w$-offsetX,h$-offsetY);
-// let image=flipImageData(gl3.getImageData(0,0,w$,h$));
-var image=gl3.getImageData(0,0,w$-offsetX,h$-offsetY);
-var imageData=image.data;
-// let pixelData=new Uint8ClampedArray(imageData);
-var pixelData=new Float64Array(imageData);
-// var pixelData=new Float64Array(imageData,0,la);
-var fileStream=FS.open('/video/frame.gl','w');
-FS.write(fileStream,pixelData,0,pixelData.length,0);
-Module.ccall("frmOn");
-setInterval(function(){
-FS.write(fileStream,pixelData,0,pixelData.length,0);
-Module.ccall("frmOn");
-},16.666);
-
-}
-
-function imageStartGif(){
 var vvi=document.querySelector('#ivi');
 let SiZ=window.innerHeight;
 let w$=parseInt(document.querySelector("#ivi").width);
@@ -473,7 +412,6 @@ var pth4=document.querySelector('#vertPath').innerHTML;
 getShader(pth2,'compute.wgsl');
 getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
- 
 videoStart();
 });
 
@@ -486,7 +424,6 @@ var pth4=document.querySelector('#vertPath').innerHTML;
 getShader(pth2,'compute.wgsl');
 getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
-
 regularStart();
 });
 
@@ -499,27 +436,12 @@ var pth4=document.querySelector('#vertPath').innerHTML;
 getShader(pth2,'compute.wgsl');
 getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
-
 setTimeout(function(){
 canvasStart();
 },3000);
 });
 
 document.querySelector('#startBtnI').addEventListener('click',function(){
-var pth=document.querySelector('#path').innerHTML;
-getShader(pth,'shader.wgsl');
-var pth2=document.querySelector('#computePath').innerHTML;
-var pth3=document.querySelector('#fragPath').innerHTML;
-var pth4=document.querySelector('#vertPath').innerHTML;
-getShader(pth2,'compute.wgsl');
-getShader(pth3,'frag2.wgsl');
-getShader(pth4,'vert.wgsl');
-setTimeout(function(){
-imageStart();
-},1000);
-});
-
-document.querySelector('#startBtnG').addEventListener('click',function(){
 var pth=document.querySelector('#path').innerHTML;
 getShader(pth,'shader.wgsl');
 var pth2=document.querySelector('#computePath').innerHTML;
