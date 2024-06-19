@@ -280,9 +280,9 @@ Module.ccall("frmOn");
 setInterval(function(){
 gl3.drawImage(vvi,0,0,w$-offsetX,h$-offsetY,0,0,w$-offsetX,h$-offsetY);
 // let image=flipImageData(gl3.getImageData(0,0,w$,h$));
-image=gl3.getImageData(0,0,w$-offsetX,h$-offsetY);
-imageData=image.data;
-pixelData=new Float64Array(imageData);
+var image=gl3.getImageData(0,0,w$-offsetX,h$-offsetY);
+var imageData=image.data;
+var pixelData=new Float64Array(imageData);
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
 },16.666);
