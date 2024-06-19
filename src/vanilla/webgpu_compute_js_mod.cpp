@@ -191,7 +191,6 @@ cnvb.height=SiZ;
 cnv.height=h$-offsetY;
 cnvb.width=SiZ;
 cnv.width=w$-offsetX;
-
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
 // const gl3=cnvb.getContext('2d',{colorType:'float64',alpha:true}); // 
 const gl3=cnv.getContext('2d',{
@@ -217,7 +216,6 @@ var pixelData=new Float64Array(imageData);
 var fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
-
 setInterval(function(){
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
@@ -227,7 +225,7 @@ Module.ccall("frmOn");
 
 
 function imageStartGif(){
-let vvi=document.querySelector('#gvg');
+let vvi=document.querySelector('#ivi');
 let SiZ=window.innerHeight;
 let w$=parseInt(document.querySelector("#ivi").width);
 let h$=parseInt(document.querySelector("#ivi").height);
