@@ -82,6 +82,7 @@ console.log('Starting..');
 Module.ccall("frmOn");
 setInterval(function(){
 if(!pause){
+gl3.clearRect(0,0,w$,h$);  
 gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 }
 image=gl3.getImageData(0,0,w$,h$);
@@ -148,6 +149,7 @@ let fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
 setInterval(function(){
+gl3.clearRect(0,0,w$,h$);  
 gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 // image=flipImageData(gl3.getImageData(0,0,w$,h$));
 image=gl3.getImageData(0,0,w$,h$);
