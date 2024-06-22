@@ -795,6 +795,10 @@ Compute_Bindgroup_Entries[7].resource=wtv.at(5,5);
 Compute_Bindgroup_Entries[8]={};
 Compute_Bindgroup_Entries[8].binding=8;
 Compute_Bindgroup_Entries[8].resource=wtv.at(6,6);
+  // Compute External Texture
+Compute_Bindgroup_Entries[9]={};
+Compute_Bindgroup_Entries[9].binding=9;
+Compute_Bindgroup_Entries[9].resource=wet.at(0,0);
             // Compute Color Attachment Texture
 // Compute_Bindgroup_Entries[7]={};
 // Compute_Bindgroup_Entries[7].binding=7;
