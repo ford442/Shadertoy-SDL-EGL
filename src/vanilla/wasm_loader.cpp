@@ -7,12 +7,13 @@ EM_ASM({
   
 let Module_lib1ink;
 
+var modu=document.querySelector('#modulePath').innerHTML;
 var scr=document.createElement("script");
 scr.async=true;
 scr.charset='utf-8';
 scr.type='text/javascript';
 scr.defer=true;
-scr.src="https://wasm.noahcohn.com/b3hd/w0-009-mod.1ijs";
+scr.src=modu;
 document.body.appendChild(scr);
 setTimeout(function(){
 Module_lib1ink=lib1ink();
