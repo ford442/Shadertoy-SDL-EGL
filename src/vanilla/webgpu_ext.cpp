@@ -239,11 +239,10 @@ const size_t bytesPerRow=sze.at(6,6)*4*sizeof(emscripten_align1_float);
 wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),floatData.data(),bytesPerRow,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
 */
    //  external texture way
-
+//  WGpuExternalTexture wgpu_device_import_external_texture(WGpuDevice device, const WGpuExternalTextureDescriptor *externalTextureDesc NOTNULL);
+wet.at(0,0)=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
   
-
-  
-  on.at(4,4)=0;
+on.at(4,4)=0;
 }   // end if on 4,4
 // void wgpu_queue_copy_external_image_to_texture(WGpuQueue queue, const WGpuImageCopyExternalImage *source NOTNULL, const WGpuImageCopyTextureTagged *destination NOTNULL, uint32_t copyWidth, uint32_t copyHeight _WGPU_DEFAULT_VALUE(1), uint32_t copyDepthOrArrayLayers _WGPU_DEFAULT_VALUE(1));
 // wgpu_queue_copy_external_image_to_texture(WGPU_Queue.at(0,0,0), ,&wictt.at(0,0) ,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
@@ -473,6 +472,7 @@ textureBindingLayoutUint32.multisampled=0;
 wtbl.at(1,1)=textureBindingLayoutFloat;
 wtbl.at(3,3)=textureBindingLayoutFloatM;
 wtbl.at(4,4)=textureBindingLayoutUint32;
+wtbl.at(5,5)=extTextureBindingLayout;
 textureBindingLayoutDepth.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_DEPTH;
 textureBindingLayoutDepth.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureBindingLayoutDepth.multisampled=0;
@@ -616,6 +616,7 @@ storageTextureBindingLayoutFloat.format=wtf.at(0,0);
 storageTextureBindingLayoutFloat.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 WGPU_StorageTextureBindingLayout.at(0,0,0)=storageTextureBindingLayoutFloat;
 WGPU_StorageTextureBindingLayout.at(1,1,1)=storageTextureBindingLayoutFloat32;
+WGPU_StorageTextureBindingLayout.at(2,2,2)=extTextureBindingLayout;
 textureIn=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,0)=textureIn;
 textureInV=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,3));
@@ -635,10 +636,10 @@ WGPU_Texture.at(0,0,2)=textureOut2;
   videoFrm.origin=oxy.at(0,0);
   videoFrm.flipY=EM_TRUE;
   wicei.at(0,0)=videoFrm;
-  External_Image_Texture.texture=WGPU_Texture.at(0,0,3);
-  External_Image_Texture.mipLevel=0;
-  External_Image_Texture.origin=oxyz.at(0,0);
-  External_Image_Texture.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
+//  External_Image_Texture.texture=WGPU_Texture.at(0,0,3);
+//  External_Image_Texture.mipLevel=0;
+//  External_Image_Texture.origin=oxyz.at(0,0);
+//  External_Image_Texture.colorSpace=HTML_PREDEFINED_COLOR_SPACE_DISPLAY_P3;
  
 Input_Image_Texture.texture=WGPU_Texture.at(0,0,0);
 Input_Image_Texture.mipLevel=0;
@@ -660,7 +661,7 @@ wict.at(2,2)=Input_Image_Texture;
 wict.at(1,1)=Output_Image_Texture;
 wict.at(3,3)=Output_Image_Texture2;
 wict.at(4,4)=Input_Image_TextureV;
-    wictt.at(0,0)=External_Image_Texture;
+ //   wictt.at(0,0)=External_Image_Texture;
 INTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,0),&WGPU_TextureViewDescriptor.at(0,0,0));
 INVTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,3),&WGPU_TextureViewDescriptor.at(0,0,3));
 OUTTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,1),&WGPU_TextureViewDescriptor.at(0,0,1));
@@ -707,7 +708,7 @@ Compute_Bindgroup_Layout_Entries[1].layout.buffer=WGPU_BufferBindingLayout.at(0,
           // Compute Input Texture
 Compute_Bindgroup_Layout_Entries[2].binding=2;
 Compute_Bindgroup_Layout_Entries[2].visibility=WGPU_SHADER_STAGE_COMPUTE;
-Compute_Bindgroup_Layout_Entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
+Compute_Bindgroup_Layout_Entries[2].type=  ;
 Compute_Bindgroup_Layout_Entries[2].layout.texture=wtbl.at(1,1);
           // Compute Output Texture
 Compute_Bindgroup_Layout_Entries[3].binding=3;
@@ -737,8 +738,13 @@ Compute_Bindgroup_Layout_Entries[7].layout.texture=wtbl.at(1,1);
               // Compute Video Input Texture
 Compute_Bindgroup_Layout_Entries[8].binding=8;
 Compute_Bindgroup_Layout_Entries[8].visibility=WGPU_SHADER_STAGE_COMPUTE;
-Compute_Bindgroup_Layout_Entries[8].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
-Compute_Bindgroup_Layout_Entries[8].layout.texture=wtbl.at(1,1);
+Compute_Bindgroup_Layout_Entries[8].type=WGPU_BIND_GROUP_LAYOUT_TYPE_EXTERNAL_TEXTURE;
+Compute_Bindgroup_Layout_Entries[8].layout.texture=wtbl.at(1,1); 
+              // Compute External Texture
+Compute_Bindgroup_Layout_Entries[9].binding=9;
+Compute_Bindgroup_Layout_Entries[9].visibility=WGPU_SHADER_STAGE_COMPUTE;
+Compute_Bindgroup_Layout_Entries[9].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
+Compute_Bindgroup_Layout_Entries[9].layout.texture=wtbl.at(5,5);
             // Compute Color Attachment Texture
 // Compute_Bindgroup_Layout_Entries[7].binding=7;
 // Compute_Bindgroup_Layout_Entries[7].visibility=WGPU_SHADER_STAGE_COMPUTE;
