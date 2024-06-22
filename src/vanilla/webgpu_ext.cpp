@@ -617,7 +617,6 @@ storageTextureBindingLayoutFloat.format=wtf.at(0,0);
 storageTextureBindingLayoutFloat.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 WGPU_StorageTextureBindingLayout.at(0,0,0)=storageTextureBindingLayoutFloat;
 WGPU_StorageTextureBindingLayout.at(1,1,1)=storageTextureBindingLayoutFloat32;
-WGPU_StorageTextureBindingLayout.at(2,2,2)=extTextureBindingLayout;
 textureIn=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,0));
 WGPU_Texture.at(0,0,0)=textureIn;
 textureInV=wgpu_device_create_texture(wd.at(0,0),&WGPU_TextureDescriptor.at(0,0,3));
@@ -747,7 +746,7 @@ Compute_Bindgroup_Layout_Entries[8].layout.texture=wtbl.at(1,1);
 Compute_Bindgroup_Layout_Entries[9].binding=9;
 Compute_Bindgroup_Layout_Entries[9].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[9].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
-Compute_Bindgroup_Layout_Entries[9].layout.texture=wetbl.at(0,0);
+Compute_Bindgroup_Layout_Entries[9].layout.externalTexture=wetbl.at(0,0);
            // Compute Color Attachment Texture
 // Compute_Bindgroup_Layout_Entries[7].binding=7;
 // Compute_Bindgroup_Layout_Entries[7].visibility=WGPU_SHADER_STAGE_COMPUTE;
