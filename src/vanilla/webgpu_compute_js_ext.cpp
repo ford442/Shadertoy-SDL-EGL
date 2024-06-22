@@ -25,6 +25,19 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }}
 
+async function getWebGPUDevice() {
+  if (!navigator.gpu) {
+    throw new Error('WebGPU not supported');
+  }
+
+  const adapter = await navigator.gpu.requestAdapter();
+  if (!adapter) {
+    throw new Error('No suitable WebGPU adapter found');
+  }
+
+  return await adapter.requestDevice();
+}
+
 let pause='ready';
 
 function canvasStart(){
@@ -37,6 +50,17 @@ var h$=vsiz;
 vvic.height=SiZ;
 console.log("canvas size: ",h$,", ",w$);
 const cnv=document.querySelector('#scanvas');
+
+const device = await getWebGPUDevice(); // Get device (from above)
+/*
+const context = vvic.getContext('webgpu');
+
+context.configure({
+  device: device,
+  format: navigator.gpu.getPreferredCanvasFormat(), // Or a specific format
+  // ... other configuration options ...
+});
+*/
 
 const cnvb=new OffscreenCanvas(h$,w$); 
 cnv.height=SiZ;
@@ -65,11 +89,18 @@ gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 
 // let image=gl3.getImageData(0,0,w$,h$);
 let image=cnvb.transferToImageBitmap();
+const texture = device.createTexture({
+    size: [image.width,image.height],
+    format:'rgba8unorm',
+    usage:GPUTextureUsage.TEXTURE_BINDING|GPUTextureUsage.COPY_DST,
+});
+device.queue.copyExternalImageToTexture(
+    { source: image }, 
+    { texture: texture },
+    [image.width, image.height]
+);
 
-let imageData=image.data;
-let pixelData=new Float64Array(imageData);
-let fileStream=FS.open('/video/frame.gl','w');
-FS.write(fileStream,pixelData,0,pixelData.length,0);
+
 if(running==0){
 setTimeout(function(){
 Module.ccall("startWebGPUC",null,"Number",[vsiz]);
@@ -88,13 +119,14 @@ if(pause=='ready'){
 gl3.clearRect(0,0,w$,h$);  
 gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 }
-// image=gl3.getImageData(0,0,w$,h$);
 image=cnvb.transferToImageBitmap();
-imageData=image.data;
-pixelData=new Float64Array(imageData);
-FS.write(fileStream,pixelData,0,pixelData.length,0);
+device.queue.copyExternalImageToTexture(
+    { source: image }, 
+    { texture: texture },
+    [image.width, image.height]
+);
 Module.ccall("frmOn");
-},24);
+},16.6);
 }
  
 function videoStart(){
