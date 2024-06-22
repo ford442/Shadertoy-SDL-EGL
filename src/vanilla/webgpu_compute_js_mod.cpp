@@ -62,7 +62,10 @@ preserveDrawingBuffer:false
 });
 gl3.imageSmoothingEnabled=false;
 gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
-let image=gl3.getImageData(0,0,w$,h$);
+
+// let image=gl3.getImageData(0,0,w$,h$);
+let image=gl3.transferToImageBitmap();
+
 let imageData=image.data;
 let pixelData=new Float64Array(imageData);
 let fileStream=FS.open('/video/frame.gl','w');
@@ -85,7 +88,8 @@ if(pause=='ready'){
 gl3.clearRect(0,0,w$,h$);  
 gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 }
-image=gl3.getImageData(0,0,w$,h$);
+// image=gl3.getImageData(0,0,w$,h$);
+image=gl3.transferToImageBitmap();
 imageData=image.data;
 pixelData=new Float64Array(imageData);
 FS.write(fileStream,pixelData,0,pixelData.length,0);
