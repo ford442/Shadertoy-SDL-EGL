@@ -38,9 +38,7 @@ vvic.height=SiZ;
 console.log("canvas size: ",h$,", ",w$);
 const cnv=document.querySelector('#scanvas');
 
-const offscreen=new OffscreenCanvas(h$,w$); 
-offscreen.id='ccanvas';
-const cnvb=document.querySelector('#ccanvas');
+const cnvb=new OffscreenCanvas(h$,w$); 
 cnv.height=SiZ;
 cnvb.height=vsiz;
 cnvb.style.height=vsiz+'px';
