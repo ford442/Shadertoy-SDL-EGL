@@ -473,7 +473,7 @@ textureBindingLayoutUint32.multisampled=0;
 wtbl.at(1,1)=textureBindingLayoutFloat;
 wtbl.at(3,3)=textureBindingLayoutFloatM;
 wtbl.at(4,4)=textureBindingLayoutUint32;
-wtbl.at(5,5)=extTextureBindingLayout;
+wetbl.at(0,0)=extTextureBindingLayout;
 textureBindingLayoutDepth.sampleType=WGPU_TEXTURE_SAMPLE_TYPE_DEPTH;
 textureBindingLayoutDepth.viewDimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
 textureBindingLayoutDepth.multisampled=0;
@@ -747,7 +747,7 @@ Compute_Bindgroup_Layout_Entries[8].layout.texture=wtbl.at(1,1);
 Compute_Bindgroup_Layout_Entries[9].binding=9;
 Compute_Bindgroup_Layout_Entries[9].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[9].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
-Compute_Bindgroup_Layout_Entries[9].layout.texture=wtbl.at(5,5);
+Compute_Bindgroup_Layout_Entries[9].layout.texture=wetbl.at(0,0);
            // Compute Color Attachment Texture
 // Compute_Bindgroup_Layout_Entries[7].binding=7;
 // Compute_Bindgroup_Layout_Entries[7].visibility=WGPU_SHADER_STAGE_COMPUTE;
