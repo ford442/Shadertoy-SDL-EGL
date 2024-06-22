@@ -740,18 +740,18 @@ Compute_Bindgroup_Layout_Entries[8].binding=8;
 Compute_Bindgroup_Layout_Entries[8].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[8].type=WGPU_BIND_GROUP_LAYOUT_TYPE_EXTERNAL_TEXTURE;
 Compute_Bindgroup_Layout_Entries[8].layout.texture=wtbl.at(1,1); 
-              // Compute External Texture
+/*              // Compute External Texture
 Compute_Bindgroup_Layout_Entries[9].binding=9;
 Compute_Bindgroup_Layout_Entries[9].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[9].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
 Compute_Bindgroup_Layout_Entries[9].layout.texture=wtbl.at(5,5);
-            // Compute Color Attachment Texture
+*/            // Compute Color Attachment Texture
 // Compute_Bindgroup_Layout_Entries[7].binding=7;
 // Compute_Bindgroup_Layout_Entries[7].visibility=WGPU_SHADER_STAGE_COMPUTE;
 // Compute_Bindgroup_Layout_Entries[7].type=WGPU_BIND_GROUP_LAYOUT_TYPE_STORAGE_TEXTURE;
 // Compute_Bindgroup_Layout_Entries[7].layout.storageTexture=WGPU_StorageTextureBindingLayout.at(0,0,0);
 WGPU_Compute_Bindgroup_Layout_Entries.at(0,0,0)=Compute_Bindgroup_Layout_Entries;
-WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(wd.at(0,0),WGPU_Compute_Bindgroup_Layout_Entries.at(0,0,0),10);
+WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(wd.at(0,0),WGPU_Compute_Bindgroup_Layout_Entries.at(0,0,0),9);
 WGPU_ComputePipelineLayout.at(0,0,0)=wgpu_device_create_pipeline_layout(wd.at(0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
 WGPU_ComputePipeline.at(0,0,0)=wgpu_device_create_compute_pipeline(wd.at(0,0),WGPU_ComputeModule.at(0,0,0),Entry,WGPU_ComputePipelineLayout.at(0,0,0),NULL,0);
       // Compute Input Buffer
@@ -795,16 +795,16 @@ Compute_Bindgroup_Entries[7].resource=wtv.at(5,5);
 Compute_Bindgroup_Entries[8]={};
 Compute_Bindgroup_Entries[8].binding=8;
 Compute_Bindgroup_Entries[8].resource=wtv.at(6,6);
-//   // Compute External Texture
+/*   // Compute External Texture
 Compute_Bindgroup_Entries[9]={};
 Compute_Bindgroup_Entries[9].binding=9;
 Compute_Bindgroup_Entries[9].resource=wet.at(0,0);
-            // Compute Color Attachment Texture
+*/           // Compute Color Attachment Texture
 // Compute_Bindgroup_Entries[7]={};
 // Compute_Bindgroup_Entries[7].binding=7;
 // Compute_Bindgroup_Entries[7].resource=wtv.at(1,1); 
 WGPU_BindGroupEntries.at(0,0,0)=Compute_Bindgroup_Entries;
-WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),10);
+WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),9);
 WGpuComputePassTimestampWrites computePassTimestampWrites={};
 computePassTimestampWrites.querySet=0;
 computePassDescriptor.timestampWrites=computePassTimestampWrites;
