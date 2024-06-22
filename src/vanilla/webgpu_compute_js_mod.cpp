@@ -64,7 +64,7 @@ gl3.imageSmoothingEnabled=false;
 gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 
 // let image=gl3.getImageData(0,0,w$,h$);
-let image=vvic.transferToImageBitmap();
+let image=cnvb.transferToImageBitmap();
 
 let imageData=image.data;
 let pixelData=new Float64Array(imageData);
@@ -89,7 +89,7 @@ gl3.clearRect(0,0,w$,h$);
 gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 }
 // image=gl3.getImageData(0,0,w$,h$);
-image=vvic.transferToImageBitmap();
+image=cnvb.transferToImageBitmap();
 imageData=image.data;
 pixelData=new Float64Array(imageData);
 FS.write(fileStream,pixelData,0,pixelData.length,0);
