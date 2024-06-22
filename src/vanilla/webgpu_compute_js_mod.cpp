@@ -26,9 +26,9 @@ return n;
 }}
 
 let pause='ready';
-const vvic=document.querySelector('#mvi');
 
 function canvasStart(){
+let vvic=document.querySelector('#mvi');
 let vsiz=document.querySelector('#vsiz').innerHTML;
 var SiZ=window.innerHeight;
 var w$=vsiz;
