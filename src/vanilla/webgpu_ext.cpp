@@ -241,7 +241,7 @@ wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),floatData.data(),byt
   
    //  external texture way
 //  WGpuExternalTexture wgpu_device_import_external_texture(WGpuDevice device, const WGpuExternalTextureDescriptor *externalTextureDesc NOTNULL);
-wet.at(0,0)=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
+// wet.at(0,0)=wgpu_device_import_external_texture(wd.at(0,0),&wetd.at(0,0));
   
 on.at(4,4)=0;
 }   // end if on 4,4
