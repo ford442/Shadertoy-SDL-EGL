@@ -25,17 +25,17 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }}
 
-async function getWebGPUDevice() {
+function getWebGPUDevice() {
   if (!navigator.gpu) {
     throw new Error('WebGPU not supported');
   }
 
-  const adapter = await navigator.gpu.requestAdapter();
+  const adapter = navigator.gpu.requestAdapter();
   if (!adapter) {
     throw new Error('No suitable WebGPU adapter found');
   }
 
-  return await adapter.requestDevice();
+  return adapter.requestDevice();
 }
 
 let pause='ready';
@@ -51,7 +51,7 @@ vvic.height=SiZ;
 console.log("canvas size: ",h$,", ",w$);
 const cnv=document.querySelector('#scanvas');
 
-const device = await getWebGPUDevice(); // Get device (from above)
+const device = getWebGPUDevice(); // Get device (from above)
 /*
 const context = vvic.getContext('webgpu');
 
