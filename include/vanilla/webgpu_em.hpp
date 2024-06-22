@@ -273,6 +273,7 @@ using wcpd_tensor=boost::numeric::ublas::tensor<WGpuComputePassDescriptor>;
 using wrpca_tensor=boost::numeric::ublas::tensor<WGpuRenderPassColorAttachment>;
 using wbbl_tensor=boost::numeric::ublas::tensor<WGpuBufferBindingLayout>;
 using wtbl_tensor=boost::numeric::ublas::tensor<WGpuTextureBindingLayout>;
+using wetbl_tensor=boost::numeric::ublas::tensor<WGpuExternalTextureBindingLayout>;
 using wsbl_tensor=boost::numeric::ublas::tensor<WGpuSamplerBindingLayout>;
 using wbd_tensor=boost::numeric::ublas::tensor<WGpuBufferDescriptor>;
 using wao_tensor=boost::numeric::ublas::tensor<WGpuRequestAdapterOptions>;
