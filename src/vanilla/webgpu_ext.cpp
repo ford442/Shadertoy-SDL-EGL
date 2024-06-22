@@ -1133,7 +1133,7 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 return EM_TRUE;
 }
 
-#include "../../src/vanilla/webgpu_compute_js_mod.cpp"
+#include "../../src/vanilla/webgpu_compute_js_ext.cpp"
 
 extern"C"{
 
