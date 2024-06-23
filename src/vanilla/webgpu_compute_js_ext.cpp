@@ -34,10 +34,11 @@ function getWebGPUDevice() {
   if (!adapter) {
     throw new Error('No suitable WebGPU adapter found');
   }
-setTimeout(function(){
     const wdevice = adapter.requestDevice();
-},500);
+
+setTimeout(function(){
 return wdevice;
+},500);
 }
 
 let pause='ready';
