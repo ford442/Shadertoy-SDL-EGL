@@ -39,7 +39,6 @@ vvic.height=SiZ;
 console.log("canvas size: ",h$,", ",w$);
 const cnvb=new OffscreenCanvas(h$,w$); 
 // document.querySelector('#contain2').appendChild(cnvb);
-
 const cnv=document.querySelector('#scanvas');
 const cnvc=document.querySelector('#bcanvas');
 cnv.height=SiZ;
@@ -50,8 +49,6 @@ cnv.width=SiZ;
 cnvb.width=vsiz;
 cnvc.width=vsiz;
 cnvc.style.width=vsiz+'px';
-var offS=Math.floor((w$-h$)/2);
-var la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl3=cnvb.getContext('2d',{
 colorType:'float64',
 alpha:true,
@@ -66,38 +63,27 @@ premultipliedAlpha:true,
 preserveDrawingBuffer:false
 });
 gl3.imageSmoothingEnabled=false;
-gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
-let image=gl3.getImageData(0,0,w$,h$);
-// let image=cnvb.transferToImageBitmap();
-let imageData=image.data;
-let pixelData=new Float64Array(imageData);
 let fileStream=FS.open('/video/frame.gl','w');
-FS.write(fileStream,pixelData,0,pixelData.length,0);
-if(running==0){
-setTimeout(function(){
-Module.ccall("startWebGPUC",null,"Number",[vsiz]);
-running=1;
-},250);
-}else{
-setTimeout(function(){
-let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUC",null,"Number",[vsiz]);
-console.log('Starting..');
-},250);
-}
-Module.ccall("frmOn");
-setInterval(function(){
-if(pause=='ready'){
-gl3.clearRect(0,0,w$,h$);  
-gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
-}
-image=gl3.getImageData(0,0,w$,h$);
-// image=cnvb.transferToImageBitmap();
-imageData=image.data;
-pixelData=new Float64Array(imageData);
-FS.write(fileStream,pixelData,0,pixelData.length,0);
-Module.ccall("frmOn");
-},16.6);
+  function drawFrame() {
+    if (pause === 'ready') {
+      gl3.clearRect(0, 0, w$, h$);
+      gl3.drawImage(vvic, 0, 0, SiZ, SiZ, 0, 0, w$, h$);
+    }
+    const image = gl3.getImageData(0, 0, w$, h$);
+    const imageData = image.data;
+    const pixelData = new Float64Array(imageData);
+    FS.write(fileStream, pixelData, 0, pixelData.length, 0);
+    Module.ccall("frmOn");
+  }
+  if (running == 0) {
+    setTimeout(() => {
+      Module.ccall("startWebGPUC", null, "Number", [vsiz]);
+      running = 1;
+      setInterval(drawFrame, 16.6); 
+    }, 250);
+  } else {
+    setInterval(drawFrame, 16.6);
+  }
 }
  
 function videoStart(){
