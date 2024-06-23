@@ -26,10 +26,11 @@ return n;
 }}
 
 let pause='ready';
-const cnvb=new OffscreenCanvas(h$,w$); 
-cnvb.style.zIndex=1;
+
 
 function canvasStart(){
+const cnvb=new OffscreenCanvas(h$,w$); 
+document.querySelctor('#contain2').appendChild(cnvb);
 let vvic=document.querySelector('#mvi');
 let vsiz=document.querySelector('#vsiz').innerHTML;
 var SiZ=window.innerHeight;
