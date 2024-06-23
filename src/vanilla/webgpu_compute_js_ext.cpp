@@ -69,8 +69,6 @@ cnvb.height=vsiz;
 cnv.width=SiZ;
 cnvb.width=vsiz;
 // cnvb.style.width=vsiz+'px';
-var offS=Math.floor((w$-h$)/2);
-var la=nearestPowerOf2(((w$*h$*4)/4)*4);
 const gl3=cnvb.getContext('2d',{
 colorType:'float64',
 alpha:true,
@@ -86,21 +84,21 @@ preserveDrawingBuffer:false
 });
 gl3.imageSmoothingEnabled=false;
 gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
+let image=gl3.getImageData(0,0,w$,h$);
+var imageData=image.data;
+// let pixelData=new Uint8ClampedArray(imageData);
+var pixelData=new Float64Array(imageData);
 
-// let image=gl3.getImageData(0,0,w$,h$);
-let image=cnvb.transferToImageBitmap();
+// let image=cnvb.transferToImageBitmap();
 const texture = device.createTexture({
     size: [image.width,image.height],
     format:'rgba8unorm',
     usage:GPUTextureUsage.TEXTURE_BINDING|GPUTextureUsage.COPY_DST,
 });
-device.queue.copyExternalImageToTexture(
-    { source: image }, 
-    { texture: texture },
-    [image.width, image.height]
-);
-
-
+// device.queue.copyExternalImageToTexture({ source: image },{ texture: texture },[image.width, image.height]);
+var byt=h$*4*4;
+device.queue.writeTexture({ texture }, pixelData, { byt }, { width: w$, height: h$ } );
+  
 if(running==0){
 setTimeout(function(){
 Module.ccall("startWebGPUC",null,"Number",[vsiz]);
@@ -119,12 +117,12 @@ if(pause=='ready'){
 gl3.clearRect(0,0,w$,h$);  
 gl3.drawImage(vvic,0,0,SiZ,SiZ,0,0,w$,h$);
 }
-image=cnvb.transferToImageBitmap();
-device.queue.copyExternalImageToTexture(
-    { source: image }, 
-    { texture: texture },
-    [image.width, image.height]
-);
+let image=gl3.getImageData(0,0,w$,h$);
+var imageData=image.data;
+// let pixelData=new Uint8ClampedArray(imageData);
+var pixelData=new Float64Array(imageData);
+  // device.queue.copyExternalImageToTexture({source:image},{texture:texture },[image.width, image.height]);
+device.queue.writeTexture({ texture }, pixelData, { byt }, { width: w$, height: h$ } );
 Module.ccall("frmOn");
 },16.6);
 }
