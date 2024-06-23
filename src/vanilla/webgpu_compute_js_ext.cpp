@@ -30,12 +30,14 @@ function getWebGPUDevice() {
     throw new Error('WebGPU not supported');
   }
 
-  const adapter = await navigator.gpu.requestAdapter();
+  const adapter = navigator.gpu.requestAdapter();
   if (!adapter) {
     throw new Error('No suitable WebGPU adapter found');
   }
-
-  return await adapter.requestDevice();
+setTimeout(function(){
+    const wdevice = adapter.requestDevice();
+},500);
+return wdevice;
 }
 
 let pause='ready';
