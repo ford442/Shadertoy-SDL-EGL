@@ -27,6 +27,7 @@ return n;
 
 let pause='ready';
 const cnvb=new OffscreenCanvas(h$,w$); 
+cnvb.style.zIndex=1;
 
 function canvasStart(){
 let vvic=document.querySelector('#mvi');
