@@ -38,7 +38,7 @@ var h$=parseInt(vsiz,10);
 vvic.height=SiZ;
 console.log("canvas size: ",h$,", ",w$);
 const cnvb=new OffscreenCanvas(h$,w$); 
-document.querySelector('#contain2').appendChild(cnvb);
+// document.querySelector('#contain2').appendChild(cnvb);
 
 const cnv=document.querySelector('#scanvas');
 const cnvc=document.querySelector('#bcanvas');
