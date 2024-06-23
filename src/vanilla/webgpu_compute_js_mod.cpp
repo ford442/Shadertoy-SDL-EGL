@@ -110,15 +110,19 @@ console.log('Starting..');
 },250);
 }
 console.log("vid size: ",h$,", ",w$);
-let cnv=document.querySelector('#bcanvas');
-let cnvb=document.querySelector('#scanvas');
-cnv.height=h$;
-cnvb.height=SiZ;
-cnv.width=w$;
-cnvb.width=SiZ;
-let offS=Math.floor((w$-h$)/2);
-let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-const gl3=cnv.getContext('2d',{
+const cnvb=new OffscreenCanvas(h$,w$); 
+// document.querySelector('#contain2').appendChild(cnvb);
+const cnv=document.querySelector('#scanvas');
+const cnvc=document.querySelector('#bcanvas');
+cnv.height=SiZ;
+cnvb.height=vsiz;
+cnvc.height=vsiz;
+cnvc.style.height=vsiz+'px';
+cnv.width=SiZ;
+cnvb.width=vsiz;
+cnvc.width=vsiz;
+cnvc.style.width=vsiz+'px';
+const gl3=cnvb.getContext('2d',{
 colorType:'float64',
 alpha:true,
 willReadFrequently:false,
