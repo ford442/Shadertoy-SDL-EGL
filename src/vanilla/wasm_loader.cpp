@@ -26,6 +26,7 @@ let codeCall=new BroadcastChannel('codeCall');
 
 const vsiz=document.querySelector('#vsiz');
 let menuSz=parseInt(window.innerWidth*.75,10);
+let infoSz=parseInt(window.innerHeight*.25,10);
 
 function normalResSetup(){
 setTimeout(function(){
@@ -94,11 +95,11 @@ slt=tem.innerHTML;
 });
 
 const infoSlideout = new Slideout({
-  panel: document.querySelector('#info'),
-  menu: document.querySelector('#menuBtn'),
-  padding: menuSz,
+  panel: document.querySelector('#panel'),
+  menu: document.querySelector('#info'),
+  padding: infoSz,
   tolerance: 70,
-  side: 'right',  // Slide from the right
+  side: 'top',  // Slide from the right
   easing: 'cubic-bezier(.32,2,.55,.27)' 
 });
 
