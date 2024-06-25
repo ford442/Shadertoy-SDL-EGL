@@ -98,12 +98,12 @@ const infoSlideout = new Slideout({
   panel: document.querySelector('#info'),
   padding: infoSz,
   tolerance: 70,
-  side: 'top',  // Slide from the right
+  side: 'top',
   easing: 'cubic-bezier(.32,2,.55,.27)' 
 });
 
 infoBtn.addEventListener('click', function() {
-  infoSlideout.toggle(); // Toggle the "info" tab
+  infoSlideout.toggle('info-active');
 });
 
 normalResSetup();
