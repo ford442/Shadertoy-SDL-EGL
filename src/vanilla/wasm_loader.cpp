@@ -45,6 +45,7 @@ document.querySelector('#status').style.backgroundColor="green";
 
 document.querySelector('#status').height=20;
 document.querySelector('#status').width=parseInt(window.innerHeight,10);
+const infoBtn=document.querySelector('#infoBtn');
 const tem=document.querySelector('#tim');
 const ban=document.querySelector('#menuBtn');
 const sfr=document.querySelector('#slideframe');
@@ -61,6 +62,7 @@ const slo=new Slideout({
 'padding':menuSz,'tolerance':70,
 'easing':'cubic-bezier(.32,2,.55,.27)'
 });
+
 ban.addEventListener('click',function(){slo.toggle();sfr.innerHTML="";
 setTimeout(function(){
 grab$lt();
@@ -89,6 +91,19 @@ setTimeout(function(){
 slt=tem.innerHTML;
 },8);
 },16);
+});
+
+const infoSlideout = new Slideout({
+  panel: document.querySelector('#info'),
+  menu: document.querySelector('#menuBtn'),
+  padding: menuSz,
+  tolerance: 70,
+  side: 'right',  // Slide from the right
+  easing: 'cubic-bezier(.32,2,.55,.27)' 
+});
+
+infoBtn.addEventListener('click', function() {
+  infoSlideout.toggle(); // Toggle the "info" tab
 });
 
 normalResSetup();
