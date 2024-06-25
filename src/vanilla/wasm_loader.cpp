@@ -103,7 +103,7 @@ const infoSlideout = new Slideout({
 });
 
 infoBtn.addEventListener('click', function() {
-  infoSlideout.toggle('info-active');
+  infoSlideout.classList.toggle('info-active');
 });
 
 normalResSetup();
