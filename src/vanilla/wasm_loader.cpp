@@ -95,7 +95,7 @@ slt=tem.innerHTML;
 });
 
 const infoSlideout = new Slideout({
-  panel: document.querySelector('#panel'),
+//   panel: document.querySelector('#panel'),
   menu: document.querySelector('#info'),
   padding: infoSz,
   tolerance: 70,
