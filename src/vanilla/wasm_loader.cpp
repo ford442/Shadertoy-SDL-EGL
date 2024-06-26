@@ -60,7 +60,8 @@ grab$lt();
 const slo=new Slideout({
 'panel':document.querySelector('#panel'),
 'menu':document.querySelector('#menu'),
-'padding':menuSz,'tolerance':70,
+'padding':menuSz,
+'tolerance':70,
 'easing':'cubic-bezier(.32,2,.55,.27)'
 });
 
