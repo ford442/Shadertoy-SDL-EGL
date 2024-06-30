@@ -4,7 +4,7 @@
 int main(){
 
 EM_ASM({
-  
+
 let Module_lib1ink;
 
 var modu=document.querySelector('#modulePath').innerHTML;
@@ -22,7 +22,19 @@ Module_lib1ink.callMain();
 };
 },700);
 
-let codeCall=new BroadcastChannel('codeCall');
+document.querySelector('#startBtnG').addEventListener('click',function(){
+var oCan=new offscreenCanvas(window.innerHeight,window.innerHeight);
+oCan.id='mvi';
+
+var modu=document.querySelector('#modulePath').innerHTML;
+var scr=document.createElement("script");
+scr.async=true;
+scr.charset='utf-8';
+scr.type='text/javascript';
+scr.defer=true;
+scr.src=modu;
+document.body.appendChild(scr);
+
 
 const vsiz=document.querySelector('#vsiz');
 let menuSz=parseInt(window.innerWidth*.75,10);
