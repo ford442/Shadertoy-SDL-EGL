@@ -51,7 +51,7 @@ using namespace std;
 // #define __EMCSCRIPTEN__ 1
 
 #include <cstdint>
-#include <pthread.h>
+// #include <pthread.h>
 
 #include <boost/integer.hpp>
 #include <boost/atomic.hpp>
