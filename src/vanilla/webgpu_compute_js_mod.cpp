@@ -27,6 +27,7 @@ return n;
 
 let pause='ready';
 
+
 function canvasStart(){
 let vvic=document.querySelector('#mvi');
 let vsiz=document.querySelector('#vsiz').innerHTML;
@@ -76,7 +77,7 @@ let fileStream=FS.open('/video/frame.gl','w');
   }
   if (running == 0) {
     setTimeout(() => {
-      Module.ccall("startWebGPUC", null, ["number", "number"], [vsiz]);
+      Module.ccall("startWebGPUC", null, "Number", [vsiz]);
       running = 1;
       setInterval(drawFrame, 16.6); 
     }, 250);
@@ -97,17 +98,15 @@ let h$=parseInt(document.querySelector("#mvi").height);
 if(running==0){
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-let srsiz=document.querySelector('#srsiz').innerHTML;
-Module.ccall("startWebGPUi",null,["number", "number"],[vsiz,srsiz]);
+Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-let srsiz=document.querySelector('#srsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,["number", "number"],[vsiz,srsiz]);
-  console.log('Starting..');
+Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
+console.log('Starting..');
 },250);
 }
 console.log("vid size: ",h$,", ",w$);
@@ -171,17 +170,15 @@ let h$=parseInt(document.querySelector("#ivi").height);
 if(running==0){
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-let srsiz=document.querySelector('#srsiz').innerHTML;
-Module.ccall("startWebGPUi",null,["number", "number"],[vsiz,srsiz]);
-  console.log('Starting..');
+Module.ccall("startWebGPUi",null,"Number",[vsiz]);
+console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-let srsiz=document.querySelector('#srsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,["number", "number"],[vsiz,srsiz]);
-  console.log('Starting..');
+Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
+console.log('Starting..');
 },250);
 }
 console.log("vid size: ",h$,", ",w$);
@@ -238,17 +235,15 @@ let h$=parseInt(document.querySelector("#ivi").height);
 if(running==0){
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-let srsiz=document.querySelector('#srsiz').innerHTML;
-Module.ccall("startWebGPUi",null,["number", "number"],[vsiz,srsiz]);
-  console.log('Starting..');
+Module.ccall("startWebGPUi",null,"Number",[vsiz]);
+console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-let srsiz=document.querySelector('#srsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,["number", "number"],[vsiz,srsiz]);
-  console.log('Starting..');
+Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
+console.log('Starting..');
 },250);
 }
 console.log("vid size: ",h$,", ",w$);
@@ -315,16 +310,14 @@ cnvb.width=SiZ;
 if(running==0){
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-let srsiz=document.querySelector('#srsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number","Number",[vsiz,srsiz]);
+Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 console.log('Starting..');
 running=1;
 },50);
 }else{
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-let srsiz=document.querySelector('#srsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,"Number","Number",[vsiz,srsiz]);
+Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
 console.log('Starting..');
 },50);
 }
