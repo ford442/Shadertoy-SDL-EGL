@@ -10,7 +10,7 @@
 #define _POSIX_REGEXP 1
 #undef _FLT_ROUNDS
 #define _FLT_ROUNDS 1
-#pragma pack(4)
+// #pragma pack(4)
 #pragma fenv_access(on)
 #pragma STDC FP_CONTRACT ON
 #pragma STDC CX_LIMITED_RANGE ON
