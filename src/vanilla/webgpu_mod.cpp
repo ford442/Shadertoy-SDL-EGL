@@ -1107,10 +1107,11 @@ wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
 
-EM_BOOL WGPU_Start(emscripten_align1_int sz){
+EM_BOOL WGPU_Start(emscripten_align1_int sz,emscripten_align1_int sr){
 sze.at(1,1)=sz;
 sze.at(6,6)=sz;
 sze.at(7,7)=sz;
+sze.at(8,8)=sr;
 f32_uniform.at(2,2)=static_cast<emscripten_align1_float>(sze.at(1,1));
 szef.at(1,1)=static_cast<emscripten_align1_float>(sze.at(1,1));
 options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
@@ -1120,10 +1121,11 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 return EM_TRUE;
 }
 
-EM_BOOL WGPU_StartC(emscripten_align1_int sz){
+EM_BOOL WGPU_StartC(emscripten_align1_int sz,emscripten_align1_int sr){
 sze.at(1,1)=sz;
 sze.at(6,6)=sz;
 sze.at(7,7)=sz;
+sze.at(8,8)=sr;
 f32_uniform.at(2,2)=static_cast<emscripten_align1_float>(sze.at(1,1));
 szef.at(1,1)=static_cast<emscripten_align1_float>(sze.at(1,1));
 options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
@@ -1152,18 +1154,18 @@ framesOn();
 return;
 }
 
-void startWebGPUi(emscripten_align1_int sz){
-WGPU_Start(sz);
+void startWebGPUi(emscripten_align1_int sz,emscripten_align1_int sr){
+WGPU_Start(sz,sr);
 return;
 }
 
-void startWebGPUbi(emscripten_align1_int sz){
-WGPU_Start(sz);
+void startWebGPUbi(emscripten_align1_int sz,emscripten_align1_int sr){
+WGPU_Start(sz,sr);
 return;
 }
 
-void startWebGPUC(emscripten_align1_int sz){
-WGPU_StartC(sz);
+void startWebGPUC(emscripten_align1_int sz,emscripten_align1_int sr){
+WGPU_StartC(sz,sr);
 return;
 }
 
