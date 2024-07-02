@@ -46,7 +46,7 @@ LINK_FLAGS = $(LDFLAGS) -sDEFAULT_TO_CXX=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 -sABORT_ON_WASM_EXCEPTIONS=0 \
 	 -sASSERTIONS=0 --typed-function-references --enable-reference-types \
 	 --use-preload-plugins --closure 0 --closureFriendly \
-	 -sWASM=1 -sWASM_BIGINT=1 -sTOTAL_STACK=65536 -sENVIRONMENT='web' -sSTRICT_JS=0 \
+	 -sWASM=1 -sWASM_BIGINT=1 -sTOTAL_STACK=65536 -sENVIRONMENT='web' -sSTRICT_JS=1 \
 	 -sGLOBAL_BASE=352321536 -DNDEBUG=1 -polly -polly-position=before-vectorizer \
 	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=2147483648 --output_eol linux -mllvm -mtune=wasm32 -march=wasm32-avx \
 	 -rtlib=compiler-rt -sAUTO_ARCHIVE_INDEXES=0
@@ -106,7 +106,7 @@ b3_audio_sdl:
 	em++ $(STDS) -o $(BIN_NAME).js $(COMMON_FLAGS) $(LINK_FLAGS) $(SIMD_FLAGS) $(BOOST_FLAGS) \
 	-sUSE_SDL=2 -sUSE_SDL_IMAGE=0 -sUSE_SDL_TTF=0 -sUSE_SDL_NET=0 -O2 \
 	-sFORCE_FILESYSTEM=1 -Wno-incompatible-function-pointer-types \
-	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	-sEXPORTED_FUNCTIONS='["_main","_pl","_r4nd","_emscripten_memcpy_js"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	--extern-post-js js/rSlider.js --extern-post-js js/slideOut.js main.o audio_sdl.o 
 
 b3_audio_safe:
