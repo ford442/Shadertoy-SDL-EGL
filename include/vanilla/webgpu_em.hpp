@@ -94,12 +94,13 @@ using namespace std;
 #include <emscripten/html5_webgpu.h>
 #include <iostream>
 #include "../../lib/lib_webgpu.h"
-
+/*
 #include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
 #include <thrust/generate.h>
 #include <thrust/reduce.h>
 #include <thrust/functional.h>
+  */
 #include <cstdlib>
 
 #include <functional>
