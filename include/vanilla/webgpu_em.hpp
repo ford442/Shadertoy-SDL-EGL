@@ -5,12 +5,10 @@
 #include "../../include/vanilla/boost_defs.hpp"
 #include "../../lib/lib_webgpu_cpp20.cpp"
 // #include <SDL2/SDL.h>
-
 #include "../../include/vanilla/egl.hpp"
 
 #include "../../highway/hwy/foreach_target.h"
 #include "../../highway/hwy/highway.h"
-
 
 using namespace std;
 #include <cstdio> // C++ style
@@ -53,8 +51,7 @@ using namespace std;
 // #define __EMCSCRIPTEN__ 1
 
 #include <cstdint>
-
-#include <pthread.h>
+// #include <pthread.h>
 
 #include <boost/integer.hpp>
 #include <boost/atomic.hpp>
@@ -219,8 +216,7 @@ static long int length;
 using namespace boost::chrono;
 
 namespace boost::numeric::ublas {
-    // Create a vector type specifically for vec4
-    using vec4 = vector<float, boost::numeric::ublas::bounded_array<float, 4>>;
+using vec4=vector<float,boost::numeric::ublas::bounded_array<float,4>>;
 }
 
 // using dv_tensor=boost::numeric::ublas::tensor<SDL_AudioDeviceID>;
@@ -249,7 +245,6 @@ using c_tensor=boost::numeric::ublas::tensor<const char *>;
 using c32_tensor=boost::numeric::ublas::tensor<const char32_t *>;
 using f_tensor=boost::numeric::ublas::tensor<emscripten_align1_float>;
 using vec4_tensor = boost::numeric::ublas::tensor<boost::numeric::ublas::vec4>;
-
 using fptr_tensor=boost::numeric::ublas::tensor<emscripten_align1_float *>;
 using wce_tensor=boost::numeric::ublas::tensor<WGpuCommandEncoder>;
 using wrpe_tensor=boost::numeric::ublas::tensor<WGpuRenderPassEncoder>;
