@@ -76,7 +76,7 @@ let fileStream=FS.open('/video/frame.gl','w');
   }
   if (running == 0) {
     setTimeout(() => {
-      Module.ccall("startWebGPUC", null, "Number", [vsiz]);
+      Module.ccall("startWebGPUC", null, ["number", "number"], [vsiz]);
       running = 1;
       setInterval(drawFrame, 16.6); 
     }, 250);
@@ -97,15 +97,17 @@ let h$=parseInt(document.querySelector("#mvi").height);
 if(running==0){
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz]);
+let srsiz=document.querySelector('#srsiz').innerHTML;
+Module.ccall("startWebGPUi",null,["number", "number"],[vsiz,srsiz]);
 console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
-console.log('Starting..');
+let srsiz=document.querySelector('#srsiz').innerHTML;
+Module.ccall("startWebGPUbi",null,["number", "number"],[vsiz,srsiz]);
+  console.log('Starting..');
 },250);
 }
 console.log("vid size: ",h$,", ",w$);
@@ -169,15 +171,17 @@ let h$=parseInt(document.querySelector("#ivi").height);
 if(running==0){
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz]);
-console.log('Starting..');
+let srsiz=document.querySelector('#srsiz').innerHTML;
+Module.ccall("startWebGPUi",null,["number", "number"],[vsiz,srsiz]);
+  console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
-console.log('Starting..');
+let srsiz=document.querySelector('#srsiz').innerHTML;
+Module.ccall("startWebGPUbi",null,["number", "number"],[vsiz,srsiz]);
+  console.log('Starting..');
 },250);
 }
 console.log("vid size: ",h$,", ",w$);
@@ -234,15 +238,17 @@ let h$=parseInt(document.querySelector("#ivi").height);
 if(running==0){
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz]);
-console.log('Starting..');
+let srsiz=document.querySelector('#srsiz').innerHTML;
+Module.ccall("startWebGPUi",null,["number", "number"],[vsiz,srsiz]);
+  console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
-console.log('Starting..');
+let srsiz=document.querySelector('#srsiz').innerHTML;
+Module.ccall("startWebGPUbi",null,["number", "number"],[vsiz,srsiz]);
+  console.log('Starting..');
 },250);
 }
 console.log("vid size: ",h$,", ",w$);
