@@ -27,7 +27,6 @@ return n;
 
 let pause='ready';
 
-
 function canvasStart(){
 let vvic=document.querySelector('#mvi');
 let vsiz=document.querySelector('#vsiz').innerHTML;
@@ -310,14 +309,16 @@ cnvb.width=SiZ;
 if(running==0){
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz]);
+let srsiz=document.querySelector('#srsiz').innerHTML;
+Module.ccall("startWebGPUi",null,"Number","Number",[vsiz,srsiz]);
 console.log('Starting..');
 running=1;
 },50);
 }else{
 setTimeout(function(){
 let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
+let srsiz=document.querySelector('#srsiz').innerHTML;
+Module.ccall("startWebGPUbi",null,"Number","Number",[vsiz,srsiz]);
 console.log('Starting..');
 },50);
 }
