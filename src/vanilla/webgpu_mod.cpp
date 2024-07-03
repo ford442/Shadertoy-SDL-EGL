@@ -368,7 +368,7 @@ emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
 emscripten_get_element_css_size("canvas",&szw,&szh);
 // u64_siz.at(3,3)=sze.at(1,1);
 sze.at(0,0)=static_cast<emscripten_align1_int>(szhI);
-sze.at(3,3)=static_cast<emscripten_align1_int>(std::max(sze.at(0,0),sze.at(1,1))*1.42);
+sze.at(3,3)=static_cast<emscripten_align1_int>(std::max(sze.at(0,0),sze.at(1,1))*1.24);
 // u64_siz.at(2,2)=static_cast<emscripten_align1_int>(szhI);
 f32_uniform.at(1,1)=szhI;
 f32_uniform.at(2,2)=static_cast<emscripten_align1_float>(sze.at(1,1));
