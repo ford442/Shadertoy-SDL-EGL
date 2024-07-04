@@ -21,8 +21,7 @@ Module_lib1ink.callMain();
 };
 },700);
 
-let codeCall=new BroadcastChannel('codeCall');
-
+/*
 const vsiz=document.querySelector('#vsiz');
 let menuSz=parseInt(window.innerWidth*.75,10);
 
@@ -91,7 +90,7 @@ slt=tem.innerHTML;
 });
 
 normalResSetup();
-
+*/
 });
 
 return;
