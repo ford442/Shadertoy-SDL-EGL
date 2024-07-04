@@ -60,7 +60,8 @@ using namespace std;
 #include <boost/numeric/ublas/vector.hpp>
 #include <boost/tuple/tuple.hpp>
 #include <boost/chrono.hpp>
-#include <boost/compute/core.hpp>
+
+// #include <boost/compute/core.hpp>
 
 #include <array>
 #include <chrono>
