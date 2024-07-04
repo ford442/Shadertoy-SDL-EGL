@@ -102,12 +102,12 @@ b3_wasm_loader:
 	 -sMODULARIZE=1 -sEXPORT_ES6=0 -sEXPORT_NAME='libload' -sSUPPORT_LONGJMP=wasm -sDISABLE_EXCEPTION_CATCHING=1
 
 
-b3_wasm_loader_wasm_64:
+b3_wasm_loader_wasm_64BACK:
 	 em++ src/vanilla/wasm_loader_wasm.cpp $(STDS) -m64 -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
-	 -mextended-const -O2 -fno-strict-aliasing -sMEMORY64=1 -c
-	 em++ -O2 -sEVAL_CTORS=1 -sSTANDALONE_WASM=1 -m64 -sMALLOC=mimalloc -sWASMFS=1 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
+	 -mextended-const -O3 -fno-strict-aliasing -sMEMORY64=1 -c
+	 em++ -O3 -sEVAL_CTORS=1 -sSTANDALONE_WASM=1 $(SIMD_FLAGS) -m64 -sMALLOC=mimalloc -sWASMFS=1 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -stdlib=libc++ \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
@@ -124,6 +124,19 @@ b3_wasm_loader_wasm_64:
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 wasm_loader_wasm.o --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
 	 -sSUPPORT_LONGJMP=wasm -sDISABLE_EXCEPTION_CATCHING=1
+
+b3_wasm_loader_wasm_64:
+	 em++ src/vanilla/wasm_loader_wasm.cpp $(STDS) -m64 \
+	 -O3 -sMEMORY64=1 -c
+	 em++ -O1 -sSTANDALONE_WASM=1 $(SIMD_FLAGS) -m64 \
+	 -o $(WGL_BIN_NAME)-wload.wasm \
+	 $(LINK_SIMD_FLAGS) -sMEMORY64=2 \
+	 --target=wasm64 \
+	 -mtune=wasm64 \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=384mb \
+	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 \
+	 -sASYNCIFY=0 -sEXPORTED_FUNCTIONS='["_main"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 wasm_loader_wasm.o
 
 b3_compute_mod:
 	 em++ src/vanilla/webgpu_mod.cpp $(STDS) -pipe -ffast-math -ffp-contract=fast -fexcess-precision=fast \
