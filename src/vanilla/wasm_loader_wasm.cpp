@@ -96,11 +96,3 @@ normalResSetup();
 return 0;
 }
 
-extern "C"{
-
-void runEmMain(){
-runmain();
-return;
-}
-
-}
