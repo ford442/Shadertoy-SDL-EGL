@@ -34,7 +34,7 @@ scr.type='text/javascript';
 scr.defer=true;
 scr.src=modu;
 document.body.appendChild(scr);
-
+});
 
 const vsiz=document.querySelector('#vsiz');
 let menuSz=parseInt(window.innerWidth*.75,10);
