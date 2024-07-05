@@ -102,7 +102,7 @@ b3_wasm_loader:
 	 -sMODULARIZE=1 -sEXPORT_ES6=0 -sEXPORT_NAME='libload' -sSUPPORT_LONGJMP=wasm -sDISABLE_EXCEPTION_CATCHING=1
 
 
-b3_wasm_loader_wasm_64BACK:
+b3_wasm_loader_wasm_64:
 	 em++ src/vanilla/wasm_loader_wasm.cpp $(STDS) -m64 -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
@@ -125,7 +125,7 @@ b3_wasm_loader_wasm_64BACK:
 	 wasm_loader_wasm.o --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
 	 -sSUPPORT_LONGJMP=wasm -sDISABLE_EXCEPTION_CATCHING=1
 
-b3_wasm_loader_wasm_64:
+b3_wasm_loader_wasm_64SAFE:
 	 em++ src/vanilla/wasm_loader_wasm.cpp $(STDS) -m64 \
 	 -O3 -sMEMORY64=1 -c
 	 em++ -O1 -sSTANDALONE_WASM=1 $(SIMD_FLAGS) -m64 \
