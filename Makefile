@@ -92,7 +92,7 @@ b3_wasm_loader:
 	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm64 -DNDEBUG=1 \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -mtune=wasm64 \
-	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=64mb \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=768mb \
 	 -sABORT_ON_WASM_EXCEPTIONS=0 -sEMULATE_FUNCTION_POINTER_CASTS=1 \
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sAUTO_NATIVE_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=1 -sIGNORE_MISSING_MAIN=0 \
