@@ -1,5 +1,5 @@
 #include <emscripten.h>
-// #include <emscripten/bind.h>
+#include <emscripten/bind.h>
 
 int main(){
 
@@ -21,7 +21,6 @@ Module_lib1ink.callMain();
 };
 },700);
 
-/*
 const vsiz=document.querySelector('#vsiz');
 let menuSz=parseInt(window.innerWidth*.75,10);
 
@@ -90,7 +89,7 @@ slt=tem.innerHTML;
 });
 
 normalResSetup();
-*/
+
 });
 
 return 0;
