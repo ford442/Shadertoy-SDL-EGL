@@ -191,7 +191,7 @@ b3_compute_mod:
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O2 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ -fpie -O2 -sLEGALIZE_JS_FFI=1 -sEVAL_CTORS=2 -sMALLOC=dlmalloc -sEXIT_RUNTIME=0 -sWASM_BIGINT=1 -ffast-math -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
+	 em++ $(mLDFLAGS) -fpie -O2 -sLEGALIZE_JS_FFI=1 -sEVAL_CTORS=2 -sMALLOC=dlmalloc -sEXIT_RUNTIME=0 -sWASM_BIGINT=1 -ffast-math -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -sUSE_GLFW=0 -sOFFSCREENCANVAS_SUPPORT=1 -stdlib=libc++ \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
 	 -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
