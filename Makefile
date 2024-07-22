@@ -131,7 +131,7 @@ b3_wasm_loader_lto_musl:
 	 -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O3 -fno-strict-aliasing $(SIMD_FLAGS) -sMEMORY64=1 -c
-	 em++ $(mLDFLAGS) -lc -I/usr/include/musl -L/usr/lib/musl -fpie -O3 -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m64 -sMALLOC=mimalloc \
+	 em++ -lc -I/usr/include/musl -L/usr/lib/musl -fpie -O3 -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m64 -sMALLOC=mimalloc \
 	 -sWASMFS=1 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -stdlib=libc++ -sUSE_ES6_IMPORT_META=0 \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
