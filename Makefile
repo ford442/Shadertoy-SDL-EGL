@@ -131,11 +131,11 @@ b3_wasm_loader_lto_musl:
 	 -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O3 -fno-strict-aliasing $(SIMD_FLAGS) -sMEMORY64=1 -c
-	 em++ -lc -nostdlib -I/usr/include/musl -L/usr/lib/musl -O3 -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m64 -sMALLOC=mimalloc -sWASMFS=0 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
+	 em++ -lc -I/usr/include/musl -L/usr/lib/musl -O3 -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m64 -sMALLOC=mimalloc -sWASMFS=0 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -stdlib=libc++ -sUSE_ES6_IMPORT_META=0 \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
-	 -DCOMPUTE -o $(WGL_BIN_NAME)-load.js -sSTRICT_JS=0 \
+	 -DCOMPUTE -o $(WGL_BIN_NAME)-load.js -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
 	 $(LINK_SIMD_FLAGS) -sUSE_GLFW=0 -sASSERTIONS=0 -march=haswell -sMEMORY64=2 \
 	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm64 -DNDEBUG=1 \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
