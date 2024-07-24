@@ -36,16 +36,14 @@ xhr.onload = function() {
     const jsCode = decodeUTF32(new Uint8Array(utf32Data), true); // Assuming little-endian
     const scr = document.createElement('script');
   //  scr.type = 'module';
-
     scr.text = jsCode;
   //    scr.dataset.moduleUrl = 'https://wasm.noahcohn.com/b3hd/'; // Base URL for module's relative paths
-
     document.body.appendChild(scr);
     setTimeout(function(){
-var Module = libload();
+var Module = lib1ink();
 Module.onRuntimeInitialized = function(){
 Module.callMain();
-console.log('call main');
+console.log('call mon main');
 };
 },2500);
 }
