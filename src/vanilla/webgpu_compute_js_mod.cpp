@@ -460,6 +460,14 @@ Module.ccall("frmsOn");
 },1900);
 });
 
+document.querySelector('#sizeUp').addEventListener('click',function(){
+Module.ccall("zoomIn");
+});
+
+document.querySelector('#sizeDown').addEventListener('click',function(){
+Module.ccall("zoomOut");
+});
+
 setTimeout(function(){
 document.querySelector('#circle').width=window.innerWidth;
 document.querySelector('#circle').height=window.innerHeight;
