@@ -27,7 +27,6 @@ return n;
 
 let pause='ready';
 
-
 function canvasStart(){
 let vvic=document.querySelector('#mvi');
 let vsiz=document.querySelector('#vsiz').innerHTML;
@@ -209,8 +208,8 @@ gl3.drawImage(vvi,0,0,w$-offsetX,h$-offsetY,0,0,w$-offsetX,h$-offsetY);
 // let image=flipImageData(gl3.getImageData(0,0,w$,h$));
 var image=gl3.getImageData(0,0,w$-offsetX,h$-offsetY);
 var imageData=image.data;
-// let pixelData=new Uint8ClampedArray(imageData);
-var pixelData=new Float64Array(imageData);
+let pixelData=new Uint8ClampedArray(imageData);
+// var pixelData=new Float64Array(imageData);
 // var pixelData=new Float64Array(imageData,0,la);
 var fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
