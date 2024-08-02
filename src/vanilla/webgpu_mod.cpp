@@ -258,7 +258,7 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&f32_uniform.at(2,2),sizeof(emscripten_align1_float));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(3,3),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&f32_uniform.at(0,0),sizeof(emscripten_align1_float));
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(5,5),0,&u64_uni.at(4,4),sizeof(uint64_t));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(6,6),0,&u64_uni.at(4,4),sizeof(uint64_t));
   //  wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&v4f32_uniform.at(0,0),sizeof(emscripten_align1_float)*4);
   
 wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(7,7),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
@@ -564,7 +564,7 @@ wbd.at(4,4)=bufferDescriptorOut;
 wbd.at(5,5)=bufferDescriptorZoom;
 wb.at(3,3)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 wb.at(4,4)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
-wb.at(5,5)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(5,5));
+wb.at(6,6)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(5,5));
     //  vert / indice buffers
 bufferDescriptor_vertex.size=sizeof(vertices);
 bufferDescriptor_vertex.usage=WGPU_BUFFER_USAGE_VERTEX|WGPU_BUFFER_USAGE_COPY_DST;
@@ -805,7 +805,7 @@ Compute_Bindgroup_Entries[8].resource=wtv.at(6,6);
 // Compute_Bindgroup_Entries[7].resource=wtv.at(1,1);
               // Compute Zoom Uniform
 Compute_Bindgroup_Entries[9].binding=9;
-Compute_Bindgroup_Entries[9].resource=wb.at(5,5);
+Compute_Bindgroup_Entries[9].resource=wb.at(6,6);
 Compute_Bindgroup_Entries[9].bufferBindOffset=0;
 Compute_Bindgroup_Entries[9].bufferBindSize=sizeof(uint64_t);
 WGPU_BindGroupEntries.at(0,0,0)=Compute_Bindgroup_Entries;
