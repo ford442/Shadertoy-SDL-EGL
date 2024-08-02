@@ -561,10 +561,10 @@ WGpuBufferDescriptor bufferDescriptorOut={u64_bfrSze.at(0,0),WGPU_BUFFER_USAGE_S
 WGpuBufferDescriptor bufferDescriptorZoom={8,WGPU_BUFFER_USAGE_UNIFORM|WGPU_BUFFER_USAGE_COPY_DST,EM_FALSE};
 wbd.at(3,3)=bufferDescriptorIn;
 wbd.at(4,4)=bufferDescriptorOut;
-wbd.at(5,5)=bufferDescriptorZoom;
+wbd.at(6,6)=bufferDescriptorZoom;
 wb.at(3,3)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(3,3));
 wb.at(4,4)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(4,4));
-wb.at(6,6)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(5,5));
+wb.at(6,6)=wgpu_device_create_buffer(wd.at(0,0),&wbd.at(6,6));
     //  vert / indice buffers
 bufferDescriptor_vertex.size=sizeof(vertices);
 bufferDescriptor_vertex.usage=WGPU_BUFFER_USAGE_VERTEX|WGPU_BUFFER_USAGE_COPY_DST;
