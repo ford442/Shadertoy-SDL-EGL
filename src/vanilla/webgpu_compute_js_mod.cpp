@@ -94,16 +94,15 @@ vvi.height=vh$;
 vvi.width=vw$;
 let w$=parseInt(document.querySelector("#mvi").width);
 let h$=parseInt(document.querySelector("#mvi").height);
+let vsiz=document.querySelector('#vsiz').innerHTML;
 if(running==0){
 setTimeout(function(){
-let vsiz=document.querySelector('#vsiz').innerHTML;
 Module.ccall("startWebGPUi",null,"Number",[vsiz]);
 console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
-let vsiz=document.querySelector('#vsiz').innerHTML;
 Module.ccall("startWebGPUbi",null,"Number",[vsiz]);
 console.log('Starting..');
 },250);
@@ -114,11 +113,11 @@ document.querySelector('#contain2').appendChild(cnvb);
 const cnv=document.querySelector('#scanvas');
 const cnvc=document.querySelector('#bcanvas');
 cnv.height=SiZ;
-// cnvb.height=Math.floor(vsiz);
+cnvb.height=vsiz;
 cnvc.height=vsiz;
 cnvc.style.height=vsiz+'px';
 cnv.width=SiZ;
-// cnvb.width=Math.floor(vsiz);
+cnvb.width=vsiz;
 cnvc.width=vsiz;
 cnvc.style.width=vsiz+'px';
 const gl3=cnvb.getContext('2d',{
