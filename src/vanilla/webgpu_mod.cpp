@@ -95,11 +95,13 @@ return EM_TRUE;
 
 EM_BOOL ZoomIn(){
 u64_uni.at(4,4)++;
+u64v.at(0,0)[0]++;
 return EM_TRUE;
 }
 
 EM_BOOL ZoomOut(){
 u64_uni.at(4,4)--;
+u64v.at(0,0)[0]--;
 return EM_TRUE;
 }
 
@@ -258,7 +260,7 @@ wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&f32_uniform.at(2,2),sizeof(emscripten_align1_float));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(1,1),0,&u64_uni.at(3,3),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&f32_uniform.at(0,0),sizeof(emscripten_align1_float));
-wgpu_queue_write_buffer(wq.at(0,0),wb.at(8,8),0,&u64_uni.at(4,4),sizeof(uint64_t));
+wgpu_queue_write_buffer(wq.at(0,0),wb.at(8,8),0,&u64v.at(0,0),sizeof(uint32_t)*3);
   //  wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&v4f32_uniform.at(0,0),sizeof(emscripten_align1_float)*4);
 wgpu_render_pass_encoder_set_index_buffer(wrpe.at(0,0),wb.at(7,7),WGPU_INDEX_FORMAT_UINT32,0,36*sizeof(uint32_t));
 wgpu_render_pass_encoder_set_vertex_buffer(wrpe.at(0,0),0,wb.at(6,6),0,sizeof(vertices));
@@ -806,7 +808,7 @@ Compute_Bindgroup_Entries[8].resource=wtv.at(6,6);
 Compute_Bindgroup_Entries[9].binding=9;
 Compute_Bindgroup_Entries[9].resource=wb.at(8,8);
 Compute_Bindgroup_Entries[9].bufferBindOffset=0;
-Compute_Bindgroup_Entries[9].bufferBindSize=sizeof(uint64_t)*3;
+Compute_Bindgroup_Entries[9].bufferBindSize=sizeof(uint32_t)*3;
 WGPU_BindGroupEntries.at(0,0,0)=Compute_Bindgroup_Entries;
 WGPU_BindGroup.at(0,0,0)=wgpu_device_create_bind_group(wd.at(0,0),WGPU_BindGroupLayout.at(0,0,0),WGPU_BindGroupEntries.at(0,0,0),10);
 WGpuComputePassTimestampWrites computePassTimestampWrites={};
