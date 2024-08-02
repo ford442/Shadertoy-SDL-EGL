@@ -94,36 +94,30 @@ return EM_TRUE;
 }
 
 EM_BOOL PanRight(){
-u64_uni.at(4,4)++;
-u64v.at(0,0)[0]++;
+u64v.at(0,0)[1]++;
 return EM_TRUE;
 }
 
 EM_BOOL PanLeft(){
-u64_uni.at(4,4)++;
-u64v.at(0,0)[0]++;
+u64v.at(0,0)[1]--;
 return EM_TRUE;
 }
 
 EM_BOOL PanUp(){
-u64_uni.at(4,4)++;
-u64v.at(0,0)[0]++;
+u64v.at(0,0)[2]++;
 return EM_TRUE;
 }
 EM_BOOL PanDown(){
-u64_uni.at(4,4)++;
-u64v.at(0,0)[0]++;
+u64v.at(0,0)[2]--;
 return EM_TRUE;
 }
 
 EM_BOOL ZoomIn(){
-u64_uni.at(4,4)++;
 u64v.at(0,0)[0]++;
 return EM_TRUE;
 }
 
 EM_BOOL ZoomOut(){
-u64_uni.at(4,4)--;
 u64v.at(0,0)[0]--;
 return EM_TRUE;
 }
@@ -1125,9 +1119,8 @@ u64_uni.at(0,0)=0;
 u64_uni.at(3,3)=0;
 u64_uni.at(4,4)=100;  //  zoom
 u64v.at(0,0)[0]=100;  //  zoom
-  
-u64_uni.at(5,5)=100;  //  left/right
-u64_uni.at(6,6)=100;  // up/down
+u64v.at(0,0)[1]=100;  //  left/right
+u64v.at(0,0)[2]=100;  //  up/down
 f32_uniform.at(0,0)=0.0f;
 d64_uniform.at(0,0)=0.0;
 u_time.t1=boost::chrono::high_resolution_clock::now();
