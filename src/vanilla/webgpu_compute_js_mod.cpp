@@ -109,7 +109,7 @@ console.log('Starting..');
 }
 console.log("vid size: ",h$,", ",w$);
 const cnvb=new OffscreenCanvas(h$,w$); 
-document.querySelector('#contain2').appendChild(cnvb);
+// document.querySelector('#contain2').appendChild(cnvb);
 const cnv=document.querySelector('#scanvas');
 const cnvc=document.querySelector('#bcanvas');
 cnv.height=SiZ;
