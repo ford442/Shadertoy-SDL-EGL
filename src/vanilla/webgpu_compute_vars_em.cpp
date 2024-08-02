@@ -518,6 +518,7 @@ js_data_tensorf frame_tensorf=js_data_tensorf{2,2};
 js_data_tensor64 frame_tensor64=js_data_tensor64{2,2};
 js_data_tensorGL frame_tensorGL=js_data_tensorGL{2,2};
 u64_tensor u64_bfrSze=u64_tensor{4,4};
+uniform_vector_tensor u64v=uniform_vector_tensor{4,4};
 wict_tensor wict=wict_tensor{8,8};
 wictt_tensor wictt=wictt_tensor{3,3};
 wsd_tensor wsd=wsd_tensor{2,2};
