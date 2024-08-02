@@ -468,6 +468,22 @@ document.querySelector('#sizeDown').addEventListener('click',function(){
 Module.ccall("zoomOut");
 });
 
+document.querySelector('#moveDown').addEventListener('click',function(){
+Module.ccall("panDown");
+});
+
+document.querySelector('#moveUp').addEventListener('click',function(){
+Module.ccall("panUp");
+});
+
+document.querySelector('#moveRight').addEventListener('click',function(){
+Module.ccall("panRight");
+});
+
+document.querySelector('#moveLeft').addEventListener('click',function(){
+Module.ccall("panLeft");
+});
+
 setTimeout(function(){
 document.querySelector('#circle').width=window.innerWidth;
 document.querySelector('#circle').height=window.innerHeight;
