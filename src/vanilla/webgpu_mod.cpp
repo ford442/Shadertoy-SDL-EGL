@@ -93,6 +93,29 @@ on.at(3,3)=1;
 return EM_TRUE;
 }
 
+EM_BOOL PanRight(){
+u64_uni.at(4,4)++;
+u64v.at(0,0)[0]++;
+return EM_TRUE;
+}
+
+EM_BOOL PanLeft(){
+u64_uni.at(4,4)++;
+u64v.at(0,0)[0]++;
+return EM_TRUE;
+}
+
+EM_BOOL PanUp(){
+u64_uni.at(4,4)++;
+u64v.at(0,0)[0]++;
+return EM_TRUE;
+}
+EM_BOOL PanDown(){
+u64_uni.at(4,4)++;
+u64v.at(0,0)[0]++;
+return EM_TRUE;
+}
+
 EM_BOOL ZoomIn(){
 u64_uni.at(4,4)++;
 u64v.at(0,0)[0]++;
@@ -1166,6 +1189,26 @@ return EM_TRUE;
 #include "../../src/vanilla/webgpu_compute_js_mod.cpp"
 
 extern"C"{
+
+void panRight(){
+PanRight();
+return;
+}
+
+void panLeft(){
+PanLeft();
+return;
+}
+
+void panUp(){
+PanUp();
+return;
+}
+
+void panDown(){
+PanDown();
+return;
+}
 
 void zoomIn(){
 ZoomIn();
