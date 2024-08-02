@@ -1161,6 +1161,16 @@ return EM_TRUE;
 
 extern"C"{
 
+void zoomIn(){
+ZoomIn();
+return;
+}
+
+void zoomOut(){
+ZoomOut();
+return;
+}
+
 void frmOn(){
 texOn();
 return;
