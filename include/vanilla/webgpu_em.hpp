@@ -292,6 +292,7 @@ using js_data_tensor=boost::numeric::ublas::tensor<std::vector<uint8_t>>;
 using js_data_tensorf=boost::numeric::ublas::tensor<std::vector<emscripten_align1_float>>;
 using js_data_tensorGL=boost::numeric::ublas::tensor<std::vector<GLubyte>>;
 using js_data_tensor64=boost::numeric::ublas::tensor<std::vector<uint64_t>>;
+using uniform_vector_tensor=boost::numeric::ublas::tensor<std::vector<uint32_t>>;
 using xyz_tensor=boost::numeric::ublas::tensor<WGpuOrigin3D>;
 using xy_tensor=boost::numeric::ublas::tensor<WGpuOrigin2D>;
 using wicb_tensor=boost::numeric::ublas::tensor<WGpuImageCopyBuffer>;
