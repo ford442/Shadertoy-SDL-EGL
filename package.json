@@ -4,3 +4,9 @@
     "typescript": "^5.5.4"
   }
 }
+
+{
+  "scripts": {
+    "build": "tsc" 
+  }
+}
