@@ -73,14 +73,19 @@ document.querySelector('#status').style.backgroundColor="green";
 document.querySelector('#status').height=20;
 document.querySelector('#status').width=parseInt(window.innerHeight,10);
 const infoBtn=document.querySelector('#infoBtn');
+const srs=document.querySelector('#srsiz');
 const tem=document.querySelector('#tim');
 const ban=document.querySelector('#menuBtn');
 const sfr=document.querySelector('#slideframe');
+const sfr2=document.querySelector('#slideframe2');
 var $lt=tem.innerHTML;
+var $sr=srs.innerHTML;
+
 function grab$lt(){
 $lt=Math.round($lt);
 }
 $lt=tem.innerHTML;
+
 grab$lt();
 
 const slo=new Slideout({
@@ -91,20 +96,27 @@ const slo=new Slideout({
 'easing':'cubic-bezier(.32,2,.55,.27)'
 });
 
-ban.addEventListener('click',function(){slo.toggle();sfr.innerHTML="";
+ban.addEventListener('click',function(){
+slo.toggle();
+sfr.innerHTML="";
+sfr2.innerHTML="";
 setTimeout(function(){
 grab$lt();
 slt=$lt/1000;
 slt=Math.round(slt);
 sfr.innerHTML='<input type='+'"te'+'xt" id'+'="time'+'slider"/'+'>';
-const tsl=new rSlider({target:'#timeslider',values:{min:0.025,max:1.50},
+sfr2.innerHTML='<input type='+'"te'+'xt" id'+'="time'+'slider2"/'+'>';
+const tsl=new rSlider({target:'#timeslider',values:{min:0.025,max:2.00},
 step:[0.005],labels:false,tooltip:true,scale:false,});
+const srsl=new rSlider({target:'#timeslider2',values:{min:0.05,max:2.00},
+step:[0.05],labels:false,tooltip:true,scale:false,});
 grab$lt();
 slt=($lt/1000);
 slt=slt*100;
 slt=Math.round(slt);
 slt=slt/100;
 tsl.setValues(1.0);
+srsl.setValues(1.0);
 vsiz.innerHTML=Math.round(window.innerHeight);
 document.querySelector('#menu').addEventListener('click',function(){
 $ll=tsl.getValue();
@@ -113,6 +125,9 @@ $ll=Math.round($ll);
 $ll=$ll/100;
 $ll=($ll*1000);
 tem.innerHTML=$ll;
+
+$sr=srsl.getValue()*1000;
+
 vsiz.innerHTML=Math.round($ll/1000*window.innerHeight);
 });
 setTimeout(function(){
