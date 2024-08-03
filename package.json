@@ -2,7 +2,7 @@
     "dependencies": {
     "@types/offscreencanvas": "^2019.7.3",
     "typescript": "^5.5.4"
-  }
+  },
   "scripts": {
     "build": "tsc" 
   }
