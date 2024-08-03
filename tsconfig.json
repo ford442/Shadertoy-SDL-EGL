@@ -5,5 +5,8 @@
     "lib": ["dom", "es2020"], // Include necessary type definitions
     "outDir": "./js", // Output directory for compiled JavaScript
     "strict": true // Enable strict type checking
-  }
+  },
+   "include": [
+    "./ts/*.ts"  // Include all .ts files in the 'src' directory and its subdirectories
+  ]
 }
