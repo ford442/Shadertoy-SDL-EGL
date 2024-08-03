@@ -1,4 +1,4 @@
-import { FS } from "lib1ink"; // Assuming your WASM module exports the FS object
+import { FS } from "./w0-010-mod.js"; // Assuming your WASM module exports the FS object
 
 const videoElement = document.getElementById("mvi") as HTMLVideoElement;
 const canvas = new OffscreenCanvas(videoElement.videoWidth,videoElement.videoHeight); 
