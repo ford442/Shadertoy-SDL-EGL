@@ -29,7 +29,7 @@ let pause='ready';
 
 function canvasStart(){
 let vvic=document.querySelector('#mvi');
-let vsiz=document.querySelector('#vsiz').innerHTML;
+let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
 var SiZ=window.innerHeight;
 var w$=parseInt(vsiz,10);
 vvic.width=SiZ;
@@ -76,7 +76,7 @@ let fileStream=FS.open('/video/frame.gl','w');
   }
   if (running == 0) {
     setTimeout(() => {
-      Module.ccall("startWebGPUC", null,"Number",[vsiz,100]);
+      Module.ccall("startWebGPUC", null,"Number",[vsiz,srsiz]);
       running = 1;
       setInterval(drawFrame, 16.6); 
     }, 250);
@@ -94,16 +94,16 @@ vvi.height=vh$;
 vvi.width=vw$;
 let w$=parseInt(document.querySelector("#mvi").width);
 let h$=parseInt(document.querySelector("#mvi").height);
-let vsiz=document.querySelector('#vsiz').innerHTML;
+let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
 if(running==0){
 setTimeout(function(){
-Module.ccall("startWebGPUi",null,"Number",[vsiz,100]);
+Module.ccall("startWebGPUi",null,"Number",[vsiz,srsiz]);
 console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
-Module.ccall("startWebGPUbi",null,"Number",[vsiz,100]);
+Module.ccall("startWebGPUbi",null,"Number",[vsiz,srsiz]);
 console.log('Starting..');
 },250);
 }
@@ -167,15 +167,15 @@ let w$=parseInt(document.querySelector("#ivi").width);
 let h$=parseInt(document.querySelector("#ivi").height);
 if(running==0){
 setTimeout(function(){
-let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz,100]);
+let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
+Module.ccall("startWebGPUi",null,"Number",[vsiz,srsiz]);
 console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
-let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,"Number",[vsiz,100]);
+let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
+Module.ccall("startWebGPUbi",null,"Number",[vsiz,srsiz]);
 console.log('Starting..');
 },250);
 }
@@ -232,15 +232,15 @@ let w$=parseInt(document.querySelector("#ivi").width);
 let h$=parseInt(document.querySelector("#ivi").height);
 if(running==0){
 setTimeout(function(){
-let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz,100]);
+let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
+Module.ccall("startWebGPUi",null,"Number",[vsiz,srsiz]);
 console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
-let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,"Number",[vsiz,100]);
+let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
+Module.ccall("startWebGPUbi",null,"Number",[vsiz,srsiz]);
 console.log('Starting..');
 },250);
 }
@@ -307,15 +307,15 @@ cnvb.height=SiZ;
 cnvb.width=SiZ;
 if(running==0){
 setTimeout(function(){
-let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz,100]);
+let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
+Module.ccall("startWebGPUi",null,"Number",[vsiz,srsiz]);
 console.log('Starting..');
 running=1;
 },50);
 }else{
 setTimeout(function(){
-let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,"Number",[vsiz,100]);
+let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
+Module.ccall("startWebGPUbi",null,"Number",[vsiz,srsiz]);
 console.log('Starting..');
 },50);
 }
