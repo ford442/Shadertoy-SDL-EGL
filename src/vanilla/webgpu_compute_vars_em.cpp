@@ -444,6 +444,7 @@ WGpuMultisampleState multiSamp={};
 WGpuMultisampleState multiSamp2={};
 WGpuBufferBindingLayout bufferBindingLayout1={};
 WGpuBufferBindingLayout bufferBindingLayoutR={};
+WGpuBufferBindingLayout bufferBindingLayoutUVEC={};
 WGpuTextureBindingLayout textureBindingLayoutUint32={};
 WGpuTextureBindingLayout textureBindingLayoutFloat={};
 WGpuTextureBindingLayout textureBindingLayoutFloatM={};
