@@ -1,4 +1,14 @@
-import { FS } from "../w0-010-mod.js"; // Assuming your WASM module exports the FS object
+import fs from 'fs';
+import path from 'path';
+
+async function loadWasmModule() {
+    const wasmFiles = fs.readdirSync('./').filter(file => file.match(/^w0-.*\.js$/)); 
+    const wasmModulePath = path.join('./', wasmFiles[0]); // Get the first (and only) matching file
+    const { init, FS } = await import(wasmModulePath); 
+    await init();
+}
+
+loadWasmModule();
 
 const videoElement = document.getElementById("mvi") as HTMLVideoElement;
 const canvas = new OffscreenCanvas(videoElement.videoWidth,videoElement.videoHeight); 
