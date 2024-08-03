@@ -126,8 +126,9 @@ $ll=$ll/100;
 $ll=($ll*1000);
 tem.innerHTML=$ll;
 
-$sr=srsl.getValue()*1000;
-
+var sr=srsl.getValue()*1000;
+srs.innerHTML=srs;
+  
 vsiz.innerHTML=Math.round($ll/1000*window.innerHeight);
 });
 setTimeout(function(){
