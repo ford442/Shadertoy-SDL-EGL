@@ -149,7 +149,6 @@ mms.at(2,1)=float((float)sze.at(0,0)-mms2.at(0,1));
 else{
 clk_l=true;
 }
-  
 u_time.t3=u_time.t2;
 u_time.t2=boost::chrono::high_resolution_clock::now();
 u_time.time_spana=boost::chrono::duration<boost::compute::double_,boost::chrono::seconds::period>(u_time.t2-u_time.t1);
@@ -186,7 +185,7 @@ videoAttachment.clearValue=clearC.at(0,0);
 wrpca.at(1,1)=videoAttachment;
 videoTextureView=wgpu_texture_create_view(wt.at(2,2),&wtvd.at(2,2));
 wtv.at(2,2)=videoTextureView;
-  /*
+/*
 depthTextureView=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
 wtv.at(0,0)=depthTextureView;
 depthAttachment.view=wtv.at(0,0);
@@ -215,7 +214,7 @@ depthAttachment2.stencilReadOnly=EM_TRUE;
 depthAttachment2.stencilLoadOp=WGPU_LOAD_OP_CLEAR;
 depthAttachment2.stencilStoreOp=WGPU_STORE_OP_UNDEFINED;
 wrpdsa.at(1,1)=depthAttachment2;
-  */
+*/
 passDesc.numColorAttachments=1;
 passDesc.colorAttachments=&wrpca.at(1,1); // &wrpca.at(0,0); // 
 // passDesc.depthStencilAttachment=wrpdsa.at(1,1);  //  wrpdsa.at(0,0); //
@@ -368,7 +367,7 @@ const char * vert_body=(char*)rd_fl(FnmV);
 wtf.at(2,2)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
 // wtf.at(0,0)=navigator_gpu_get_preferred_canvas_format();
 wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
-  wtf.at(1,1)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
+wtf.at(1,1)=WGPU_TEXTURE_FORMAT_RGBA32FLOAT;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RG11B10UFLOAT;
 // wtf.at(0,0)=WGPU_TEXTURE_FORMAT_RGBA8UNORM;
 wtf.at(4,4)=WGPU_TEXTURE_FORMAT_INVALID;
@@ -397,7 +396,7 @@ emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
 emscripten_get_element_css_size("canvas",&szw,&szh);
 // u64_siz.at(3,3)=sze.at(1,1);
 sze.at(0,0)=static_cast<emscripten_align1_int>(szhI);
-sze.at(3,3)=static_cast<emscripten_align1_int>(std::max(sze.at(0,0),sze.at(1,1))*1.07);
+sze.at(3,3)=static_cast<emscripten_align1_int>(std::max(sze.at(0,0),sze.at(1,1))*(u64_uni.at(4,4)/1000));
 // u64_siz.at(2,2)=static_cast<emscripten_align1_int>(szhI);
 f32_uniform.at(1,1)=szhI;
 f32_uniform.at(2,2)=static_cast<emscripten_align1_float>(sze.at(1,1));
@@ -564,12 +563,10 @@ bufferBindingLayoutR.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayoutR.hasDynamicOffset=0,
 bufferBindingLayoutR.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayoutR;
-
 bufferBindingLayoutUVEC.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayoutUVEC.hasDynamicOffset=0,
 bufferBindingLayoutUVEC.minBindingSize=sizeof(uint32_t)*3;
 wbbl.at(1,1)=bufferBindingLayoutUVEC;
-  
 bufferBindingLayoutF.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayoutF.hasDynamicOffset=0,
 bufferBindingLayoutF.minBindingSize=sizeof(emscripten_align1_float);
@@ -1123,7 +1120,6 @@ bindgroup_2=wgpu_device_create_bind_group(wd.at(0,0),wbgl.at(1,1),wbge.at(1,1),5
 wbg.at(1,1)=bindgroup_2;
 u64_uni.at(0,0)=0;
 u64_uni.at(3,3)=0;
-u64_uni.at(4,4)=100;  //  zoom
 u64v.at(0,0)[0]=100;  //  zoom
 u64v.at(0,0)[1]=100;  //  left/right
 u64v.at(0,0)[2]=100;  //  up/down
@@ -1163,6 +1159,7 @@ EM_BOOL WGPU_Start(emscripten_align1_int sz,emscripten_align1_int sr){
 sze.at(1,1)=sz;
 sze.at(6,6)=sz;
 sze.at(7,7)=sz;
+u64_uni.at(4,4)=sr;  //  texture resize amount
 f32_uniform.at(2,2)=static_cast<emscripten_align1_float>(sze.at(1,1));
 szef.at(1,1)=static_cast<emscripten_align1_float>(sze.at(1,1));
 options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
@@ -1176,6 +1173,7 @@ EM_BOOL WGPU_StartC(emscripten_align1_int sz,emscripten_align1_int sr){
 sze.at(1,1)=sz;
 sze.at(6,6)=sz;
 sze.at(7,7)=sz;
+u64_uni.at(4,4)=sr;  //  texture resize amount
 f32_uniform.at(2,2)=static_cast<emscripten_align1_float>(sze.at(1,1));
 szef.at(1,1)=static_cast<emscripten_align1_float>(sze.at(1,1));
 options.powerPreference=WGPU_POWER_PREFERENCE_HIGH_PERFORMANCE;
