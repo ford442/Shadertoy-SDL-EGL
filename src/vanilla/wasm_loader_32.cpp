@@ -10,7 +10,7 @@ var modu=document.querySelector('#modulePath').innerHTML;
 const xhr = new XMLHttpRequest();
 xhr.open('GET', modu, true); // Replace with your filename
 xhr.responseType = 'arraybuffer'; // Get raw binary data
-    console.log('got run');
+console.log('got run');
 
 function decodeUTF32(uint8Array, isLittleEndian = true) {
   const dataView = new DataView(uint8Array.buffer);
@@ -79,7 +79,7 @@ const ban=document.querySelector('#menuBtn');
 const sfr=document.querySelector('#slideframe');
 const sfr2=document.querySelector('#slideframe2');
 var $lt=tem.innerHTML;
-var $sr=srs.innerHTML;
+let $sr=srs.innerHTML;
 
 function grab$lt(){
 $lt=Math.round($lt);
