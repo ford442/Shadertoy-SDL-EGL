@@ -564,6 +564,12 @@ bufferBindingLayoutR.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayoutR.hasDynamicOffset=0,
 bufferBindingLayoutR.minBindingSize=sizeof(uint64_t);
 wbbl.at(0,0)=bufferBindingLayoutR;
+
+bufferBindingLayoutUVEC.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
+bufferBindingLayoutUVEC.hasDynamicOffset=0,
+bufferBindingLayoutUVEC.minBindingSize=sizeof(uint32_t)*3;
+wbbl.at(1,1)=bufferBindingLayoutUVEC;
+  
 bufferBindingLayoutF.type=WGPU_BUFFER_BINDING_TYPE_UNIFORM;
 bufferBindingLayoutF.hasDynamicOffset=0,
 bufferBindingLayoutF.minBindingSize=sizeof(emscripten_align1_float);
@@ -771,7 +777,7 @@ Compute_Bindgroup_Layout_Entries[8].layout.texture=wtbl.at(1,1);
 Compute_Bindgroup_Layout_Entries[9].binding=9;
 Compute_Bindgroup_Layout_Entries[9].visibility=WGPU_SHADER_STAGE_COMPUTE;
 Compute_Bindgroup_Layout_Entries[9].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
-Compute_Bindgroup_Layout_Entries[9].layout.buffer=wbbl.at(0,0);
+Compute_Bindgroup_Layout_Entries[9].layout.buffer=wbbl.at(1,1);
 WGPU_Compute_Bindgroup_Layout_Entries.at(0,0,0)=Compute_Bindgroup_Layout_Entries;
 WGPU_BindGroupLayout.at(0,0,0)=wgpu_device_create_bind_group_layout(wd.at(0,0),WGPU_Compute_Bindgroup_Layout_Entries.at(0,0,0),10);
 WGPU_ComputePipelineLayout.at(0,0,0)=wgpu_device_create_pipeline_layout(wd.at(0,0),&WGPU_BindGroupLayout.at(0,0,0),1);
