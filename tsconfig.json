@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "es5", // Or a newer target if your browser supports it
+    "module": "es5", // Or another module system if you prefer
+    "lib": ["dom", "es5"], // Include necessary type definitions
+    "outDir": "./js", // Output directory for compiled JavaScript
+    "strict": true // Enable strict type checking
+  }
+}
