@@ -127,7 +127,7 @@ $ll=($ll*1000);
 tem.innerHTML=$ll;
 
 var sr=srsl.getValue()*1000;
-srs.innerHTML=srs;
+srs.innerHTML=sr;
   
 vsiz.innerHTML=Math.round($ll/1000*window.innerHeight);
 });
