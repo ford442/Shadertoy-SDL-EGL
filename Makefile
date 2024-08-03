@@ -196,6 +196,29 @@ b3_wasm_loader_lto_32:
 	 wasm_loader_32.o --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
 	 -sMODULARIZE=1 -sEXPORT_ES6=0 -sEXPORT_NAME='libload' -sSUPPORT_LONGJMP=wasm -sDISABLE_EXCEPTION_CATCHING=1
 
+b3_wasm_loader_lto_32_test:
+	 em++ src/vanilla/wasm_loader_32.cpp $(STDS) -fPIC -m64 -flto -flto=thin -pipe -ffp-contract=fast -fexcess-precision=fast \
+	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
+	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
+	 -mextended-const -O3 -fno-strict-aliasing $(SIMD_FLAGS) -sMEMORY64=1 -c
+	 em++ -O3 -fPIE -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m64 -sMALLOC=mimalloc -sWASMFS=1 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
+	 -sDEFAULT_TO_CXX=0 -stdlib=libc++ -sUSE_ES6_IMPORT_META=0 \
+	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
+	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
+	 -DCOMPUTE -o $(BETA_BIN_NAME)-load-32.js -sTOTAL_STACK=524288 -sSTRICT_JS=0 \
+	 $(LINK_SIMD_FLAGS) -sUSE_GLFW=0 -sASSERTIONS=0 -march=haswell -sMEMORY64=2 \
+	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm64 -DNDEBUG=1 \
+	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
+	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -mtune=wasm64 \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=768mb \
+	 -sABORT_ON_WASM_EXCEPTIONS=0 -sEMULATE_FUNCTION_POINTER_CASTS=1 \
+	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sAUTO_NATIVE_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=1 \
+	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=1 -sIGNORE_MISSING_MAIN=0 \
+	 -sASYNCIFY=0 -sEXPORTED_FUNCTIONS='["_main"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
+	 wasm_loader_32.o --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
+	 -sMODULARIZE=1 -sEXPORT_ES6=0 -sEXPORT_NAME='libload' -sSUPPORT_LONGJMP=wasm -sDISABLE_EXCEPTION_CATCHING=1
+
 b3_wasm_loader_wasm_64:
 	 em++ src/vanilla/wasm_loader_wasm.cpp $(STDS) -m64 -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
