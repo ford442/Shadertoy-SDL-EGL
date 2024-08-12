@@ -22,7 +22,7 @@ document.getElementById("apngBtn").addEventListener('click',function(){
 var acanvas = document.querySelector("#scanvas");  // Animation drawn on this canvas
 window.encoder = new APNGencoder(acanvas);
 encoder.setRepeat(0);    // auto-loop is 0
-encoder.setDelay(60);    // 1/100 sec  // really ms ?
+encoder.setDelay(6);    // 1/100 sec  // really ms ?
 encoder.setDispose(0);
 encoder.setBlend(1);
 var ii=0;
