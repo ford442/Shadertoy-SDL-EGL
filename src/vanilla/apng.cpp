@@ -22,14 +22,14 @@ document.getElementById("apngBtn").addEventListener('click',function(){
 var acanvas = document.querySelector("#scanvas");  // Animation drawn on this canvas
 window.encoder = new APNGencoder(acanvas);
 encoder.setRepeat(0);    // auto-loop is 0
-encoder.setDelay(60);    // 1/100 sec  // really ms ?
+encoder.setDelay(20);    // 1/100 sec  // really ms ?
 encoder.setDispose(0);
 encoder.setBlend(1);
 var ii=0;
 encoder.start();
 function render() {
 ii++;
-encoder.addFrame(acanvas, { delay: 60 }); // Capture the frame from your main canvas
+encoder.addFrame(acanvas, { delay: 20 }); // Capture the frame from your main canvas
 if (ii>10) {
 encoder.finish(); // Finalize encoding when done
 var out = encoder.stream();
@@ -45,7 +45,7 @@ console.log('finished');
 } else {
 setTimeout(function(){
 render();
-},60);
+},200);
 } // Continue the animation
 }
 render();
