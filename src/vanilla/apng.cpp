@@ -9,6 +9,15 @@ scr.type='text/javascript';
 scr.defer=true;
 scr.src="https://js.1ink.us/canvas2apng.js";
 document.body.appendChild(scr);
+
+setTimeout(function(){
+var Module = libapng();
+Module.onRuntimeInitialized = function(){
+Module.callMain();
+console.log('call apng main');
+};
+},2500);
+
 document.getElementById("apngBtn").addEventListener('click',function(){
 var acanvas = document.querySelector("#scanvas");  // Animation drawn on this canvas
 window.encoder = new APNGencoder(acanvas);
