@@ -1,5 +1,9 @@
 #include <emscripten.h>
 #include <emscripten/bind.h>
+#include "../../include/vanilla/avx.hpp"
+#include "../../include/vanilla/defs.hpp"
+#include <emscripten/em_types.h>
+#include <emscripten/val.h>
 
 int main(){
 
