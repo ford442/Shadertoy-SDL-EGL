@@ -46,8 +46,8 @@ document.body.appendChild(scr);
 setTimeout(function(){
 var Module = lib1ink();
 Module.onRuntimeInitialized = function(){
-// Module.callMain();
 console.log('call mod main');
+Module.callMain();
 };
 },2500);
 }
