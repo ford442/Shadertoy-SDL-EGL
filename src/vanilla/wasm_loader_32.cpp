@@ -14,8 +14,7 @@ var modu=document.querySelector('#modulePath').innerHTML;
 const xhr = new XMLHttpRequest();
 xhr.open('GET', modu, true); // Replace with your filename
 xhr.responseType = 'arraybuffer'; // Get raw binary data
-console.log('got run');
-
+console.log('got loader run');
 function decodeUTF32(uint8Array, isLittleEndian = true) {
 const dataView = new DataView(uint8Array.buffer);
 let result = "";
@@ -32,16 +31,14 @@ return result;
 }
 
 xhr.onload = function() {
-console.log('got load');
+console.log('got loader load');
 if (xhr.status === 200) {
-console.log('got script');
 const utf32Data = xhr.response;
   //  const decoder = new TextDecoder('utf-32'); // Or 'utf-32be'
 const jsCode = decodeUTF32(new Uint8Array(utf32Data), true); // Assuming little-endian
 const scr = document.createElement('script');
 // scr.type = 'module';
 scr.text = jsCode;
-  //    scr.dataset.moduleUrl = 'https://wasm.noahcohn.com/b3hd/'; // Base URL for module's relative paths
 document.body.appendChild(scr);
 setTimeout(function(){
 var Module = lib1ink();
