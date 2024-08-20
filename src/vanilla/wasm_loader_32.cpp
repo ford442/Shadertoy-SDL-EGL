@@ -39,7 +39,7 @@ const utf32Data = xhr.response;
   //  const decoder = new TextDecoder('utf-32'); // Or 'utf-32be'
 const jsCode = decodeUTF32(new Uint8Array(utf32Data), true); // Assuming little-endian
 const scr = document.createElement('script');
-  //  scr.type = 'module';
+scr.type = 'module';
 scr.text = jsCode;
   //    scr.dataset.moduleUrl = 'https://wasm.noahcohn.com/b3hd/'; // Base URL for module's relative paths
 document.body.appendChild(scr);
@@ -47,7 +47,7 @@ setTimeout(function(){
 var Module = lib1ink();
 Module.onRuntimeInitialized = function(){
 Module.callMain();
-console.log('call mon main');
+console.log('call mod main');
 };
 },2500);
 }
