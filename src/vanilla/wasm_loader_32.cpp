@@ -9,6 +9,27 @@ int main(){
 
 EM_ASM({
 
+setTimeout(function(){
+document.querySelector('#splash2').style.zIndex=3000;
+document.querySelector('#splash2').style.display='none';
+},4200);
+setTimeout(function(){
+document.querySelector('#splash1').style.zIndex=3000;
+document.querySelector('#splash1').style.display='none';
+},4500);
+
+setTimeout(function(){
+document.getElementById('vsiz').innerHTML=parseInt(window.innerHeight,10);
+},500);
+
+setTimeout(function(){
+window.scrollTo({
+  top: 0,
+  left: 0,
+  behavior: "smooth",
+  });
+},1500);
+
 var modu=document.querySelector('#modulePath').innerHTML;
 
 const xhr = new XMLHttpRequest();
