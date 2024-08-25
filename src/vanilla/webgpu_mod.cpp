@@ -4,7 +4,7 @@
 
 #include <boost/filesystem.hpp>
 
-namespace fs = boost::filesystem;
+namespace fstm = boost::filesystem;
 namespace compute = boost::compute; 
 
 compute::context global_context;
@@ -254,7 +254,6 @@ wtv.at(6,6)=INVTextureView;
       
       //  Frame Data 
 std::ifstream fram(Fnm2,std::ios::binary);
-      
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 
       /*    //  highway way
@@ -270,18 +269,16 @@ std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf
     }
 */ //  regular way
 std::vector<emscripten_align1_float>floatData(data.size());
+std::vector<float> outputData(data.size()); // Pre-allocate output data
 
-        //  boost CL
-         compute::vector<unsigned char> inputData(fileData.begin(), fileData.end(), queue);
-        compute::vector<float> outputData(floatData.size(), context);
-        // Conversion kernel (adapt to your actual conversion logic)
-        compute::transform(
-            inputData.begin(), inputData.end(), outputData.begin(),
-            compute::_1 / 255.0f, queue
-        );
+compute::buffer inputBuffer(global_context, floatData.size() * sizeof(float));
+compute::buffer outputBuffer(global_context, outputData.size() * sizeof(float));
+
+compute::copy(inputData.begin(), floatData.end(), inputBuffer.begin(), global_queue);
+compute::transform(inputBuffer.begin(), inputBuffer.end(), outputBuffer.begin(),compute::_1 / 255.0f, queue);
         // Copy back to host
-        compute::copy(outputData.begin(), outputData.end(), floatData.begin(), queue);
-   
+compute::copy(outputBuffer.begin(), outputBuffer.end(), outputData.begin(), global_queue);
+      
       //  non-boost
    //   std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});  // for RGBA32FLOAT
       
