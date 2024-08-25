@@ -1,6 +1,23 @@
 #include "../../include/vanilla/webgpu_em.hpp"
 
 #include "../../src/vanilla/webgpu_compute_vars_em.cpp"
+#include <boost/gil/gil_all.hpp> 
+#include <boost/gil/extension/io/png_io.hpp> 
+#include <boost/filesystem.hpp>
+
+namespace gil = boost::gil;
+namespace fs = boost::filesystem;
+namespace compute = boost::compute; 
+
+compute::context global_context;
+compute::device global_device;
+compute::command_queue global_queue;
+
+void initializeBoostCompute() {
+global_device = compute::system::default_device();
+global_context = compute::context(global_device);
+global_queue = compute::command_queue(global_context, global_device);
+}
 
 EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
@@ -235,10 +252,14 @@ wrpd.at(1,1)=passDesc2;
 if(on.at(4,4)==1){
 INVTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,3),&WGPU_TextureViewDescriptor.at(0,0,3));
 wtv.at(6,6)=INVTextureView;
+
+      
       //  Frame Data 
 std::ifstream fram(Fnm2,std::ios::binary);
+      
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-/*    //  highway way
+
+      /*    //  highway way
      const HWY_FULL(uint8_t) d;
     const size_t N = data.size();  
      std::vector<emscripten_align1_float> floatData(4 * N); 
@@ -251,8 +272,22 @@ std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf
     }
 */ //  regular way
 std::vector<emscripten_align1_float>floatData(data.size());
-std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});  // for RGBA32FLOAT
-const size_t bytesPerRow=sze.at(6,6)*4*sizeof(emscripten_align1_float);
+
+        //  boost CL
+         compute::vector<unsigned char> inputData(fileData.begin(), fileData.end(), queue);
+        compute::vector<float> outputData(floatData.size(), context);
+        // Conversion kernel (adapt to your actual conversion logic)
+        compute::transform(
+            inputData.begin(), inputData.end(), outputData.begin(),
+            compute::_1 / 255.0f, queue
+        );
+        // Copy back to host
+        compute::copy(outputData.begin(), outputData.end(), floatData.begin(), queue);
+   
+      //  non-boost
+   //   std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});  // for RGBA32FLOAT
+      
+      const size_t bytesPerRow=sze.at(6,6)*4*sizeof(emscripten_align1_float);
 // frame_tensor.at(0,0)=data;
 // fjs_data_pointer.at(0,0)=floatData.data();
 // fjsv_data_pointer.at(0,0)=&floatData; // (std::vector<float*>)
@@ -1251,6 +1286,7 @@ return;
 
 int main(){
 on.at(0,0)=0;
+initializeBoostCompute();
 js_main();
 return 0;
 }
