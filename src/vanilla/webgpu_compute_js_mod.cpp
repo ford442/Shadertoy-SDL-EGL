@@ -28,12 +28,13 @@ return n;
 let pause='ready';
 
 function canvasStart(){
-let vvic=document.querySelector('#mvi');
-let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
-var SiZ=window.innerHeight;
-var w$=parseInt(vsiz,10);
+const vvic=document.querySelector('#mvi');
+const srsiz=document.querySelector('#srsiz').innerHTML;
+const vsiz=document.querySelector('#vsiz').innerHTML;
+const SiZ=window.innerHeight;
+const w$=parseInt(vsiz,10);
 vvic.width=SiZ;
-var h$=parseInt(vsiz,10);
+const h$=parseInt(vsiz,10);
 vvic.height=SiZ;
 console.log("canvas size: ",h$,", ",w$);
 const cnvb=new OffscreenCanvas(h$,w$); 
@@ -62,27 +63,27 @@ premultipliedAlpha:true,
 preserveDrawingBuffer:false
 });
 gl3.imageSmoothingEnabled=false;
-let fileStream=FS.open('/video/frame.gl','w');
-  function drawFrame() {
-    if (pause === 'ready') {
-      gl3.clearRect(0, 0, w$, h$);
-      gl3.drawImage(vvic, 0, 0, SiZ, SiZ, 0, 0, w$, h$);
-    }
-    const image = gl3.getImageData(0, 0, w$, h$);
-    const imageData = image.data;
-    const pixelData = new Float64Array(imageData);
-    FS.write(fileStream, pixelData, 0, pixelData.length, 0);
-    Module.ccall("frmOn");
-  }
-  if (running == 0) {
-    setTimeout(() => {
-      Module.ccall("startWebGPUC", null,"Number",[vsiz,srsiz]);
-      running = 1;
-      setInterval(drawFrame, 16.6); 
-    }, 250);
-  } else {
-    setInterval(drawFrame, 16.6);
-  }
+const fileStream=FS.open('/video/frame.gl','w');
+function drawFrame() {
+if (pause === 'ready') {
+gl3.clearRect(0, 0, w$, h$);
+gl3.drawImage(vvic, 0, 0, SiZ, SiZ, 0, 0, w$, h$);
+}
+const image = gl3.getImageData(0, 0, w$, h$);
+const imageData = image.data;
+const pixelData = new Float64Array(imageData);
+FS.write(fileStream, pixelData, 0, pixelData.length, 0);
+Module.ccall("frmOn");
+}
+if (running == 0) {
+setTimeout(() => {
+Module.ccall("startWebGPUC", null,"Number",[vsiz,srsiz]);
+running = 1;
+setInterval(drawFrame, 16.6); 
+}, 250);
+} else {
+setInterval(drawFrame, 16.6);
+}
 }
  
 function videoStart(){
