@@ -1255,7 +1255,6 @@ return;
 
 int main(){
 on.at(0,0)=0;
-initializeBoostCompute();
 js_main();
 return 0;
 }
