@@ -1,11 +1,9 @@
 #include "../../include/vanilla/webgpu_em.hpp"
 
 #include "../../src/vanilla/webgpu_compute_vars_em.cpp"
-#include <boost/gil/gil_all.hpp> 
-#include <boost/gil/extension/io/png_io.hpp> 
+
 #include <boost/filesystem.hpp>
 
-namespace gil = boost::gil;
 namespace fs = boost::filesystem;
 namespace compute = boost::compute; 
 
