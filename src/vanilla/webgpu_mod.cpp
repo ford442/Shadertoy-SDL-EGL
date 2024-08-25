@@ -240,8 +240,8 @@ wtv.at(6,6)=INVTextureView;
 
       
       //  Frame Data 
-// std::ifstream fram(Fnm2,std::ios::binary);
-fsm::ifstream fram(Fnm2,std::ios::binary);
+std::ifstream fram(Fnm2,std::ios::binary);
+// fsm::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 std::vector<emscripten_align1_float>floatData(data.size());
 std::vector<float> outputData(data.size()); // Pre-allocate output data
