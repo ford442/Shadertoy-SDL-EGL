@@ -1,6 +1,8 @@
 #include "../../include/vanilla/webgpu_em.hpp"
 
 #include "../../src/vanilla/webgpu_compute_vars_em.cpp"
+#include <boost/filesystem/fstream.hpp>
+namespace fsm = boost::filesystem;
 
 EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
@@ -238,7 +240,8 @@ wtv.at(6,6)=INVTextureView;
 
       
       //  Frame Data 
-std::ifstream fram(Fnm2,std::ios::binary);
+// std::ifstream fram(Fnm2,std::ios::binary);
+fsm::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 std::vector<emscripten_align1_float>floatData(data.size());
 std::vector<float> outputData(data.size()); // Pre-allocate output data
