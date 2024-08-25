@@ -2,21 +2,6 @@
 
 #include "../../src/vanilla/webgpu_compute_vars_em.cpp"
 
-#include <boost/filesystem.hpp>
-
-namespace fstm = boost::filesystem;
-namespace compute = boost::compute; 
-
-compute::context global_context;
-compute::device global_device;
-compute::command_queue global_queue;
-
-void initializeBoostCompute() {
-global_device = compute::system::default_device();
-global_context = compute::context(global_device);
-global_queue = compute::command_queue(global_context, global_device);
-}
-
 EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
 if(eventType==EMSCRIPTEN_EVENT_MOUSEDOWN&&e->buttons!=0){
@@ -255,36 +240,10 @@ wtv.at(6,6)=INVTextureView;
       //  Frame Data 
 std::ifstream fram(Fnm2,std::ios::binary);
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-
-      /*    //  highway way
-     const HWY_FULL(uint8_t) d;
-    const size_t N = data.size();  
-     std::vector<emscripten_align1_float> floatData(4 * N); 
-
-    // SIMD conversion loop
-    for (size_t i = 0; i < N; i += 1) {
-        const auto v = Load(d, &data[i]); 
-       const HWY_FULL(float) f = v / Set(d, 255.0f); // Divide as before
-        Store(f, d, &floatData[i]); 
-    }
-*/ //  regular way
 std::vector<emscripten_align1_float>floatData(data.size());
 std::vector<float> outputData(data.size()); // Pre-allocate output data
-
-compute::buffer inputBuffer(global_context, floatData.size() * sizeof(float));
-compute::buffer outputBuffer(global_context, outputData.size() * sizeof(float));
-
-  compute::copy(
-        inputData.begin(), inputData.end(), inputBuffer.begin(), global_queue
-    );compute::transform(inputBuffer.begin(), inputBuffer.end(), outputBuffer.begin(),compute::_1 / 255.0f, queue);
-        // Copy back to host
-   compute::copy(
-        outputBuffer.begin(), outputBuffer.end(), outputData.begin(), global_queue
-    );      
-      //  non-boost
-   //   std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});  // for RGBA32FLOAT
-      
-      const size_t bytesPerRow=sze.at(6,6)*4*sizeof(emscripten_align1_float);
+std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});  // for RGBA32FLOAT
+const size_t bytesPerRow=sze.at(6,6)*4*sizeof(emscripten_align1_float);
 // frame_tensor.at(0,0)=data;
 // fjs_data_pointer.at(0,0)=floatData.data();
 // fjsv_data_pointer.at(0,0)=&floatData; // (std::vector<float*>)
@@ -293,6 +252,19 @@ compute::buffer outputBuffer(global_context, outputData.size() * sizeof(float));
 // wetd.at(0,0).source=texid.at(0,0);
 //   wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&frame_tensor.at(0,0),bytesPerRow,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
 wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),floatData.data(),bytesPerRow,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
+
+/*    //  highway way
+const HWY_FULL(uint8_t) d;
+const size_t N = data.size();  
+std::vector<emscripten_align1_float> floatData(4 * N); 
+    // SIMD conversion loop
+for (size_t i = 0; i < N; i += 1) {
+const auto v = Load(d, &data[i]); 
+const HWY_FULL(float) f = v / Set(d, 255.0f); // Divide as before
+Store(f, d, &floatData[i]); 
+}
+*/
+
 on.at(4,4)=0;
 }   // end if on 4,4
 // void wgpu_queue_copy_external_image_to_texture(WGpuQueue queue, const WGpuImageCopyExternalImage *source NOTNULL, const WGpuImageCopyTextureTagged *destination NOTNULL, uint32_t copyWidth, uint32_t copyHeight _WGPU_DEFAULT_VALUE(1), uint32_t copyDepthOrArrayLayers _WGPU_DEFAULT_VALUE(1));
