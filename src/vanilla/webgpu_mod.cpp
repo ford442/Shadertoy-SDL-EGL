@@ -274,11 +274,13 @@ std::vector<float> outputData(data.size()); // Pre-allocate output data
 compute::buffer inputBuffer(global_context, floatData.size() * sizeof(float));
 compute::buffer outputBuffer(global_context, outputData.size() * sizeof(float));
 
-compute::copy(inputData.begin(), floatData.end(), inputBuffer.begin(), global_queue);
-compute::transform(inputBuffer.begin(), inputBuffer.end(), outputBuffer.begin(),compute::_1 / 255.0f, queue);
+  compute::copy(
+        inputData.begin(), inputData.end(), inputBuffer.begin(), global_queue
+    );compute::transform(inputBuffer.begin(), inputBuffer.end(), outputBuffer.begin(),compute::_1 / 255.0f, queue);
         // Copy back to host
-compute::copy(outputBuffer.begin(), outputBuffer.end(), outputData.begin(), global_queue);
-      
+   compute::copy(
+        outputBuffer.begin(), outputBuffer.end(), outputData.begin(), global_queue
+    );      
       //  non-boost
    //   std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});  // for RGBA32FLOAT
       
