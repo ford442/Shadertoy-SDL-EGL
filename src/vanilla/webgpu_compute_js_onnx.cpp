@@ -344,7 +344,7 @@ function getModel(pth,fname){
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
-document.querySelector('#stat').innerHTML='Downloading Shader';
+document.querySelector('#stat').innerHTML='Downloading ONNX Model';
 document.querySelector('#stat').style.backgroundColor='yellow';
 ff.addEventListener("load",function(){
 let sarrayBuffer=ff.response;
