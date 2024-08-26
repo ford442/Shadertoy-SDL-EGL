@@ -1,7 +1,6 @@
 #include "../../include/vanilla/webgpu_em.hpp"
 
 #include "../../src/vanilla/webgpu_compute_vars_em.cpp"
-#include <boost/fusion/include/vector.hpp>
 #include <boost/filesystem/fstream.hpp>
 namespace fsm = boost::filesystem;
 
@@ -245,10 +244,10 @@ wtv.at(6,6)=INVTextureView;
 fsm::ifstream fram(Fnm2,std::ios::binary);
       
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-boost::fusion::vector<emscripten_align1_float>floatData(data.size());
+std::vector<emscripten_align1_float>floatData(data.size());
 std::vector<float> outputData(data.size()); // Pre-allocate output data
 
-      std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});  // for RGBA32FLOAT
+std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});  // for RGBA32FLOAT
 const size_t bytesPerRow=sze.at(6,6)*4*sizeof(emscripten_align1_float);
 // frame_tensor.at(0,0)=data;
 // fjs_data_pointer.at(0,0)=floatData.data();
