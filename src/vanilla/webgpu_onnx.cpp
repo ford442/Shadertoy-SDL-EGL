@@ -61,6 +61,8 @@ std::vector<int64_t>ints=to_int32(tokens);
 std::vector<float>floats=to_floats(tokens);
 
 void cltest(){
+
+	/*
 std::vector<std::string>infos=Ort::GetAvailableProviders();
 char* char_array=new char[infos.size()*infos[0].size()];
 for (int i=0;i<infos.size();i++){
@@ -233,6 +235,8 @@ delete[] image_data;
 // Display the image.
 // emscripten_set_canvas_image_data(data, width, height);
 //	std::cout << "Output tensors updated." << std::endl;
+
+	*/
 	return;
 }
 
