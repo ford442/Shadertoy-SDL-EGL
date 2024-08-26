@@ -50,7 +50,7 @@ cnvb.width=vsiz;
 cnvc.width=vsiz;
 cnvc.style.width=vsiz+'px';
 const gl3=cnvb.getContext('2d',{
-colorType:'float64',
+colorType:'float32',
 alpha:true,
 willReadFrequently:true,
 stencil:false,
@@ -71,7 +71,7 @@ gl3.drawImage(vvic, 0, 0, SiZ, SiZ, 0, 0, w$, h$);
 }
 const image = gl3.getImageData(0, 0, w$, h$);
 const imageData = image.data;
-const pixelData = new Float64Array(imageData);
+const pixelData = new Float32Array(imageData);
 FS.write(fileStream, pixelData, 0, pixelData.length, 0);
 Module.ccall("frmOn");
 }
@@ -122,7 +122,7 @@ cnvb.width=vsiz;
 cnvc.width=vsiz;
 cnvc.style.width=vsiz+'px';
 const gl3=cnvb.getContext('2d',{
-colorType:'float64',
+colorType:'float32',
 alpha:true,
 willReadFrequently:false,
 stencil:false,
@@ -139,8 +139,8 @@ gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 var image=gl3.getImageData(0,0,w$,h$);
 var imageData=image.data;
 // let pixelData=new Uint8ClampedArray(imageData);
-var pixelData=new Float64Array(imageData);
-// var pixelData=new Float64Array(imageData,0,la);
+var pixelData=new Float32Array(imageData);
+// var pixelData=new Float32Array(imageData,0,la);
 let fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
@@ -151,11 +151,11 @@ gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
 // pixelData=new Uint8ClampedArray(imageData);
-pixelData=new Float64Array(imageData);
- // pixelData=new Float64Array(imageData);
+pixelData=new Float32Array(imageData);
+ // pixelData=new Float32Array(imageData);
  //  const externalTexture = gpuDevice.createTexture({size: [imageWidth, imageHeight, 1],format: 'rgba8unorm',usage: GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST });
 // gpuQueue.writeTexture({ texture }, pixelData, { bytesPerRow }, { width: w$, height: h$ } );
-// pixelData=new Float64Array(imageData,0,la);  // causes sub-array data array-reforming (slower)
+// pixelData=new Float32Array(imageData,0,la);  // causes sub-array data array-reforming (slower)
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
 },16.666);
@@ -190,9 +190,9 @@ cnv.height=h$-offsetY;
 cnvb.width=SiZ;
 cnv.width=w$-offsetX;
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-// const gl3=cnvb.getContext('2d',{colorType:'float64',alpha:true}); // 
+// const gl3=cnvb.getContext('2d',{colorType:'float32',alpha:true}); // 
 const gl3=cnv.getContext('2d',{
-colorType:'float64',
+colorType:'float32',
 alpha:true,
 willReadFrequently:false,
 stencil:false,
@@ -209,8 +209,8 @@ gl3.drawImage(vvi,0,0,w$-offsetX,h$-offsetY,0,0,w$-offsetX,h$-offsetY);
 var image=gl3.getImageData(0,0,w$-offsetX,h$-offsetY);
 var imageData=image.data;
 let pixelData=new Uint8ClampedArray(imageData);
-// var pixelData=new Float64Array(imageData);
-// var pixelData=new Float64Array(imageData,0,la);
+// var pixelData=new Float32Array(imageData);
+// var pixelData=new Float32Array(imageData,0,la);
 var fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
@@ -220,7 +220,7 @@ gl3.drawImage(vvi,0,0,w$-offsetX,h$-offsetY,0,0,w$-offsetX,h$-offsetY);
 // let image=flipImageData(gl3.getImageData(0,0,w$,h$));
 var image=gl3.getImageData(0,0,w$-offsetX,h$-offsetY);
 var imageData=image.data;
-var pixelData=new Float64Array(imageData);
+var pixelData=new Float32Array(imageData);
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
 },16.666);
@@ -254,9 +254,9 @@ cnv.width=SiZ;
 cnvb.width=w$;
 let offS=Math.floor((w$-h$)/2);
 let la=nearestPowerOf2(((w$*h$*4)/4)*4);
-// const gl3=cnvb.getContext('2d',{colorType:'float64',alpha:true}); // 
+// const gl3=cnvb.getContext('2d',{colorType:'float32',alpha:true}); // 
 const gl3=cnvb.getContext('2d',{
-colorType:'float64',
+colorType:'float32',
 alpha:true,
 willReadFrequently:false,
 stencil:false,
@@ -269,7 +269,7 @@ premultipliedAlpha:true,
 preserveDrawingBuffer:false
 }); // 
  const gl4=cnv.getContext('2d',{
-colorType:'float64',
+colorType:'float32',
 alpha:true,
 willReadFrequently:false,
 stencil:false,
@@ -286,8 +286,8 @@ gl3.drawImage(vvi,0,0,w$,h$,0,0,w$,h$);
 let image=gl3.getImageData(0,0,w$,h$);
 let imageData=image.data;
 // let pixelData=new Uint8ClampedArray(imageData);
-let pixelData=new Float64Array(imageData);
-// var pixelData=new Float64Array(imageData,0,la);
+let pixelData=new Float32Array(imageData);
+// var pixelData=new Float32Array(imageData,0,la);
 FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
 setInterval(function(){
@@ -295,7 +295,7 @@ image=gl4.getImageData(0,0,SiZ,SiZ);
 gl3.drawImage(image,0,offS,h$,h$,0,0,h$,h$);
 let image=gl3.getImageData(0,0,w$,h$);
 imageData=image.data;
-pixelData=new Float64Array(imageData);
+pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
 },16.666);
