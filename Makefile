@@ -365,7 +365,7 @@ b3_onnx3:
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
 	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS='["wgpu_buffer_map_sync"]' \
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
-	 onnx.o libonnxruntime_webassembly.a --output_eol linux rtlib=compiler-rt --closure 0 \
+	 onnx.o libonnxruntime_webassembly.a --output_eol linux -rtlib=compiler-rt --closure 0 \
 	 -sMODULARIZE -sEXPORT_NAME='lib1ink' -sSUPPORT_LONGJMP=emscripten -sDISABLE_EXCEPTION_CATCHING=1
 
 b3_compute_mod_musl:
