@@ -1482,7 +1482,6 @@ return;
 
 void startWebGPUi(emscripten_align1_int sz,emscripten_align1_int sr){
 WGPU_Start(sz,sr);
-cltest();
 return;
 }
 
@@ -1499,6 +1498,7 @@ return;
 }
 
 int main(){
+cltest();
 on.at(0,0)=0;
 js_main();
 return 0;
