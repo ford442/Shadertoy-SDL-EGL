@@ -221,7 +221,7 @@ b3_wasm_loader_lto_32_test:
 	 -sMODULARIZE=1 -sEXPORT_ES6=0 -sEXPORT_NAME='libload' -sSUPPORT_LONGJMP=wasm -sDISABLE_EXCEPTION_CATCHING=1
 
 b3_onnx6:
-	 em++ src/vanilla/wasm_onnx.cpp $(STDS) -fPIC -m32 -flto -flto=thin -pipe -ffp-contract=fast -fexcess-precision=fast \
+	 em++ src/vanilla/wasm_onnx.cpp $(STDS) -fPIC -m32 -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O3 -fno-strict-aliasing $(SIMD_FLAGS) -c
