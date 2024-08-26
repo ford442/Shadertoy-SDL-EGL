@@ -52,9 +52,7 @@ using namespace std;
 #include <emscripten/em_types.h>
 
 #include <emscripten/html5.h>
-#include <emscripten/html5_webgpu.h>
 #include <iostream>
-#include "../../lib/lib_webgpu.h"
 
 #include <cstdlib>
 
