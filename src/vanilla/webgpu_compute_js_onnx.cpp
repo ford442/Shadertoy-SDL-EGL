@@ -391,8 +391,6 @@ codeMessageV.addEventListener('message',event=>{
 var pth2=document.querySelector('#computePath').innerHTML;
 var pth3=document.querySelector('#fragPath').innerHTML;
 var pth4=document.querySelector('#vertPath').innerHTML;
-var pth5=document.querySelector('#onnxPath').innerHTML;
-getModel(pth5,'model.onnx');
 getShader(pth2,'compute.wgsl');
 getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
@@ -434,6 +432,8 @@ videoStart();
 
 document.querySelector('#startBtn2').addEventListener('click',function(){
 var pth=document.querySelector('#path').innerHTML;
+var pth5=document.querySelector('#onnxPath').innerHTML;
+getModel(pth5,'model.onnx');
 getShader(pth,'shader.wgsl');
 var pth2=document.querySelector('#computePathNovid').innerHTML;
 var pth3=document.querySelector('#fragPath').innerHTML;
