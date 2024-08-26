@@ -1,7 +1,7 @@
 #include "../../include/vanilla/webgpu_em.hpp"
 
 #include "../../src/vanilla/webgpu_compute_vars_em.cpp"
-#include <boost/fusion/include/vector.hpp>
+// #include <boost/fusion/include/vector.hpp>
 
 #include "../../onnxruntime/include/onnxruntime/core/session/onnxruntime_cxx_api.h"
 #include <boost/filesystem/fstream.hpp>
@@ -477,9 +477,9 @@ wtv.at(6,6)=INVTextureView;
 // std::ifstream fram(Fnm2,std::ios::binary);
 fsm::ifstream fram(Fnm2,std::ios::binary);
       
-boost::fusion::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-boost::fusion::vector<emscripten_align1_float>floatData(data.size());
-boost::fusion::vector<float> outputData(data.size()); // Pre-allocate output data
+std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+std::vector<emscripten_align1_float>floatData(data.size());
+std::vector<float> outputData(data.size()); // Pre-allocate output data
 
       std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});  // for RGBA32FLOAT
 const size_t bytesPerRow=sze.at(6,6)*4*sizeof(emscripten_align1_float);
