@@ -201,7 +201,7 @@ b3_wasm_loader_lto_32_test:
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O3 -fno-strict-aliasing $(SIMD_FLAGS) -sMEMORY64=1 -c
-	 em++ -O3 -fPIE -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m64 -sMALLOC=mimalloc -sWASMFS=1 -sLEGALIZE_JS_FFI=1 \
+	 em++ -O3 -fPIE -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m64 -sMALLOC=mimalloc -sWASMFS=1 \
 	 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -stdlib=libc++ -sUSE_ES6_IMPORT_META=0 \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
@@ -225,7 +225,7 @@ b3_onnx6:
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O2 -fno-strict-aliasing $(SIMD_FLAGS) -c
-	 em++ -O2 -fPIE -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m32 -sMALLOC=mimalloc -sLEGALIZE_JS_FFI=1 \
+	 em++ -O2 -fPIE -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m32 -sMALLOC=mimalloc  \
 	 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -stdlib=libc++ -sUSE_ES6_IMPORT_META=0 \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
@@ -309,7 +309,7 @@ b3_compute_mod:
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O3 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ $(mLDFLAGS) -flto -flto=thin -fpie -O3 -sLEGALIZE_JS_FFI=1 -sEVAL_CTORS=2 -sMALLOC=dlmalloc -sEXIT_RUNTIME=0 -sWASM_BIGINT=1 -ffast-math -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
+	 em++ $(mLDFLAGS) -flto -flto=thin -fpie -O3 -sEVAL_CTORS=2 -sMALLOC=dlmalloc -sEXIT_RUNTIME=0 -sWASM_BIGINT=1 -ffast-math -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -sUSE_GLFW=0 -sOFFSCREENCANVAS_SUPPORT=1 -stdlib=libc++ \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
 	 -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
