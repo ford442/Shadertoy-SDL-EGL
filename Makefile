@@ -771,7 +771,8 @@ b3_onnx2:
 	 -sINITIAL_MEMORY=2048mb -lmath.js -lhtml5.js -lint53.js -mllvm -mtune=wasm32 \
 	 -sFORCE_FILESYSTEM=1 -sLEGACY_RUNTIME=1 -sDISABLE_EXCEPTION_THROWING=0 -sASSERTIONS=0 -sDISABLE_EXCEPTION_CATCHING=1 \
 	 -sASYNCIFY=0 \
-	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb","_resUp","_resDown"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPUi","_startWebGPUbi","_startWebGPUC","_frmOn","_frmsOff","_frmsOn","_zoomIn","_zoomOut","_panRight","_panLeft","_panUp","_panDown"]' \
+	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 
