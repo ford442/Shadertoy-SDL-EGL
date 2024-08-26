@@ -339,6 +339,38 @@ b3_compute_mod_test:
 	 webgpu_mod.o --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
 	 -sMODULARIZE -sEXPORT_NAME='lib1ink' -sSUPPORT_LONGJMP=emscripten -sDISABLE_EXCEPTION_CATCHING=1
 
+b3_onnx4:
+	 em++ src/vanilla/webgpu_onnx.cpp $(STDS) -flto -flto=thin -fPIC -pipe -ffast-math -ffp-contract=fast \
+	 -fexcess-precision=fast \
+	 -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
+	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
+	 -mextended-const -O2 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing \
+	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
+	 em++ $(mLDFLAGS) -flto -flto=thin -fPIE -O2 -sLEGALIZE_JS_FFI=1 -sWASM_BIGINT=1 -sEVAL_CTORS=2 \
+	 -sMALLOC=dlmalloc -sEXIT_RUNTIME=0 -sWASM_BIGINT=1 -ffast-math -mextended-const -dead_strip -mbulk-memory \
+	 -matomics -pipe -DQUAD -DDOUBLE \
+	 -sDEFAULT_TO_CXX=0 -sUSE_GLFW=0 -sOFFSCREENCANVAS_SUPPORT=1 -stdlib=libc++ \
+	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types \
+	 -fno-strict-aliasing \
+	 -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast \
+	 -fexcess-precision=fast -sENVIRONMENT=web \
+	 -DCOMPUTE -o $(BETA_BIN_NAME)-onnx.js -sSTRICT_JS=0 -sSTRICT=1 -ffunction-sections -fdata-sections \
+	 $(BOOST_FLAGS) $(LINK_SIMD_FLAGS) $(xGL_FLAGS) -sASSERTIONS=0 -march=haswell \
+	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm32 -DNDEBUG=1 \
+	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
+	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -mtune=wasm32 \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1984mb -lmath.js -lhtml5.js -lint53.js \
+	 -sABORT_ON_WASM_EXCEPTIONS=0 -sEMULATE_FUNCTION_POINTER_CASTS=1 \
+	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sDISABLE_EXCEPTION_THROWING=0 \
+	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=0 -sIGNORE_MISSING_MAIN=0 \
+	 -sASYNCIFY=0 -sASYNCIFY_IMPORTS='["wgpu_buffer_map_sync"]' \
+	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPUi","_startWebGPUbi","_startWebGPUC","_frmOn","_frmsOff","_frmsOn","_zoomIn","_zoomOut","_panRight","_panLeft","_panUp","_panDown"]' \
+	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
+	 --js-library lib/lib_webgpu.js --js-library lib/lib_demo.js \
+	 --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 webgpu_onnx.o libonnxruntime_webassembly.a --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
+	 -sMODULARIZE -sEXPORT_NAME='lib1ink' -sSUPPORT_LONGJMP=emscripten -sDISABLE_EXCEPTION_CATCHING=1
+
 b3_onnx3:
 	 em++ src/vanilla/onnx.cpp $(STDS) -flto -flto=thin -fPIC -pipe -ffast-math -ffp-contract=fast \
 	 -fexcess-precision=fast \
