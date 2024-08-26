@@ -372,13 +372,13 @@ b3_onnx4:
 	 -sMODULARIZE -sEXPORT_NAME='lib1ink' -sSUPPORT_LONGJMP=emscripten -sDISABLE_EXCEPTION_CATCHING=1
 
 b3_onnx5:
-	 em++ src/vanilla/webgpu_onnx.cpp $(STDS) -mllvm -fPIC -pipe -ffast-math -ffp-contract=fast \
+	 em++ src/vanilla/webgpu_onnx.cpp $(STDS) -fPIC -pipe -ffast-math -ffp-contract=fast \
 	 -fexcess-precision=fast \
 	 -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O2 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ $(mLDFLAGS) -mllvm -fPIE -O2 -sLEGALIZE_JS_FFI=1 -sWASM_BIGINT=1 -sEVAL_CTORS=2 \
+	 em++ $(mLDFLAGS) -fPIE -O2 -sLEGALIZE_JS_FFI=1 -sWASM_BIGINT=1 -sEVAL_CTORS=2 \
 	 -sMALLOC=dlmalloc -sEXIT_RUNTIME=0 -sWASM_BIGINT=1 -ffast-math -mextended-const -dead_strip -mbulk-memory \
 	 -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -sUSE_GLFW=0 -sOFFSCREENCANVAS_SUPPORT=1 -stdlib=libc++ \
