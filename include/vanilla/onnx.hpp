@@ -6,7 +6,6 @@
 #include "../../include/vanilla/defs.hpp"
 // #include "../../include/vanilla/gl.hpp"
 #include "../../include/vanilla/boost_defs.hpp"
-#include "../../lib/lib_webgpu_cpp20.cpp"
 
 #include "../../onnxruntime/include/onnxruntime/core/session/onnxruntime_cxx_api.h"
 
