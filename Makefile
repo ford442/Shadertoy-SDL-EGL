@@ -400,8 +400,6 @@ b3_onnx3:
 	 onnx.o libonnxruntime_webassembly.a --output_eol linux -rtlib=compiler-rt --closure 0 \
 	 -sMODULARIZE -sEXPORT_NAME='lib1ink' -sSUPPORT_LONGJMP=emscripten -sDISABLE_EXCEPTION_CATCHING=1
 
-
-
 b3_onnx3_nolto:
 	 em++ src/vanilla/onnx.cpp $(STDS) -fPIC -pipe -ffast-math -ffp-contract=fast \
 	 -fexcess-precision=fast \
@@ -852,7 +850,7 @@ b3_onnx:
 	 -sASYNCIFY=0 \
 	 -sEXPORTED_FUNCTIONS='["_main","_startWebGPU","_startWebGPUb","_resUp","_resDown"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
-	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
+	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js
 
 
 b3_onnx2:
@@ -867,7 +865,7 @@ b3_onnx2:
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 --js-library lib/lib_demo.js --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 
+	 -sMODULARIZE -sEXPORT_NAME='lib1ink' -sSUPPORT_LONGJMP=emscripten -sDISABLE_EXCEPTION_CATCHING=1
 
 b3_compute:
 	 em++ -D__EMSCRIPTEN__ src/vanilla/main_compute.cpp -fchar8_t -std=c++14 -ffast-math -ffp-contract=off -mbulk-memory -matomics \
