@@ -1,5 +1,5 @@
 EM_JS(void,js_main,(),{
-
+FS.mkdir('/model');
 FS.mkdir('/shader');
 FS.mkdir('/video');
 let running=0;
