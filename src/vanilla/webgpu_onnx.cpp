@@ -124,9 +124,7 @@ std::cout << "Got dynamic batch size. Setting output batch size to "
 << batchSize << "." << std::endl;
 outputDims.at(0)=batchSize;
 }
-*/
 
-	/*
 outputDims.at(0)=1;
 outputDims.at(1)=3;
 outputDims.at(2)=768;
