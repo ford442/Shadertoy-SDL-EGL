@@ -242,7 +242,7 @@ b3_onnx6:
 	 -sASYNCIFY=0 -sEXPORTED_FUNCTIONS='["_main"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js \
 	 wasm_onnx.o libonnxruntime_webassembly.a --output_eol linux -rtlib=compiler-rt --closure 0 \
-	 -sMAX_FUNC_PARAMS=20 -sMODULARIZE=1 -sEXPORT_ES6=0 -sEXPORT_NAME='lib1ink' -sSUPPORT_LONGJMP=emscripten -sDISABLE_EXCEPTION_CATCHING=1
+	 -sMODULARIZE=1 -sEXPORT_ES6=0 -sEXPORT_NAME='lib1ink' -sSUPPORT_LONGJMP=emscripten -sDISABLE_EXCEPTION_CATCHING=1
 
 
 b3_apng:
