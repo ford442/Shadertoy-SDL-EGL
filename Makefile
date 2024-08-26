@@ -400,7 +400,7 @@ b3_onnx5:
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_webgpu.js --js-library lib/lib_demo.js \
 	 --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 webgpu_onnx.o libonnxruntime_webassembly.a --output_eol linux -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
+	 webgpu_onnx.o libonnxruntime_webassembly.a --output_eol linux -sAUTO_JS_LIBRARIES=0 -sAUTO_NATIVE_LIBRARIES=0 -sAUTO_ARCHIVE_INDEXES=0 -rtlib=compiler-rt --closure 0 \
 	 -sMODULARIZE -sEXPORT_NAME='lib1ink' -sSUPPORT_LONGJMP=emscripten -sDISABLE_EXCEPTION_CATCHING=1
 
 b3_onnx3:
