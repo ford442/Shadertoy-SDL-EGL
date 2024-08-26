@@ -1479,16 +1479,19 @@ return;
 }
 
 void startWebGPUi(emscripten_align1_int sz,emscripten_align1_int sr){
+cltest();
 WGPU_Start(sz,sr);
 return;
 }
 
 void startWebGPUbi(emscripten_align1_int sz,emscripten_align1_int sr){
+cltest();
 WGPU_Start(sz,sr);
 return;
 }
 
 void startWebGPUC(emscripten_align1_int sz,emscripten_align1_int sr){
+cltest();
 WGPU_StartC(sz,sr);
 return;
 }
@@ -1496,7 +1499,6 @@ return;
 }
 
 int main(){
-cltest();
 on.at(0,0)=0;
 js_main();
 return 0;
