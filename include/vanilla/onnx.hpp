@@ -68,19 +68,5 @@ typedef ResultType result_type;
 
 #include <boost/function.hpp>
 
-inline int rNd4(int);
-// static void WGPU_Run();
-static void ObtainedWebGpuDeviceStart(WGpuDevice,void *);
-static void ObtainedWebGpuAdapterStart(WGpuAdapter,void *);
-
-// static void WGPU_Start();
-
 // int cltest();
-
-extern"C"{
-
-void startWebGPU();
-void runWebGPU();
-
-}
 
