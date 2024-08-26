@@ -3,6 +3,7 @@
 #include "../../src/vanilla/webgpu_compute_vars_em.cpp"
 #include <boost/fusion/include/vector.hpp>
 
+#include "../../onnxruntime/include/onnxruntime/core/session/onnxruntime_cxx_api.h"
 
 
 
