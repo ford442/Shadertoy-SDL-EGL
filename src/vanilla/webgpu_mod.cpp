@@ -246,7 +246,7 @@ fsm::ifstream fram(Fnm2,std::ios::binary);
       
 std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
 boost::fusion::vector<emscripten_align1_float>floatData(data.size());
-boost::fusion::vector<float> outputData(data.size()); // Pre-allocate output data
+std::vector<float> outputData(data.size()); // Pre-allocate output data
 
       std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});  // for RGBA32FLOAT
 const size_t bytesPerRow=sze.at(6,6)*4*sizeof(emscripten_align1_float);
