@@ -2,6 +2,8 @@
 
 #include "../../src/vanilla/webgpu_compute_vars_em.cpp"
 #include <boost/fusion/include/vector.hpp>
+#include <boost/filesystem/fstream.hpp>
+namespace fsm = boost::filesystem;
 
 EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
@@ -242,9 +244,9 @@ wtv.at(6,6)=INVTextureView;
 // std::ifstream fram(Fnm2,std::ios::binary);
 fsm::ifstream fram(Fnm2,std::ios::binary);
       
-fusion::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
-fusion::vector<emscripten_align1_float>floatData(data.size());
-fusion::vector<float> outputData(data.size()); // Pre-allocate output data
+std::vector<uint8_t>data((std::istreambuf_iterator<char>(fram)),(std::istreambuf_iterator<char>()));
+boost::fusion::vector<emscripten_align1_float>floatData(data.size());
+boost::fusion::vector<float> outputData(data.size()); // Pre-allocate output data
 
       std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});  // for RGBA32FLOAT
 const size_t bytesPerRow=sze.at(6,6)*4*sizeof(emscripten_align1_float);
