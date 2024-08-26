@@ -5,6 +5,7 @@
 #include <emscripten/em_types.h>
 #include <emscripten/val.h>
 #include "../../onnxruntime/include/onnxruntime/core/session/onnxruntime_cxx_api.h"
+#include <cstdio> // C++ style
 
 template <typename T>
 T vectorProduct(const std::vector<T>& v){
