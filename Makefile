@@ -393,7 +393,7 @@ b3_compute_mod_test2:
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O2 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ -c $(BOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ $(mLDFLAGS) -fPIE -O2 -sLEGALIZE_JS_FFI=1 -sWASM_BIGINT=1 -sEVAL_CTORS=2 \
+	 em++ $(mLDFLAGS) -fPIE -O2 -sLEGALIZE_JS_FFI=1 -sEVAL_CTORS=2 \
 	 -sEXIT_RUNTIME=0 -sWASM_BIGINT=1 -ffast-math -mextended-const -mbulk-memory \
 	 -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -sUSE_GLFW=0 -sOFFSCREENCANVAS_SUPPORT=1 -stdlib=libc++ \
@@ -416,7 +416,7 @@ b3_compute_mod_test2:
 	 --js-library lib/lib_webgpu.js --js-library lib/lib_demo.js \
 	 --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 webgpu_mod.o --output_eol linux -rtlib=compiler-rt --closure 0 \
-	 -sMODULARIZE -sEXPORT_NAME='lib1ink' -sSUPPORT_LONGJMP=emscripten -sDISABLE_EXCEPTION_CATCHING=1
+	 -sMODULARIZE -sEXPORT_NAME='lib1ink' -sDISABLE_EXCEPTION_CATCHING=1
 
 b3_onnx4:
 	 em++ src/vanilla/webgpu_onnx.cpp $(STDS) -fPIC -pipe -ffast-math -ffp-contract=fast \
