@@ -1,6 +1,8 @@
 #include <emscripten.h>
 #include <emscripten/bind.h>
+
 int main(){
+  
 EM_ASM({
 let scr=document.createElement("script");
 scr.async=true;
@@ -27,6 +29,7 @@ encoder.setDispose(0);
 encoder.setBlend(1);
 var ii=0;
 encoder.start();
+
 function render() {
 ii++;
 encoder.addFrame(acanvas, { delay: 25 }); // Capture the frame from your main canvas
@@ -42,19 +45,24 @@ link.href = href;
 link.click();
 window.open(href);
 console.log('finished');
+  
+var base64Out = bytesToBase64(encoder.stream().bin);     // ANIMATION
+var img = document.getElementById("imgAnimPNG");
+img.style.width = acanvas.width;
+img.style.height = acanvas.height;
+img.src = "data:image/png;base64," + base64Out;
 } else {
 setTimeout(function(){
 render();
 },60);
 } // Continue the animation
 }
+
 render();
-var base64Out = bytesToBase64(encoder.stream().bin);     // ANIMATION
-var img = document.getElementById("imgAnimPNG");
-img.style.width = acanvas.width;
-img.style.height = acanvas.height;
-img.src = "data:image/png;base64," + base64Out;
+
 });
+
 });
+
 return 0;
 }
