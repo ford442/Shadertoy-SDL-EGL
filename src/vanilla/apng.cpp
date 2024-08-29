@@ -2,7 +2,7 @@
 #include <emscripten/bind.h>
 
 int main(){
-  
+
 EM_ASM({
 let scr=document.createElement("script");
 scr.async=true;
@@ -11,7 +11,6 @@ scr.type='text/javascript';
 scr.defer=true;
 scr.src="https://js.1ink.us/canvas2apng.js";
 document.body.appendChild(scr);
-
 setTimeout(function(){
 var Module = libapng();
 Module.onRuntimeInitialized = function(){
@@ -24,14 +23,15 @@ document.getElementById("apngBtn").addEventListener('click',function(){
 var acanvas = document.querySelector("#scanvas");  // Animation drawn on this canvas
 window.encoder = new APNGencoder(acanvas);
 encoder.setRepeat(0);    // auto-loop is 0
-encoder.setDelay(60);    // 1/100 sec  // really ms ?
+encoder.setDelay(10);    // 1/100 sec  // really ms ?
 encoder.setDispose(0);
 encoder.setBlend(1);
 var ii=0;
 encoder.start();
 function render() {
 ii++;
-encoder.addFrame(acanvas, { delay: 40 }); // Capture the frame from your main canvas
+console.log('frame ',ii);
+encoder.addFrame(acanvas, { delay: 10 }); // Capture the frame from your main canvas
 if (ii>40) {
 encoder.finish(); // Finalize encoding when done
 var out = encoder.stream();
@@ -52,7 +52,7 @@ img.src = "data:image/png;base64," + base64Out;
 } else {
 setTimeout(function(){
 render();
-},40);
+},100);
 } // Continue the animation
 }
 
