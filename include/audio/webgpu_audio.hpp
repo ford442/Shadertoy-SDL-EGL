@@ -10,7 +10,7 @@ using namespace std;
 #include <cstdio> // C++ style
 #include <cstdarg> // C++ style
 
- //  aubio needs  < c++17
+/* //  aubio needs  < c++17
 #include "/content/RAMDRIVE2/aubio/src/aubio.h"
 #include "/content/RAMDRIVE2/aubio/src/utils/parameter.c"
 #include "/content/RAMDRIVE2/aubio/src/types.h"
@@ -42,7 +42,7 @@ using namespace std;
 #include "/content/RAMDRIVE2/aubio/src/pitch/pitchyinfast.c"
 #include "/content/RAMDRIVE2/aubio/src/pitch/pitchspecacf.c"
 #include "/content/RAMDRIVE2/aubio/src/pitch/pitch.c"
-
+*/
 #define __EMCSCRIPTEN__ 1
 
 #include <cstdint>
