@@ -1,9 +1,10 @@
 /**
  * @param {string} type
- * @param {EventListener|function(!Event): *} listener
- * @param {(AddEventListenerOptions|boolean)=} options
+ * @param {EventListener|function(!Event):(boolean|undefined)} listener
+ * @param {(boolean|!AddEventListenerOptions)=} opt_options
+ * @return {undefined}
  */
-Window.prototype.addEventListener = function(type, listener, options) {};
+var addEventListener = function(type, listener, opt_options) {};
 /**
  * @constructor
  */
