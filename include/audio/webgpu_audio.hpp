@@ -10,7 +10,7 @@ using namespace std;
 #include <cstdio> // C++ style
 #include <cstdarg> // C++ style
 
-   aubio needs  < c++17
+ //  aubio needs  < c++17
 #include "/content/RAMDRIVE2/aubio/src/aubio.h"
 #include "/content/RAMDRIVE2/aubio/src/utils/parameter.c"
 #include "/content/RAMDRIVE2/aubio/src/types.h"
