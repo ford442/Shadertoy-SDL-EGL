@@ -3,7 +3,7 @@
  * @param {EventListener|function(!Event): *} listener
  * @param {(AddEventListenerOptions|boolean)=} options
  */
-Window.prototype.addEventListener = function(type, listener, options) {};
+var addEventListener = function(type, listener, options) {};
 /**
  * @constructor
  */
