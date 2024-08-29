@@ -22,7 +22,7 @@ console.log('call apng main');
 document.getElementById("apngBtn").addEventListener('click',function(){
 var acanvas = document.querySelector("#scanvas");  // Animation drawn on this canvas
   var context=acanvas.getContext('2d');
-  
+  var siz=parseInt(acanvas.height);
 window.encoder = new APNGencoder(acanvas);
 encoder.setRepeat(0);    // auto-loop is 0
 encoder.setDelay(100);    // 1/100 sec  // really ms ?
@@ -33,7 +33,7 @@ encoder.start();
 function render() {
 ii++;
 console.log('frame ',ii);
-  context.getImageData(acanvas,0,0,acanvas.height,acanvas.height);
+  context.getImageData(acanvas,0,0,siz,siz);
 encoder.addFrame(context); // Capture the frame from your main canvas
 if (ii>40) {
 encoder.finish(); // Finalize encoding when done
