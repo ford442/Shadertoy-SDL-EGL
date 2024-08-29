@@ -54,7 +54,7 @@ img.style.height = acanvas.height;
 img.src = "data:image/png;base64," + base64Out;
 
   } else {
-  if(ii<40){
+  if(ii<41){
   ii++;
 console.log('frame ',ii);
 context.getImageData(0,0,siz,siz);
