@@ -21,9 +21,11 @@ console.log('call apng main');
 
 document.getElementById("apngBtn").addEventListener('click',function(){
 var acanvas = document.querySelector("#scanvas");  // Animation drawn on this canvas
+  var context=acanvas.getContext('2d');
+  
 window.encoder = new APNGencoder(acanvas);
 encoder.setRepeat(0);    // auto-loop is 0
-encoder.setDelay(10);    // 1/100 sec  // really ms ?
+encoder.setDelay(100);    // 1/100 sec  // really ms ?
 encoder.setDispose(0);
 encoder.setBlend(1);
 var ii=0;
@@ -31,7 +33,8 @@ encoder.start();
 function render() {
 ii++;
 console.log('frame ',ii);
-encoder.addFrame(acanvas, { delay: 10 }); // Capture the frame from your main canvas
+  context.getImageData(acanvas,0,0,acanvas.height,acanvas.height);
+encoder.addFrame(context); // Capture the frame from your main canvas
 if (ii>40) {
 encoder.finish(); // Finalize encoding when done
 var out = encoder.stream();
@@ -40,7 +43,7 @@ var timestamp = new Date().toISOString().replace(/[-:.]/g, ''); // Format: YYYYM
 var filename = `APNG_${timestamp}.png`;
 var link = document.createElement('a');
 link.download = filename;  // Set the desired filename
-link.href = href;
+link.href =href;
 link.click();
 window.open(href);
 console.log('finished');
