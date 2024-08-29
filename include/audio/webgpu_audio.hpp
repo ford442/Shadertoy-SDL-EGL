@@ -404,7 +404,7 @@ SDL_memcpy(stm,wave.wptr,sound_lft.at(0,0));
 stm+=sound_lft.at(0,0);
 len-=sound_lft.at(0,0);
 wave.wptr=sound.at(0,1,0);
-WGPU_AudioInputBuffer.at(0,0,0)=dynamic_cast<float*>(sound.at(0,1,0));
+WGPU_AudioInputBuffer.at(0,0,0)=(float*)(sound.at(0,1,0));
 snd_lft(sound_pos_u.at(0,0));
 snd_pos(0);
 SDL_LockAudioDevice(dv.at(0,0));
