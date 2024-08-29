@@ -403,19 +403,19 @@ SDL_memcpy(stm,wave.wptr,sound_lft.at(0,0));
 stm+=sound_lft.at(0,0);
 len-=sound_lft.at(0,0);
 wave.wptr=sound.at(0,1,0);
-    
+    /(
 aubio_pitch_t *pitch_o = new_aubio_pitch("yinfft", 4096, 2048, 44100); // Adjust parameters as needed
 fvec_t *input = new_fvec(2048); 
 fvec_t *output = new_fvec(1);
 
 // ... (Process audio data, filling 'input' with appropriate samples)
 
-aubio_pitch_do(pitch_o, sound.at(0,1,0), output);
+aubio_pitch_do(pitch_o, input, output);
 // Access the detected pitch as a float
 float pitchValue = fvec_get_sample(output, 0); 
 // Assign to WGPU_AudioInputBuffer
 WGPU_AudioInputBuffer.at(0,0,0) = pitchValue; 
-
+*/
 snd_lft(sound_pos_u.at(0,0));
 snd_pos(0);
 SDL_LockAudioDevice(dv.at(0,0));
