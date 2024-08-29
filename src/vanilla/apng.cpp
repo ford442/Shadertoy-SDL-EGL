@@ -33,7 +33,7 @@ encoder.start();
 function render() {
 ii++;
 console.log('frame ',ii);
-  context.getImageData(acanvas,0,0,500,500);
+  context.getImageData(0,0,siz,siz);
 encoder.addFrame(context); // Capture the frame from your main canvas
 if (ii>40) {
 encoder.finish(); // Finalize encoding when done
