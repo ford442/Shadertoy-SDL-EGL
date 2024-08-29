@@ -33,10 +33,6 @@ var ii=0;
 encoder.start();
 
 function render() {
-ii++;
-console.log('frame ',ii);
-context.getImageData(0,0,siz,siz);
-encoder.addFrame(context); // Capture the frame from your main canvas
 
 setTimeout(function(){
 if (ii>40) {
@@ -58,6 +54,11 @@ img.style.height = acanvas.height;
 img.src = "data:image/png;base64," + base64Out;
 
   } else {
+  ii++;
+console.log('frame ',ii);
+context.getImageData(0,0,siz,siz);
+encoder.addFrame(context); // Capture the frame from your main canvas
+
 render();
 
   
