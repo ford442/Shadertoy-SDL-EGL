@@ -8,4 +8,4 @@ Window.prototype.addEventListener = function(type, listener, opt_useCapture) {};
 /**
  * @constructor
  */
-function Event() {}
+function Event() {};
