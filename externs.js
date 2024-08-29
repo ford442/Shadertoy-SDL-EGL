@@ -1,10 +1,9 @@
 /**
  * @param {string} type
- * @param {function(!Event)} listener
- * @param {boolean=} opt_useCapture
+ * @param {EventListener|function(!Event): *} listener
+ * @param {(AddEventListenerOptions|boolean)=} options
  */
-Window.prototype.addEventListener = function(type, listener, opt_useCapture) {};
-var addEventListener;
+Window.prototype.addEventListener = function(type, listener, options) {};
 /**
  * @constructor
  */
