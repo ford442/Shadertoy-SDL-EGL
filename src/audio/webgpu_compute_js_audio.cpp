@@ -76,7 +76,7 @@ $sngs[0]=preList.length;
 for(var i=1;i<preList.length;i++){
 var txxt=preList[i].href;
 var Self=location.href;
-Self=Self.replace(/1ink.1ink/,"");
+Self=Self.replace(/aud.1ink/,"");
 txxt=txxt.replace(Self,"");
 $sngs[i]=Self+'songs/'+txxt;
 }}
