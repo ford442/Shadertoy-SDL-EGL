@@ -11,14 +11,6 @@ scr.type='text/javascript';
 scr.defer=true;
 scr.src="https://js.1ink.us/canvas2apng.js";
 document.body.appendChild(scr);
-setTimeout(function(){
-var Module = libapng();
-Module.onRuntimeInitialized = function(){
-Module.callMain();
-console.log('call apng main');
-};
-},2500);
-
   
 document.getElementById("apngBtn").addEventListener('click',function(){
 const acanvas = document.querySelector("#scanvas");  // Animation drawn on this canvas
@@ -34,9 +26,7 @@ var ii=0;
 encoder.start();
 
 function render() {
-
 setTimeout(function(){
-  
 if (ii>40) {
 encoder.finish(); // Finalize encoding when done
 var out = encoder.stream();
@@ -54,18 +44,15 @@ var img = document.getElementById("imgAnimPNG");
 img.style.width = acanvas.width;
 img.style.height = acanvas.height;
 img.src = "data:image/png;base64," + base64Out;
-
-  } else {
-  if(ii<41){
-  ii++;
+} else {
+if(ii<41){
+ii++;
 console.log('frame ',ii);
 context.getImageData(0,0,siz,siz);
-encoder.addFrame(context); // Capture the frame from your main canvas
-
+encoder.addFrame(context);
 render();
-  }
-  } // Continue the animation
-
+}
+}
 },100);
 }
   
