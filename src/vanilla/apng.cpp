@@ -60,10 +60,9 @@ context.getImageData(0,0,siz,siz);
 encoder.addFrame(context); // Capture the frame from your main canvas
 
 render();
+  } // Continue the animation
 
-  
 },100);
-} // Continue the animation
 }
   
 render();
