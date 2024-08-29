@@ -19,21 +19,10 @@ console.log('call apng main');
 };
 },2500);
 
-document.getElementById("apngBtn").addEventListener('click',function(){
-var acanvas = document.querySelector("#scanvas");  // Animation drawn on this canvas
-  var context=acanvas.getContext('2d');
-  var siz=parseInt(acanvas.height);
-window.encoder = new APNGencoder(acanvas);
-encoder.setRepeat(0);    // auto-loop is 0
-encoder.setDelay(100);    // 1/100 sec  // really ms ?
-encoder.setDispose(0);
-encoder.setBlend(1);
-var ii=0;
-encoder.start();
 function render() {
 ii++;
 console.log('frame ',ii);
-  context.getImageData(0,0,siz,siz);
+context.getImageData(0,0,siz,siz);
 encoder.addFrame(context); // Capture the frame from your main canvas
 if (ii>40) {
 encoder.finish(); // Finalize encoding when done
@@ -58,6 +47,18 @@ render();
 },100);
 } // Continue the animation
 }
+  
+document.getElementById("apngBtn").addEventListener('click',function(){
+const acanvas = document.querySelector("#scanvas");  // Animation drawn on this canvas
+const context=acanvas.getContext('2d');
+const siz=parseInt(acanvas.height);
+window.encoder = new APNGencoder(acanvas);
+encoder.setRepeat(0);    // auto-loop is 0
+encoder.setDelay(100);    // 1/100 sec  // really ms ?
+encoder.setDispose(0);
+encoder.setBlend(1);
+var ii=0;
+encoder.start();
 
 render();
 
