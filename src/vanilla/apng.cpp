@@ -29,11 +29,10 @@ encoder.setDispose(0);
 encoder.setBlend(1);
 var ii=0;
 encoder.start();
-
 function render() {
 ii++;
-encoder.addFrame(acanvas, { delay: 25 }); // Capture the frame from your main canvas
-if (ii>10) {
+encoder.addFrame(acanvas, { delay: 40 }); // Capture the frame from your main canvas
+if (ii>40) {
 encoder.finish(); // Finalize encoding when done
 var out = encoder.stream();
 var href= URL.createObjectURL(new Blob([new Uint8Array(out.bin)], {type : "image/png" } ));
@@ -45,7 +44,6 @@ link.href = href;
 link.click();
 window.open(href);
 console.log('finished');
-  
 var base64Out = bytesToBase64(encoder.stream().bin);     // ANIMATION
 var img = document.getElementById("imgAnimPNG");
 img.style.width = acanvas.width;
@@ -54,7 +52,7 @@ img.src = "data:image/png;base64," + base64Out;
 } else {
 setTimeout(function(){
 render();
-},60);
+},40);
 } // Continue the animation
 }
 
