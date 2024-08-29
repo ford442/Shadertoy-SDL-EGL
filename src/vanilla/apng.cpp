@@ -54,12 +54,14 @@ img.style.height = acanvas.height;
 img.src = "data:image/png;base64," + base64Out;
 
   } else {
+  if(ii<40){
   ii++;
 console.log('frame ',ii);
 context.getImageData(0,0,siz,siz);
 encoder.addFrame(context); // Capture the frame from your main canvas
 
 render();
+  }
   } // Continue the animation
 
 },100);
