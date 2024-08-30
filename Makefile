@@ -277,7 +277,7 @@ b3_apng:
 	 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -stdlib=libc++ -sUSE_ES6_IMPORT_META=0  -fno-rounding-math -fassociative-math -freciprocal-math -fno-signed-zeros \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
-	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
+	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fcx-limited-range -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
 	 -DCOMPUTE -o $(BETA_BIN_NAME)-apng.js -sSTRICT=1 -sSTRICT_JS=0 \
 	 $(LINK_SIMD_FLAGS) -sUSE_GLFW=0 -sASSERTIONS=0 -march=haswell -sMEMORY64=2 \
 	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm64 -DNDEBUG=1 \
@@ -356,7 +356,7 @@ b3_compute_mod:
 
 b3_compute_mod_test:
 	 em++ src/vanilla/webgpu_mod.cpp $(STDS) -flto -flto=thin -fPIC -pipe -ffast-math -ffp-contract=fast \
-	 -fexcess-precision=fast -fno-rounding-math -fcx-limited-range -fassociative-math -freciprocal-math -fno-signed-zeros \
+	 -fexcess-precision=fast -fno-rounding-math -fassociative-math -freciprocal-math -fno-signed-zeros \
 	 -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O3 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing \
@@ -366,7 +366,7 @@ b3_compute_mod_test:
 	 -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -sUSE_GLFW=0 -sOFFSCREENCANVAS_SUPPORT=1 -stdlib=libc++ \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types \
-	 -fno-strict-aliasing -fno-rounding-math -fcx-limited-range -fassociative-math -freciprocal-math -fno-signed-zeros \
+	 -fno-strict-aliasing -fno-rounding-math -fassociative-math -freciprocal-math -fno-signed-zeros \
 	 -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast \
 	 -fexcess-precision=fast -sENVIRONMENT=web \
 	 -DCOMPUTE -o $(BETA_BIN_NAME)-mod.js -sSTRICT_JS=0 -sSTRICT=1 -ffunction-sections -fdata-sections \
