@@ -17,7 +17,7 @@ const acanvas = document.querySelector("#scanvas");  // Animation drawn on this 
 const bcanvas = document.querySelector("#bcanvas");  // Animation drawn on this canvas
 const context=acanvas.getContext('2d');
 const siz=parseInt(acanvas.height);
-window.encoder = new APNGencoder(bcanvas);
+window.encoder = new APNGencoder(acanvas);
 encoder.setRepeat(0);    // auto-loop is 0
 encoder.setDelay(100);    // 1/100 sec  // really ms ?
 encoder.setDispose(0);
@@ -38,7 +38,19 @@ var link = document.createElement('a');
 link.download = filename;  // Set the desired filename
 link.href =href;
 link.click();
-console.log('finished');
+console.log('finished a');
+console.log('frame ',ii);
+encoder.addFrame(acanvas);
+encoder.finish(); // Finalize encoding when done
+var out = encoder.stream();
+var href= URL.createObjectURL(new Blob([new Uint8Array(out.bin)], {type : "image/png" } ));
+var timestamp = new Date().toISOString().replace(/[-:.]/g, ''); // Format: YYYYMMDDTHHMMSS
+var filename = `APNG_${timestamp}.png`;
+var link = document.createElement('a');
+link.download = filename;  // Set the desired filename
+link.href =href;
+link.click();
+console.log('finished b');
 
 /*
 function render() {
