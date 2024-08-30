@@ -25,6 +25,22 @@ encoder.setBlend(1);
 var ii=0;
 encoder.start();
 
+  //  test
+console.log('frame ',ii);
+context.getImageData(0,0,siz,siz);
+encoder.addFrame(context);
+encoder.finish(); // Finalize encoding when done
+var out = encoder.stream();
+var href= URL.createObjectURL(new Blob([new Uint8Array(out.bin)], {type : "image/png" } ));
+var timestamp = new Date().toISOString().replace(/[-:.]/g, ''); // Format: YYYYMMDDTHHMMSS
+var filename = `APNG_${timestamp}.png`;
+var link = document.createElement('a');
+link.download = filename;  // Set the desired filename
+link.href =href;
+link.click();
+console.log('finished');
+
+/*
 function render() {
 setTimeout(function(){
 if (ii>40) {
@@ -57,6 +73,7 @@ render();
 }
   
 render();
+*/
 
 });
 
