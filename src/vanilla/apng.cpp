@@ -28,7 +28,7 @@ encoder.start();
 
   //  test
 console.log('frame ',ii);
-context.getImageData(0,0,siz,siz);
+context.getImageData(0,0,siz,siz).data;
 encoder.addFrame(context);
 encoder.finish(); // Finalize encoding when done
 var out = encoder.stream();
@@ -58,7 +58,7 @@ console.log('finished b');
 encoder2.start();
 
 console.log('frame ',ii);
-context.getImageData(0,0,siz,siz);
+context.getImageData(0,0,siz,siz).data;
 encoder2.addFrame(context);
 encoder2.finish(); // Finalize encoding when done
 var out = encoder.stream();
