@@ -62,7 +62,7 @@ powerPreference:"high-performance",
 premultipliedAlpha:true,
 preserveDrawingBuffer:false
 });
-gl3.imageSmoothingEnabled=false;
+// gl3.imageSmoothingEnabled=false;
 const fileStream=FS.open('/video/frame.gl','w+');
 function drawFrame() {
 if (pause === 'ready') {
