@@ -63,7 +63,7 @@ premultipliedAlpha:true,
 preserveDrawingBuffer:false
 });
 gl3.imageSmoothingEnabled=false;
-const fileStream=FS.open('/video/frame.gl','w');
+const fileStream=FS.open('/video/frame.gl','w+');
 function drawFrame() {
 if (pause === 'ready') {
 gl3.clearRect(0, 0, w$, h$);
