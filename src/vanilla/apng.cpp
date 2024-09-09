@@ -13,11 +13,12 @@ scr.src="https://js.1ink.us/canvas2apng.js";
 document.body.appendChild(scr);
   
 document.getElementById("apngBtn").addEventListener('click',function(){
-const acanvas = document.querySelector("#scanvas");  // Animation drawn on this canvas
+const acanvas = document.querySelector("#scanvas");
+const ctx = acanvas.getContext("2d");
 const siz=parseInt(acanvas.height);
 window.encoder = new APNGencoder(acanvas);
-encoder.setRepeat(0);    // auto-loop is 0
-encoder.setDelay(100);    // 1/100 sec  // really ms ?
+encoder.setRepeat(0);
+encoder.setDelay(100);
 encoder.setDispose(0);
 encoder.setBlend(1);
 var ii=0;
@@ -46,7 +47,7 @@ img.src = "data:image/png;base64," + base64Out;
 } else {
 ii++;
 console.log('frame ',ii);
-encoder.addFrame(acanvas);
+encoder.addFrame(ctx);
 setTimeout(function(){
 render();
 },100);
