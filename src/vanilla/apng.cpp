@@ -49,15 +49,14 @@ console.log('frame ',ii);
 encoder.addFrame(acanvas);
 setTimeout(function(){
 render();
-}
 },100);
 }
-  
-setTimeout(function() {
-  encoder.start();
-  render(); 
-}, 100); // Give some time for the initial frame to be drawn
+}
 
+setTimeout(function() {
+encoder.start();
+render(); 
+}, 100); // Give some time for the initial frame to be drawn
 
 });
 
