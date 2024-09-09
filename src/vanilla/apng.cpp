@@ -11,22 +11,16 @@ scr.type='text/javascript';
 scr.defer=true;
 scr.src="https://js.1ink.us/canvas2apng.js";
 document.body.appendChild(scr);
-  
+  
 document.getElementById("apngBtn").addEventListener('click',function(){
-const acanvas = document.querySelector("#scanvas");  // Animation drawn on this canvas
+const acanvas = document.querySelector("#scanvas");  // Animation drawn on this canvas
 const siz=parseInt(acanvas.height);
 window.encoder = new APNGencoder(acanvas);
-encoder.setRepeat(0);    // auto-loop is 0
-encoder.setDelay(100);    // 1/100 sec  // really ms ?
+encoder.setRepeat(0);    // auto-loop is 0
+encoder.setDelay(100);    // 1/100 sec  // really ms ?
 encoder.setDispose(0);
 encoder.setBlend(1);
 var ii=0;
-
-// Start encoding AFTER the first frame is ready
-setTimeout(function() {
-  encoder.start();
-  render(); 
-}, 100); // Give some time for the initial frame to be drawn
 
 function render() {
 if (ii>21) {
@@ -39,12 +33,12 @@ var href= URL.createObjectURL(new Blob([new Uint8Array(out.bin)], {type : "image
 var timestamp = new Date().toISOString().replace(/[-:.]/g, ''); // Format: YYYYMMDDTHHMMSS
 var filename = `APNG_${timestamp}.png`;
 var link = document.createElement('a');
-link.download = filename;  // Set the desired filename
+link.download = filename;  // Set the desired filename
 link.href =href;
 link.click();
 window.open(href);
 console.log('finished');
-var base64Out = bytesToBase64(encoder.stream().bin);     // ANIMATION
+var base64Out = bytesToBase64(encoder.stream().bin);     // ANIMATION
 var img = document.getElementById("imgAnimPNG");
 img.style.width = acanvas.width;
 img.style.height = acanvas.height;
@@ -58,8 +52,11 @@ render();
 }
 },100);
 }
-
-}
+  
+setTimeout(function() {
+  encoder.start();
+  render(); 
+}, 100); // Give some time for the initial frame to be drawn
 
 
 });
