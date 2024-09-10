@@ -23,6 +23,19 @@ encoder.setDispose(0);
 encoder.setBlend(1);
 var ii=0;
 
+encoder.start();
+encoder.addFrame(acanvas);
+encoder.finish(); // Finalize encoding when done
+var out = encoder.stream();
+var href= URL.createObjectURL(new Blob([new Uint8Array(out.bin)], {type : "image/png" } ));
+var timestamp = new Date().toISOString().replace(/[-:.]/g, ''); // Format: YYYYMMDDTHHMMSS
+var filename = `APNG_${timestamp}.png`;
+var link = document.createElement('a');
+link.download = filename;  // Set the desired filename
+link.href =href;
+link.click();
+
+/*
 function render() {
 if (ii>21) {
 return;
@@ -58,6 +71,7 @@ setTimeout(function() {
 encoder.start();
 render(); 
 }, 100); // Give some time for the initial frame to be drawn
+*/
 
 });
 
