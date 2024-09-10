@@ -24,6 +24,7 @@ encoder.setBlend(1);
 var ii=0;
 
 encoder.start();
+setTimeout(function(){
 encoder.addFrame(acanvas);
 encoder.finish(); // Finalize encoding when done
 var out = encoder.stream();
@@ -34,7 +35,7 @@ var link = document.createElement('a');
 link.download = filename;  // Set the desired filename
 link.href =href;
 link.click();
-
+},1500);
 /*
 function render() {
 if (ii>21) {
