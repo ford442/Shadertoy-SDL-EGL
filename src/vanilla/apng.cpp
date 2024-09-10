@@ -28,14 +28,11 @@ encoder.start();
 setTimeout(function(){
 encoder.addFrame(acanvas);
 encoder.finish(); // Finalize encoding when done
-var out = encoder.stream();
-var href= URL.createObjectURL(new Blob([new Uint8Array(out.bin)], {type : "image/png" } ));
-var timestamp = new Date().toISOString().replace(/[-:.]/g, ''); // Format: YYYYMMDDTHHMMSS
-var filename = `APNG_${timestamp}.png`;
-var link = document.createElement('a');
-link.download = filename;  // Set the desired filename
-link.href =href;
-link.click();
+  var base64Out = bytesToBase64(encoder.stream().bin);         // ANIMATION
+  var img = document.getElementById("imgAnimPNG");
+  img.style.width = canvas.width;
+  img.style.height = canvas.height;
+  img.src = "data:image/png;base64," + base64Out;
 },1500);
 /*
 function render() {
