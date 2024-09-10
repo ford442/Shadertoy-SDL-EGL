@@ -17,24 +17,12 @@ const acanvas = document.querySelector("#scanvas");
 const ctx = acanvas.getContext("2d");
 const siz=parseInt(acanvas.height);
 window.encoder = new APNGencoder(acanvas);
- encoder.setRepeat(2);    // auto-loop is 0
-  encoder.setDelay(80);    // 1/100 sec
+ encoder.setRepeat(0);    // auto-loop is 0
+  encoder.setDelay(100);    // 1/100 sec
   encoder.setDispose(0);
   encoder.setBlend(1);
-
 var ii=0;
 
-encoder.start();
-setTimeout(function(){
-encoder.addFrame(acanvas);
-encoder.finish(); // Finalize encoding when done
-  var base64Out = bytesToBase64(encoder.stream().bin);         // ANIMATION
-  var img = document.getElementById("imgAnimPNG");
-  img.style.width = canvas.width;
-  img.style.height = canvas.height;
-  img.src = "data:image/png;base64," + base64Out;
-},1500);
-/*
 function render() {
 if (ii>21) {
 return;
@@ -70,7 +58,6 @@ setTimeout(function() {
 encoder.start();
 render(); 
 }, 100); // Give some time for the initial frame to be drawn
-*/
 
 });
 
