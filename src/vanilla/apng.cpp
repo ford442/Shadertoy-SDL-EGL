@@ -17,10 +17,11 @@ const acanvas = document.querySelector("#scanvas");
 const ctx = acanvas.getContext("2d");
 const siz=parseInt(acanvas.height);
 window.encoder = new APNGencoder(acanvas);
-encoder.setRepeat(0);
-encoder.setDelay(100);
-encoder.setDispose(0);
-encoder.setBlend(1);
+ encoder.setRepeat(2);    // auto-loop is 0
+  encoder.setDelay(80);    // 1/100 sec
+  encoder.setDispose(0);
+  encoder.setBlend(1);
+
 var ii=0;
 
 encoder.start();
