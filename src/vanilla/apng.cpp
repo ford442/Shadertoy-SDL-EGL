@@ -7,14 +7,15 @@ png_infop info_ptr_write;
 
 png_bytep* frame_data = nullptr; 
 png_bytepp row_pointers = nullptr;
+int height=1024;
 
 void generate(){
 int num_frames = 20; 
 frame_data = (png_bytep*) malloc(sizeof(png_bytep) * num_frames);
-row_pointers = (png_bytepp*) malloc(sizeof(png_bytepp) * num_frames * Cheight); 
-frame_data[CframeCount - 1] = (png_bytep) malloc(Cwidth * Cheight * 4);
-for (int y = 0; y < Cheight; ++y) {
-row_pointers[(CframeCount - 1) * Cheight + y] = frame_data[CframeCount - 1] + y * Cwidth * 4;
+row_pointers = (png_bytepp) malloc(sizeof(png_bytepp) * num_frames * height); 
+frame_data[CframeCount - 1] = (png_bytep) malloc(height * height * 4);
+for (int y = 0; y < height; ++y) {
+row_pointers[(CframeCount - 1) * height + y] = frame_data[CframeCount - 1] + y * height * 4;
 }
 }
 
