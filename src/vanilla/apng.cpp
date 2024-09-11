@@ -8,6 +8,7 @@ png_infop info_ptr_write;
 png_bytep* frame_data = nullptr; 
 png_bytepp row_pointers = nullptr;
 int height=1024;
+int CframeCount=10;
 
 void generate(){
 int num_frames = 20; 
