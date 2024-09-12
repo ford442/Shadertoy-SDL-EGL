@@ -69,7 +69,7 @@ document.getElementById("apngBtn").addEventListener('click',function(){
     }
 
     ii++;
-    console.log('frame ', ii);
+    console.log('Frame: ', ii);
 
     const image = ctx.getImageData(0, 0, siz, siz); // Assuming square canvas
     const imageData = image.data;
