@@ -18,21 +18,11 @@ png_bytep* frame_data = nullptr;
 png_bytepp row_pointers = nullptr;
 int height=1024;
 int CframeCount=10;
-
-void generate(){
 int num_frames = 20;
-frame_data = (png_bytep*) malloc(sizeof(png_bytep) * num_frames);
-row_pointers = (png_bytepp) malloc(sizeof(png_bytepp) * num_frames * height);
-frame_data[CframeCount - 1] = (png_bytep) malloc(height * height * 4);
-for (int y = 0; y < height; ++y) {
-row_pointers[(CframeCount - 1) * height + y] = frame_data[CframeCount - 1] + y * height * 4;
-}
-}
 
 void read_png(FILE *fp, int sig_read) {
 png_structp png_ptr;
 png_infop info_ptr;
-
 // Create read struct and check for errors
 png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 if (!png_ptr) {
@@ -40,38 +30,26 @@ fclose(fp);
 fprintf(stderr, "Error: could not create PNG read struct\n");
 return; 
 }
-
 info_ptr = png_create_info_struct(png_ptr);
-
 // Set up error handling (you'll need to implement png_error and png_warning)
-
 png_init_io(png_ptr, fp);
 png_set_sig_bytes(png_ptr, sig_read);
-
 // Read the image information
 png_read_info(png_ptr, info_ptr);
-
 png_uint_32 width, height;
 int bit_depth, color_type, interlace_type;
-png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type,
- &interlace_type, NULL, 
- NULL);
-
+png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type, &interlace_type, NULL,  NULL);
 decoded_png_data.width = width;
 decoded_png_data.height = height;
-
 // Allocate memory for row pointers and read the image data
 decoded_png_data.rows = (png_bytep*) malloc(sizeof(png_bytep) * height);
 for (int y = 0; y < height; y++) {
 decoded_png_data.rows[y] = (png_byte*) malloc(png_get_rowbytes(png_ptr, info_ptr));
 }
-
 png_read_image(png_ptr, decoded_png_data.rows);
-
 // Clean up
 png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
 }
-
 
 extern "C" {
 int runApng(int* delays, int num_frames, int width, int height) {
