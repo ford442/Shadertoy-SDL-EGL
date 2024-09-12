@@ -21,11 +21,37 @@ row_pointers[(CframeCount - 1) * height + y] = frame_data[CframeCount - 1] + y *
 }
 
 extern "C" {
-    // This function will be called from JavaScript to assemble the APNG
-    int runApng(const char** pngFilePaths, int* delays, int num_frames, int width, int height) {
-        // ... (Implementation to read PNGs from Emscripten FS, 
-        //     encode them using libpng, and save the final APNG)
-    }
+// This function will be called from JavaScript to assemble the APNG
+int runApng(const char** pngFilePaths, int* delays, int num_frames, int width, int height) {
+ // Initialize PNG writing
+png_set_IHDR(png_ptr_write, info_ptr_write, width, height, 8, PNG_COLOR_TYPE_RGBA,
+PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+// Write animation control chunk (acTL) using png_set_acTL
+png_set_acTL(png_ptr_write, info_ptr_write, num_frames, 0); 
+// Read and write each frame
+for (int i = 0; i < num_frames; ++i) {
+// Open the PNG file from Emscripten FS
+FILE* fp = fopen(pngFilePaths[i], "rb");
+if (!fp) {
+fprintf(stderr, "Error: could not open file %s\n", pngFilePaths[i]);
+return 1; // Indicate an error
+}
+// Read the PNG file using the provided 'read_png' function
+read_png(fp, 0); // Assuming 0 for sig_read (no signature bytes read yet)
+// ... (Access the decoded image data from the 'read_png' function)
+// You'll likely need to modify 'read_png' to make the image data accessible
+// For example, it could store the data in a global variable or return a struct
+// Write frame control chunk (fcTL)
+png_set_next_frame_fcTL(png_ptr_write, info_ptr_write, width, height, 0, 0, 
+delays[i] * 1000 / 1000, 1000, 
+PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
+// Write the image data for the frame (adjust based on how 'read_png' provides the data)
+// png_write_image(png_ptr_write, ...); // Replace ... with the appropriate image data
+// Close the file
+fclose(fp);
+}
+
+}
 }
 
 void assembleAndSaveAnimatedPNG(png_bytep* frame_data, png_bytepp* row_pointers, int num_frames, int width, int height, int* delays) {
@@ -51,44 +77,44 @@ int main(){
 
 EM_ASM({
 document.getElementById("apngBtn").addEventListener('click',function(){
-  const acanvas = document.querySelector("#scanvas");
-  const ctx = acanvas.getContext("2d");
-  const siz = parseInt(acanvas.height);
-  let ii = 0;
-  const delays = []; // Array to store delays for each frame
+const acanvas = document.querySelector("#scanvas");
+const ctx = acanvas.getContext("2d");
+const siz = parseInt(acanvas.height);
+let ii = 0;
+const delays = []; // Array to store delays for each frame
 
-  function render() {
-    if (ii > 21) {
-      // Animation complete, assemble APNG
-      const pngFilePaths = [];
-      for (let j = 1; j <= ii; j++) {
-        pngFilePaths.push('/frame' + j + '.png');
-      }
-      Module.ccall('runApng', 'number', ['array', 'array', 'number', 'number', 'number'], [pngFilePaths, delays, ii, siz, siz]);
-      return;
-    }
+function render() {
+if (ii > 21) {
+// Animation complete, assemble APNG
+const pngFilePaths = [];
+for (let j = 1; j <= ii; j++) {
+pngFilePaths.push('/frame' + j + '.png');
+}
+Module.ccall('runApng', 'number', ['array', 'array', 'number', 'number', 'number'], [pngFilePaths, delays, ii, siz, siz]);
+return;
+}
 
-    ii++;
-    console.log('Frame: ', ii);
+ii++;
+console.log('Frame: ', ii);
 
-    const image = ctx.getImageData(0, 0, siz, siz); // Assuming square canvas
-    const imageData = image.data;
-    const pixelData = new Uint8Array(imageData);
+const image = ctx.getImageData(0, 0, siz, siz); // Assuming square canvas
+const imageData = image.data;
+const pixelData = new Uint8Array(imageData);
 
-    const fileStream = FS.open('/frame' + ii + '.png', 'w+');
-    FS.write(fileStream, pixelData, 0, pixelData.length, 0);
-    FS.close(fileStream);
+const fileStream = FS.open('/frame' + ii + '.png', 'w+');
+FS.write(fileStream, pixelData, 0, pixelData.length, 0);
+FS.close(fileStream);
 
-    delays.push(100); // Add delay for this frame (adjust as needed)
+delays.push(100); // Add delay for this frame (adjust as needed)
 
-    setTimeout(function(){
-      render();
-    }, 100);
-  }
+setTimeout(function(){
+render();
+}, 100);
+}
 
-  setTimeout(function() {
-    render(); 
-  }, 100); 
+setTimeout(function() {
+render(); 
+}, 100); 
 });
 
 });
