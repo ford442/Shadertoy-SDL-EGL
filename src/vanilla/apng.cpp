@@ -132,7 +132,7 @@ const pngFilePaths = [];
 for (let j = 1; j <= ii; j++) {
 pngFilePaths.push('/frame' + j + '.png');
 }
-Module.ccall('assembleAndSaveAnimatedPNGFromFS', 'number', ['array', 'array', 'number', 'number', 'number'], 
+Module.ccall('aPng', 'number', ['array', 'array', 'number', 'number', 'number'], 
  [pngFilePaths, delays, ii, siz, siz]);
 return;
 }
