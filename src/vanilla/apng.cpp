@@ -95,7 +95,7 @@ png_set_acTL(png_ptr_write, info_ptr_write, num_frames, 0);
 // Read and write each frame
 for (int i = 0; i < num_frames; ++i) {
 // Open the PNG file from Emscripten FS
-FILE* fp = fopen(pngFilePaths[i], "rb");
+FILE* fp = fopen('/frame'+i+'.png', "rb");
 if (!fp) {
 fprintf(stderr, "Error: could not open file %s\n", pngFilePaths[i]);
 return 1; 
