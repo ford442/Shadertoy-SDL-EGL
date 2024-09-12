@@ -20,12 +20,12 @@ row_pointers[(CframeCount - 1) * height + y] = frame_data[CframeCount - 1] + y *
 }
 }
 
-extern"C"{
-
-void runApng(){
-generate();
-}
-
+extern "C" {
+    // This function will be called from JavaScript to assemble the APNG
+    int runApng(const char** pngFilePaths, int* delays, int num_frames, int width, int height) {
+        // ... (Implementation to read PNGs from Emscripten FS, 
+        //     encode them using libpng, and save the final APNG)
+    }
 }
 
 void assembleAndSaveAnimatedPNG(png_bytep* frame_data, png_bytepp* row_pointers, int num_frames, int width, int height, int* delays) {
@@ -50,40 +50,45 @@ png_write_image(png_ptr_write, *(row_pointers + i * height));
 int main(){
 
 EM_ASM({
-
 document.getElementById("apngBtn").addEventListener('click',function(){
-const acanvas = document.querySelector("#scanvas");
-const ctx = acanvas.getContext("2d");
-const siz=parseInt(acanvas.height);
-var ii=0;
+  const acanvas = document.querySelector("#scanvas");
+  const ctx = acanvas.getContext("2d");
+  const siz = parseInt(acanvas.height);
+  let ii = 0;
+  const delays = []; // Array to store delays for each frame
 
-function render() {
-if (ii>21) {
-return;
-}
-if (ii>20) {
-setTimeout(function() {
-Module.ccall('runApng');
-}, 100); // Give some time for the initial frame to be drawn
+  function render() {
+    if (ii > 21) {
+      // Animation complete, assemble APNG
+      const pngFilePaths = [];
+      for (let j = 1; j <= ii; j++) {
+        pngFilePaths.push('/frame' + j + '.png');
+      }
+      Module.ccall('runApng', 'number', ['array', 'array', 'number', 'number', 'number'], [pngFilePaths, delays, ii, siz, siz]);
+      return;
+    }
 
-} else {
-ii++;
-console.log('frame ',ii);
-const image = ctx.getImageData(0, 0, w$, h$);
-const imageData = image.data;
-const pixelData = new Float32Array(imageData);
-const fileStream=FS.open('/frame'+ii+'.png','w+');
-FS.write(fileStream, pixelData, 0, pixelData.length, 0);
-setTimeout(function(){
-render();
-},100);
-}
-}
+    ii++;
+    console.log('frame ', ii);
 
-setTimeout(function() {
-render();
-}, 100); // Give some time for the initial frame to be drawn
+    const image = ctx.getImageData(0, 0, siz, siz); // Assuming square canvas
+    const imageData = image.data;
+    const pixelData = new Uint8Array(imageData);
 
+    const fileStream = FS.open('/frame' + ii + '.png', 'w+');
+    FS.write(fileStream, pixelData, 0, pixelData.length, 0);
+    FS.close(fileStream);
+
+    delays.push(100); // Add delay for this frame (adjust as needed)
+
+    setTimeout(function(){
+      render();
+    }, 100);
+  }
+
+  setTimeout(function() {
+    render(); 
+  }, 100); 
 });
 
 });
