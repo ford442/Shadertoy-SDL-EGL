@@ -276,7 +276,7 @@ b3_apng:
 	 -mextended-const -O3 -fno-strict-aliasing $(SIMD_FLAGS) -c -fno-rounding-math -fcx-limited-range -fassociative-math -freciprocal-math -fno-signed-zeros
 	 em++ -sUSE_LIBPNG=1 -O3 -I/content/RAMDRIVE2/libpng-1.6.43/ -L/content/RAMDRIVE2/libpng-1.6.43/.libs \
 	 -lpng16 -fPIE -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m32 -sMALLOC=mimalloc -sWASMFS=1 -sLEGALIZE_JS_FFI=1 \
-	 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
+	 -sWASM_BIGINT=0 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -stdlib=libc++ -sUSE_ES6_IMPORT_META=0  -fno-rounding-math -fassociative-math -freciprocal-math -fno-signed-zeros \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fcx-limited-range -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
