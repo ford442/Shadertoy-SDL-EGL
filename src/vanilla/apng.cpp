@@ -28,8 +28,10 @@ row_pointers[(CframeCount - 1) * height + y] = frame_data[CframeCount - 1] + y *
 }
 
 void read_png(FILE *fp, int sig_read) {
-    // ... (your existing read_png code)
-    // After reading the image information
+   png_structp png_ptr;
+   png_infop info_ptr;
+   png_uint_32 width, height;
+   int bit_depth, color_type, interlace_type;    // After reading the image information
     png_read_info(png_ptr, info_ptr);
     png_get_IHDR(png_ptr, info_ptr, &decoded_png_data.width, &decoded_png_data.height, &bit_depth, &color_type,
                  &interlace_type, NULL, NULL);
