@@ -74,7 +74,7 @@ png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
 
 
 extern "C" {
-int runApng(const char** pngFilePaths, int* delays, int num_frames, int width, int height) {
+int runApng(int* delays, int num_frames, int width, int height) {
 // ... (Create APNG write and info structs, set up error handling) ... 
 // Create the APNG write struct
 png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
@@ -96,8 +96,10 @@ png_set_acTL(png_ptr_write, info_ptr_write, num_frames, 0);
 // Read and write each frame
 for (int i = 0; i < num_frames; ++i) {
 // Open the PNG file from Emscripten FS
-
-            FILE* fp = fopen(pngFilePaths[i], "rb");
+std::stringstream ss;
+ss << "/frame" << (i + 1) << ".png";
+std::string fileName = ss.str();
+FILE* fp = fopen(fileName.c_str(), "rb");
 if (!fp) {
 fprintf(stderr, "Error: could not open file %s\n", pngFilePaths[i]);
 return 1; 
@@ -145,9 +147,8 @@ const pngFilePaths = [];
 for (let j = 1; j <= ii; j++) {
 pngFilePaths.push('/frame' + j + '.png');
 }
-const cStrings = pngFilePaths.map(path => Module.allocateUTF8(path));
-Module.ccall('runApng', 'number', ['array', 'array', 'number', 'number', 'number'], 
- [cStrings, delays, ii, siz, siz]);
+Module.ccall('runApng', 'number', ['array', 'number', 'number', 'number'], 
+ [delays, ii, siz, siz]);
 return;
 }
 ii++;
