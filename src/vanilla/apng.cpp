@@ -31,6 +31,7 @@ row_pointers[(CframeCount - 1) * height + y] = frame_data[CframeCount - 1] + y *
 void read_png(FILE *fp, int sig_read) {
  png_structp png_ptr;
  png_infop info_ptr;
+ info_ptr = png_create_info_struct(png_ptr);
  png_uint_32 width, height;
  int bit_depth, color_type, interlace_type;// After reading the image information
 png_read_info(png_ptr, info_ptr);
