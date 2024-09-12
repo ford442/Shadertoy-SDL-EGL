@@ -101,7 +101,7 @@ ss << "/frame" << (i + 1) << ".png";
 std::string fileName = ss.str();
 FILE* fp = fopen(fileName.c_str(), "rb");
 if (!fp) {
-fprintf(stderr, "Error: could not open file %s\n", pngFilePaths[i]);
+fprintf(stderr, "Error: could not open file %s\n", fileName.c_str());
 return 1; 
 }
 // Read the PNG file
