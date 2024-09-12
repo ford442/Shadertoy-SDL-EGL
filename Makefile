@@ -273,7 +273,7 @@ b3_apng:
 	 -lpng16 -fPIC -m32 -flto -flto=thin -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
-	 -mextended-const -O3 -fno-strict-aliasing $(SIMD_FLAGS) -sMEMORY64=1 -c -fno-rounding-math -fcx-limited-range -fassociative-math -freciprocal-math -fno-signed-zeros
+	 -mextended-const -O3 -fno-strict-aliasing $(SIMD_FLAGS) -c -fno-rounding-math -fcx-limited-range -fassociative-math -freciprocal-math -fno-signed-zeros
 	 em++ -sUSE_LIBPNG=1 -O3 -I/content/RAMDRIVE2/libpng-1.6.43/ -L/content/RAMDRIVE2/libpng-1.6.43/.libs \
 	 -lpng16 -fPIE -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m32 -sMALLOC=mimalloc -sWASMFS=1 -sLEGALIZE_JS_FFI=1 \
 	 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
@@ -281,7 +281,7 @@ b3_apng:
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fcx-limited-range -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
 	 -DCOMPUTE -o $(BETA_BIN_NAME)-apng.js -sSTRICT=1 -sSTRICT_JS=0 \
-	 $(LINK_SIMD_FLAGS) -sUSE_GLFW=0 -sASSERTIONS=0 -march=haswell -sMEMORY64=2 \
+	 $(LINK_SIMD_FLAGS) -sUSE_GLFW=0 -sASSERTIONS=0 -march=haswell \
 	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm32 -DNDEBUG=1 \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -mtune=wasm32 \
