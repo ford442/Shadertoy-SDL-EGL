@@ -96,10 +96,8 @@ png_set_acTL(png_ptr_write, info_ptr_write, num_frames, 0);
 // Read and write each frame
 for (int i = 0; i < num_frames; ++i) {
 // Open the PNG file from Emscripten FS
-std::stringstream ss;
-ss << "/frame" << (i + 1) << ".png"; // Start frame numbering from 1
-std::string fileName = ss.str();
-FILE* fp = fopen(fileName.c_str(), "rb"); 
+
+            FILE* fp = fopen(pngFilePaths[i], "rb");
 if (!fp) {
 fprintf(stderr, "Error: could not open file %s\n", pngFilePaths[i]);
 return 1; 
@@ -147,8 +145,9 @@ const pngFilePaths = [];
 for (let j = 1; j <= ii; j++) {
 pngFilePaths.push('/frame' + j + '.png');
 }
+const cStrings = pngFilePaths.map(path => Module.allocateUTF8(path));
 Module.ccall('runApng', 'number', ['array', 'array', 'number', 'number', 'number'], 
- [pngFilePaths, delays, ii, siz, siz]);
+ [cStrings, delays, ii, siz, siz]);
 return;
 }
 ii++;
