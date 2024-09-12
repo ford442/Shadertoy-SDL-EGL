@@ -1,14 +1,15 @@
 #include <emscripten.h>
 #include <emscripten/bind.h>
 #include <png.h>
+#include <sstream> // Include the necessary header for std::stringstream
 
 png_structp png_ptr_write;
 png_infop info_ptr_write;
 
 struct PngData {
-    png_bytep* rows;
-    png_uint_32 width;
-    png_uint_32 height;
+png_bytep* rows;
+png_uint_32 width;
+png_uint_32 height;
 };
 
 PngData decoded_png_data;
@@ -29,46 +30,46 @@ row_pointers[(CframeCount - 1) * height + y] = frame_data[CframeCount - 1] + y *
 }
 
 void read_png(FILE *fp, int sig_read) {
-    png_structp png_ptr;
-    png_infop info_ptr;
+png_structp png_ptr;
+png_infop info_ptr;
 
-    // Create read struct and check for errors
-    png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-    if (!png_ptr) {
-        fclose(fp);
-        fprintf(stderr, "Error: could not create PNG read struct\n");
-        return; 
-    }
+// Create read struct and check for errors
+png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
+if (!png_ptr) {
+fclose(fp);
+fprintf(stderr, "Error: could not create PNG read struct\n");
+return; 
+}
 
-    info_ptr = png_create_info_struct(png_ptr);
+info_ptr = png_create_info_struct(png_ptr);
 
-    // Set up error handling (you'll need to implement png_error and png_warning)
+// Set up error handling (you'll need to implement png_error and png_warning)
 
-    png_init_io(png_ptr, fp);
-    png_set_sig_bytes(png_ptr, sig_read);
+png_init_io(png_ptr, fp);
+png_set_sig_bytes(png_ptr, sig_read);
 
-    // Read the image information
-    png_read_info(png_ptr, info_ptr);
+// Read the image information
+png_read_info(png_ptr, info_ptr);
 
-    png_uint_32 width, height;
-    int bit_depth, color_type, interlace_type;
-    png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type,
-                 &interlace_type, NULL,   
+png_uint_32 width, height;
+int bit_depth, color_type, interlace_type;
+png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type,
+ &interlace_type, NULL, 
  NULL);
 
-    decoded_png_data.width = width;
-    decoded_png_data.height = height;
+decoded_png_data.width = width;
+decoded_png_data.height = height;
 
-    // Allocate memory for row pointers and read the image data
-    decoded_png_data.rows = (png_bytep*) malloc(sizeof(png_bytep) * height);
-    for (int y = 0; y < height; y++) {
-        decoded_png_data.rows[y] = (png_byte*) malloc(png_get_rowbytes(png_ptr, info_ptr));
-    }
+// Allocate memory for row pointers and read the image data
+decoded_png_data.rows = (png_bytep*) malloc(sizeof(png_bytep) * height);
+for (int y = 0; y < height; y++) {
+decoded_png_data.rows[y] = (png_byte*) malloc(png_get_rowbytes(png_ptr, info_ptr));
+}
 
-    png_read_image(png_ptr, decoded_png_data.rows);
+png_read_image(png_ptr, decoded_png_data.rows);
 
-    // Clean up
-    png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
+// Clean up
+png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
 }
 
 
@@ -78,24 +79,27 @@ int runApng(const char** pngFilePaths, int* delays, int num_frames, int width, i
 // Create the APNG write struct
 png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 if (!png_ptr_write) {
-    fprintf(stderr, "Error: could not create PNG write struct\n");
-    return 1; // Indicate an error
+fprintf(stderr, "Error: could not create PNG write struct\n");
+return 1; // Indicate an error
 }
 // Create the APNG info struct
 info_ptr_write = png_create_info_struct(png_ptr_write);
 if (!info_ptr_write) {
-    png_destroy_write_struct(&png_ptr_write, nullptr);
-    fprintf(stderr, "Error: could not create PNG info struct\n");
-    return 1; // Indicate an error
+png_destroy_write_struct(&png_ptr_write, nullptr);
+fprintf(stderr, "Error: could not create PNG info struct\n");
+return 1; // Indicate an error
 }
-    png_set_IHDR(png_ptr_write, info_ptr_write, width, height, 8, PNG_COLOR_TYPE_RGBA,
+png_set_IHDR(png_ptr_write, info_ptr_write, width, height, 8, PNG_COLOR_TYPE_RGBA,
  PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 // Write animation control chunk (acTL) using png_set_acTL
 png_set_acTL(png_ptr_write, info_ptr_write, num_frames, 0); 
 // Read and write each frame
 for (int i = 0; i < num_frames; ++i) {
 // Open the PNG file from Emscripten FS
-FILE* fp = fopen('/frame'+i+'.png', "rb");
+std::stringstream ss;
+ss << "/frame" << (i + 1) << ".png"; // Start frame numbering from 1
+std::string fileName = ss.str();
+FILE* fp = fopen(fileName.c_str(), "rb"); 
 if (!fp) {
 fprintf(stderr, "Error: could not open file %s\n", pngFilePaths[i]);
 return 1; 
