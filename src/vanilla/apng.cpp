@@ -97,7 +97,7 @@ png_set_acTL(png_ptr_write, info_ptr_write, num_frames, 0);
 for (int i = 0; i < num_frames; ++i) {
 // Open the PNG file from Emscripten FS
 std::stringstream ss;
-ss << "/frame" << (i + 1) << ".png";
+ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName = ss.str();
 FILE* fp = fopen(fileName.c_str(), "rb");
 if (!fp) {
@@ -133,7 +133,7 @@ return 0;
 int main(){
 
 EM_ASM({
-
+FS.mkdir('/frames');
 document.getElementById("apngBtn").addEventListener('click',function(){
 const acanvas = document.querySelector("#scanvas");
 const siz = parseInt(acanvas.height);
@@ -143,19 +143,14 @@ const delays = [100];
 function render() {
 if (ii > 21) {
 // Animation complete, assemble APNG
-const pngFilePaths = [];
-for (let j = 1; j <= ii; j++) {
-pngFilePaths.push('/frame' + j + '.png');
-}
-Module.ccall('runApng', 'number', ['array', 'number', 'number', 'number'], 
- [delays, ii, siz, siz]);
+Module.ccall('runApng', 'number', ['array', 'number', 'number', 'number'],  [delays, ii, siz, siz]);
 return;
 }
 ii++;
 console.log('Frame: ', ii);
 const dataURL = acanvas.toDataURL('image/png', 1.0);
-const fileStream = FS.open('/frame' + ii + '.png', 'w+', { encoding: 'binary' });
- console.log('/frame' + ii + '.png');
+const fileStream = FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' });
+ console.log('/frames/frame' + ii + '.png');
 const encoder = new TextEncoder(); // To convert the string to Uint8Array
 const uint8Array = encoder.encode(dataURL);
 FS.write(fileStream, uint8Array, 0, uint8Array.length, 0); 
