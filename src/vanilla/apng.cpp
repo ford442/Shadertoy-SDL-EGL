@@ -75,7 +75,7 @@ void read_png(FILE *fp, int sig_read) {
 extern "C" {
 int runApng(const char** pngFilePaths, int* delays, int num_frames, int width, int height) {
 // ... (Create APNG write and info structs, set up error handling) ... 
-// Initialize PNG writing
+png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 png_set_IHDR(png_ptr_write, info_ptr_write, width, height, 8, PNG_COLOR_TYPE_RGBA,
  PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 // Write animation control chunk (acTL) using png_set_acTL
