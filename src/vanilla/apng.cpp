@@ -120,10 +120,9 @@ EM_ASM({
 
 document.getElementById("apngBtn").addEventListener('click',function(){
 const acanvas = document.querySelector("#scanvas");
-const ctx = acanvas.getContext("2d");
 const siz = parseInt(acanvas.height);
 let ii = 0;
-const delays = []; 
+const delays = [100]; 
 
 function render() {
 if (ii > 21) {
