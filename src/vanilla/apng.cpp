@@ -33,8 +33,7 @@ void read_png(FILE *fp, int sig_read) {
    png_uint_32 width, height;
    int bit_depth, color_type, interlace_type;    // After reading the image information
     png_read_info(png_ptr, info_ptr);
-    png_get_IHDR(png_ptr, info_ptr, &decoded_png_data.width, &decoded_png_data.height, &bit_depth, &color_type,
-                 &interlace_type, NULL, NULL);
+png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type,&interlace_type, NULL,NULL);
     // Allocate memory for row pointers and read the image data
     decoded_png_data.rows = (png_bytep*) malloc(sizeof(png_bytep) * decoded_png_data.height);
     for (int y = 0; y < decoded_png_data.height; y++) {
