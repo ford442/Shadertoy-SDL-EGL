@@ -27,7 +27,6 @@ generate();
 }
 
 }
-
 void assembleAndSaveAnimatedPNG(png_bytep* frame_data, png_bytepp* row_pointers, int num_frames, int width, int height, int* delays) {
     // ... (Create APNG write and info structs, set up error handling) ... 
     // Initialize PNG writing
@@ -37,9 +36,10 @@ void assembleAndSaveAnimatedPNG(png_bytep* frame_data, png_bytepp* row_pointers,
     png_set_acTL(png_ptr_write, info_ptr_write, num_frames, 0); // 0 for infinite loop
     // Write each frame
     for (int i = 0; i < num_frames; ++i) {
-        // Write frame control chunk (fcTL)
-        png_write_fcTL(png_ptr_write, info_ptr_write, width, height, 0, 0, delays[i] / 1000.0, 
-                       PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE);
+        // Write frame control chunk (fcTL) using png_set_next_frame_fcTL
+        png_set_next_frame_fcTL(png_ptr_write, info_ptr_write, width, height, 0, 0, 
+                                delays[i] * 1000 / 1000, 1000, // Convert delay to seconds (numerator/denominator)
+                                PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
         // Write the image data for the frame
         png_write_image(png_ptr_write, row_pointers + i * height);
     }
