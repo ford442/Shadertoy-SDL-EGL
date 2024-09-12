@@ -108,8 +108,8 @@ EM_ASM({
 document.getElementById("apngBtn").addEventListener('click',function(){
 const acanvas = document.querySelector("#scanvas");
 const ctx = acanvas.getContext("2d");
-const siz = acanvas.height;
-let ii = 0;
+const siz = parseInt(acanvas.height);
+let ii = parseInt(0);
 const delays = []; // Array to store delays for each frame
 
 function render() {
