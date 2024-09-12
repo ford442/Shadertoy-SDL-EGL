@@ -41,7 +41,7 @@ void assembleAndSaveAnimatedPNG(png_bytep* frame_data, png_bytepp* row_pointers,
                                 delays[i] * 1000 / 1000, 1000, // Convert delay to seconds (numerator/denominator)
                                 PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
         // Write the image data for the frame
-        png_write_image(png_ptr_write, row_pointers + i * height);
+        png_write_image(png_ptr_write, *(row_pointers + i * height)); 
     }
     // ... (rest of the function)
 }
