@@ -269,7 +269,7 @@ b3_onnx6_safe:
 
 
 b3_apng:
-	 em++ src/vanilla/apng.cpp $(STDS) -I/content/RAMDRIVE2/libpng-1.6.39/ -fPIC -m64 -flto -flto=thin -pipe -ffp-contract=fast -fexcess-precision=fast \
+	 em++ src/vanilla/apng.cpp $(STDS) -I/content/RAMDRIVE2/libpng-1.6.39/ -lpng -fPIC -m64 -flto -flto=thin -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O3 -fno-strict-aliasing $(SIMD_FLAGS) -sMEMORY64=1 -c -fno-rounding-math -fcx-limited-range -fassociative-math -freciprocal-math -fno-signed-zeros
