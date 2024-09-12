@@ -10,6 +10,7 @@ png_bytep* rows;
 int width;
 int height;
 };
+
 PngData decoded_png_data;
 
 png_bytep* frame_data = nullptr;
@@ -122,6 +123,7 @@ const pngFilePaths = [];
 for (let j = 1; j <= ii; j++) {
 pngFilePaths.push('/frame' + j + '.png');
 }
+ console.log(pngFilePaths);
 Module.ccall('runApng', 'number', ['array', 'array', 'number', 'number', 'number'], [pngFilePaths, delays, ii, siz, siz]);
 return;
 }else{
