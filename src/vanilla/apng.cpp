@@ -59,8 +59,6 @@ png_set_IHDR(png_ptr_write, info_ptr_write, width, height, 8, PNG_COLOR_TYPE_RGB
 png_set_acTL(png_ptr_write, info_ptr_write, num_frames, 0); 
 
  // Read and write each frame
-
- 
 for (int i = 0; i < num_frames; ++i) {
 std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
@@ -133,7 +131,7 @@ return;
 }
 ii++;
 const dataURL = acanvas.toDataURL('image/png', 1.0);
-const fileStream = FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' },[0777]);
+const fileStream = FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' });
  console.log('/frames/frame' + ii + '.png');
 const encoder = new TextEncoder(); // To convert the string to Uint8Array
 const uint8Array = encoder.encode(dataURL);
