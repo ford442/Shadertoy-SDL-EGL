@@ -2,12 +2,6 @@
 #include <emscripten/bind.h>
 #include <png.h>
 #include <sstream> // Include the necessary header for std::stringstream
-#include <boost/filesystem/fstream.hpp>
-namespace fsm = boost::filesystem;
-#include <fstream>
-#include <stdio.h>
-#include <streambuf>
-#include <iostream>
 
 png_structp png_ptr_write;
 png_infop info_ptr_write;
@@ -57,29 +51,22 @@ int runApng(int* delays, int num_frames, int width, int height) {
 // ... (Create APNG write and info structs, set up error handling) ... 
 // Create the APNG write struct
 png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-if (!png_ptr_write) {
-fprintf(stderr, "Error: could not create PNG write struct\n");
-return 1; // Indicate an error
-}
 // Create the APNG info struct
 info_ptr_write = png_create_info_struct(png_ptr_write);
-if (!info_ptr_write) {
-png_destroy_write_struct(&png_ptr_write, nullptr);
-fprintf(stderr, "Error: could not create PNG info struct\n");
-return 1; // Indicate an error
-}
 png_set_IHDR(png_ptr_write, info_ptr_write, width, height, 8, PNG_COLOR_TYPE_RGBA,
  PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-// Write animation control chunk (acTL) using png_set_acTL
 png_set_acTL(png_ptr_write, info_ptr_write, num_frames, 0); 
-// Read and write each frame
+
+ // Read and write each frame
+
+ 
 for (int i = 0; i < num_frames; ++i) {
-// Open the PNG file from Emscripten FS
 std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName = ss.str();
-// fsm::ifstream fp(fileName.c_str(),std::ios::binary);
-FILE* fp = fopen(fileName.c_str(), "r");
+// FILE * fp = fopen(fileName.c_str(), "r");
+FILE * fp = fopen("/frames/frame5.png", "r");
+ 
 // Read the PNG file
 read_png(fp, 0); 
 // Write frame control chunk (fcTL)
@@ -96,12 +83,11 @@ free(decoded_png_data.rows[y]);
 free(decoded_png_data.rows);
 }
 
+ 
 // End the write operation
 png_write_end(png_ptr_write, info_ptr_write);
-
 // Clean up
 png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
-
 return 0; 
 }
 }
@@ -109,7 +95,9 @@ return 0;
 int main(){
 
 EM_ASM({
+
 FS.mkdir('/frames');
+
 document.getElementById("apngBtn").addEventListener('click',function(){
 const acanvas = document.querySelector("#scanvas");
 const siz = parseInt(acanvas.height);
@@ -141,9 +129,8 @@ render();
 }, 16);
 }
 
-setTimeout(function() {
 render(); 
-}, 100); 
+
 });
 
 });
