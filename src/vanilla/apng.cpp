@@ -120,7 +120,7 @@ const delays = [500];
 function render() {
 totalFrames++;
 if (totalFrames%30==0) {
-if (ii > 10) {
+if (ii > 9) {
 // Animation complete, assemble APNG
 Module.ccall('runApng', 'number', ['array', 'number', 'number', 'number'],  [delays, ii, siz, siz]);
 return;
