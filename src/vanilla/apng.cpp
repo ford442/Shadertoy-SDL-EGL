@@ -61,18 +61,18 @@ FILE* fp = fopen(fileName.c_str(), "r");
     }
     printf("\n");
     rewind(fp);// Read the PNG file
-// read_png(fp, 0);
-//  png_set_next_frame_fcTL(png_ptr_write, info_ptr_write, decoded_png_data.width, decoded_png_data.height, 0, 0, 
-//  static_cast<png_uint_16>(delay), 1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
-//  png_write_image(png_ptr_write, decoded_png_data.rows);
+read_png(fp, 0);
+png_set_next_frame_fcTL(png_ptr_write, info_ptr_write, decoded_png_data.width, decoded_png_data.height, 0, 0, 
+static_cast<png_uint_16>(delay), 1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
+png_write_image(png_ptr_write, decoded_png_data.rows);
 fclose(fp);
-// for (int y = 0; y < decoded_png_data.height; y++) {
-// free(decoded_png_data.rows[y]);
-// }
-// free(decoded_png_data.rows);
+for (int y = 0; y < decoded_png_data.height; y++) {
+free(decoded_png_data.rows[y]);
 }
-// png_write_end(png_ptr_write, info_ptr_write);
-// png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
+free(decoded_png_data.rows);
+}
+png_write_end(png_ptr_write, info_ptr_write);
+png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
 return 0; 
 }
 }
@@ -92,7 +92,7 @@ function render() {
 totalFrames++;
 if (totalFrames%30==0) {
 if (ii > 10) {
-Module.ccall('runApng', null, ['number', 'number', 'number'],  [delay, ii, siz]);
+Module.ccall('runApng', ['number', 'number', 'number'],  [delay, ii, siz]);
 return;
 }
 ii++;
