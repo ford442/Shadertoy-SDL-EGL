@@ -49,7 +49,7 @@ decoded_png_data.rows[y] = (png_byte*) malloc(png_get_rowbytes(png_ptr, info_ptr
 }
 png_read_image(png_ptr, decoded_png_data.rows);
 // Clean up
-    png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
+png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
 }
 
 extern "C" {
@@ -122,7 +122,7 @@ totalFrames++;
 if (totalFrames%30==0) {
 if (ii > 9) {
 // Animation complete, assemble APNG
-  console.log('Directory: ',FS.readdir('/frames');
+  console.log('Directory: ',FS.readdir('/frames'));
 Module.ccall('runApng', 'number', ['array', 'number', 'number', 'number'],  [delays, ii, siz, siz]);
 return;
 }
