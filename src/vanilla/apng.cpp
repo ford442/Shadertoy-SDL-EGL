@@ -30,11 +30,6 @@ png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullpt
 info_ptr = png_create_info_struct(png_ptr);
 // Set up error handling (you'll need to implement png_error and png_warning)
 png_init_io(png_ptr, fp);
-    png_set_read_fn(png_ptr, (void*)&fp, [](png_structp png_ptr, png_bytep data, png_size_t length) {
-        fsm::ifstream* stream = (fsm::ifstream*)png_get_io_ptr(png_ptr);
-        stream->read((char*)data, length);
-        return (png_uint_32)stream->gcount(); // Return the number of bytes actually read
-    });
 png_set_sig_bytes(png_ptr, sig_read);
 // Read the image information
 png_read_info(png_ptr, info_ptr);
@@ -79,7 +74,7 @@ for (int i = 0; i < num_frames; ++i) {
 std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName = ss.str();
- fsm::ifstream fp(fileName.c_str(),std::ios::binary);
+// fsm::ifstream fp(fileName.c_str(),std::ios::binary);
 // FILE* fp = fopen(fileName.c_str(), "r");
 // Read the PNG file
 read_png(fp, 0); 
