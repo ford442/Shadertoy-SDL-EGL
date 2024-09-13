@@ -78,9 +78,9 @@ return;
 
 extern "C" {
 
-int runApng(int delay, int num_frames, int size) {
+void runApng(int delay, int num_frames, int size) {
 runApngC(delay, num_frames, size);
-return 0;
+return;
 }
 
 }
@@ -100,7 +100,7 @@ function render() {
 totalFrames++;
 if (totalFrames%30==0) {
 if (ii > 10) {
-Module.ccall('runApng','number', ['number', 'number', 'number'],  [delay, ii, siz]);
+Module.ccall('runApng',null, ['number', 'number', 'number'],  [delay, ii, siz]);
 return;
 }
 ii++;
