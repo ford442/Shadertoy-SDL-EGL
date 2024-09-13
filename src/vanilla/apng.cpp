@@ -89,7 +89,7 @@ FILE* fp = fopen(fileName.c_str(), "r");
     
 read_png(fp, 0);
 
-    /*
+}/*
 // Write frame control chunk (fcTL)
 png_set_next_frame_fcTL(png_ptr_write, info_ptr_write, decoded_png_data.width, decoded_png_data.height, 0, 0, 
 static_cast<png_uint_16>(delays[i]), 1000, 
