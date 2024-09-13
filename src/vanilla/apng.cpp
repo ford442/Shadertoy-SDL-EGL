@@ -92,7 +92,7 @@ function render() {
 totalFrames++;
 if (totalFrames%30==0) {
 if (ii > 10) {
-Module.ccall('runApng', 'number', ['number', 'number', 'number'],  [delay, ii, siz]);
+Module.ccall('runApng', null, ['number', 'number', 'number'],  [delay, ii, siz]);
 return;
 }
 ii++;
