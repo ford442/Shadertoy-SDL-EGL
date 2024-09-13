@@ -124,7 +124,7 @@ return;
 ii++;
 console.log('Frame: ', ii);
 const dataURL = acanvas.toDataURL('image/png', 1.0);
-const fileStream = FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' });
+const fileStream = FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' },[0777]);
  console.log('/frames/frame' + ii + '.png');
 const encoder = new TextEncoder(); // To convert the string to Uint8Array
 const uint8Array = encoder.encode(dataURL);
