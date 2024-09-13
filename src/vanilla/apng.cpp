@@ -65,8 +65,8 @@ for (int i = 0; i < num_frames; ++i) {
 std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName = ss.str();
-// FILE * fp = fopen(fileName.c_str(), "r");
-FILE * fp = fopen("/frames/frame5.png", "r");
+FILE * fp = fopen(fileName.c_str(), "r");
+// FILE * fp = fopen("/frames/frame5.png", "r");
  
 // Read the PNG file
 read_png(fp, 0); 
