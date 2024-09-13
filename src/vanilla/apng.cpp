@@ -1,4 +1,4 @@
-#include <emscripten.h>
+#include <emscripten/emscripten.h>
 #include <emscripten/bind.h>
 #include <png.h>
 #include <sstream> // Include the necessary header for std::stringstream
@@ -138,7 +138,6 @@ const fileStream = FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'bin
 const encoder = new TextEncoder(); // To convert the string to Uint8Array
 const uint8Array = encoder.encode(dataURL);
 FS.write(fileStream, uint8Array, 0, uint8Array.length, 0); 
-FS.close(fileStream);
 }
 setTimeout(function(){
 render();
