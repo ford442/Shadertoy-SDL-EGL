@@ -41,7 +41,7 @@ png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
 }
 
 EMSCRIPTEN_KEEPALIVE
-int writePNG(const unsigned char* imageData, int frameNumber, int width, int height) {
+int writePNG(const unsigned char* imageData, int frameNumber, int size) {
 png_structp png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 if (!png_ptr) {
 fprintf(stderr, "Error: could not create PNG write struct\n");
@@ -69,12 +69,12 @@ fprintf(stderr, "Error: could not open file %s\n", fileName.c_str());
 return 1;
 }
 png_init_io(png_ptr, fp);
-png_set_IHDR(png_ptr, info_ptr, width, height, 8, PNG_COLOR_TYPE_RGBA,
+png_set_IHDR(png_ptr, info_ptr, size, size, 8, PNG_COLOR_TYPE_RGBA,
  PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 png_write_info(png_ptr, info_ptr); 
-png_bytep* row_pointers = (png_bytep*)malloc(sizeof(png_bytep) * height);
-for (int y = 0; y < height; ++y) {
-row_pointers[y] = (png_bytep)(imageData + y * width * 4);
+png_bytep* row_pointers = (png_bytep*)malloc(sizeof(png_bytep) * size);
+for (int y = 0; y < size; ++y) {
+row_pointers[y] = (png_bytep)(imageData + y * size * 4);
 }
 png_write_image(png_ptr, row_pointers);
 png_write_end(png_ptr, nullptr);
@@ -85,10 +85,10 @@ free(row_pointers);
 return 0; // Indicate success
 }
 
-int assembleAPNG(int* delays, int num_frames, int width, int height) {
+int assembleAPNG(int* delays, int num_frames, int size) {
 png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_ptr_write = png_create_info_struct(png_ptr_write);
-png_set_IHDR(png_ptr_write, info_ptr_write, width, height, 8, PNG_COLOR_TYPE_RGBA,
+png_set_IHDR(png_ptr_write, info_ptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA,
 PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 png_set_acTL(png_ptr_write, info_ptr_write, num_frames, 0); 
 
