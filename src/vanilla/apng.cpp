@@ -122,6 +122,7 @@ totalFrames++;
 if (totalFrames%30==0) {
 if (ii > 9) {
 // Animation complete, assemble APNG
+  console.log('Directory: ',FS.readdir('/frames');
 Module.ccall('runApng', 'number', ['array', 'number', 'number', 'number'],  [delays, ii, siz, siz]);
 return;
 }
