@@ -18,7 +18,7 @@ png_bytep* frame_data = nullptr;
 png_bytepp row_pointers = nullptr;
 int height=1024;
 int CframeCount=10;
-int num_frames = 20;
+int num_frames = 10;
 
 void read_png(FILE *fp, int sig_read) {
 png_structp png_ptr;
@@ -122,7 +122,7 @@ const delays = [500];
 function render() {
 totalFrames++;
 if (totalFrames%30==0) {
-if (ii > 20) {
+if (ii > 10) {
 // Animation complete, assemble APNG
 Module.ccall('runApng', 'number', ['array', 'number', 'number', 'number'],  [delays, ii, siz, siz]);
 return;
