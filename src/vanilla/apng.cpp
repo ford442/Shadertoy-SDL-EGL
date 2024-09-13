@@ -75,7 +75,7 @@ png_set_acTL(png_ptr_write, info_ptr_write, num_frames, 0);
 for (int i = 0; i < num_frames; ++i) {
 // Open the PNG file from Emscripten FS
 std::stringstream ss;
-ss << "/frames/frame" << (i + 1) << ".png";
+ss << "frames/frame" << (i + 1) << ".png";
 std::string fileName = ss.str();
 FILE* fp = fopen(fileName.c_str(), "rb");
 if (!fp) {
@@ -117,7 +117,7 @@ const acanvas = document.querySelector("#scanvas");
 const siz = parseInt(acanvas.height);
 let ii = 0;
 let totalFrames = 0;
-const delays = [100]; 
+const delays = [500]; 
 
 function render() {
 totalFrames++;
@@ -136,7 +136,6 @@ const encoder = new TextEncoder(); // To convert the string to Uint8Array
 const uint8Array = encoder.encode(dataURL);
 FS.write(fileStream, uint8Array, 0, uint8Array.length, 0); 
 FS.close(fileStream);
-delays.push(500);
 }
 setTimeout(function(){
 render();
