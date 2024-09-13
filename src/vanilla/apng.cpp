@@ -48,7 +48,7 @@ png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
 }
 
 extern "C" {
-int runApng(int* delays, int num_frames, int width, int height) {
+int runApng(int delay, int num_frames, int width, int height) {
 // ... (Create APNG write and info structs, set up error handling) ... 
 // Create the APNG write struct
 png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
@@ -72,7 +72,7 @@ FILE * fp = fopen(fileName.c_str(), "r");
 read_png(fp, 0); 
 // Write frame control chunk (fcTL)
 png_set_next_frame_fcTL(png_ptr_write, info_ptr_write, decoded_png_data.width, decoded_png_data.height, 0, 0, 
-static_cast<png_uint_16>(delays[i]), 1000, 
+static_cast<png_uint_16>(delay), 1000, 
 PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
 // Write the image data for the frame
 png_write_image(png_ptr_write, decoded_png_data.rows);
@@ -104,7 +104,7 @@ const acanvas = document.querySelector("#scanvas");
 const siz = parseInt(acanvas.height);
 let ii = 0;
 let totalFrames = 0;
-const delays = [500]; 
+const delay = 500; 
 
 function render() {
 totalFrames++;
@@ -112,7 +112,7 @@ if (totalFrames%30==0) {
 if (ii > 9) {
 // Animation complete, assemble APNG
   console.log('Directory: ',FS.readdir('/frames'));
-Module.ccall('runApng', 'number', ['array', 'number', 'number', 'number'],  [delays, ii, siz, siz]);
+Module.ccall('runApng', 'number', ['number', 'number', 'number', 'number'],  [delay, ii, siz, siz]);
 return;
 }
 ii++;
