@@ -275,7 +275,7 @@ b3_apng:
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O3 -fno-strict-aliasing $(SIMD_FLAGS) -c -fno-rounding-math -fcx-limited-range -fassociative-math -freciprocal-math -fno-signed-zeros
 	 em++ -sUSE_LIBPNG=1 -O3 -I/content/RAMDRIVE2/libpng-1.6.43/ -L/content/RAMDRIVE2/libpng-1.6.43/.libs \
-	 -lpng16 -fPIE -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m32 -sMALLOC=mimalloc -sWASMFS=0 -sLEGALIZE_JS_FFI=1 \
+	 -lpng16 -fPIE -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m32 -sMALLOC=mimalloc -sWASMFS=1 -sLEGALIZE_JS_FFI=1 \
 	 -sWASM_BIGINT=0 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -stdlib=libc++ -sUSE_ES6_IMPORT_META=0  -fno-rounding-math -fassociative-math -freciprocal-math -fno-signed-zeros \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
@@ -289,7 +289,7 @@ b3_apng:
 	 -sABORT_ON_WASM_EXCEPTIONS=0 -sEMULATE_FUNCTION_POINTER_CASTS=1 \
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sAUTO_NATIVE_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=1 -sIGNORE_MISSING_MAIN=0 \
-	 -sASYNCIFY=0 -sEXPORTED_FUNCTIONS='["_main","_runApng"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 -sASYNCIFY=1 -sEXPORTED_FUNCTIONS='["_main","_runApng"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 apng.o --output_eol linux -rtlib=compiler-rt --closure 0 \
 	 -sMODULARIZE=1 -sEXPORT_ES6=0 -sEXPORT_NAME='libapng' -sSUPPORT_LONGJMP=emscripten -sDISABLE_EXCEPTION_CATCHING=1
 
