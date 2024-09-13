@@ -4,6 +4,10 @@
 #include <sstream> // Include the necessary header for std::stringstream
 #include <boost/filesystem/fstream.hpp>
 namespace fsm = boost::filesystem;
+#include <fstream>
+#include <stdio.h>
+#include <streambuf>
+#include <iostream>
 
 png_structp png_ptr_write;
 png_infop info_ptr_write;
