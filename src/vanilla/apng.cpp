@@ -67,8 +67,22 @@ ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName = ss.str();
 FILE * fp = fopen(fileName.c_str(), "r");
 // FILE * fp = fopen("/frames/frame5.png", "r");
- 
-// Read the PNG file
+  if (!fp) {
+      fprintf(stderr, "Error: could not open file %s\n", fileName.c_str());
+      return 1; 
+    }
+
+    // Read and print the first 8 bytes (PNG signature)
+    unsigned char header[8];
+    fread(header, 1, 8, fp);
+    printf("File Header for %s: ", fileName.c_str());
+    for (int j = 0; j < 8; j++) {
+      printf("%02X ", header[j]); 
+    }
+    printf("\n");
+
+    // Rewind the file pointer to the beginning
+    rewind(fp);// Read the PNG file
 read_png(fp, 0); 
 // Write frame control chunk (fcTL)
 png_set_next_frame_fcTL(png_ptr_write, info_ptr_write, decoded_png_data.width, decoded_png_data.height, 0, 0, 
@@ -102,6 +116,8 @@ FS.mkdir('/frames');
 document.getElementById("apngBtn").addEventListener('click',function(){
 const acanvas = document.querySelector("#scanvas");
 const siz = parseInt(acanvas.height);
+ let outputFrames = 10;
+
 let ii = 0;
 let totalFrames = 0;
 const delay = 500; 
@@ -109,14 +125,13 @@ const delay = 500;
 function render() {
 totalFrames++;
 if (totalFrames%30==0) {
-if (ii > 9) {
+if (ii > outputFrames-1) {
 // Animation complete, assemble APNG
-  console.log('Directory: ',FS.readdir('/frames'));
-Module.ccall('runApng', 'number', ['number', 'number', 'number', 'number'],  [delay, ii, siz, siz]);
+//  console.log('Directory: ',FS.readdir('/frames'));
+Module.ccall('runApng', NULL, ['number', 'number', 'number', 'number'],  [delay, ii, siz, siz]);
 return;
 }
 ii++;
-console.log('Frame: ', ii);
 const dataURL = acanvas.toDataURL('image/png', 1.0);
 const fileStream = FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' },[0777]);
  console.log('/frames/frame' + ii + '.png');
