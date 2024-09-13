@@ -69,6 +69,7 @@ png_set_IHDR(png_ptr_write, info_ptr_write, width, height, 8, PNG_COLOR_TYPE_RGB
 // Write animation control chunk (acTL) using png_set_acTL
 png_set_acTL(png_ptr_write, info_ptr_write, num_frames, 0); 
 // Read and write each frame
+    
 for (int i = 0; i < num_frames; ++i) {
 // Open the PNG file from Emscripten FS
 std::stringstream ss;
@@ -88,8 +89,7 @@ FILE* fp = fopen(fileName.c_str(), "r");
     rewind(fp);// Read the PNG file
     
 read_png(fp, 0);
-
-}/*
+/*
 // Write frame control chunk (fcTL)
 png_set_next_frame_fcTL(png_ptr_write, info_ptr_write, decoded_png_data.width, decoded_png_data.height, 0, 0, 
 static_cast<png_uint_16>(delays[i]), 1000, 
@@ -102,12 +102,13 @@ for (int y = 0; y < decoded_png_data.height; y++) {
 free(decoded_png_data.rows[y]);
 }
 free(decoded_png_data.rows);
+    */
 }
 // End the write operation
 png_write_end(png_ptr_write, info_ptr_write);
 // Clean up
 png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
-*/
+
 return 0; 
 }
 }
