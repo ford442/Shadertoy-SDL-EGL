@@ -2,6 +2,7 @@
 #include <emscripten/bind.h>
 #include <png.h>
 #include <sstream> // Include the necessary header for std::stringstream
+#include <boost/filesystem/fstream.hpp>
 
 png_structp png_ptr_write;
 png_infop info_ptr_write;
@@ -77,11 +78,8 @@ for (int i = 0; i < num_frames; ++i) {
 std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName = ss.str();
-FILE* fp = fopen(fileName.c_str(), "r");
-if (!fp) {
-fprintf(stderr, "Error: could not open file %s\n", fileName.c_str());
-return 1; 
-}
+ fsm::ifstream fp(fileName.c_str(),std::ios::binary);
+// FILE* fp = fopen(fileName.c_str(), "r");
 // Read the PNG file
 read_png(fp, 0); 
 // Write frame control chunk (fcTL)
