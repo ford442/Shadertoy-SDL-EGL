@@ -134,13 +134,14 @@ return;
 }
 ii++;
 console.log('Frame: ', ii);
-const dataURL = acanvas.toDataURL('image/png', 1.0);
-const fileStream = FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' });
- console.log('/frames/frame' + ii + '.png');
-const encoder = new TextEncoder(); // To convert the string to Uint8Array
-const uint8Array = encoder.encode(dataURL);
-FS.write(fileStream, uint8Array, 0, uint8Array.length, 0); 
-FS.close(fileStream);
+   const dataURL = acanvas.toDataURL('image/png', 1.0);
+      // Extract the base64-encoded PNG data from the data URL
+      const base64Data = dataURL.split(',')[1];
+      // Decode the base64 data into a Uint8Array
+      const pngData = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
+      const fileStream = FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' });
+      FS.write(fileStream, pngData, 0, pngData.length, 0); 
+      FS.close(fileStream);
 }
 setTimeout(function(){
 render();
