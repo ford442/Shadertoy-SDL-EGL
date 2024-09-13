@@ -95,7 +95,8 @@ vvi.height=vh$;
 vvi.width=vw$;
 let w$=parseInt(document.querySelector("#mvi").width);
 let h$=parseInt(document.querySelector("#mvi").height);
-let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
+let srsiz=document.querySelector('#srsiz').innerHTML;
+let vsiz=document.querySelector('#vsiz').innerHTML;
 if(running==0){
 setTimeout(function(){
 Module.ccall("startWebGPUi",null,"Number",[vsiz,srsiz]);
