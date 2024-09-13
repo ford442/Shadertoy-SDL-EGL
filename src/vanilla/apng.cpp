@@ -2,6 +2,7 @@
 #include <emscripten/bind.h>
 #include <png.h>
 #include <sstream> // Include the necessary header for std::stringstream
+#include <cstdio> 
 
 png_structp png_ptr_write;
 png_infop info_ptr_write;
