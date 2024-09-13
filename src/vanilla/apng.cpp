@@ -109,20 +109,17 @@ return;
       tempCanvas.width = siz;
       tempCanvas.height = siz;
       const tempCtx = tempCanvas.getContext('2d');
-      tempCtx.drawImage(acanvas, 0, 0); // Copy the current frame to the temp canvas
+      tempCtx.drawImage(acanvas, 0, 0); 
 
       // Get the PNG blob directly from the temp canvas
       tempCanvas.toBlob((blob) => {
         const reader = new FileReader();
         reader.onloadend = () => {
           const pngData = new Uint8Array(reader.result);
-
           const fileStream = FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' });
           FS.write(fileStream, pngData, 0, pngData.length, 0); 
           FS.close(fileStream);
-
           delays.push(100); 
-
           setTimeout(function(){
             render();
           }, 100);
