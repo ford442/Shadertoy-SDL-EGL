@@ -66,13 +66,13 @@ FILE* fp = fopen(fileName.c_str(), "r");
 //  static_cast<png_uint_16>(delay), 1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
 //  png_write_image(png_ptr_write, decoded_png_data.rows);
 fclose(fp);
-for (int y = 0; y < decoded_png_data.height; y++) {
-free(decoded_png_data.rows[y]);
+// for (int y = 0; y < decoded_png_data.height; y++) {
+// free(decoded_png_data.rows[y]);
+// }
+// free(decoded_png_data.rows);
 }
-free(decoded_png_data.rows);
-}
-png_write_end(png_ptr_write, info_ptr_write);
-png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
+// png_write_end(png_ptr_write, info_ptr_write);
+// png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
 return 0; 
 }
 }
