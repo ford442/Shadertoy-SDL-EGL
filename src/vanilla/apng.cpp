@@ -116,10 +116,13 @@ document.getElementById("apngBtn").addEventListener('click',function(){
 const acanvas = document.querySelector("#scanvas");
 const siz = parseInt(acanvas.height);
 let ii = 0;
+let totalFrames = 0;
 const delays = [100]; 
 
 function render() {
-if (ii > 21) {
+totalFrames++;
+if (totalFrames%30==0) {
+if (ii > 20) {
 // Animation complete, assemble APNG
 Module.ccall('runApng', 'number', ['array', 'number', 'number', 'number'],  [delays, ii, siz, siz]);
 return;
@@ -133,10 +136,11 @@ const encoder = new TextEncoder(); // To convert the string to Uint8Array
 const uint8Array = encoder.encode(dataURL);
 FS.write(fileStream, uint8Array, 0, uint8Array.length, 0); 
 FS.close(fileStream);
-delays.push(100); 
+delays.push(500);
+}
 setTimeout(function(){
 render();
-}, 100);
+}, 16);
 }
 
 setTimeout(function() {
