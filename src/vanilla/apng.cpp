@@ -131,22 +131,37 @@ if (ii > 10) {
 // Animation complete, assemble APNG
 Module.ccall('runApng', 'number', ['array', 'number', 'number', 'number'],  [delays, ii, siz, siz]);
 return;
-}
-ii++;
-console.log('Frame: ', ii);
-   const dataURL = acanvas.toDataURL('image/png', 1.0);
-      // Extract the base64-encoded PNG data from the data URL
-      const base64Data = dataURL.split(',')[1];
-      // Decode the base64 data into a Uint8Array
-      const pngData = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
-      const fileStream = FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' });
-      FS.write(fileStream, pngData, 0, pngData.length, 0); 
-      FS.close(fileStream);
-}
-setTimeout(function(){
-render();
-}, 16);
-}
+  else {
+      ii++;
+      console.log('Frame: ', ii);
+
+      // Create a temporary canvas to hold the image data
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = siz;
+      tempCanvas.height = siz;
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCtx.drawImage(acanvas, 0, 0); // Copy the current frame to the temp canvas
+
+      // Get the PNG blob directly from the temp canvas
+      tempCanvas.toBlob((blob) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const pngData = new Uint8Array(reader.result);
+
+          const fileStream = FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' });
+          FS.write(fileStream, pngData, 0, pngData.length, 0); 
+          FS.close(fileStream);
+
+          delays.push(100); 
+
+          setTimeout(function(){
+            render();
+          }, 100);
+        };
+        reader.readAsArrayBuffer(blob);
+      }, 'image/png', 1.0); 
+    }
+  }
 
 setTimeout(function() {
 render(); 
