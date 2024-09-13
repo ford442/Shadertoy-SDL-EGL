@@ -75,9 +75,9 @@ png_set_acTL(png_ptr_write, info_ptr_write, num_frames, 0);
 for (int i = 0; i < num_frames; ++i) {
 // Open the PNG file from Emscripten FS
 std::stringstream ss;
-ss << "frames/frame" << (i + 1) << ".png";
+ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName = ss.str();
-FILE* fp = fopen(fileName.c_str(), "rb");
+FILE* fp = fopen(fileName.c_str(), "r");
 if (!fp) {
 fprintf(stderr, "Error: could not open file %s\n", fileName.c_str());
 return 1; 
