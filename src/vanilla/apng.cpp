@@ -76,7 +76,6 @@ ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName = ss.str();
 // fsm::ifstream fp(fileName.c_str(),std::ios::binary);
 FILE* fp = fopen(fileName.c_str(), "r");
-    
    // Read and print the first 8 bytes (PNG signature)
     unsigned char header[8];
     fread(header, 1, 8, fp);
@@ -89,6 +88,8 @@ FILE* fp = fopen(fileName.c_str(), "r");
     rewind(fp);// Read the PNG file
     
 read_png(fp, 0);
+
+    /*
 // Write frame control chunk (fcTL)
 png_set_next_frame_fcTL(png_ptr_write, info_ptr_write, decoded_png_data.width, decoded_png_data.height, 0, 0, 
 static_cast<png_uint_16>(delays[i]), 1000, 
@@ -102,13 +103,11 @@ free(decoded_png_data.rows[y]);
 }
 free(decoded_png_data.rows);
 }
-
 // End the write operation
 png_write_end(png_ptr_write, info_ptr_write);
-
 // Clean up
 png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
-
+*/
 return 0; 
 }
 }
