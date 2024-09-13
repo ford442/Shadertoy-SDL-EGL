@@ -1,7 +1,7 @@
 #include <emscripten.h>
 #include <emscripten/bind.h>
 #include <png.h>
-#include <sstream> // Include the necessary header for std::stringstream
+#include <sstream>
 #include <cstdio> 
 
 png_structp png_ptr_write;
@@ -24,20 +24,16 @@ int num_frames = 10;
 void read_png(FILE *fp, int sig_read) {
 png_structp png_ptr;
 png_infop info_ptr;
-// Create read struct and check for errors
 png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_ptr = png_create_info_struct(png_ptr);
-// Set up error handling (you'll need to implement png_error and png_warning)
 png_init_io(png_ptr, fp);
 png_set_sig_bytes(png_ptr, sig_read);
-// Read the image information
 png_read_info(png_ptr, info_ptr);
 png_uint_32 width, height;
 int bit_depth, color_type, interlace_type;
 png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type, &interlace_type, NULL,  NULL);
 decoded_png_data.width = width;
 decoded_png_data.height = height;
-// Allocate memory for row pointers and read the image data
 decoded_png_data.rows = (png_bytep*) malloc(sizeof(png_bytep) * height);
 for (int y = 0; y < height; y++) {
 decoded_png_data.rows[y] = (png_byte*) malloc(png_get_rowbytes(png_ptr, info_ptr));
@@ -57,8 +53,6 @@ std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName = ss.str();
 FILE* fp = fopen(fileName.c_str(), "r");
-    
-   // Read and print the first 8 bytes (PNG signature)
     unsigned char header[8];
     fread(header, 1, 8, fp);
     printf("File Header for %s: ", fileName.c_str());
@@ -66,17 +60,11 @@ FILE* fp = fopen(fileName.c_str(), "r");
       printf("%02X ", header[j]); 
     }
     printf("\n");
-    // Rewind the file pointer to the beginning
     rewind(fp);// Read the PNG file
-    
 read_png(fp, 0);
-// Write frame control chunk (fcTL)
 png_set_next_frame_fcTL(png_ptr_write, info_ptr_write, decoded_png_data.width, decoded_png_data.height, 0, 0, 
-static_cast<png_uint_16>(delays[i]), 1000, 
-PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
-// Write the image data for the frame
+static_cast<png_uint_16>(delays[i]), 1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
 png_write_image(png_ptr_write, decoded_png_data.rows);
-// Close the file and free memory allocated by read_png
 fclose(fp);
 for (int y = 0; y < decoded_png_data.height; y++) {
 free(decoded_png_data.rows[y]);
