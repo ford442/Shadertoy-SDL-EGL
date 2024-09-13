@@ -2,9 +2,8 @@
 #include <emscripten/bind.h>
 #include <png.h>
 #include <sstream> // Include the necessary header for std::stringstream
-#include <boost/filesystem/fstream.hpp>
-namespace fsm = boost::filesystem;
 #include <cstdio> 
+
 png_structp png_ptr_write;
 png_infop info_ptr_write;
 
@@ -44,37 +43,19 @@ for (int y = 0; y < height; y++) {
 decoded_png_data.rows[y] = (png_byte*) malloc(png_get_rowbytes(png_ptr, info_ptr));
 }
 png_read_image(png_ptr, decoded_png_data.rows);
-// Clean up
-    png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
+png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
 }
 
 extern "C" {
-int runApng(int* delays, int num_frames, int width, int height) {
-// ... (Create APNG write and info structs, set up error handling) ... 
-// Create the APNG write struct
+int runApng(int delay, int num_frames, int size) {
 png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-if (!png_ptr_write) {
-fprintf(stderr, "Error: could not create PNG write struct\n");
-return 1; // Indicate an error
-}
-// Create the APNG info struct
 info_ptr_write = png_create_info_struct(png_ptr_write);
-if (!info_ptr_write) {
-png_destroy_write_struct(&png_ptr_write, nullptr);
-fprintf(stderr, "Error: could not create PNG info struct\n");
-return 1; // Indicate an error
-}
-png_set_IHDR(png_ptr_write, info_ptr_write, width, height, 8, PNG_COLOR_TYPE_RGBA,
- PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-// Write animation control chunk (acTL) using png_set_acTL
+png_set_IHDR(png_ptr_write, info_ptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 png_set_acTL(png_ptr_write, info_ptr_write, num_frames, 0); 
-// Read and write each frame
 for (int i = 0; i < num_frames; ++i) {
-// Open the PNG file from Emscripten FS
 std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName = ss.str();
-// fsm::ifstream fp(fileName.c_str(),std::ios::binary);
 FILE* fp = fopen(fileName.c_str(), "r");
     
    // Read and print the first 8 bytes (PNG signature)
@@ -102,13 +83,8 @@ free(decoded_png_data.rows[y]);
 }
 free(decoded_png_data.rows);
 }
-
-// End the write operation
 png_write_end(png_ptr_write, info_ptr_write);
-
-// Clean up
 png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
-
 return 0; 
 }
 }
@@ -122,14 +98,13 @@ const acanvas = document.querySelector("#scanvas");
 const siz = parseInt(acanvas.height);
 let ii = 0;
 let totalFrames = 0;
-const delays = [500]; 
+const delay = 500; 
 
 function render() {
 totalFrames++;
 if (totalFrames%30==0) {
 if (ii > 10) {
-// Animation complete, assemble APNG
-Module.ccall('runApng', 'number', ['array', 'number', 'number', 'number'],  [delays, ii, siz, siz]);
+Module.ccall('runApng', 'number', ['number', 'number', 'number'],  [delays, ii, siz]);
 return;
 }
 ii++;
@@ -153,7 +128,6 @@ render();
 });
 
 });
-
 
 return 0;
 }
