@@ -77,7 +77,7 @@ Module.ccall("frmOn");
 }
 if (running == 0) {
 setTimeout(() => {
-Module.ccall("startWebGPUC", null,"Number",[vsiz,srsiz]);
+Module.ccall("startWebGPUC", null,["Number","Number"],[vsiz,srsiz]);
 running = 1;
 setInterval(drawFrame, 16.6); 
 }, 250);
@@ -99,13 +99,13 @@ let srsiz=document.querySelector('#srsiz').innerHTML;
 let vsiz=document.querySelector('#vsiz').innerHTML;
 if(running==0){
 setTimeout(function(){
-Module.ccall("startWebGPUi",null,"Number",[vsiz,srsiz]);
+Module.ccall("startWebGPUi",null,["Number","Number"],[vsiz,srsiz]);
 console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
-Module.ccall("startWebGPUbi",null,"Number",[vsiz,srsiz]);
+Module.ccall("startWebGPUbi",null,["Number","Number"],[vsiz,srsiz]);
 console.log('Starting..');
 },250);
 }
@@ -170,14 +170,14 @@ let h$=parseInt(document.querySelector("#ivi").height);
 if(running==0){
 setTimeout(function(){
 let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz,srsiz]);
+Module.ccall("startWebGPUi",null,["Number","Number"],[vsiz,srsiz]);
 console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
 let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,"Number",[vsiz,srsiz]);
+Module.ccall("startWebGPUbi",null,["Number","Number"],[vsiz,srsiz]);
 console.log('Starting..');
 },250);
 }
@@ -235,14 +235,14 @@ let h$=parseInt(document.querySelector("#ivi").height);
 if(running==0){
 setTimeout(function(){
 let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz,srsiz]);
+Module.ccall("startWebGPUi",null,["Number","Number"],[vsiz,srsiz]);
 console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
 let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,"Number",[vsiz,srsiz]);
+Module.ccall("startWebGPUbi",null,["Number","Number"],[vsiz,srsiz]);
 console.log('Starting..');
 },250);
 }
@@ -310,14 +310,14 @@ cnvb.width=SiZ;
 if(running==0){
 setTimeout(function(){
 let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,"Number",[vsiz,srsiz]);
+Module.ccall("startWebGPUi",null,["Number","Number"],[vsiz,srsiz]);
 console.log('Starting..');
 running=1;
 },50);
 }else{
 setTimeout(function(){
 let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,"Number",[vsiz,srsiz]);
+Module.ccall("startWebGPUbi",null,["Number","Number"],[vsiz,srsiz]);
 console.log('Starting..');
 },50);
 }
