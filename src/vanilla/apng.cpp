@@ -128,7 +128,7 @@ if (totalFrames%30==0) {
 if (ii > outputFrames-1) {
 // Animation complete, assemble APNG
 //  console.log('Directory: ',FS.readdir('/frames'));
-Module.ccall('runApng', NULL, ['number', 'number', 'number', 'number'],  [delay, ii, siz, siz]);
+Module.ccall('runApng', null, ['number', 'number', 'number', 'number'],  [delay, ii, siz, siz]);
 return;
 }
 ii++;
