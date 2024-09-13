@@ -25,13 +25,10 @@ int num_frames = 10;
 void read_png(FILE *fp, int sig_read) {
 png_structp png_ptr;
 png_infop info_ptr;
-// Create read struct and check for errors
 png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_ptr = png_create_info_struct(png_ptr);
-// Set up error handling (you'll need to implement png_error and png_warning)
 png_init_io(png_ptr, fp);
 png_set_sig_bytes(png_ptr, sig_read);
-// Read the image information
 png_read_info(png_ptr, info_ptr);
 png_uint_32 width, height;
 int bit_depth, color_type, interlace_type;
@@ -44,71 +41,43 @@ for (int y = 0; y < height; y++) {
 decoded_png_data.rows[y] = (png_byte*) malloc(png_get_rowbytes(png_ptr, info_ptr));
 }
 png_read_image(png_ptr, decoded_png_data.rows);
-// Clean up
-    png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
+png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
 }
 
 extern "C" {
+
 int runApng(int* delays, int num_frames, int width, int height) {
-// ... (Create APNG write and info structs, set up error handling) ... 
-// Create the APNG write struct
 png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-if (!png_ptr_write) {
-fprintf(stderr, "Error: could not create PNG write struct\n");
-return 1; // Indicate an error
-}
-// Create the APNG info struct
 info_ptr_write = png_create_info_struct(png_ptr_write);
-if (!info_ptr_write) {
-png_destroy_write_struct(&png_ptr_write, nullptr);
-fprintf(stderr, "Error: could not create PNG info struct\n");
-return 1; // Indicate an error
-}
 png_set_IHDR(png_ptr_write, info_ptr_write, width, height, 8, PNG_COLOR_TYPE_RGBA,
  PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-// Write animation control chunk (acTL) using png_set_acTL
 png_set_acTL(png_ptr_write, info_ptr_write, num_frames, 0); 
-// Read and write each frame
-    
+
 for (int i = 0; i < num_frames; ++i) {
-// Open the PNG file from Emscripten FS
 std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName = ss.str();
-// fsm::ifstream fp(fileName.c_str(),std::ios::binary);
 FILE* fp = fopen(fileName.c_str(), "r");
-   // Read and print the first 8 bytes (PNG signature)
     unsigned char header[8];
     fread(header, 1, 8, fp);
     printf("File Header for %s: ", fileName.c_str());
     for (int j = 0; j < 8; j++) {
-      printf("%02X ", header[j]); 
+    printf("%02X ", header[j]); 
     }
     printf("\n");
-    // Rewind the file pointer to the beginning
-    rewind(fp);// Read the PNG file
-    
+    rewind(fp);
 read_png(fp, 0);
-/*
-// Write frame control chunk (fcTL)
 png_set_next_frame_fcTL(png_ptr_write, info_ptr_write, decoded_png_data.width, decoded_png_data.height, 0, 0, 
-static_cast<png_uint_16>(delays[i]), 1000, 
-PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
-// Write the image data for the frame
+static_cast<png_uint_16>(delays[i]), 1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
 png_write_image(png_ptr_write, decoded_png_data.rows);
-// Close the file and free memory allocated by read_png
 fclose(fp);
 for (int y = 0; y < decoded_png_data.height; y++) {
 free(decoded_png_data.rows[y]);
 }
 free(decoded_png_data.rows);
-    */
 }
-// End the write operation
 png_write_end(png_ptr_write, info_ptr_write);
-// Clean up
 png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
-
 return 0; 
 }
 }
