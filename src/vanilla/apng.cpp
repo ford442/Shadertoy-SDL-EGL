@@ -75,7 +75,7 @@ std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName = ss.str();
 // fsm::ifstream fp(fileName.c_str(),std::ios::binary);
-// FILE* fp = fopen(fileName.c_str(), "r");
+FILE* fp = fopen(fileName.c_str(), "r");
 // Read the PNG file
 read_png(fp, 0); 
 // Write frame control chunk (fcTL)
