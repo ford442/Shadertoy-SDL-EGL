@@ -43,9 +43,7 @@ png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
 return;
 }
 
-extern "C" {
-
-void runApng(int delay, int num_frames, int size) {
+void runApngC(int delay, int num_frames, int size) {
 png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_ptr_write = png_create_info_struct(png_ptr_write);
 png_set_IHDR(png_ptr_write, info_ptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
@@ -77,6 +75,13 @@ png_write_end(png_ptr_write, info_ptr_write);
 png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
 return; 
 }
+
+extern "C" {
+
+void runApng(int delay, int num_frames, int size) {
+runApngC(delay, num_frames, size);
+}
+
 }
 
 int main(){
