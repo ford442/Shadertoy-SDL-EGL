@@ -78,8 +78,9 @@ return;
 
 extern "C" {
 
-void runApng(int delay, int num_frames, int size) {
+int runApng(int delay, int num_frames, int size) {
 runApngC(delay, num_frames, size);
+return 0;
 }
 
 }
