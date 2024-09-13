@@ -18,7 +18,7 @@ PngData decoded_png_data;
 
 png_bytep* frame_data = nullptr;
 png_bytepp row_pointers = nullptr;
-int height=1024;
+
 int CframeCount=10;
 int num_frames = 10;
 
