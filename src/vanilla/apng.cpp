@@ -135,7 +135,9 @@ writePNG(imageData,frameNumber,size);
 int main(){
 
 EM_ASM({
+ 
 FS.mkdir('/frames');
+
 document.getElementById("apngBtn").addEventListener('click',function(){
 const acanvas = document.querySelector("#scanvas");
 const ctx = acanvas.getContext("2d");
@@ -164,7 +166,7 @@ render();
 setTimeout(function() {
 render(); 
 }, 100); 
-});
+ 
 });
 
 });
