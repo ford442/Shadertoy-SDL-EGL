@@ -64,8 +64,8 @@ FILE* fp=fopen(fileName.c_str(), "r");
     }
     printf("\n");
     rewind(fp);// Read the PNG file
-read_png(fp, 0);
-png_set_next_frame_fcTL(png_ptr_write,info_ptr_write,decoded_png_data.width,decoded_png_data.height,0,0,500,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
+// read_png(fp, 0);
+// png_set_next_frame_fcTL(png_ptr_write,info_ptr_write,decoded_png_data.width,decoded_png_data.height,0,0,500,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
 // png_write_image(png_ptr_write, decoded_png_data.rows);
 fclose(fp);
 for (int y=0; y < decoded_png_data.height; y++) {
