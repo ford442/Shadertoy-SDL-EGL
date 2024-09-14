@@ -106,15 +106,9 @@ const dataURL=acanvas.toDataURL('image/png', 1.0);
 
       // Decode the base64 data into a Uint8Array
    //   const pngData = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
-let img = new Image();
-img.src = dataURL;// Get image data URL
-window.open(img);
-    for (let i = 0; i < pngData.length; i += 4) {
-          [pngData[i], pngData[i + 3]] = [pngData[i + 3], pngData[i]]; // Swap R and A
-          [pngData[i + 1], pngData[i + 2]] = [pngData[i + 2], pngData[i + 1]]; // Swap G and B
-        }
-img.src = pngData;
-window.open(img);
+var link = document.createElement('a');
+link.href =dataURL;
+window.open(href);
 
 const fileStream=FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' });
  console.log('/frames/frame' + ii + '.png');
