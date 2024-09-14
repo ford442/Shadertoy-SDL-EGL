@@ -106,15 +106,12 @@ const dataURL=acanvas.toDataURL('image/png', 1.0);
 
       // Decode the base64 data into a Uint8Array
    //   const pngData = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
-var link = document.createElement('a');
-link.href =dataURL;
-window.open(link);
 
 const fileStream=FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' });
  console.log('/frames/frame' + ii + '.png');
 // const encoder=new TextEncoder(); // To convert the string to Uint8Array
 // const uint8Array=encoder.encode(dataURL);
-      FS.write(fileStream, pngData, 0, pngData.length, 0); 
+      FS.write(fileStream, dataURL, 0, pngData.length, 0); 
 FS.close(fileStream);
 }
 setTimeout(function(){
