@@ -38,10 +38,9 @@ decoded_png_data.rows=(png_bytep*) malloc(sizeof(png_bytep) * height);
 for (int y=0; y < height; y++) {
 decoded_png_data.rows[y]=(png_byte*) malloc(png_get_rowbytes(png_ptr, info_ptr));
 }
-     
-//     png_set_swap(png_ptr);
-     
+
 png_read_image(png_ptr, decoded_png_data.rows);
+png_read_end(png_ptr, NULL);
 png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
 return;
 }
