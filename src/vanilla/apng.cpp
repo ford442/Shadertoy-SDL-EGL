@@ -43,10 +43,11 @@ png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
 return;
 }
 
-void runApngC(int delay, int num_frames, int size) {
+void runApngC() {
+int delay=500, num_frames=10, size=1024;
 png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_ptr_write = png_create_info_struct(png_ptr_write);
-png_set_IHDR(png_ptr_write, info_ptr_write, 1024, 1024, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+png_set_IHDR(png_ptr_write, info_ptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 png_set_acTL(png_ptr_write, info_ptr_write, 10, 0); 
 for (int i = 0; i < 10; ++i) {
 std::stringstream ss;
@@ -78,8 +79,8 @@ return;
 
 extern "C" {
 
-void runApng(int delay, int num_frames, int size) {
-runApngC(delay, num_frames, size);
+void runApng() {
+runApngC();
 return;
 }
 
@@ -100,7 +101,7 @@ function render() {
 totalFrames++;
 if (totalFrames%30==0) {
 if (ii > 10) {
-Module.ccall('runApng',null, ['number', 'number', 'number'],  [delay, ii, siz]);
+Module.ccall('runApng');
 return;
 }
 ii++;
