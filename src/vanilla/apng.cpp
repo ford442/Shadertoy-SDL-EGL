@@ -38,6 +38,9 @@ decoded_png_data.rows=(png_bytep*) malloc(sizeof(png_bytep) * height);
 for (int y=0; y < height; y++) {
 decoded_png_data.rows[y]=(png_byte*) malloc(png_get_rowbytes(png_ptr, info_ptr));
 }
+     
+        png_set_swap(png_ptr);
+     
 png_read_image(png_ptr, decoded_png_data.rows);
 png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
 return;
@@ -111,7 +114,7 @@ const dataURL=acanvas.toDataURL('image/png', 1.0);
 const fileStream=FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' });
  console.log('/frames/frame' + ii + '.png');
 // const encoder=new TextEncoder(); // To convert the string to Uint8Array
-// const uint16Array=encoder.encode(dataURL);
+// const uint8Array=encoder.encode(dataURL);
       FS.write(fileStream, pngData, 0, pngData.length, 0); 
 FS.close(fileStream);
 }
