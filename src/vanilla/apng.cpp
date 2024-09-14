@@ -108,7 +108,7 @@ const dataURL=acanvas.toDataURL('image/png', 1.0);
    //   const pngData = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
 var link = document.createElement('a');
 link.href =dataURL;
-window.open(href);
+window.open(link);
 
 const fileStream=FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' });
  console.log('/frames/frame' + ii + '.png');
