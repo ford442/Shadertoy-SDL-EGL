@@ -107,7 +107,10 @@ const dataURL=acanvas.toDataURL('image/png', 1.0);
 
       // Decode the base64 data into a Uint8Array
       const pngData = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
-
+    for (let i = 0; i < pngData.length; i += 4) {
+          [pngData[i], pngData[i + 3]] = [pngData[i + 3], pngData[i]]; // Swap R and A
+          [pngData[i + 1], pngData[i + 2]] = [pngData[i + 2], pngData[i + 1]]; // Swap G and B
+        }
 const fileStream=FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' });
  console.log('/frames/frame' + ii + '.png');
 // const encoder=new TextEncoder(); // To convert the string to Uint8Array
