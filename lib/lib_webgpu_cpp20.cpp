@@ -1,6 +1,6 @@
 #include "lib_webgpu.h"
 
-// Default initializers for WebGPU descriptors, using C++11 standard.
+// Default initializers for WebGPU descriptors, using C++20 standard.
 // Only add either this file or lib_webgpu_cpp11.cpp to your project, but not both.
 
 #ifdef __cplusplus
@@ -49,7 +49,7 @@ const WGpuBindGroupLayoutEntry WGPU_BUFFER_BINDING_LAYOUT_ENTRY_DEFAULT_INITIALI
 
 const WGpuBufferBindingLayout WGPU_BUFFER_BINDING_LAYOUT_DEFAULT_INITIALIZER = {
   .type = WGPU_BUFFER_BINDING_TYPE_UNIFORM,
-  .hasDynamicOffset = EM_FALSE,
+  .hasDynamicOffset = WGPU_FALSE,
   .minBindingSize = 0
 };
 
@@ -102,9 +102,14 @@ const WGpuStorageTextureBindingLayout WGPU_STORAGE_TEXTURE_BINDING_LAYOUT_DEFAUL
   .viewDimension = WGPU_TEXTURE_VIEW_DIMENSION_2D
 };
 
+const WGpuCanvasToneMapping WGPU_CANVAS_TONE_MAPPING_DEFAULT_INITIALIZER = {
+  .mode = WGPU_CANVAS_TONE_MAPPING_MODE_STANDARD
+};
+
 const WGpuCanvasConfiguration WGPU_CANVAS_CONFIGURATION_DEFAULT_INITIALIZER = {
   .usage = WGPU_TEXTURE_USAGE_RENDER_ATTACHMENT,
   .colorSpace = HTML_PREDEFINED_COLOR_SPACE_SRGB,
+  .toneMapping = WGPU_CANVAS_TONE_MAPPING_DEFAULT_INITIALIZER,
   .alphaMode = WGPU_CANVAS_ALPHA_MODE_OPAQUE,
 };
 
@@ -115,11 +120,11 @@ const WGpuRenderPassTimestampWrites WGPU_RENDER_PASS_TIMESTAMP_WRITES_DEFAULT_IN
 };
 
 const WGpuRenderPassDescriptor WGPU_RENDER_PASS_DESCRIPTOR_DEFAULT_INITIALIZER = {
-  .numColorAttachments = 0,
+  .maxDrawCount = 0,
   .colorAttachments = 0,
+  .numColorAttachments = 0,
   .depthStencilAttachment = WGPU_RENDER_PASS_DEPTH_STENCIL_ATTACHMENT_DEFAULT_INITIALIZER,
   .occlusionQuerySet = 0,
-  .maxDrawCount = 0,
   .timestampWrites = WGPU_RENDER_PASS_TIMESTAMP_WRITES_DEFAULT_INITIALIZER
 };
 
@@ -211,7 +216,7 @@ extern const WGpuImageCopyTextureTagged WGPU_IMAGE_COPY_TEXTURE_TAGGED_DEFAULT_I
   },
   .aspect = WGPU_TEXTURE_ASPECT_ALL,
   .colorSpace = HTML_PREDEFINED_COLOR_SPACE_SRGB,
-  .premultipliedAlpha = EM_FALSE
+  .premultipliedAlpha = WGPU_FALSE
 };
 
 #ifdef __cplusplus
