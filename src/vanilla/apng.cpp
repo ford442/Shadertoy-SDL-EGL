@@ -72,7 +72,7 @@ FS.mkdir('/frames');
 document.getElementById("apngBtn").addEventListener('click',function(){
 const acanvas=document.querySelector("#scanvas");
 const ctx=acanvas.getContext('2d',{
-// colorType:'float32',
+colorType:'float32',
 alpha:true,
 willReadFrequently:true,
 stencil:false,
@@ -109,7 +109,7 @@ return;
 ii++;
 console.log('Frame: ', ii);
 const image = ctx.getImageData(0, 0, siz, siz);
-    const pixelData = new Float32Array(imageData.data);
+const pixelData = new Float32Array(image.data);
 Module.ccall('writePngFrame', null, ['array', 'number', 'number'], [pixelData, siz, siz]);
 }
 setTimeout(function(){
