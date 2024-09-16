@@ -38,7 +38,7 @@ void writePngFrame(const unsigned char* imageData, int width, int height) {
         png_set_acTL(png_ptr_write, info_ptr_write, 10, 0);
     }
     // Create row pointers from the image data
-    png_bytepp row_pointers = (png_bytepp)malloc(height * sizeof(png_bytep));
+    png_bytepp row_pointers = (png_bytepp)(height * sizeof(png_bytep));
     for (int y = 0; y < height; y++) {
         row_pointers[y] = (png_bytep)(imageData + y * width * 4); // 4 bytes per pixel (RGBA)
     }
@@ -57,8 +57,7 @@ void saveApng() {
     png_write_end(png_ptr_write, info_ptr_write);
   //  png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
     // Write the PNG data to the file
-    fwrite(png_get_io_ptr(png_ptr_write), png_get_rowbytes(png_ptr_write, info_ptr_write),
-           png_get_image_height(png_ptr_write, info_ptr_write), fp);
+    fwrite(png_get_io_ptr(png_ptr_write), png_get_rowbytes(png_ptr_write, info_ptr_write),png_get_image_height(png_ptr_write, info_ptr_write), fp);
     fclose(fp);
 }
 
