@@ -168,7 +168,7 @@ return;
 ii++;
 console.log('Frame: ', ii);
 
-const image = ctx.getImageData(0, 0, w$, h$);
+const image = ctx.getImageData(0, 0, siz, siz);
 // const imageData = image.data;
 // const pixelData = new Float32Array(imageData);
      
