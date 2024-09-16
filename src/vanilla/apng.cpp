@@ -2,7 +2,9 @@
 #include <emscripten/bind.h>
 #include <png.h>
 #include <sstream>
-#include <cstdio> 
+#include <cstdio>
+
+using namespace emscripten;
 
 png_structp png_ptr_write;
 png_infop info_ptr_write;
@@ -20,6 +22,39 @@ png_bytepp row_pointers=nullptr;
 
 int CframeCount=10;
 int num_frames=10;
+
+void saveApng(const char* filename) {
+    FILE* fp = fopen(filename, "wb");
+    if (!fp) {
+        fprintf(stderr, "Error opening file for writing: %s\n", filename);
+        return;
+    }
+    png_write_end(png_ptr_write, info_ptr_write);
+    png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
+    // Write the PNG data to the file
+    fwrite(png_get_io_ptr(png_ptr_write), png_get_rowbytes(png_ptr_write, info_ptr_write),
+           png_get_image_height(png_ptr_write, info_ptr_write), fp);
+    fclose(fp);
+}
+
+void writePngFrame(const unsigned char* imageData, int width, int height) {
+    // Set up PNG writing structures (if not already done)
+    if (!png_ptr_write) {
+        png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
+        info_ptr_write = png_create_info_struct(png_ptr_write);
+        png_set_IHDR(png_ptr_write, info_ptr_write, width, height, 8, PNG_COLOR_TYPE_RGBA,PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+        png_set_acTL(png_ptr_write, info_ptr_write, 10, 0);
+    }
+    // Create row pointers from the image data
+    png_bytepp row_pointers = (png_bytepp)malloc(height * sizeof(png_bytep));
+    for (int y = 0; y < height; y++) {
+        row_pointers[y] = (png_bytep)(imageData + y * width * 4); // 4 bytes per pixel (RGBA)
+    }
+    // Write the frame data
+    png_set_next_frame_fcTL(png_ptr_write, info_ptr_write, width, height, 0, 0, 500, 1000,PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE);
+    png_write_image(png_ptr_write, row_pointers);
+    free(row_pointers);
+}
 
 void read_png(FILE *fp, int sig_read) {
 png_structp png_ptr;
@@ -80,12 +115,37 @@ return;
 
 }
 
+void finalizeApng() {
+    png_write_end(png_ptr_write, info_ptr_write);
+    png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
+}
+
+// JavaScript-callable function to receive image data and write PNG frames
+EMSCRIPTEN_BINDINGS(my_module) {
+function("writePngFrame", &writePngFrame, allow_raw_pointers());
+function("finalizeApng", &finalizeApng);
+function("saveApng", &saveApng);
+}
+
 int main(){
 
 EM_ASM({
 FS.mkdir('/frames');
 document.getElementById("apngBtn").addEventListener('click',function(){
 const acanvas=document.querySelector("#scanvas");
+const ctx=cnvb.getContext('2d',{
+colorType:'float32',
+alpha:true,
+willReadFrequently:true,
+stencil:false,
+depth:false,
+colorSpace:"display-p3",
+desynchronized:false,
+antialias:true,
+powerPreference:"high-performance",
+premultipliedAlpha:true,
+preserveDrawingBuffer:false
+});
 const siz=parseInt(acanvas.height);
 let ii=0;
 let totalFrames=0;
@@ -95,24 +155,27 @@ function render() {
 totalFrames++;
 if (totalFrames%30==0) {
 if (ii > 10) {
-Module.ccall('runApng');
+Module.ccall('finalizeApng');
+Module.ccall('saveApng', null, ['string'], ['/frames/output.png']); // Save to file
+setTimeout(function(){
+let outputData=FS.readfile('/frames/output.png');
+const link = document.createElement('a');
+link.href = outputData;
+link.download = 'output.png';
+document.body.appendChild(link);
+link.click();
+document.body.removeChild(link);
+},250);
 return;
 }
 ii++;
 console.log('Frame: ', ii);
-const dataURL=acanvas.toDataURL('image/png', 1.0);
-     // Extract the base64-encoded PNG data from the data URL
-   //   const base64Data = dataURL.split(',')[1];
 
-      // Decode the base64 data into a Uint8Array
-   //   const pngData = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
-
-const fileStream=FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' });
- console.log('/frames/frame' + ii + '.png');
-// const encoder=new TextEncoder(); // To convert the string to Uint8Array
-// const uint8Array=encoder.encode(dataURL);
-      FS.write(fileStream, dataURL, 0, pngData.length, 0); 
-FS.close(fileStream);
+const image = gl3.getImageData(0, 0, w$, h$);
+// const imageData = image.data;
+// const pixelData = new Float32Array(imageData);
+     
+Module.ccall('writePngFrame', null, ['array', 'number', 'number'], [image.data, siz, siz]);
 }
 setTimeout(function(){
 render();
