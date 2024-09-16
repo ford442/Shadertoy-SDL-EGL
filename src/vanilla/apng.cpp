@@ -29,7 +29,7 @@ void runApng() {
 return;
 }
 
-void writePngFrame(const unsigned char* imageData, png_uint_32 width, png_uint_32 height) {
+void writePngFrame(const unsigned char* imageData, int width, int height) {
     // Set up PNG writing structures (if not already done)
     if (!png_ptr_write) {
         png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
