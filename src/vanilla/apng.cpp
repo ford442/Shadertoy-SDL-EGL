@@ -130,7 +130,7 @@ EM_ASM({
 FS.mkdir('/frames');
 document.getElementById("apngBtn").addEventListener('click',function(){
 const acanvas=document.querySelector("#scanvas");
-const ctx=cnvb.getContext('2d',{
+const ctx=acanvas.getContext('2d',{
 colorType:'float32',
 alpha:true,
 willReadFrequently:true,
@@ -168,7 +168,7 @@ return;
 ii++;
 console.log('Frame: ', ii);
 
-const image = gl3.getImageData(0, 0, w$, h$);
+const image = ctx.getImageData(0, 0, w$, h$);
 // const imageData = image.data;
 // const pixelData = new Float32Array(imageData);
      
