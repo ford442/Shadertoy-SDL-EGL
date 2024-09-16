@@ -25,24 +25,6 @@ int num_frames=10;
 
 
 
-void writePngFrame(const unsigned char* imageData, int width, int height) {
-    // Set up PNG writing structures (if not already done)
-    if (!png_ptr_write) {
-        png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-        info_ptr_write = png_create_info_struct(png_ptr_write);
-        png_set_IHDR(png_ptr_write, info_ptr_write, width, height, 8, PNG_COLOR_TYPE_RGBA,PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-        png_set_acTL(png_ptr_write, info_ptr_write, 10, 0);
-    }
-    // Create row pointers from the image data
-    png_bytepp row_pointers = (png_bytepp)malloc(height * sizeof(png_bytep));
-    for (int y = 0; y < height; y++) {
-        row_pointers[y] = (png_bytep)(imageData + y * width * 4); // 4 bytes per pixel (RGBA)
-    }
-    // Write the frame data
-    png_set_next_frame_fcTL(png_ptr_write, info_ptr_write, width, height, 0, 0, 500, 1000,PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE);
-    png_write_image(png_ptr_write, row_pointers);
-    free(row_pointers);
-}
 
 void read_png(FILE *fp, int sig_read) {
 png_structp png_ptr;
@@ -99,6 +81,25 @@ extern "C" {
 void runApng() {
 runApngC();
 return;
+}
+
+void writePngFrame(const unsigned char* imageData, int width, int height) {
+    // Set up PNG writing structures (if not already done)
+    if (!png_ptr_write) {
+        png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
+        info_ptr_write = png_create_info_struct(png_ptr_write);
+        png_set_IHDR(png_ptr_write, info_ptr_write, width, height, 8, PNG_COLOR_TYPE_RGBA,PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+        png_set_acTL(png_ptr_write, info_ptr_write, 10, 0);
+    }
+    // Create row pointers from the image data
+    png_bytepp row_pointers = (png_bytepp)malloc(height * sizeof(png_bytep));
+    for (int y = 0; y < height; y++) {
+        row_pointers[y] = (png_bytep)(imageData + y * width * 4); // 4 bytes per pixel (RGBA)
+    }
+    // Write the frame data
+    png_set_next_frame_fcTL(png_ptr_write, info_ptr_write, width, height, 0, 0, 500, 1000,PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE);
+    png_write_image(png_ptr_write, row_pointers);
+    free(row_pointers);
 }
 
 void finalizeApng() {
