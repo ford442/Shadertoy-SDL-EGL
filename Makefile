@@ -270,11 +270,11 @@ b3_onnx6_safe:
 
 b3_apng:
 	 em++ src/vanilla/apng.cpp $(STDS) -I/content/RAMDRIVE2/libpng-1.6.43/ -L/content/RAMDRIVE2/libpng-1.6.43/.libs  \
-	 -lpng16 -fPIC -m32 -flto -flto=thin -pipe -ffp-contract=fast -fexcess-precision=fast \
+	 -lpng16 -fPIC -m32 -O2 -flto -flto=thin -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -fno-strict-aliasing $(SIMD_FLAGS) -c -fno-rounding-math -fcx-limited-range -fassociative-math -freciprocal-math -fno-signed-zeros
-	 em++ -g -I/content/RAMDRIVE2/libpng-1.6.43/ -L/content/RAMDRIVE2/libpng-1.6.43/.libs \
+	 em++ -bind -O2 -I/content/RAMDRIVE2/libpng-1.6.43/ -L/content/RAMDRIVE2/libpng-1.6.43/.libs \
 	 -lpng16 -fPIE -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m32 -sMALLOC=mimalloc -sWASMFS=0 -sLEGALIZE_JS_FFI=1 \
 	 -sWASM_BIGINT=0 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -stdlib=libc++ -sUSE_ES6_IMPORT_META=0  -fno-rounding-math -fassociative-math -freciprocal-math -fno-signed-zeros \
