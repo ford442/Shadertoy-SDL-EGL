@@ -23,16 +23,7 @@ png_bytepp row_pointers=nullptr;
 int CframeCount=10;
 int num_frames=10;
 
-void saveApng() {
-    FILE* fp = fopen("/frames/output.png", "wb");
 
-    png_write_end(png_ptr_write, info_ptr_write);
-    png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
-    // Write the PNG data to the file
-    fwrite(png_get_io_ptr(png_ptr_write), png_get_rowbytes(png_ptr_write, info_ptr_write),
-           png_get_image_height(png_ptr_write, info_ptr_write), fp);
-    fclose(fp);
-}
 
 void writePngFrame(const unsigned char* imageData, int width, int height) {
     // Set up PNG writing structures (if not already done)
@@ -110,19 +101,25 @@ runApngC();
 return;
 }
 
-}
-
 void finalizeApng() {
     png_write_end(png_ptr_write, info_ptr_write);
     png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
 }
 
-// JavaScript-callable function to receive image data and write PNG frames
-EMSCRIPTEN_BINDINGS(my_module) {
-function("writePngFrame", &writePngFrame, allow_raw_pointers());
-function("finalizeApng", &finalizeApng);
-function("saveApng", &saveApng);
+void saveApng() {
+    FILE* fp = fopen("/frames/output.png", "wb");
+
+    png_write_end(png_ptr_write, info_ptr_write);
+    png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
+    // Write the PNG data to the file
+    fwrite(png_get_io_ptr(png_ptr_write), png_get_rowbytes(png_ptr_write, info_ptr_write),
+           png_get_image_height(png_ptr_write, info_ptr_write), fp);
+    fclose(fp);
 }
+
+}
+
+
 
 int main(){
 
