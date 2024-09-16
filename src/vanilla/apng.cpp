@@ -23,9 +23,6 @@ png_bytepp row_pointers=nullptr;
 int CframeCount=10;
 int num_frames=10;
 
-
-
-
 void read_png(FILE *fp, int sig_read) {
 png_structp png_ptr;
 png_infop info_ptr;
@@ -43,7 +40,6 @@ decoded_png_data.rows=(png_bytep*) malloc(sizeof(png_bytep) * height);
 for (int y=0; y < height; y++) {
 decoded_png_data.rows[y]=(png_byte*) malloc(png_get_rowbytes(png_ptr, info_ptr));
 }
-
 png_read_image(png_ptr, decoded_png_data.rows);
 png_read_end(png_ptr, NULL);
 png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
@@ -54,7 +50,6 @@ void runApngC() {
 int delay=500, num_frames=10, size=1024;
 png_ptr_write=png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_ptr_write=png_create_info_struct(png_ptr_write);
-
 png_set_IHDR(png_ptr_write, info_ptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 png_set_acTL(png_ptr_write, info_ptr_write, 10, 0); 
 for (int i=0; i < 10; ++i) {
@@ -83,7 +78,7 @@ runApngC();
 return;
 }
 
-void writePngFrame(const unsigned char* imageData, int width, int height) {
+void writePngFrame(const unsigned char* imageData, png_uint_32 width, png_uint_32 height) {
     // Set up PNG writing structures (if not already done)
     if (!png_ptr_write) {
         png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
@@ -109,7 +104,6 @@ void finalizeApng() {
 
 void saveApng() {
     FILE* fp = fopen("/frames/output.png", "wb");
-
     png_write_end(png_ptr_write, info_ptr_write);
     png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
     // Write the PNG data to the file
@@ -119,8 +113,6 @@ void saveApng() {
 }
 
 }
-
-
 
 int main(){
 
@@ -165,11 +157,7 @@ return;
 }
 ii++;
 console.log('Frame: ', ii);
-
 const image = ctx.getImageData(0, 0, siz, siz);
-// const imageData = image.data;
-// const pixelData = new Float32Array(imageData);
-     
 Module.ccall('writePngFrame', null, ['array', 'number', 'number'], [image.data, siz, siz]);
 }
 setTimeout(function(){
