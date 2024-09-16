@@ -55,7 +55,7 @@ void finalizeApng() {
 void saveApng() {
     FILE* fp = fopen("/frames/output.png", "wb");
     png_write_end(png_ptr_write, info_ptr_write);
-    png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
+  //  png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
     // Write the PNG data to the file
     fwrite(png_get_io_ptr(png_ptr_write), png_get_rowbytes(png_ptr_write, info_ptr_write),
            png_get_image_height(png_ptr_write, info_ptr_write), fp);
