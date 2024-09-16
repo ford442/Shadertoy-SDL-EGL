@@ -23,8 +23,8 @@ png_bytepp row_pointers=nullptr;
 int CframeCount=10;
 int num_frames=10;
 
-void saveApng(const char* filename) {
-    FILE* fp = fopen(filename, "wb");
+void saveApng() {
+    FILE* fp = fopen("/frames/output.png", "wb");
     if (!fp) {
         fprintf(stderr, "Error opening file for writing: %s\n", filename);
         return;
