@@ -49,7 +49,7 @@ void writePngFrame(const unsigned char* imageData, png_uint_32 width, png_uint_3
 
 void finalizeApng() {
     png_write_end(png_ptr_write, info_ptr_write);
-    png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
+  //  png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
 }
 
 void saveApng() {
