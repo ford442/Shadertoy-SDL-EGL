@@ -45,7 +45,6 @@ void writePngFrame(const unsigned char* imageData, png_uint_32 width, png_uint_3
     // Write the frame data
     png_set_next_frame_fcTL(png_ptr_write, info_ptr_write, width, height, 0, 0, 500, 1000,PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE);
     png_write_image(png_ptr_write, row_pointers);
-    free(row_pointers);
 }
 
 void finalizeApng() {
