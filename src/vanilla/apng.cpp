@@ -25,10 +25,7 @@ int num_frames=10;
 
 void saveApng() {
     FILE* fp = fopen("/frames/output.png", "wb");
-    if (!fp) {
-        fprintf(stderr, "Error opening file for writing: %s\n", filename);
-        return;
-    }
+
     png_write_end(png_ptr_write, info_ptr_write);
     png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
     // Write the PNG data to the file
