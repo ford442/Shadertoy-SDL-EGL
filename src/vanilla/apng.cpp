@@ -121,7 +121,7 @@ FS.mkdir('/frames');
 document.getElementById("apngBtn").addEventListener('click',function(){
 const acanvas=document.querySelector("#scanvas");
 const ctx=acanvas.getContext('2d',{
-colorType:'float32',
+// colorType:'float32',
 alpha:true,
 willReadFrequently:true,
 stencil:false,
