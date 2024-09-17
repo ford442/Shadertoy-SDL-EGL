@@ -50,8 +50,8 @@ void runApngC(int size) {
 int delay=500, num_frames=10;
 png_aptr_write=png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_aptr_write=png_create_info_struct(png_aptr_write);
-png_structp png_write_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-const png_infop info_ptr_write = png_create_info_struct(png_write_ptr);
+png_structp * png_write_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
+png_infop info_ptr_write = png_create_info_struct(png_write_ptr);
 png_set_IHDR(png_aptr_write, info_aptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 png_set_acTL(png_aptr_write, info_aptr_write, 10, 0); 
 
@@ -61,23 +61,24 @@ ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName=ss.str();
 FILE* fp=fopen(fileName.c_str(), "rb");
 unsigned int rowbytes, j;
-png_bytepp rows = (png_bytepp)malloc(size*sizeof(png_bytep));
-
+png_byte** row_pointers; // pointer to image bytes
+row_pointers = (png_byte**)malloc(sizeof(png_byte*) * size);
 rowbytes = png_get_rowbytes(png_write_ptr, info_ptr_write);
 size_t image_size = size * size * 4;
 unsigned char* image_data = (unsigned char*)malloc(image_size);
 fread(image_data, image_size, 1, fp);
 for (j=0; j<size; j++){
-rows[j] = image_data + j*rowbytes;
+row_pointers[i] = (png_byte*)malloc(4*size);
 }
-    png_write_info(png_write_ptr, info_ptr_write);
+for (j=0; j<size; j++){
+row_pointers[j] = image_data + j*rowbytes;
+}
 
 png_init_io(png_write_ptr, fp);
 png_set_compression_level(png_write_ptr, 9);
 png_set_IHDR(png_write_ptr, info_ptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-
-
-png_write_image(png_write_ptr, rows);
+png_write_info(png_write_ptr, info_ptr_write);
+png_write_image(png_write_ptr, row_pointers);
 png_write_end(png_write_ptr, info_ptr_write);
 read_png(fp, 0);
 png_set_next_frame_fcTL(png_aptr_write,info_aptr_write,decoded_png_data.width,decoded_png_data.height,0,0,100,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
