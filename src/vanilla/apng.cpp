@@ -6,7 +6,6 @@
 #include <cstdlib>
 
 png_structp png_aptr_write;
-png_infop info_aptr_write;
 
 struct PngData {
 png_bytep* rows;
@@ -51,7 +50,7 @@ int delay=500, num_frames=10;
 png_aptr_write=png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_aptr_write=png_create_info_struct(png_aptr_write);
 png_structp png_write_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-png_infop info_ptr_write = png_create_info_struct(png_write_ptr);
+png_infop png_infop info_ptr_write = png_create_info_struct(png_write_ptr);
 png_set_IHDR(png_aptr_write, info_aptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 png_set_acTL(png_aptr_write, info_aptr_write, 10, 0); 
 
