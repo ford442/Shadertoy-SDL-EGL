@@ -33,20 +33,20 @@ const srsiz=document.querySelector('#srsiz').innerHTML;
 const vsiz=document.querySelector('#vsiz').innerHTML;
 const SiZ=window.innerHeight;
 const w$=parseInt(vsiz,10);
-vvic.width=SiZ;
+// vvic.width=SiZ;
 const h$=parseInt(vsiz,10);
-vvic.height=SiZ;
+// vvic.height=SiZ;
 console.log("canvas size: ",h$,", ",w$);
 const cnvb=new OffscreenCanvas(h$,w$); 
 // document.querySelector('#contain2').appendChild(cnvb);
 const cnv=document.querySelector('#scanvas');
 const cnvc=document.querySelector('#bcanvas');
 cnv.height=SiZ;
-cnvb.height=vsiz;
+// cnvb.height=vsiz;
 cnvc.height=vsiz;
 cnvc.style.height=vsiz+'px';
 cnv.width=SiZ;
-cnvb.width=vsiz;
+// cnvb.width=vsiz;
 cnvc.width=vsiz;
 cnvc.style.width=vsiz+'px';
 const gl3=cnvb.getContext('2d',{
@@ -77,7 +77,7 @@ Module.ccall("frmOn");
 }
 if (running == 0) {
 setTimeout(() => {
-Module.ccall("startWebGPUC", null,["Number","Number"],[vsiz,srsiz]);
+Module.ccall("startWebGPUC", null,["Number","Number","Number"],[vvic.height,vsiz,srsiz]);
 running = 1;
 setInterval(drawFrame, 16.6); 
 }, 250);
@@ -99,13 +99,13 @@ let srsiz=document.querySelector('#srsiz').innerHTML;
 let vsiz=document.querySelector('#vsiz').innerHTML;
 if(running==0){
 setTimeout(function(){
-Module.ccall("startWebGPUi",null,["Number","Number"],[vsiz,srsiz]);
+Module.ccall("startWebGPUi",null,["Number","Number","Number"],[vvi.height,vsiz,srsiz]);
 console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
-Module.ccall("startWebGPUbi",null,["Number","Number"],[vsiz,srsiz]);
+Module.ccall("startWebGPUbi",null,["Number","Number","Number"],[vvi.height,vsiz,srsiz]);
 console.log('Starting..');
 },250);
 }
@@ -170,14 +170,14 @@ let h$=parseInt(document.querySelector("#ivi").height);
 if(running==0){
 setTimeout(function(){
 let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,["Number","Number"],[vsiz,srsiz]);
+Module.ccall("startWebGPUi",null,["Number","Number","Number"],[vvi.height,vsiz,srsiz]);
 console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
 let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,["Number","Number"],[vsiz,srsiz]);
+Module.ccall("startWebGPUbi",null,["Number","Number","Number"],[vvi.height,vsiz,srsiz]);
 console.log('Starting..');
 },250);
 }
@@ -235,14 +235,14 @@ let h$=parseInt(document.querySelector("#ivi").height);
 if(running==0){
 setTimeout(function(){
 let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,["Number","Number"],[vsiz,srsiz]);
+Module.ccall("startWebGPUi",null,["Number","Number","Number"],[vvi.height,vsiz,srsiz]);
 console.log('Starting..');
 running=1;
 },250);
 }else{
 setTimeout(function(){
 let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,["Number","Number"],[vsiz,srsiz]);
+Module.ccall("startWebGPUbi",null,["Number","Number","Number"],[vvi.height,vsiz,srsiz]);
 console.log('Starting..');
 },250);
 }
@@ -305,19 +305,21 @@ Module.ccall("frmOn");
 function regularStart(){
 let SiZ=window.innerHeight;
 let cnvb=document.querySelector('#scanvas');
+const vvic=document.querySelector('#mvi');
+
 cnvb.height=SiZ;
 cnvb.width=SiZ;
 if(running==0){
 setTimeout(function(){
 let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUi",null,["Number","Number"],[vsiz,srsiz]);
+Module.ccall("startWebGPUi",null,["Number","Number","Number"],[vsiz,vsiz,srsiz]);
 console.log('Starting..');
 running=1;
 },50);
 }else{
 setTimeout(function(){
 let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
-Module.ccall("startWebGPUbi",null,["Number","Number"],[vsiz,srsiz]);
+Module.ccall("startWebGPUbi",null,["Number","Number","Number"],[vsiz,vsiz,srsiz]);
 console.log('Starting..');
 },50);
 }
