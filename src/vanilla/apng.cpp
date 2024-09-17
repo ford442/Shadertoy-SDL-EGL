@@ -24,6 +24,11 @@ int num_frames=10;
 void read_png(FILE *fp, int sig_read) {
 png_structp png_ptr;
 png_infop info_ptr;
+
+png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
+info_ptr_write = png_create_info_struct(png_ptr_write);
+png_set_IHDR(png_ptr_write, info_ptr_write, width, height, 8, PNG_COLOR_TYPE_RGBA,PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+
 png_ptr=png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_ptr=png_create_info_struct(png_ptr);
 png_init_io(png_ptr, fp);
@@ -44,8 +49,8 @@ png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
 return;
 }
 
-void runApngC() {
-int delay=500, num_frames=10, size=1024;
+void runApngC(int size) {
+int delay=500, num_frames=10;
 png_ptr_write=png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_ptr_write=png_create_info_struct(png_ptr_write);
 
@@ -72,8 +77,8 @@ return;
 
 extern "C" {
 
-void runApng() {
-runApngC();
+void runApng(int sz) {
+runApngC(sz);
 return;
 }
 
@@ -108,12 +113,11 @@ function render() {
 totalFrames++;
 if (totalFrames%30==0) {
 if (ii > 10) {
-Module.ccall('runApng');
+Module.ccall('runApng',null,"Number",[siz]);
 return;
 }
 ii++;
 console.log('Frame: ', ii);
-
 
 const image = ctx.getImageData(0, 0, siz, siz); // Assuming square canvas
 const imageData = image.data;
