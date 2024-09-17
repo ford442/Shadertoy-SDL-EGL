@@ -30,7 +30,7 @@ unsigned char* image_data = (unsigned char*)malloc(image_size);
 fread(image_data, 1, image_size, fp);
 
 // Set up the row_pointers array
-png_bytep* row_pointers = (png_bytep*)malloc(siz * sizeof(png_bytep));
+   png_bytep row_pointers[height];
 for (int y = 0; y < siz; ++y) {
   row_pointers[y] = image_data + y * siz * 4;
 }
