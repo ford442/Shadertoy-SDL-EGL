@@ -121,7 +121,7 @@ function render() {
 totalFrames++;
 if (totalFrames%30==0) {
 if (ii > 10) {
-Module.ccall('runApng',null,"Number",[siz]);
+Module.ccall('runApng',null,["Number"],[siz]);
 return;
 }
 ii++;
