@@ -248,7 +248,7 @@ std::vector<emscripten_align1_float>floatData(data.size());
 std::vector<float> outputData(data.size()); // Pre-allocate output data
 
 std::transform(data.begin(),data.end(),floatData.begin(),[](uint8_t val){return val/255.0f;});  // for RGBA32FLOAT
-const size_t bytesPerRow=sze.at(6,6)*4*sizeof(emscripten_align1_float);
+const size_t bytesPerRow=sze.at(7,7)*4*sizeof(emscripten_align1_float);
 // frame_tensor.at(0,0)=data;
 // fjs_data_pointer.at(0,0)=floatData.data();
 // fjsv_data_pointer.at(0,0)=&floatData; // (std::vector<float*>)
@@ -256,7 +256,7 @@ const size_t bytesPerRow=sze.at(6,6)*4*sizeof(emscripten_align1_float);
 // frame_tensorGL.at(0,0)=data;
 // wetd.at(0,0).source=texid.at(0,0);
 //   wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&frame_tensor.at(0,0),bytesPerRow,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
-wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),floatData.data(),bytesPerRow,sze.at(7,7),sze.at(6,6),sze.at(7,7),1);
+wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),floatData.data(),bytesPerRow,sze.at(7,7),sze.at(7,7),sze.at(7,7),1);
 
 /*    //  highway way
 const HWY_FULL(uint8_t) d;
@@ -455,7 +455,7 @@ textureDescriptorIn.viewFormats=nullptr; // &textureAviewFormats[0];
 textureDescriptorInV.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorInV.format=wtf.at(1,1);
 textureDescriptorInV.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
-textureDescriptorInV.width=sze.at(6,6);
+textureDescriptorInV.width=sze.at(7,7);
 textureDescriptorInV.height=sze.at(7,7); // default = 1;
 textureDescriptorInV.depthOrArrayLayers=1;
 textureDescriptorInV.mipLevelCount=1;
@@ -1165,10 +1165,10 @@ wdd.at(0,0)=deviceDesc;
 wgpu_adapter_request_device_async(wa.at(0,0),&wdd.at(0,0),ObtainedWebGpuDeviceStart,0);
 }
 
-EM_BOOL WGPU_Start(emscripten_align1_int sz,emscripten_align1_int sr){
+EM_BOOL WGPU_Start(emscripten_align1_int vsz,emscripten_align1_int sz,emscripten_align1_int sr){
 sze.at(1,1)=sz;
 sze.at(6,6)=sz;
-sze.at(7,7)=sz;
+sze.at(7,7)=vsz;
 u64_uni.at(4,4)=sr;  //  texture resize amount
 f32_uniform.at(2,2)=static_cast<emscripten_align1_float>(sze.at(1,1));
 szef.at(1,1)=static_cast<emscripten_align1_float>(sze.at(1,1));
@@ -1179,10 +1179,10 @@ navigator_gpu_request_adapter_async(&wao.at(0,0),ObtainedWebGpuAdapterStart,0);
 return EM_TRUE;
 }
 
-EM_BOOL WGPU_StartC(emscripten_align1_int sz,emscripten_align1_int sr){
+EM_BOOL WGPU_StartC(emscripten_align1_int vsz,emscripten_align1_int sz,emscripten_align1_int sr){
 sze.at(1,1)=sz;
 sze.at(6,6)=sz;
-sze.at(7,7)=sz;
+sze.at(7,7)=vsz;
 u64_uni.at(4,4)=sr;  //  texture resize amount
 f32_uniform.at(2,2)=static_cast<emscripten_align1_float>(sze.at(1,1));
 szef.at(1,1)=static_cast<emscripten_align1_float>(sze.at(1,1));
@@ -1242,18 +1242,18 @@ framesOn();
 return;
 }
 
-void startWebGPUi(emscripten_align1_int sz,emscripten_align1_int sr){
-WGPU_Start(sz,sr);
+void startWebGPUi(emscripten_align1_int vsz,emscripten_align1_int sz,emscripten_align1_int sr){
+WGPU_Start(vsz,sz,sr);
 return;
 }
 
-void startWebGPUbi(emscripten_align1_int sz,emscripten_align1_int sr){
-WGPU_Start(sz,sr);
+void startWebGPUbi(emscripten_align1_int vsz,emscripten_align1_int sz,emscripten_align1_int sr){
+WGPU_Start(vsz,sz,sr);
 return;
 }
 
-void startWebGPUC(emscripten_align1_int sz,emscripten_align1_int sr){
-WGPU_StartC(sz,sr);
+void startWebGPUC(emscripten_align1_int vsz,emscripten_align1_int sz,emscripten_align1_int sr){
+WGPU_StartC(vsz,sz,sr);
 return;
 }
 
