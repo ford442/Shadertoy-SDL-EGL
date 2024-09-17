@@ -26,7 +26,7 @@ void read_png(FILE *fp, int sig_read) {
 png_structp png_ptr;
 png_infop info_ptr;
 png_ptr=png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-info_ptr=png_create_info_struct(png_ptr);
+const info_ptr=png_create_info_struct(png_ptr);
 png_init_io(png_ptr, fp);
 png_set_sig_bytes(png_ptr, sig_read);
 png_read_info(png_ptr, info_ptr);
