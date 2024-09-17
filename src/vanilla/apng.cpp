@@ -77,10 +77,10 @@ row_pointers[j] = image_data + j*rowbytes;
 png_init_io(png_write_ptr, fp);
 png_set_compression_level(png_write_ptr, 9);
 png_set_IHDR(png_write_ptr, info_ptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-void *info_ptr;
-    info_ptr=info_ptr_write;
-      png_infop info_ptr_writer=info_ptr;
-         png_write_info(png_write_ptr, info_ptr_writer);
+
+    
+         png_write_info(png_write_ptr, info_ptr_write);
+
     
 png_write_image(png_write_ptr, row_pointers);
 png_write_end(png_write_ptr, NULL);
