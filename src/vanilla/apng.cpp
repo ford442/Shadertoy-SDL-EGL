@@ -51,7 +51,7 @@ int delay=500, num_frames=10;
 png_aptr_write=png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_aptr_write=png_create_info_struct(png_aptr_write);
 png_structp png_write_ptr  = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-png_infop info_ptr_write = png_create_info_struct(png_ptr);
+png_infop info_ptr_write = png_create_info_struct(png_write_ptr);
 png_set_IHDR(png_aptr_write, info_aptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 png_set_acTL(png_aptr_write, info_aptr_write, 10, 0); 
 
@@ -66,7 +66,6 @@ png_bytepp rows = (png_bytepp)malloc(size*sizeof(png_bytep));
 png_init_io(info_ptr_write, fp);
 png_set_compression_level(info_ptr_write, 9);
 png_set_IHDR(png_write_ptr, info_ptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-
 png_write_info(png_write_ptr, info_ptr_write);
 
 rowbytes = png_get_rowbytes(png_write_ptr, info_ptr_write);
@@ -79,8 +78,6 @@ rows[j] = image_data + j*rowbytes;
 }
 png_write_image(info_ptr_write, rows);
 png_write_end(info_ptr_write, info_ptr);
-
-
     
 read_png(fp, 0);
 png_set_next_frame_fcTL(png_aptr_write,info_aptr_write,decoded_png_data.width,decoded_png_data.height,0,0,100,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
