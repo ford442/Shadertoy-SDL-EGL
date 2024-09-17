@@ -30,9 +30,9 @@ unsigned char* image_data = (unsigned char*)malloc(image_size);
 fread(image_data, 1, image_size, *fp);
 
 // Set up the row_pointers array
-png_bytep* row_pointers = (png_bytep*)malloc(height * sizeof(png_bytep));
-for (int y = 0; y < height; ++y) {
-  row_pointers[y] = image_data + y * width * 4;
+png_bytep* row_pointers = (png_bytep*)malloc(siz * sizeof(png_bytep));
+for (int y = 0; y < siz; ++y) {
+  row_pointers[y] = image_data + y * siz * 4;
 }
 png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_ptr_write = png_create_info_struct(png_ptr_write);
