@@ -131,9 +131,9 @@ void raf();
 extern"C"{
 
 void startWebGPU();
-void startWebGPUi(int sz,int sr);
-void startWebGPUbi(int sz,int sr);
-void startWebGPUC(int sz,int sr);
+void startWebGPUi(int vsz,int sz,int sr);
+void startWebGPUbi(int vsz,int sz,int sr);
+void startWebGPUC(int vsz,int sz,int sr);
 void runWebGPU();
 
 }
