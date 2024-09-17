@@ -25,7 +25,7 @@ void read_png(FILE *fp, int sig_read, int siz) {
 png_structp png_ptr;
 png_infop info_ptr;
     
-size_t image_size = width * height * 4;
+size_t image_size = siz * siz * 4;
 unsigned char* image_data = (unsigned char*)malloc(image_size);
 fread(image_data, 1, image_size, *fp);
 
