@@ -36,9 +36,9 @@ for (int y = 0; y < siz; ++y) {
 }
 png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_ptr_write = png_create_info_struct(png_ptr_write);
-png_write_info(png_ptr, info_ptr_write);
 
 png_set_IHDR(png_ptr_write, info_ptr_write, siz, siz, 8, PNG_COLOR_TYPE_RGBA,PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+png_write_info(png_ptr, info_ptr_write);
 png_write_image(png_ptr_write, row_pointers);
 png_write_end(png_ptr_write, info_ptr_write);
 png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
