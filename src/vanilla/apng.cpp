@@ -68,8 +68,7 @@ rowbytes = png_get_rowbytes(png_ptr, info_ptr);
    size_t image_size = size * size * 4;
 unsigned char* image_data = (unsigned char*)malloc(image_size);
 fread(image_data, 1, image_size, fp);
-
-for (j=0; j<siz; j++){
+for (j=0; j<size; j++){
 rows[j] = image_data + j*rowbytes;
 }
 png_write_image(png_ptr, rows);
