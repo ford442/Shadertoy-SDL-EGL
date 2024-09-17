@@ -27,7 +27,7 @@ png_infop info_ptr;
     
 size_t image_size = siz * siz * 4;
 unsigned char* image_data = (unsigned char*)malloc(image_size);
-fread(image_data, 1, image_size, *fp);
+fread(image_data, 1, image_size, fp);
 
 // Set up the row_pointers array
 png_bytep* row_pointers = (png_bytep*)malloc(siz * sizeof(png_bytep));
