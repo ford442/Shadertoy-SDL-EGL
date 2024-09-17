@@ -6,6 +6,7 @@
 #include <cstdlib>
 
 png_structp png_aptr_write;
+png_infop info_aptr_write;
 
 struct PngData {
 png_bytep* rows;
