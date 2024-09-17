@@ -63,11 +63,12 @@ std::string fileName=ss.str();
 FILE* fp=fopen(fileName.c_str(), "rb");
 unsigned int rowbytes, j;
 png_bytepp rows = (png_bytepp)malloc(size*sizeof(png_bytep));
-png_init_io(png_ptr, fp);
-png_set_compression_level(png_ptr, 9);
+// png_init_io(png_ptr, fp);
+// png_set_compression_level(png_ptr, 9);
 png_set_IHDR(png_ptr, info_ptr, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 
-/*    png_write_info(png_ptr, info_ptr);
+ png_write_info(png_ptr, info_ptr);
+
 rowbytes = png_get_rowbytes(png_ptr, info_ptr);
 size_t image_size = size * size * 4;
 unsigned char* image_data = (unsigned char*)malloc(image_size);
@@ -78,7 +79,9 @@ rows[j] = image_data + j*rowbytes;
 }
 png_write_image(png_ptr, rows);
 png_write_end(png_ptr, info_ptr);
-*/
+
+
+    
 read_png(fp, 0);
 png_set_next_frame_fcTL(png_ptr_write,info_ptr_write,decoded_png_data.width,decoded_png_data.height,0,0,100,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
 png_write_image(png_ptr_write, decoded_png_data.rows);
