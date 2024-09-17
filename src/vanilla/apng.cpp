@@ -69,7 +69,7 @@ png_set_IHDR(png_write_ptr, info_ptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, 
 
 png_write_info(png_write_ptr, info_ptr_write);
 
-rowbytes = png_get_rowbytes(png_ptr, info_ptr_write);
+rowbytes = png_get_rowbytes(png_write_ptr, info_ptr_write);
 size_t image_size = size * size * 4;
 unsigned char* image_data = (unsigned char*)malloc(image_size);
 
