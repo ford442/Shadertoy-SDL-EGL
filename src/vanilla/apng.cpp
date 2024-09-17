@@ -59,14 +59,18 @@ ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName=ss.str();
 FILE* fp=fopen(fileName.c_str(), "r");
 unsigned int rowbytes, j;
-png_bytepp rows = (png_bytepp)malloc(h*sizeof(png_bytep));
-png_init_io(png_ptr, f1);
+png_bytepp rows = (png_bytepp)malloc(size*sizeof(png_bytep));
+png_init_io(png_ptr, fp);
 png_set_compression_level(png_ptr, 9);
 png_set_IHDR(png_ptr, info_ptr, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 png_write_info(png_ptr, info_ptr);
 rowbytes = png_get_rowbytes(png_ptr, info_ptr);
-for (j=0; j<h; j++){
-rows[j] = p_frame + j*rowbytes;
+   size_t image_size = size * size * 4;
+unsigned char* image_data = (unsigned char*)malloc(image_size);
+fread(image_data, 1, image_size, fp);
+
+for (j=0; j<siz; j++){
+rows[j] = image_data + j*rowbytes;
 }
 png_write_image(png_ptr, rows);
 png_write_end(png_ptr, info_ptr);
