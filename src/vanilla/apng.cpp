@@ -25,8 +25,15 @@ void read_png(FILE *fp, int sig_read, int siz) {
 png_structp png_ptr;
 png_infop info_ptr;
     
-png_bytep row_pointers[siz];
+size_t image_size = width * height * 4;
+unsigned char* image_data = (unsigned char*)malloc(image_size);
+fread(image_data, 1, image_size, *fp);
 
+// Set up the row_pointers array
+png_bytep* row_pointers = (png_bytep*)malloc(height * sizeof(png_bytep));
+for (int y = 0; y < height; ++y) {
+  row_pointers[y] = image_data + y * width * 4;
+}
 png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_ptr_write = png_create_info_struct(png_ptr_write);
 png_set_IHDR(png_ptr_write, info_ptr_write, siz, siz, 8, PNG_COLOR_TYPE_RGBA,PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
