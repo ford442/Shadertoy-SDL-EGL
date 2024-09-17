@@ -114,8 +114,10 @@ return;
 ii++;
 console.log('Frame: ', ii);
 
-const image = ctx.getImageData(0, 0, siz, siz);
-const pixelData = new Float32Array(image.data);
+
+const image = ctx.getImageData(0, 0, siz, siz); // Assuming square canvas
+const imageData = image.data;
+const pixelData = new Uint8Array(imageData);
 
 const fileStream=FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' });
  console.log('/frames/frame' + ii + '.png');
