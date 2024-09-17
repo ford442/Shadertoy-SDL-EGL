@@ -30,16 +30,15 @@ png_init_io(png_ptr, fp);
 png_set_sig_bytes(png_ptr, sig_read);
 png_read_info(png_ptr, info_ptr);
 png_uint_32 width, height;
+png_bytep row_pointers[height];
+
 int bit_depth, color_type, interlace_type;
 png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type, &interlace_type, NULL,  NULL);
 decoded_png_data.width=width;
 decoded_png_data.height=height;
-decoded_png_data.rows=(png_bytep*) malloc(sizeof(png_bytep) * height);
-for (int y=0; y < height; y++) {
-decoded_png_data.rows[y]=(png_byte*) malloc(png_get_rowbytes(png_ptr, info_ptr));
-}
 
-png_read_image(png_ptr, decoded_png_data.rows);
+    // Read the image data directly into the row pointers
+png_read_image(png_ptr, row_pointers);
 png_read_end(png_ptr, NULL);
 png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
 return;
