@@ -21,19 +21,19 @@ png_bytepp row_pointers=nullptr;
 int CframeCount=10;
 int num_frames=10;
 
-void read_png(FILE *fp, int sig_read, int siz) {
+void read_png(FILE *fp, int sig_read) {
 png_structp png_ptr;
 png_infop info_ptr;
-    
+    /*
 size_t image_size = siz * siz * 4;
 unsigned char* image_data = (unsigned char*)malloc(image_size);
 fread(image_data, 1, image_size, fp);
-
 // Set up the row_pointers array
    png_bytep row_pointers[siz];
 for (int y = 0; y < siz; ++y) {
   row_pointers[y] = image_data + y * siz * 4;
 }
+    
 png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_ptr_write = png_create_info_struct(png_ptr_write);
 
@@ -44,7 +44,8 @@ png_write_info(png_ptr, info_ptr_write);
 png_write_image(png_ptr_write, row_pointers);
 png_write_end(png_ptr_write, info_ptr_write);
 png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
-
+*/
+    
 png_ptr=png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_ptr=png_create_info_struct(png_ptr);
 png_init_io(png_ptr, fp);
@@ -76,14 +77,10 @@ std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName=ss.str();
 FILE* fp=fopen(fileName.c_str(), "r");
-read_png(fp, 0,size);
-png_set_next_frame_fcTL(png_ptr_write,info_ptr_write,decoded_png_data.width,decoded_png_data.height,0,0,500,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
-png_write_image(png_ptr_write, decoded_png_data.rows);
+PngData frameData = read_png(fp, 0);
+png_set_next_frame_fcTL(png_ptr_write,info_ptr_write,frameData.width,frameData.height,0,0,100,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
+png_write_image(png_ptr_write, frameData.rows);
 fclose(fp);
-for (int y=0; y < decoded_png_data.height; y++) {
-free(decoded_png_data.rows[y]);
-}
-free(decoded_png_data.rows);
 }
 png_write_end(png_ptr_write, info_ptr_write);
 png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
