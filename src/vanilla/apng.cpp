@@ -50,7 +50,7 @@ void runApngC(int size) {
 int delay=500, num_frames=10;
 png_aptr_write=png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_aptr_write=png_create_info_struct(png_aptr_write);
-png_struct * png_write_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
+png_structp png_write_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 png_infop info_ptr_write = png_create_info_struct(png_write_ptr);
 png_set_IHDR(png_aptr_write, info_aptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 png_set_acTL(png_aptr_write, info_aptr_write, 10, 0); 
@@ -78,6 +78,7 @@ png_init_io(png_write_ptr, fp);
 png_set_compression_level(png_write_ptr, 9);
 png_set_IHDR(png_write_ptr, info_ptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 png_write_info(png_write_ptr, info_ptr_write);
+    
 png_write_image(png_write_ptr, row_pointers);
 png_write_end(png_write_ptr, info_ptr_write);
 read_png(fp, 0);
