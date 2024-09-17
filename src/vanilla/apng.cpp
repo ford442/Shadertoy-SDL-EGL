@@ -24,52 +24,33 @@ int num_frames=10;
 void read_png(FILE *fp, int sig_read) {
 png_structp png_ptr;
 png_infop info_ptr;
-    /*
-size_t image_size = siz * siz * 4;
-unsigned char* image_data = (unsigned char*)malloc(image_size);
-fread(image_data, 1, image_size, fp);
-// Set up the row_pointers array
-   png_bytep row_pointers[siz];
-for (int y = 0; y < siz; ++y) {
-  row_pointers[y] = image_data + y * siz * 4;
-}
-    
-png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-info_ptr_write = png_create_info_struct(png_ptr_write);
-
-png_set_IHDR(png_ptr_write, info_ptr_write, siz, siz, 8, PNG_COLOR_TYPE_RGBA,PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-png_write_info(png_ptr, info_ptr_write);
-        png_init_io(png_ptr, fp);
-    png_set_rows(png_ptr, info_ptr, row_pointers);
-png_write_image(png_ptr_write, row_pointers);
-png_write_end(png_ptr_write, info_ptr_write);
-png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
-*/
-    
 png_ptr=png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_ptr=png_create_info_struct(png_ptr);
 png_init_io(png_ptr, fp);
 png_set_sig_bytes(png_ptr, sig_read);
 png_read_info(png_ptr, info_ptr);
 png_uint_32 width, height;
-
 int bit_depth, color_type, interlace_type;
 png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type, &interlace_type, NULL,  NULL);
 decoded_png_data.width=width;
 decoded_png_data.height=height;
-
-    // Read the image data directly into the row pointers
-png_read_image(png_ptr, row_pointers);
+decoded_png_data.rows=(png_bytep*) malloc(sizeof(png_bytep) * height);
+for (int y=0; y < height; y++) {
+decoded_png_data.rows[y]=(png_byte*) malloc(png_get_rowbytes(png_ptr, info_ptr));
+}
+png_read_image(png_ptr, decoded_png_data.rows);
 png_read_end(png_ptr, NULL);
 png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
 return;
 }
 
+
 void runApngC(int size) {
 int delay=500, num_frames=10;
 png_ptr_write=png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_ptr_write=png_create_info_struct(png_ptr_write);
-
+   png_structp png_ptr  = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+    png_infop   info_ptr = png_create_info_struct(png_ptr);
 png_set_IHDR(png_ptr_write, info_ptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 png_set_acTL(png_ptr_write, info_ptr_write, 10, 0); 
 for (int i=0; i < 10; ++i) {
@@ -77,9 +58,21 @@ std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName=ss.str();
 FILE* fp=fopen(fileName.c_str(), "r");
-PngData frameData = read_png(fp, 0);
-png_set_next_frame_fcTL(png_ptr_write,info_ptr_write,frameData.width,frameData.height,0,0,100,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
-png_write_image(png_ptr_write, frameData.rows);
+unsigned int rowbytes, j;
+png_bytepp rows = (png_bytepp)malloc(h*sizeof(png_bytep));
+png_init_io(png_ptr, f1);
+png_set_compression_level(png_ptr, 9);
+png_set_IHDR(png_ptr, info_ptr, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+png_write_info(png_ptr, info_ptr);
+rowbytes = png_get_rowbytes(png_ptr, info_ptr);
+for (j=0; j<h; j++){
+rows[j] = p_frame + j*rowbytes;
+}
+png_write_image(png_ptr, rows);
+png_write_end(png_ptr, info_ptr);
+read_png(fp, 0);
+png_set_next_frame_fcTL(png_ptr_write,info_ptr_write,decoded_png_data.width,decoded_png_data.height,0,0,100,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
+png_write_image(png_ptr_write, decoded_png_data.rows);
 fclose(fp);
 }
 png_write_end(png_ptr_write, info_ptr_write);
