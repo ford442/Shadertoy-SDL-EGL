@@ -76,8 +76,8 @@ fread(image_data, image_size, 1, fp);
 for (j=0; j<size; j++){
 rows[j] = image_data + j*rowbytes;
 }
-png_write_image(info_ptr_write, rows);
-png_write_end(info_ptr_write, info_ptr);
+png_write_image(png_write_ptr, rows);
+png_write_end(png_write_ptr, info_ptr_write);
     
 read_png(fp, 0);
 png_set_next_frame_fcTL(png_aptr_write,info_aptr_write,decoded_png_data.width,decoded_png_data.height,0,0,100,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
