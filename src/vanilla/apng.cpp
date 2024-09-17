@@ -21,13 +21,18 @@ png_bytepp row_pointers=nullptr;
 int CframeCount=10;
 int num_frames=10;
 
-void read_png(FILE *fp, int sig_read) {
+void read_png(FILE *fp, int sig_read, int siz) {
 png_structp png_ptr;
 png_infop info_ptr;
+    
+png_bytep row_pointers[siz];
 
 png_ptr_write = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_ptr_write = png_create_info_struct(png_ptr_write);
-png_set_IHDR(png_ptr_write, info_ptr_write, width, height, 8, PNG_COLOR_TYPE_RGBA,PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+png_set_IHDR(png_ptr_write, info_ptr_write, siz, siz, 8, PNG_COLOR_TYPE_RGBA,PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+png_write_image(png_ptr_write, row_pointers);
+png_write_end(png_ptr_write, info_ptr_write);
+png_destroy_write_struct(&png_ptr_write, &info_ptr_write);
 
 png_ptr=png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_ptr=png_create_info_struct(png_ptr);
@@ -35,7 +40,6 @@ png_init_io(png_ptr, fp);
 png_set_sig_bytes(png_ptr, sig_read);
 png_read_info(png_ptr, info_ptr);
 png_uint_32 width, height;
-png_bytep row_pointers[height];
 
 int bit_depth, color_type, interlace_type;
 png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type, &interlace_type, NULL,  NULL);
@@ -61,7 +65,7 @@ std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName=ss.str();
 FILE* fp=fopen(fileName.c_str(), "r");
-read_png(fp, 0);
+read_png(fp, 0,size);
 png_set_next_frame_fcTL(png_ptr_write,info_ptr_write,decoded_png_data.width,decoded_png_data.height,0,0,500,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
 png_write_image(png_ptr_write, decoded_png_data.rows);
 fclose(fp);
