@@ -70,12 +70,14 @@ png_write_info(png_ptr, info_ptr);
 rowbytes = png_get_rowbytes(png_ptr, info_ptr);
 size_t image_size = size * size * 4;
 unsigned char* image_data = (unsigned char*)malloc(image_size);
+/*
 fread(image_data, image_size, 1, fp);
 for (j=0; j<size; j++){
 rows[j] = image_data + j*rowbytes;
 }
 png_write_image(png_ptr, rows);
 png_write_end(png_ptr, info_ptr);
+*/
 read_png(fp, 0);
 png_set_next_frame_fcTL(png_ptr_write,info_ptr_write,decoded_png_data.width,decoded_png_data.height,0,0,100,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
 png_write_image(png_ptr_write, decoded_png_data.rows);
