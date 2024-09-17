@@ -63,8 +63,8 @@ std::string fileName=ss.str();
 FILE* fp=fopen(fileName.c_str(), "rb");
 unsigned int rowbytes, j;
 png_bytepp rows = (png_bytepp)malloc(size*sizeof(png_bytep));
-png_init_io(info_ptr_write, fp);
-png_set_compression_level(info_ptr_write, 9);
+png_init_io(png_write_ptr, fp);
+png_set_compression_level(png_write_ptr, 9);
 png_set_IHDR(png_write_ptr, info_ptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 png_write_info(png_write_ptr, info_ptr_write);
 
