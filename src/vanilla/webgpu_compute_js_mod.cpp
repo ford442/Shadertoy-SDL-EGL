@@ -204,23 +204,19 @@ antialias:true,
 powerPreference:"high-performance",
 premultipliedAlpha:true,
 preserveDrawingBuffer:false
-}); // 
+});
 gl3.drawImage(vvi,0,0,w$-offsetX,h$-offsetY,0,0,w$-offsetX,h$-offsetY);
-// let image=flipImageData(gl3.getImageData(0,0,w$,h$));
 var image=gl3.getImageData(0,0,w$-offsetX,h$-offsetY);
 var imageData=image.data;
 let pixelData=new Uint8ClampedArray(imageData);
-// var pixelData=new Float32Array(imageData);
-// var pixelData=new Float32Array(imageData,0,la);
 var fileStream=FS.open('/video/frame.gl','w');
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
 setInterval(function(){
 gl3.clearRect(0,0,w$,h$);  
 gl3.drawImage(vvi,0,0,w$-offsetX,h$-offsetY,0,0,w$-offsetX,h$-offsetY);
-// let image=flipImageData(gl3.getImageData(0,0,w$,h$));
-var image=gl3.getImageData(0,0,w$-offsetX,h$-offsetY);
-var imageData=image.data;
+var image2=gl3.getImageData(0,0,w$-offsetX,h$-offsetY);
+var imageData=image2.data;
 var pixelData=new Float32Array(imageData);
 FS.write(fileStream,pixelData,0,pixelData.length,0);
 Module.ccall("frmOn");
@@ -294,8 +290,8 @@ Module.ccall("frmOn");
 setInterval(function(){
 image=gl4.getImageData(0,0,SiZ,SiZ);
 gl3.drawImage(image,0,offS,h$,h$,0,0,h$,h$);
-let image=gl3.getImageData(0,0,w$,h$);
-imageData=image.data;
+let image2=gl3.getImageData(0,0,w$,h$);
+imageData=image2.data;
 pixelData=new Float32Array(imageData);
 FS.writeFile('/video/frame.gl',pixelData);
 Module.ccall("frmOn");
