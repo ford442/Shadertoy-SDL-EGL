@@ -1,5 +1,4 @@
 #include <emscripten.h>
-#include <emscripten/bind.h>
 #include <png.h>
 #include <sstream>
 #include <cstdio> 
@@ -60,6 +59,7 @@ std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName=ss.str();
 FILE* fp=fopen(fileName.c_str(), "rb");
+FILE* fpw=fopen(fileName.c_str(), "wb");
 unsigned int rowbytes, j;
 png_byte** row_pointers; // pointer to image bytes
 row_pointers = (png_byte**)malloc(sizeof(png_byte*) * size);
@@ -74,7 +74,7 @@ for (j=0; j<size; j++){
 row_pointers[j] = image_data + j*rowbytes;
 }
 
-png_init_io(png_write_ptr, fp);
+png_init_io(png_write_ptr, fpw);
 png_set_compression_level(png_write_ptr, 9);
 png_set_IHDR(png_write_ptr, info_ptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 
