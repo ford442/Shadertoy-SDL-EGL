@@ -76,7 +76,7 @@ row_pointers[i] = (png_byte*)malloc(4*size);
 for (j=0; j<size; j++){
 row_pointers[j] = image_data + j*rowbytes;
 }
-png_init_io(png_write_ptr, fpw);
+// png_init_io(png_write_ptr, fpw);
 png_write_info(png_write_ptr, info_ptr_write); 
 png_write_image(png_write_ptr, row_pointers);
 png_write_end(png_write_ptr, NULL);
