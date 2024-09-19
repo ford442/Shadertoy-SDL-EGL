@@ -56,7 +56,7 @@ png_infop info_ptr_write = png_create_info_struct(png_write_ptr);
 png_set_IHDR(png_aptr_write, info_aptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 png_set_acTL(png_aptr_write, info_aptr_write, 10, 0); 
 png_set_compression_level(png_write_ptr, 9);
-png_set_IHDR(png_write_ptr, info_ptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+png_set_IHDR(png_write_ptr, info_ptr_write, decoded_png_data.width, decoded_png_data.height, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 for (int i=0; i < 10; ++i) {
 std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
@@ -76,7 +76,7 @@ for (j=0; j<size; j++){
 decoded_png_data.rows[j] = image_data + j*rowbytes;
 }
     // read_png(fp, 0);
-png_set_next_frame_fcTL(png_aptr_write,info_aptr_write,size,size,0,0,100,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
+png_set_next_frame_fcTL(png_aptr_write,info_aptr_write,decoded_png_data.width,decoded_png_data.height,0,0,100,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
 png_write_image(png_aptr_write, decoded_png_data.rows);
 fclose(fp);
 }
