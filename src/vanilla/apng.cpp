@@ -49,9 +49,9 @@ void runApngC(int size) {
 int delay=500, num_frames=10;
 decoded_png_data.width=size;
 decoded_png_data.height=size;
-png_aptr_write=png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+png_aptr_write=png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 info_aptr_write=png_create_info_struct(png_aptr_write);
-png_structp png_write_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+png_structp png_write_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 png_infop info_ptr_write = png_create_info_struct(png_write_ptr);
 png_set_IHDR(png_aptr_write, info_aptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 png_set_acTL(png_aptr_write, info_aptr_write, 10, 0); 
@@ -127,14 +127,12 @@ Module.ccall("runApng",null,["Number"],[siz]);
 return;
 }
 ii++;
-console.log('Frame: ', ii);
-const image = ctx.getImageData(0, 0, siz, siz); // Assuming square canvas
+console.log('Frame: ', ii,' Size: '+siz);
+const image = ctx.getImageData(0, 0, siz, siz);
 const imageData = image.data;
 const pixelData = new Uint8Array(imageData);
 const fileStream=FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary',mode:0777 });
- console.log('/frames/frame' + ii + '.png');
-// const encoder=new TextEncoder(); // To convert the string to Uint8Array
-// const uint8Array=encoder.encode(dataURL);
+console.log('/frames/frame' + ii + '.png');
 FS.write(fileStream, pixelData, 0, pixelData.length,  0); 
 FS.close(fileStream);
 }
