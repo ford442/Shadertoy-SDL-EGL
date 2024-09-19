@@ -146,7 +146,7 @@ const fileStream=FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binar
  console.log('/frames/frame' + ii + '.png');
 // const encoder=new TextEncoder(); // To convert the string to Uint8Array
 // const uint8Array=encoder.encode(dataURL);
-FS.write(fileStream, pixelData, 0, pixelData.length, 0); 
+FS.write(fileStream, pixelData, BigInt(0), pixelData.length,  BigInt(0)); 
 FS.close(fileStream);
 }
 setTimeout(function(){
