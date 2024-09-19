@@ -76,7 +76,7 @@ for (j=0; j<size; j++){
 decoded_png_data.rows[j] = image_data + j*rowbytes;
 }
     // read_png(fp, 0);
-png_set_next_frame_fcTL(png_aptr_write,info_aptr_write,decoded_png_data.width,decoded_png_data.height,0,0,100,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
+png_set_next_frame_fcTL(png_aptr_write,info_aptr_write,size,size,0,0,100,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
 png_write_image(png_aptr_write, decoded_png_data.rows);
 fclose(fp);
 }
