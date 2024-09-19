@@ -58,8 +58,8 @@ for (int i=0; i < 10; ++i) {
 std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName=ss.str();
-FILE* fp=fopen(fileName.c_str(), "rb");
-FILE* fpw=fopen(fileName.c_str(), "wb");
+FILE* fp=fopen(fileName.c_str(), "rb",[0777]);
+FILE* fpw=fopen(fileName.c_str(), "wb",[0777]);
 unsigned int rowbytes, j;
 png_byte** row_pointers; // pointer to image bytes
 row_pointers = (png_byte**)malloc(sizeof(png_byte*) * size);
@@ -142,7 +142,7 @@ const image = ctx.getImageData(0, 0, siz, siz); // Assuming square canvas
 const imageData = image.data;
 const pixelData = new Uint8Array(imageData);
 
-const fileStream=FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary' });
+const fileStream=FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary',mode:0777 });
  console.log('/frames/frame' + ii + '.png');
 // const encoder=new TextEncoder(); // To convert the string to Uint8Array
 // const uint8Array=encoder.encode(dataURL);
