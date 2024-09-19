@@ -54,6 +54,10 @@ png_infop info_ptr_write = png_create_info_struct(png_write_ptr);
 png_set_IHDR(png_aptr_write, info_aptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 png_set_acTL(png_aptr_write, info_aptr_write, 10, 0); 
 
+png_set_compression_level(png_write_ptr, 9);
+png_set_IHDR(png_write_ptr, info_ptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+
+    
 for (int i=0; i < 10; ++i) {
 std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
@@ -73,15 +77,9 @@ row_pointers[i] = (png_byte*)malloc(4*size);
 for (j=0; j<size; j++){
 row_pointers[j] = image_data + j*rowbytes;
 }
-
 png_init_io(png_write_ptr, fpw);
-png_set_compression_level(png_write_ptr, 9);
-png_set_IHDR(png_write_ptr, info_ptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-
-    
-         png_write_info(png_write_ptr, info_ptr_write);
-
-    
+png_write_info(png_write_ptr, info_ptr_write); 
+png_write_info(png_write_ptr, info_ptr_write);
 png_write_image(png_write_ptr, row_pointers);
 png_write_end(png_write_ptr, NULL);
 read_png(fp, 0);
