@@ -47,6 +47,8 @@ return;
 
 void runApngC(int size) {
 int delay=500, num_frames=10;
+decoded_png_data.width=size;
+decoded_png_data.height=size;
 png_aptr_write=png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
 info_aptr_write=png_create_info_struct(png_aptr_write);
 png_structp png_write_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
@@ -55,8 +57,6 @@ png_set_IHDR(png_aptr_write, info_aptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA
 png_set_acTL(png_aptr_write, info_aptr_write, 10, 0); 
 png_set_compression_level(png_write_ptr, 9);
 png_set_IHDR(png_write_ptr, info_ptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-
-    
 for (int i=0; i < 10; ++i) {
 std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
