@@ -62,7 +62,6 @@ std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName=ss.str();
 FILE* fp=fopen(fileName.c_str(), "rb");
-FILE* fpw=fopen(fileName.c_str(), "wb");
 unsigned int rowbytes, j;
 png_byte** row_pointers; // pointer to image bytes
 row_pointers = (png_byte**)malloc(sizeof(png_byte*) * size);
@@ -76,15 +75,10 @@ row_pointers[i] = (png_byte*)malloc(4*size);
 for (j=0; j<size; j++){
 row_pointers[j] = image_data + j*rowbytes;
 }
-// png_init_io(png_write_ptr, fpw);
-png_write_info(png_write_ptr, info_ptr_write); 
-png_write_image(png_write_ptr, row_pointers);
-png_write_end(png_write_ptr, NULL);
-fclose(fpw);read_png(fp, 0);
-png_set_next_frame_fcTL(png_aptr_write,info_aptr_write,decoded_png_data.width,decoded_png_data.height,0,0,100,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
-png_write_image(png_aptr_write, decoded_png_data.rows);
+    // read_png(fp, 0);
+png_set_next_frame_fcTL(png_aptr_write,info_aptr_write,row_pointers.width,row_pointers.height,0,0,100,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
+png_write_image(png_aptr_write, row_pointers.rows);
 fclose(fp);
-
 }
 png_write_end(png_aptr_write, NULL);
 png_destroy_write_struct(&png_aptr_write, &info_aptr_write);
@@ -106,7 +100,7 @@ EM_ASM({
 FS.mkdir('/frames');
 document.getElementById("apngBtn").addEventListener('click',function(){
 const acanvas=document.querySelector("#scanvas");
-    const ctx=acanvas.getContext('2d',{
+const ctx=acanvas.getContext('2d',{
 colorType:'float32',
 alpha:true,
 willReadFrequently:true,
@@ -134,11 +128,9 @@ return;
 }
 ii++;
 console.log('Frame: ', ii);
-
 const image = ctx.getImageData(0, 0, siz, siz); // Assuming square canvas
 const imageData = image.data;
 const pixelData = new Uint8Array(imageData);
-
 const fileStream=FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary',mode:0777 });
  console.log('/frames/frame' + ii + '.png');
 // const encoder=new TextEncoder(); // To convert the string to Uint8Array
