@@ -58,8 +58,8 @@ for (int i=0; i < 10; ++i) {
 std::stringstream ss;
 ss << "/frames/frame" << (i + 1) << ".png";
 std::string fileName=ss.str();
-FILE* fp=fopen(fileName.c_str(), "rb",[0777]);
-FILE* fpw=fopen(fileName.c_str(), "wb",[0777]);
+FILE* fp=fopen(fileName.c_str(), "rb");
+FILE* fpw=fopen(fileName.c_str(), "wb");
 unsigned int rowbytes, j;
 png_byte** row_pointers; // pointer to image bytes
 row_pointers = (png_byte**)malloc(sizeof(png_byte*) * size);
