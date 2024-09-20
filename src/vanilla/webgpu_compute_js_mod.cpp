@@ -85,6 +85,113 @@ setInterval(drawFrame, 16.6);
 setInterval(drawFrame, 16.6);
 }
 }
+
+function createRGBAFrame(audioChunk, chunkIndex) {
+  const width = 1024;
+  const height = 1024;
+  const frameSize = width * height * 4; // RGBA frame size
+  const frameData = new Uint8ClampedArray(frameSize);
+const vvic=document.querySelector('#mvi');
+const srsiz=document.querySelector('#srsiz').innerHTML;
+const vsiz=document.querySelector('#vsiz').innerHTML;
+const SiZ=window.innerHeight;
+const w$=parseInt(vsiz,10);
+// vvic.width=SiZ;
+const h$=parseInt(vsiz,10);
+// vvic.height=SiZ;
+console.log("canvas size: ",h$,", ",w$);
+const cnvb=new OffscreenCanvas(h$,w$); 
+// document.querySelector('#contain2').appendChild(cnvb);
+const cnv=document.querySelector('#scanvas');
+const cnvc=document.querySelector('#bcanvas');
+cnv.height=SiZ;
+// cnvb.height=vsiz;
+cnvc.height=vsiz;
+cnvc.style.height=vsiz+'px';
+cnv.width=SiZ;
+// cnvb.width=vsiz;
+cnvc.width=vsiz;
+cnvc.style.width=vsiz+'px';
+const gl3=cnvb.getContext('2d',{
+colorType:'float32',
+alpha:true,
+willReadFrequently:true,
+stencil:false,
+depth:false,
+colorSpace:"display-p3",
+desynchronized:false,
+antialias:true,
+powerPreference:"high-performance",
+premultipliedAlpha:true,
+preserveDrawingBuffer:false
+});
+// gl3.imageSmoothingEnabled=false;
+const fileStream=FS.open('/video/frame.gl','w+');
+for (let i = 0; i < audioChunk.length; i++) {
+const sampleValue = audioChunk[i];
+    const rgbaValue = Math.floor((sampleValue + 1) * 127.5); // Normalize to 0-255
+    const x = i % width;
+    const y = Math.floor(i / width);
+    const index = (y * width + x) * 4;
+    frameData[index] = rgbaValue; // R
+    frameData[index + 1] = rgbaValue; // G
+    frameData[index + 2] = rgbaValue; // B
+    frameData[index + 3] = 255; // A
+}
+const image = new ImageData(frameData, width, height);
+const imageData = image.data;
+const pixelData = new Float32Array(imageData);
+FS.write(fileStream, pixelData, 0, pixelData.length, 0);
+Module.ccall("frmOn");
+}
+
+function splitAudioIntoChunks(audioData) {
+  const chunkSize = 1024 * 1024; // 1024x1024 samples
+  const numberOfChunks = Math.ceil(audioData.length / chunkSize);
+  for (let i = 0; i < numberOfChunks; i++) {
+const start = i * chunkSize;
+    const end = Math.min(start + chunkSize, audioData.length);
+    const chunk = audioData.slice(start, end);
+setTimeout(function(){
+createRGBAFrame(chunk, i);
+},16.6);
+  }
+}
+
+function processAudioBuffer(audioBuffer) {
+  const channelData = audioBuffer.getChannelData(0); // Get the first channel data
+  const sampleRate = audioBuffer.sampleRate;
+  const duration = audioBuffer.duration;
+  const numberOfChannels = audioBuffer.numberOfChannels;
+  console.log('Sample Rate:', sampleRate);
+  console.log('Duration:', duration);
+  console.log('Number of Channels:', numberOfChannels);
+  splitAudioIntoChunks(channelData);
+}
+
+function birdsongStart(){
+const pth=document.querySelector('#songPath').innerHTML;
+const ff=new XMLHttpRequest();
+ff.open('GET',pth,true);
+ff.responseType='arraybuffer';
+document.querySelector('#stat').innerHTML='Downloading Song';
+document.querySelector('#stat').style.backgroundColor='yellow';
+ff.addEventListener("load", function() {
+  let sarrayBuffer = ff.response;
+  if (sarrayBuffer) {
+    audioContext.decodeAudioData(sarrayBuffer).then(audioBuffer => {
+      processAudioBuffer(audioBuffer);
+    }).catch(err => {
+      console.error('Error decoding audio data:', err);
+    });
+  }
+});
+ff.send();
+if (running == 0) {
+Module.ccall("startWebGPUC", null,["Number","Number","Number"],[1024,1024,srsiz]);
+running = 1;
+}
+}
  
 function videoStart(){
 const vvi=document.querySelector('#mvi');
