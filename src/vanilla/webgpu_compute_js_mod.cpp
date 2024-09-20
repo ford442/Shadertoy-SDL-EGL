@@ -189,7 +189,7 @@ ff.addEventListener("load", function() {
 });
 ff.send();
 if (running == 0) {
-Module.ccall("startWebGPUC", null,["Number","Number","Number"],[1024,1024,srsiz]);
+Module.ccall("startWebGPUC", null,["Number","Number","Number"],[1024,1024,1000]);
 running = 1;
 }
 }
