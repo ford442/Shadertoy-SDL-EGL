@@ -6,7 +6,14 @@
 #include <vector>
 #include <cstring>
 
-std::vector<png_bytep> frames;
+struct Frame {
+  png_bytep* rows;
+  int width;
+  int height;
+};
+
+std::vector<Frame> frames;
+
 int frameWidth = 0;
 int frameHeight = 0;
 
@@ -14,10 +21,13 @@ extern "C" {
   void processImageData(uint8_t* data, int width, int height) {
     frameWidth = width;
     frameHeight = height;
-    png_bytep frame = new png_bytep[height];
+   // Allocate memory for the rows
+    png_bytep* rows = new png_bytep[height];
     for (int y = 0; y < height; y++) {
-      frame[y] = data + y * width * 4;
+      rows[y] = data + y * width * 4;
     }
+
+    Frame frame = { rows, width, height };
     frames.push_back(frame);
   }
 
@@ -53,8 +63,8 @@ extern "C" {
                  PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
     png_write_info(png, info);
     // Write each frame
-    for (const auto& frame : frames) {
-      png_write_image(png, frame);
+   for (const auto& frame : frames) {
+      png_write_image(png, frame.rows);
     }
     png_write_end(png, NULL);
     // Clean up
@@ -62,7 +72,7 @@ extern "C" {
     png_destroy_write_struct(&png, &info);
     // Free allocated memory
     for (auto& frame : frames) {
-      delete[] frame;
+      delete[] frame.rows;
     }
     frames.clear();
   }
@@ -141,7 +151,7 @@ function render() {
 totalFrames++;
 if (totalFrames%30==0) {
 if (ii > 10) {
-Module.ccall("runApng",null,["Number"],[siz]);
+saveAPNG();
 return;
 }
 ii++;
