@@ -18,7 +18,7 @@ int frameWidth = 0;
 int frameHeight = 0;
 
 extern "C" {
-  void processImageData(uint8_t* data, int width, int height) {
+  void runApng(uint8_t* data, int width, int height) {
     frameWidth = width;
     frameHeight = height;
    // Allocate memory for the rows
