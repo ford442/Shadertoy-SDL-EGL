@@ -170,7 +170,7 @@ function processAudioBuffer(audioBuffer) {
 }
 
 function birdsongStart(){
-const pth=document.querySelector('#songPath').innerHTML;
+const pth=document.querySelector('#birdsongPath').innerHTML;
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
@@ -541,6 +541,20 @@ getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
 setTimeout(function(){
 canvasStart();
+},3000);
+});
+
+document.querySelector('#startBtnB').addEventListener('click',function(){
+var pth=document.querySelector('#path').innerHTML;
+getShader(pth,'shader.wgsl');
+var pth2=document.querySelector('#computePath').innerHTML;
+var pth3=document.querySelector('#fragPath').innerHTML;
+var pth4=document.querySelector('#vertPath').innerHTML;
+getShader(pth2,'compute.wgsl');
+getShader(pth3,'frag2.wgsl');
+getShader(pth4,'vert.wgsl');
+setTimeout(function(){
+birdsongStart();
 },3000);
 });
 
