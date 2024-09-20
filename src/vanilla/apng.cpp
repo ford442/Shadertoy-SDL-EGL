@@ -19,8 +19,7 @@ int frameHeight = 0;
 
 extern "C" {
   void runApng(uint8_t* data, int width, int height) {
-    frameWidth = width;
-    frameHeight = height;
+
    // Allocate memory for the rows
     png_bytep* rows = new png_bytep[height];
     for (int y = 0; y < height; y++) {
@@ -31,7 +30,9 @@ extern "C" {
     frames.push_back(frame);
   }
 
-  void createAPNG() {
+  void createAPNG(int size) {
+        frameWidth = size;
+    frameHeight = size;
     // Create a file to write the APNG
     FILE* fp = fopen("output.png", "wb");
     if (!fp) {
@@ -104,9 +105,10 @@ const siz=parseInt(acanvas.height);
 let ii=0;
 let totalFrames=0;
 
-async function saveAPNG() {
+async function saveAPNG(size) {
+
   // Call the WASM function to create the APNG
-  Module._createAPNG();
+  Module._createAPNG(size);
   // Read the generated APNG file from the WASM heap
   const fs = Module.FS;
   const filePath = '/output.png';
@@ -148,7 +150,7 @@ function render() {
 totalFrames++;
 if (totalFrames%30==0) {
 if (ii > 10) {
-saveAPNG();
+saveAPNG(siz);
 return;
 }
 ii++;
