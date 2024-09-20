@@ -59,6 +59,8 @@ extern "C" {
     }
     png_init_io(png, fp);
     // Set the image information
+          fprintf(stderr, "IHDR width: ",frameWidth);
+
     png_set_IHDR(png, info, frameWidth, frameHeight, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE,
                  PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
     png_write_info(png, info);
