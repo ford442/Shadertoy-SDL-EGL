@@ -141,11 +141,6 @@ Module.ccall("runApng",null,["Number","Number","Number"],[ptr, width, height]);
   // Free the allocated memory
   Module._free(ptr);
 }
-
-frames.forEach(frame => transferImageDataToWasm(frame));
-
-Module._free(ptr);
-}
     
 function render() {
 totalFrames++;
