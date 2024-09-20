@@ -3,95 +3,69 @@
 #include <sstream>
 #include <cstdio> 
 #include <cstdlib>
+#include <vector>
+#include <cstring>
 
-png_structp png_aptr_write;
-png_infop info_aptr_write;
-
-struct PngData {
-png_bytep* rows;
-png_uint_32 width;
-png_uint_32 height;
-};
-
-PngData decoded_png_data;
-
-png_bytep* frame_data=nullptr;
-png_bytepp row_pointers=nullptr;
-
-int CframeCount=10;
-int num_frames=10;
-
-void read_png(FILE *fp, int sig_read) {
-png_structp png_ptr;
-png_infop info_ptr;
-png_ptr=png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-info_ptr=png_create_info_struct(png_ptr);
-png_init_io(png_ptr, fp);
-png_set_sig_bytes(png_ptr, sig_read);
-png_read_info(png_ptr, info_ptr);
-png_uint_32 width, height;
-int bit_depth, color_type, interlace_type;
-png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type, &interlace_type, NULL,  NULL);
-decoded_png_data.width=width;
-decoded_png_data.height=height;
-decoded_png_data.rows=(png_bytep*) malloc(sizeof(png_bytep) * height);
-for (int y=0; y < height; y++) {
-decoded_png_data.rows[y]=(png_byte*) malloc(png_get_rowbytes(png_ptr, info_ptr));
-}
-png_read_image(png_ptr, decoded_png_data.rows);
-png_read_end(png_ptr, NULL);
-png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
-return;
-}
-
-
-void runApngC(int size) {
-int delay=500, num_frames=10;
-decoded_png_data.width=size;
-decoded_png_data.height=size;
-png_aptr_write=png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-info_aptr_write=png_create_info_struct(png_aptr_write);
-png_structp png_write_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-png_infop info_ptr_write = png_create_info_struct(png_write_ptr);
-png_set_IHDR(png_aptr_write, info_aptr_write, size, size, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-png_set_acTL(png_aptr_write, info_aptr_write, 10, 0); 
-png_set_compression_level(png_write_ptr, 9);
-png_set_IHDR(png_write_ptr, info_ptr_write, decoded_png_data.width, decoded_png_data.height, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-for (int i=0; i < 10; ++i) {
-std::stringstream ss;
-ss << "/frames/frame" << (i + 1) << ".png";
-std::string fileName=ss.str();
-FILE* fp=fopen(fileName.c_str(), "rb");
-unsigned int rowbytes, j;
-png_byte** row_pointers; // pointer to image bytes
-row_pointers = (png_byte**)malloc(sizeof(png_byte*) * size);
-rowbytes = png_get_rowbytes(png_write_ptr, info_ptr_write);
-size_t image_size = size * size * 4;
-unsigned char* image_data = (unsigned char*)malloc(image_size);
-fread(image_data, image_size, 1, fp);
-for (j=0; j<size; j++){
-decoded_png_data.rows[i] = (png_byte*)malloc(4*size);
-}
-for (j=0; j<size; j++){
-decoded_png_data.rows[j] = image_data + j*rowbytes;
-}
-    // read_png(fp, 0);
-png_set_next_frame_fcTL(png_aptr_write,info_aptr_write,decoded_png_data.width,decoded_png_data.height,0,0,100,1000, PNG_DISPOSE_OP_BACKGROUND, PNG_BLEND_OP_SOURCE); 
-png_write_image(png_aptr_write, decoded_png_data.rows);
-fclose(fp);
-}
-png_write_end(png_aptr_write, NULL);
-png_destroy_write_struct(&png_aptr_write, &info_aptr_write);
-return;
-}
+std::vector<png_bytep> frames;
+int frameWidth = 0;
+int frameHeight = 0;
 
 extern "C" {
+  void processImageData(uint8_t* data, int width, int height) {
+    frameWidth = width;
+    frameHeight = height;
+    png_bytep frame = new png_bytep[height];
+    for (int y = 0; y < height; y++) {
+      frame[y] = data + y * width * 4;
+    }
+    frames.push_back(frame);
+  }
 
-void runApng(int sz) {
-runApngC(sz);
-return;
-}
-
+  void createAPNG() {
+    // Create a file to write the APNG
+    FILE* fp = fopen("output.png", "wb");
+    if (!fp) {
+      fprintf(stderr, "Could not open file for writing\n");
+      return;
+    }
+    png_structp png = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+    if (!png) {
+      fprintf(stderr, "Could not create PNG write struct\n");
+      fclose(fp);
+      return;
+    }
+    png_infop info = png_create_info_struct(png);
+    if (!info) {
+      fprintf(stderr, "Could not create PNG info struct\n");
+      png_destroy_write_struct(&png, NULL);
+      fclose(fp);
+      return;
+    }
+    if (setjmp(png_jmpbuf(png))) {
+      fprintf(stderr, "Error during PNG creation\n");
+      png_destroy_write_struct(&png, &info);
+      fclose(fp);
+      return;
+    }
+    png_init_io(png, fp);
+    // Set the image information
+    png_set_IHDR(png, info, frameWidth, frameHeight, 8, PNG_COLOR_TYPE_RGBA, PNG_INTERLACE_NONE,
+                 PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+    png_write_info(png, info);
+    // Write each frame
+    for (const auto& frame : frames) {
+      png_write_image(png, frame);
+    }
+    png_write_end(png, NULL);
+    // Clean up
+    fclose(fp);
+    png_destroy_write_struct(&png, &info);
+    // Free allocated memory
+    for (auto& frame : frames) {
+      delete[] frame;
+    }
+    frames.clear();
+  }
 }
 
 int main(){
@@ -117,8 +91,52 @@ preserveDrawingBuffer:false
 const siz=parseInt(acanvas.height);
 let ii=0;
 let totalFrames=0;
-const delay=500; 
 
+async function saveAPNG() {
+  // Call the WASM function to create the APNG
+  Module._createAPNG();
+  // Read the generated APNG file from the WASM heap
+  const fs = Module.FS;
+  const filePath = '/output.png';
+  const fileData = fs.readFile(filePath);
+  // Create a Blob from the file data
+  const blob = new Blob([fileData.buffer], { type: 'image/png' });
+  // Save the Blob using the FileSystem API
+  const handle = await window.showSaveFilePicker({
+    suggestedName: 'output.png',
+    types: [{
+      description: 'PNG Image',
+      accept: {'image/png': ['.png']},
+    }],
+  });
+  const writable = await handle.createWritable();
+  await writable.write(blob);
+  await writable.close();
+}
+
+function transferImageDataToWasm(imageData) {
+  const { data, width, height } = imageData;
+  const numBytes = data.length * data.BYTES_PER_ELEMENT;
+
+  // Allocate memory in the WASM heap
+  const ptr = Module._malloc(numBytes);
+  const heap = new Uint8Array(Module.HEAPU8.buffer, ptr, numBytes);
+
+  // Copy the ImageData to the WASM heap
+  heap.set(new Uint8Array(data.buffer));
+
+  // Call the WASM function to process the ImageData
+Module.ccall("runApng",null,["Number","Number","Number"],[ptr, width, height]);
+
+  // Free the allocated memory
+  Module._free(ptr);
+}
+
+frames.forEach(frame => transferImageDataToWasm(frame));
+
+Module._free(ptr);
+}
+    
 function render() {
 totalFrames++;
 if (totalFrames%30==0) {
@@ -129,12 +147,7 @@ return;
 ii++;
 console.log('Frame: ', ii,' Size: '+siz);
 const image = ctx.getImageData(0, 0, siz, siz);
-const imageData = image.data;
-const pixelData = new Uint8Array(imageData);
-const fileStream=FS.open('/frames/frame' + ii + '.png', 'w+', { encoding: 'binary',mode:0777 });
-console.log('/frames/frame' + ii + '.png');
-FS.write(fileStream, pixelData, 0, pixelData.length,  0); 
-FS.close(fileStream);
+transferImageDataToWasm(image);
 }
 setTimeout(function(){
 render();
@@ -143,13 +156,11 @@ render();
 
 setTimeout(function() {
 render(); 
-}, 100); 
+}, 100);
+
 });
 
 });
 
 return 0;
 }
-
-
-
