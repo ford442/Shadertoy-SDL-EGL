@@ -87,10 +87,10 @@ setInterval(drawFrame, 16.6);
 }
 
 function createRGBAFrame(audioChunk, chunkIndex) {
-  const width = 1024;
-  const height = 1024;
-  const frameSize = width * height * 4; // RGBA frame size
-  const frameData = new Uint8ClampedArray(frameSize);
+const width = 1024;
+const height = 1024;
+const frameSize = width * height * 4; // RGBA frame size
+const frameData = new Uint8ClampedArray(frameSize);
 const vvic=document.querySelector('#mvi');
 const srsiz=document.querySelector('#srsiz').innerHTML;
 const vsiz=document.querySelector('#vsiz').innerHTML;
@@ -129,14 +129,14 @@ preserveDrawingBuffer:false
 const fileStream=FS.open('/video/frame.gl','w+');
 for (let i = 0; i < audioChunk.length; i++) {
 const sampleValue = audioChunk[i];
-    const rgbaValue = Math.floor((sampleValue + 1) * 127.5); // Normalize to 0-255
-    const x = i % width;
-    const y = Math.floor(i / width);
-    const index = (y * width + x) * 4;
-    frameData[index] = rgbaValue; // R
-    frameData[index + 1] = rgbaValue; // G
-    frameData[index + 2] = rgbaValue; // B
-    frameData[index + 3] = 255; // A
+const rgbaValue = Math.floor((sampleValue + 1) * 127.5); // Normalize to 0-255
+const x = i % width;
+const y = Math.floor(i / width);
+const index = (y * width + x) * 4;
+frameData[index] = rgbaValue; // R
+frameData[index + 1] = rgbaValue; // G
+frameData[index + 2] = rgbaValue; // B
+frameData[index + 3] = 255; // A
 }
 const image = new ImageData(frameData, width, height);
 const imageData = image.data;
@@ -146,12 +146,12 @@ Module.ccall("frmOn");
 }
 
 function splitAudioIntoChunks(audioData) {
-  const chunkSize = 1024 * 1024; // 1024x1024 samples
-  const numberOfChunks = Math.ceil(audioData.length / chunkSize);
-  for (let i = 0; i < numberOfChunks; i++) {
+const chunkSize = 1024 * 1024; // 1024x1024 samples
+const numberOfChunks = Math.ceil(audioData.length / chunkSize);
+for (let i = 0; i < numberOfChunks; i++) {
 const start = i * chunkSize;
-    const end = Math.min(start + chunkSize, audioData.length);
-    const chunk = audioData.slice(start, end);
+const end = Math.min(start + chunkSize, audioData.length);
+const chunk = audioData.slice(start, end);
 setTimeout(function(){
 createRGBAFrame(chunk, i);
 },16.6);
@@ -171,6 +171,7 @@ function processAudioBuffer(audioBuffer) {
 
 function birdsongStart(){
 const pth=document.querySelector('#birdsongPath').innerHTML;
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const ff=new XMLHttpRequest();
 ff.open('GET',pth,true);
 ff.responseType='arraybuffer';
