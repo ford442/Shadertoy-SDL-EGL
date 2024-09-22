@@ -67,7 +67,7 @@ const fileStream=FS.open('/video/frame.gl','w+');
 function drawFrame() {
 if (pause === 'ready') {
 gl3.clearRect(0, 0, w$, h$);
-gl3.drawImage(vvic, 0, 0, SiZ, SiZ, 0, 0, w$, h$);
+gl3.drawImage(vvic, 0, 0, w$, h$, 0, 0, w$, h$);
 }
 const image = gl3.getImageData(0, 0, w$, h$);
 const imageData = image.data;
