@@ -476,6 +476,7 @@ wetd_tensor wetd=wetd_tensor{2,2};
 wet_tensor wet=wet_tensor{2,2};
 i_tensor texid=i_tensor{2,2};
 i_tensor sze=i_tensor{8,8};
+i_tensor szeV=i_tensor{8,8};
 f_tensor szef=f_tensor{2,2};
 wce_tensor wce=wce_tensor{2,2};
 wrpe_tensor wrpe=wrpe_tensor{2,2};
