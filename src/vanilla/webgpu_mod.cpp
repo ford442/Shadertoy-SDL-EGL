@@ -457,6 +457,8 @@ textureDescriptorInV.format=wtf.at(1,1);
 textureDescriptorInV.usage=WGPU_TEXTURE_USAGE_TEXTURE_BINDING|WGPU_TEXTURE_USAGE_COPY_DST;
 textureDescriptorInV.width=szeV.at(7,7);
 textureDescriptorInV.height=szeV.at(7,7); // default = 1;
+            emscripten_log("Input texture size: %d", szeV.at(7,7));
+
 textureDescriptorInV.depthOrArrayLayers=1;
 textureDescriptorInV.mipLevelCount=1;
 textureDescriptorInV.sampleCount=1;
