@@ -77,6 +77,7 @@ Module.ccall("frmOn");
 }
 if (running == 0) {
 setTimeout(() => {
+console.log('sending: ',vvic.height,vsiz,srsiz);
 Module.ccall("startWebGPUC", null,["Number","Number","Number"],[vvic.height,vsiz,srsiz]);
 running = 1;
 setInterval(drawFrame, 16.6); 
