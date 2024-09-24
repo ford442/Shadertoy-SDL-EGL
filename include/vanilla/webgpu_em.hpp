@@ -115,8 +115,6 @@ typedef ArgumentType argument_type;
 typedef ResultType result_type;
 };
 
-#include <boost/function.hpp>
-
 inline int rNd4(int);
 // static void WGPU_Run();
 // static void ObtainedWebGpuDeviceStart(WGpuDevice,void *);
@@ -281,6 +279,7 @@ using wrbed_tensor=boost::numeric::ublas::tensor<WGpuRenderBundleEncoderDescript
 using wrpdsa_tensor=boost::numeric::ublas::tensor<WGpuRenderPassDepthStencilAttachment>;
 using u64_tensor=boost::numeric::ublas::tensor<uint32_t>;
 using i_tensor=boost::numeric::ublas::tensor<emscripten_align1_int>;
+using Vi_tensor=boost::numeric::ublas::tensor<emscripten_align1_int>;
 // using i_tensor=boost::numeric::ublas::tensor<boost::int_t<64>::exact>;
 using ui32_tensor=boost::numeric::ublas::tensor<boost::uint_t<32>::exact>;
 using wt_tensor=boost::numeric::ublas::tensor<WGpuTexture>;
