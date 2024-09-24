@@ -32,9 +32,10 @@ const vvic=document.querySelector('#mvi');
 const srsiz=document.querySelector('#srsiz').innerHTML;
 const vsiz=document.querySelector('#vsiz').innerHTML;
 const SiZ=window.innerHeight;
+vvic.width=vsiz;
+vvic.height=vsiz;
 
 let w$=vvic.width;
-// vvic.width=SiZ;
 let h$=vvic.height;
 if(vvic.tagName=='IMG'){
 w$=vvic.naturalWidth;
@@ -49,6 +50,7 @@ const cnvb=new OffscreenCanvas(keepSize,keepSize);
 // document.querySelector('#contain2').appendChild(cnvb);
 const cnv=document.querySelector('#scanvas');
 const cnvc=document.querySelector('#bcanvas');
+    
 cnv.height=SiZ;
 cnvb.height=keepSize;
 cnvc.height=vsiz;
