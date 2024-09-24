@@ -32,16 +32,18 @@ const vvic=document.querySelector('#mvi');
 const srsiz=document.querySelector('#srsiz').innerHTML;
 const vsiz=document.querySelector('#vsiz').innerHTML;
 const SiZ=window.innerHeight;
-// vvic.width=vsiz;
-// vvic.height=vsiz;
-
+vvic.width=vsiz;
+vvic.height=vsiz;
 let w$=vvic.width;
 let h$=vvic.height;
 if(vvic.tagName=='IMG'){
 w$=vvic.naturalWidth;
 h$=vvic.naturalHeight;
+vvic.width=naturalWidth;
+vvic.height=naturalHeight;
 }
-const keepSize = Math.max(h$, w$);
+const keepSizea = Math.max(h$, w$);
+const keepSize = Math.min(keepSize, vsiz);
 const drawX = (keepSize - w$) / 2;
 const drawY = (keepSize - h$) / 2;
     
