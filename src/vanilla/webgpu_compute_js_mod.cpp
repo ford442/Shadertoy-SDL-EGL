@@ -39,8 +39,8 @@ let h$=vvic.height;
 if(vvic.tagName=='IMG'){
 w$=vvic.naturalWidth;
 h$=vvic.naturalHeight;
-vvic.width=naturalWidth;
-vvic.height=naturalHeight;
+vvic.width=vvic.naturalWidth;
+vvic.height=vvic.naturalHeight;
 }
 const keepSizea = Math.max(h$, w$);
 const keepSize = Math.min(keepSize, vsiz);
