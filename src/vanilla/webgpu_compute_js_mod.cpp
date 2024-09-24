@@ -32,9 +32,14 @@ const vvic=document.querySelector('#mvi');
 const srsiz=document.querySelector('#srsiz').innerHTML;
 const vsiz=document.querySelector('#vsiz').innerHTML;
 const SiZ=window.innerHeight;
-const w$=vvic.width;
+
+let w$=vvic.width;
 // vvic.width=SiZ;
-const h$=vvic.height;
+let h$=vvic.height;
+if(vvic.tagName=='IMG'){
+w$=vvic.naturalWidth;
+h$=vvic.naturalHeight;
+}
 // vvic.height=SiZ;
 console.log("canvas size: ",h$,", ",w$);
 const cnvb=new OffscreenCanvas(h$,w$); 
@@ -77,8 +82,8 @@ Module.ccall("frmOn");
 }
 if (running == 0) {
 setTimeout(() => {
-console.log('sending: ',vvic.height,vsiz,srsiz);
-Module.ccall("startWebGPUC", null,["Number","Number","Number"],[vvic.height,vsiz,srsiz]);
+console.log('sending: ',h$,vsiz,srsiz);
+Module.ccall("startWebGPUC", null,["Number","Number","Number"],[h$,vsiz,srsiz]);
 running = 1;
 setInterval(drawFrame, 16.6); 
 }, 250);
