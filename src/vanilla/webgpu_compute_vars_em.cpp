@@ -454,13 +454,10 @@ WGpuTextureBindingLayout textureBindingLayout1={}; // for video.cpp
 WGpuSamplerBindingLayout samplerBindingLayout={};
 WGpuImageCopyExternalImage videoFrm={};
 
-
-
 wdss_tensor wdss=wdss_tensor{2,2};
 wvs_tensor wvs=wvs_tensor{2,2};
 wps_tensor wps=wps_tensor{2,2};
 wfs_tensor wfs=wfs_tensor{2,2};
-
 
 wib_tensor wib=wib_tensor{3,3};
 d_tensor d64_uniform=d_tensor{8,8};
@@ -476,7 +473,7 @@ wetd_tensor wetd=wetd_tensor{2,2};
 wet_tensor wet=wet_tensor{2,2};
 i_tensor texid=i_tensor{2,2};
 i_tensor sze=i_tensor{8,8};
-i_tensor szeV=i_tensor{8,8};
+Vi_tensor szeV=Vi_tensor{8,8};
 f_tensor szef=f_tensor{2,2};
 wce_tensor wce=wce_tensor{2,2};
 wrpe_tensor wrpe=wrpe_tensor{2,2};
