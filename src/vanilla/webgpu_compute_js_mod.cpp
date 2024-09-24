@@ -32,8 +32,8 @@ const vvic=document.querySelector('#mvi');
 const srsiz=document.querySelector('#srsiz').innerHTML;
 const vsiz=document.querySelector('#vsiz').innerHTML;
 const SiZ=window.innerHeight;
-vvic.width=vsiz;
-vvic.height=vsiz;
+// vvic.width=vsiz;
+// vvic.height=vsiz;
 
 let w$=vvic.width;
 let h$=vvic.height;
@@ -79,7 +79,7 @@ if (pause === 'ready') {
 
 gl3.clearRect(0, 0, keepSize, keepSize);
    gl3.fillStyle = 'black';
-    gl3.fillRect(0, 0, w$, h$);
+    gl3.fillRect(0, 0, keepSize, keepSize);
         gl3.drawImage(vvic, 0, 0, keepSize, keepSize, drawX, drawY, keepSize, keepSize); 
 
 // gl3.drawImage(vvic, cropX, cropY, cropSize, cropSize, 0, 0, cropSize, cropSize); 
