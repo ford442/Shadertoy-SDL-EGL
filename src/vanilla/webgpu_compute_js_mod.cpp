@@ -548,7 +548,7 @@ canvasStart();
 document.querySelector('#startBtnB').addEventListener('click',function(){
 var pth=document.querySelector('#path').innerHTML;
 getShader(pth,'shader.wgsl');
-var pth2=document.querySelector('#computePath').innerHTML;
+var pth2=document.querySelector('#computePathBird').innerHTML;
 var pth3=document.querySelector('#fragPath').innerHTML;
 var pth4=document.querySelector('#vertPath').innerHTML;
 getShader(pth2,'compute.wgsl');
