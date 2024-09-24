@@ -40,18 +40,24 @@ if(vvic.tagName=='IMG'){
 w$=vvic.naturalWidth;
 h$=vvic.naturalHeight;
 }
+
+    const cropSize = Math.min(w$, h$);
+    // Calculate the starting coordinates for cropping
+    const cropX = (w$ - cropSize) / 2;
+    const cropY = (h$ - cropSize) / 2;
+
 // vvic.height=SiZ;
-console.log("canvas size: ",h$,", ",w$);
-const cnvb=new OffscreenCanvas(h$,w$); 
+console.log("canvas size: ",cropSize,", ",cropSize);
+const cnvb=new OffscreenCanvas(cropSize,cropSize); 
 // document.querySelector('#contain2').appendChild(cnvb);
 const cnv=document.querySelector('#scanvas');
 const cnvc=document.querySelector('#bcanvas');
 cnv.height=SiZ;
-cnvb.height=h$;
+cnvb.height=cropSize;
 cnvc.height=vsiz;
 cnvc.style.height=vsiz+'px';
 cnv.width=SiZ;
-cnvb.width=w$;
+cnvb.width=cropSize;
 cnvc.width=vsiz;
 cnvc.style.width=vsiz+'px';
 const gl3=cnvb.getContext('2d',{
@@ -71,10 +77,11 @@ preserveDrawingBuffer:false
 const fileStream=FS.open('/video/frame.gl','w+');
 function drawFrame() {
 if (pause === 'ready') {
-gl3.clearRect(0, 0, w$, h$);
-gl3.drawImage(vvic, 0, 0, w$, h$, 0, 0, w$, h$);
+
+gl3.clearRect(0, 0, cropSize, cropSize);
+gl3.drawImage(vvic, cropX, cropY, cropSize, cropSize, 0, 0, cropSize, cropSize); 
 }
-const image = gl3.getImageData(0, 0, w$, h$);
+const image = gl3.getImageData(0, 0, cropSize, cropSize);
 const imageData = image.data;
 const pixelData = new Float32Array(imageData);
 FS.write(fileStream, pixelData, 0, pixelData.length, 0);
@@ -83,7 +90,7 @@ Module.ccall("frmOn");
 if (running == 0) {
 setTimeout(() => {
 console.log('sending: ',h$,vsiz,srsiz);
-Module.ccall("startWebGPUC", null,["Number","Number","Number"],[h$,vsiz,srsiz]);
+Module.ccall("startWebGPUC", null,["Number","Number","Number"],[cropSize,vsiz,srsiz]);
 running = 1;
 setInterval(drawFrame, 16.6); 
 }, 250);
