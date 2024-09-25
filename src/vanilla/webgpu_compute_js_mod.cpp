@@ -110,6 +110,86 @@ setInterval(drawFrame, 16.6);
 }
 }
 
+
+function 330khz(){
+let timeStart=performance.now();
+let cycle;
+let dot;
+const srsiz=document.querySelector('#srsiz').innerHTML;
+const vsiz=document.querySelector('#vsiz').innerHTML;
+const SiZ=window.innerHeight;
+console.log("canvas size: ",SiZ,", ",SiZ);
+const OffscCnv=new OffscreenCanvas(keepSize,keepSize); 
+const scnv=document.querySelector('#scanvas');
+const bcnv=document.querySelector('#bcanvas');
+scnv.height=SiZ;
+OffscCnv.height=vsiz;
+bcnv.height=vsiz;
+bcnv.style.height=keepSize+'px';
+scnv.width=SiZ;
+OffscCnv.width=vsiz;
+bcnv.width=vsiz;
+bcnv.style.width=keepSize+'px';
+const gl3=OffscCnv.getContext('2d',{
+colorType:'float32',
+alpha:true,
+willReadFrequently:true,
+stencil:false,
+depth:false,
+colorSpace:"display-p3",
+desynchronized:false,
+antialias:true,
+powerPreference:"high-performance",
+premultipliedAlpha:true,
+preserveDrawingBuffer:false
+});
+// gl3.imageSmoothingEnabled=false;
+const fileStream=FS.open('/video/frame.gl','w+');
+let matrix=    gl3.createImageData(vsiz,vsiz);
+for (let i = 0; i < matrix.data.length; i += 4){
+matrix.data[i+0] = 0;
+matrix.data[i+1] = 0;
+matrix.data[i+2] = 0;
+matrix.data[i+3] = 255;
+}
+function drawFrame() {
+if (pause === 'ready') {
+gl3.clearRect(0, 0, vsiz, vsiz);
+gl3.fillStyle = 'black';
+gl3.fillRect(0, 0, vsiz, vsiz);
+cycle=performance.now()-timeStart;
+cycle=cycle%1.0;
+dot=330000*cycle;
+dot=(vsiz*vsiz)*dot*4;
+for (let i = 0; i < matrix.data.length; i += 4){
+matrix.data[i+0] = 0;
+matrix.data[i+1] = 0;
+matrix.data[i+2] = 0;
+matrix.data[i+3] = 255;
+}
+matrix.data[dot] = 255;
+matrix.data[dot+1] = 255;
+matrix.data[dot+2] = 255;
+gl3.putImageData(matrix);
+}
+const image = gl3.getImageData(0, 0, vsiz, vsiz);
+const imageData = image.data;
+const pixelData = new Float32Array(imageData);
+FS.write(fileStream, pixelData, 0, pixelData.length, 0);
+Module.ccall("frmOn");
+}
+if (running == 0) {
+setTimeout(() => {
+console.log('sending: ',vsiz,vsiz,srsiz);
+Module.ccall("startWebGPUC", null,["Number","Number","Number"],[vsiz,vsiz,srsiz]);
+running = 1;
+setInterval(drawFrame, 16.6); 
+}, 250);
+} else {
+setInterval(drawFrame, 16.6);
+}
+}
+
 function createRGBAFrame(audioChunk, chunkIndex) {
 const width = 1024;
 const height = 1024;
@@ -582,6 +662,21 @@ getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
 setTimeout(function(){
 birdsongStart();
+},3000);
+});
+
+
+document.querySelector('#startBtnH').addEventListener('click',function(){
+var pth=document.querySelector('#path').innerHTML;
+getShader(pth,'shader.wgsl');
+var pth2=document.querySelector('#computePathBird').innerHTML;
+var pth3=document.querySelector('#fragPath').innerHTML;
+var pth4=document.querySelector('#vertPath').innerHTML;
+getShader(pth2,'compute.wgsl');
+getShader(pth3,'frag2.wgsl');
+getShader(pth4,'vert.wgsl');
+setTimeout(function(){
+330khz();
 },3000);
 });
 
