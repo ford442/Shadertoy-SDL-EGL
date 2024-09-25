@@ -43,7 +43,7 @@ vvic.width=vvic.naturalWidth;
 vvic.height=vvic.naturalHeight;
 }
 const keepSizea = Math.max(h$, w$);
-const keepSize = Math.min(keepSize, vsiz);
+const keepSize = Math.min(keepSizea, vsiz);
 const drawX = (keepSize - w$) / 2;
 const drawY = (keepSize - h$) / 2;
     
