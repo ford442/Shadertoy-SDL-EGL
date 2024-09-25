@@ -49,7 +49,7 @@ vvic.width=vvic.naturalWidth;
 vvic.height=vvic.naturalHeight;
 }
 const keepSize = Math.max(h$, w$);
-// const keepSize = Math.min(keepSizea, vsiz);
+const keepSize = Math.min(keepSizea, vsiz);
 const drawX = (keepSize - w$) / 2;
 const drawY = (keepSize - h$) / 2;
 
@@ -88,7 +88,7 @@ if (pause === 'ready') {
 gl3.clearRect(0, 0, keepSize, keepSize);
    gl3.fillStyle = 'black';
     gl3.fillRect(0, 0, keepSize, keepSize);
-        gl3.drawImage(vvic, 0, 0, keepSize, keepSize, drawX, drawY, keepSize, keepSize); 
+        gl3.drawImage(vvic, 0, 0, w$, h$, drawX, drawY, w$, h$); 
 
 // gl3.drawImage(vvic, cropX, cropY, cropSize, cropSize, 0, 0, cropSize, cropSize); 
 }
