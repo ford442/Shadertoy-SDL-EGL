@@ -1176,7 +1176,7 @@ sze.at(1,1)=sz;
 sze.at(6,6)=sz;
 szeV.at(7,7)=vsz;
 u64_uni.at(4,4)=sr;  //  texture resize amount
-                  emscripten_log(EM_LOG_CONSOLE,"C main texture size: %d", sze.at(1,1));
+                  emscripten_log(EM_LOG_CONSOLE,"C main size: %d", sze.at(1,1));
                   emscripten_log(EM_LOG_CONSOLE,"C input texture size: %d", szeV.at(7,7));
                   emscripten_log(EM_LOG_CONSOLE,"C super res size: %d", u64_uni.at(4,4));
 f32_uniform.at(2,2)=static_cast<emscripten_align1_float>(sze.at(1,1));
@@ -1194,7 +1194,7 @@ sze.at(6,6)=sz;
 szeV.at(7,7)=vsz;
 u64_uni.at(4,4)=sr;  //  texture resize amount
                   emscripten_log(EM_LOG_CONSOLE,"C input texture sizes: %d", szeV.at(7,7));
-                  emscripten_log(EM_LOG_CONSOLE,"C input size: %d", sze.at(1,1));
+                  emscripten_log(EM_LOG_CONSOLE,"C main size: %d", sze.at(1,1));
                   emscripten_log(EM_LOG_CONSOLE,"C super res size: %d",u64_uni.at(4,4));
 f32_uniform.at(2,2)=static_cast<emscripten_align1_float>(sze.at(1,1));
 szef.at(1,1)=static_cast<emscripten_align1_float>(sze.at(1,1));
