@@ -32,8 +32,8 @@ const vvic=document.querySelector('#mvi');
 const srsiz=document.querySelector('#srsiz').innerHTML;
 const vsiz=document.querySelector('#vsiz').innerHTML;
 const SiZ=window.innerHeight;
-vvic.width=vsiz;
-vvic.height=vsiz;
+// vvic.width=vsiz;
+// vvic.height=vsiz;
 let w$=vvic.width;
 let h$=vvic.height;
 if(vvic.tagName=='IMG'){
