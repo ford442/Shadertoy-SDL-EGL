@@ -48,26 +48,26 @@ h$=vvic.naturalHeight;
 vvic.width=vvic.naturalWidth;
 vvic.height=vvic.naturalHeight;
 }
-const keepSizea = Math.max(h$, w$);
-const keepSize = Math.min(keepSizea, vsiz);
+const keepSize = Math.max(h$, w$);
+// const keepSize = Math.min(keepSizea, vsiz);
 const drawX = (keepSize - w$) / 2;
 const drawY = (keepSize - h$) / 2;
 
 console.log("canvas size: ",keepSize,", ",keepSize);
-const cnvb=new OffscreenCanvas(keepSize,keepSize); 
-// document.querySelector('#contain2').appendChild(cnvb);
-const cnv=document.querySelector('#scanvas');
-const cnvc=document.querySelector('#bcanvas');
+const OffscCnv=new OffscreenCanvas(keepSize,keepSize); 
+// document.querySelector('#contain2').appendChild(OffscCnv);
+const scnv=document.querySelector('#scanvas');
+const bcnv=document.querySelector('#bcanvas');
     
-cnv.height=SiZ;
-cnvb.height=keepSize;
-cnvc.height=keepSize;
-cnvc.style.height=vsiz+'px';
-cnv.width=SiZ;
-cnvb.width=keepSize;
-cnvc.width=keepSize;
-cnvc.style.width=vsiz+'px';
-const gl3=cnvb.getContext('2d',{
+scnv.height=SiZ;
+OffscCnv.height=keepSize;
+bcnv.height=keepSize;
+bcnv.style.height=keepSize+'px';
+scnv.width=SiZ;
+OffscCnv.width=keepSize;
+bcnv.width=keepSize;
+bcnv.style.width=keepSize+'px';
+const gl3=OffscCnv.getContext('2d',{
 colorType:'float32',
 alpha:true,
 willReadFrequently:true,
