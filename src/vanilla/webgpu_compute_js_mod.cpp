@@ -34,8 +34,14 @@ const vsiz=document.querySelector('#vsiz').innerHTML;
 const SiZ=window.innerHeight;
 // vvic.width=vsiz;
 // vvic.height=vsiz;
-let w$=vvic.width;
-let h$=vvic.height;
+let w$;
+let h$;
+if(vvic.tagName=='CANVAS'){
+vvic.width=vsiz;
+vvic.height=vsiz;
+w$=vsiz;
+h$=vsiz;  
+}
 if(vvic.tagName=='IMG'){
 w$=vvic.naturalWidth;
 h$=vvic.naturalHeight;
@@ -46,7 +52,7 @@ const keepSizea = Math.max(h$, w$);
 const keepSize = Math.min(keepSizea, vsiz);
 const drawX = (keepSize - w$) / 2;
 const drawY = (keepSize - h$) / 2;
-    
+
 console.log("canvas size: ",keepSize,", ",keepSize);
 const cnvb=new OffscreenCanvas(keepSize,keepSize); 
 // document.querySelector('#contain2').appendChild(cnvb);
@@ -55,11 +61,11 @@ const cnvc=document.querySelector('#bcanvas');
     
 cnv.height=SiZ;
 cnvb.height=keepSize;
-cnvc.height=vsiz;
+cnvc.height=keepSize;
 cnvc.style.height=vsiz+'px';
 cnv.width=SiZ;
 cnvb.width=keepSize;
-cnvc.width=vsiz;
+cnvc.width=keepSize;
 cnvc.style.width=vsiz+'px';
 const gl3=cnvb.getContext('2d',{
 colorType:'float32',
