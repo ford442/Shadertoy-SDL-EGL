@@ -170,7 +170,7 @@ matrix.data[i+3] = 255;
 matrix.data[dot] = 255;
 matrix.data[dot+1] = 255;
 matrix.data[dot+2] = 255;
-gl3.putImageData(matrix);
+gl3.putImageData(matrix,vsiz,vsiz);
 }
 const image = gl3.getImageData(0, 0, vsiz, vsiz);
 const imageData = image.data;
