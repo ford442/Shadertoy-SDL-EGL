@@ -111,7 +111,7 @@ setInterval(drawFrame, 16.6);
 }
 
 
-function 330khz(){
+function khz(){
 let timeStart=performance.now();
 let cycle;
 let dot;
@@ -676,7 +676,7 @@ getShader(pth2,'compute.wgsl');
 getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
 setTimeout(function(){
-330khz();
+khz();
 },3000);
 });
 
