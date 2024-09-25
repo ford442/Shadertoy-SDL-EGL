@@ -119,17 +119,17 @@ const srsiz=document.querySelector('#srsiz').innerHTML;
 const vsiz=document.querySelector('#vsiz').innerHTML;
 const SiZ=window.innerHeight;
 console.log("canvas size: ",SiZ,", ",SiZ);
-const OffscCnv=new OffscreenCanvas(keepSize,keepSize); 
+const OffscCnv=new OffscreenCanvas(vsiz,vsiz); 
 const scnv=document.querySelector('#scanvas');
 const bcnv=document.querySelector('#bcanvas');
 scnv.height=SiZ;
 OffscCnv.height=vsiz;
 bcnv.height=vsiz;
-bcnv.style.height=keepSize+'px';
+bcnv.style.height=vsiz+'px';
 scnv.width=SiZ;
 OffscCnv.width=vsiz;
 bcnv.width=vsiz;
-bcnv.style.width=keepSize+'px';
+bcnv.style.width=vsiz+'px';
 const gl3=OffscCnv.getContext('2d',{
 colorType:'float32',
 alpha:true,
