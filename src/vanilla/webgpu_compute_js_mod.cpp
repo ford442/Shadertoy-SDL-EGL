@@ -194,6 +194,8 @@ function processAudioBuffer(audioBuffer) {
 }
 
 function birdsongStart(){
+let srsiz=document.querySelector('#srsiz').innerHTML;
+let vsiz=document.querySelector('#vsiz').innerHTML;
 const pth=document.querySelector('#birdsongPath').innerHTML;
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const ff=new XMLHttpRequest();
@@ -213,7 +215,7 @@ ff.addEventListener("load", function() {
 });
 ff.send();
 if (running == 0) {
-Module.ccall("startWebGPUC", null,["Number","Number","Number"],[1024,1024,1000]);
+Module.ccall("startWebGPUC", null,["Number","Number","Number"],[1024,vsiz,srsiz]);
 running = 1;
 }
 }
