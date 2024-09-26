@@ -170,6 +170,15 @@ matrix.data[i+3] = 255;
 matrix.data[dot] = 255;
 matrix.data[dot+1] = 255;
 matrix.data[dot+2] = 255;
+matrix.data[dot+3] = 255;
+matrix.data[dot+4] = 255;
+matrix.data[dot+5] = 255;
+matrix.data[dot+6] = 255;
+matrix.data[dot+7] = 255;
+matrix.data[dot+8] = 255;
+matrix.data[dot+9] = 255;
+matrix.data[dot+10] = 255;
+matrix.data[dot+11] = 255;
 gl3.putImageData(matrix,vsiz,vsiz);
 }
 const image = gl3.getImageData(0, 0, vsiz, vsiz);
