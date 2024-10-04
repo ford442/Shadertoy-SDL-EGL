@@ -403,7 +403,7 @@ clearColor.a=1.0;
 clearC.at(0,0)=clearColor;
 wgpu_canvas_context_configure(wcc.at(0,0),&wccf.at(0,0));
 emscripten_get_canvas_element_size("canvas",&szwI,&szhI);
-emscripten_get_element_css_size("canvas",&szw,&szh);
+emscripten_get_element_css_size("#scanvas",&szw,&szh);
 // u64_siz.at(3,3)=sze.at(1,1);
 sze.at(0,0)=static_cast<emscripten_align1_int>(szhI);
                         emscripten_log(EM_LOG_CONSOLE,"C got canvas size: %d", sze.at(0,0));
