@@ -110,7 +110,6 @@ setInterval(drawFrame, 16.6);
 }
 }
 
-
 function khz(){
 let timeStart=performance.now();
 let cycle;
