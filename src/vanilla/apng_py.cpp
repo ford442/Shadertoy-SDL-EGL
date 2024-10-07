@@ -490,10 +490,6 @@ document.querySelector('#mvi').style.transform='scaleX(-1.0)';
 }
 });
 
-</script>
-
-<script type="module">
-
 document.getElementById("startBtn").addEventListener('click',function(){
 document.getElementById('mvi').play();
 });
