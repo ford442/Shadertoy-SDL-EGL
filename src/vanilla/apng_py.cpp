@@ -4,7 +4,285 @@ int main(){
 
 EM_ASM({
 
-        async function processImage(imageDataURL) {
+    // https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js
+const pyChannel = new BroadcastChannel('py_channel');
+const imageChannel = new BroadcastChannel('imageChannel');
+const imgOut = document.getElementById('mvi');
+const pyBtn3 = document.getElementById('pyBtn3');
+const pyBtn4 = document.getElementById('pyBtn4');
+const fileInput = document.getElementById('fileInput'); // Replace 'fileInput' with your input's ID
+const fileInput2 = document.getElementById('fileInput2'); // Replace 'fileInput' with your input's ID
+
+function getDepth(){
+// window.open('./depth.1ink');
+const xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://noahcohn.com/depth009.3ijs', true);
+xhr.responseType = 'arraybuffer';
+console.log('got run');
+function decodeUTF32(uint8Array, isLittleEndian = true) {
+const dataView = new DataView(uint8Array.buffer);
+let result = "";
+for (let i = 0; i < uint8Array.length; i += 4) {
+let codePoint;
+if (isLittleEndian) {
+codePoint = dataView.getUint32(i, true); // Little-endian
+} else {
+codePoint = dataView.getUint32(i, false); // Big-endian
+}
+result += String.fromCodePoint(codePoint);
+}
+return result;
+}
+xhr.onload = function() {
+if (xhr.status === 200) {
+const utf32Data = xhr.response;
+const jsCode = decodeUTF32(new Uint8Array(utf32Data), true); // Assuming little-endian
+const scr = document.createElement('script');
+scr.type = 'module';
+scr.text = jsCode;
+setTimeout(function(){
+document.body.appendChild(scr);
+},200);
+}
+};
+xhr.send();
+var imgChan=new BroadcastChannel('imageURL');
+imgChan.addEventListener('message',event=>{
+document.querySelector('#imagePath').innerHTML=event.data.data;
+document.querySelector('#example').click();
+});
+const loaderChannel = new BroadcastChannel('loaderChannel');
+document.querySelector('#loadGLTF').addEventListener('click',function(){
+document.querySelector('#saveName').innerHTML=document.querySelector('#savedName').value;
+var GLloc=document.querySelector('#saveName').innerHTML;
+loaderChannel.postMessage({GLloc});
+});
+document.querySelector('#savegltf').addEventListener('click',function(){
+document.querySelector('#saveName').innerHTML=document.querySelector('#savedName').value;
+});
+}
+
+// Add event listener for file selection
+fileInput.addEventListener('change', (event) => {
+const file = event.target.files[0];
+if (file) {
+const reader = new FileReader();
+reader.onload = (e) => {
+const imageDataURL = e.target.result;
+getDepth();
+setTimeout(function(){
+imageChannel.postMessage({ imageDataURL });
+},3500);};
+reader.readAsDataURL(file);
+setTimeout(function(){
+document.querySelector('#tvi').style.position='absolute';
+document.querySelector('#tvi').style.zIndex=3100;
+document.querySelector('#tvi').style.pointerEvents='auto';
+},5500);
+}
+});
+
+pyBtn4.onclick = () => {
+const divElement = document.querySelector('#imagePath'); // Replace 'myDiv' with your div's ID
+const mtext = navigator.clipboard.readText(); // Read text from clipboard
+divElement.textContent = mtext; // Set the div's text content
+document.getElementById("pyBtn").click();
+}
+
+pyBtn3.onclick = () => {
+getDepth();
+setTimeout(function () {
+const canvas = document.createElement('canvas');
+canvas.width = imgOut.width;
+canvas.height = imgOut.height;
+const ctx = canvas.getContext('2d');
+ctx.drawImage(imgOut, 0, 0);
+// window.open('./depth.1ink');
+//window.open('./depth/index.html');
+// const imageDataURL = canvas.toDataURL();
+const imageDataURL = imgOut.src;
+imageChannel.postMessage({imageDataURL});
+}, 4500);
+setTimeout(function(){
+document.querySelector('#tvi').style.position='absolute';
+document.querySelector('#tvi').style.zIndex=3300;
+document.querySelector('#tvi').style.pointerEvents='auto';
+},6500);
+};
+
+pyChannel.addEventListener('message', (event) => {
+const message = event.data;
+console.log('got postmessage');
+});
+
+document.getElementById("pyBtn").addEventListener('click', () => {
+    const pth = document.querySelector('#imagePath').innerHTML;
+    processImageFromURL(pth);
+});
+
+document.getElementById("pyBtn5").addEventListener('click', () => {
+    getDepth();
+    setTimeout(function () {
+     //   const canvas = document.createElement('canvas');
+     //   canvas.width = imgOut.width;
+     //   canvas.height = imgOut.height;
+    //    const ctx = canvas.getContext('2d');
+     //   ctx.drawImage(imgOut, 0, 0);
+// window.open('./depth.1ink');
+//window.open('./depth/index.html');
+// const imageDataURL = canvas.toDataURL();
+        const imageDataURL = imgOut.src;
+        imageChannel.postMessage({imageDataURL});
+    }, 4500);
+    setTimeout(function(){
+        document.querySelector('#tvi').style.position='absolute';
+        document.querySelector('#tvi').style.zIndex=3300;
+        document.querySelector('#tvi').style.pointerEvents='auto';
+    },6500);
+});
+
+// Add an event listener to your file input element
+fileInput2.addEventListener('change', (event) => {
+document.querySelector('#scanvas').style.transform='scaleY(-1.0)';
+const file = event.target.files[0];
+if (file) {
+const reader = new FileReader();
+reader.onload = (e) => {
+const imageDataURL = e.target.result;
+processImage(imageDataURL);
+};
+reader.readAsDataURL(file);
+}
+});
+
+let cnv1=document.querySelector('#scanvas');
+
+let base64Strings=[];
+let currentApngFrame=0;
+
+function AddPNGs_ctx() {
+let apngCtx=cnv1.getContext('2d');
+imageStrings[currentApngFrame]=apngCtx.getImageData(0, 0, cnv1.height, cnv1.height);
+currentApngFrame++;
+if(currentApngFrame<10){
+setTimeout(function(){
+AddPNGs();
+},200);
+}else{
+const pngCanvas=createElement('canvas');
+const pngCtx=pngCanvas.getContext('2d');
+pngCanvas.height=cnv1.height;
+pngCanvas.width=cnv1.height;
+for (var i=0;i<10;i++){
+pngCtx.putImageData(imageStrings[i]);
+base64Strings[i]=pngCtx.toDataURL().split(',')[1];
+}
+MakeAPNG();
+}
+}
+
+function AddPNGs() {
+base64Strings[currentApngFrame]=cnv1.toDataURL().split(',')[1];;
+currentApngFrame++;
+if(currentApngFrame<10){
+setTimeout(function(){
+AddPNGs();
+},200);
+}else{
+MakeAPNG();
+}
+}
+
+function AddPNGsThreeJS() {
+let cnv2=document.querySelector('canvas.#mvi');
+
+base64Strings[currentApngFrame]=cnv2.toDataURL().split(',')[1];;
+currentApngFrame++;
+if(currentApngFrame<10){
+setTimeout(function(){
+AddPNGs();
+},200);
+}else{
+MakeAPNG();
+}
+}
+
+async function MakeAPNG() {
+console.log(base64Strings);
+let pyodide = await loadPyodide();
+
+// pyodide.globals.set("base64Strings", base64Strings);
+const globals = pyodide.toPy({ imgStrings: base64Strings });
+
+await pyodide.loadPackage("micropip");
+await pyodide.runPythonAsync(`
+import micropip
+await micropip.install('numpy')
+await micropip.install('cython')
+
+await micropip.install('apng')
+await micropip.install('pillow')
+await micropip.install('essentia')
+import os
+import js
+import base64
+import pyodide
+from PIL import Image
+import io
+import numpy as np
+from apng import APNG, PNG
+frames_data = []  # List to store decoded frame data
+
+frames_data = []
+
+apng_animation = APNG()
+
+for base64_string in imgStrings:
+        img_data = base64.b64decode(base64_string)
+        img = Image.open(io.BytesIO(img_data))
+        img_array = np.array(img)
+        frames_data.append(img_array)
+
+for frame_data in frames_data:
+        img = Image.fromarray(frame_data)
+        with io.BytesIO() as output:
+            img.save(output, format="PNG")
+            png_bytes = output.getvalue()
+        png_image = PNG.from_bytes(png_bytes)
+        apng_animation.append(png_image, delay=200, delay_den=1000)
+
+apng_bytes = apng_animation.to_bytes()
+
+apng_base64 = base64.b64encode(apng_bytes).decode('ascii')
+apng_base64
+`,{globals})
+.then(result => {
+    // Get the base64 data back in JavaScript
+  //  const apngBase64 = pyodide.globals.get("apngBase64");
+
+    // Create a data URL
+    const apngDataURL = "data:image/apng;base64," + result;
+
+    // Now you can use apngDataURL to display the animation or trigger a download
+
+    // Example: Displaying the animation in an <img> tag
+    const img = document.createElement('img');
+    img.src = apngDataURL;
+    document.body.appendChild(img);
+
+    // Example: Triggering a download
+    const a = document.createElement('a');
+    a.href = apngDataURL;
+    a.download = 'animation.apng';
+    a.click();
+})
+.catch(error => {
+    console.error("Error in Pyodide:", error);
+});
+
+}
+
+async function processImage(imageDataURL) {
 let result;
 let base64String;
     const img = new Image();
@@ -76,6 +354,7 @@ p2: float
 p98: float
 p2, p98 = np.percentile(img_array, (2, 98))
 js.console.log('got image PIL')
+
 
 original_height, original_width = img_array.shape[:2]
 
@@ -166,81 +445,238 @@ downloadImage(result, 'histogram_eq_image.jpg');
 // main();
 }
 
-FS.mkdir('/frames');
-
-async function MakeAPNG() {
-console.log(base64Strings);
-let pyodide = await loadPyodide();
-
-// pyodide.globals.set("base64Strings", base64Strings);
-const globals = pyodide.toPy({ imgStrings: base64Strings });
-
-await pyodide.loadPackage("micropip");
-await pyodide.runPythonAsync(`
-import micropip
-await micropip.install('numpy')
-await micropip.install('cython')
-await micropip.install('apng')
-await micropip.install('pillow')
-await micropip.install('essentia')
-import os
-import js
-import base64
-import pyodide
-from PIL import Image
-import io
-import numpy as np
-from apng import APNG, PNG
-frames_data = []  # List to store decoded frame data
-
-frames_data = []
-
-apng_animation = APNG()
-
-for base64_string in imgStrings:
-        img_data = base64.b64decode(base64_string)
-        img = Image.open(io.BytesIO(img_data))
-        img_array = np.array(img)
-        frames_data.append(img_array)
-
-for frame_data in frames_data:
-        img = Image.fromarray(frame_data)
-        with io.BytesIO() as output:
-            img.save(output, format="PNG")
-            png_bytes = output.getvalue()
-        png_image = PNG.from_bytes(png_bytes)
-        apng_animation.append(png_image, delay=200, delay_den=1000)
-
-apng_bytes = apng_animation.to_bytes()
-
-apng_base64 = base64.b64encode(apng_bytes).decode('ascii')
-apng_base64
-`,{globals})
-.then(result => {
-    // Get the base64 data back in JavaScript
-  //  const apngBase64 = pyodide.globals.get("apngBase64");
-
-    // Create a data URL
-    const apngDataURL = "data:image/apng;base64," + result;
-
-    // Now you can use apngDataURL to display the animation or trigger a download
-
-    // Example: Displaying the animation in an <img> tag
-    const img = document.createElement('img');
-    img.src = apngDataURL;
-    document.body.appendChild(img);
-
-    // Example: Triggering a download
-    const a = document.createElement('a');
-    a.href = apngDataURL;
-    a.download = 'animation.apng';
-    a.click();
-})
-.catch(error => {
-    console.error("Error in Pyodide:", error);
-});
+function _arrayBufferToBase64(buffer) {
+let binary = '';
+const bytes = new Uint8Array(buffer);
+const len = bytes.byteLength;
+for (let i = 0; i < len; i++) {
+binary += String.fromCharCode(bytes[i]);
+}
+return window.btoa(binary);
 
 }
+
+function downloadImage(base64String, filename) {
+const link = document.createElement('a');
+link.href = "data:image/jpeg;base64," + base64String;
+link.download = filename;
+document.body.appendChild(link);
+link.click();
+document.body.removeChild(link);
+}
+
+function processImageFromURL(pth) {
+const xhr = new XMLHttpRequest();
+document.querySelector('#mvi').src = pth;
+xhr.open('GET', pth, true);
+xhr.responseType = 'arraybuffer';
+console.log('got py image');
+xhr.onload = function() {
+const imageData = xhr.response;
+processImage(imageData); // Reuse the processImage function
+};
+xhr.send();
+}
+
+document.getElementById("pyBtn2").addEventListener('click',function() {
+document.querySelector('#scanvas').style.transform='scaleY(-1.0)';
+const imageDataUrl = document.getElementById('scanvas').toDataURL('image/jpeg'); // You can change the format if needed
+document.getElementById('mvi').src=imageDataUrl;
+document.querySelector('#mvi').style.transform='scaleY(-1.0)';
+document.querySelector('#mvi').style.transform='scaleX(-1.0)';
+
+});
+
+</script>
+
+<script type="module">
+
+document.getElementById("startBtn").addEventListener('click',function(){
+document.getElementById('mvi').play();
+});
+
+document.getElementById("mviBtn").addEventListener('click',function(){
+document.getElementById('mvi').play();
+});
+
+document.getElementById("apngBtn").addEventListener('click',function(){
+AddPNGs();
+});
+
+document.getElementById("apngBtn2").addEventListener('click',function(){
+AddPNGsThreeJS();
+});
+
+/*
+document.getElementById("apngBtn2").addEventListener('click',function(){
+
+const xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://wasm.noahcohn.com/b3hd/w0-017-apng.3ijs', true); // Replace with your filename
+xhr.responseType = 'arraybuffer'; // Get raw binary data
+console.log('got run');
+
+function decodeUTF32(uint8Array, isLittleEndian = true) {
+const dataView = new DataView(uint8Array.buffer);
+let result = "";
+for (let i = 0; i < uint8Array.length; i += 4) {
+let codePoint;
+if (isLittleEndian) {
+codePoint = dataView.getUint32(i, true); // Little-endian
+} else {
+codePoint = dataView.getUint32(i, false); // Big-endian
+}
+result += String.fromCodePoint(codePoint);
+}
+return result;
+}
+
+xhr.onload = function() {
+console.log('got load');
+if (xhr.status === 200) {
+console.log('got script');
+const utf32Data = xhr.response;
+//const decoder = new TextDecoder('utf-32'); // Or 'utf-32be'
+const jsCode = decodeUTF32(new Uint8Array(utf32Data), true); // Assuming little-endian
+const scr = document.createElement('script');
+//scr.type = 'module';
+scr.text = jsCode;
+//scr.dataset.moduleUrl = 'https://wasm.noahcohn.com/b3hd/'; // Base URL for module's relative paths
+document.body.appendChild(scr);
+setTimeout(function(){
+var Module = libapng();
+Module.onRuntimeInitialized = function(){
+Module.callMain();
+console.log('call main');
+};
+},2500);
+}
+};
+xhr.send();
+});
+
+*/
+
+document.getElementById("startBtn5").addEventListener('click',function(){
+const xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://wasm.noahcohn.com/b3hd/w0-020-load-32.3ijs', true); // Replace with your filename
+xhr.responseType = 'arraybuffer'; // Get raw binary data
+console.log('got run');
+
+function decodeUTF32(uint8Array, isLittleEndian = true) {
+const dataView = new DataView(uint8Array.buffer);
+let result = "";
+for (let i = 0; i < uint8Array.length; i += 4) {
+let codePoint;
+if (isLittleEndian) {
+codePoint = dataView.getUint32(i, true); // Little-endian
+} else {
+codePoint = dataView.getUint32(i, false); // Big-endian
+}
+result += String.fromCodePoint(codePoint);
+}
+return result;
+}
+
+xhr.onload = function() {
+console.log('got load');
+if (xhr.status === 200) {
+console.log('got script');
+const utf32Data = xhr.response;
+//const decoder = new TextDecoder('utf-32'); // Or 'utf-32be'
+const jsCode = decodeUTF32(new Uint8Array(utf32Data), true); // Assuming little-endian
+const scr = document.createElement('script');
+//scr.type = 'module';
+scr.text = jsCode;
+//scr.dataset.moduleUrl = 'https://wasm.noahcohn.com/b3hd/'; // Base URL for module's relative paths
+document.body.appendChild(scr);
+setTimeout(function(){
+var Module = libload();
+Module.onRuntimeInitialized = function(){
+Module.callMain();
+console.log('call main');
+};
+},2500);
+}
+};
+xhr.send();
+
+});
+
+setTimeout(function(){
+document.querySelector('#splash2').style.zIndex=3000;
+document.querySelector('#splash2').style.display='none';
+},4200);
+setTimeout(function(){
+document.querySelector('#splash1').style.zIndex=3000;
+document.querySelector('#splash1').style.display='none';
+},4500);
+
+setTimeout(function(){
+document.getElementById('vsiz').innerHTML=parseInt(window.innerHeight,10);
+// document.getElementById('vsiz').innerHTML=parseInt(window.innerHeight,10)*3.0;
+document.getElementById('startBtn5').click();
+},1500);
+
+setTimeout(function(){
+window.scrollTo({
+top: 0,
+left: 0,
+behavior: "smooth",
+});
+},1500);
+
+document.getElementById("getThree").addEventListener('click',function(){
+document.querySelector('#mvi').id='ivi';
+// document.querySelector('#tvi').style.zIndex=1300;
+document.querySelector('#tvi').hidden=true;
+document.querySelector('#tvi').opacity=0.0;
+document.querySelector('#tvi').id='mvi';
+document.querySelector('#startBtnC').click();
+});
+
+
+document.querySelector('#btnGif1').addEventListener('click', () => {
+document.querySelector('#btnGif1').src = './image/btn2.gif'; // Reset the GIF to the beginning
+var canvas = document.querySelector('#scanvas'); // Replace 'myCanvas' with your canvas ID
+
+var newCanvas = document.createElement('canvas');
+newCanvas.width = canvas.width;
+newCanvas.height = canvas.height;
+newCanvas.id = 'fcan';
+document.body.appendChild(newCanvas);
+
+var flippedCanvas = document.querySelector('#fcan');
+
+var flippedContext = flippedCanvas.getContext('2d');
+
+flippedContext.imageSmoothingEnabled = false;
+flippedContext.save();
+flippedContext.scale(-1,-1);
+
+// var image=flippedContext.getImageData(0,0,canvas.width,canvas.height);
+var image=new Image();
+
+// var image=flipImageData(flippedContext.getImageData(0,0,canvas.width,canvas.height));
+
+// flippedContext.drawImage(image, 0, 0);
+// flippedContext.putImageData(image, 0, 0);
+
+var dataURL2 = canvas.toDataURL('image/jpeg',1.0); // Or 'image/png', 'image/webp', etc.
+image.src=dataURL2;
+flippedContext.drawImage(image, canvas.height*-1, canvas.height*-1,canvas.height,canvas.height);
+
+var dataURL = canvas.toDataURL('image/jpeg',1.0); // Or 'image/png', 'image/webp', etc.
+
+var timestamp = new Date().toISOString().replace(/[-:.]/g, ''); // Format: YYYYMMDDTHHMMSS
+var filename = `Snapshot_${timestamp}.jpg`;
+
+var link = document.createElement('a');
+link.download = filename;// Set the desired filename
+link.href = dataURL2;
+link.click();
+// flippedCanvas.remove(); // Remove from DOM
+// flippedCanvas = null;// Nullify reference
+});
 
 });
 
