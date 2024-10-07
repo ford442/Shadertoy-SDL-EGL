@@ -487,7 +487,7 @@ const imageDataUrl = document.getElementById('scanvas').toDataURL('image/jpeg');
 document.getElementById('mvi').src=imageDataUrl;
 document.querySelector('#mvi').style.transform='scaleY(-1.0)';
 document.querySelector('#mvi').style.transform='scaleX(-1.0)';
-
+}
 });
 
 </script>
