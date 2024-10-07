@@ -293,7 +293,7 @@ let base64String;
   let   cropX;
   let   cropY;
 
-let base64String = imageDataURL.split(',')[1];
+base64String = imageDataURL.split(',')[1];
 
     if (img.width > img.height) {
         newWidth = newHeight = img.height;
