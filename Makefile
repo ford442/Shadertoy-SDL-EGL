@@ -226,12 +226,12 @@ b3_wasm_loader_lto_32_test2:
 	 em++ src/vanilla/wasm_loader_32.cpp $(STDS) -m64 -flto -flto=thin -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
-	 -mextended-const -O3 -fno-strict-aliasing $(SIMD_FLAGS) -sMEMORY64=1 -c -fno-rounding-math -fcx-limited-range -fassociative-math -freciprocal-math -fno-signed-zeros
+	 -mextended-const -O3 -fno-strict-aliasing $(SIMD_FLAGS) -sMEMORY64=1 -c -fno-rounding-math -fassociative-math -freciprocal-math -fno-signed-zeros
 	 em++ -O3 -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m64 -sMALLOC=mimalloc -sWASMFS=1 \
 	 -openmp-simd -pthread -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -stdlib=libc++ -sUSE_ES6_IMPORT_META=0 -fno-rounding-math -fassociative-math -freciprocal-math -fno-signed-zeros \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
-	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fcx-limited-range -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
+	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
 	 -DCOMPUTE -o $(BETA_BIN_NAME)-load-32.js -sSTRICT=1 -sSTRICT_JS=0 \
 	 $(LINK_SIMD_FLAGS) -sUSE_GLFW=0 -sASSERTIONS=0 -march=haswell -sMEMORY64=2 \
 	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm64 -DNDEBUG=1 \
