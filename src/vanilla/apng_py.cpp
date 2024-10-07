@@ -87,7 +87,7 @@ const divElement = document.querySelector('#imagePath'); // Replace 'myDiv' with
 const mtext = navigator.clipboard.readText(); // Read text from clipboard
 divElement.textContent = mtext; // Set the div's text content
 document.getElementById("pyBtn").click();
-}
+};
 
 pyBtn3.onclick = () => {
 getDepth();
