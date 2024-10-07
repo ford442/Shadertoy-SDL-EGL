@@ -287,10 +287,13 @@ let result;
 let base64String;
     const img = new Image();
     img.src = imageDataURL;
-    const maxSize = 1024; // Set your desired maximum size for the square
-        let newWidth, newHeight, cropX, cropY;
+    const maxSize = 1024;
+        let newWidth;
+   let  newHeight;
+  let   cropX;
+  let   cropY;
 
-base64String = imageDataURL.split(',')[1];
+let base64String = imageDataURL.split(',')[1];
 
     if (img.width > img.height) {
         newWidth = newHeight = img.height;
