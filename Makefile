@@ -507,7 +507,7 @@ b3_compute_mod_test2:
 
 
 b3_compute_mod_test3:
-	 em++ src/vanilla/webgpu_mod.cpp $(STDS) -BOOST_NO_EXCEPTIONS -pipe -ffast-math -ffp-contract=fast \
+	 em++ src/vanilla/webgpu_mod.cpp $(STDS) -fno-exceptions -BOOST_NO_EXCEPTIONS -pipe -ffast-math -ffp-contract=fast \
 	 -fexcess-precision=fast \
 	 -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
