@@ -506,13 +506,13 @@ b3_compute_mod_test2:
 
 b3_compute_mod_test3:
 	 em++ src/vanilla/webgpu_mod.cpp $(STDS) -pipe -ffast-math -ffp-contract=fast \
-	 -fexcess-precision=fast -fno-exceptions \
+	 -fexcess-precision=fast \
 	 -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O3 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ \
 	 -c $(nBOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ $(mLDFLAGS) -fno-exceptions -O3 -sEVAL_CTORS=2 -stdlib=libc++ \
+	 em++ $(mLDFLAGS) -O3 -sEVAL_CTORS=2 -stdlib=libc++ \
 	 -sEXIT_RUNTIME=0 -ffast-math -mextended-const -mbulk-memory \
 	 -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -sUSE_GLFW=0 -sOFFSCREENCANVAS_SUPPORT=1 \
