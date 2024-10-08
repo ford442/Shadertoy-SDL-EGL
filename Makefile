@@ -512,7 +512,7 @@ b3_compute_mod_test3:
 	 -mextended-const -O3 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ \
 	 -c $(nBOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ $(mLDFLAGS) -BOOST_NO_EXCEPTIONS -O3 -sEVAL_CTORS=2 -fno-exceptions -stdlib=libc++abi-noexcept \
+	 em++ $(mLDFLAGS) -BOOST_NO_EXCEPTIONS -O3 -sEVAL_CTORS=2 -stdlib=libc++abi-noexcept \
 	 -sEXIT_RUNTIME=0 -ffast-math -mextended-const -mbulk-memory \
 	 -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -sUSE_GLFW=0 -sOFFSCREENCANVAS_SUPPORT=1 -stdlib=libc++ \
