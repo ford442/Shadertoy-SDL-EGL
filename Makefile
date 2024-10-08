@@ -3,6 +3,8 @@ BETA_BIN_NAME = w0-021
 
 LDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lc++abi,-lm,-ldl
 mLDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lc++abi,-lc
+neLDFLAGS = -Wl,-O3,--lto-O3,-lc++abi-noexcept
+
 wLDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lc++abi,-lm,-ldl
  
 oldLDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lpthread,-lc++abi,-lm,-lrt,-ldl
@@ -512,7 +514,7 @@ b3_compute_mod_test3:
 	 -mextended-const -O3 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ \
 	 -I/content/RAMDRIVE2/b3/boost_1_86_0/ -c $(nBOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ $(mLDFLAGS) -O3 -sEVAL_CTORS=2 -stdlib=libc++ \
+	 em++ $(neLDFLAGS) -O3 -sEVAL_CTORS=2 -stdlib=libc++abi-noexcept \
 	 -sEXIT_RUNTIME=0 -ffast-math -mextended-const -mbulk-memory \
 	 -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -sUSE_GLFW=0 -sOFFSCREENCANVAS_SUPPORT=1 \
