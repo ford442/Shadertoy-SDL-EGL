@@ -253,8 +253,8 @@ b3_wasm_loader_lto_32_test3:
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O3 -fno-strict-aliasing $(SIMD_FLAGS) -sMEMORY64=1 -c -fno-rounding-math -fcx-limited-range \
 	 -fassociative-math -freciprocal-math -fno-signed-zeros
-	 em++ -O3 -sEVAL_CTORS=0 -sEXIT_RUNTIME=0 -m64 -sMALLOC=mimalloc -sWASMFS=1 \
-	 -openmp-simd -pthread -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics \
+	 em++ -O3 -sEVAL_CTORS=2 -sEXIT_RUNTIME=0 -m64 -sMALLOC=mimalloc -sWASMFS=1 \
+	 -sWASM_BIGINT=1 -mextended-const -dead_strip -mbulk-memory -matomics \
 	 -pipe -DQUAD -DDOUBLE -fno-exceptions \
 	 -sDEFAULT_TO_CXX=0 -stdlib=libc++abi-noexcept -sUSE_ES6_IMPORT_META=0 -fno-rounding-math -fassociative-math \
 	 -freciprocal-math -fno-signed-zeros \
