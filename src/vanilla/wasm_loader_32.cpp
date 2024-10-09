@@ -16,9 +16,13 @@ setTimeout(function(){
 document.querySelector('#splash1').style.zIndex=3000;
 document.querySelector('#splash1').style.display='none';
 },4500);
+
 setTimeout(function(){
 document.getElementById('vsiz').innerHTML=parseInt(window.innerHeight,10);
+document.querySelector('#circle').width=window.innerWidth;
+document.querySelector('#circle').height=window.innerHeight;
 },500);
+
 setTimeout(function(){
 window.scrollTo({
 top: 0,
@@ -67,11 +71,10 @@ xhr.send();
 const vsiz=document.querySelector('#vsiz');
 let menuSz=parseInt(window.innerWidth*.75,10);
 let infoSz=parseInt(window.innerHeight*.25,10);
+
 function normalResSetup(){
 setTimeout(function(){
 document.querySelector('#shut').innerHTML=2;
-document.querySelector('#circle').width=window.innerWidth;
-document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#pmhig').innerHTML=parseInt(window.innerHeight,10);
 document.querySelector('#ihig').innerHTML=parseInt(window.innerHeight,10);
 document.querySelector('#scanvas').height=parseInt(window.innerHeight,10);
@@ -79,7 +82,7 @@ document.querySelector('#bcanvas').height=parseInt(window.innerHeight,10);
 document.querySelector('#scanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#bcanvas').width=parseInt(window.innerHeight,10);
 document.querySelector('#di').click();
-},500);
+},250);
 document.querySelector('#status').style.backgroundColor="green";
 }
 document.querySelector('#status').height=20;
