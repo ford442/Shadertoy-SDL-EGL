@@ -351,14 +351,14 @@ b3_apng:
 	 -sMODULARIZE=1 -sEXPORT_ES6=0 -sEXPORT_NAME='libapng' -sSUPPORT_LONGJMP=emscripten -sDISABLE_EXCEPTION_CATCHING=1
 
 b3_apng_py:
-	 em++ src/vanilla/apng_py.cpp $(STDS) -I/content/RAMDRIVE2/libpng-1.6.43/ -L/content/RAMDRIVE2/libpng-1.6.43/.libs  \
-	 -lpng16 -m32 -O3 -flto -flto=thin -pipe -ffp-contract=fast -fexcess-precision=fast \
+	 em++ src/vanilla/apng_py.cpp $(STDS) \
+	 -m32 -O3 -flto -flto=thin -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -fno-strict-aliasing $(SIMD_FLAGS) -c -fno-rounding-math -fcx-limited-range -fassociative-math -freciprocal-math -fno-signed-zeros
-	 em++ -O3 -I/content/RAMDRIVE2/libpng-1.6.43/ -L/content/RAMDRIVE2/libpng-1.6.43/.libs \
-	 -lpng16 -sEVAL_CTORS=1 -sEXIT_RUNTIME=0 -m32 -sMALLOC=mimalloc -sWASMFS=1 -sWASM_BIGINT=1 \
-	 -sWASM_BIGINT=0 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
+	 em++ -O3 \
+	 -lpng16 -sEVAL_CTORS=2 -sEXIT_RUNTIME=0 -m32 -sMALLOC=mimalloc -sWASMFS=1 -sWASM_BIGINT=1 \
+	 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -stdlib=libc++ -sUSE_ES6_IMPORT_META=0  -fno-rounding-math -fassociative-math -freciprocal-math -fno-signed-zeros \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fcx-limited-range -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
@@ -371,7 +371,7 @@ b3_apng_py:
 	 -sABORT_ON_WASM_EXCEPTIONS=0 -sEMULATE_FUNCTION_POINTER_CASTS=1 \
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sAUTO_NATIVE_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=1 -sIGNORE_MISSING_MAIN=0 \
-	 -sASYNCIFY=0 -sUSE_LIBPNG=1 -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 -sASYNCIFY=1 -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 apng_py.o --output_eol linux -rtlib=compiler-rt --closure 0 \
 	 -sMODULARIZE=0 -sEXPORT_ES6=0 -sSUPPORT_LONGJMP=emscripten -sDISABLE_EXCEPTION_CATCHING=1
 
