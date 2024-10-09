@@ -70,7 +70,6 @@ tc=document.querySelector('#tcan');
 
 const params={
 colorType:'float32',
-preferLowPowerToHighPerformance:false,
 colorSpace:'display-p3',
 alpha:true,
 depth:true,
