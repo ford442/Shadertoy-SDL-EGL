@@ -452,7 +452,8 @@ let w$=parseInt(document.querySelector("#ivi").width);
 let h$=parseInt(document.querySelector("#ivi").height);
 if(running==0){
 setTimeout(function(){
-let srsiz=document.querySelector('#srsiz').innerHTML;let vsiz=document.querySelector('#vsiz').innerHTML;
+let srsiz=document.querySelector('#srsiz').innerHTML;
+let vsiz=document.querySelector('#vsiz').innerHTML;
 Module.ccall("startWebGPUi",null,["Number","Number","Number"],[vvi.height,vsiz,srsiz]);
 console.log('Starting..');
 running=1;
@@ -643,8 +644,6 @@ bufferView[i] = flDat.charCodeAt(i);
 FS.writeFile('/shader/shader.wgsl',bufferView);
 // document.querySelector('#startBtn').click();
 setTimeout(function(){
-document.querySelector('#circle').width=window.innerWidth;
-document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#di').click();
 document.querySelector('#status').style.backgroundColor="green";
 regularStart();
@@ -669,8 +668,6 @@ bufferView[i] = flDat.charCodeAt(i);
 FS.writeFile('/shader/shader.wgsl',bufferView);
 // document.querySelector('#startBtn').click();
 setTimeout(function(){
-document.querySelector('#circle').width=window.innerWidth;
-document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#di').click();
 document.querySelector('#status').style.backgroundColor="green";
 regularStart();
@@ -797,8 +794,6 @@ Module.ccall("panLeft");
 });
 
 setTimeout(function(){
-document.querySelector('#circle').width=window.innerWidth;
-document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#di').click();
-},1500);
+},250);
 });
