@@ -800,5 +800,5 @@ setTimeout(function(){
 document.querySelector('#circle').width=window.innerWidth;
 document.querySelector('#circle').height=window.innerHeight;
 document.querySelector('#di').click();
-},500);
+},1500);
 });
