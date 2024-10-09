@@ -4,15 +4,6 @@ int main(){
 
 EM_ASM({
 
-    // https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js
-const pyChannel = new BroadcastChannel('py_channel');
-const imageChannel = new BroadcastChannel('imageChannel');
-const imgOut = document.getElementById('mvi');
-const pyBtn3 = document.getElementById('pyBtn3');
-const pyBtn4 = document.getElementById('pyBtn4');
-const fileInput = document.getElementById('fileInput'); // Replace 'fileInput' with your input's ID
-const fileInput2 = document.getElementById('fileInput2'); // Replace 'fileInput' with your input's ID
-
 let cnv1=document.querySelector('#scanvas');
 let base64Strings=[];
 let currentApngFrame=0;
@@ -64,7 +55,7 @@ MakeAPNG();
 }
 
 async function MakeAPNG() {
-console.log(base64Strings);
+// console.log(base64Strings);
 let pyodide = await loadPyodide();
 // pyodide.globals.set("base64Strings", base64Strings);
 const globals = pyodide.toPy({ imgStrings: base64Strings });
@@ -83,7 +74,6 @@ from PIL import Image
 import io
 import numpy as np
 from apng import APNG, PNG
-frames_data = []
 frames_data = []
 apng_animation = APNG()
 
