@@ -11,7 +11,27 @@ EM_ASM({
 
 //  shutter / bezel
 
-var rec,ccs,mw,tc,iww,img,imgb,hi,sht,lns,glas,rr,mdd,gtop,nw,nh,ndiff,bz,fbb,bctx,ttx;
+let rec;
+let ccs;
+let mw;
+let tc;
+let iww;
+let img;
+let imgb;
+let hi;
+let sht;
+let lns;
+let glas;
+let rr;
+let mdd;
+let gtop;
+let nw;
+let nh;
+let ndiff;
+let bz;
+let fbb;
+let bctx;
+let ttx;
 
 function clo(sz){
 bctx.globalCompositeOperation='source-over';
