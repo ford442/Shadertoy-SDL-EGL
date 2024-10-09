@@ -408,7 +408,7 @@ b3_depth:
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -fno-strict-aliasing $(SIMD_FLAGS) -c -fno-rounding-math -fcx-limited-range -fassociative-math -freciprocal-math -fno-signed-zeros
 	 em++ $(neLDFLAGS) -O3 -fno-exceptions -sMEMORY64=2 \
-	 -sEVAL_CTORS=2 -sEXIT_RUNTIME=0 -m64 -sMALLOC=mimalloc -sWASMFS=1 -sWASM_BIGINT=1 \
+	 -sEVAL_CTORS=0 -sEXIT_RUNTIME=0 -m64 -sMALLOC=mimalloc -sWASMFS=1 -sWASM_BIGINT=1 \
 	 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -stdlib=libc++abi-noexcept -sUSE_ES6_IMPORT_META=0  -fno-rounding-math -fassociative-math -freciprocal-math -fno-signed-zeros \
 	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
@@ -422,7 +422,7 @@ b3_depth:
 	 -sABORT_ON_WASM_EXCEPTIONS=0 -sEMULATE_FUNCTION_POINTER_CASTS=1 \
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sAUTO_NATIVE_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=1 -sIGNORE_MISSING_MAIN=0 \
-	 -sASYNCIFY=0 -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 -sASYNCIFY=1 -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 apng_py.o --output_eol linux -rtlib=compiler-rt --closure 0 \
 	 -sMODULARIZE=0 -sEXPORT_ES6=0 -sSUPPORT_LONGJMP=0 -sDISABLE_EXCEPTION_CATCHING=1
 
