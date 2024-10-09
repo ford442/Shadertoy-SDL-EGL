@@ -373,7 +373,7 @@ b3_apng_py:
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=1 -sIGNORE_MISSING_MAIN=0 \
 	 -sASYNCIFY=0 -sUSE_LIBPNG=1 -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 apng_py.o --output_eol linux -rtlib=compiler-rt --closure 0 \
-	 -sMODULARIZE=0 -sEXPORT_ES6=0 -sSUPPORT_LONGJMP=emscripten -sDISABLE_EXCEPTION_CATCHING=1
+	 -sMODULARIZE=1 -sEXPORT_ES6=0 -sEXPORT_NAME='libapng' -sSUPPORT_LONGJMP=emscripten -sDISABLE_EXCEPTION_CATCHING=1
 
 b3_wasm_loader_wasm_64:
 	 em++ src/vanilla/wasm_loader_wasm.cpp $(STDS) -m64 -pipe -ffp-contract=fast -fexcess-precision=fast \
