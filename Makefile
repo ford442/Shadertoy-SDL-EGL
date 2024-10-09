@@ -276,7 +276,7 @@ b3_wasm_loader_lto_32_test3:
 	 -sASYNCIFY=0 -sEXPORTED_FUNCTIONS='["_main"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
 	 --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/pyodide.js \
 	 wasm_loader_32.o --output_eol linux -rtlib=compiler-rt --closure 0 \
-	 -sMODULARIZE=1 -sEXPORT_ES6=0 -sEXPORT_NAME='libload' -sSUPPORT_LONGJMP=wasm -sDISABLE_EXCEPTION_CATCHING=1
+	 -sMODULARIZE=1 -sEXPORT_ES6=0 -sEXPORT_NAME='libload' -sSUPPORT_LONGJMP=0 -sDISABLE_EXCEPTION_CATCHING=1
 
 b3_onnx6:
 	 em++ src/vanilla/wasm_onnx.cpp $(STDS) -fPIC -m32 -pipe -ffp-contract=fast -fexcess-precision=fast \
@@ -351,12 +351,12 @@ b3_apng:
 	 -sMODULARIZE=1 -sEXPORT_ES6=0 -sEXPORT_NAME='libapng' -sSUPPORT_LONGJMP=emscripten -sDISABLE_EXCEPTION_CATCHING=1
 
 b3_apng_py:
-	 em++ src/vanilla/apng_py.cpp $(STDS) -fno-exceptions -fPIC \
+	 em++ src/vanilla/apng_py.cpp $(STDS) -fno-exceptions \
 	 -m32 -O3 -flto -flto=thin -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -fno-strict-aliasing $(SIMD_FLAGS) -c -fno-rounding-math -fcx-limited-range -fassociative-math -freciprocal-math -fno-signed-zeros
-	 em++ -O3 -fno-exceptions -fPIE \
+	 em++ -O3 -fno-exceptions \
 	 -sEVAL_CTORS=2 -sEXIT_RUNTIME=0 -m32 -sMALLOC=mimalloc -sWASMFS=1 -sWASM_BIGINT=1 \
 	 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -stdlib=libc++abi-noexcept -sUSE_ES6_IMPORT_META=0  -fno-rounding-math -fassociative-math -freciprocal-math -fno-signed-zeros \
@@ -376,12 +376,12 @@ b3_apng_py:
 	 -sMODULARIZE=0 -sEXPORT_ES6=0 -sSUPPORT_LONGJMP=0 -sDISABLE_EXCEPTION_CATCHING=1
 
 b3_apng_py_64:
-	 em++ src/vanilla/apng_py.cpp $(STDS) -fno-exceptions -fPIC -sMEMORY64=1 \
+	 em++ src/vanilla/apng_py.cpp $(STDS) -fno-exceptions -sMEMORY64=1 \
 	 -m64 -O3 -flto -flto=thin -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -fno-strict-aliasing $(SIMD_FLAGS) -c -fno-rounding-math -fcx-limited-range -fassociative-math -freciprocal-math -fno-signed-zeros
-	 em++ $(neLDFLAGS) -O3 -fno-exceptions -fPIE -sMEMORY64=2 \
+	 em++ $(neLDFLAGS) -O3 -fno-exceptions -sMEMORY64=2 \
 	 -sEVAL_CTORS=2 -sEXIT_RUNTIME=0 -m64 -sMALLOC=mimalloc -sWASMFS=1 -sWASM_BIGINT=1 \
 	 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -stdlib=libc++abi-noexcept -sUSE_ES6_IMPORT_META=0  -fno-rounding-math -fassociative-math -freciprocal-math -fno-signed-zeros \
@@ -529,8 +529,6 @@ b3_compute_mod_test2:
 	 webgpu_mod.o --output_eol linux -rtlib=compiler-rt --closure 0 \
 	 -sMODULARIZE -sEXPORT_NAME='lib1ink' -sDISABLE_EXCEPTION_CATCHING=1
 
-
-
 b3_compute_mod_test3:
 	 em++ src/vanilla/webgpu_mod.cpp $(STDS) -BOOST_NO_EXCEPTIONS -pipe -ffast-math -ffp-contract=fast \
 	 -fexcess-precision=fast \
@@ -562,7 +560,7 @@ b3_compute_mod_test3:
 	 --js-library lib/lib_webgpu.js --js-library lib/lib_demo.js \
 	 --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 webgpu_mod.o --output_eol linux -rtlib=compiler-rt --closure 0 \
-	 -sMODULARIZE -sEXPORT_NAME='lib1ink' -sDISABLE_EXCEPTION_CATCHING=1
+	 -sMODULARIZE -sEXPORT_NAME='lib1ink' -sSUPPORT_LONGJMP=0 -sDISABLE_EXCEPTION_CATCHING=1
 
 
 b3_onnx4:
