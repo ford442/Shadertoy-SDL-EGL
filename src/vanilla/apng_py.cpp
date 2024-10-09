@@ -4,6 +4,15 @@ int main(){
 
 EM_ASM({
 
+    // https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js
+const pyChannel = new BroadcastChannel('py_channel');
+const imageChannel = new BroadcastChannel('imageChannel');
+const imgOut = document.getElementById('mvi');
+const pyBtn3 = document.getElementById('pyBtn3');
+const pyBtn4 = document.getElementById('pyBtn4');
+const fileInput = document.getElementById('fileInput'); // Replace 'fileInput' with your input's ID
+const fileInput2 = document.getElementById('fileInput2'); // Replace 'fileInput' with your input's ID
+
 let cnv1=document.querySelector('#scanvas');
 let base64Strings=[];
 let currentApngFrame=0;
@@ -71,43 +80,30 @@ import js
 import base64
 import pyodide
 from PIL import Image
-    import io
-    import numpy as np
-    from apng import APNG, PNG
+import io
+import numpy as np
+from apng import APNG, PNG
+frames_data = []
+frames_data = []
+apng_animation = APNG()
 
-    frames_data = []
-    apng_animation = APNG()
+for base64_string in imgStrings:
+        img_data = base64.b64decode(base64_string)
+        img = Image.open(io.BytesIO(img_data))
+        img_array = np.array(img)
+        frames_data.append(img_array)
 
-    try:
-        for base64_string in imgStrings:
-            try:
-                img_data = base64.b64decode(base64_string)
-                img = Image.open(io.BytesIO(img_data))
-                img_array = np.array(img)
-                frames_data.append(img_array)
-            except Exception as e:
-                print(f"Error processing image: {e}") 
+for frame_data in frames_data:
+        img = Image.fromarray(frame_data)
+        with io.BytesIO() as output:
+            img.save(output, format="PNG")
+            png_bytes = output.getvalue()
+        png_image = PNG.from_bytes(png_bytes)
+        apng_animation.append(png_image, delay=200, delay_den=1000)
 
-        for frame_data in frames_data:
-            try:
-                img = Image.fromarray(frame_data)
-                with io.BytesIO() as output:
-                    img.save(output, format="PNG")
-                    png_bytes = output.getvalue()
-                png_image = PNG.from_bytes(png_bytes)
-                apng_animation.append(png_image, delay=200, delay_den=1000, disposal=APNG.DISPOSAL_BACKGROUND)  
-            except Exception as e:
-                print(f"Error creating APNG frame: {e}")
-
-        apng_bytes = apng_animation.to_bytes()
-        apng_base64 = base64.b64encode(apng_bytes).decode('ascii')
-
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        apng_base64 = ""  # Return an empty string in case of error
-
-    apng_base64  # Make sure to return the result
-  `,{globals}).then(result => {
+apng_bytes = apng_animation.to_bytes()
+apng_base64 = base64.b64encode(apng_bytes).decode('ascii')
+apng_base64`,{globals}).then(result => {
 
     const apngDataURL = "data:image/apng;base64," + result;
     const img = document.createElement('img');
