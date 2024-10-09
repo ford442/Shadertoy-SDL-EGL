@@ -400,6 +400,32 @@ b3_apng_py_64:
 	 apng_py.o --output_eol linux -rtlib=compiler-rt --closure 0 \
 	 -sMODULARIZE=0 -sEXPORT_ES6=0 -sSUPPORT_LONGJMP=0 -sDISABLE_EXCEPTION_CATCHING=1
 
+
+b3_depth:
+	 em++ src/vanilla/apng_py.cpp $(STDS) -fno-exceptions -sMEMORY64=1 \
+	 -m64 -O3 -flto -flto=thin -pipe -ffp-contract=fast -fexcess-precision=fast \
+	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
+	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
+	 -mextended-const -fno-strict-aliasing $(SIMD_FLAGS) -c -fno-rounding-math -fcx-limited-range -fassociative-math -freciprocal-math -fno-signed-zeros
+	 em++ $(neLDFLAGS) -O3 -fno-exceptions -sMEMORY64=2 \
+	 -sEVAL_CTORS=2 -sEXIT_RUNTIME=0 -m64 -sMALLOC=mimalloc -sWASMFS=1 -sWASM_BIGINT=1 \
+	 -mextended-const -dead_strip -mbulk-memory -matomics -pipe -DQUAD -DDOUBLE \
+	 -sDEFAULT_TO_CXX=0 -stdlib=libc++abi-noexcept -sUSE_ES6_IMPORT_META=0  -fno-rounding-math -fassociative-math -freciprocal-math -fno-signed-zeros \
+	 --use-preload-plugins --closureFriendly --typed-function-references --enable-reference-types -fno-strict-aliasing \
+	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fcx-limited-range -fno-trapping-math -ffp-contract=fast -fexcess-precision=fast -sENVIRONMENT=web \
+	 -DCOMPUTE -o $(BETA_BIN_NAME)-depth.js -sSTRICT=1 -sSTRICT_JS=0 --extern-post-js js/depth.js \
+	 $(LINK_SIMD_FLAGS) -sUSE_GLFW=0 -sASSERTIONS=1 -march=haswell \
+	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm64 -DNDEBUG=0 \
+	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
+	 -fwhole-program-vtables -polly -polly-position=before-vectorizer -mtune=wasm64 \
+	 -sALLOW_MEMORY_GROWTH=0 -sINITIAL_MEMORY=1400mb -ffunction-sections -fdata-sections \
+	 -sABORT_ON_WASM_EXCEPTIONS=0 -sEMULATE_FUNCTION_POINTER_CASTS=1 \
+	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sAUTO_NATIVE_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
+	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=1 -sIGNORE_MISSING_MAIN=0 \
+	 -sASYNCIFY=0 -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
+	 apng_py.o --output_eol linux -rtlib=compiler-rt --closure 0 \
+	 -sMODULARIZE=0 -sEXPORT_ES6=0 -sSUPPORT_LONGJMP=0 -sDISABLE_EXCEPTION_CATCHING=1
+
 b3_wasm_loader_wasm_64:
 	 em++ src/vanilla/wasm_loader_wasm.cpp $(STDS) -m64 -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
