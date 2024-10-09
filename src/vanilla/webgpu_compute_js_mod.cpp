@@ -713,7 +713,7 @@ getShader(pth2,'compute.wgsl');
 getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
 setTimeout(function(){
-canvasStartSize();
+canvasStart();
 },3000);
 });
 
