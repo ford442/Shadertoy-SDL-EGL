@@ -286,7 +286,7 @@ b3_compute_mod_test4:
 	 -mextended-const -O3 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ \
 	 -I/content/RAMDRIVE2/b3/boost_1_86_0/ -c $(nBOOST_FLAGS) $(SIMD_FLAGS)
-	 em++ $(neLDFLAGS) -O3 -BOOST_NO_EXCEPTIONS -sEVAL_CTORS=2 -stdlib=libc++abi-noexcept \
+	 em++ $(neLDFLAGS) -O3 -BOOST_NO_EXCEPTIONS -sEVAL_CTORS=0 -stdlib=libc++abi-noexcept \
 	 -sEXIT_RUNTIME=0 -ffast-math -mextended-const -mbulk-memory \
 	 -matomics -pipe -DQUAD -DDOUBLE \
 	 -sDEFAULT_TO_CXX=0 -sUSE_GLFW=0 -sOFFSCREENCANVAS_SUPPORT=1 \
