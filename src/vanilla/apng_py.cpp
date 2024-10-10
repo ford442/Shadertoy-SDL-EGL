@@ -2,6 +2,8 @@
 
 #include <cstdio>
 
+static char * result=NULL;
+
 static long int length;
 
 const char * rd_fl(const char * Fnm){
