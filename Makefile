@@ -285,7 +285,7 @@ b3_compute_mod_test4:
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
 	 -mextended-const -O3 $(STDS) $(xGL_FLAGS) -fno-strict-aliasing \
 	 -I/content/RAMDRIVE2/b3/include/vanilla/ -I/content/RAMDRIVE2/b3/highway/ \
-	 -I/content/RAMDRIVE2/b3/boost_1_86_0/ -c $(nBOOST_FLAGS) $(SIMD_FLAGS) -o mod.so
+	 -I/content/RAMDRIVE2/b3/boost_1_86_0/ -c $(nBOOST_FLAGS) $(SIMD_FLAGS) -o /mod.so
 
 b3_wasm_loader_lto_32_test4:
 	 em++ src/vanilla/wasm_loader_so.cpp $(STDS) -m64 -flto -flto=thin -pipe -ffp-contract=fast \
