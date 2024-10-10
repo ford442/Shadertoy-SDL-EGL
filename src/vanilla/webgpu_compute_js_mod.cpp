@@ -34,8 +34,8 @@ const vsiz=document.querySelector('#vsiz').innerHTML;
 const SiZ=window.innerHeight;
 // vvic.width=vsiz;
 // vvic.height=vsiz;
-let w$;
-let h$;
+let w$=vsiz;
+let h$=vsiz;
 if(vvic.tagName=='CANVAS'){
 vvic.width=vsiz;
 vvic.height=vsiz;
