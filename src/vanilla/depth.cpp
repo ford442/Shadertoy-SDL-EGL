@@ -33,7 +33,7 @@ return nullptr;
 
 int main(){
   
-const char * Fnm=reinterpret_cast<const char *>("/depth.js");
+const char * Fnm=reinterpret_cast<const char *>("depth.js");
 const char * js_script=(char*)rd_fl(Fnm);
 emscripten_async_run_script("console.log('From async run.');", 100); // 1 for async
 emscripten_async_run_script(js_script, 100); // 1 for async
