@@ -402,7 +402,7 @@ b3_apng_py_64:
 
 
 b3_depth:
-	 em++ src/vanilla/apng_py.cpp $(STDS) -fno-exceptions -sMEMORY64=1 \
+	 em++ src/vanilla/depth.cpp $(STDS) -fno-exceptions -sMEMORY64=1 \
 	 -m64 -O3 -flto -flto=thin -pipe -ffp-contract=fast -fexcess-precision=fast \
 	 -ffast-math -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
@@ -423,7 +423,7 @@ b3_depth:
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sAUTO_NATIVE_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=0 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=1 -sIGNORE_MISSING_MAIN=0 \
 	 -sASYNCIFY=1 -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 apng_py.o --output_eol linux -rtlib=compiler-rt --closure 0 \
+	 depth.o --output_eol linux -rtlib=compiler-rt --closure 0 \
 	 -sMODULARIZE=0 -sEXPORT_ES6=0 -sSUPPORT_LONGJMP=0 -sDISABLE_EXCEPTION_CATCHING=1
 
 b3_wasm_loader_wasm_64:
