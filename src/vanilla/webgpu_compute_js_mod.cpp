@@ -40,13 +40,19 @@ if(vvic.tagName=='CANVAS'){
 vvic.width=vsiz;
 vvic.height=vsiz;
 w$=vsiz;
-h$=vsiz;  
+h$=vsiz;
 }
 if(vvic.tagName=='IMG'){
 w$=vvic.naturalWidth;
 h$=vvic.naturalHeight;
 vvic.width=vvic.naturalWidth;
 vvic.height=vvic.naturalHeight;
+}
+if(vvic.tagName=='VIDEO'){
+w$=vvic.videoWidth;
+h$=vvic.videoHeight;
+vvic.width=vvic.videoWidth;
+vvic.height=vvic.videoHeight;
 }
 const keepSizea = Math.max(h$, w$);
 const keepSize = Math.min(keepSizea, vsiz);
