@@ -1,5 +1,8 @@
 #include <emscripten.h>
 
+#include <cstdlib>
+
+static long int length;
 
 const char * rd_fl(const char * Fnm){
 FILE * file=fopen(Fnm,"r");
