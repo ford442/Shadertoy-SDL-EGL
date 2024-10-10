@@ -3,7 +3,7 @@ BETA_BIN_NAME = w0-022
 
 LDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lc++abi,-lm,-ldl
 mLDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lc++abi,-lc
-neLDFLAGS = -Wl,-O3,--lto-O3,-lc++abi-noexcept
+neLDFLAGS = -Wl,-O3,--lto-O3
 
 wLDFLAGS = -Wl,-O3,--lto-O3,-lc++,-lc++abi,-lm,-ldl
  
