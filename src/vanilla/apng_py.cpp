@@ -1,6 +1,6 @@
 #include <emscripten.h>
 
-#include <cstdlib>
+#include <cstdio>
 
 static long int length;
 
