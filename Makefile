@@ -313,7 +313,7 @@ b3_wasm_loader_lto_32_test4:
 	 -sUSE_SDL=0 -sFORCE_FILESYSTEM=1 -sAUTO_JS_LIBRARIES=0 -sAUTO_NATIVE_LIBRARIES=0 -sDISABLE_EXCEPTION_THROWING=1 \
 	 -sTRUSTED_TYPES=1 -sALLOW_UNIMPLEMENTED_SYSCALLS=1 -sIGNORE_MISSING_MAIN=0 \
 	 -sASYNCIFY=0 -sEXPORTED_FUNCTIONS='["_main"]' -sEXPORTED_RUNTIME_METHODS='["ccall"]' \
-	 --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/pyodide.js --embed-file /mod.so --use-preload-plugins \
+	 --pre-js js/rSlider.js --pre-js js/slideOut.js --pre-js js/pyodide.js --embed-file ./mod.so --use-preload-plugins \
 	 wasm_loader_so.o --output_eol linux -rtlib=compiler-rt --closure 0 \
 	 -sMODULARIZE=1 -sEXPORT_ES6=0 -sEXPORT_NAME='libload' -sSUPPORT_LONGJMP=0 -sDISABLE_EXCEPTION_CATCHING=1
 
