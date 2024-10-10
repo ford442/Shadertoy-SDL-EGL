@@ -306,7 +306,7 @@ b3_compute_mod_test4:
 	 --js-library lib/lib_webgpu.js --js-library lib/lib_demo.js \
 	 --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
 	 webgpu_mod.o --output_eol linux -rtlib=compiler-rt --closure 0 \
-	 -sSUPPORT_LONGJMP=0 -sDISABLE_EXCEPTION_CATCHING=1 -o ./mod.wasm -fPIE -sSIDE_MODULE=2 -sRELOCATABLE=1
+	 -sSUPPORT_LONGJMP=0 -sDISABLE_EXCEPTION_CATCHING=1 -fPIE -sSIDE_MODULE=2 -sRELOCATABLE=1 -o ./mod.wasm 
 	 emcc -shared -o ./mod.so ./mod.wasm
 
 b3_wasm_loader_lto_32_test4:
