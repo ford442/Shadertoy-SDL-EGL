@@ -279,7 +279,7 @@ b3_wasm_loader_lto_32_test3:
 	 -sMODULARIZE=1 -sEXPORT_ES6=0 -sEXPORT_NAME='libload' -sSUPPORT_LONGJMP=0 -sDISABLE_EXCEPTION_CATCHING=1
 
 b3_compute_mod_test4:
-	 em++ src/vanilla/webgpu_mod.cpp $(STDS) -BOOST_NO_EXCEPTIONS -pipe -ffast-math -ffp-contract=fast \
+	 em++ -fPIC src/vanilla/webgpu_mod.cpp $(STDS) -BOOST_NO_EXCEPTIONS -pipe -ffast-math -ffp-contract=fast \
 	 -fexcess-precision=fast \
 	 -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
