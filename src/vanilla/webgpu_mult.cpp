@@ -1,6 +1,6 @@
-#include "../../include/vanilla/webgpu_em.hpp"
+#include "../../include/vanilla/webgpu_mult.hpp"
 
-#include "../../src/vanilla/webgpu_compute_vars_em.cpp"
+#include "../../src/vanilla/webgpu_compute_vars_mult.cpp"
 #include <boost/filesystem/fstream.hpp>
 namespace fsm = boost::filesystem;
 
