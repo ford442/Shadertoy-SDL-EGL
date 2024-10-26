@@ -1019,6 +1019,8 @@ multiSamp.count=1;
 multiSamp.mask=0xFFFFFFFF;
 multiSamp2.count=1;
 multiSamp2.mask=0xFFFFFFFF;
+multiSamp3.count=4;
+multiSamp3.mask=0xFFFFFFFF;
 shaderModuleDescV.code=vert_body;
 vs=wgpu_device_create_shader_module(wd.at(0,0),&shaderModuleDescV);
 shaderModuleDescF.code=frag_body;
@@ -1266,7 +1268,7 @@ renderPipelineDesc4.fragment=wfs.at(1,1);
 renderPipelineDesc4.depthStencil=wdss.at(1,1);
 renderPipelineDesc4.layout=wrpl.at(1,1);
 // renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
-renderPipelineDesc4.multisample=multiSamp4;
+renderPipelineDesc4.multisample=multiSamp3;
 wrp.at(3,3)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc4);
 
       
