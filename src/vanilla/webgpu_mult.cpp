@@ -1166,7 +1166,7 @@ Resolve_Bindgroup_Layout_Entries[2]={};
 Resolve_Bindgroup_Layout_Entries[2].binding=2;
 Resolve_Bindgroup_Layout_Entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Resolve_Bindgroup_Layout_Entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
-     Resolve_Bindgroup_Layout_Entries[2].layout.texture=wtbl.at(1,1);
+     Resolve_Bindgroup_Layout_Entries[2].layout.texture=wtbl.at(3,3);
   //  Resolve iResolution Buffer
 Resolve_Bindgroup_Layout_Entries[3]={};
 Resolve_Bindgroup_Layout_Entries[3].binding=5;
@@ -1199,7 +1199,7 @@ Resolve_Bindgroup_Layout_Entries_2[2]={};
 Resolve_Bindgroup_Layout_Entries_2[2].binding=2;
 Resolve_Bindgroup_Layout_Entries_2[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Resolve_Bindgroup_Layout_Entries_2[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
-     Resolve_Bindgroup_Layout_Entries_2[2].layout.texture=wtbl.at(1,1);
+     Resolve_Bindgroup_Layout_Entries_2[2].layout.texture=wtbl.at(3,3);
   //  Resolve_2 iResolution Buffer
 Resolve_Bindgroup_Layout_Entries_2[3]={};
 Resolve_Bindgroup_Layout_Entries_2[3].binding=5;
