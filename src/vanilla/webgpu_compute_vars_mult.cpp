@@ -491,16 +491,16 @@ i_tensor texid=i_tensor{2,2};
 i_tensor sze=i_tensor{8,8};
 Vi_tensor szeV=Vi_tensor{8,8};
 f_tensor szef=f_tensor{2,2};
-wce_tensor wce=wce_tensor{2,2};
-wrpe_tensor wrpe=wrpe_tensor{2,2};
-wcb_tensor wcb=wcb_tensor{2,2};
+wce_tensor wce=wce_tensor{4,4};
+wrpe_tensor wrpe=wrpe_tensor{4,4};
+wcb_tensor wcb=wcb_tensor{4,4};
 wd_tensor wd=wd_tensor{2,2};
 wq_tensor wq=wq_tensor{2,2};
 wa_tensor wa=wa_tensor{2,2};
 wcc_tensor wcc=wcc_tensor{2,2};
 wccf_tensor wccf=wccf_tensor{2,2};
-wrp_tensor wrp=wrp_tensor{2,2};
-wpl_tensor wrpl=wpl_tensor{2,2};
+wrp_tensor wrp=wrp_tensor{4,4};
+wpl_tensor wrpl=wpl_tensor{4,4};
 wb_tensor wb=wb_tensor{12,12};
 wbgle_tensor wbgle=wbgle_tensor{4,4};
 wbge_tensor wbge=wbge_tensor{4,4};
@@ -580,9 +580,7 @@ mouse_tensor mms=mouse_tensor{2,2};
 mouse_tensor mms2=mouse_tensor{2,2};
 vec4_tensor v4f32_uniform=vec4_tensor{2,2};
 
-
 EMSCRIPTEN_RESULT retCl,retMu,retMd,retMv,retSa,retSb,retSc;
-
 
 WGpuComputePassDescriptor computePassDescriptor={};
 WGpuCommandBufferDescriptor commandBufferDescriptor={};
