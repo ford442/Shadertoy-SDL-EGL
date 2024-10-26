@@ -194,7 +194,7 @@ videoAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
 videoAttachment.clearValue=clearC.at(0,0);
 wrpca.at(1,1)=videoAttachment;  // regular input
 
-   multiOUTattachment.view=wtv.at(3,3);
+multiOUTattachment.view=wtv.at(3,3);
 multiOUTattachment.depthSlice=-1;
 multiOUTattachment.storeOp=WGPU_STORE_OP_STORE;
 // multiOUTattachment.loadOp=WGPU_LOAD_OP_LOAD;
@@ -202,7 +202,7 @@ multiOUTattachment.loadOp=WGPU_LOAD_OP_CLEAR;
 multiOUTattachment.clearValue=clearC.at(0,0);
 wrpca.at(2,2)=multiOUTattachment;  // video input
 
-   multiOUTVattachment.view=wtv.at(2,2);
+multiOUTVattachment.view=wtv.at(2,2);
 multiOUTVattachment.depthSlice=-1;
 multiOUTVattachment.storeOp=WGPU_STORE_OP_STORE;
 // multiOUTVattachment.loadOp=WGPU_LOAD_OP_LOAD;
@@ -278,7 +278,7 @@ wrpd.at(3,3)=passDesc4;
 if(on.at(4,4)==1){
 INVTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,3),&WGPU_TextureViewDescriptor.at(0,0,3));
 wtv.at(6,6)=INVTextureView;
-INVTextureViewMult=wgpu_texture_create_view(WGPU_Texture.at(0,0,3),&WGPU_TextureViewDescriptor.at(0,0,5));
+INVTextureViewMult=wgpu_texture_create_view(WGPU_Texture.at(0,0,5),&WGPU_TextureViewDescriptor.at(0,0,5));
 wtv.at(8,8)=INVTextureViewMult;
 
       
