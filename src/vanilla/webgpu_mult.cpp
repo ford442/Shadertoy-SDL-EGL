@@ -1498,7 +1498,7 @@ on.at(0,0)=1;
 void ObtainedWebGpuAdapterStart(WGpuAdapter result, void *userData){
 wa.at(0,0)=result;
 // deviceDesc.requiredFeatures=WGPU_FEATURE_DEPTH32FLOAT_STENCIL8;
-deviceDesc.requiredFeatures=WGPU_FEATURE_FLOAT32_FILTERABLE;
+deviceDesc.requiredFeatures=WGPU_FEATURE_FLOAT32_FILTERABLE|WGPU_FEATURE_SHADER_F16‎;
 // deviceDesc.requiredFeatures=WGPU_FEATURE_RG11B10UFLOAT_RENDERABLE;
 // WGPU_FEATURES_BITFIELD ftr=wgpu_adapter_or_device_get_features(wa.at(0,0));
 // deviceDesc.requiredFeatures=ftr;
