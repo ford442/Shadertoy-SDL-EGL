@@ -195,7 +195,7 @@ videoAttachment.clearValue=clearC.at(0,0);
 wrpca.at(1,1)=videoAttachment;  // regular input
             
 multiOUTattachment.view=wtv.at(3,3);
-multiOUTattachment.resolveTarget=wtv.at(3,3);
+// multiOUTattachment.resolveTarget=wtv.at(3,3);
 multiOUTattachment.depthSlice=-1;
 multiOUTattachment.storeOp=WGPU_STORE_OP_STORE;
 // multiOUTattachment.loadOp=WGPU_LOAD_OP_LOAD;
@@ -204,7 +204,7 @@ multiOUTattachment.clearValue=clearC.at(0,0);
 wrpca.at(2,2)=multiOUTattachment;  // video input
 
 multiOUTVattachment.view=wtv.at(2,2);
-multiOUTVattachment.resolveTarget=wtv.at(2,2);
+// multiOUTVattachment.resolveTarget=wtv.at(2,2);
 multiOUTVattachment.depthSlice=-1;
 multiOUTVattachment.storeOp=WGPU_STORE_OP_STORE;
 // multiOUTVattachment.loadOp=WGPU_LOAD_OP_LOAD;
