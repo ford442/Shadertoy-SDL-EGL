@@ -400,7 +400,6 @@ WGpuTextureViewDescriptor MSTextureViewDescriptor={};
 WGpuRenderPassColorAttachment colorAttachment={};
 WGpuRenderPassColorAttachment videoAttachment={};
 WGpuRenderPassColorAttachment multiOUTattachment={};
-WGpuRenderPassColorAttachment videoAttachment={};
 WGpuRenderPassDepthStencilAttachment depthAttachment={};
 WGpuRenderPassDepthStencilAttachment depthAttachment2={};
 WGpuSampler videoSampler={};
