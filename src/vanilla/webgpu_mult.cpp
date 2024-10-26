@@ -200,6 +200,7 @@ multiOUTattachment.storeOp=WGPU_STORE_OP_STORE;
 // multiOUTattachment.loadOp=WGPU_LOAD_OP_LOAD;
 multiOUTattachment.loadOp=WGPU_LOAD_OP_CLEAR;
 multiOUTattachment.clearValue=clearC.at(0,0);
+multiOUTattachment.sampleCount=4;
 wrpca.at(2,2)=multiOUTattachment;  // video input
 
 multiOUTVattachment.view=wtv.at(2,2);
@@ -208,6 +209,7 @@ multiOUTVattachment.storeOp=WGPU_STORE_OP_STORE;
 // multiOUTVattachment.loadOp=WGPU_LOAD_OP_LOAD;
 multiOUTVattachment.loadOp=WGPU_LOAD_OP_CLEAR;
 multiOUTVattachment.clearValue=clearC.at(0,0);
+multiOUTVattachment.sampleCount=4;
 wrpca.at(3,3)=multiOUTVattachment;  // video input
 
 
