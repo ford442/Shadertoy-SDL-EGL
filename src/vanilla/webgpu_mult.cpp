@@ -242,7 +242,7 @@ depthAttachment2.stencilStoreOp=WGPU_STORE_OP_UNDEFINED;
 wrpdsa.at(1,1)=depthAttachment2;
 */
 passDesc.numColorAttachments=1;
-passDesc.colorAttachments=&wrpca.at(1,1); // &wrpca.at(0,0); // 
+passDesc.colorAttachments=&wrpca.at(1,1);
 // passDesc.depthStencilAttachment=wrpdsa.at(1,1);  //  wrpdsa.at(0,0); //
 passDesc.occlusionQuerySet=0;
 // passDesc.maxDrawCount=6;
@@ -252,7 +252,7 @@ renderTimestampWrites.endOfPassWriteIndex=-1;
 passDesc.timestampWrites=renderTimestampWrites;
 wrpd.at(0,0)=passDesc;
 passDesc2.numColorAttachments=1;
-passDesc2.colorAttachments=&wrpca.at(0,0); // &wrpca.at(1,1); //
+passDesc2.colorAttachments=&wrpca.at(0,0);
 // passDesc2.depthStencilAttachment=wrpdsa.at(0,0);
 passDesc2.occlusionQuerySet=0;
 // passDesc2.maxDrawCount=6;
@@ -260,21 +260,19 @@ passDesc2.timestampWrites=renderTimestampWrites;
 wrpd.at(1,1)=passDesc2;
 
 passDesc3.numColorAttachments=1;
-passDesc3.colorAttachments=&wrpca.at(2,2); // &wrpca.at(1,1); //
+passDesc3.colorAttachments=&wrpca.at(2,2);
 // passDesc3.depthStencilAttachment=wrpdsa.at(0,0);
 passDesc3.occlusionQuerySet=0;
 // passDesc3.maxDrawCount=6;
 passDesc3.timestampWrites=renderTimestampWrites;
-passDesc3.sampleCount=4;      
 wrpd.at(2,2)=passDesc3;
 
 passDesc4.numColorAttachments=1;
-passDesc4.colorAttachments=&wrpca.at(3,3); // &wrpca.at(1,1); //
+passDesc4.colorAttachments=&wrpca.at(3,3);
 // passDesc4.depthStencilAttachment=wrpdsa.at(0,0);
 passDesc4.occlusionQuerySet=0;
 // passDesc4.maxDrawCount=6;
 passDesc4.timestampWrites=renderTimestampWrites;
-passDesc4.sampleCount=4;      
 wrpd.at(3,3)=passDesc4;
       
 if(on.at(4,4)==1){
