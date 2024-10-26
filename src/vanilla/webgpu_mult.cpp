@@ -1101,6 +1101,8 @@ wict.at(0,0)=videoTextureCopy;
   */
 samplerBindingLayout.type=WGPU_SAMPLER_BINDING_TYPE_FILTERING;
 wsbl.at(1,1)=samplerBindingLayout;
+samplerBindingLayoutMult.type=WGPU_SAMPLER_BINDING_TYPE_NON_FILTERING;
+wsbl.at(2,2)=samplerBindingLayoutMult;
   //  Render Sampler
 Render_Bindgroup_Layout_Entries[0]={};
 Render_Bindgroup_Layout_Entries[0].binding=0;
@@ -1173,7 +1175,7 @@ Resolve_Bindgroup_Layout_Entries[0]={};
 Resolve_Bindgroup_Layout_Entries[0].binding=0;
 Resolve_Bindgroup_Layout_Entries[0].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Resolve_Bindgroup_Layout_Entries[0].type=WGPU_BIND_GROUP_LAYOUT_TYPE_SAMPLER;
-   Resolve_Bindgroup_Layout_Entries[0].layout.sampler=wsbl.at(1,1);
+   Resolve_Bindgroup_Layout_Entries[0].layout.sampler=wsbl.at(2,2);
   //  Resolve iTime Buffer
 Resolve_Bindgroup_Layout_Entries[1]={};
 Resolve_Bindgroup_Layout_Entries[1].binding=7;
@@ -1206,7 +1208,7 @@ Resolve_Bindgroup_Layout_Entries_2[0]={};
 Resolve_Bindgroup_Layout_Entries_2[0].binding=0;
 Resolve_Bindgroup_Layout_Entries_2[0].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Resolve_Bindgroup_Layout_Entries_2[0].type=WGPU_BIND_GROUP_LAYOUT_TYPE_SAMPLER;
-   Resolve_Bindgroup_Layout_Entries_2[0].layout.sampler=wsbl.at(1,1);
+   Resolve_Bindgroup_Layout_Entries_2[0].layout.sampler=wsbl.at(2,2);
   //  Resolve_2 iTime Buffer
 Resolve_Bindgroup_Layout_Entries_2[1]={};
 Resolve_Bindgroup_Layout_Entries_2[1].binding=7;
@@ -1318,7 +1320,7 @@ wbge.at(0,0)=Render_Bindgroup_Entries;
         //  Resolve Sampler
 Resolve_Bindgroup_Entries[0]={};
 Resolve_Bindgroup_Entries[0].binding=0;
-Resolve_Bindgroup_Entries[0].resource=wsmp.at(0,0);
+Resolve_Bindgroup_Entries[0].resource=wsmp.at(1,1);
     //  Resolve iTime Buffer
 Resolve_Bindgroup_Entries[1].binding=7;
 Resolve_Bindgroup_Entries[1].resource=wb.at(0,0);
@@ -1345,7 +1347,7 @@ wbge.at(2,2)=Resolve_Bindgroup_Entries;
               //  Resolve 2 Sampler
 Resolve_Bindgroup_Entries_2[0]={};
 Resolve_Bindgroup_Entries_2[0].binding=0;
-Resolve_Bindgroup_Entries_2[0].resource=wsmp.at(0,0);
+Resolve_Bindgroup_Entries_2[0].resource=wsmp.at(1,1);
     //  Resolve 2 iTime Buffer
 Resolve_Bindgroup_Entries_2[1].binding=7;
 Resolve_Bindgroup_Entries_2[1].resource=wb.at(0,0);
