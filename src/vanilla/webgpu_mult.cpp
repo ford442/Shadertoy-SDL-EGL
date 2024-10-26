@@ -1219,7 +1219,6 @@ wbgle.at(3,3)=Resolve_Bindgroup_Layout_Entries_2;
 bindgroup_layout_4=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(3,3),5);
 wbgl.at(3,3)=bindgroup_layout_3;
 
-      
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
 wrpl.at(0,0)=pipeline_layout;
 WGpuRenderPipelineDescriptor renderPipelineDesc={};
