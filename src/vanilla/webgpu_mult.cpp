@@ -1081,8 +1081,8 @@ wsmp.at(0,0)=videoSampler;
 videoSamplerMultDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 videoSamplerMultDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 videoSamplerMultDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
-videoSamplerMultDescriptor.magFilter=WGPU_FILTER_MODE_LINEAR;
-videoSamplerMultDescriptor.minFilter=WGPU_FILTER_MODE_LINEAR;
+videoSamplerMultDescriptor.magFilter=WGPU_FILTER_MODE_NEAREST;
+videoSamplerMultDescriptor.minFilter=WGPU_FILTER_MODE_NEAREST;
 videoSamplerMultDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_LINEAR;
 videoSamplerMultDescriptor.lodMinClamp=0;
 videoSamplerMultDescriptor.lodMaxClamp=0;  //  default=32
