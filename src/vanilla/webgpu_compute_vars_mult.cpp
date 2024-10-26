@@ -413,6 +413,7 @@ WGpuBufferDescriptor bufferDescriptorDst={};
 WGpuBufferDescriptor bufferDescriptorVid={};
 WGpuSamplerDescriptor resizeSamplerDescriptor={};
 WGpuSamplerDescriptor videoSamplerDescriptor={};
+WGpuSamplerDescriptor videoSamplerMultDescriptor={};
 WGpuTextureDescriptor depthTextureDescriptor={};
 WGpuTextureDescriptor depthTextureDescriptor2={};
 WGpuTextureDescriptor colorTextureDescriptor={};
