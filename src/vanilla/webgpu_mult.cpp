@@ -343,7 +343,7 @@ wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
 
-       //  Resolve Pass 1
+/*       //  Resolve Pass 1
 wceC=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(2,2)=wceC;
 wrpe.at(2,2)=wgpu_command_encoder_begin_render_pass(wce.at(2,2),&wrpd.at(2,2));
@@ -365,8 +365,8 @@ wgpu_render_pass_encoder_draw_indexed(wrpe.at(2,2),36,1,0,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(2,2));
 wcb.at(2,2)=wgpu_command_encoder_finish(wce.at(2,2));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(2,2));
-
- /*      //  Resolve Pass 2
+*/
+      //  Resolve Pass 2
 wceD=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(3,3)=wceD;
 wrpe.at(3,3)=wgpu_command_encoder_begin_render_pass(wce.at(3,3),&wrpd.at(3,3));
@@ -388,7 +388,7 @@ wgpu_render_pass_encoder_draw_indexed(wrpe.at(3,3),36,1,0,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(3,3));
 wcb.at(3,3)=wgpu_command_encoder_finish(wce.at(3,3));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(3,3));
-*/
+
   //  Render Pass 2  (sampler)
 wceA={};
 wceB=wgpu_device_create_command_encoder(wd.at(0,0),0);
