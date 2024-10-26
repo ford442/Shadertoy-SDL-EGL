@@ -175,6 +175,8 @@ WGpuShaderModule fs;
 WGpuShaderModule fs2;
 WGpuBindGroup bindgroup;
 WGpuBindGroup bindgroup_2;
+WGpuBindGroup bindgroup_3;
+WGpuBindGroup bindgroup_4;
 WGpuRenderBundleEncoder renderBundleEncoder;
 WGpuBuffer uniBuffer;
 WGpuBuffer srcBuffer;
