@@ -615,8 +615,9 @@ b3_compute_mod_test2:
 	 webgpu_mod.o --output_eol linux -rtlib=compiler-rt --closure 0 \
 	 -sMODULARIZE -sEXPORT_NAME='lib1ink' -sDISABLE_EXCEPTION_CATCHING=1
 
-b3_compute_mod_test3:
-	 em++ src/vanilla/webgpu_mod.cpp $(STDS) -BOOST_NO_EXCEPTIONS -pipe -ffast-math -ffp-contract=fast \
+
+b3_compute_mult:
+	 em++ src/vanilla/webgpu_mult.cpp $(STDS) -BOOST_NO_EXCEPTIONS -pipe -ffast-math -ffp-contract=fast \
 	 -fexcess-precision=fast \
 	 -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -fno-math-errno \
 	 -mmutable-globals -mbulk-memory -matomics -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
@@ -631,7 +632,7 @@ b3_compute_mod_test3:
 	 -fno-strict-aliasing \
 	 -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffp-contract=fast \
 	 -fexcess-precision=fast -sENVIRONMENT=web \
-	 -DCOMPUTE -o $(BETA_BIN_NAME)-mod.js -sSTRICT_JS=0 -sSTRICT=1 -ffunction-sections -fdata-sections \
+	 -DCOMPUTE -o $(BETA_BIN_NAME)-mult.js -sSTRICT_JS=0 -sSTRICT=1 -ffunction-sections -fdata-sections \
 	 $(nBOOST_FLAGS) $(LINK_SIMD_FLAGS) $(xGL_FLAGS) -sASSERTIONS=0 -march=haswell \
 	 -ftree-vectorize -fstrict-vtable-pointers -fno-math-errno --target=wasm32 -DNDEBUG=1 \
 	 -mmutable-globals -mnontrapping-fptoint -msign-ext -fno-omit-frame-pointer \
@@ -645,7 +646,7 @@ b3_compute_mod_test3:
 	 -sEXPORTED_RUNTIME_METHODS='["ccall","FS"]' \
 	 --js-library lib/lib_webgpu.js --js-library lib/lib_demo.js \
 	 --js-library lib/library_miniprintf.js --closure-args=--externs=lib/webgpu-closure-externs.js \
-	 webgpu_mod.o --output_eol linux -rtlib=compiler-rt --closure 0 --closureFriendly \
+	 webgpu_mult.o --output_eol linux -rtlib=compiler-rt --closure 0 --closureFriendly \
 	 -sMODULARIZE -sEXPORT_NAME='lib1ink' -sSUPPORT_LONGJMP=0 -sDISABLE_EXCEPTION_CATCHING=1
 
 
