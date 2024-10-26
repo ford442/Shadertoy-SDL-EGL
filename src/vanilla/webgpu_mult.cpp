@@ -200,7 +200,6 @@ multiOUTattachment.storeOp=WGPU_STORE_OP_STORE;
 // multiOUTattachment.loadOp=WGPU_LOAD_OP_LOAD;
 multiOUTattachment.loadOp=WGPU_LOAD_OP_CLEAR;
 multiOUTattachment.clearValue=clearC.at(0,0);
-multiOUTattachment.sampleCount=4;
 wrpca.at(2,2)=multiOUTattachment;  // video input
 
 multiOUTVattachment.view=wtv.at(2,2);
@@ -209,7 +208,6 @@ multiOUTVattachment.storeOp=WGPU_STORE_OP_STORE;
 // multiOUTVattachment.loadOp=WGPU_LOAD_OP_LOAD;
 multiOUTVattachment.loadOp=WGPU_LOAD_OP_CLEAR;
 multiOUTVattachment.clearValue=clearC.at(0,0);
-multiOUTVattachment.sampleCount=4;
 wrpca.at(3,3)=multiOUTVattachment;  // video input
 
 
@@ -267,6 +265,7 @@ passDesc3.colorAttachments=&wrpca.at(2,2); // &wrpca.at(1,1); //
 passDesc3.occlusionQuerySet=0;
 // passDesc3.maxDrawCount=6;
 passDesc3.timestampWrites=renderTimestampWrites;
+passDesc3.sampleCount=4;      
 wrpd.at(2,2)=passDesc3;
 
 passDesc4.numColorAttachments=1;
@@ -275,6 +274,7 @@ passDesc4.colorAttachments=&wrpca.at(3,3); // &wrpca.at(1,1); //
 passDesc4.occlusionQuerySet=0;
 // passDesc4.maxDrawCount=6;
 passDesc4.timestampWrites=renderTimestampWrites;
+passDesc4.sampleCount=4;      
 wrpd.at(3,3)=passDesc4;
       
 if(on.at(4,4)==1){
