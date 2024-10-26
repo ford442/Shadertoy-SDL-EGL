@@ -467,6 +467,7 @@ WGpuTextureBindingLayout textureBindingLayoutFloat32={};
 WGpuTextureBindingLayout textureBindingLayoutDepth={};
 WGpuTextureBindingLayout textureBindingLayout1={}; // for video.cpp
 WGpuSamplerBindingLayout samplerBindingLayout={};
+WGpuSamplerBindingLayout samplerBindingLayoutMult={};
 WGpuImageCopyExternalImage videoFrm={};
 
 wdss_tensor wdss=wdss_tensor{2,2};
