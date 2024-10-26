@@ -406,6 +406,7 @@ WGpuRenderPassColorAttachment multiOUTVattachment={};
 WGpuRenderPassDepthStencilAttachment depthAttachment={};
 WGpuRenderPassDepthStencilAttachment depthAttachment2={};
 WGpuSampler videoSampler={};
+WGpuSampler videoSamplerMult={};
 WGpuSampler resizeSampler={};
 WGpuTextureDescriptor highbitTextureDescriptor={};
 WGpuBufferDescriptor bufferDescriptorSrc={};
