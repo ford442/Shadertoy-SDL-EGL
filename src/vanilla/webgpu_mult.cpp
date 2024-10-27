@@ -193,7 +193,6 @@ videoAttachment.storeOp=WGPU_STORE_OP_STORE;
 videoAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
 videoAttachment.clearValue=clearC.at(0,0);
 wrpca.at(1,1)=videoAttachment;  // regular input
-            
           
 multiOUTattachment.view=wtv.at(7,7);
 // multiOUTattachment.resolveTarget=wtv.at(3,3);
@@ -212,8 +211,6 @@ multiOUTVattachment.storeOp=WGPU_STORE_OP_STORE;
 multiOUTVattachment.loadOp=WGPU_LOAD_OP_CLEAR;
 multiOUTVattachment.clearValue=clearC.at(0,0);
 wrpca.at(3,3)=multiOUTVattachment;  // video input
-
-
 
 depthTextureView=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
 wtv.at(0,0)=depthTextureView;
@@ -284,7 +281,6 @@ INVTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,3),&WGPU_TextureView
 wtv.at(6,6)=INVTextureView;
 INVTextureViewMult=wgpu_texture_create_view(WGPU_Texture.at(0,0,5),&WGPU_TextureViewDescriptor.at(0,0,5));
 wtv.at(8,8)=INVTextureViewMult;
-
       
       //  Frame Data 
 // std::ifstream fram(Fnm2,std::ios::binary);
@@ -325,10 +321,11 @@ on.at(4,4)=0;
       //  Render Pass
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
+wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(6,6),&wict.at(4,4),szeV.at(7,7),szeV.at(7,7),1);
+
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
-wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(6,6),&wict.at(4,4),szeV.at(7,7),szeV.at(7,7),1);
 
  // wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_siz.at(3,3),sizeof(uint64_t));
