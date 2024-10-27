@@ -992,7 +992,7 @@ Compute_Bindgroup_Entries[5].bufferBindSize=sizeof(emscripten_align1_float);
             // Compute Video Texture
 Compute_Bindgroup_Entries[6]={};
 Compute_Bindgroup_Entries[6].binding=6;
-Compute_Bindgroup_Entries[6].resource=wtv.at(8,8); 
+Compute_Bindgroup_Entries[6].resource=wtv.at(2,2); 
             // Compute Resize Texture
 Compute_Bindgroup_Entries[7]={};
 Compute_Bindgroup_Entries[7].binding=7;
@@ -1000,7 +1000,7 @@ Compute_Bindgroup_Entries[7].resource=wtv.at(5,5);
               // Compute Video In Texture
 Compute_Bindgroup_Entries[8]={};
 Compute_Bindgroup_Entries[8].binding=8;
-Compute_Bindgroup_Entries[8].resource=wtv.at(6,6);
+Compute_Bindgroup_Entries[8].resource=wtv.at(8,8);
             // Compute Color Attachment Texture
 // Compute_Bindgroup_Entries[7]={};
 // Compute_Bindgroup_Entries[7].binding=7;
