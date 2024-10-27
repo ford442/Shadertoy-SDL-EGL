@@ -845,7 +845,6 @@ Input_Image_TextureVmult.texture=WGPU_Texture.at(0,0,5);
 Input_Image_TextureVmult.mipLevel=0;
 Input_Image_TextureVmult.origin=oxyz.at(0,0);
 Input_Image_TextureVmult.aspect=WGPU_TEXTURE_ASPECT_ALL;
-
       
 Output_Image_Texture.texture=WGPU_Texture.at(0,0,1);
 Output_Image_Texture.origin=oxyz.at(0,0);
