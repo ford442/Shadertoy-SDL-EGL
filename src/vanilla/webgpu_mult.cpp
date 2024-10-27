@@ -321,11 +321,10 @@ on.at(4,4)=0;
       //  Render Pass
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
-
+wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),& wict.at(5,5),&wict.at(2,2),sze.at(1,1),sze.at(1,1),1);
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
-
  // wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_siz.at(3,3),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&f32_uniform.at(2,2),sizeof(emscripten_align1_float));
@@ -343,7 +342,6 @@ wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
 
-wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),& wict.at(5,5),& wict.at(2,2), sze.at(1,1), sze.at(1,1),1);
 
 /*       //  Resolve Pass 1
 wceC=wgpu_device_create_command_encoder(wd.at(0,0),0);
@@ -395,8 +393,7 @@ wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(3,3));
 wceA={};
 wceB=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(1,1)=wceB;
-wgpu_command_encoder_copy_texture_to_texture(wce.at(1,1),&wict.at(6,6),&wict.at(4,4),szeV.at(7,7),szeV.at(7,7),1);
-
+wgpu_command_encoder_copy_texture_to_texture(wce.at(1,1),&wict.at(5,5),&wict.at(2,2),sze.at(1,1),sze.at(1,1),1);
 wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(1,1),0,0);
@@ -418,8 +415,6 @@ wgpu_compute_pass_encoder_set_pipeline(WGPU_ComputePassCommandEncoder.at(0,0,0),
 wgpu_encoder_set_bind_group(WGPU_ComputePassCommandEncoder.at(0,0,0),0,WGPU_BindGroup.at(0,0,0),0,0);
 wgpu_compute_pass_encoder_dispatch_workgroups(WGPU_ComputePassCommandEncoder.at(0,0,0),32,8,1);
 wgpu_encoder_end(WGPU_ComputePassCommandEncoder.at(0,0,0));
-
-      
       
   //  Move resized texture
 wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(1,1),&wict.at(3,3),sze.at(3,3),sze.at(3,3),1);
