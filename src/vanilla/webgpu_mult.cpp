@@ -304,7 +304,6 @@ const size_t bytesPerRow=szeV.at(7,7)*4*sizeof(emscripten_align1_float);
 // wetd.at(0,0).source=texid.at(0,0);
 //   wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&frame_tensor.at(0,0),bytesPerRow,szeV.at(7,7),sze.at(6,6),szeV.at(7,7),1);
 wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(6,6),floatData.data(),bytesPerRow,szeV.at(7,7),szeV.at(7,7),szeV.at(7,7),1);
-wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(6,6),&wict.at(4,4),szeV.at(7,7),szeV.at(7,7),1);
 
 /*    //  highway way
 const HWY_FULL(uint8_t) d;
@@ -329,6 +328,8 @@ wce.at(0,0)=wceA;
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
 wgpu_encoder_set_bind_group(wrpe.at(0,0),0,wbg.at(0,0),0,0);
+wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(6,6),&wict.at(4,4),szeV.at(7,7),szeV.at(7,7),1);
+
  // wgpu_queue_write_buffer(wq.at(0,0),wb.at(0,0),0,&u64_uni.at(0,0),sizeof(uint64_t));
 // wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&u64_siz.at(3,3),sizeof(uint64_t));
 wgpu_queue_write_buffer(wq.at(0,0),wb.at(2,2),0,&f32_uniform.at(2,2),sizeof(emscripten_align1_float));
