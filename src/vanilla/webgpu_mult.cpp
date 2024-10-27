@@ -593,7 +593,7 @@ textureDescriptorInMult.width=sze.at(1,1);
 textureDescriptorInMult.height=sze.at(1,1); // default = 1;
 textureDescriptorInMult.depthOrArrayLayers=1;
 textureDescriptorInMult.mipLevelCount=1;
-textureDescriptorInMult.sampleCount=8;
+textureDescriptorInMult.sampleCount=4;
 textureDescriptorInMult.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureAviewFormats[0]={wtf.at(2,2)};
 textureDescriptorInMult.numViewFormats=0;
@@ -605,7 +605,7 @@ textureDescriptorInVmult.width=szeV.at(7,7);
 textureDescriptorInVmult.height=szeV.at(7,7); // default = 1;
 textureDescriptorInVmult.depthOrArrayLayers=1;
 textureDescriptorInVmult.mipLevelCount=1;
-textureDescriptorInVmult.sampleCount=8;
+textureDescriptorInVmult.sampleCount=4;
 textureDescriptorInVmult.dimension=WGPU_TEXTURE_DIMENSION_2D;
 textureDescriptorInVmult.numViewFormats=0;
 textureDescriptorInVmult.viewFormats=nullptr; // &textureAviewFormats[0];
@@ -1075,14 +1075,13 @@ videoSamplerDescriptor.maxAnisotropy=8;
 wsd.at(0,0)=videoSamplerDescriptor;
 videoSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(0,0));
 wsmp.at(0,0)=videoSampler;
-
             
 videoSamplerMultDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 videoSamplerMultDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 videoSamplerMultDescriptor.addressModeW=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
-videoSamplerMultDescriptor.magFilter=WGPU_FILTER_MODE_NEAREST;
-videoSamplerMultDescriptor.minFilter=WGPU_FILTER_MODE_NEAREST;
-videoSamplerMultDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_NEAREST;
+videoSamplerMultDescriptor.magFilter=WGPU_FILTER_MODE_LINEAR;
+videoSamplerMultDescriptor.minFilter=WGPU_FILTER_MODE_LINEAR;
+videoSamplerMultDescriptor.mipmapFilter=WGPU_MIPMAP_FILTER_MODE_LINEAR;
 videoSamplerMultDescriptor.lodMinClamp=0;
 videoSamplerMultDescriptor.lodMaxClamp=0;  //  default=32
 // videoSamplerMultDescriptor.compare;  // default = WGPU_COMPARE_FUNCTION_INVALID (not used)
