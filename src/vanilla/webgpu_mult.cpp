@@ -194,7 +194,8 @@ videoAttachment.loadOp=WGPU_LOAD_OP_CLEAR;
 videoAttachment.clearValue=clearC.at(0,0);
 wrpca.at(1,1)=videoAttachment;  // regular input
             
-multiOUTattachment.view=wtv.at(3,3);
+          
+multiOUTattachment.view=wtv.at(7,7);
 // multiOUTattachment.resolveTarget=wtv.at(3,3);
 multiOUTattachment.depthSlice=-1;
 multiOUTattachment.storeOp=WGPU_STORE_OP_STORE;
@@ -202,7 +203,7 @@ multiOUTattachment.storeOp=WGPU_STORE_OP_STORE;
 multiOUTattachment.loadOp=WGPU_LOAD_OP_CLEAR;
 multiOUTattachment.clearValue=clearC.at(0,0);
 wrpca.at(2,2)=multiOUTattachment;  // video input
-
+  /*
 multiOUTVattachment.view=wtv.at(2,2);
 // multiOUTVattachment.resolveTarget=wtv.at(2,2);
 multiOUTVattachment.depthSlice=-1;
@@ -213,7 +214,7 @@ multiOUTVattachment.clearValue=clearC.at(0,0);
 wrpca.at(3,3)=multiOUTVattachment;  // video input
 
 
-/*
+
 depthTextureView=wgpu_texture_create_view(wt.at(0,0),&wtvd.at(0,0));
 wtv.at(0,0)=depthTextureView;
 depthAttachment.view=wtv.at(0,0);
@@ -243,8 +244,9 @@ depthAttachment2.stencilLoadOp=WGPU_LOAD_OP_CLEAR;
 depthAttachment2.stencilStoreOp=WGPU_STORE_OP_UNDEFINED;
 wrpdsa.at(1,1)=depthAttachment2;
 */
+            
 passDesc.numColorAttachments=1;
-passDesc.colorAttachments=&wrpca.at(1,1);
+passDesc.colorAttachments=&wrpca.at(2,2);
 // passDesc.depthStencilAttachment=wrpdsa.at(1,1);  //  wrpdsa.at(0,0); //
 passDesc.occlusionQuerySet=0;
 // passDesc.maxDrawCount=6;
@@ -302,6 +304,7 @@ const size_t bytesPerRow=szeV.at(7,7)*4*sizeof(emscripten_align1_float);
 // wetd.at(0,0).source=texid.at(0,0);
 //   wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(4,4),&frame_tensor.at(0,0),bytesPerRow,szeV.at(7,7),sze.at(6,6),szeV.at(7,7),1);
 wgpu_queue_write_texture(WGPU_Queue.at(0,0,0),&wict.at(6,6),floatData.data(),bytesPerRow,szeV.at(7,7),szeV.at(7,7),szeV.at(7,7),1);
+wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),&wict.at(6,6),&wict.at(4,4),szeV.at(7,7),szeV.at(7,7),1);
 
 /*    //  highway way
 const HWY_FULL(uint8_t) d;
@@ -342,6 +345,8 @@ wgpu_render_pass_encoder_draw_indexed(wrpe.at(0,0),36,1,0,0,0);
 wgpu_render_pass_encoder_end(wrpe.at(0,0));
 wcb.at(0,0)=wgpu_command_encoder_finish(wce.at(0,0));
 wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(0,0));
+
+wgpu_command_encoder_copy_texture_to_texture(WGPU_CommandEncoder.at(0,0,0),& wict.at(5,5),& wict.at(2,2), sze.at(1,1), sze.at(1,1),1);
 
 /*       //  Resolve Pass 1
 wceC=wgpu_device_create_command_encoder(wd.at(0,0),0);
