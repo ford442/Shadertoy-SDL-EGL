@@ -321,7 +321,6 @@ on.at(4,4)=0;
       //  Render Pass
 wceA=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(0,0)=wceA;
-wgpu_command_encoder_copy_texture_to_texture(wce.at(0,0),&wict.at(6,6),&wict.at(4,4),szeV.at(7,7),szeV.at(7,7),1);
 
 wrpe.at(0,0)=wgpu_command_encoder_begin_render_pass(wce.at(0,0),&wrpd.at(0,0));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(0,0),wrp.at(0,0));
@@ -396,6 +395,8 @@ wgpu_queue_submit_one_and_destroy(wq.at(0,0),wcb.at(3,3));
 wceA={};
 wceB=wgpu_device_create_command_encoder(wd.at(0,0),0);
 wce.at(1,1)=wceB;
+wgpu_command_encoder_copy_texture_to_texture(wce.at(1,1),&wict.at(6,6),&wict.at(4,4),szeV.at(7,7),szeV.at(7,7),1);
+
 wrpe.at(1,1)=wgpu_command_encoder_begin_render_pass(wce.at(1,1),&wrpd.at(1,1));
 wgpu_render_pass_encoder_set_pipeline(wrpe.at(1,1),wrp.at(1,1));
 wgpu_encoder_set_bind_group(wrpe.at(1,1),0,wbg.at(1,1),0,0);
