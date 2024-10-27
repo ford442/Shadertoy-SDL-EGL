@@ -1075,6 +1075,7 @@ videoSamplerDescriptor.maxAnisotropy=8;
 wsd.at(0,0)=videoSamplerDescriptor;
 videoSampler=wgpu_device_create_sampler(wd.at(0,0),&wsd.at(0,0));
 wsmp.at(0,0)=videoSampler;
+
             
 videoSamplerMultDescriptor.addressModeU=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
 videoSamplerMultDescriptor.addressModeV=WGPU_ADDRESS_MODE_CLAMP_TO_EDGE;
@@ -1173,7 +1174,7 @@ Resolve_Bindgroup_Layout_Entries[0]={};
 Resolve_Bindgroup_Layout_Entries[0].binding=0;
 Resolve_Bindgroup_Layout_Entries[0].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Resolve_Bindgroup_Layout_Entries[0].type=WGPU_BIND_GROUP_LAYOUT_TYPE_SAMPLER;
-   Resolve_Bindgroup_Layout_Entries[0].layout.sampler=wsbl.at(2,2);
+Resolve_Bindgroup_Layout_Entries[0].layout.sampler=wsbl.at(2,2);
   //  Resolve iTime Buffer
 Resolve_Bindgroup_Layout_Entries[1]={};
 Resolve_Bindgroup_Layout_Entries[1].binding=7;
@@ -1185,7 +1186,7 @@ Resolve_Bindgroup_Layout_Entries[2]={};
 Resolve_Bindgroup_Layout_Entries[2].binding=2;
 Resolve_Bindgroup_Layout_Entries[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Resolve_Bindgroup_Layout_Entries[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
-     Resolve_Bindgroup_Layout_Entries[2].layout.texture=wtbl.at(3,3);
+Resolve_Bindgroup_Layout_Entries[2].layout.texture=wtbl.at(1,1);
   //  Resolve iResolution Buffer
 Resolve_Bindgroup_Layout_Entries[3]={};
 Resolve_Bindgroup_Layout_Entries[3].binding=5;
@@ -1199,8 +1200,8 @@ Resolve_Bindgroup_Layout_Entries[4].visibility=WGPU_SHADER_STAGE_FRAGMENT|WGPU_S
 Resolve_Bindgroup_Layout_Entries[4].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 Resolve_Bindgroup_Layout_Entries[4].layout.buffer=wbbl.at(0,0);
 wbgle.at(2,2)=Resolve_Bindgroup_Layout_Entries;
-// bindgroup_layout_3=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(2,2),5);
-// wbgl.at(2,2)=bindgroup_layout_3;
+bindgroup_layout_3=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(2,2),5);
+wbgl.at(2,2)=bindgroup_layout_3;
   //  Resolve_2 Sampler
             
 Resolve_Bindgroup_Layout_Entries_2[0]={};
@@ -1219,7 +1220,7 @@ Resolve_Bindgroup_Layout_Entries_2[2]={};
 Resolve_Bindgroup_Layout_Entries_2[2].binding=2;
 Resolve_Bindgroup_Layout_Entries_2[2].visibility=WGPU_SHADER_STAGE_FRAGMENT;
 Resolve_Bindgroup_Layout_Entries_2[2].type=WGPU_BIND_GROUP_LAYOUT_TYPE_TEXTURE;
-     Resolve_Bindgroup_Layout_Entries_2[2].layout.texture=wtbl.at(3,3);
+     Resolve_Bindgroup_Layout_Entries_2[2].layout.texture=wtbl.at(1,1);
   //  Resolve_2 iResolution Buffer
 Resolve_Bindgroup_Layout_Entries_2[3]={};
 Resolve_Bindgroup_Layout_Entries_2[3].binding=5;
@@ -1233,8 +1234,8 @@ Resolve_Bindgroup_Layout_Entries_2[4].visibility=WGPU_SHADER_STAGE_FRAGMENT|WGPU
 Resolve_Bindgroup_Layout_Entries_2[4].type=WGPU_BIND_GROUP_LAYOUT_TYPE_BUFFER;
 Resolve_Bindgroup_Layout_Entries_2[4].layout.buffer=wbbl.at(0,0);
 wbgle.at(3,3)=Resolve_Bindgroup_Layout_Entries_2;
-// bindgroup_layout_4=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(3,3),5);
-// wbgl.at(3,3)=bindgroup_layout_3;
+bindgroup_layout_4=wgpu_device_create_bind_group_layout(wd.at(0,0),wbgle.at(3,3),5);
+wbgl.at(3,3)=bindgroup_layout_3;
 
 WGpuPipelineLayout pipeline_layout=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(0,0),1);
 wrpl.at(0,0)=pipeline_layout;
@@ -1260,7 +1261,7 @@ renderPipelineDesc2.layout=wrpl.at(1,1);
 // renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
 renderPipelineDesc2.multisample=multiSamp2;
 wrp.at(1,1)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc2);
-/*
+
 WGpuPipelineLayout pipeline_layout_3=wgpu_device_create_pipeline_layout(wd.at(0,0),&wbgl.at(2,2),1);
 wrpl.at(2,2)=pipeline_layout_3;
 WGpuRenderPipelineDescriptor renderPipelineDesc3={};
@@ -1287,7 +1288,7 @@ renderPipelineDesc4.layout=wrpl.at(3,3);
 // renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
 renderPipelineDesc4.multisample=multiSamp3;
 wrp.at(3,3)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc4);
-*/
+
   //  Render Sampler
 Render_Bindgroup_Entries[0]={};
 Render_Bindgroup_Entries[0].binding=0;
@@ -1327,7 +1328,7 @@ Resolve_Bindgroup_Entries[1].bufferBindSize=sizeof(emscripten_align1_float);
   //  Resolve TextureIN
 Resolve_Bindgroup_Entries[2]={};
 Resolve_Bindgroup_Entries[2].binding=2;
-Resolve_Bindgroup_Entries[2].resource=wtv.at(7,7);
+Resolve_Bindgroup_Entries[2].resource=wtv.at(2,2);
   //  Resolve iResolution Buffer
 Resolve_Bindgroup_Entries[3]={};
 Resolve_Bindgroup_Entries[3].binding=5;
@@ -1354,7 +1355,7 @@ Resolve_Bindgroup_Entries_2[1].bufferBindSize=sizeof(emscripten_align1_float);
   //  Resolve 2 TextureIN
 Resolve_Bindgroup_Entries_2[2]={};
 Resolve_Bindgroup_Entries_2[2].binding=2;
-Resolve_Bindgroup_Entries_2[2].resource=wtv.at(8,8);
+Resolve_Bindgroup_Entries_2[2].resource=wtv.at(2,2);
   //  Resolve iResolution Buffer
 Resolve_Bindgroup_Entries_2[3]={};
 Resolve_Bindgroup_Entries_2[3].binding=5;
