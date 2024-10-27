@@ -648,8 +648,6 @@ textureViewDescriptorInV.baseMipLevel=0; // default = 0
 textureViewDescriptorInV.mipLevelCount=1;
 textureViewDescriptorInV.baseArrayLayer=0; // default = 0
 textureViewDescriptorInV.arrayLayerCount=1;
-
-
       
 textureViewDescriptorInMult.format=wtf.at(2,2);
 textureViewDescriptorInMult.dimension=WGPU_TEXTURE_VIEW_DIMENSION_2D;
@@ -1271,7 +1269,7 @@ renderPipelineDesc3.vertex.entryPoint="main";
 renderPipelineDesc3.primitive=wps.at(0,0);
 renderPipelineDesc3.fragment=wfs.at(1,1);
 renderPipelineDesc3.depthStencil=wdss.at(1,1);
-renderPipelineDesc3.layout=wrpl.at(1,1);
+renderPipelineDesc3.layout=wrpl.at(2,2);
 // renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
 renderPipelineDesc3.multisample=multiSamp3;
 wrp.at(2,2)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc3);
@@ -1285,12 +1283,11 @@ renderPipelineDesc4.vertex.entryPoint="main";
 renderPipelineDesc4.primitive=wps.at(0,0);
 renderPipelineDesc4.fragment=wfs.at(1,1);
 renderPipelineDesc4.depthStencil=wdss.at(1,1);
-renderPipelineDesc4.layout=wrpl.at(1,1);
+renderPipelineDesc4.layout=wrpl.at(3,3);
 // renderPipelineDesc.layout=WGPU_AUTO_LAYOUT_MODE_AUTO;
 renderPipelineDesc4.multisample=multiSamp3;
 wrp.at(3,3)=wgpu_device_create_render_pipeline(wd.at(0,0),&renderPipelineDesc4);
 
-      
   //  Render Sampler
 Render_Bindgroup_Entries[0]={};
 Render_Bindgroup_Entries[0].binding=0;
