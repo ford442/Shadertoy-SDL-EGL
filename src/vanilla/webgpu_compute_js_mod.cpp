@@ -159,12 +159,12 @@ function drawFrame() {
 if (pause === 'ready') {
 gl3.clearRect(0, 0, w$, h$);
 gl3.drawImage(vvic, 0, 0, SiZ, SiZ, 0, 0, w$, h$);
-}
 const image = gl3.getImageData(0, 0, w$, h$);
 const imageData = image.data;
 const pixelData = new Float32Array(imageData);
 FS.write(fileStream, pixelData, 0, pixelData.length, 0);
 Module.ccall("frmOn");
+}
 }
 if (running == 0) {
 setTimeout(() => {
