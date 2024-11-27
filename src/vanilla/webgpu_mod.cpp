@@ -81,6 +81,8 @@ return EM_TRUE;
 EM_BOOL texOn(){
 if(on.at(3,3)==1){
 on.at(4,4)=1;
+}else{
+on.at(4,4)=0;
 }
 return EM_TRUE;
 }
