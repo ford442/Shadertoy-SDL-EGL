@@ -469,6 +469,7 @@ xy_tensor oxy=xy_tensor{2,2};
 wtbl_tensor wtbl=wtbl_tensor{4,4};
 wetbl_tensor wetbl=wetbl_tensor{4,4};
 i_tensor on=i_tensor{6,6};
+i_tensor on_b=i_tensor{6,6};
 wetd_tensor wetd=wetd_tensor{2,2};
 wet_tensor wet=wet_tensor{2,2};
 i_tensor texid=i_tensor{2,2};
