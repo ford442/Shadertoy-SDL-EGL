@@ -146,17 +146,11 @@ premultipliedAlpha:true,
 preserveDrawingBuffer:false
 });
 // gl3.imageSmoothingEnabled=false;
-const fileStream=FS.open('/video/frame.gl','w+');
+const fileStream=FS.open('/video/frame.gl','w');
 function drawFrame() {
 if (pause === 'ready') {
-
 gl3.clearRect(0, 0, keepSize, keepSize);
-   gl3.fillStyle = 'black';
-    gl3.fillRect(0, 0, keepSize, keepSize);
-    
-        gl3.drawImage(vvic, 0, 0, w$, h$, drawX, drawY, w$, h$); 
-
-// gl3.drawImage(vvic, cropX, cropY, cropSize, cropSize, 0, 0, cropSize, cropSize); 
+gl3.drawImage(vvic, 0, 0, w$, h$, drawX, drawY, w$, h$); 
 }
 const image = gl3.getImageData(0, 0, keepSize, keepSize);
 const imageData = image.data;
@@ -779,7 +773,7 @@ getShader(pth2,'compute.wgsl');
 getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
 setTimeout(function(){
-canvasStart2();
+canvasStartSize();
 },3000);
 });
 
