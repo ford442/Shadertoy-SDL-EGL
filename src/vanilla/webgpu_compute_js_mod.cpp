@@ -25,7 +25,7 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }}
 
-let pause='ready';
+var pause='ready';
 
 function canvasStartSize(){
 const vvic=document.querySelector('#mvi');
