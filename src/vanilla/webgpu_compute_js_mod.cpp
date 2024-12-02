@@ -25,8 +25,67 @@ return Math.pow(2,Math.ceil(Math.log2(n)));
 return n;
 }}
 
-var pause='ready';
-
+let pause='ready';
+    
+function canvasStart2(){
+let vvic=document.querySelector('#mvi');
+let srsiz=document.querySelector('#srsiz').innerHTML;
+let vsiz=document.querySelector('#vsiz').innerHTML;
+var SiZ=window.innerHeight;
+var w$=parseInt(vsiz,10);
+vvic.width=SiZ;
+var h$=parseInt(vsiz,10);
+vvic.height=SiZ;
+console.log("canvas size: ",h$,", ",w$);
+const cnvb=new OffscreenCanvas(h$,w$); 
+// document.querySelector('#contain2').appendChild(cnvb);
+const cnv=document.querySelector('#scanvas');
+const cnvc=document.querySelector('#bcanvas');
+cnv.height=SiZ;
+cnvb.height=vsiz;
+cnvc.height=vsiz;
+cnvc.style.height=vsiz+'px';
+cnv.width=SiZ;
+cnvb.width=vsiz;
+cnvc.width=vsiz;
+cnvc.style.width=vsiz+'px';
+const gl3=cnvb.getContext('2d',{
+colorType:'float64',
+alpha:true,
+willReadFrequently:true,
+stencil:false,
+depth:false,
+colorSpace:"display-p3",
+desynchronized:false,
+antialias:true,
+powerPreference:"high-performance",
+premultipliedAlpha:true,
+preserveDrawingBuffer:false
+});
+gl3.imageSmoothingEnabled=false;
+let fileStream=FS.open('/video/frame.gl','w');
+  function drawFrame() {
+    if (pause === 'ready') {
+      gl3.clearRect(0, 0, w$, h$);
+      gl3.drawImage(vvic, 0, 0, SiZ, SiZ, 0, 0, w$, h$);
+    }
+    const image = gl3.getImageData(0, 0, w$, h$);
+    const imageData = image.data;
+    const pixelData = new Float64Array(imageData);
+    FS.write(fileStream, pixelData, 0, pixelData.length, 0);
+    Module.ccall("frmOn");
+  }
+  if (running == 0) {
+    setTimeout(() => {
+      Module.ccall("startWebGPUC", null,"Number",[vsiz,srsiz]);
+      running = 1;
+      setInterval(drawFrame, 16.6); 
+    }, 250);
+  } else {
+    setInterval(drawFrame, 16.6);
+  }
+}
+ 
 function canvasStartSize(){
 const vvic=document.querySelector('#mvi');
 const srsiz=document.querySelector('#srsiz').innerHTML;
@@ -720,7 +779,7 @@ getShader(pth2,'compute.wgsl');
 getShader(pth3,'frag2.wgsl');
 getShader(pth4,'vert.wgsl');
 setTimeout(function(){
-canvasStart();
+canvasStart2();
 },3000);
 });
 
