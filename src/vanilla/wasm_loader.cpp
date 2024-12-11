@@ -9,10 +9,10 @@ let Module_lib1ink;
 
 var modu=document.querySelector('#modulePath').innerHTML;
 var scr=document.createElement("script");
-scr.async=true;
+// scr.async=true;
 scr.charset='utf-8';
 scr.type='text/javascript';
-scr.defer=true;
+// scr.defer=true;
 scr.src=modu;
 document.body.appendChild(scr);
 setTimeout(function(){
