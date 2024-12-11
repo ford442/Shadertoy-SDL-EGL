@@ -821,6 +821,8 @@ imageStart();
 });
 
 document.querySelector('#moveFwd').addEventListener('click',function(){
+    Module.ccall('pauseRendering', null, ['number'], [true]); // Pause
+
 Module.ccall('frmsOff'); // Assuming this stops processing new frames
 pause = 'loading';
 const moveForwardPromise = new Promise(resolve => {
@@ -828,6 +830,7 @@ const moveForwardPromise = new Promise(resolve => {
             pause = 'ready';
             Module.ccall('frmsOn');
             resolve();
+    Module.ccall('pauseRendering', null, ['number'], [false]); // Resume
         }, 1900);
 });
 moveForwardPromise();
