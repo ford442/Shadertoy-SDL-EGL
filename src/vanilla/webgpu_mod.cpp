@@ -364,7 +364,7 @@ return;
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 if(on.at(0,0)==0){wd.at(0,0)=result;}
-on_b.at(4,4)=0;
+// on_b.at(4,4)=0;
 on.at(3,3)=1;
 js_data_pointer.at(0,0)=0;
 fjs_data_pointer.at(0,0)=0;
