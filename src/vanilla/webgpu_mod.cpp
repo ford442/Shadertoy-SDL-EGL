@@ -1,8 +1,10 @@
 #include "../../include/vanilla/webgpu_em.hpp"
-
 #include "../../src/vanilla/webgpu_compute_vars_em.cpp"
 #include <boost/filesystem/fstream.hpp>
+
 namespace fsm = boost::filesystem;
+
+bool isRenderingPaused = false;
 
 EM_BOOL ms_clk(int32_t eventType,const EmscriptenMouseEvent * e,void * userData){
 if(e->screenX!=0&&e->screenY!=0&&e->clientX!=0&&e->clientY!=0&&e->targetX!=0&&e->targetY!=0){
@@ -235,7 +237,10 @@ passDesc2.occlusionQuerySet=0;
 // passDesc2.maxDrawCount=6;
 passDesc2.timestampWrites=renderTimestampWrites;
 wrpd.at(1,1)=passDesc2;
-if(on_b.at(4,4)==1){
+      
+// if(on_b.at(4,4)==1){
+if (!isRenderingPaused) {
+
 INVTextureView=wgpu_texture_create_view(WGPU_Texture.at(0,0,3),&WGPU_TextureViewDescriptor.at(0,0,3));
 wtv.at(6,6)=INVTextureView;
 
@@ -364,7 +369,7 @@ return;
 
 void ObtainedWebGpuDeviceStart(WGpuDevice result,void *userData){
 if(on.at(0,0)==0){wd.at(0,0)=result;}
-// on_b.at(4,4)=0;
+on_b.at(4,4)=0;
 on.at(3,3)=1;
 js_data_pointer.at(0,0)=0;
 fjs_data_pointer.at(0,0)=0;
@@ -1209,6 +1214,11 @@ return EM_TRUE;
 #include "../../src/vanilla/webgpu_compute_js_mod.cpp"
 
 extern"C"{
+
+void pauseRendering(bool pause) {
+isRenderingPaused = pause;
+return;
+}
 
 void panRight(){
 PanRight();
