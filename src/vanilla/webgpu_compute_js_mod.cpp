@@ -821,12 +821,20 @@ imageStart();
 });
 
 document.querySelector('#moveFwd').addEventListener('click',function(){
-Module.ccall("frmsOff");
-pause='loading'; // Toggle pause on/off
-setTimeout(function(){
-pause='ready'; // Toggle pause on/off
-Module.ccall("frmsOn");
-},1900);
+
+Module.ccall('frmsOff'); // Assuming this stops processing new frames
+pause = 'loading';
+
+// Create a promise that resolves when the move is done
+const moveForwardPromise = new Promise(resolve => {
+        setTimeout(() => {
+            pause = 'ready';
+            Module.ccall('frmsOn');
+            resolve(); // Signal completion
+        }, 1900);
+
+moveForwardPromise();
+
 });
 
 document.querySelector('#sizeUp').addEventListener('click',function(){
