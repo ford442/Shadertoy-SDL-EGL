@@ -821,20 +821,16 @@ imageStart();
 });
 
 document.querySelector('#moveFwd').addEventListener('click',function(){
-
 Module.ccall('frmsOff'); // Assuming this stops processing new frames
 pause = 'loading';
-
-// Create a promise that resolves when the move is done
 const moveForwardPromise = new Promise(resolve => {
         setTimeout(() => {
             pause = 'ready';
             Module.ccall('frmsOn');
-            resolve(); // Signal completion
+            resolve();
         }, 1900);
-
+});
 moveForwardPromise();
-
 });
 
 document.querySelector('#sizeUp').addEventListener('click',function(){
